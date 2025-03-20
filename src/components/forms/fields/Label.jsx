@@ -1,18 +1,11 @@
 import { useTranslation } from 'react-i18next'
 
-type LabelProps = {
-  label: string;
-  name: string;
-  labelClassName?: string;
-  required: boolean;
-}
-
 export const Label = ({
   label,
   name,
   labelClassName,
   required
-}: LabelProps) => {
+}) => {
   const { t } = useTranslation()
 
   return (

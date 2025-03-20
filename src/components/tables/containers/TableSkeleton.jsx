@@ -1,4 +1,3 @@
-import React from "react";
 
 export const TableSkeleton = ({ columns }) => {
   let len = columns?.length ? columns : Array(8).fill(0);

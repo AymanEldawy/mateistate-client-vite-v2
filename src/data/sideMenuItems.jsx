@@ -1,16 +1,24 @@
+import {
+  ClipboardIcon,
+  UserIcon,
+  ToolsIcon,
+  BanknoteIcon,
+  StoreIcon,
+  GearIcon,
+
+} from "@/components/Icons";
 import PATHS from "./paths";
 import PERMISSIONS from "./permissions";
-// import { DashboardMainIcon } from '@/components/icons/SideMenuIcons/DashboardMainIcon';
+// import { DashboardMainIcon } from '@components/Icons/SideMenuIcons/DashboardMainIcon';
 
 const sideMenuItems = [
   /******************** General ********************/
-  {
-    name: "home",
-    path: PATHS.HOME,
-    permissions: PERMISSIONS[PATHS.HOME],
-    // icon: <DashboardMainIcon />,
-    permissions: PERMISSIONS[PATHS.HOME],
-  },
+  // {
+  //   name: "home",
+  //   path: PATHS.HOME,
+  //   permissions: PERMISSIONS[PATHS.HOME],
+  //   // icon: <DashboardMainIcon />,
+  // },
   {
     name: "Accounts",
     icon: <UserIcon />,

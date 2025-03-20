@@ -1,19 +1,21 @@
 import InputColor from "react-input-color";
-import InputContainer from "./InputContainer";
 import { Controller, useFormContext } from "react-hook-form";
+import { Label } from "./Label";
+import { ErrorText } from "@/components/shared/ErrorText";
 
 const RHFColorPicker = ({
   name,
   label,
-  hidden,
   disabled,
   required = true,
   containerClassName,
-  translatePrefixKey = "formsInputs",
+  labelClassName,
+  col,
+  ...field
 }) => {
   const { control, getFieldState } = useFormContext();
   const { invalid, error } = getFieldState(name);
-  const { message: errorMessage } = error || {};
+  const { message } = error || {};
 
   const inputClassName = `${invalid ? "error" : ""} rhf-input-field`;
 
@@ -22,16 +24,15 @@ const RHFColorPicker = ({
       name={name}
       control={control}
       render={({ field: { value, onChange } }) => (
-        <InputContainer
-          name={name}
-          label={label}
-          hidden={hidden}
-          invalid={invalid}
-          required={required}
-          errorMessage={errorMessage}
-          containerClassName={containerClassName}
-          translatePrefixKey={translatePrefixKey}
-        >
+        <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
+          {label && (
+            <Label
+              name={name}
+              required={required}
+              label={label}
+              labelClassName={labelClassName}
+            />
+          )}
           <InputColor
             value={value}
             placement="bottom"
@@ -39,8 +40,12 @@ const RHFColorPicker = ({
             className={inputClassName}
             initialValue={value || "#2954c3"}
             onChange={(pickedColor) => onChange(pickedColor.hex)}
+            {...field}
           />
-        </InputContainer>
+          {error ? (
+            <ErrorText containerClassName="py-1">{message}</ErrorText>
+          ) : null}
+        </div>
       )}
     />
   );

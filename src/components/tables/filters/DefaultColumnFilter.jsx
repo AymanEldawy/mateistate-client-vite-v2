@@ -1,15 +1,22 @@
+import { DebouncedInput } from "@/components/forms/fields";
+
 export function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
+  // column: { filterValue, preFilteredRows, setFilter },
+  column,
 }) {
-  const count = preFilteredRows.length;
+  const value = column?.getFilterValue()
+  const setFilterValue = column?.setFilterValue
+  const header = column?.columnDef?.header
 
   return (
-    <input
-      value={filterValue || ''}
-      onChange={e => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+    <DebouncedInput
+      className="p-1 text-xs border rounded-md"
+      value={value || ''}
+      onChange={value => {
+        setFilterValue(value|| undefined);
       }}
-      placeholder={`Search ${count} records...`}
+      debounce={400}
+      placeholder={`Search ${header} records...`}
     />
   );
 }

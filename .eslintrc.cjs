@@ -12,9 +12,8 @@ module.exports = {
   settings: { react: { version: "18.2" } },
   plugins: ["react-refresh"],
   rules: {
-    "react/prop-types": "off",
-    "react/never-use": "off",
-    "react/jsx-no-target-blank": "off",
+    "react/prop-types": "off", // Disable prop-types if not using them
+    "react/jsx-no-target-blank": "off", // Allow target="_blank" without rel="noreferrer"
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

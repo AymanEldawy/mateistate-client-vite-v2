@@ -1,4 +1,4 @@
-import { ChevronIcon, LongArrow } from "Components/Icons";
+import { ChevronIcon, LongArrow } from "@components/Icons";
 import Layout from "Components/Layout";
 import React from "react";
 import { useNavigate } from "react-router-dom";

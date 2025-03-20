@@ -4,6 +4,9 @@ import { Controller, useFormContext } from 'react-hook-form';
 import AsyncSelect from "react-select/async";
 import { Label } from "./Label";
 import { ErrorText } from "../../shared/ErrorText";
+import { PlusIcon, SearchIcon } from "@/components/Icons";
+import Btn from "@/components/shared/Btn";
+import { usePopupForm } from "@/hook/usePopupForm";
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -18,30 +21,32 @@ const RHFAsyncSelectField = ({
   labelClassName,
   getSingle,
   getSearch,
-  small,
   isDarkMode,
   selectProps,
   styles,
-  label: MI_label,
+  label,
+  col,
+  small = true,
   ...field
 }) => {
+  const { handleDispatchForm } = usePopupForm()
   const { control, watch, setValue } = useFormContext();
-  const [defaultOption, setDefaultOption] = useState < Option | null > (null)
-  const { MI_name, MI_label_key, MI_value, MI_table, required } = field
+  const [defaultOption, setDefaultOption] = useState(null)
+  const { name, optionValue, optionLabel, tableName, required, allowAdd, table, formKey } = field
   const queryClient = new QueryClient();
 
   const loadOptions = async (value, callback, id) => {
     try {
       const res = await queryClient.fetchQuery({
-        queryKey: ["list", MI_table, 'search', id, value],
+        queryKey: ["list", tableName, 'search', id, value],
         queryFn: async () => {
           if (!value && !id) return;
           let response;
           if (id) {
-            response = await getSingle(MI_table, id);
+            response = await getSingle(tableName, id);
           } else {
             response = await getSearch(
-              MI_table,
+              tableName,
               value,
             )
           }
@@ -62,16 +67,16 @@ const RHFAsyncSelectField = ({
   };
 
   useEffect(() => {
-    if (!watch(MI_name)) return;
-    if (defaultOption && defaultOption?.[MI_name] === watch(MI_name)) return;
+    if (!watch(name)) return;
+    if (defaultOption && defaultOption?.[name] === watch(name)) return;
 
-    loadOptions(watch(MI_name), undefined)
+    loadOptions(watch(name), undefined)
 
-  }, [watch(MI_name), defaultOption])
+  }, [watch(name), defaultOption])
 
   return (
     <Controller
-      name={MI_name}
+      name={name}
       control={control}
       defaultValue={null}
       render={({
@@ -79,56 +84,65 @@ const RHFAsyncSelectField = ({
         fieldState: { error },
       }) => {
         return (
-          <div className={`w-full ${containerClassName} flex flex-col gap-1`}>
-            {MI_label && (
+          <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
+            {label && (
               <Label
-                name={MI_name}
+                name={name}
                 required={required}
-                label={MI_label}
+                label={label}
                 labelClassName={labelClassName}
               />
             )}
             <AsyncSelect
               ref={ref}
-              required
+              menuPlacement="auto"
+              menuPortalTarget={document?.body}
               className={`w-full min-h-[30px] h-[30px] border-none ${selectClassName}`}
+              classNames={{
+                // indicatorsContainer: () => "!hidden bg-black",
+                control: () => `!min-h-[30px] !h-[30px]`,
+                singleValue: () => "!-mt-[5px]",
+                menu: () => "min-w-[190px]",
+                input: () => "!h-[30px] !py-0 !-mt-[2px]",
+              }}
               styles={{
+                menuPortal: (base) => ({ ...base, zIndex: 9999 }),
                 placeholder: (provided) => ({
                   ...provided,
                   color: isDarkMode ? "white" : "black",
                   fontWeight: "normal",
-                  fontSize: small ? "13px" : "14px",
+                  fontSize: small ? "12px" : "14px",
                 }),
                 valueContainer: (provided) => ({
                   ...provided,
-                  height: small ? "32px" : provided.height,
+                  height: small ? "30px" : provided.height,
                   padding: small ? "0 6px" : "0 10px",
-                  fontSize: small ? "13px" : provided.fontSize,
+                  fontSize: small ? "12px" : provided.fontSize,
                   cursor: "pointer",
                 }),
                 option: (provided, state) => ({
                   ...provided,
                   backgroundColor:
                     state.isFocused && isDarkMode ? DARK_ONE : provided.backgroundColor,
-                  fontSize: small ? "13px" : provided.fontSize,
+                  fontSize: small ? "12px" : provided.fontSize,
                   cursor: "pointer",
                 }),
                 container: (provided) => ({
                   ...provided,
-                  height: small ? "32px" : provided.height,
+                  height: small ? "30px" : provided.height,
                   minWidth: "110px",
                   maxWidth: small ? "155px" : "auto",
                 }),
                 indicatorsContainer: (provided) => ({
                   ...provided,
-                  height: small ? "32px" : provided.height,
+                  height: small ? "30px" : provided.height,
                   cursor: "pointer",
                 }),
                 control: (provided, state) => ({
                   ...provided,
                   boxShadow: "none",
-                  height: small ? "32px" : provided.height,
-                  minHeight: small ? "32px" : provided.minHeight,
+                  height: small ? "30px" : provided.height,
+                  minHeight: small ? "30px" : provided.minHeight,
                   borderColor: error
                     ? RED_COLOR
                     : state.isFocused
@@ -142,9 +156,9 @@ const RHFAsyncSelectField = ({
                   "&:hover": {
                     borderColor: PRIMARY_COLOR,
                   },
-                  " > div": {
-                    overflow: "auto",
-                  },
+                  // " > div": {
+                  //   overflow: "auto",
+                  // },
                 }),
                 menu: (provided) => ({
                   ...provided,
@@ -156,22 +170,43 @@ const RHFAsyncSelectField = ({
                 ...styles,
               }}
               getOptionLabel={(option) => {
-                return option?.[MI_label_key]
+                return option?.[optionLabel]
               }}
               defaultOptions
               cacheOptions
               value={defaultOption}
               defaultValue={defaultOption}
-              getOptionValue={(option) => option?.[MI_value || "id"]}
+              getOptionValue={(option) => option?.[optionValue || "id"]}
               loadOptions={(inputValue, callback) => {
                 loadOptions(inputValue, callback);
               }}
               onChange={(option) => {
                 setDefaultOption(option);
-                setValue(name, option[MI_value || 'id'])
+                setValue(name, option[optionValue || 'id'])
               }}
               {...selectProps}
-
+              components={{
+                IndicatorsContainer: () => {
+                  if (allowAdd) {
+                    return (
+                      <Btn
+                        type="button"
+                        kind="info"
+                        containerClassName="h-[25px] w-[25px] !rounded-full !p-1 mx-1"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleDispatchForm({
+                            setDefaultOption,
+                            table,
+                            formKey
+                          })
+                        }} ><PlusIcon className={`h-4 w-4 rounded-full`} />
+                      </Btn>
+                    )
+                  }
+                  return <SearchIcon className={`h-5  w-5 rounded-full mx-2 text-blue-500`} />
+                }
+              }}
             />
             {error ? (
               <ErrorText containerClassName="py-1">{error?.message}</ErrorText>

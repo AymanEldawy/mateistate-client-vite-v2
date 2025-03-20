@@ -6,7 +6,7 @@
   "Number_rows": "Number of rows: ",
   "search": "search",
   "save": "Save",
-  "search_in": "search in  ",
+  "search_in": "search in",
 
   "Add": "Add",
   "Edit": "Edit",
@@ -157,5 +157,14 @@
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",
-  "returned_orders": "Returned orders"
+  "returned_orders": "Returned orders",
+
+  "formWarnAlerts": {
+    "warning": "warning",
+    "warnMessage": "Are you sure you wan't leave the page without saving.",
+    "confirmDelete": "Are you sure you wan't delete.",
+    "cancel": "Cancel",
+    "exist": "Exist",
+    "yes": "Yes"
+  }
 }

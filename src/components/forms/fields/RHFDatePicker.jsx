@@ -1,21 +1,23 @@
 import "react-datepicker/dist/react-datepicker.css";
 import ReactDatePicker from "react-datepicker";
 import { Controller, useFormContext } from "react-hook-form";
-import InputContainer from "./InputContainer";
+import { ErrorText } from "@/components/shared/ErrorText";
+import { Label } from "./Label";
 
 const RHFDatePicker = ({
   containerClassName,
   labelClassName,
-  label: MI_label,
+  label,
   inputClassName,
+  col,
   ...field
 }) => {
   const { control } = useFormContext();
-  const { MI_name, required } = field
+  const { name, required } = field
 
   return (
     <Controller
-      name={MI_name}
+      name={name}
       control={control}
       defaultValue={null}
       render={({
@@ -23,12 +25,12 @@ const RHFDatePicker = ({
         fieldState: { error },
       }) => {
         return (
-          <div className={`w-full ${containerClassName} flex flex-col gap-1`}>
-            {MI_label && (
+          <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
+            {label && (
               <Label
-                name={MI_name}
+                name={name}
                 required={required}
-                label={MI_label}
+                label={label}
                 labelClassName={labelClassName}
               />
             )}

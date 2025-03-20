@@ -1,17 +1,28 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Menu from './menu/Menu'
-import Header from './menu/Header'
-import Footer from './menu/Footer'
+import Menu from './header/Menu'
+import Header from './header/Header'
+import Footer from './Footer'
 import sideMenuItems from '@/data/sideMenuItems'
+import { useEffect, useState } from 'react'
+import Sidebar from './Sidebar'
 
 const Layout = () => {
+  
+
+  // useEffect(() => {
+  //   const getMen = async () => {
+  //     const menu = await getMenu();
+  //     setMenu(menu);
+  //   };
+  //   getMen();
+  // }, []);
+
+
   return (
     <div id="layout-wrapper" className={"flex flex-col h-screen"}>
-      <Header setOpen={setOpen} mode={mode} setMode={setMode} />
+      <Header />
       <Menu menu={sideMenuItems} />
-      {/* <Backdrop open={open} onClose={() => setOpen(false)} /> */}
-      {/* <Sidebar menu={menu} setOpen={setOpen} open={open} /> */}
+      <Sidebar menu={sideMenuItems} />
       <Outlet />
       <Footer />
     </div>

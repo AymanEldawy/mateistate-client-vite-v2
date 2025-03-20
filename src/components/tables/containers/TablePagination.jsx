@@ -1,26 +1,83 @@
-<nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-<span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
-<ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-    <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-    </li>
-    <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-    </li>
-    <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-    </li>
-    <li>
-        <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-    </li>
-    <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-    </li>
-    <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-    </li>
-    <li>
-<a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-    </li>
-</ul>
-</nav>
+import { Fragment } from "react";
+
+const TablePagination = ({ table }) => {
+
+  return (
+    <div>
+      <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+        <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+          Showing{' '}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}-
+            {Math.min(
+              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
+              table.getFilteredRowModel().rows.length
+            )}
+          </span>{' '}
+          of{' '}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            {table.getFilteredRowModel().rows.length}
+          </span>
+        </span>
+
+        <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+          <li>
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+          </li>
+
+          {
+            Array.from({ length: table.getPageCount() }, (_, i) => i + 1)
+              .filter((page) => {
+                const currentPage = table.getState().pagination.pageIndex + 1;
+                return (
+                  page === 1 || // Always show the first page
+                  page === table.getPageCount() || // Always show the last page
+                  (page >= currentPage - 3 && page <= currentPage + 3) // Show prev 3, current, and next 3
+                );
+              })
+              .map((page, index, array) => (
+                <Fragment key={page}>
+                  {/* Add ellipsis if there's a gap between pages */}
+                  {index > 0 && array[index - 1] !== page - 1 && (
+                    <li>
+                      <span className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500">...</span>
+                    </li>
+                  )}
+
+                  <li>
+                    <button
+                      onClick={() => table.setPageIndex(page - 1)}
+                      className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${table.getState().pagination.pageIndex === page - 1
+                        ? 'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:bg-gray-700 dark:text-white'
+                        : ''
+                        }`}
+                    >
+                      {page}
+                    </button>
+                  </li>
+                </Fragment>
+              ))
+          }
+
+          <li>
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+export default TablePagination

@@ -1,8 +1,13 @@
-import React from 'react'
+import FormSidebar from "./FormSidebar"
 
-const FormStepsLayout = () => {
+const FormStepsLayout = ({ RenderForm, formSidebarProps }) => {
   return (
-    <div>FormStepsLayout</div>
+    <div>
+      <FormSidebar {...formSidebarProps} />
+      <div>
+        <RenderForm />
+      </div>
+    </div>
   )
 }
 

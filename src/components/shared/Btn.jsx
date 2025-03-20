@@ -1,6 +1,5 @@
-import React from "react";
 
-const Btn = ({ children, kind, containerClassName, isLoading, isActive, ...props }) => {
+const Btn = ({ children, kind, containerClassName, isLoading, isActive, onClick, ...props }) => {
   let classes = `text-blue-500 bg-blue-100 border border-transparent active:border-blue-700 hover:text-blue-700 ${isActive && 'border-blue-700'}`;
 
   switch (kind) {
@@ -33,7 +32,8 @@ const Btn = ({ children, kind, containerClassName, isLoading, isActive, ...props
 
   return (
     <button
-      className={`text-sm flex items-center gap-4 disabled:bg-gray-200 disabled:text-gray-400  px-4 h-7 tracking-wide rounded-md py-1 font-medium capitalize duration-300 ${classes} ${containerClassName}`}
+      onClick={onClick}
+      className={`text-sm flex items-center gap-2 disabled:bg-gray-200 disabled:text-gray-400 px-2 h-7 tracking-wide rounded-md py-1 font-medium capitalize duration-300 ${classes} ${containerClassName}`}
       {...props}
     >
       {isLoading ? (
