@@ -26,6 +26,7 @@ const FormStepPagination = ({ formPagination }) => {
   };
 
   return (
+    
     <div className="flex flex-nowrap w-fit items-center justify-center gap-1 dark:bg-[#f1f1f121] dark:text-white">
       <button
         disabled={+currentNumber === 1}

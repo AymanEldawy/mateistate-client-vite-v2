@@ -70,6 +70,7 @@ const RHFTableAsyncSelect = ({
       name={name}
       control={control}
       defaultValue={null}
+      className="w-full"
       render={({
         field: { ref },
         fieldState: { error },
@@ -79,7 +80,7 @@ const RHFTableAsyncSelect = ({
             ref={ref}
             menuPlacement="auto"
             menuPortalTarget={document?.body}
-            className={`w-full min-h-[30px] h-[30px] border-none ${selectClassName}`}
+            className={`w-full min-h-[30px] h-[30px] w-full border-none ${selectClassName}`}
             classNames={{
               // indicatorsContainer: () => "!hidden bg-black",
               control: () => `bg-none border-none !min-h-[30px] !h-[30px]`,
@@ -113,7 +114,7 @@ const RHFTableAsyncSelect = ({
                 ...provided,
                 height: small ? "30px" : provided.height,
                 minWidth: "110px",
-                maxWidth: small ? "155px" : "auto",
+                // maxWidth: small ? "155px" : "auto",
               }),
               indicatorsContainer: (provided) => ({
                 ...provided,

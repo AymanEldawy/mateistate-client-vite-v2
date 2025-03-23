@@ -1,0 +1,58 @@
+import { Controller, useFormContext } from 'react-hook-form';
+import { Label } from "./Label";
+import { ErrorText } from "../../shared/ErrorText";
+
+const RHFCheckbox = ({
+  containerClassName,
+  labelClassName,
+  label,
+  col,
+  ...field
+}) => {
+  const { control } = useFormContext();
+  const { name, required } = field
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={null}
+      render={({
+        field: { onChange, ref, value },
+        fieldState: { error },
+      }) => {
+        return (
+          <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
+            {label && (
+              <Label
+                name={name}
+                required={required}
+                label={label}
+                labelClassName={labelClassName}
+              />
+            )}
+            <input
+              ref={ref}
+              className={`border  h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
+                ${error ? "border-red-200 text-red-500" : ""}
+                `}
+              name={name}
+              onChange={(e) => {
+                onChange(e.target.value);
+              }}
+              type="checkbox"
+              {...field}
+              value={value}
+            />
+
+            {error ? (
+              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+            ) : null}
+          </div>
+        );
+      }}
+    />
+  );
+};
+
+export default RHFCheckbox;

@@ -2,15 +2,11 @@ const PATHS = {
   /********** General **********/
   HOME: "/",
   PROFILE: "/profile",
-  ACCOUNT: "/account",
   CHANGE_PASSWORD: "/profile/password",
   /********** Authentication **********/
   LOGIN: "/login",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
-  /******************** Announcements ********************/
-
-
   /******************** ACCOUNT ********************/
   ACCOUNT: "/account",
   /******************** ACCOUNT_CHART ********************/
@@ -77,7 +73,6 @@ const PATHS = {
   /******************** UNREGISTER ********************/
   MATERIAL_UNREGISTER: "/unregister",
   /******************** SERVICE ********************/
-  SERVICE: "/service",
   /******************** MAINTENANCES ********************/
   MAINTENANCES: "/maintenances",
   MAINTENANCES_PROPERTY: "/maintenances/property",
@@ -186,8 +181,6 @@ const PATHS = {
   BUILDING_SCHEMA_REPORT: "/reports/building-schema",
   /******************** UNIT_CONDITION_FOR_CONSTRUCTION_REPORT ********************/
   UNIT_CONDITION_FOR_CONSTRUCTION_REPORT: "/reports/unit-condition-for-construction-report",
-  /******************** CHEQUE_REPORT ********************/
-  CHEQUE_REPORT: "/reports/cheque-report",
   /******************** WAREHOUSE_REPORT ********************/
   WAREHOUSE_REPORT: "/reports/warehouse-report",
   /******************** ITEM_ACTIVITY ********************/

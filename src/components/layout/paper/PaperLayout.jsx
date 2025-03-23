@@ -8,6 +8,7 @@ import PaperError from './PaperError';
 import FormWrapper from '../../forms/wrapper/FormWrapper';
 import Loading from '@/components/shared/Loading';
 import ConfirmModal from '@/components/shared/ConfirmModal';
+import PaperFiltersAndSort from './PaperFiltersAndSort';
 
 const PaperLayout = ({
   name,
@@ -83,7 +84,9 @@ const PaperLayout = ({
           setOpenForm={setOpenForm}
           onClickDelete={() => setOpenConfirmation(true)}
           setOpenViability={setOpenViability}
+          records={data?.length}
         />
+        <PaperFiltersAndSort filters={columnFilters} sorts={[]} setColumnFilters={setColumnFilters} />
         <CustomTable
           {...tableProps}
           name={name}

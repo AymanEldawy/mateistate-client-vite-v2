@@ -22,7 +22,6 @@ const FormWrapper = ({
   onHandlingDataBeforeSubmit,
   invalidateQueryKeyOnSuccess,
   onSuccessAction,
-  isSteps,
   outerClose,
   formHeaderProps,
   formFooterProps,
@@ -119,7 +118,7 @@ const FormWrapper = ({
           autoComplete="off"
         >
           <FormHeader {...formHeaderProps} onClose={handleOnClose} />
-          {isSteps ?
+          {formProps?.isSteps ?
             <FormStepsLayout formSidebarProps={formSidebarProps}  {...formProps} /> : <FormSingularLayout {...formProps} />
           }
           <FormFooter

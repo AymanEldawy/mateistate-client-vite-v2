@@ -14,7 +14,8 @@ const costCenterConfig = {
   formProps: {
     defaultValue,
     validationSchema,
-    mutationFunction: () => { },
+    mutationAddFunction: () => { },
+    mutationUpdateFunction: () => { },
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteAccount,

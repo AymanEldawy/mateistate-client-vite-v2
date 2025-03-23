@@ -1,4 +1,4 @@
-import FIELDS_STRUCTURE from "@/helpers/FIELDS_STATCUTRE";
+import FIELDS_STRUCTURE from "@/helpers/FIELDS_STRUCTURE";
 
 export const COST_CENTER_FIELDS = {
   created_at: FIELDS_STRUCTURE.created_at(),

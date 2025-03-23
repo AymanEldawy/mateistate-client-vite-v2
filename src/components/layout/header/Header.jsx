@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import logo from "@/assets/abrepair-logo.svg";
+import logo from "@/assets/abrepair-logo.svg";
 import { IconsBar } from "./IconsBar";
 import SearchBar from "./SearchBar";
 import { BarsIcon, HomeIcon } from "@/components/Icons";
@@ -15,7 +15,7 @@ function Header() {
       <div className="container  flex py-2">
         <div className="flex items-center gap-4">
           <Link className="" to="/">
-            {/* <img src={logo} alt="Abrepair" className="max-w-[140px]" /> */}
+            <img src={logo} alt="Abrepair" className="max-w-[140px]" />
           </Link>
           <Link className="h-10 w-10 flex items-center justify-center bg-[#0002] hover:bg-gray-200 hover:text-gray-600 rounded-full" to="/">
             <HomeIcon className="h-6 w-6" />

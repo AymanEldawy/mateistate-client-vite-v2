@@ -1,16 +1,16 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
-import AccountForm from '@/components/forms/containers/AccountForm'
+import UserForm from '@/components/forms/containers/UserForm'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import accountColumns from '@/helpers/account/accountColumns'
+import userColumns from '@/helpers/user/userColumns'
+import { deleteManyUsers, deleteUser, getAllUsers } from '@/services/userService'
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {}
 
 const validationSchema = () => { }
 
-const accountConfig = {
+const userConfig = {
   formProps: {
     defaultValue,
     validationSchema,
@@ -18,24 +18,24 @@ const accountConfig = {
     mutationUpdateFunction: () => { },
     onSuccessAction: () => { },
     isSteps: false,
-    onHandleDelete: deleteAccount,
-    RenderForm: (props) => <AccountForm {...props} />
+    onHandleDelete: deleteUser,
+    RenderForm: (props) => <UserForm {...props} />
   },
   formHeaderProps: {
-    header: "Account"
+    header: "user"
   },
   formPaginationProps: {
-    name: 'account',
+    name: 'user',
     number: 1
   },
 }
 
-const Account = ({ formOnly, outerClose }) => {
+const User = ({ formOnly, outerClose }) => {
 
   if (formOnly) {
     return (
       <FormWrapper
-        {...accountConfig}
+        {...userConfig}
         outerClose={outerClose}
       />
     )
@@ -43,24 +43,24 @@ const Account = ({ formOnly, outerClose }) => {
   
   return (
     <PaperLayout
-      name="account"
-      queryKey={QUERY_KEYS.ACCOUNT}
-      queryFn={getAllAccounts}
-      handleDeleteSelected={deleteManyAccounts}
+      name="user"
+      queryKey={QUERY_KEYS.user}
+      queryFn={getAllUsers}
+      handleDeleteSelected={deleteManyUsers}
       paperHeaderProps={{
-        header: "account"
+        header: "user"
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: accountColumns
+        columns: userColumns
       }}
-      {...accountConfig}
+      {...userConfig}
 
     />
   )
 }
 
-export default Account
+export default User

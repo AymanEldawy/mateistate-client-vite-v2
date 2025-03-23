@@ -1,0 +1,11 @@
+import { FLAT_PROPERTY_TYPES } from "@/data/constants";
+
+export function getUnitType(contract, value) {
+  let type = contract?.parking_id
+    ? "parking_"
+    : contract?.shop_id
+    ? "shop_"
+    : "apartment_";
+
+  return FLAT_PROPERTY_TYPES[`${type}${value}`];
+}

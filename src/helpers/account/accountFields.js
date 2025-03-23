@@ -1,5 +1,5 @@
 import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
-import FIELDS_STRUCTURE from "@/helpers/FIELDS_STATCUTRE";
+import FIELDS_STRUCTURE from "@/helpers/FIELDS_STRUCTURE";
 
 export const ACCOUNT_FIELDS = {
   created_at: FIELDS_STRUCTURE.created_at(),

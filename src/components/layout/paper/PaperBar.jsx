@@ -16,13 +16,15 @@ const PaperBar = ({
   onClickDelete,
   customAdd,
   setOpenForm,
-  setOpenViability
+  setOpenViability,
+  records
 }) => {
   const { t } = useTranslation();
 
   return (
     <div className="flex gap-4 items-center justify-between mb-2">
       <div className="flex gap-2 items-center">
+        <h3 className='ltr:border-r-2 rtl:border-l-2 ltr:pr-4 rtl:pl-4 ltr:mr-2 rtl:ml-2 border-black capitalize'>{t('total')}: {records}</h3>
         <div className="relative">
           <div className="relative md:block ">
             <div className="absolute inset-y-0 left-0 flex items-center pl-2 overflow-hidden">

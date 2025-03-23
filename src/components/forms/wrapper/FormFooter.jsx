@@ -9,7 +9,7 @@ const FormFooter = ({
   isLoading
 }) => {
   return (
-    <div className='flex items-center justify-between gap-4 p-2'>
+    <div className='flex items-center justify-between gap-4 p-2  bg-gray-200 border-t border-t-gray-300 z-10 relative'>
       <FormStepPagination {...paginationForm} />
       <div className="flex gap-2 items-center">
         {additionalButtons && additionalButtons}

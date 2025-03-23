@@ -4,7 +4,6 @@ import Account from '@/pages/views/Account/Account';
 
 const DynamicPopupForm = () => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
-  console.log("🚀 ~ DynamicPopupForm ~ popupFormConfig:", popupFormConfig)
   if (!popupFormConfig) return;
 
   const displayForm = () => {

@@ -13,6 +13,30 @@ const dateField = (additional) => ({
   ...additional,
 });
 
+const feedback = (additional) => ({
+  label: 'feedback',
+  name: 'feedback',
+  type: "checkbox",
+  required: false,
+  ...additional,
+});
+
+const gen_entries = (additional) => ({
+  label: 'gen_entries',
+  name: 'gen_entries',
+  type: "checkbox",
+  required: false,
+  ...additional,
+});
+
+const lawsuit = (additional) => ({
+  label: 'lawsuit',
+  name: 'lawsuit',
+  type: "checkbox",
+  required: false,
+  ...additional,
+});
+
 const numberField = (additional) => ({
   type: "number",
   required: false,
@@ -93,7 +117,6 @@ const cost_center = (additional) => ({
 const building = (additional) => ({
   label: "building",
   name: "building_id",
-  is_ref: true,
   table: "building",
   ...additional,
 });
@@ -141,6 +164,9 @@ const FIELDS_STRUCTURE = {
   numberField,
   selectField,
   uniqueField,
+  feedback,
+  lawsuit,
+  gen_entries,
 };
 
 export default FIELDS_STRUCTURE;
