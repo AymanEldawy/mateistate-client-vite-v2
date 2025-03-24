@@ -1,1 +1,1 @@
-export const accountValidationSchema = {}
+export const lessorValidationSchema = {}

@@ -45,7 +45,6 @@ const PATHS = {
   OWNER_EXPENSES: "/owner_expenses",
   /******************** RESERVATION_PROPERTY ********************/
   RESERVATION_PROPERTY: "/reservation_property",
-
   /******************** CONTRACT_PATTERN ********************/
   CONTRACT_PATTERN: "/types/contract_pattern",
   /******************** CHEQUE_PATTERN ********************/
