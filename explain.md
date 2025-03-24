@@ -2,9 +2,12 @@ each form has view
 1. create view or file inside folder `views`
 -> path `pages/views`
 -> import the view in `routes.js` file
--> take a copy of `Account.jsx` file view and replace all things with the important things for the `lessor`
-2. create form inside folder `containers`
+-> take a copy of `Account.jsx` file view and replace all things with the important things for the 
+-> make sure you see the page in browser you can navigate to it from menu or write in the url `/lessor`
+`lessor`
+2. create form file e.g. `LessorForm` inside folder `containers`
 -> path `components/forms/containers`
+-> you should take the forms fields from project `v1` inside file `forms.js` search for the form name e.g. `lessor = [ ]`
 3. create service file inside folder `services`
 -> path `services`
 4. create folder inside folder `helpers`
