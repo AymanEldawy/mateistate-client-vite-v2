@@ -24,13 +24,13 @@ Manual
 - service
 
 
-
 Steps 
 - land
 - apartment
 - parking
 - shop
 - villa
+
 
 
 Normal 
@@ -50,11 +50,3 @@ Normal
 
 
 
-
-
-
-
-
-## Database
--X change internal_number to code
-- change pattern.code to patter_id

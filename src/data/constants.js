@@ -260,53 +260,40 @@ const GLOBAL_CONTRACT_STEPS = {
   contract_termination_step: "termination",
 };
 
-export const APARTMENT_STEPS_CONTRACT = [
+const SHARED_STEPS = [
   GLOBAL_CONTRACT_STEPS.contract_general_step,
   GLOBAL_CONTRACT_STEPS.contract_payments_step,
   GLOBAL_CONTRACT_STEPS.contract_commission_step,
-  GLOBAL_CONTRACT_STEPS.contract_terms_step,
-  GLOBAL_CONTRACT_STEPS.contract_pictures_step,
   GLOBAL_CONTRACT_STEPS.contract_other_fees_step,
-  GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
+  GLOBAL_CONTRACT_STEPS.contract_termination_step,
+  // GLOBAL_CONTRACT_STEPS.contract_terms_step,
+
+]
+
+export const APARTMENT_STEPS_CONTRACT = [
+  ...SHARED_STEPS,
+
+  // GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
   GLOBAL_CONTRACT_STEPS.contract_linked_parking_step,
   GLOBAL_CONTRACT_STEPS.contract_contract_cycle_step,
-  GLOBAL_CONTRACT_STEPS.contract_termination_step,
 ]
 
 export const SHOP_STEPS_CONTRACT = [
-  GLOBAL_CONTRACT_STEPS.contract_general_step,
-  GLOBAL_CONTRACT_STEPS.contract_payments_step,
-  GLOBAL_CONTRACT_STEPS.contract_commission_step,
-  GLOBAL_CONTRACT_STEPS.contract_terms_step,
-  GLOBAL_CONTRACT_STEPS.contract_pictures_step,
-  GLOBAL_CONTRACT_STEPS.contract_other_fees_step,
-  GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
+  ...SHARED_STEPS,
+  // GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
   GLOBAL_CONTRACT_STEPS.contract_linked_parking_step,
   GLOBAL_CONTRACT_STEPS.contract_contract_cycle_step,
-  GLOBAL_CONTRACT_STEPS.contract_termination_step,
 ]
 
 export const LAND_STEPS_CONTRACT = [
-  GLOBAL_CONTRACT_STEPS.contract_general_step,
-  GLOBAL_CONTRACT_STEPS.contract_payments_step,
-  GLOBAL_CONTRACT_STEPS.contract_commission_step,
-  GLOBAL_CONTRACT_STEPS.contract_terms_step,
-  GLOBAL_CONTRACT_STEPS.contract_pictures_step,
-  GLOBAL_CONTRACT_STEPS.contract_other_fees_step,
-  GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
+  ...SHARED_STEPS,
+  // GLOBAL_CONTRACT_STEPS.contract_fixed_assets_step,
   GLOBAL_CONTRACT_STEPS.contract_linked_parking_step,
   GLOBAL_CONTRACT_STEPS.contract_contract_cycle_step,
-  GLOBAL_CONTRACT_STEPS.contract_termination_step,
 ];
 
 export const PARKING_STEPS_CONTRACT = [
-  GLOBAL_CONTRACT_STEPS.contract_general_step,
-  GLOBAL_CONTRACT_STEPS.contract_payments_step,
-  GLOBAL_CONTRACT_STEPS.contract_commission_step,
-  GLOBAL_CONTRACT_STEPS.contract_terms_step,
-  GLOBAL_CONTRACT_STEPS.contract_pictures_step,
-  GLOBAL_CONTRACT_STEPS.contract_other_fees_step,
-  GLOBAL_CONTRACT_STEPS.contract_termination_step,
+  ...SHARED_STEPS
 ]
 
 export const FLAT_PROPERTY_COLORS = {
