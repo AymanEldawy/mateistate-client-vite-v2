@@ -3,6 +3,7 @@ const QUERY_KEYS = {
   ACCOUNT: "account",
   BUILDING: "building",
   CONTRACT: "contract",
+  Lessor: "lessor",
 };
 
 export default QUERY_KEYS;

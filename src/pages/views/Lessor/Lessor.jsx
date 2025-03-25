@@ -1,65 +1,62 @@
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import accountColumns from '@/helpers/account/accountColumns'
-import { lessorValidationSchema } from '@/helpers/lessor/lessorValidationSchema'
-import LessorForm from '@/components/forms/containers/LessorForm'
+import QUERY_KEYS from "@/data/queryKeys";
+import PaperLayout from "../../../components/layout/paper/PaperLayout";
+import {
+  deleteAccount,
+  deleteManyAccounts,
+  getAllAccounts,
+} from "@/services/accountService";
+import { lessorValidationSchema } from "@/helpers/lessor/lessorValidationSchema";
+import LessorForm from "@/components/forms/containers/LessorForm";
+import lessorColumns from "@/helpers/lessor/lessorColumns";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {}
+const defaultValue = {};
 
-const accountConfig = {
+const lessorConfig = {
   formProps: {
     defaultValue,
     validationSchema: lessorValidationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
-    onSuccessAction: () => { },
-    isSteps: false,
+    mutationAddFunction: () => {},
+    mutationUpdateFunction: () => {},
+    onSuccessAction: () => {},
+    isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <LessorForm {...props} />
+    RenderForm: (props) => <LessorForm {...props} />,
   },
   formHeaderProps: {
-    header: "Account"
+    header: "Lessor",
   },
   formPaginationProps: {
-    name: 'account',
-    number: 1
+    name: "Lessor",
+    number: 1,
   },
-}
+};
 
-const Account = ({ formOnly, outerClose }) => {
+const Lessor = () => {
+  // if (formOnly) {
+  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
+  // }
+  // const navigate = useNavigate();
 
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...accountConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-  
   return (
     <PaperLayout
-      name="account"
-      queryKey={QUERY_KEYS.ACCOUNT}
-      queryFn={getAllAccounts}
-      handleDeleteSelected={deleteManyAccounts}
+      name="Lessor"
+      queryKey={QUERY_KEYS.Lessor}
+      queryFn={getAllAccounts} //
+      handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "account"
+        header: "Lessor",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: accountColumns
+        columns: lessorColumns,
       }}
-      {...accountConfig}
-
+      {...lessorConfig}
     />
-  )
-}
+  );
+};
 
-export default Account
+export default Lessor;
