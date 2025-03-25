@@ -11,6 +11,7 @@ import { Navigate } from "react-router-dom";
 /************************************** General **************************************/
 const Home = React.lazy(() => import("../pages/views/Home/Home"));
 const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
+const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -29,13 +30,20 @@ const routes = [
     children: [
       /************************************** General **************************************/
       {
-        path: PATHS.ACCOUNT, element: <Account />
+        path: PATHS.ACCOUNT,
+        element: <Account />,
       },
       {
-        path: PATHS.CONTRACT, element: <Contract />
+        path: PATHS.CONTRACT,
+        element: <Contract />,
       },
       {
-        path: PATHS.HOME, element: <Home />
+        path: PATHS.HOME,
+        element: <Home />,
+      },
+      {
+        path: PATHS.LESSOR,
+        element: <Lessor />,
       },
 
       /************************************** Announcements **************************************/
