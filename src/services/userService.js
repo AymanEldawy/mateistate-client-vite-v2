@@ -44,11 +44,3 @@ export const deleteManyUsers = (ids) => {
     `${API_URL_CONSTANTS.BASE_USER}?ids=${ids.join(',')}`
   );
 };
-
-
-
-export const getUserCode = (parentId) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_USER}/code=${parentId}`
-  );
-};

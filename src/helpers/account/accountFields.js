@@ -20,7 +20,6 @@ export const ACCOUNT_FIELDS = {
   },
 
   note: FIELDS_STRUCTURE.note(),
-  // FIELDS_STRUCTURE.currency(),
   final_id: FIELDS_STRUCTURE.account({
     label: "final_id",
     name: "final_id",

@@ -124,19 +124,6 @@ export const LAWSUIT_STEPS = {
   lawsuit_termination: "lawsuit_termination",
 };
 
-export const BUILDING_STEPS = {
-  building_general: "building_general",
-  building_units: "building_units",
-  building_buying: "building_buying",
-  building_ownership: "building_ownership",
-  building_editorial_entry: "building_editorial_entry",
-  building_investment: "building_investment",
-  building_pictures: "building_pictures",
-  building_real_estate_development: "building_real_estate_development",
-  building_real_estate_management: "building_real_estate_management",
-  building_default_accounts: "building_default_accounts",
-};
-
 export const APARTMENT_STEPS = {
   apartment_general: "apartment_general",
   apartment_pictures: "apartment_pictures",
@@ -247,7 +234,7 @@ export const CHEQUE_PATTERN_STEPS = {
   cheque_pattern_sms: "cheque_pattern_sms",
 };
 
-const GLOBAL_CONTRACT_STEPS = {
+export const GLOBAL_CONTRACT_STEPS = {
   contract_general_step: "general",
   contract_payments_step: "payments",
   contract_commission_step: "commission",

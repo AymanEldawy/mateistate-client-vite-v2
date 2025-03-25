@@ -10,6 +10,8 @@ import { Navigate } from "react-router-dom";
 
 /************************************** General **************************************/
 const Home = React.lazy(() => import("../pages/views/Home/Home"));
+const Building = React.lazy(() => import("../pages/views/Building/Building"));
+const Users = React.lazy(() => import("../pages/views/Users/Users"));
 const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
@@ -36,6 +38,12 @@ const routes = [
       },
       {
         path: PATHS.HOME, element: <Home />
+      },
+      {
+        path: PATHS.BUILDING, element: <Building />
+      },
+      {
+        path: PATHS.USER, element: <Users />
       },
 
       /************************************** Announcements **************************************/

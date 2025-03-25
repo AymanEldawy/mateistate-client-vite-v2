@@ -1,6 +1,7 @@
 import Btn from '@/components/shared/Btn'
 import FormStepPagination from './FormStepPagination'
 import { EditIcon, TrashIcon } from '@/components/Icons'
+import { useFormContext } from 'react-hook-form'
 
 const FormFooter = ({
   paginationForm,
@@ -8,11 +9,12 @@ const FormFooter = ({
   setOpenConfirmation,
   isLoading
 }) => {
+  const { watch } = useFormContext()
   return (
     <div className='flex items-center justify-between gap-4 p-2  bg-gray-200 border-t border-t-gray-300 z-10 relative'>
       <FormStepPagination {...paginationForm} />
       <div className="flex gap-2 items-center">
-        {additionalButtons && additionalButtons}
+        {additionalButtons && additionalButtons(watch())}
         {paginationForm?.currentId ? (
           <Btn
             type="button"

@@ -44,8 +44,7 @@ const numberField = (additional) => ({
 });
 
 const selectField = (additional) => ({
-  intValue: true,
-  selectFirstAsDefault: true,
+  key: "select",
   options: [],
   required: false,
   ...additional,
@@ -54,7 +53,6 @@ const selectField = (additional) => ({
 const uniqueField = (additional) => ({
   ref_id: "id",
   ref_name: "name",
-  is_ref: true,
   ...additional,
 });
 
@@ -62,7 +60,6 @@ const number = (additional) => ({
   label: "number",
   name: "number",
   type: "number",
-  required: true,
   ...additional,
 });
 
@@ -93,23 +90,21 @@ const note = (additional) => ({
 const nationality = (additional) => ({
   label: "nationality",
   name: "nationality",
+  key: "select",
   options: NATIONALITY_LISTS,
-  allowInsert: true,
 
   ...additional,
 });
 const account = (additional) => ({
   label: "account_id",
   name: "account_id",
-  is_ref: true,
-  allowAdd: true, 
+  allowAdd: true,
   table: "account",
   ...additional,
 });
 const cost_center = (additional) => ({
   label: "cost_center_id",
   name: "cost_center_id",
-  is_ref: true,
   table: "cost_center",
   ...additional,
 });
@@ -124,7 +119,6 @@ const building = (additional) => ({
 const bank = (additional) => ({
   label: "bank_id",
   name: "bank_id",
-  is_ref: true,
   table: "bank",
   ...additional,
 });
@@ -132,7 +126,6 @@ const bank = (additional) => ({
 // const client = (additional) => ({
 //   label: "client_id",
 //   name: "client_id",
-//   is_ref: true,
 //   table: UNIQUE_TABLES.clients,
 //   ...additional,
 // });
@@ -140,7 +133,6 @@ const bank = (additional) => ({
 // const suppliers = (additional) => ({
 //   label: "owner_id",
 //   name: "owner_id",
-//   is_ref: true,
 //   table: UNIQUE_TABLES.suppliers,
 //   ...additional,
 // });
