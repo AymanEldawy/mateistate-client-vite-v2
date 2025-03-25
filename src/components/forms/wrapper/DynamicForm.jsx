@@ -3,20 +3,20 @@ import { CurrencyFieldGroup, RHFAsyncSelectField, RHFCheckbox, RHFInput, RHFSele
 export const DynamicForm = ({
   fields,
   containerClassName,
-  labelClassName
+  labelClassName,
+  customGrid,
 }) => {
 
+  
   return (
     <div
-      className={`${containerClassName}`}
+      className={`${containerClassName} grid gap-x-4 gap-y-2 ${customGrid ? customGrid : ' grid-cols-2 lg:grid-cols-3'}`}
     >
       {fields?.map((field) => {
-        if (field?.hide_in_form) return;
-
         if (field?.key === 'text') {
           return (
             <RHFTextarea
-              key={field}
+              key={field?.name}
               {...field}
               labelClassName={labelClassName}
             />
@@ -25,14 +25,14 @@ export const DynamicForm = ({
           return (
             <CurrencyFieldGroup
               {...field}
-              key={field}
+              key={field?.name}
             />
           );
         } else if (field?.table) {
           return (
             <RHFAsyncSelectField
               {...field}
-              key={field}
+              key={field?.name}
               labelClassName={labelClassName}
             />
           );
@@ -40,15 +40,15 @@ export const DynamicForm = ({
           return (
             <RHFSelectField
               {...field}
-              key={field}
+              key={field?.name}
               labelClassName={labelClassName}
             />
           );
-        } else if (field?.key === "switch") {
+        } else if (field?.key === "checkbox") {
           return (
             <RHFCheckbox
               {...field}
-              key={field}
+              key={field?.name}
               labelClassName={labelClassName}
             />
           );
@@ -56,7 +56,7 @@ export const DynamicForm = ({
           return (
             <RHFInput
               {...field}
-              key={field}
+              key={field?.name}
               labelClassName={labelClassName}
             />
           );

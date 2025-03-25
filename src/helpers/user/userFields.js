@@ -2,38 +2,30 @@ import { USER_TYPE } from "../DEFAULT_OPTIONS";
 import FIELDS_STRUCTURE from "../FIELDS_STRUCTURE";
 
 export const USER_FIELDS = [
-  FIELDS_STRUCTURE.uniqueField({
-    name: "building_id",
-    hide_in_form: true,
-    category: "building",
-  }),
-  FIELDS_STRUCTURE.uniqueField({
-    name: "category_id",
-    hide_in_form: true,
-    category: "category",
-  }),
-
-  FIELDS_STRUCTURE.number(),
+  // FIELDS_STRUCTURE.number(),
+  // FIELDS_STRUCTURE.created_at(),
   FIELDS_STRUCTURE.name(),
-  FIELDS_STRUCTURE.created_at(),
   FIELDS_STRUCTURE.selectField({
     label: "card_type",
     name: "card_type",
     options: USER_TYPE
   }),
-  
+  {
+    label: "phone",
+    name: "phone",
+    type: "text",
+    required: true,
+  },
   FIELDS_STRUCTURE.number({
     label: "trn_number",
     name: "trn_number",
   }),
-  {
-    label: "account_id",
-    name: "account_id",
-    required: true,
-    is_ref: true,
-    category: "account",
-    hide_in_form: true,
-  },
+  // {
+  //   label: "account_id",
+  //   name: "account_id",
+  //   required: true,
+  //   table: "account",
+  // },
   {
     label: "date_of_birth",
     name: "date_of_birth",
@@ -89,12 +81,7 @@ export const USER_FIELDS = [
     name: "work_phone",
     type: "text",
   },
-  {
-    label: "phone",
-    name: "phone",
-    type: "text",
-    required: true,
-  },
+
   {
     label: "token",
     name: "token",
@@ -130,29 +117,16 @@ export const USER_FIELDS = [
     name: "statement",
     type: "text",
   },
-
   {
     label: "insurance_account_id",
     name: "insurance_account_id",
-    is_ref: true,
-    category: "account",
+    table: "account",
   },
-  // {
-  //   label: "category_id",
-  //   name: "category_id",
-  //   is_ref: true,
-  //   category: "category",
-  // },
   {
     label: "bank_id",
     name: "bank_id",
-    is_ref: true,
-    category: "bank",
+    table: "bank",
   },
-  {
-    label: "bank_account",
-    name: "bank_account",
-    type: "text",
-  },
+
   FIELDS_STRUCTURE.nationality(),
 ];

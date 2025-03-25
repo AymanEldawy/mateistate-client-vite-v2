@@ -1,21 +1,20 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import UserForm from '@/components/forms/containers/UserForm'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import userColumns from '@/helpers/user/userColumns'
-import { deleteManyUsers, deleteUser, getAllUsers } from '@/services/userService'
-// import QUERY_KEYS from './../../../data/queryKeys';
+import { createUser, deleteManyUsers, deleteUser, getAllUsers, updateUser } from '@/services/userService'
+import { userValidationSchema } from '@/helpers/user/userValidationSchema'
+import { lazy } from 'react'
+const UserForm = lazy(() => import("@/components/forms/containers/user/UserForm"))
 
 const defaultValue = {}
-
-const validationSchema = () => { }
 
 const userConfig = {
   formProps: {
     defaultValue,
-    validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    validationSchema: userValidationSchema,
+    mutationAddFunction: createUser,
+    mutationUpdateFunction: updateUser,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteUser,
@@ -30,7 +29,7 @@ const userConfig = {
   },
 }
 
-const User = ({ formOnly, outerClose }) => {
+const Users = ({ formOnly, outerClose }) => {
 
   if (formOnly) {
     return (
@@ -63,4 +62,4 @@ const User = ({ formOnly, outerClose }) => {
   )
 }
 
-export default User
+export default Users

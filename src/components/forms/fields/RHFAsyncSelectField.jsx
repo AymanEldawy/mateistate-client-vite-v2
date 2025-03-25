@@ -131,7 +131,7 @@ const RHFAsyncSelectField = ({
                   ...provided,
                   height: small ? "30px" : provided.height,
                   minWidth: "110px",
-                  maxWidth: small ? "155px" : "auto",
+                  // maxWidth: small ? "155px" : "auto",
                 }),
                 indicatorsContainer: (provided) => ({
                   ...provided,

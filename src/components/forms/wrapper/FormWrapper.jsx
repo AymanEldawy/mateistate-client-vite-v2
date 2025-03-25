@@ -40,7 +40,7 @@ const FormWrapper = ({
 
   const methods = useForm({
     defaultValues,
-    resolver: zodResolver(validationSchema),
+    // resolver: zodResolver(validationSchema),
   });
 
   const {
@@ -73,6 +73,7 @@ const FormWrapper = ({
   // });
 
   const handleSubmitFunc = async (data) => {
+    console.log("🚀 ~ handleSubmitFunc ~ data:", data)
     try {
       const dataToSubmit = onHandlingDataBeforeSubmit
         ? onHandlingDataBeforeSubmit({ ...data })

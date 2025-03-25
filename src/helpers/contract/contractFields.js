@@ -102,30 +102,6 @@ const contract = [
 
 const contract_commission = [
   {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "created_at",
-    name: "created_at",
-    type: "date",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
-  {
     label: "commission_percentage",
     name: "commission_percentage",
     type: "number",
@@ -142,7 +118,6 @@ const contract_commission = [
     name: "commission_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -168,7 +143,6 @@ const contract_commission = [
     name: "commission_from_owner_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
     // ref_table: UNIQUE_REF_TABLES.suppliers,
   },
@@ -189,29 +163,13 @@ const contract_commission = [
   //   label: 'commission_from_lessor_account_id', name: "commission_from_lessor_account_id",
   //   type: "uuid",
   //   required: false,
-  //   is_ref: true,
   //   ref_table: "commission_from_lessor_account",
   //
   // },
   // { label: 'commission_from_lessor_note', name: "commission_from_lessor_note", type: "text", required: false },
 ];
 const contract_cycle = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-    hide_in_form: true,
-  },
+ 
 
   {
     label: "contract_certifying_body",
@@ -275,55 +233,40 @@ const contract_cycle = [
     name: "contract_documented",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "contract_certifying",
     name: "contract_certifying",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "contract_delivered",
     name: "contract_delivered",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "contract_signed",
     name: "contract_signed",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "contract_received",
     name: "contract_received",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
 ];
 const contract_terms = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
+ 
+ 
   {
     label: "contract_terms",
     name: "contract_terms",
@@ -333,36 +276,14 @@ const contract_terms = [
 ];
 
 const contract_linked_parking = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "created_at",
-    name: "created_at",
-    type: "date",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
+ 
+ 
+ 
   {
     label: "building_id",
     name: "building_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "building",
     hideAdd: true,
   },
@@ -371,7 +292,6 @@ const contract_linked_parking = [
     name: "account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -379,30 +299,14 @@ const contract_linked_parking = [
     name: "main_contract_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "contract",
     hideAdd: true,
   },
 ];
 
 const contract_pictures = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
+ 
+ 
   {
     label: "picture",
     name: "picture",
@@ -414,26 +318,13 @@ const contract_pictures = [
   },
 ];
 const contract_termination = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  // {
-  //   label: "number",
-  //   name: "number",
-  //   type: "number",
-  //   required: false,
-  //   hide_in_form: true,
-  // },
+ 
   {
     label: "terminated",
     name: "terminated",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "termination_date",
@@ -472,7 +363,6 @@ const contract_termination = [
     name: "revenue_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   { label: "fines", name: "fines", type: "text", required: false },
@@ -481,7 +371,6 @@ const contract_termination = [
     name: "fines_revenue_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   { label: "fine_note", name: "fine_note", type: "text", required: false },
@@ -490,7 +379,7 @@ const contract_termination = [
     name: "evacuation_request",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "evacuation_date",
@@ -503,7 +392,7 @@ const contract_termination = [
     name: "clearance_printed",
     type: "boolean",
     required: false,
-    key: "switch",
+    key: "checkbox",
   },
   {
     label: "clearance_printed_date",
@@ -511,21 +400,12 @@ const contract_termination = [
     type: "date",
     required: false,
   },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
+ 
   {
     label: "gen_entries",
     name: "gen_entries",
     type: "boolean",
-    key: "switch",
+    key: "checkbox",
     required: false,
   },
 ];
@@ -534,83 +414,18 @@ const contract_fines_grid = [
   { label: "id", name: "id", type: "uuid", required: false },
   { label: "created_at", name: "created_at", type: "date", required: false },
   {
-    label: "termination_id",
-    name: "termination_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract_termination_fines",
-
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
-  {
     label: "account_id",
     name: "account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   { label: "fee_amount", name: "fee_amount", type: "number", required: false },
   { label: "notes", name: "notes", type: "text", required: false },
 ];
 
-// const contract_receipt_number = [
-//   {
-//     label: "id",
-//     name: "id",
-//     type: "uuid",
-//     required: false,
-//     hide_in_form: true,
-//   },
-//   {
-//     label: "contract_id",
-//     name: "contract_id",
-//     type: "uuid",
-//     required: false,
-//     is_ref: true,
-//     ref_table: "contract",
-
-//     hide_in_form: true,
-//   },
-//   {
-//     label: "receipt_number",
-//     name: "receipt_number",
-//     type: "number",
-//     required: false,
-//   },
-//   {
-//     label: "receipt_date",
-//     name: "receipt_date",
-//     type: "date",
-//     required: false,
-//   },
-//   {
-//     label: "receipt_statement",
-//     name: "receipt_statement",
-//     type: "text",
-//     required: false,
-//   },
-// ];
-
 const contract_other_fees = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
+ 
   { label: "date", name: "date", type: "date", required: false },
   { label: "fee_amount", name: "fee_amount", type: "number", required: false },
   {
@@ -618,53 +433,18 @@ const contract_other_fees = [
     name: "account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   { label: "notes", name: "notes", type: "text", required: false },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
 
-    hide_in_form: true,
-  },
 ];
 
 const contract_fixed_assets = [
-  {
-    label: "id",
-    name: "id",
-    type: "uuid",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "created_at",
-    name: "created_at",
-    type: "date",
-    required: false,
-    hide_in_form: true,
-  },
-  {
-    label: "contract_id",
-    name: "contract_id",
-    type: "uuid",
-    required: false,
-    is_ref: true,
-    ref_table: "contract",
-
-    hide_in_form: true,
-  },
   {
     label: "assets_id",
     name: "assets_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "assets",
   },
   { label: "value", name: "value", type: "number", required: false },
@@ -682,7 +462,6 @@ const apartment_sale_contract = [
     name: "apartment_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "apartment",
     ref_name: "apartment_no",
     hideAdd: true,
@@ -693,7 +472,6 @@ const apartment_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -720,7 +498,6 @@ const shop_sale_contract = [
     name: "shop_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "shop",
     ref_name: "shop_no",
     hideAdd: true,
@@ -731,7 +508,6 @@ const shop_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -759,7 +535,6 @@ const parking_sale_contract = [
     name: "parking_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "parking",
     ref_name: "parking_no",
     hideAdd: true,
@@ -770,7 +545,6 @@ const parking_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -792,8 +566,6 @@ const parking_sale_contract = [
 ];
 
 const land_sale_contract = [
-  { is_ref: true, ref_table: "bank", hide_in_form: true },
-  { is_ref: true, ref_table: "currency", ref_name: "code", hide_in_form: true },
   { label: "id", name: "id", type: "uuid", required: false },
   {
     label: "number",
@@ -810,14 +582,14 @@ const land_sale_contract = [
     label: "feedback",
     name: "feedback",
     type: "boolean",
-    key: "switch",
+    key: "checkbox",
     required: false,
   },
   {
     label: "lawsuit",
     name: "lawsuit",
     type: "boolean",
-    key: "switch",
+    key: "checkbox",
     required: false,
   },
   FIELDS_STRUCTURE.client({ required: true }),
@@ -826,7 +598,6 @@ const land_sale_contract = [
     name: "land_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "land",
   },
   { label: "description", name: "description", type: "text", required: false },
@@ -835,7 +606,6 @@ const land_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -858,7 +628,6 @@ const land_sale_contract = [
     name: "contract_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "contract",
   },
   {
@@ -872,7 +641,6 @@ const land_sale_contract = [
     name: "currency_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "currency",
   },
   // {
@@ -893,7 +661,6 @@ const land_sale_contract = [
   {
     label: "discount_contract_amount",
     name: "discount_contract_amount",
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -901,7 +668,6 @@ const land_sale_contract = [
     name: "discount_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -933,7 +699,6 @@ const land_sale_contract = [
     name: "revenue_account_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -941,7 +706,6 @@ const land_sale_contract = [
     name: "customer_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   {
@@ -949,14 +713,13 @@ const land_sale_contract = [
     name: "insurance_account_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "account",
   },
   {
     label: "gen_entries",
     name: "gen_entries",
     type: "boolean",
-    key: "switch",
+    key: "checkbox",
     required: false,
   },
 ];
@@ -969,7 +732,6 @@ const apartment_rent_contract = [
     name: "apartment_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "apartment",
     ref_name: "apartment_no",
     hideAdd: true,
@@ -980,7 +742,6 @@ const apartment_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -1023,7 +784,6 @@ const shop_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -1041,7 +801,6 @@ const shop_rent_contract = [
     name: "shop_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "shop",
     ref_name: "shop_no",
     hideAdd: true,
@@ -1076,7 +835,6 @@ const parking_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    is_ref: true,
     ref_table: "lessor",
   },
   {
@@ -1094,7 +852,6 @@ const parking_rent_contract = [
     name: "parking_id",
     type: "uuid",
     required: true,
-    is_ref: true,
     ref_table: "parking",
     ref_name: "parking_no",
     hideAdd: true,
@@ -1127,7 +884,6 @@ const parking_rent_contract = [
 //     name: "parking_id",
 //     type: "uuid",
 //     required: true,
-//     is_ref: true,
 //     ref_table: "parking",
 //     ref_name: "parking_no",
 //   },
@@ -1137,7 +893,6 @@ const parking_rent_contract = [
 //     name: "lessor_id",
 //     type: "uuid",
 //     required: false,
-//     is_ref: true,
 //     ref_table: "lessor",
 //   },
 //   {

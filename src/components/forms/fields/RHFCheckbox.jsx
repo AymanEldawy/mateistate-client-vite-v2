@@ -22,20 +22,10 @@ const RHFCheckbox = ({
         fieldState: { error },
       }) => {
         return (
-          <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
-            {label && (
-              <Label
-                name={name}
-                required={required}
-                label={label}
-                labelClassName={labelClassName}
-              />
-            )}
+          <div className={`w-full gap-4 ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
             <input
               ref={ref}
-              className={`border  h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
-                ${error ? "border-red-200 text-red-500" : ""}
-                `}
+              className={`h-5 w-5 `}
               name={name}
               onChange={(e) => {
                 onChange(e.target.value);
@@ -44,6 +34,14 @@ const RHFCheckbox = ({
               {...field}
               value={value}
             />
+            {label && (
+              <Label
+                name={name}
+                required={required}
+                label={label}
+                labelClassName={labelClassName}
+              />
+            )}
 
             {error ? (
               <ErrorText containerClassName="py-1">{error?.message}</ErrorText>

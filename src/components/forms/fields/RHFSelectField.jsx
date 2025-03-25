@@ -48,7 +48,7 @@ const RHFSelectField = ({
               ref={ref}
               menuPlacement="auto"
               menuPortalTarget={document?.body}
-              className={`w-full min-h-[30px] h-[30px] text-xs border-none ${selectClassName}`}
+              className={`w-full min-h-[30px] h-[30px] flex-1 text-xs border-none ${selectClassName}`}
               classNames={{
                 // indicatorsContainer: () => "!hidden bg-black",
                 control: () => `!min-h-[30px] !h-[30px]`,
@@ -82,7 +82,6 @@ const RHFSelectField = ({
                   ...provided,
                   height: small ? "30px" : provided.height,
                   minWidth: "110px",
-                  maxWidth: small ? "155px" : "auto",
                 }),
                 indicatorsContainer: (provided) => ({
                   ...provided,
