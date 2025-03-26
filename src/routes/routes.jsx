@@ -1,6 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import Account from "@/pages/views/Account/Account";
+import Owner from "@/pages/views/Owner/Owner";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -48,10 +49,16 @@ const routes = [
         element: <Lessor />,
       },
       {
-        path: PATHS.BUILDING, element: <Building />
+        path: PATHS.OWNER,
+        element: <Owner />,
       },
       {
-        path: PATHS.USER, element: <Users />
+        path: PATHS.BUILDING,
+        element: <Building />,
+      },
+      {
+        path: PATHS.USER,
+        element: <Users />,
       },
 
       /************************************** Announcements **************************************/

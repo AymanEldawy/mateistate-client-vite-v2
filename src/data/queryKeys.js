@@ -4,6 +4,7 @@ const QUERY_KEYS = {
   BUILDING: "building",
   CONTRACT: "contract",
   Lessor: "lessor",
+  Owner: "owner",
 };
 
 export default QUERY_KEYS;
