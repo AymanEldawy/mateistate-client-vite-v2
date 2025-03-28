@@ -5,6 +5,7 @@ const QUERY_KEYS = {
   CONTRACT: "contract",
   Lessor: "lessor",
   Owner: "owner",
+  Seller: "seller",
 };
 
 export default QUERY_KEYS;

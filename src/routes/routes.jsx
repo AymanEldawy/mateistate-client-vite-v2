@@ -1,7 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import Account from "@/pages/views/Account/Account";
-import Owner from "@/pages/views/Owner/Owner";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -15,6 +14,8 @@ const Building = React.lazy(() => import("../pages/views/Building/Building"));
 const Users = React.lazy(() => import("../pages/views/Users/Users"));
 const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
 const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
+const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
+const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -51,6 +52,10 @@ const routes = [
       {
         path: PATHS.OWNER,
         element: <Owner />,
+      },
+      {
+        path: PATHS.SELLER,
+        element: <Seller />,
       },
       {
         path: PATHS.BUILDING,
