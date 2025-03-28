@@ -10,6 +10,7 @@ import { APARTMENT_STEPS_CONTRACT } from '@/data/constants'
 import { contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
 import { useState } from 'react'
 import ContractFormFooter from '@/components/forms/containers/contract/ContractFormFooter'
+const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
 const defaultValue = {}
 

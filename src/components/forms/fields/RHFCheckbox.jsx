@@ -28,11 +28,11 @@ const RHFCheckbox = ({
               className={`h-5 w-5 `}
               name={name}
               onChange={(e) => {
-                onChange(e.target.value);
+                onChange(e.target.checked);
               }}
               type="checkbox"
               {...field}
-              value={value}
+              checked={value}
             />
             {label && (
               <Label

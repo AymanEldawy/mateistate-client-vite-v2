@@ -11,6 +11,7 @@ import { Navigate } from "react-router-dom";
 /************************************** General **************************************/
 const Home = React.lazy(() => import("../pages/views/Home/Home"));
 const Building = React.lazy(() => import("../pages/views/Building/Building"));
+const Cheque = React.lazy(() => import("../pages/views/Cheque/Cheque"));
 const Users = React.lazy(() => import("../pages/views/Users/Users"));
 const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
@@ -41,6 +42,9 @@ const routes = [
       },
       {
         path: PATHS.BUILDING, element: <Building />
+      },
+      {
+        path: PATHS.CHEQUE, element: <Cheque />
       },
       {
         path: PATHS.USER, element: <Users />
