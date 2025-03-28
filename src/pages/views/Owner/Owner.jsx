@@ -5,34 +5,34 @@ import {
   deleteManyAccounts,
   getAllAccounts,
 } from "@/services/accountService";
-import { lessorValidationSchema } from "@/helpers/lessor/lessorValidationSchema";
-import LessorForm from "@/components/forms/containers/LessorForm";
-import lessorColumns from "@/helpers/lessor/lessorColumns";
+import { ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
+import ownerColumns from "@/helpers/owner/ownerColumns";
+import OwnerForm from "@/components/forms/containers/owner/OwnerForm";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
 
-const lessorConfig = {
+const ownerConfig = {
   formProps: {
     defaultValue,
-    validationSchema: lessorValidationSchema,
+    validationSchema: ownerValidationSchema,
     mutationAddFunction: () => {},
     mutationUpdateFunction: () => {},
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <LessorForm {...props} />,
+    RenderForm: (props) => <OwnerForm {...props} />,
   },
   formHeaderProps: {
-    header: "Lessor",
+    header: "Owner",
   },
   formPaginationProps: {
-    name: "Lessor",
+    name: "Owner",
     number: 1,
   },
 };
 
-const Lessor = () => {
+const Owner = () => {
   // if (formOnly) {
   //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
   // }
@@ -40,23 +40,23 @@ const Lessor = () => {
 
   return (
     <PaperLayout
-      name="Lessor"
-      queryKey={QUERY_KEYS.Lessor}
+      name="Owner"
+      queryKey={QUERY_KEYS.Owner}
       queryFn={getAllAccounts} //
       handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "Lessor",
+        header: "Owner",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: lessorColumns,
+        columns: ownerColumns,
       }}
-      {...lessorConfig}
+      {...ownerConfig}
     />
   );
 };
 
-export default Lessor;
+export default Owner;

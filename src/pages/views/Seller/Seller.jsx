@@ -5,34 +5,34 @@ import {
   deleteManyAccounts,
   getAllAccounts,
 } from "@/services/accountService";
-import { lessorValidationSchema } from "@/helpers/lessor/lessorValidationSchema";
-import LessorForm from "@/components/forms/containers/LessorForm";
-import lessorColumns from "@/helpers/lessor/lessorColumns";
+import sellerColumns from "@/helpers/seller/sellerColumns";
+import { sellerValidationSchema } from "@/helpers/seller/sellerValidationSchema";
+import SellerForm from "@/components/forms/seller/sellerForm";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
 
-const lessorConfig = {
+const sellerConfig = {
   formProps: {
     defaultValue,
-    validationSchema: lessorValidationSchema,
+    validationSchema: sellerValidationSchema,
     mutationAddFunction: () => {},
     mutationUpdateFunction: () => {},
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <LessorForm {...props} />,
+    RenderForm: (props) => <SellerForm {...props} />,
   },
   formHeaderProps: {
-    header: "Lessor",
+    header: "Seller",
   },
   formPaginationProps: {
-    name: "Lessor",
+    name: "Seller",
     number: 1,
   },
 };
 
-const Lessor = () => {
+const Seller = () => {
   // if (formOnly) {
   //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
   // }
@@ -40,23 +40,23 @@ const Lessor = () => {
 
   return (
     <PaperLayout
-      name="Lessor"
+      name="Seller"
       queryKey={QUERY_KEYS.Lessor}
       queryFn={getAllAccounts} //
       handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "Lessor",
+        header: "Seller",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: lessorColumns,
+        columns: sellerColumns,
       }}
-      {...lessorConfig}
+      {...sellerConfig}
     />
   );
 };
 
-export default Lessor;
+export default Seller;

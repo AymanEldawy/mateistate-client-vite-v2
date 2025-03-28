@@ -14,6 +14,9 @@ const Building = React.lazy(() => import("../pages/views/Building/Building"));
 const Cheque = React.lazy(() => import("../pages/views/Cheque/Cheque"));
 const Users = React.lazy(() => import("../pages/views/Users/Users"));
 const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
+const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
+const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
+const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -32,22 +35,41 @@ const routes = [
     children: [
       /************************************** General **************************************/
       {
-        path: PATHS.ACCOUNT, element: <Account />
+        path: PATHS.ACCOUNT,
+        element: <Account />,
       },
       {
-        path: PATHS.CONTRACT, element: <Contract />
+        path: PATHS.CONTRACT,
+        element: <Contract />,
       },
       {
-        path: PATHS.HOME, element: <Home />
+        path: PATHS.HOME,
+        element: <Home />,
       },
       {
-        path: PATHS.BUILDING, element: <Building />
+        path: PATHS.LESSOR,
+        element: <Lessor />,
       },
       {
         path: PATHS.CHEQUE, element: <Cheque />
       },
       {
         path: PATHS.USER, element: <Users />
+      },
+      {
+        path: PATHS.OWNER, element: <Owner />
+      },
+      {
+        path: PATHS.SELLER,
+        element: <Seller />,
+      },
+      {
+        path: PATHS.BUILDING,
+        element: <Building />,
+      },
+      {
+        path: PATHS.USER,
+        element: <Users />,
       },
 
       /************************************** Announcements **************************************/
