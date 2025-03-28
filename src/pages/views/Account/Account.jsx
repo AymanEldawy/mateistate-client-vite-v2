@@ -1,10 +1,11 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
-import AccountForm from '@/components/forms/containers/AccountForm'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import accountColumns from '@/helpers/account/accountColumns'
+import { lazy } from 'react'
 // import QUERY_KEYS from './../../../data/queryKeys';
+const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
 
 const defaultValue = {}
 

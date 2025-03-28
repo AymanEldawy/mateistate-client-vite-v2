@@ -135,21 +135,21 @@ const BuildingForm = ({ tab }) => {
 
   return (
     <div className="p-4 min-h-[350px] w-[95vh]">
-      {displayForm()}
-      {BUILDING_STEPS.building_units === tab && (
-        <div className="grid grid-cols-3 text-xs mt-4 border-t pt-2 gap-4">
-          {Object.entries(FLATS)?.map(([key, val]) => {
-            return (
-              <span
-                key={key}
-                className="bg-blue-50 rounded-md py-1 px-2 whitespace-nowrap text-blue-500 border text-center capitalize flex items-center gap-2 justify-between"
-              >
-                {key?.replace(/_|count/ig, " ")} <span className="p-[2px] rounded-md bg-blue-500 text-white px-2">{val || 0}</span>
-              </span>
-            );
-          })}
-        </div>
-      )}
+          {displayForm()}
+          {BUILDING_STEPS.building_units === tab && (
+            <div className="grid grid-cols-3 text-xs mt-4 border-t pt-2 gap-4">
+              {Object.entries(FLATS)?.map(([key, val]) => {
+                return (
+                  <span
+                    key={key}
+                    className="bg-blue-50 rounded-md py-1 px-2 whitespace-nowrap text-blue-500 border text-center capitalize flex items-center gap-2 justify-between"
+                  >
+                    {key?.replace(/_|count/ig, " ")} <span className="p-[2px] rounded-md bg-blue-500 text-white px-2">{val || 0}</span>
+                  </span>
+                );
+              })}
+            </div>
+          )}
     </div>
   );
 };

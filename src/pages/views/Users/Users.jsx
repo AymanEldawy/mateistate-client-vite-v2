@@ -43,7 +43,7 @@ const Users = ({ formOnly, outerClose }) => {
   return (
     <PaperLayout
       name="user"
-      queryKey={QUERY_KEYS.user}
+      queryKey={QUERY_KEYS.USER}
       queryFn={getAllUsers}
       handleDeleteSelected={deleteManyUsers}
       paperHeaderProps={{

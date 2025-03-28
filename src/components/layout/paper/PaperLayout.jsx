@@ -85,6 +85,7 @@ const PaperLayout = ({
           onClickDelete={() => setOpenConfirmation(true)}
           setOpenViability={setOpenViability}
           records={data?.length}
+          setGlobalFilter={setGlobalFilter}
         />
         <PaperFiltersAndSort filters={columnFilters} sorts={[]} setColumnFilters={setColumnFilters} />
         <CustomTable

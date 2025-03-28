@@ -3,6 +3,8 @@ const QUERY_KEYS = {
   ACCOUNT: "account",
   BUILDING: "building",
   CONTRACT: "contract",
+  CHEQUE: "cheque",
+  USER: "user",
   Lessor: "lessor",
   Owner: "owner",
   Seller: "seller",

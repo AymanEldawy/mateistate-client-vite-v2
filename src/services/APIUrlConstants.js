@@ -15,8 +15,10 @@ const API_URL_CONSTANTS = {
   BASE_USER: "/user",
   /************************************** BUILDING **************************************/
   BASE_BUILDING: "/building",
+  /************************************** CHEQUE **************************************/
+  BASE_CHEQUE: "/cheque",
   /************************************** Lessor **************************************/
-  BASE_Lessor: "/Lessor",
+  BASE_Lessor: "/lessor",
 };
 
 export default API_URL_CONSTANTS;

@@ -56,11 +56,8 @@ Steps (2 days)
 - shop
 - villa
 
-
-
 total 10 - 11 days
 ----
-
 
 Normal (4-5 days)
 
@@ -86,3 +83,12 @@ Normal (4-5 days)
 
 
 ------------
+
+
+
+
+
+formWrapper
+formHeader
+formBody
+formFooter

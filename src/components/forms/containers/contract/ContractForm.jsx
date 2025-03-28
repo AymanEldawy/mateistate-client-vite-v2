@@ -1,4 +1,4 @@
-import { GLOBAL_CONTRACT_STEPS } from "@/data/constants"
+import { APARTMENT_STEPS, GLOBAL_CONTRACT_STEPS } from "@/data/constants"
 import ContractFormGeneral from "./ContractFormGeneral"
 import ContractFormPayments from "./ContractFormPayments"
 import ContractFormCommission from "./ContractFormCommission"
@@ -34,23 +34,15 @@ const ContractForm = ({ tab }) => {
         return <ContractFormContractCycle />
       default:
         return <ContractFormGeneral />
-
     }
-  }
-
-  const submit = (e) => {
-    console.log("🚀 ~ submit ~ e:", e)
-    e.preventDefault()
-    console.log("🚀 ~ submit ~ value:", watch())
-
   }
 
   return (
     <>
       <button>click</button>
       <div className="min-w-[800px] h-[75vh]">
-        {displayForm()}
-      </div>
+          {displayForm()}
+        </div>
     </>
   )
 }
