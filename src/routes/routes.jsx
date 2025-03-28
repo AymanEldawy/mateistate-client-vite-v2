@@ -16,6 +16,9 @@ const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
 const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
 const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
 const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
+const CostCenter = React.lazy(() =>
+  import("../pages/views/CostCenter/CostCenter")
+);
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -56,6 +59,10 @@ const routes = [
       {
         path: PATHS.SELLER,
         element: <Seller />,
+      },
+      {
+        path: PATHS.COST_CENTER,
+        element: <CostCenter />,
       },
       {
         path: PATHS.BUILDING,

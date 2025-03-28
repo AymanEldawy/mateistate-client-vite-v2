@@ -1,67 +1,62 @@
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
-import AccountForm from '@/components/forms/containers/AccountForm'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import costCenterColumns from '@/helpers/costCenter/costCenterColumns'
+import QUERY_KEYS from "@/data/queryKeys";
+import PaperLayout from "../../../components/layout/paper/PaperLayout";
+import {
+  deleteAccount,
+  deleteManyAccounts,
+  getAllAccounts,
+} from "@/services/accountService";
+import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
+import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
+import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {}
+const defaultValue = {};
 
-const validationSchema = () => { }
-
-const costCenterConfig = {
+const lessorConfig = {
   formProps: {
     defaultValue,
-    validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
-    onSuccessAction: () => { },
-    isSteps: false,
+    validationSchema: costCenterValidationSchema,
+    mutationAddFunction: () => {},
+    mutationUpdateFunction: () => {},
+    onSuccessAction: () => {},
+    isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <AccountForm {...props} />
+    RenderForm: (props) => <CostCenterForm {...props} />,
   },
   formHeaderProps: {
-    header: "Account"
+    header: "Cost_center",
   },
   formPaginationProps: {
-    name: 'account',
-    number: 1
+    name: "Cost_center",
+    number: 1,
   },
-}
+};
 
-const CostCenter = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...costCenterConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const CostCenter = () => {
+  // if (formOnly) {
+  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
+  // }
+  // const navigate = useNavigate();
 
   return (
     <PaperLayout
-      name="cost_center"
-      queryKey={QUERY_KEYS.ACCOUNT}
-      queryFn={getAllAccounts}
-      handleDeleteSelected={deleteManyAccounts}
+      name="Cost_center"
+      queryKey={QUERY_KEYS.Cost_center}
+      queryFn={getAllAccounts} //
+      handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "cost_center"
+        header: "Cost_center",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        tableColumns: costCenterColumns
+        columns: costCenterColumns,
       }}
-      {...costCenterConfig}
-
+      {...lessorConfig}
     />
-  )
-}
+  );
+};
 
-export default CostCenter
+export default CostCenter;
