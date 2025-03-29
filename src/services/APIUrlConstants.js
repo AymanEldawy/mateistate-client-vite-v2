@@ -19,6 +19,12 @@ const API_URL_CONSTANTS = {
   BASE_CHEQUE: "/cheque",
   /************************************** Lessor **************************************/
   BASE_Lessor: "/lessor",
+  /************************************** PARTIAL_COLLECTION **************************************/
+  BASE_PARTIAL_COLLECTION: "/partial_collection",
+  /************************************** BASE_COLLECTION **************************************/
+  BASE_COLLECTION: "/collection",
+  /************************************** BASE_RETURN **************************************/
+  BASE_RETURN: "/return",
 };
 
 export default API_URL_CONSTANTS;

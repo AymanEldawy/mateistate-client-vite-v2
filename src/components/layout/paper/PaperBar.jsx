@@ -17,7 +17,8 @@ const PaperBar = ({
   customAdd,
   setOpenForm,
   setOpenViability,
-  records
+  records,
+  hideAdd
 }) => {
   const { t } = useTranslation();
 
@@ -44,12 +45,15 @@ const PaperBar = ({
         </div>
       </div>
       <div className="flex gap-2">
-        {customAdd ? (
-          customAdd()
+        {hideAdd ? (
+          null
         ) :
           <Btn
             kind="primary"
-            onClick={() => setOpenForm(p => !p)}
+            onClick={() => {
+              setOpenForm(p => !p)
+              if (customAdd) customAdd()
+            }}
           >
             <PlusIcon className="w-6 h-6" circle />
             {t("add_new")}

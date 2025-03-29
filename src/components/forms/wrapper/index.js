@@ -7,3 +7,4 @@ export { default as FormModalLayout } from './FormModalLayout';
 export { default as FormStepPagination } from './FormStepPagination';
 export { default as FormWarnModal } from './FormWarnModal';
 export { default as DynamicPopupForm } from './DynamicPopupForm';
+export { default as FormHeaderSearchBar } from './FormHeaderSearchBar';

@@ -1,51 +1,42 @@
 import { useFormContext } from "react-hook-form";
-import { RHFCheckbox, CurrencyFieldGroup, RHFInput, RHFTextarea, RHFAsyncSelectField } from "../../fields";
-import { FormFooter, FormHeader } from "../../wrapper";
-import useFormPagination from "@/hook/useFormPagination";
-import { ViewEntry } from "@/components/shared/ViewEntry";
+import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField } from "../../fields";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
+import { getChequePatternByCode } from "@/services/chequeService";
 
+const mergePatternWithChequeData = (pattern, watch, setValue) => {
 
-// const mergePatternWithChequeData = (pattern, watch, setValue) => {
+  if (pattern?.auto_gen_entries) {
+    setValue('gen_entries', true)
+  }
 
-//   if (pattern?.auto_gen_entries) {
-//     setValue('gen_entries', true)
-//   }
+  if (pattern?.code) {
+    setValue('code', pattern?.code)
+  }
+  if (pattern?.default_account_id) {
+    setValue('account_id', pattern?.default_account_id)
+  }
 
-//   if (pattern?.code) {
-//     setValue('code', pattern?.code)
-//   }
-//   if (pattern?.default_account_id) {
-//     setValue('account_id', pattern?.default_account_id)
-//   }
+};
 
-// };
+const ChequeForm = ({ code: outerCode }) => {
+  const { watch, setValue } = useFormContext();
+  const [searchParams] = useSearchParams();
+  const code = outerCode || searchParams.get('code');
 
-const ChequeForm = ({ handleOnClose, ...props }) => {
-  const name = 'cheque'
-  const { watch } = useFormContext();
-  console.log("🚀 ~ ChequeForm ~ watch:", watch())
-  const code = 2
-  const number = 1
-  const paginationForm = useFormPagination({ name: 'cheque', number, code })
-  const [PATTERN_SETTINGS, setPATTERN_SETTINGS] = useState(null)
+  const { data: pattern } = useQuery({
+    queryKey: ['pattern', 'cheque', code],
+    queryFn: async () => {
+      const response = await getChequePatternByCode(code)
+      mergePatternWithChequeData(response, watch, setValue)
+    },
+    enabled: !!code
+  })
 
   return (
     <>
       <button>click</button>
-      <FormHeader
-        header={name}
-        onClose={handleOnClose}
-        extraContentBar={
-          <>
-            <RHFCheckbox name="feedback" label="feedback" />
-            <RHFCheckbox name="gen_entries" label="gen_entries" />
-            {watch('id') && PATTERN_SETTINGS?.auto_gen_entries ? (
-              <ViewEntry id={watch('id')} />
-            ) : null}
-          </>
-        }
-      />
       <div className="relative p-4">
         <div className="grid gap-y-2 gap-x-8 grid-cols-3">
           <div className="flex flex-col gap-2">
@@ -146,10 +137,6 @@ const ChequeForm = ({ handleOnClose, ...props }) => {
     /> */}
 
       </div>
-      <FormFooter
-        paginationForm={paginationForm}
-        {...props}
-      />
     </>
   );
 }

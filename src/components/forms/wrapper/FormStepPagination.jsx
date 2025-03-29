@@ -1,7 +1,7 @@
 import { ChevronIcon, DoubleArrowIcon, PlusIcon } from "@/components/Icons";
 import Btn from "@/components/shared/Btn";
 
-const FormStepPagination = ({ formPagination }) => {
+const FormStepPagination = (props) => {
   const {
     goTo,
     goBack,
@@ -11,7 +11,7 @@ const FormStepPagination = ({ formPagination }) => {
     currentNumber,
     isLast,
     goNew,
-  } = formPagination || {};
+  } = props || {};
 
   const handleChange = (e) => {
     // Allow only numeric input

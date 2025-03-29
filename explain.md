@@ -1,4 +1,4 @@
-each form has view 
+each form or model has view 
 1. create view or file inside folder `views`
 -> add query key e.g. `LESSOR: 'lessor'` in file queryKeys.js in folder `data`
 -> path `pages/views`
@@ -17,8 +17,12 @@ each form has view
   2. `lessorValidationSchema` for schema validation for form we use `zod`
   3. `lessorHelpers` optional if you need more logic 
 
+--------
+
+
+
 
 ## Notes
-- You have many fields `input` `select` in folder `components/forms/fields`
+- You have many fields `input` `select` `date field` etc in folder `components/forms/fields`
 - Important we follow the schema for names and files
 - we use transitions so all text should putting in transition file 

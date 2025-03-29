@@ -8,6 +8,10 @@ const QUERY_KEYS = {
   Lessor: "lessor",
   Owner: "owner",
   Seller: "seller",
+  COLLECTION: "collection",
+  RETURN: "return",
+  PARTIAL_COLLECTION: "partial_collection",
+  CONTRACT_PATTERN: "contract_pattern",
 };
 
 export default QUERY_KEYS;

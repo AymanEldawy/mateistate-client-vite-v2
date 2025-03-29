@@ -1,21 +1,22 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
-import AccountForm from '@/components/forms/containers/AccountForm'
+import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, updateAccount } from '@/services/accountService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import costCenterColumns from '@/helpers/costCenter/costCenterColumns'
+import accountColumns from '@/helpers/account/accountColumns'
+import { lazy } from 'react'
 // import QUERY_KEYS from './../../../data/queryKeys';
+const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
 
 const defaultValue = {}
 
 const validationSchema = () => { }
 
-const costCenterConfig = {
+const accountConfig = {
   formProps: {
     defaultValue,
     validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    mutationAddFunction: createAccount,
+    mutationUpdateFunction: updateAccount,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteAccount,
@@ -25,43 +26,42 @@ const costCenterConfig = {
     header: "Account"
   },
   formPaginationProps: {
-    name: 'cost_center',
+    name: 'account',
     number: 1
   },
 }
 
-const CostCenter = ({ formOnly, outerClose }) => {
+const ContractPattern = ({ formOnly, outerClose }) => {
 
   if (formOnly) {
     return (
       <FormWrapper
-        {...costCenterConfig}
+        {...accountConfig}
         outerClose={outerClose}
       />
     )
   }
-
-
+  
   return (
     <PaperLayout
-      name="cost_center"
-      queryKey={QUERY_KEYS.ACCOUNT}
+      name="contract_pattern"
+      queryKey={QUERY_KEYS.CONTRACT_PATTERN}
       queryFn={getAllAccounts}
       handleDeleteSelected={deleteManyAccounts}
       paperHeaderProps={{
-        header: "cost_center"
+        header: "contract_pattern"
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        tableColumns: costCenterColumns
+        columns: accountColumns
       }}
-      {...costCenterConfig}
+      {...accountConfig}
 
     />
   )
 }
 
-export default CostCenter
+export default ContractPattern

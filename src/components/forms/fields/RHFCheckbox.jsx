@@ -25,7 +25,7 @@ const RHFCheckbox = ({
           <div className={`w-full gap-4 ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
             <input
               ref={ref}
-              className={`h-5 w-5 `}
+              className={`h-5 w-5`}
               name={name}
               onChange={(e) => {
                 onChange(e.target.checked);

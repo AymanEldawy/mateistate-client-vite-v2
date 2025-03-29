@@ -44,3 +44,12 @@ export const deleteManyCheques = (ids) => {
     `${API_URL_CONSTANTS.BASE_CHEQUE}?ids=${ids.join(',')}`
   );
 };
+
+
+export const getSearchCheque = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${value}`);
+};
+
+export const getChequePatternByCode = (code) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${code}`);
+};
