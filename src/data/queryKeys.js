@@ -10,6 +10,7 @@ const QUERY_KEYS = {
   Seller: "seller",
   Cost_center: "cost_center",
   Country: "country",
+  Bank: "bank",
 };
 
 export default QUERY_KEYS;

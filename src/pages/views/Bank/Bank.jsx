@@ -5,29 +5,29 @@ import {
   deleteManyAccounts,
   getAllAccounts,
 } from "@/services/accountService";
-import countryColumns from "@/helpers/country/countryColumns";
-import { countryValidationSchema } from "@/helpers/country/countryValidationSchema";
-import CountryForm from "@/components/forms/containers/country/CountryForm";
+import { bankValidationSchema } from "@/helpers/bank/bankValidationSchema";
+import bankColumns from "@/helpers/bank/bankColumns";
+import BankForm from "@/components/forms/containers/bank/BankForm";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
 
-const countryConfig = {
+const bankConfig = {
   formProps: {
     defaultValue,
-    validationSchema: countryValidationSchema,
+    validationSchema: bankValidationSchema,
     mutationAddFunction: () => {},
     mutationUpdateFunction: () => {},
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <CountryForm {...props} />,
+    RenderForm: (props) => <BankForm {...props} />,
   },
   formHeaderProps: {
-    header: "Country",
+    header: "Bank",
   },
   formPaginationProps: {
-    name: "Country",
+    name: "Bank",
     number: 1,
   },
 };
@@ -35,21 +35,21 @@ const countryConfig = {
 const Bank = () => {
   return (
     <PaperLayout
-      name="Country"
-      queryKey={QUERY_KEYS.Country}
+      name="Bank"
+      queryKey={QUERY_KEYS.Bank}
       queryFn={getAllAccounts} //
       handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "Country",
+        header: "Bank",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: countryColumns,
+        columns: bankColumns,
       }}
-      {...countryConfig}
+      {...bankConfig}
     />
   );
 };
