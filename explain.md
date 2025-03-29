@@ -16,7 +16,7 @@ each form or model has view
   1. `lessorColumns` for table columns we use library called `tanstack react table` and take copy form `v1` from file `columns-structure.js` in the file you can search about e.g. `lessor` 
   2. `lessorValidationSchema` for schema validation for form we use `zod`
   3. `lessorHelpers` optional if you need more logic 
-
+  4. `lessorSteps` optional if the form is multi steps
 --------
 
 
