@@ -8,7 +8,8 @@ const QUERY_KEYS = {
   Lessor: "lessor",
   Owner: "owner",
   Seller: "seller",
-  "Cost_center": "cost_center",
+  Cost_center: "cost_center",
+  Country: "country",
 };
 
 export default QUERY_KEYS;

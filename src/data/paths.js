@@ -13,6 +13,8 @@ const PATHS = {
   ACCOUNT_CHART: "/chart/account",
   /******************** COST_CENTER ********************/
   COST_CENTER: "/cost_center",
+  /******************** country ********************/
+  COUNTRY: "/country",
   /******************** COST_CENTER_CHART ********************/
   COST_CENTER_CHART: "/chart/cost_center",
   /******************** OWNER ********************/
@@ -111,7 +113,8 @@ const PATHS = {
   /******************** VAT_BILLS_REPORT/ ********************/
   VAT_BILLS_REPORT: "/reports/vat-bills-report/",
   /******************** CUSTOMER_ACCOUNT_STATEMENT_REPORT/ ********************/
-  CUSTOMER_ACCOUNT_STATEMENT_REPORT: "/reports/customer-account-statement-report/",
+  CUSTOMER_ACCOUNT_STATEMENT_REPORT:
+    "/reports/customer-account-statement-report/",
   /******************** JOURNAL_LEDGER_REPORT/ ********************/
   JOURNAL_LEDGER_REPORT: "/reports/journal-ledger-report/",
   /******************** GENERAL_LEDGER_REPORT/ ********************/
@@ -121,9 +124,11 @@ const PATHS = {
   /******************** CREDITORS_AGES_REPORT/ ********************/
   CREDITORS_AGES_REPORT: "/reports/creditors-ages-report/",
   /******************** COST_CENTER_GENERAL_LEDGER_REPORT/ ********************/
-  COST_CENTER_GENERAL_LEDGER_REPORT: "/reports/cost-center-general-ledger-report/",
+  COST_CENTER_GENERAL_LEDGER_REPORT:
+    "/reports/cost-center-general-ledger-report/",
   /******************** COST_CENTER_TRIAL_BALANCE_REPORT/ ********************/
-  COST_CENTER_TRIAL_BALANCE_REPORT: "/reports/cost-center-trial-balance-report/",
+  COST_CENTER_TRIAL_BALANCE_REPORT:
+    "/reports/cost-center-trial-balance-report/",
   /******************** TRADING_SHEET_REPORT/ ********************/
   TRADING_SHEET_REPORT: "/reports/trading-sheet-report/",
   /******************** PROFIT_AND_LOSS_REPORT/ ********************/
@@ -151,11 +156,14 @@ const PATHS = {
   /******************** SOLD_VILLAS_REPORT ********************/
   SOLD_VILLAS_REPORT: "/reports/sold-villas-report",
   /******************** CHANGES_FLATS_RENT_PRICING_REPORT ********************/
-  CHANGES_FLATS_RENT_PRICING_REPORT: "/reports/changes-flats-rent-pricing-report",
+  CHANGES_FLATS_RENT_PRICING_REPORT:
+    "/reports/changes-flats-rent-pricing-report",
   /******************** CHANGES_FLATS_SALE_PRICING_REPORT ********************/
-  CHANGES_FLATS_SALE_PRICING_REPORT: "/reports/changes-flats-sale-pricing-report",
+  CHANGES_FLATS_SALE_PRICING_REPORT:
+    "/reports/changes-flats-sale-pricing-report",
   /******************** EARNING_RENTAL_INCOME_EARNED_REPORT ********************/
-  EARNING_RENTAL_INCOME_EARNED_REPORT: "/reports/earning-rental-income-earned-report",
+  EARNING_RENTAL_INCOME_EARNED_REPORT:
+    "/reports/earning-rental-income-earned-report",
   /******************** UNREALIZED ********************/
   UNREALIZED: "/reports/unrealized",
   /******************** CONTRACT ********************/
@@ -179,7 +187,8 @@ const PATHS = {
   /******************** BUILDING_SCHEMA ********************/
   BUILDING_SCHEMA_REPORT: "/reports/building-schema",
   /******************** UNIT_CONDITION_FOR_CONSTRUCTION_REPORT ********************/
-  UNIT_CONDITION_FOR_CONSTRUCTION_REPORT: "/reports/unit-condition-for-construction-report",
+  UNIT_CONDITION_FOR_CONSTRUCTION_REPORT:
+    "/reports/unit-condition-for-construction-report",
   /******************** WAREHOUSE_REPORT ********************/
   WAREHOUSE_REPORT: "/reports/warehouse-report",
   /******************** ITEM_ACTIVITY ********************/
@@ -197,7 +206,7 @@ const PATHS = {
   /******************** COMPLAINTS_REPORT ********************/
   COMPLAINTS_REPORT: "/reports/complaints-report",
   /******************** WORKER_REPORT ********************/
-  WORKER_REPORT: "/reports/worker-report"
+  WORKER_REPORT: "/reports/worker-report",
 };
 
 export default PATHS;

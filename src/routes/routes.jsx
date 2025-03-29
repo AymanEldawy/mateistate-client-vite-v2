@@ -20,6 +20,7 @@ const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
 const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
+const Country = React.lazy(() => import("../pages/views/Country/Country"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -54,13 +55,16 @@ const routes = [
         element: <Lessor />,
       },
       {
-        path: PATHS.CHEQUE, element: <Cheque />
+        path: PATHS.CHEQUE,
+        element: <Cheque />,
       },
       {
-        path: PATHS.USER, element: <Users />
+        path: PATHS.USER,
+        element: <Users />,
       },
       {
-        path: PATHS.OWNER, element: <Owner />
+        path: PATHS.OWNER,
+        element: <Owner />,
       },
       {
         path: PATHS.SELLER,
@@ -69,6 +73,10 @@ const routes = [
       {
         path: PATHS.COST_CENTER,
         element: <CostCenter />,
+      },
+      {
+        path: PATHS.COUNTRY,
+        element: <Country />,
       },
       {
         path: PATHS.BUILDING,

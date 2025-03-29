@@ -46,7 +46,7 @@ Manual
 - user_work_times
 - service
 - lawsuit
-- accounting_voucher_pattern_general 
+- accounting_voucher_pattern_general
 
 Steps (2 days)
 
@@ -56,17 +56,16 @@ Steps (2 days)
 - shop
 - villa
 
-total 10 - 11 days
-----
+## total 10 - 11 days
 
 Normal (4-5 days)
 
-- lessor
-- owner
-- seller
-- cost_center
-- country
-- bank
+- lessor \*
+- owner \*
+- seller \*
+- cost_center \*
+- country \*
+- bank \*
 - currency
 - material_group
 - category
@@ -75,18 +74,14 @@ Normal (4-5 days)
 - owner_expenses_types
 
 ---
+
 - menu & website setting (1-2 days)
 - auth (2 days)
 - table sorting and filters (5-7 days)
 - reports (unknown)
 - testing (at least 1 week )
 
-
-------------
-
-
-
-
+---
 
 formWrapper
 formHeader
