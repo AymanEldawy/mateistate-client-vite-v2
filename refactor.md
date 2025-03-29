@@ -21,8 +21,8 @@ Manual
 - reservation_property
 - user_work_times
 - service
----
-
+- lawsuit
+- accounting_voucher_pattern_general 
 
 ----
 
@@ -33,18 +33,12 @@ Steps
 - parking
 - shop
 - villa
-- material
 
-Normal 
-- contract_pattern
-- bill_pattern
-- cheque_pattern
-- voucher_pattern
-
+total 10 - 11 days
 ----
 
-#### Mahound
-Normal forms (4-5 days) Mahound
+Normal (4-5 days)
+
 - lessor
 - owner
 - seller
@@ -58,19 +52,21 @@ Normal forms (4-5 days) Mahound
 - store
 - owner_expenses_types
 
-
-
-
-
-#### Final tasks
-
+---
 - menu & website setting (1-2 days)
 - auth (2 days)
 - table sorting and filters (5-7 days)
 - reports (unknown)
 - testing (at least 1 week )
 
-- Unknown forms
-- lawsuit
-- accounting_voucher_pattern_general 
+
 ------------
+
+
+
+
+
+formWrapper
+formHeader
+formBody
+formFooter

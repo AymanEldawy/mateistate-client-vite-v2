@@ -5,58 +5,53 @@ import {
   deleteManyAccounts,
   getAllAccounts,
 } from "@/services/accountService";
-import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
-import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
-import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
+import { bankValidationSchema } from "@/helpers/bank/bankValidationSchema";
+import bankColumns from "@/helpers/bank/bankColumns";
+import BankForm from "@/components/forms/containers/bank/BankForm";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
 
-const lessorConfig = {
+const bankConfig = {
   formProps: {
     defaultValue,
-    validationSchema: costCenterValidationSchema,
+    validationSchema: bankValidationSchema,
     mutationAddFunction: () => {},
     mutationUpdateFunction: () => {},
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <CostCenterForm {...props} />,
+    RenderForm: (props) => <BankForm {...props} />,
   },
   formHeaderProps: {
-    header: "Cost_center",
+    header: "Bank",
   },
   formPaginationProps: {
-    name: 'cost_center',
-    number: 1
+    name: "Bank",
+    number: 1,
   },
 };
 
-const CostCenter = () => {
-  // if (formOnly) {
-  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
-  // }
-  // const navigate = useNavigate();
-
+const Bank = () => {
   return (
     <PaperLayout
-      name="Cost_center"
-      queryKey={QUERY_KEYS.Cost_center}
+      name="Bank"
+      queryKey={QUERY_KEYS.Bank}
       queryFn={getAllAccounts} //
       handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "Cost_center",
+        header: "Bank",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: costCenterColumns,
+        columns: bankColumns,
       }}
-      {...lessorConfig}
+      {...bankConfig}
     />
   );
 };
 
-export default CostCenter;
+export default Bank;

@@ -12,6 +12,9 @@ const QUERY_KEYS = {
   RETURN: "return",
   PARTIAL_COLLECTION: "partial_collection",
   CONTRACT_PATTERN: "contract_pattern",
+  Cost_center: "cost_center",
+  Country: "country",
+  Bank: "bank",
 };
 
 export default QUERY_KEYS;

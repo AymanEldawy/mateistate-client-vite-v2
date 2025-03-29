@@ -5,58 +5,54 @@ import {
   deleteManyAccounts,
   getAllAccounts,
 } from "@/services/accountService";
-import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
-import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
-import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
+import countryColumns from "@/helpers/country/countryColumns";
+import { countryValidationSchema } from "@/helpers/country/countryValidationSchema";
+import CountryForm from "@/components/forms/containers/country/CountryForm";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
 
-const lessorConfig = {
+const countryConfig = {
   formProps: {
     defaultValue,
-    validationSchema: costCenterValidationSchema,
+    validationSchema: countryValidationSchema,
     mutationAddFunction: () => {},
     mutationUpdateFunction: () => {},
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
-    RenderForm: (props) => <CostCenterForm {...props} />,
+    RenderForm: (props) => <CountryForm {...props} />,
   },
   formHeaderProps: {
-    header: "Cost_center",
+    header: "Country",
   },
   formPaginationProps: {
-    name: 'cost_center',
-    number: 1
+    name: "Country",
+    number: 1,
   },
 };
 
-const CostCenter = () => {
-  // if (formOnly) {
-  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
-  // }
-  // const navigate = useNavigate();
+const Country = () => {
 
   return (
     <PaperLayout
-      name="Cost_center"
-      queryKey={QUERY_KEYS.Cost_center}
+      name="Country"
+      queryKey={QUERY_KEYS.Country}
       queryFn={getAllAccounts} //
       handleDeleteSelected={deleteManyAccounts} //
       paperHeaderProps={{
-        header: "Cost_center",
+        header: "Country",
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: costCenterColumns,
+        columns: countryColumns,
       }}
-      {...lessorConfig}
+      {...countryConfig}
     />
   );
 };
 
-export default CostCenter;
+export default Country;
