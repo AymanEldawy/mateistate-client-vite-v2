@@ -1,5 +1,4 @@
-## Forms
-
+### Ayman
 Manual
 - account
 - user
@@ -17,12 +16,7 @@ Manual
 - vouchers
 - entries
 ---
-- owner_expenses
-- reservation_property
-- user_work_times
-- service
-- lawsuit
-- accounting_voucher_pattern_general 
+
 
 ----
 
@@ -33,10 +27,13 @@ Steps
 - parking
 - shop
 - villa
+- reservation_property
+- user_work_times
+- service
 
-total 10 - 11 days
-----
 
+
+### Mahamoud
 Normal (4-5 days)
 
 - lessor
@@ -52,6 +49,10 @@ Normal (4-5 days)
 - store
 - owner_expenses_types
 
+
+
+
+### Future
 ---
 - menu & website setting (1-2 days)
 - auth (2 days)
@@ -59,3 +60,8 @@ Normal (4-5 days)
 - reports (unknown)
 - testing (at least 1 week )
 
+
+- owner_expenses
+
+- lawsuit
+- accounting_voucher_pattern_general 
