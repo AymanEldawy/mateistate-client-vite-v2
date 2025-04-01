@@ -30,7 +30,6 @@ const RHFAsyncSelectField = ({
   small = true,
   ...field
 }) => {
-  const { handleDispatchForm } = usePopupForm()
   const { control, watch, setValue } = useFormContext();
   const [defaultOption, setDefaultOption] = useState(null)
   const { name, optionValue, optionLabel, table, required, allowAdd } = field || {}
@@ -97,6 +96,9 @@ const RHFAsyncSelectField = ({
                 setDefaultOption(option);
                 setValue(name, option?.[optionValue])
               }}
+              allowAdd={allowAdd}
+              table={table}
+              formKey={name}
             />
             {error ? (
               <ErrorText containerClassName="py-1">{error?.message}</ErrorText>

@@ -23,6 +23,8 @@ const DynamicPopupForm = () => {
         return <Users formOnly outerClose={onCloseDispatchedForm} popupFormConfig={popupFormConfig} />
       case 'cheque':
         return <Cheque formOnly outerClose={onCloseDispatchedForm} popupFormConfig={popupFormConfig} />
+      case 'cost_center':
+        return <CostCenter formOnly outerClose={onCloseDispatchedForm} popupFormConfig={popupFormConfig} />
       // case 'voucher':
       //   return <Voucher formOnly outerClose={onCloseDispatchedForm} popupFormConfig={popupFormConfig} />
       case 'op_partial_collection':

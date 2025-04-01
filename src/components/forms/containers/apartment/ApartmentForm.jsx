@@ -9,6 +9,7 @@ const ApartmentForm = ({ tab }) => {
   const ApartmentGeneralFields = (
     <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw] w-full h-full">
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+      <RHFDatePicker name="date" label="Date" type="date" />
       <RHFAsyncSelectField
         table="building"
         name="building_id"

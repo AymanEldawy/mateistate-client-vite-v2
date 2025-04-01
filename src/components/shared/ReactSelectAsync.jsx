@@ -1,5 +1,8 @@
 import { QueryClient } from '@tanstack/react-query';
 import AsyncSelect from "react-select/async";
+import { PlusIcon, SearchIcon } from '../Icons';
+import Btn from './Btn';
+import { usePopupForm } from '@/hook/usePopupForm';
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -22,9 +25,12 @@ const ReactSelectAsync = ({
   name,
   defaultOption,
   setDefaultOption,
+  allowAdd,
+  table,
+  formKey,
   ...selectProps
 }) => {
-
+  const { handleDispatchForm } = usePopupForm()
   const queryClient = new QueryClient();
   const loadOptions = async (value, callback, id) => {
     try {
@@ -43,7 +49,6 @@ const ReactSelectAsync = ({
       throw Error(JSON.stringify(error));
     }
   };
-
 
   return (
     <AsyncSelect
@@ -126,8 +131,35 @@ const ReactSelectAsync = ({
       }}
       value={defaultOption}
       defaultValue={defaultOption}
+      components={{
+        IndicatorsContainer: ({ children }) => {
+          return (
+            <div className="mb-1 flex items-center">
+              <div className="w-[1px] h-4 bg-gray-300"></div>
+              {allowAdd ? (
+                <Btn
+                  type="button"
+                  kind="info"
+                  containerClassName="h-[25px] w-[25px] !rounded-full !p-1 mx-1"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleDispatchForm({
+                      setDefaultOption,
+                      table,
+                      formKey
+                    })
+                  }}
+                >
+                  <PlusIcon className={`h-4 w-4 rounded-full`} />
+                </Btn>
+              ) : (
+                <SearchIcon className={`h-5 w-5 rounded-full mx-2 text-blue-500`} />
+              )}
+            </div>
+          );
+        },
+      }}
       {...selectProps}
-
     />
   )
 }
