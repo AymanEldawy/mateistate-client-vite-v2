@@ -8,12 +8,16 @@ const RHFInput = ({
   labelClassName,
   label,
   col,
+  inTable,
   ...field
 }) => {
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
   const { name, required, type, readOnly } = field
   const [hideNumber, setHideNumber] = useState(false)
 
+
+  console.log(watch(name),name, 'name');
+  
   return (
     <Controller
       name={name}
@@ -33,16 +37,20 @@ const RHFInput = ({
                 labelClassName={labelClassName}
               />
             )}
-            <div className='relative  h-[30px]'>
+            <div className='relative w-full h-[30px]'>
               <input
                 ref={ref}
                 className={`border text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
                 ${type === 'number' && 'absolute top-0 left-0 w-full h-full opacity-0 z-10'} 
+                ${!hideNumber ? 'opacity-0' : ''}
+                ${inTable ? '!border-none !rounded-none' : ''}
                 ${error ? "border-red-200 text-red-500" : ""}
                 `}
                 name={name}
                 onChange={(e) => {
-                  onChange(e.target.value);
+                  console.log('called');
+                  
+                  onChange(+e.target.value);
                 }}
                 onBlur={() => {
                   onBlur()
@@ -53,7 +61,7 @@ const RHFInput = ({
                 value={value}
               />
               {!hideNumber &&
-                <span className={`numbers absolute w-full h-full top-0 left-0 border text-xs font-medium rounded p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}`}>{Number(value || 0)?.toLocaleString()}</span>
+                <span className={`numbers absolute pointer-events-none w-full h-full top-0 left-0 ${inTable ? 'rounded-none' : 'border'} text-xs font-medium rounded p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}`}>{Number(value || 0)?.toLocaleString()}</span>
               }
             </div>
 

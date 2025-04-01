@@ -1,4 +1,5 @@
-import Select from 'react-select';
+import { QueryClient } from '@tanstack/react-query';
+import AsyncSelect from "react-select/async";
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -7,25 +8,49 @@ const BORDER_COLOR = "#ced4da";
 const BORDER_COLOR_DARK = "#32383e";
 const RED_COLOR = "#d32424";
 
-const ReactSelectNormal = ({ 
+const ReactSelectAsync = ({
   selectClassName,
   isDarkMode,
   small,
   styles,
   getOptionLabel,
   getOptionValue,
-  onChange,
   value,
   error,
+  queryKey,
+  getSearch,
+  name,
+  defaultOption,
+  setDefaultOption,
   ...selectProps
 }) => {
+
+  const queryClient = new QueryClient();
+  const loadOptions = async (value, callback, id) => {
+    try {
+      const res = await queryClient.fetchQuery({
+        queryKey: [queryKey || name, 'search', id, value],
+        queryFn: async () => {
+          const response = await getSearch(
+            value,
+          )
+          return response.result;
+        },
+      });
+      callback(res);
+      return res;
+    } catch (error) {
+      throw Error(JSON.stringify(error));
+    }
+  };
+
+
   return (
-    <Select
+    <AsyncSelect
       menuPlacement="auto"
       menuPortalTarget={document?.body}
       className={`w-full min-h-[30px] h-[30px] flex-1 text-xs border-none ${selectClassName}`}
       classNames={{
-        // indicatorsContainer: () => "!hidden bg-black",
         control: () => `!min-h-[30px] !h-[30px]`,
         singleValue: () => "!-mt-[5px]",
         menu: () => "min-w-[190px]",
@@ -94,14 +119,17 @@ const ReactSelectNormal = ({
         }),
         ...styles,
       }}
-      value={value}
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
-      onChange={onChange}
+      loadOptions={(inputValue, callback) => {
+        loadOptions(inputValue, callback);
+      }}
+      value={defaultOption}
+      defaultValue={defaultOption}
       {...selectProps}
 
     />
   )
 }
 
-export default ReactSelectNormal
+export default ReactSelectAsync

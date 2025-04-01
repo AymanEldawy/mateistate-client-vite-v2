@@ -1,5 +1,5 @@
 import { SearchIcon } from "@/components/Icons";
-import ReactSelectAsync from "../fields/ReactSelectAsync";
+import ReactSelectAsync from "../../shared/ReactSelectAsync";
 
 const FormHeaderSearchBar = ({
   queryKey,

@@ -1,4 +1,5 @@
-import { CurrencyFieldGroup, RHFAsyncSelectField, RHFCheckbox, RHFInput, RHFSelectField, RHFTextarea } from "../fields";
+import { RHFAsyncSelectField, RHFCheckbox, RHFInput, RHFSelectField, RHFTextarea } from "../fields";
+import { CurrencyFieldGroup } from "../global";
 
 export const DynamicForm = ({
   fields,

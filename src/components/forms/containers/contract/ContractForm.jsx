@@ -7,8 +7,9 @@ import ContractFormTermination from "./ContractFormTermination"
 import ContractFormLinkedParking from "./ContractFormLinkedParking"
 import ContractFormContractCycle from "./ContractFormContractCycle"
 import { useForm } from "react-hook-form"
+import InstallmentForm from "./InstallmentForm"
 
-const ContractForm = ({ tab }) => {
+const ContractForm = ({ tab, isInstallmentOpen, setIsInstallmentOpen }) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -39,10 +40,12 @@ const ContractForm = ({ tab }) => {
 
   return (
     <>
-      <button>click</button>
+      {isInstallmentOpen ?
+        <InstallmentForm isInstallmentOpen={isInstallmentOpen} setIsInstallmentOpen={setIsInstallmentOpen} />
+        : null}
       <div className="min-w-[800px] h-[75vh]">
-          {displayForm()}
-        </div>
+        {displayForm()}
+      </div>
     </>
   )
 }

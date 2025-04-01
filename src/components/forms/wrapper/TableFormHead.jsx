@@ -8,10 +8,10 @@ const TableFormHead = ({ headers, theadClassName, trClassName, thClassName, with
       <tr className={` ${trClassName}`}>
         <th className="border min-w-[25px] text-center">#</th>
         {headers?.map(header => (
-          <th key={header} className={`py-1 text-sm ${thClassName}`}>{t(header)}</th>
+          <th key={header} className={`py-1 border min-w-[100px] ${thClassName}`}>{t(header)}</th>
         ))}
         {withoutAction ? null :
-          <th className="border text-center">{t('action')}</th>
+          <th className="border text-center py-1 px-1">{t('action')}</th>
         }
       </tr>
     </thead>

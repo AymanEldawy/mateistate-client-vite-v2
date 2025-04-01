@@ -27,7 +27,7 @@ const RHFTextarea = ({
                 name={name}
                 required={required}
                 label={label}
-                labelClassName={labelClassName}
+                labelClassName={`${labelClassName} !w-full`}
               />
             )}
             <textarea

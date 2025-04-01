@@ -2,103 +2,103 @@ import { CONTRACT_DURATION, CONTRACT_PAID_TYPE, CONTRACT_ROUND_TO, CONTRACT_STAT
 import FIELDS_STRUCTURE from "../FIELDS_STRUCTURE";
 import { APARTMENT_STEPS_CONTRACT, LAND_STEPS_CONTRACT, PARKING_STEPS_CONTRACT, SHOP_STEPS_CONTRACT } from "./contractSteps";
 
-const contract = [
-  FIELDS_STRUCTURE.numberField({
-    label: "gov_number",
-    name: "gov_number",
-  }),
-  FIELDS_STRUCTURE.dateField({
-    label: "issue_date",
-    name: "issue_date",
-    required: true,
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "internal_number",
-    name: "internal_number",
-  }),
+// const contract = [
+//   FIELDS_STRUCTURE.numberField({
+//     label: "gov_number",
+//     name: "gov_number",
+//   }),
+//   FIELDS_STRUCTURE.dateField({
+//     label: "issue_date",
+//     name: "issue_date",
+//     required: true,
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "internal_number",
+//     name: "internal_number",
+//   }),
 
-  FIELDS_STRUCTURE.numberField({
-    label: "contract_value",
-    name: "contract_value",
-    required: true,
-  }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "contract_value",
+//     name: "contract_value",
+//     required: true,
+//   }),
 
-  FIELDS_STRUCTURE.feedback(),
-  FIELDS_STRUCTURE.lawsuit(),
-  FIELDS_STRUCTURE.client({ required: true }),
-  FIELDS_STRUCTURE.building({ required: true }),
-  FIELDS_STRUCTURE.selectField({
-    label: "paid_type",
-    name: "paid_type",
-    required: true,
-    options: CONTRACT_PAID_TYPE,
-  }),
-
-
-  FIELDS_STRUCTURE.numberField({
-    label: "discount_rate",
-    name: "discount_rate",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "discount_value",
-    name: "discount_value",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "final_price",
-    name: "final_price",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "price_before_vat",
-    name: "price_before_vat",
-    required: true,
-  }),
-  FIELDS_STRUCTURE.account({
-    label: "discount_account_id",
-    name: "discount_account_id",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "previous_securing",
-    name: "previous_securing",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "current_securing_value",
-    name: "current_securing_value",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "contracts_number_prev",
-    name: "contracts_number_prev",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "contracts_number_current",
-    name: "contracts_number_current",
-  }),
+//   FIELDS_STRUCTURE.feedback(),
+//   FIELDS_STRUCTURE.lawsuit(),
+//   FIELDS_STRUCTURE.client({ required: true }),
+//   FIELDS_STRUCTURE.building({ required: true }),
+//   FIELDS_STRUCTURE.selectField({
+//     label: "paid_type",
+//     name: "paid_type",
+//     required: true,
+//     options: CONTRACT_PAID_TYPE,
+//   }),
 
 
-  FIELDS_STRUCTURE.account({
-    label: "revenue_account_id",
-    name: "revenue_account_id",
-    required: true,
-  }),
-  FIELDS_STRUCTURE.account({
-    label: "security_deposit_account_id",
-    name: "insurance_account_id",
-  }),
-  FIELDS_STRUCTURE.account({
-    label: "vat_account_id",
-    name: "vat_account_id",
-  }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "discount_rate",
+//     name: "discount_rate",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "discount_value",
+//     name: "discount_value",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "final_price",
+//     name: "final_price",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "price_before_vat",
+//     name: "price_before_vat",
+//     required: true,
+//   }),
+//   FIELDS_STRUCTURE.account({
+//     label: "discount_account_id",
+//     name: "discount_account_id",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "previous_securing",
+//     name: "previous_securing",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "current_securing_value",
+//     name: "current_securing_value",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "contracts_number_prev",
+//     name: "contracts_number_prev",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "contracts_number_current",
+//     name: "contracts_number_current",
+//   }),
 
-  FIELDS_STRUCTURE.numberField({
-    label: "vat_rate",
-    name: "vat_rate",
-  }),
-  FIELDS_STRUCTURE.numberField({
-    label: "vat_value",
-    name: "vat_value",
-  }),
-  FIELDS_STRUCTURE.gen_entries(),
-  FIELDS_STRUCTURE.note(),
-];
+
+//   FIELDS_STRUCTURE.account({
+//     label: "revenue_account_id",
+//     name: "revenue_account_id",
+//     required: true,
+//   }),
+//   FIELDS_STRUCTURE.account({
+//     label: "security_deposit_account_id",
+//     name: "insurance_account_id",
+//   }),
+//   FIELDS_STRUCTURE.account({
+//     label: "vat_account_id",
+//     name: "vat_account_id",
+//   }),
+
+//   FIELDS_STRUCTURE.numberField({
+//     label: "vat_rate",
+//     name: "vat_rate",
+//   }),
+//   FIELDS_STRUCTURE.numberField({
+//     label: "vat_value",
+//     name: "vat_value",
+//   }),
+//   FIELDS_STRUCTURE.gen_entries(),
+//   FIELDS_STRUCTURE.note(),
+// ];
 
 const contract_commission = [
   {
@@ -118,7 +118,7 @@ const contract_commission = [
     name: "commission_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "commission_note",
@@ -143,8 +143,8 @@ const contract_commission = [
     name: "commission_from_owner_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
-    // ref_table: UNIQUE_REF_TABLES.suppliers,
+    table: "account",
+    // table: UNIQUE_tableS.suppliers,
   },
   {
     label: "commission_from_owner_note",
@@ -163,7 +163,7 @@ const contract_commission = [
   //   label: 'commission_from_lessor_account_id', name: "commission_from_lessor_account_id",
   //   type: "uuid",
   //   required: false,
-  //   ref_table: "commission_from_lessor_account",
+  //   table: "commission_from_lessor_account",
   //
   // },
   // { label: 'commission_from_lessor_note', name: "commission_from_lessor_note", type: "text", required: false },
@@ -284,7 +284,7 @@ const contract_linked_parking = [
     name: "building_id",
     type: "uuid",
     required: true,
-    ref_table: "building",
+    table: "building",
     hideAdd: true,
   },
   {
@@ -292,14 +292,14 @@ const contract_linked_parking = [
     name: "account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "main_contract_id",
     name: "main_contract_id",
     type: "uuid",
     required: false,
-    ref_table: "contract",
+    table: "contract",
     hideAdd: true,
   },
 ];
@@ -363,7 +363,7 @@ const contract_termination = [
     name: "revenue_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   { label: "fines", name: "fines", type: "text", required: false },
   {
@@ -371,7 +371,7 @@ const contract_termination = [
     name: "fines_revenue_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   { label: "fine_note", name: "fine_note", type: "text", required: false },
   {
@@ -418,7 +418,7 @@ const contract_fines_grid = [
     name: "account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   { label: "fee_amount", name: "fee_amount", type: "number", required: false },
   { label: "notes", name: "notes", type: "text", required: false },
@@ -433,7 +433,7 @@ const contract_other_fees = [
     name: "account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   { label: "notes", name: "notes", type: "text", required: false },
 
@@ -445,7 +445,7 @@ const contract_fixed_assets = [
     name: "assets_id",
     type: "uuid",
     required: false,
-    ref_table: "assets",
+    table: "assets",
   },
   { label: "value", name: "value", type: "number", required: false },
   { label: "note", name: "note", type: "text", required: false },
@@ -462,7 +462,7 @@ const apartment_sale_contract = [
     name: "apartment_id",
     type: "uuid",
     required: true,
-    ref_table: "apartment",
+    table: "apartment",
     ref_name: "apartment_no",
     hideAdd: true,
   },
@@ -472,7 +472,7 @@ const apartment_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -498,7 +498,7 @@ const shop_sale_contract = [
     name: "shop_id",
     type: "uuid",
     required: true,
-    ref_table: "shop",
+    table: "shop",
     ref_name: "shop_no",
     hideAdd: true,
   },
@@ -508,7 +508,7 @@ const shop_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -535,7 +535,7 @@ const parking_sale_contract = [
     name: "parking_id",
     type: "uuid",
     required: true,
-    ref_table: "parking",
+    table: "parking",
     ref_name: "parking_no",
     hideAdd: true,
   },
@@ -545,7 +545,7 @@ const parking_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -598,7 +598,7 @@ const land_sale_contract = [
     name: "land_id",
     type: "uuid",
     required: false,
-    ref_table: "land",
+    table: "land",
   },
   { label: "description", name: "description", type: "text", required: false },
   {
@@ -606,7 +606,7 @@ const land_sale_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "property_delivery_date",
@@ -628,7 +628,7 @@ const land_sale_contract = [
     name: "contract_id",
     type: "uuid",
     required: false,
-    ref_table: "contract",
+    table: "contract",
   },
   {
     label: "amount",
@@ -641,7 +641,7 @@ const land_sale_contract = [
     name: "currency_id",
     type: "uuid",
     required: false,
-    ref_table: "currency",
+    table: "currency",
   },
   // {
   //   label: "currency_val",
@@ -661,14 +661,14 @@ const land_sale_contract = [
   {
     label: "discount_contract_amount",
     name: "discount_contract_amount",
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "discount_account_id",
     name: "discount_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "previous_securing",
@@ -699,21 +699,21 @@ const land_sale_contract = [
     name: "revenue_account_id",
     type: "uuid",
     required: true,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "customer_account_id",
     name: "customer_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "insurance_account_id",
     name: "insurance_account_id",
     type: "uuid",
     required: false,
-    ref_table: "account",
+    table: "account",
   },
   {
     label: "gen_entries",
@@ -732,7 +732,7 @@ const apartment_rent_contract = [
     name: "apartment_id",
     type: "uuid",
     required: true,
-    ref_table: "apartment",
+    table: "apartment",
     ref_name: "apartment_no",
     hideAdd: true,
   },
@@ -742,7 +742,7 @@ const apartment_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -784,7 +784,7 @@ const shop_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -801,7 +801,7 @@ const shop_rent_contract = [
     name: "shop_id",
     type: "uuid",
     required: true,
-    ref_table: "shop",
+    table: "shop",
     ref_name: "shop_no",
     hideAdd: true,
   },
@@ -835,7 +835,7 @@ const parking_rent_contract = [
     name: "lessor_id",
     type: "uuid",
     required: false,
-    ref_table: "lessor",
+    table: "lessor",
   },
   {
     label: "status",
@@ -852,7 +852,7 @@ const parking_rent_contract = [
     name: "parking_id",
     type: "uuid",
     required: true,
-    ref_table: "parking",
+    table: "parking",
     ref_name: "parking_no",
     hideAdd: true,
   },
@@ -884,7 +884,7 @@ const parking_rent_contract = [
 //     name: "parking_id",
 //     type: "uuid",
 //     required: true,
-//     ref_table: "parking",
+//     table: "parking",
 //     ref_name: "parking_no",
 //   },
 //   { label: "description", name: "description", type: "text", required: false },
@@ -893,7 +893,7 @@ const parking_rent_contract = [
 //     name: "lessor_id",
 //     type: "uuid",
 //     required: false,
-//     ref_table: "lessor",
+//     table: "lessor",
 //   },
 //   {
 //     label: "status",

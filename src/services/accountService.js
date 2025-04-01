@@ -48,7 +48,14 @@ export const deleteManyAccounts = (ids) => {
 
 
 export const getAccountCode = (parentId) => {
-  return http.delete(
+  return http.get(
     `${API_URL_CONSTANTS.BASE_ACCOUNT}/code=${parentId}`
+  );
+};
+
+
+export const getAccountReceivable = (buildingId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/buildingId=${buildingId}`
   );
 };

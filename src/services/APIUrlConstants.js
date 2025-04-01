@@ -8,17 +8,17 @@ const API_URL_CONSTANTS = {
   /************************************** Authentication **************************************/
   BASE_AUTH: "/auth",
   /************************************** ACCOUNT **************************************/
-  BASE_ACCOUNT: "/account",
+  BASE_ACCOUNT: "/accounts",
   /************************************** CONTRACT **************************************/
-  BASE_CONTRACT: "/contract",
+  BASE_CONTRACT: "/contracts",
   /************************************** USER **************************************/
-  BASE_USER: "/user",
+  BASE_USER: "/users",
   /************************************** BUILDING **************************************/
-  BASE_BUILDING: "/building",
+  BASE_BUILDING: "/buildings",
   /************************************** CHEQUE **************************************/
-  BASE_CHEQUE: "/cheque",
+  BASE_CHEQUE: "/cheques",
   /************************************** Lessor **************************************/
-  BASE_Lessor: "/lessor",
+  BASE_Lessor: "/lessors",
   /************************************** PARTIAL_COLLECTION **************************************/
   BASE_PARTIAL_COLLECTION: "/partial_collection",
   /************************************** BASE_COLLECTION **************************************/

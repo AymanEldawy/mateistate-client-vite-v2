@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { Label } from "./Label";
-import { RHFInput, RHFTableSelect } from ".";
+import { Label } from "../fields/Label";
+import { RHFInput, RHFTableSelect } from "../fields";
 import useGlobalOptions from "@/hook/useGlobalOptions";
 import { ErrorText } from "@/components/shared/ErrorText";
 
@@ -12,26 +12,28 @@ const CurrencyFieldGroup = ({
   const {
     formState: { errors },
   } = useFormContext();
-  const { currencies = [] } = useGlobalOptions();
-  console.log("🚀 ~ currencies:", currencies)
+  // const { currencies = [] } = useGlobalOptions();
+  // console.log("🚀 ~ currencies:", currencies)
   // const [currency, setCurrency] = useState(null);
-  const { currency_name = 'currency_id', required, label } = field || {}
-  const error = errors?.[currency_name];
+  const { name = 'currency_id', required, label } = field || {}
+  const error = errors?.[name];
 
   return (
     <div className={`flex-row flex rounded-md text-sm h-[31px] ${containerClassName}`}>
       {label && (
         <Label
-          name={currency_name}
+          name={name}
           required={required}
           label={label}
           labelClassName={labelClassName}
         />
       )}
       <RHFTableSelect
-        name={currency_name}
-        options={currencies}
+        name={name}
+        options={[]}
         // default option
+        optionValue="id"
+        optionLabel="code"
         selectProps={{
           components: {
             IndicatorsContainer: () => {

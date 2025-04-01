@@ -10,7 +10,7 @@ const Modal = ({
   isDrawer
 }) => {
 
-  let classes = `max-w-[85%] rounded-md p-4 min-w-[250px] min-h-[100px] max-h-[90vh] overflow-auto`
+  let classes = `max-w-[85%] rounded-md p-4 min-w-[250px] max-h-[90vh] overflow-auto`
   if (isDrawer) {
     classes = `p-4 overflow-auto h-screen min-w-[250px] ltr:ml-auto rtl:mr-auto`
   }

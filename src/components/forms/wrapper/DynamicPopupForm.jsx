@@ -2,14 +2,16 @@ import Modal from '@/components/shared/Modal';
 import { usePopupForm } from '@/hook/usePopupForm'
 import { lazy } from 'react';
 
-const Account = lazy(() => '@/pages/views/Account/Account');
-const Users = lazy(() => '@/pages/views/Users/Users.jsx');
-const Cheque = lazy(() => '@/pages/views/Cheque/Cheque');
-const PartialCollectionFrom = lazy(() => '../containers/cheque/PartialCollectionFrom');
-const CollectionForm = lazy(() => '../containers/cheque/CollectionForm');
+const Account = lazy(() => import('@/pages/views/Account/Account'));
+const Users = lazy(() => import('@/pages/views/Users/Users.jsx'));
+const Cheque = lazy(() => import('@/pages/views/Cheque/Cheque'));
+const PartialCollectionFrom = lazy(() => import('../containers/cheque/PartialCollectionFrom'));
+const CollectionForm = lazy(() => import('../containers/cheque/CollectionForm'));
+const ReturnForm = lazy(() => import('../containers/cheque/ReturnForm'));
 
 const DynamicPopupForm = () => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
+  console.log("🚀 ~ DynamicPopupForm ~ popupFormConfig:", popupFormConfig)
   if (!popupFormConfig) return;
 
   const displayForm = () => {
@@ -26,8 +28,8 @@ const DynamicPopupForm = () => {
         return <PartialCollectionFrom popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
       case 'op_collection':
         return <CollectionForm popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
-      // case 'op_return':
-      //   return <ReturnForm popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
+      case 'op_return':
+        return <ReturnForm popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
       default:
         return
     }

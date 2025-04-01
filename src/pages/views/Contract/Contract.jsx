@@ -44,7 +44,7 @@ const Contract = () => {
           onSuccessAction: () => { },
           isSteps: true,
           onHandleDelete: deleteContract,
-          RenderForm: (props) => <ContractForm isInstallmentOpen={isInstallmentOpen} {...props} list={APARTMENT_STEPS_CONTRACT} />
+          RenderForm: (props) => <ContractForm isInstallmentOpen={isInstallmentOpen} setIsInstallmentOpen={setIsInstallmentOpen}  {...props} list={APARTMENT_STEPS_CONTRACT} />
         }}
         formHeaderProps={{
           header: "contract"

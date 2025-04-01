@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import FormWrapper from '../../wrapper/FormWrapper'
-import { FormFooter } from '../../wrapper';
+import { FormFooter, FormHeader } from '../../wrapper';
 import usePartialPagination from '@/hook/usePartialPagination';
-import { CurrencyFieldGroup, RHFAsyncSelectField, RHFInput, RHFTextarea } from '../../fields';
+import { RHFAsyncSelectField, RHFInput, RHFTextarea } from '../../fields';
 import { FormProvider, useForm } from 'react-hook-form';
-import { AccountField } from '../../global';
+import { AccountField, CurrencyFieldGroup } from '../../global';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import QUERY_KEYS from '@/data/queryKeys';
+import ConfirmModal from '@/components/shared/ConfirmModal';
 
 const defaultValues = {}
 
@@ -33,9 +34,6 @@ const mergePattern = (pattern, chqValues, setValue) => {
     setValue("debit_account_id", pattern?.partial_debit_account_id);
   }
 
-  if (pattern?.partial_default_account_is_building_bank) {
-  }
-
   if (pattern?.partial_gen_entries) setValue("gen_entries", true);
 
   if (
@@ -49,17 +47,19 @@ const mergePattern = (pattern, chqValues, setValue) => {
 
 
 const PartialCollectionFrom = ({
-  popupFormConfig
+  popupFormConfig,
+  outerClose
 }) => {
   const methods = useForm({
     defaultValues
   });
-  const chequeId = popupFormConfig?.chequeId
+  const chequeId = popupFormConfig?.chequeValue?.id
   const chequeValue = popupFormConfig?.chequeValue
-  const { handleSubmit, watch, setValue, setError, clearErrors, reset } = methods
+  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
   const { getFirst, getLast, getNext: goNext, getPrevious: goBack, getPartialByNumber } = usePartialPagination(chequeId)
   const [currentNumber, setCurrentNumber] = useState(0);
   const [lastNumber, setLastNumber] = useState(0);
+  const [openConfirmation, setOpenConfirmation] = useState(false)
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
@@ -145,16 +145,23 @@ const PartialCollectionFrom = ({
     setCurrentNumber(num);
   }
 
+  const onHandleDelete = async () => { }
+
   const onSubmit = async (value) => {
 
   };
 
   return (
-    <div>
-
+    <>
+      <ConfirmModal
+        onConfirm={onHandleDelete}
+        open={openConfirmation}
+        setOpen={setOpenConfirmation}
+      />
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="p-4">
-          <div className="max-w-3xl w-full">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <FormHeader onClose={outerClose} header="partial_collection" />
+          <div className="max-w-3xl w-full p-4">
             <div className="grid grid-cols-3 gap-8 xl:gap-14">
               <div className="flex flex-col gap-2 col-span-2">
                 <RHFInput name="created_at" label="created_at" />
@@ -163,14 +170,22 @@ const PartialCollectionFrom = ({
                 <RHFAsyncSelectField
                   name="debit_account_id"
                   label="debit_account_id"
+                  getSearch={() => { }}
+                  getSingle={() => { }}
                 />
                 <RHFAsyncSelectField
                   name="credit_account_id"
                   label="credit_account_id"
+                  getSearch={() => { }}
+                  getSingle={() => { }}
+
                 />
                 <RHFAsyncSelectField
                   name="cost_center_id"
                   label="cost_center_id"
+                  getSearch={() => { }}
+                  getSingle={() => { }}
+
                 />
               </div>
               <div className="flex flex-col gap-2 ">
@@ -196,6 +211,9 @@ const PartialCollectionFrom = ({
                 <RHFAsyncSelectField
                   name='commission_cost_center_id'
                   label='commission_cost_center_id'
+                  getSearch={() => { }}
+                  getSingle={() => { }}
+
                 />
               </div>
               <div className="flex flex-col gap-2 ">
@@ -207,7 +225,8 @@ const PartialCollectionFrom = ({
 
           </div>
           <FormFooter
-            // additionalButtons={}
+            isLoading={isLoading || isSubmitting}
+            setOpenConfirmation={setOpenConfirmation}
             paginationForm={{
               goTo,
               goBack,
@@ -221,7 +240,7 @@ const PartialCollectionFrom = ({
           />
         </form>
       </FormProvider>
-    </div>
+    </>
   )
 }
 

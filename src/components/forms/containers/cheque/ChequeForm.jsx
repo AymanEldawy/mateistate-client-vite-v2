@@ -1,9 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField } from "../../fields";
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getChequePatternByCode } from "@/services/chequeService";
+import ChequeFormBar from "./ChequeFormBar";
 
 const mergePatternWithChequeData = (pattern, watch, setValue) => {
 
@@ -36,7 +36,6 @@ const ChequeForm = ({ code: outerCode }) => {
 
   return (
     <>
-      <button>click</button>
       <div className="relative p-4">
         <div className="grid gap-y-2 gap-x-8 grid-cols-3">
           <div className="flex flex-col gap-2">
@@ -129,13 +128,7 @@ const ChequeForm = ({ code: outerCode }) => {
             label="note2"
           />
         </div>
-
-        {/* <ChequeStatus
-      pattern={PATTERN_SETTINGS}
-      onOpenFormOperation={onOpenFormOperation}
-      chqValues={watch()}
-    /> */}
-
+        <ChequeFormBar pattern={pattern} />
       </div>
     </>
   );

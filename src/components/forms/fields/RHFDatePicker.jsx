@@ -1,4 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
+import "@/styles/date-picker.css";
+
 import ReactDatePicker from "react-datepicker";
 import { Controller, useFormContext } from "react-hook-form";
 import { ErrorText } from "@/components/shared/ErrorText";
@@ -41,7 +43,7 @@ const RHFDatePicker = ({
               timeIntervals={5}
               timeFormat="HH:mm"
               onChange={onChange}
-              className={inputClassName}
+              className={`w-full flex-1 ${inputClassName}`}
               showYearDropdown
               dateFormat={"dd/MM/yyyy"}
               // showTimeSelect={showTimeSelect}
