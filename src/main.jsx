@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
           <GlobalOptionsProvider>
             <PopupFormProvider>
               {/* <Suspense fallback={}> */}
-                <DynamicPopupForm />
+              <DynamicPopupForm />
               {/* </Suspense> */}
               <RouterProvider router={router} />
             </PopupFormProvider>

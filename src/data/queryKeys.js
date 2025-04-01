@@ -16,6 +16,7 @@ const QUERY_KEYS = {
   Cost_center: "cost_center",
   Country: "country",
   Bank: "bank",
+  PARKING: "parking",
 };
 
 export default QUERY_KEYS;

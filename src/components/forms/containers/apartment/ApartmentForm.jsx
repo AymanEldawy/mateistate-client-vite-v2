@@ -1,4 +1,4 @@
-import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableAsyncSelect, RHFTableInput, RHFTextarea } from "../../fields";
+import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../../fields";
 import { APARTMENT_FLAT_TYPE, FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { APARTMENT_STEPS } from "@/data/constants";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
@@ -100,7 +100,7 @@ const ApartmentForm = ({ tab }) => {
       <TableForm
         renderFields={(item, index) => (
           <td>
-            <RHFTableAsyncSelect
+            <RHFAsyncSelectField
               label="apartment_id"
               table="apartment"
               name={`apartment_accumulate.${index}.apartment_id`}
@@ -127,7 +127,7 @@ const ApartmentForm = ({ tab }) => {
               <RHFTableInput name={`apartment_rental_price.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFTableAsyncSelect name={`apartment_rental_price.${index}.currency_id`} label="Currency" table="currency" allowAdd />
+              <RHFAsyncSelectField name={`apartment_rental_price.${index}.currency_id`} table="currency" allowAdd />
             </td>
             <td>
               <RHFTableInput name={`apartment_rental_price.${index}.note`} label="Note" />
@@ -157,7 +157,7 @@ const ApartmentForm = ({ tab }) => {
               <RHFTableInput name={`apartment_selling_price.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFTableAsyncSelect name={`apartment_selling_price.${index}.currency_id`} label="Currency" table="currency" allowAdd />
+              <RHFAsyncSelectField name={`apartment_selling_price.${index}.currency_id`} table="currency" allowAdd />
             </td>
             <td>
               <RHFTableInput name={`apartment_selling_price.${index}.note`} label="Note" />

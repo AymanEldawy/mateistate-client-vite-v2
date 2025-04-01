@@ -152,10 +152,10 @@ export const ASSETS_STEPS = {
 
 export const PARKING_STEPS = {
   parking_general: "parking_general",
+  parking_pictures: "parking_pictures",
   parking_accumulate: "parking_accumulate",
   parking_rental_price: "parking_rental_price",
   parking_selling_price: "parking_selling_price",
-  parking_pictures: "parking_pictures",
 };
 
 export const SHOP_STEPS = {

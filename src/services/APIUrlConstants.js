@@ -27,6 +27,8 @@ const API_URL_CONSTANTS = {
   BASE_RETURN: "/return",
   /************************************** APARTMENT **************************************/
   BASE_APARTMENT: "/apartment",
+  /************************************** PARKING **************************************/
+  BASE_PARKING: "/parking",
 };
 
 export default API_URL_CONSTANTS;

@@ -153,6 +153,12 @@
   "drag_and_drop_files": "اسحب وافلت الملفات هنا، أو انقر لاختيار الملفات",
   "remove": "ازالة",
 
+  "parking_general": "معلومات اساسية",
+  "parking_pictures": "صور الموقف",
+  "parking_accumulate": "التراكمات",
+  "parking_rental_price": "سعر الايجار",
+  "parking_selling_price": "سعر البيع",
+
   "total_amount": "المبلغ الاجمالي",
   "early_payment": "الدفع المبكر",
   "sales_progress": "فاتورة المبيعات",

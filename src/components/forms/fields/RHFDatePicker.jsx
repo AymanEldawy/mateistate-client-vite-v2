@@ -39,7 +39,7 @@ const RHFDatePicker = ({
             )}
 
             <ReactDatePicker
-              ref={ref}
+              // ref={ref}
               selected={value}
               timeIntervals={5}
               timeFormat="HH:mm"
