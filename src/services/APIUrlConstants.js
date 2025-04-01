@@ -25,10 +25,12 @@ const API_URL_CONSTANTS = {
   BASE_COLLECTION: "/collection",
   /************************************** BASE_RETURN **************************************/
   BASE_RETURN: "/return",
+  /************************************** SHOP **************************************/
+  BASE_SHOP: "/shops",
   /************************************** APARTMENT **************************************/
-  BASE_APARTMENT: "/apartment",
+  BASE_APARTMENT: "/apartments",
   /************************************** PARKING **************************************/
-  BASE_PARKING: "/parking",
+  BASE_PARKING: "/parkings",
 };
 
 export default API_URL_CONSTANTS;

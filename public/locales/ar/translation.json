@@ -159,6 +159,13 @@
   "parking_rental_price": "سعر الايجار",
   "parking_selling_price": "سعر البيع",
 
+  "shop_general": "معلومات اساسية",
+  "shop_pictures": "صور المحل",
+  "shop_fixed_assets": "الاصول الثابتة",
+  "shop_accumulate": "التراكمات",
+  "shop_rental_price": "سعر الايجار",
+  "shop_selling_price": "سعر البيع",
+
   "total_amount": "المبلغ الاجمالي",
   "early_payment": "الدفع المبكر",
   "sales_progress": "فاتورة المبيعات",

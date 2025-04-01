@@ -171,6 +171,13 @@
   "parking_rental_price": "Rental Price",
   "parking_selling_price": "Selling Price",
 
+  "shop_general": "Basic Information",
+  "shop_pictures": "Shop Pictures",
+  "shop_fixed_assets": "Fixed Assets",
+  "shop_accumulate": "Accumulate",
+  "shop_rental_price": "Rental Price",
+  "shop_selling_price": "Selling Price",
+
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",

@@ -160,9 +160,9 @@ export const PARKING_STEPS = {
 
 export const SHOP_STEPS = {
   shop_general: "shop_general",
-  shop_accumulate: "shop_accumulate",
-  shop_fixed_assets: "shop_fixed_assets",
   shop_pictures: "shop_pictures",
+  shop_fixed_assets: "shop_fixed_assets",
+  shop_accumulate: "shop_accumulate",
   shop_rental_price: "shop_rental_price",
   shop_selling_price: "shop_selling_price",
 };

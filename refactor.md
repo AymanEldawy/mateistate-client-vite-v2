@@ -36,7 +36,7 @@ Steps
 
 - apartment ✅
 - parking ✅
-- shop
+- shop ✅
 - villa
 - land
 - reservation_property
