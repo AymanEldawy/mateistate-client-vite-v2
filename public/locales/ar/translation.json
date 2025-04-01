@@ -142,6 +142,17 @@
   "drag_file_description": "حدد او اسحب الملفات",
   "catalog_description1": "لاضافة المنتج الذي تريد بيعه يمكن البحث عنه في كتالوج المنتاجات",
 
+  "apartment_general": "معلومات اساسية",
+  "apartment_pictures": "صور الشقة",
+  "property_values": "قيمة العقار",
+  "apartment_accumulate": "التراكمات",
+  "apartment_rental_price": "سعر الايجار",
+  "apartment_selling_price": "سعر البيع",
+
+  "drop_files_here": "افلت الملفات هنا ...",
+  "drag_and_drop_files": "اسحب وافلت الملفات هنا، أو انقر لاختيار الملفات",
+  "remove": "ازالة",
+
   "total_amount": "المبلغ الاجمالي",
   "early_payment": "الدفع المبكر",
   "sales_progress": "فاتورة المبيعات",

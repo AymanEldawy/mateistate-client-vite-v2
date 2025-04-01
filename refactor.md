@@ -1,28 +1,39 @@
 ### Ayman
+
 Manual
+
 - account
 - user
 - building
+
 ---
+
 - op_collection
 - op_partial_collection
 - op_return
 - cheque
+
 ---
+
 - installment
+
 ---
+
 - bill
+
 ---
+
 - vouchers
 - entries
+
 ---
 
-
-----
+---
 
 ### Omar
-Steps 
-- land
+
+Steps
+
 - apartment
 - parking
 - shop
@@ -30,10 +41,10 @@ Steps
 - reservation_property
 - user_work_times
 - service
-
-
+- land
 
 ### Mahamoud
+
 Normal (4-5 days)
 
 - lessor
@@ -49,19 +60,17 @@ Normal (4-5 days)
 - store
 - owner_expenses_types
 
-
-
-
 ### Future
+
 ---
+
 - menu & website setting (1-2 days)
 - auth (2 days)
 - table sorting and filters (5-7 days)
 - reports (unknown)
 - testing (at least 1 week )
 
-
 - owner_expenses
 
 - lawsuit
-- accounting_voucher_pattern_general 
+- accounting_voucher_pattern_general

@@ -8,6 +8,7 @@ const QUERY_KEYS = {
   Lessor: "lessor",
   Owner: "owner",
   Seller: "seller",
+  APARTMENT: "apartment",
   COLLECTION: "collection",
   RETURN: "return",
   PARTIAL_COLLECTION: "partial_collection",

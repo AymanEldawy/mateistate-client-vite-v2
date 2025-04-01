@@ -154,6 +154,17 @@
   "delete_attachment": "Delete attachment",
   "confirm_delete_msg": "Are you sure you want delete?",
 
+  "apartment_general": "Basic Information",
+  "apartment_pictures": "Apartment Pictures",
+  "property_values": "Property Values",
+  "apartment_accumulate": "Accumulate",
+  "apartment_rental_price": "Rental Price",
+  "apartment_selling_price": "Selling Price",
+
+  "drop_files_here": "Drop the files here ...",
+  "drag_and_drop_files": "Drag and drop files here, or click to select files",
+  "remove": "Remove",
+
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",

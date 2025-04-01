@@ -21,6 +21,7 @@ const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
 const Country = React.lazy(() => import("../pages/views/Country/Country"));
+const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
 const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
@@ -90,6 +91,11 @@ const routes = [
       {
         path: PATHS.USER,
         element: <Users />,
+      },
+
+      {
+        path: PATHS.APARTMENT,
+        element: <Apartment />,
       },
 
       /************************************** Announcements **************************************/

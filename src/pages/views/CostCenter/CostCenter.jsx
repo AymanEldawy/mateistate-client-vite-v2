@@ -8,6 +8,7 @@ import {
 import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
 import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
+import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
@@ -16,9 +17,9 @@ const lessorConfig = {
   formProps: {
     defaultValue,
     validationSchema: costCenterValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
-    onSuccessAction: () => {},
+    mutationAddFunction: () => { },
+    mutationUpdateFunction: () => { },
+    onSuccessAction: () => { },
     isSteps: true,
     onHandleDelete: deleteAccount,
     RenderForm: (props) => <CostCenterForm {...props} />,
@@ -32,10 +33,10 @@ const lessorConfig = {
   },
 };
 
-const CostCenter = () => {
-  // if (formOnly) {
-  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
-  // }
+const CostCenter = ({ formOnly, outerClose }) => {
+  if (formOnly) {
+    return <FormWrapper {...lessorConfig} outerClose={outerClose} />;
+  }
   // const navigate = useNavigate();
 
   return (
