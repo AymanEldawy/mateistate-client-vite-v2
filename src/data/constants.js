@@ -126,8 +126,8 @@ export const LAWSUIT_STEPS = {
 
 export const APARTMENT_STEPS = {
   apartment_general: "apartment_general",
-  apartment_pictures: "apartment_pictures",
   property_values: "property_values",
+  apartment_pictures: "apartment_pictures",
   apartment_accumulate: "apartment_accumulate",
   apartment_rental_price: "apartment_rental_price",
   apartment_selling_price: "apartment_selling_price",

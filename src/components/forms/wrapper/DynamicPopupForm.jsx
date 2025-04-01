@@ -1,5 +1,6 @@
 import Modal from '@/components/shared/Modal';
 import { usePopupForm } from '@/hook/usePopupForm'
+import CostCenter from '@/pages/views/CostCenter/CostCenter';
 import { lazy } from 'react';
 
 const Account = lazy(() => '@/pages/views/Account/Account');
@@ -28,6 +29,8 @@ const DynamicPopupForm = () => {
         return <CollectionForm popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
       // case 'op_return':
       //   return <ReturnForm popupFormConfig={popupFormConfig} outerClose={onCloseDispatchedForm} />
+      case 'cost_center':
+        return <CostCenter formOnly outerClose={onCloseDispatchedForm} popupFormConfig={popupFormConfig} />
       default:
         return
     }

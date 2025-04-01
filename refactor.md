@@ -28,11 +28,11 @@ Manual
 
 ### Omar
 Steps 
-- land
 - apartment
 - parking
 - shop
 - villa
+- land
 
 total 10 - 11 days
 ----
