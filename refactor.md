@@ -58,48 +58,57 @@ Normal (4-5 days)
 - owner_expenses_types
 
 ### Reports
-- `NOTES:` 
-  - 
-BuildingSchemaReport,
-ChangesFlatsRentPricingReport,
-ChangesFlatsSalePricingReport,
-ChequeReport,
-CollectionChqReport,
-ContractChequeReport,
-ContractCycleReport,
-ContractNearToExpireReport,
-ContractPaymentsReport,
-ContractsDepositReport,
-ContractsExpiredReport,
-ContractsReport,
-CostCenterGeneralLedgerReport,
-CostCenterTrialBalanceReport,
-CreditorsAgesReport,
-CustomersAccountStatementReport,
-DueNotePaperReport,
-EarningRentalIncomeEarnedReport,
-GeneralLedgerReport,
-JournalLedgerReport,
-LeasedLandsReport,
-LeasedParkingReport,
-LeasedPropertyActivityReport,
-LeasedUnitsReport,
-LeasedVillasReport,
-MangerChequeReport,
-OverduePaymentsReport,
-OwnerExpensesReport,
-ReservedUnitsReport,
-ReturnedChqReport,
-ServicesContractsReport,
-SoldLandsReport,
-SoldUnitsReport,
-SoldVillasReport,
-TrialBalanceReport,
-UnitConditionConstructionReport,
-UnitsWillVacatedReport,
-VATBillsReport,
-WarehouseReport,
-WorkerReport,
+
+- `reports/worker-report`
+- `reports/warehouse-report`
+- `reports/complaints-report`
+- `reports/lease-units-report`
+- `reports/lease-parking-report`
+- `reports/lease-lands-report`
+- `reports/lease-villas-report`
+- `reports/leased-property-activity-report`
+- `reports/sold-units-report`
+- `reports/sold-lands-report`
+- `reports/sold-villas-report`
+- `reports/changes-flats-rent-pricing-report`
+- `reports/changes-flats-sale-pricing-report`
+- `reports/units-will-vacated-report`
+- `reports/reserved-units-report`
+- `reports/contracts/services-contracts-report`
+- `reports/contracts/contract-cycle-report`
+- `reports/contracts/contracts-deposit-report`
+- `reports/trial-balance"`
+- `reports/creditors-ages-report`
+- `reports/trading-sheet-report/`
+- `reports/profit-and-loss-report/`
+- `reports/balance-sheet-report/`
+- `reports/due-note-papers-report`
+- `reports/returned-cheques`
+- `reports/collection-cheque-report`
+- `reports/overdue-payments-report`
+- `reports/general-ledger-report`
+- `reports/cost-center-general-ledger-report`
+- `reports/cost-center-trial-balance-report`
+- `reports/vat-bills-report/`
+- `reports/customer-account-statement-report/`
+- `reports/journal-ledger-report`
+- `reports/contracts/disclosure"`
+- `reports/contracts/expired-contract`
+- `reports/contracts/near-to-expire-contract`
+- `reports/contracts/contract-cheque-report`
+- `reports/contracts/contract-payments-report`
+- `reports/cheque"`
+- `reports/building-schema"`
+- `reports/revenues/earning-rental-income-earned-report`
+- `reports/unit-condition-for-construction-report`
+- `reports/owner-expenses-report`
+- `reports/mangers/cheque-report`
+- `reports/item-activity`
+- `reports/inventory-report`
+- `reports/ending-inventory-report`
+- `reports/sales-report`
+- `reports/bill-details-report`
+- `reports/bill-profit-report`
 
 ### Future
 
