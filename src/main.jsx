@@ -24,10 +24,10 @@ createRoot(document.getElementById('root')).render(
         <Suspense fallback={<Loading logo />}>
           <GlobalOptionsProvider>
             <PopupFormProvider>
-              {/* <Suspense fallback={}> */}
+              <VoucherEntriesViewProvider>
                 <DynamicPopupForm />
-              {/* </Suspense> */}
-              <RouterProvider router={router} />
+                <RouterProvider router={router} />
+              </VoucherEntriesViewProvider>
             </PopupFormProvider>
           </GlobalOptionsProvider>
         </Suspense>
