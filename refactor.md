@@ -40,9 +40,9 @@ Steps
 - villa ✅
 - land ✅
 - currency ✅
-- reservation_property
-- user_work_times
-- service
+- reservation_property ✅
+- user_work_times ✅
+- service ✅
 
 ### Mahamoud
 

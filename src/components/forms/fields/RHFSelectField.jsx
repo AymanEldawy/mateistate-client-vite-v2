@@ -24,7 +24,7 @@ const RHFSelectField = ({
   ...field
 }) => {
   const { control } = useFormContext();
-  const { name, optionValue, optionLabel, required, options } = field
+  const { name, optionValue = "id", optionLabel = "name", required, options } = field
 
   return (
     <Controller

@@ -21,6 +21,9 @@ const QUERY_KEYS = {
   VILLA: "villa",
   Land: "land",
   CURRENCY: "currency",
+  RESERVATION_PROPERTY: "reservationProperty",
+  USER_WORK_TIME: "userWorkTime",
+  SERVICE: "service",
 };
 
 export default QUERY_KEYS;

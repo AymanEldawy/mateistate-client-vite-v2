@@ -21,6 +21,9 @@ const Shop = React.lazy(() => import("@/pages/views/Shop/Shop"));
 const Villa = React.lazy(() => import("@/pages/views/Villa/Villa"));
 const Land = React.lazy(() => import("@/pages/views/Land/Land"));
 const Currency = React.lazy(() => import("@/pages/views/Currency/Currency"));
+const ReservationProperty = React.lazy(() => import("@/pages/views/ReservationProperty/ReservationProperty"));
+const Service = React.lazy(() => import("@/pages/views/Service/Service"));
+const UserWorkTime = React.lazy(() => import("@/pages/views/UserWorkTime/UserWorkTime"));
 const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
@@ -121,6 +124,18 @@ const routes = [
       {
         path: PATHS.CURRENCY,
         element: <Currency />,
+      },
+      {
+        path: PATHS.RESERVATION_PROPERTY,
+        element: <ReservationProperty />,
+      },
+      {
+        path: PATHS.SERVICE,
+        element: <Service />,
+      },
+      {
+        path: PATHS.USER_WORK_TIMES,
+        element: <UserWorkTime />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

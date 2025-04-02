@@ -68,6 +68,7 @@ const PaperLayout = ({
           onClose={() => setOpenForm(false)}
           formPaginationProps={formPaginationProps}
           formProps={formProps}
+          defaultValues={formProps?.defaultValues}
         />
       </PaperModal>
       <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">

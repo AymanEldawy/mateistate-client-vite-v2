@@ -39,6 +39,12 @@ const API_URL_CONSTANTS = {
   BASE_LAND: "/land",
   /************************************** BASE_CURRENCY **************************************/
   BASE_CURRENCY: "/currencies",
+  /************************************** BASE_RESERVATION_PROPERTY **************************************/
+  BASE_RESERVATION_PROPERTY: "/reservation_properties",
+  /************************************** BASE_USER_WORK_TIME **************************************/
+  BASE_USER_WORK_TIME: "/user_work_times",
+  /************************************** BASE_SERVICE **************************************/
+  BASE_SERVICE: "/services",
 };
 
 export default API_URL_CONSTANTS;
