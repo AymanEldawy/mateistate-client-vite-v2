@@ -37,6 +37,8 @@ const API_URL_CONSTANTS = {
   BASE_VILLA: "/villas",
   /************************************** BASE_LAND **************************************/
   BASE_LAND: "/land",
+  /************************************** BASE_CURRENCY **************************************/
+  BASE_CURRENCY: "/currencies",
 };
 
 export default API_URL_CONSTANTS;

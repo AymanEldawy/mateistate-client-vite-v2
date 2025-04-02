@@ -3,11 +3,12 @@ import { FLAT_PROPERTY_TYPE, PARKING_KIND_TYPE } from "@/helpers/DEFAULT_OPTIONS
 import { PARKING_STEPS } from "@/data/constants";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 
 const ParkingForm = ({ tab }) => {
 
     const ParkingGeneralFields = (
-        <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
+        <FormFieldsGridContainer key="generalFields" >
             <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
             <RHFSelectField
                 label="Parking Kind"
@@ -72,7 +73,7 @@ const ParkingForm = ({ tab }) => {
                 allowAdd
             />
             <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-        </div>
+        </FormFieldsGridContainer>
     )
 
     const ParkingPicturesFields = (

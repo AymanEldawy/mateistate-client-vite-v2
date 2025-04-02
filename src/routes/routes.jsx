@@ -18,8 +18,9 @@ const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
 const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
 const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
 const Shop = React.lazy(() => import("@/pages/views/Shop/Shop"));
-const Villa = React.lazy(() => import("@/pages/views/villa/Villa"));
+const Villa = React.lazy(() => import("@/pages/views/Villa/Villa"));
 const Land = React.lazy(() => import("@/pages/views/Land/Land"));
+const Currency = React.lazy(() => import("@/pages/views/Currency/Currency"));
 const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
@@ -116,6 +117,10 @@ const routes = [
       {
         path: PATHS.VILLA,
         element: <Villa />,
+      },
+      {
+        path: PATHS.CURRENCY,
+        element: <Currency />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

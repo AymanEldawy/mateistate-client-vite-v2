@@ -20,6 +20,7 @@ const QUERY_KEYS = {
   SHOP: "shop",
   VILLA: "villa",
   Land: "land",
+  CURRENCY: "currency",
 };
 
 export default QUERY_KEYS;

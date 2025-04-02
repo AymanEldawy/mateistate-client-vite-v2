@@ -3,11 +3,11 @@ import { FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { SHOP_STEPS } from "@/data/constants";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
-
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 const ShopForm = ({ tab }) => {
 
   const ShopGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
+    <FormFieldsGridContainer key="generalFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
       <RHFAsyncSelectField
         table="building"
@@ -79,16 +79,16 @@ const ShopForm = ({ tab }) => {
       />
 
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const ShopFixedAssetsFields = (
-    <div key="ShopFixedAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="ShopFixedAssetsFields" >
       <RHFAsyncSelectField label="Shop" name="shop_id" table="shop" containerClassName="col-span-2" />
       <RHFAsyncSelectField label="Asset" name="asset_id" table="asset" containerClassName="col-span-2" />
       <RHFInput name="value" label="Value" type="number" containerClassName="col-span-2" />
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const ShopPicturesFields = (

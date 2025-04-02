@@ -39,7 +39,7 @@ Steps
 - shop ✅
 - villa ✅
 - land ✅
-- currency
+- currency ✅
 - reservation_property
 - user_work_times
 - service

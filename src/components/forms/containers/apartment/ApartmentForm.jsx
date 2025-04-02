@@ -3,11 +3,12 @@ import { APARTMENT_FLAT_TYPE, FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIO
 import { APARTMENT_STEPS } from "@/data/constants";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 
 const ApartmentForm = ({ tab }) => {
 
   const ApartmentGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
+    <FormFieldsGridContainer key="generalFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
       <RHFAsyncSelectField
         table="building"
@@ -75,17 +76,17 @@ const ApartmentForm = ({ tab }) => {
       {/* <RHFInput name="x_index" label="X Index" type="number" required />
       <RHFInput name="y_index" label="Y Index" type="number" required /> */}
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
   const ApartmentPropertyValuesFields = (
-    <div key="propertyValuesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="propertyValuesFields" >
       <RHFColorPicker required={false} name="hex" label="Hex" />
       <RHFInput name="unit_count" label="Unit Count" type="number" />
       <RHFSelectField label="Property Type" name="property_type" options={FLAT_PROPERTY_TYPE} containerClassName="col-span-2" />
       <RHFInput name="area" label="Area" type="number" />
       <RHFInput name="view" label="View" />
       <RHFTextarea name="description" label="Description" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const ApartmentPicturesFields = (

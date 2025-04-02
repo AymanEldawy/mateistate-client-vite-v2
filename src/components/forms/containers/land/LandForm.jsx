@@ -1,14 +1,13 @@
-import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../../fields";
-import { APARTMENT_FLAT_TYPE, FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFTableInput, RHFTextarea } from "../../fields";
 import { LAND_STEPS } from "@/data/constants";
-import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 
 const LandForm = ({ tab }) => {
 
   // todo: rethink this after client feedback
   const LandGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4 w-full h-full">
+    <FormFieldsGridContainer key="generalFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
       <RHFInput name="name" label="Name" required />
       <RHFInput name="type" label="Type" type="number" />
@@ -158,11 +157,11 @@ const LandForm = ({ tab }) => {
       <RHFInput name="commission_percent" label="Commission Percent" type="number" />
       <RHFInput name="used_end_date" label="Used End Date" type="checkbox" />
       <RHFInput name="create_entry_investment" label="Create Entry Investment" type="checkbox" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const LandAccumulateFields = (
-    <div key="landAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
+    <div key="landAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
       <TableForm
         renderFields={(item, index) => (
           <td>
@@ -182,7 +181,7 @@ const LandForm = ({ tab }) => {
   )
 
   const LandRentalPriceFields = (
-    <div key="landRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
+    <div key="landRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
       <TableForm
         renderFields={(item, index) => (
           <>
@@ -212,7 +211,7 @@ const LandForm = ({ tab }) => {
   )
 
   const LandSellingPriceFields = (
-    <div key="landSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
+    <div key="landSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
       <TableForm
         renderFields={(item, index) => (
           <>
@@ -256,7 +255,7 @@ const LandForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
       {renderFields()}
     </div>
   )

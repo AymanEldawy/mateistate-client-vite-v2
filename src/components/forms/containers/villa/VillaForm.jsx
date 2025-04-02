@@ -1,11 +1,11 @@
 import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFTableInput, RHFTextarea } from "../../fields";
 import { VILLA_STEPS } from "@/data/constants";
 import TableForm from "../../wrapper/TableForm";
-
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 const VillaForm = ({ tab }) => {
 
   const VillaGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
+    <FormFieldsGridContainer key="generalFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
       <RHFInput name="complex_name" label="Complex Name" required />
       <RHFInput name="villa_no" label="Villa Number" required />
@@ -28,30 +28,30 @@ const VillaForm = ({ tab }) => {
       <RHFInput name="electricity_meter" label="Electricity Meter" type="number" />
 
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const VillaAssetsFields = (
-    <div key="villaAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="villaAssetsFields" >
       <RHFAsyncSelectField name="assets_id" table="assets" label="Assets" allowAdd />
       <RHFInput name="value" label="Value" type="number" />
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const VillaAccountsFields = (
-    <div key="villaAccountsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="villaAccountsFields" >
       <RHFAsyncSelectField name="villa_account_id" table="account" label="Villa Account" allowAdd />
       <RHFAsyncSelectField name="cost_center_id" table="cost_center" label="Cost Center" allowAdd />
       <RHFAsyncSelectField name="account_bank_villa_id" table="account" label="Bank Account" allowAdd />
       <RHFAsyncSelectField name="cash_account_id" table="account" label="Cash Account" allowAdd />
       <RHFAsyncSelectField name="insurance_account_id" table="account" label="Insurance Account" allowAdd />
       <RHFAsyncSelectField name="lessor_id" table="lessor" label="Lessor" allowAdd />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const VillaExteriorDetailsFields = (
-    <div key="villaExteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="villaExteriorDetailsFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Wall Details</h5>
       <RHFInput name="wall" label="Wall" />
       <RHFInput name="wall_state" label="Wall State" />
@@ -73,11 +73,11 @@ const VillaForm = ({ tab }) => {
       <RHFInput name="garden_count" label="Garden Count" type="number" />
       <RHFInput name="garden_area" label="Garden Area" />
       <RHFInput name="garden_state" label="Garden State" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const VillaInteriorDetailsFields = (
-    <div key="villaInteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
+    <FormFieldsGridContainer key="villaInteriorDetailsFields" >
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Room Information</h5>
       <RHFInput name="room_state" label="Room State" />
       <RHFInput name="room_count" label="Room Count" type="number" />
@@ -97,7 +97,7 @@ const VillaForm = ({ tab }) => {
       <RHFInput name="finishing_state" label="Finishing State" containerClassName="col-span-2" />
       <RHFInput name="security_system" label="Security System" />
       <RHFInput name="security_type" label="Security Type" type="number" />
-    </div>
+    </FormFieldsGridContainer>
   )
 
   const VillaRentalPriceFields = (
