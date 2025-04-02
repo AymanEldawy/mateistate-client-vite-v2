@@ -24,6 +24,7 @@ const QUERY_KEYS = {
   RESERVATION_PROPERTY: "reservationProperty",
   USER_WORK_TIME: "userWorkTime",
   SERVICE: "service",
+  BILLS: "bills",
 };
 
 export default QUERY_KEYS;

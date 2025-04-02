@@ -21,6 +21,8 @@ const PATHS = {
   OWNER: "/owner",
   /******************** SELLER ********************/
   SELLER: "/seller",
+  /******************** VOUCHERS ********************/
+  VOUCHERS: "/vouchers",
   /******************** LESSOR ********************/
   LESSOR: "/lessor",
   /******************** BANK ********************/
@@ -90,7 +92,7 @@ const PATHS = {
   /******************** EVACUATION_REQUEST ********************/
   EVACUATION_REQUEST: "/evacuation_request",
   /******************** BILL ********************/
-  BILL: "/bill",
+  BILLS: "/bills",
   /******************** CHEQUE ********************/
   CHEQUE: "/cheque",
   /******************** CONTRACT ********************/
@@ -207,6 +209,7 @@ const PATHS = {
   COMPLAINTS_REPORT: "/reports/complaints-report",
   /******************** WORKER_REPORT ********************/
   WORKER_REPORT: "/reports/worker-report",
+  /******************** WORKER_REPORT ********************/
 };
 
 export default PATHS;

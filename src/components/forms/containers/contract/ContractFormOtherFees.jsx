@@ -15,25 +15,21 @@ const ContractFormOtherFees = () => {
           <>
             <td>
               <RHFDatePicker
-                label="date"
                 name={`contract_other_fees.${index}.date`}
               />
             </td>
             <td>
               <RHFInputAmount
-                label="fee_amount"
                 name={`contract_other_fees.${index}.fee_amount`}
               />
             </td>
             <td>
               <AccountField
-                label="account_id"
                 name={`contract_other_fees.${index}.account_id`}
               />
             </td>
             <td>
               <RHFInput
-                label="notes"
                 name={`contract_other_fees.${index}.notes`}
               />
             </td>

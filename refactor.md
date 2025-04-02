@@ -26,10 +26,6 @@ Manual
 - vouchers
 - entries
 
----
-
----
-
 ### Omar
 
 Steps
@@ -61,17 +57,61 @@ Normal (4-5 days)
 - store
 - owner_expenses_types
 
+### Reports
+- `NOTES:` 
+  - 
+BuildingSchemaReport,
+ChangesFlatsRentPricingReport,
+ChangesFlatsSalePricingReport,
+ChequeReport,
+CollectionChqReport,
+ContractChequeReport,
+ContractCycleReport,
+ContractNearToExpireReport,
+ContractPaymentsReport,
+ContractsDepositReport,
+ContractsExpiredReport,
+ContractsReport,
+CostCenterGeneralLedgerReport,
+CostCenterTrialBalanceReport,
+CreditorsAgesReport,
+CustomersAccountStatementReport,
+DueNotePaperReport,
+EarningRentalIncomeEarnedReport,
+GeneralLedgerReport,
+JournalLedgerReport,
+LeasedLandsReport,
+LeasedParkingReport,
+LeasedPropertyActivityReport,
+LeasedUnitsReport,
+LeasedVillasReport,
+MangerChequeReport,
+OverduePaymentsReport,
+OwnerExpensesReport,
+ReservedUnitsReport,
+ReturnedChqReport,
+ServicesContractsReport,
+SoldLandsReport,
+SoldUnitsReport,
+SoldVillasReport,
+TrialBalanceReport,
+UnitConditionConstructionReport,
+UnitsWillVacatedReport,
+VATBillsReport,
+WarehouseReport,
+WorkerReport,
+
 ### Future
 
 ---
 
+- reports (unknown)
+
 - menu & website setting (1-2 days)
 - auth (2 days)
 - table sorting and filters (5-7 days)
-- reports (unknown)
 - testing (at least 1 week )
 
 - owner_expenses
-
 - lawsuit
 - accounting_voucher_pattern_general

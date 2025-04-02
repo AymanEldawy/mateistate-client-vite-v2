@@ -4,12 +4,14 @@ import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import contractColumns from '@/helpers/contract/contractColumns'
 // import ContractForm from '@/components/forms/containers/contract/ContractForm'
-import { deleteContract, deleteManyContracts, getAllContracts } from '@/services/contractService'
+import { deleteContract, deleteManyContracts, getAllContracts, getSearchContract } from '@/services/contractService'
 // import { useState } from 'react'
 import { APARTMENT_STEPS_CONTRACT } from '@/data/constants'
 import { contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
 import { lazy, useState } from 'react'
 import ContractFormFooter from '@/components/forms/containers/contract/ContractFormFooter'
+import { FormHeaderSearchBar } from '@/components/forms/wrapper'
+import EntryBar from '@/components/shared/EntryBar'
 const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
 const defaultValue = {}
@@ -47,7 +49,18 @@ const Contract = () => {
           RenderForm: (props) => <ContractForm isInstallmentOpen={isInstallmentOpen} setIsInstallmentOpen={setIsInstallmentOpen}  {...props} list={APARTMENT_STEPS_CONTRACT} />
         }}
         formHeaderProps={{
-          header: "contract"
+          header: "contract",
+          ExtraContentBar: ({ values }) => (
+            <>
+              <FormHeaderSearchBar
+                getOptionLabel={option => option?.name}
+                getOptionValue={option => option?.id}
+                getSearch={getSearchContract}
+                queryKey={QUERY_KEYS.CONTRACT}
+              />
+              <EntryBar entryId={values?.id} />
+            </>
+          )
         }}
         formSidebarProps={{
           list: APARTMENT_STEPS_CONTRACT

@@ -97,7 +97,7 @@ function RHFUploadFiles({ onChange, error, accept, containerClassName, defaultVa
                 <div className='mt-4 flex flex-wrap justify-center items-center'>
                     {preview.map((file, index) => (
                         <div key={index} className='mb-2 p-2 w-full md:w-1/2 lg:w-1/4 relative'>
-                            {file.file.type.startsWith('image/') ? (
+                            {file?.file?.type?.startsWith('image/') ? (
                                 <img
                                     src={file.preview}
                                     alt={`preview ${index}`}

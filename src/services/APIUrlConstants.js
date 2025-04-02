@@ -45,6 +45,8 @@ const API_URL_CONSTANTS = {
   BASE_USER_WORK_TIME: "/user_work_times",
   /************************************** BASE_SERVICE **************************************/
   BASE_SERVICE: "/services",
+  /************************************** BILLS **************************************/
+  BASE_BILLS: "/bills",
 };
 
 export default API_URL_CONSTANTS;

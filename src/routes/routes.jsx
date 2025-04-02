@@ -18,7 +18,7 @@ const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
 const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
 const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
 const Shop = React.lazy(() => import("@/pages/views/Shop/Shop"));
-const Villa = React.lazy(() => import("@/pages/views/Villa/Villa"));
+const Villa = React.lazy(() => import("@/pages/views/villa/Villa"));
 const Land = React.lazy(() => import("@/pages/views/Land/Land"));
 const Currency = React.lazy(() => import("@/pages/views/Currency/Currency"));
 const ReservationProperty = React.lazy(() => import("@/pages/views/ReservationProperty/ReservationProperty"));
@@ -31,6 +31,8 @@ const Country = React.lazy(() => import("../pages/views/Country/Country"));
 const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
 const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
 const Parking = React.lazy(() => import("../pages/views/Parking/Parking"));
+const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
+const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -136,6 +138,14 @@ const routes = [
       {
         path: PATHS.USER_WORK_TIMES,
         element: <UserWorkTime />,
+      }, 
+      {
+        path: PATHS.BILLS,
+        element: <Bills />,
+      },
+      {
+        path: PATHS.VOUCHERS,
+        element: <Vouchers />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/
