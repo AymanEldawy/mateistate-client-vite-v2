@@ -1,7 +1,7 @@
-import { useVoucherEntriesView } from "@/hook/useVoucherEntriesView";
 import Btn from "./Btn";
 import { EyeIcon } from "../Icons";
 import { useTranslation } from "react-i18next";
+import { useVoucherEntriesView } from "@/hook/useVoucherEntriesView";
 
 
 export const ViewEntry = ({ id, created_from, hideText }) => {

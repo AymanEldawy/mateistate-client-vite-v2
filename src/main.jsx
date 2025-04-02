@@ -10,6 +10,7 @@ import { GlobalOptionsProvider } from './hook/useGlobalOptions';
 import { PopupFormProvider } from './hook/usePopupForm';
 import { lazy } from 'react';
 import Loading from './components/shared/Loading';
+import { VoucherEntriesViewProvider } from './hook/useVoucherEntriesView';
 const DynamicPopupForm = lazy(() => import('./components/forms/wrapper/DynamicPopupForm'));
 
 
@@ -22,12 +23,14 @@ createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <Suspense fallback={<Loading logo />}>
           <GlobalOptionsProvider>
-            <PopupFormProvider>
-              {/* <Suspense fallback={}> */}
+            <VoucherEntriesViewProvider>
+              <PopupFormProvider>
+                {/* <Suspense fallback={}> */}
                 <DynamicPopupForm />
-              {/* </Suspense> */}
-              <RouterProvider router={router} />
-            </PopupFormProvider>
+                {/* </Suspense> */}
+                <RouterProvider router={router} />
+              </PopupFormProvider>
+            </VoucherEntriesViewProvider>
           </GlobalOptionsProvider>
         </Suspense>
       </QueryClientProvider>
