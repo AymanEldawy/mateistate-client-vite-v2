@@ -33,6 +33,10 @@ const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
 const Parking = React.lazy(() => import("../pages/views/Parking/Parking"));
 const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
+const MaterialGroup = React.lazy(() =>
+  import("../pages/views/MaterialGroup/MaterialGroup")
+);
+const Category = React.lazy(() => import("../pages/views/Category/Category"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -138,7 +142,7 @@ const routes = [
       {
         path: PATHS.USER_WORK_TIMES,
         element: <UserWorkTime />,
-      }, 
+      },
       {
         path: PATHS.BILLS,
         element: <Bills />,
@@ -146,6 +150,14 @@ const routes = [
       {
         path: PATHS.VOUCHERS,
         element: <Vouchers />,
+      },
+      {
+        path: PATHS.MATERIAL_GROUP,
+        element: <MaterialGroup />,
+      },
+      {
+        path: PATHS.CATEGORY,
+        element: <Category />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

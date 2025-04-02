@@ -25,6 +25,8 @@ const QUERY_KEYS = {
   USER_WORK_TIME: "userWorkTime",
   SERVICE: "service",
   BILLS: "bills",
+  MATERIAL_GROUP: "materialGroup",
+  CATEGORY: "category",
 };
 
 export default QUERY_KEYS;
