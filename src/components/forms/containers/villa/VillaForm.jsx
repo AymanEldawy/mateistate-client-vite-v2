@@ -5,7 +5,7 @@ import TableForm from "../../wrapper/TableForm";
 const VillaForm = ({ tab }) => {
 
   const VillaGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw] w-full h-full">
+    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
       <RHFInput name="complex_name" label="Complex Name" required />
       <RHFInput name="villa_no" label="Villa Number" required />
@@ -32,7 +32,7 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaAssetsFields = (
-    <div key="villaAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <RHFAsyncSelectField name="assets_id" table="assets" label="Assets" allowAdd />
       <RHFInput name="value" label="Value" type="number" />
       <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
@@ -40,7 +40,7 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaAccountsFields = (
-    <div key="villaAccountsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaAccountsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <RHFAsyncSelectField name="villa_account_id" table="account" label="Villa Account" allowAdd />
       <RHFAsyncSelectField name="cost_center_id" table="cost_center" label="Cost Center" allowAdd />
       <RHFAsyncSelectField name="account_bank_villa_id" table="account" label="Bank Account" allowAdd />
@@ -51,7 +51,7 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaExteriorDetailsFields = (
-    <div key="villaExteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaExteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Wall Details</h5>
       <RHFInput name="wall" label="Wall" />
       <RHFInput name="wall_state" label="Wall State" />
@@ -77,7 +77,7 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaInteriorDetailsFields = (
-    <div key="villaInteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaInteriorDetailsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Room Information</h5>
       <RHFInput name="room_state" label="Room State" />
       <RHFInput name="room_count" label="Room Count" type="number" />
@@ -101,12 +101,12 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaRentalPriceFields = (
-    <div key="villaRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`villa_rental_price.${index}.date`} label="Date" type="date" />
+              <RHFDatePicker name={`villa_rental_price.${index}.date`} type="date" />
             </td>
             <td>
               <RHFTableInput name={`villa_rental_price.${index}.price`} label="Price" type="number" />
@@ -131,12 +131,12 @@ const VillaForm = ({ tab }) => {
   )
 
   const VillaSellingPriceFields = (
-    <div key="villaSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="villaSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`villa_selling_price.${index}.date`} label="Date" type="date" />
+              <RHFDatePicker name={`villa_selling_price.${index}.date`} type="date" />
             </td>
             <td>
               <RHFTableInput name={`villa_selling_price.${index}.price`} label="Price" type="number" />
@@ -181,7 +181,7 @@ const VillaForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
       {renderFields()}
     </div>
   )

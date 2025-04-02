@@ -37,8 +37,9 @@ Steps
 - apartment ✅
 - parking ✅
 - shop ✅
-- villa
-- land
+- villa ✅
+- land ✅
+- currency
 - reservation_property
 - user_work_times
 - service

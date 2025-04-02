@@ -1,8 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import Account from "@/pages/views/Account/Account";
-import Shop from "@/pages/views/Shop/Shop";
-import Villa from "@/pages/views/villa/Villa";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -19,6 +17,9 @@ const Contract = React.lazy(() => import("../pages/views/Contract/Contract"));
 const Lessor = React.lazy(() => import("../pages/views/Lessor/Lessor"));
 const Owner = React.lazy(() => import("../pages/views/Owner/Owner"));
 const Seller = React.lazy(() => import("../pages/views/Seller/Seller"));
+const Shop = React.lazy(() => import("@/pages/views/Shop/Shop"));
+const Villa = React.lazy(() => import("@/pages/views/villa/Villa"));
+const Land = React.lazy(() => import("@/pages/views/Land/Land"));
 const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
@@ -95,7 +96,10 @@ const routes = [
         path: PATHS.USER,
         element: <Users />,
       },
-
+      {
+        path: PATHS.LAND,
+        element: <Land />,
+      },
       {
         path: PATHS.APARTMENT,
         element: <Apartment />,

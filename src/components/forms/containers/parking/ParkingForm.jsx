@@ -7,7 +7,7 @@ import TableForm from "../../wrapper/TableForm";
 const ParkingForm = ({ tab }) => {
 
     const ParkingGeneralFields = (
-        <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw] w-full h-full">
+        <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
             <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
             <RHFSelectField
                 label="Parking Kind"
@@ -76,13 +76,13 @@ const ParkingForm = ({ tab }) => {
     )
 
     const ParkingPicturesFields = (
-        <div key="parkingPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+        <div key="parkingPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
             <RHFUploadFilesController name="pictures" accept="image/*" containerClassName="col-span-2" label="Pictures" required />
         </div>
     )
 
     const ParkingAccumulateFields = (
-        <div key="parkingAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+        <div key="parkingAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
             <TableForm
                 renderFields={(item, index) => (
                     <td>
@@ -101,12 +101,12 @@ const ParkingForm = ({ tab }) => {
     )
 
     const ParkingRentalPriceFields = (
-        <div key="parkingRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+        <div key="parkingRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
             <TableForm
                 renderFields={(item, index) => (
                     <>
                         <td>
-                            <RHFDatePicker name={`parking_rental_price.${index}.date`} label="Date" type="date" />
+                            <RHFDatePicker name={`parking_rental_price.${index}.date`} type="date" />
                         </td>
                         <td>
                             <RHFTableInput name={`parking_rental_price.${index}.price`} label="Price" type="number" />
@@ -121,22 +121,22 @@ const ParkingForm = ({ tab }) => {
                 )}
                 gridName={"parking_rental_price"}
                 headers={[
-                    "date",
-                    "price",
-                    "currency",
-                    "note",
+                    "Date",
+                    "Price",
+                    "Currency",
+                    "Note",
                 ]}
             />
         </div>
     )
 
     const ParkingSellingPriceFields = (
-        <div key="parkingSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+        <div key="parkingSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
             <TableForm
                 renderFields={(item, index) => (
                     <>
                         <td>
-                            <RHFDatePicker name={`parking_selling_price.${index}.date`} label="Date" type="date" />
+                            <RHFDatePicker name={`parking_selling_price.${index}.date`} type="date" />
                         </td>
                         <td>
                             <RHFTableInput name={`parking_selling_price.${index}.price`} label="Price" type="number" />
@@ -151,10 +151,10 @@ const ParkingForm = ({ tab }) => {
                 )}
                 gridName={"parking_selling_price"}
                 headers={[
-                    "date",
-                    "price",
-                    "currency",
-                    "note",
+                    "Date",
+                    "Price",
+                    "Currency",
+                    "Note",
                 ]}
             />
         </div>
@@ -177,7 +177,7 @@ const ParkingForm = ({ tab }) => {
     }
 
     return (
-        <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll">
+        <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
             {renderFields()}
         </div>
     )

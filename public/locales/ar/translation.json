@@ -175,6 +175,11 @@
   "villa_rental_price": "سعر الايجار",
   "villa_selling_price": "سعر البيع",
 
+  "land_general": "معلومات اساسية",
+  "land_accumulate": "التراكمات",
+  "land_rental_price": "سعر الايجار",
+  "land_selling_price": "سعر البيع",
+
   "total_amount": "المبلغ الاجمالي",
   "early_payment": "الدفع المبكر",
   "sales_progress": "فاتورة المبيعات",

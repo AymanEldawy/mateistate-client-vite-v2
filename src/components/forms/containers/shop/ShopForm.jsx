@@ -7,7 +7,7 @@ import TableForm from "../../wrapper/TableForm";
 const ShopForm = ({ tab }) => {
 
   const ShopGeneralFields = (
-    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw] w-full h-full">
+    <div key="generalFields" className="grid grid-cols-2 gap-x-4 gap-y-4  w-full h-full">
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
       <RHFAsyncSelectField
         table="building"
@@ -83,7 +83,7 @@ const ShopForm = ({ tab }) => {
   )
 
   const ShopFixedAssetsFields = (
-    <div key="ShopFixedAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="ShopFixedAssetsFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <RHFAsyncSelectField label="Shop" name="shop_id" table="shop" containerClassName="col-span-2" />
       <RHFAsyncSelectField label="Asset" name="asset_id" table="asset" containerClassName="col-span-2" />
       <RHFInput name="value" label="Value" type="number" containerClassName="col-span-2" />
@@ -92,13 +92,13 @@ const ShopForm = ({ tab }) => {
   )
 
   const ShopPicturesFields = (
-    <div key="shopPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="shopPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
       <RHFUploadFilesController name="pictures" accept="image/*" containerClassName="col-span-2" label="Pictures" required />
     </div>
   )
 
   const ShopAccumulateFields = (
-    <div key="shopAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="shopAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
       <TableForm
         renderFields={(item, index) => (
           <td>
@@ -118,12 +118,12 @@ const ShopForm = ({ tab }) => {
   )
 
   const ShopRentalPriceFields = (
-    <div key="shopRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="shopRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`shop_rental_price.${index}.date`} label="Date" type="date" />
+              <RHFDatePicker name={`shop_rental_price.${index}.date`} type="date" />
             </td>
             <td>
               <RHFTableInput name={`shop_rental_price.${index}.price`} label="Price" type="number" />
@@ -148,12 +148,12 @@ const ShopForm = ({ tab }) => {
   )
 
   const ShopSellingPriceFields = (
-    <div key="shopSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 lg:w-[60vw] md:w-[90vw]">
+    <div key="shopSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4 ">
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`shop_selling_price.${index}.date`} label="Date" type="date" />
+              <RHFDatePicker name={`shop_selling_price.${index}.date`} type="date" />
             </td>
             <td>
               <RHFTableInput name={`shop_selling_price.${index}.price`} label="Price" type="number" />
@@ -196,7 +196,7 @@ const ShopForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
       {renderFields()}
     </div>
   )

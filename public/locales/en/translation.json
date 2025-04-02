@@ -187,6 +187,11 @@
   "villa_rental_price": "Rental Price",
   "villa_selling_price": "Selling Price",
 
+  "land_general": "Basic Information",
+  "land_accumulate": "Accumulate",
+  "land_rental_price": "Rental Price",
+  "land_selling_price": "Selling Price",
+
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",
