@@ -56,6 +56,12 @@ export const getAccountCode = (parentId) => {
 
 export const getAccountReceivable = (buildingId) => {
   return http.get(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/buildingId=${buildingId}`
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/receivable?buildingId=${buildingId}`
+  );
+};
+
+export const getAccountCash = (buildingId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/bank?buildingId=${buildingId}`
   );
 };

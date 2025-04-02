@@ -85,8 +85,7 @@ export const generatePaymentBatches = async (
   const begin_number = watch("installment.begin_number");
   const beneficiary_name = watch("installment.beneficiary_name");
   const account_id = watch(`contract.client_id`);
-  // let observe_account_id = await getAccountReceivable(watch(`contract.building_id`))
-  let observe_account_id = null
+  let observe_account_id = await getAccountReceivable(watch(`contract.building_id`))
   const client = CACHE_LIST?.client?.find(
     (c) => c.id === watch(`contract.client_id`)
   );
