@@ -23,14 +23,12 @@ createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <Suspense fallback={<Loading logo />}>
           <GlobalOptionsProvider>
-            <VoucherEntriesViewProvider>
-              <PopupFormProvider>
-                {/* <Suspense fallback={}> */}
+            <PopupFormProvider>
+              {/* <Suspense fallback={}> */}
                 <DynamicPopupForm />
-                {/* </Suspense> */}
-                <RouterProvider router={router} />
-              </PopupFormProvider>
-            </VoucherEntriesViewProvider>
+              {/* </Suspense> */}
+              <RouterProvider router={router} />
+            </PopupFormProvider>
           </GlobalOptionsProvider>
         </Suspense>
       </QueryClientProvider>

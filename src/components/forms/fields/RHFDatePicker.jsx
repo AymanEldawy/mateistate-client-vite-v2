@@ -5,6 +5,7 @@ import ReactDatePicker from "react-datepicker";
 import { Controller, useFormContext } from "react-hook-form";
 import { ErrorText } from "@/components/shared/ErrorText";
 import { Label } from "./Label";
+import { CalenderIcon } from "@/components/Icons";
 
 const RHFDatePicker = ({
   containerClassName,
@@ -38,12 +39,16 @@ const RHFDatePicker = ({
             )}
 
             <ReactDatePicker
-              ref={ref}
+              // ref={ref}
               selected={value}
               timeIntervals={5}
               timeFormat="HH:mm"
               onChange={onChange}
-              className={`w-full flex-1 ${inputClassName}`}
+              className={`w-full flex-1 ${inputClassName} border  h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
+                ${error ? "border-red-200 text-red-500" : ""}
+                `}
+              showIcon
+              icon={<CalenderIcon />}
               showYearDropdown
               dateFormat={"dd/MM/yyyy"}
               // showTimeSelect={showTimeSelect}

@@ -1,6 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import Account from "@/pages/views/Account/Account";
+import Shop from "@/pages/views/Shop/Shop";
+import Villa from "@/pages/views/villa/Villa";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -23,6 +25,7 @@ const CostCenter = React.lazy(() =>
 const Country = React.lazy(() => import("../pages/views/Country/Country"));
 const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
 const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
+const Parking = React.lazy(() => import("../pages/views/Parking/Parking"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -97,7 +100,19 @@ const routes = [
         path: PATHS.APARTMENT,
         element: <Apartment />,
       },
+      {
+        path: PATHS.PARKING,
+        element: <Parking />,
+      },
+      {
+        path: PATHS.SHOP,
+        element: <Shop />,
+      },
 
+      {
+        path: PATHS.VILLA,
+        element: <Villa />,
+      },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/
       {

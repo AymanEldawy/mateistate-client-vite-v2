@@ -5,8 +5,7 @@ import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import apartmentColumns from '@/helpers/apartment/apartmentColumns'
 import { lazy } from 'react'
 import { APARTMENT_STEPS } from '@/data/constants'
-import { FormHeaderSearchBar } from '@/components/forms/wrapper'
-import { RHFCheckbox, RHFInput } from '@/components/forms/fields'
+import { RHFCheckbox } from '@/components/forms/fields'
 const ApartmentForm = lazy(() => import("@/components/forms/containers/apartment/ApartmentForm"))
 
 const defaultValue = {}
@@ -33,7 +32,7 @@ const apartmentConfig = {
   },
   formHeaderProps: {
     header: "Apartment",
-    ExtraContentBar: ({ values }) => (
+    ExtraContentBar: () => (
       <>
         <RHFCheckbox name="has_lawsuit" label="Has Lawsuit" type="checkbox" />
         <RHFCheckbox name="blocked" label="Blocked" type="checkbox" />

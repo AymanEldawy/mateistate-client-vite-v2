@@ -34,14 +34,14 @@ Manual
 
 Steps
 
-- apartment
-- parking
-- shop
+- apartment ✅
+- parking ✅
+- shop ✅
 - villa
+- land
 - reservation_property
 - user_work_times
 - service
-- land
 
 ### Mahamoud
 

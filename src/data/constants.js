@@ -152,28 +152,29 @@ export const ASSETS_STEPS = {
 
 export const PARKING_STEPS = {
   parking_general: "parking_general",
+  parking_pictures: "parking_pictures",
   parking_accumulate: "parking_accumulate",
   parking_rental_price: "parking_rental_price",
   parking_selling_price: "parking_selling_price",
-  parking_pictures: "parking_pictures",
 };
 
 export const SHOP_STEPS = {
   shop_general: "shop_general",
-  shop_accumulate: "shop_accumulate",
-  shop_fixed_assets: "shop_fixed_assets",
   shop_pictures: "shop_pictures",
+  shop_fixed_assets: "shop_fixed_assets",
+  shop_accumulate: "shop_accumulate",
   shop_rental_price: "shop_rental_price",
   shop_selling_price: "shop_selling_price",
 };
 
 export const VILLA_STEPS = {
   villa_general: "villa_general",
-  villa_accounts: "villa_accounts",
+  // ? this is deprecated in the old version
+  // villa_pictures: "villa_pictures",
   villa_assets: "villa_assets",
   villa_exterior_details: "villa_exterior_details",
   villa_interior_details: "villa_interior_details",
-  villa_pictures: "villa_pictures",
+  villa_accounts: "villa_accounts",
   villa_rental_price: "villa_rental_price",
   villa_selling_price: "villa_selling_price",
 };

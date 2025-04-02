@@ -165,6 +165,28 @@
   "drag_and_drop_files": "Drag and drop files here, or click to select files",
   "remove": "Remove",
 
+  "parking_general": "Basic Information",
+  "parking_pictures": "Parking Pictures",
+  "parking_accumulate": "Accumulate",
+  "parking_rental_price": "Rental Price",
+  "parking_selling_price": "Selling Price",
+
+  "shop_general": "Basic Information",
+  "shop_pictures": "Shop Pictures",
+  "shop_fixed_assets": "Fixed Assets",
+  "shop_accumulate": "Accumulate",
+  "shop_rental_price": "Rental Price",
+  "shop_selling_price": "Selling Price",
+
+  "villa_general": "Basic Information",
+  "villa_pictures": "Villa Pictures",
+  "villa_assets": "Assets",
+  "villa_exterior_details": "Exterior Details",
+  "villa_interior_details": "Interior Details",
+  "villa_accounts": "Accounts",
+  "villa_rental_price": "Rental Price",
+  "villa_selling_price": "Selling Price",
+
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",
