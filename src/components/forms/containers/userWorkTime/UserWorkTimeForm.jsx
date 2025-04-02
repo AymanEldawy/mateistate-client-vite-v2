@@ -3,7 +3,7 @@ import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer
 const UserWorkTimeForm = () => {
 
     return (
-        <div className="p-4 flex flex-col min-h-[400px] max-h-[80vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+        <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
             <FormFieldsGridContainer key="generalFields" >
                 <RHFAsyncSelectField
                     name="user_id"
