@@ -166,6 +166,15 @@
   "shop_rental_price": "سعر الايجار",
   "shop_selling_price": "سعر البيع",
 
+  "villa_general": "معلومات اساسية",
+  "villa_pictures": "صور الفيلا",
+  "villa_assets": "الاصول",
+  "villa_exterior_details": "التفاصيل الخارجية",
+  "villa_interior_details": "التفاصيل الداخلية",
+  "villa_accounts": "الحسابات",
+  "villa_rental_price": "سعر الايجار",
+  "villa_selling_price": "سعر البيع",
+
   "total_amount": "المبلغ الاجمالي",
   "early_payment": "الدفع المبكر",
   "sales_progress": "فاتورة المبيعات",

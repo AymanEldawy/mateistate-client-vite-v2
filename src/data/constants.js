@@ -169,11 +169,12 @@ export const SHOP_STEPS = {
 
 export const VILLA_STEPS = {
   villa_general: "villa_general",
-  villa_accounts: "villa_accounts",
+  // ? this is deprecated in the old version
+  // villa_pictures: "villa_pictures",
   villa_assets: "villa_assets",
   villa_exterior_details: "villa_exterior_details",
   villa_interior_details: "villa_interior_details",
-  villa_pictures: "villa_pictures",
+  villa_accounts: "villa_accounts",
   villa_rental_price: "villa_rental_price",
   villa_selling_price: "villa_selling_price",
 };

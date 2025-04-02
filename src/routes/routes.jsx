@@ -2,6 +2,7 @@ import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import Account from "@/pages/views/Account/Account";
 import Shop from "@/pages/views/Shop/Shop";
+import Villa from "@/pages/views/villa/Villa";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -108,6 +109,10 @@ const routes = [
         element: <Shop />,
       },
 
+      {
+        path: PATHS.VILLA,
+        element: <Villa />,
+      },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/
       {

@@ -18,6 +18,7 @@ const QUERY_KEYS = {
   Bank: "bank",
   PARKING: "parking",
   SHOP: "shop",
+  VILLA: "villa",
 };
 
 export default QUERY_KEYS;

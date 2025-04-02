@@ -178,6 +178,15 @@
   "shop_rental_price": "Rental Price",
   "shop_selling_price": "Selling Price",
 
+  "villa_general": "Basic Information",
+  "villa_pictures": "Villa Pictures",
+  "villa_assets": "Assets",
+  "villa_exterior_details": "Exterior Details",
+  "villa_interior_details": "Interior Details",
+  "villa_accounts": "Accounts",
+  "villa_rental_price": "Rental Price",
+  "villa_selling_price": "Selling Price",
+
   "new_orders": "New orders",
   "orders_in_delivery": "Orders in delivery",
   "delivered_orders": "Delivered orders",
