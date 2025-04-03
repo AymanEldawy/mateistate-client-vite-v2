@@ -1,5 +1,6 @@
 import { PrintIcon, SearchIcon } from "@/components/Icons"
 import Btn from "@/components/shared/Btn"
+import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox"
 import { VOUCHER_RECEIPTS_CODE, VOUCHER_RECEIPTS_NAME } from "@/data/GENERATE_STARTING_DATA"
 import { usePopupForm } from "@/hook/usePopupForm"
 
@@ -50,3 +51,45 @@ export const VOUCHER_GRID_COLUMNS = [
   },
   { header: "note", accessorKey: "note", enableColumnFilter: false, },
 ]
+
+
+const voucherColumns = [
+  {
+    id: "select",
+    size: 40,
+    isResizingColumn: false,
+    header: ({ table }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: table.getIsAllRowsSelected(),
+          indeterminate: table.getIsSomeRowsSelected(),
+          onChange: table.getToggleAllRowsSelectedHandler(),
+        }}
+      />
+    ),
+    cell: ({ row }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: row.getIsSelected(),
+          disabled: !row.getCanSelect(),
+          indeterminate: row.getIsSomeSelected(),
+          onChange: row.getToggleSelectedHandler(),
+        }}
+      />
+    ),
+  },
+  {
+    header: "created_at",
+    accessorKey: "created_at",
+    cell: ({ getValue }) => (
+      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+    ),
+  },
+  { header: "currency_id", accessorKey: "currency_id" },
+  { header: "note", accessorKey: "note" },
+  { header: "debit", accessorKey: "debit" },
+  { header: "credit", accessorKey: "credit" },
+  { header: "difference", accessorKey: "difference" },
+];
+
+export default voucherColumns;

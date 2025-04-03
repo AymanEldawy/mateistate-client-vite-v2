@@ -2,13 +2,13 @@
 
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { lazy, useState } from 'react'
+import { lazy } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
-import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, updateBill } from '@/services/billService'
-import { billValidationSchema } from '@/helpers/bill/billValidationSchema'
-import billColumns from '@/helpers/bill/billColumns'
-const BillForm = lazy(() => import("@/components/forms/containers/bill/BillForm"))
+import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, updateVoucher } from '@/services/vouchersService'
+import voucherColumns from '@/helpers/voucher/voucherColumns'
+import { voucherValidationSchema } from '@/helpers/voucher/voucherValidationSchema'
+const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
 const defaultValue = {
   gen_entries: true,
@@ -20,52 +20,50 @@ const defaultValue = {
 
 
 const Vouchers = () => {
-  const [isInstallmentOpen, setIsInstallmentOpen] = useState(false)
-  // const [list, setList] = useState(APARTMENT_STEPS_CONTRACT)
 
   return (
     <>
       <PaperLayout
-        name="bills"
-        queryKey={QUERY_KEYS.BILLS}
-        queryFn={getAllBills}
-        handleDeleteSelected={deleteManyBills}
+        name="vouchers"
+        queryKey={QUERY_KEYS.VOUCHERS}
+        queryFn={getAllVouchers}
+        handleDeleteSelected={deleteManyVouchers}
         paperHeaderProps={{
-          header: "bills"
+          header: "vouchers"
         }}
         paperBarProps={{
           onClickPrint: true,
           onClickAdd: true,
         }}
         tableProps={{
-          columns: billColumns
+          columns: voucherColumns
         }}
         formProps={{
           defaultValue,
-          validationSchema: billValidationSchema,
-          mutationAddFunction: createBill,
-          mutationUpdateFunction: updateBill,
+          validationSchema: voucherValidationSchema,
+          mutationAddFunction: createVoucher,
+          mutationUpdateFunction: updateVoucher,
           onSuccessAction: () => { },
           isSteps: false,
-          onHandleDelete: deleteBill,
-          RenderForm: (props) => <BillForm {...props} />
+          onHandleDelete: deleteVoucher,
+          RenderForm: (props) => <VoucherForm {...props} />
         }}
         formHeaderProps={{
-          header: "bill",
+          header: "voucher",
           ExtraContentBar: ({ values }) => (
             <>
               <FormHeaderSearchBar
                 getOptionLabel={option => option?.name}
                 getOptionValue={option => option?.id}
-                getSearch={getSearchBill}
-                queryKey={QUERY_KEYS.BILLS}
+                getSearch={getSearchVoucher}
+                queryKey={QUERY_KEYS.VOUCHERS}
               />
               <EntryBar entryId={values?.id} />
             </>
           )
         }}
         formPaginationProps={{
-          name: 'bill',
+          name: 'voucher',
           number: 1,
           code: 1
         }}

@@ -16,3 +16,7 @@ export function getNameFromList(list, value) {
     (c) => c.id === value
   )?.name || 'unknown';
 }
+
+export const getCreatedFromUrl = () => {
+
+}

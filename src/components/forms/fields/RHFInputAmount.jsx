@@ -3,9 +3,10 @@ import { Label } from "./Label";
 import { ErrorText } from "../../shared/ErrorText";
 import { useState } from 'react';
 
-const RHFInput = ({
+const RHFInputAmount = ({
   containerClassName,
   labelClassName,
+  inputClassName,
   label,
   col,
   inTable,
@@ -16,8 +17,8 @@ const RHFInput = ({
   const [hideNumber, setHideNumber] = useState(false)
 
 
-  console.log(watch(name),name, 'name');
-  
+  console.log(watch(name), name, 'name');
+
   return (
     <Controller
       name={name}
@@ -45,18 +46,20 @@ const RHFInput = ({
                 ${!hideNumber ? 'opacity-0' : ''}
                 ${inTable ? '!border-none !rounded-none' : ''}
                 ${error ? "border-red-200 text-red-500" : ""}
+                ${inputClassName}
                 `}
                 name={name}
                 onChange={(e) => {
                   console.log('called');
-                  
                   onChange(+e.target.value);
                 }}
                 onBlur={() => {
                   onBlur()
                   setHideNumber(false)
                 }}
-                onFocus={() => setHideNumber(true)}
+                onFocus={() => {
+                  if (!readOnly) setHideNumber(true)
+                }}
                 {...field}
                 value={value}
               />
@@ -75,4 +78,4 @@ const RHFInput = ({
   );
 };
 
-export default RHFInput;
+export default RHFInputAmount;

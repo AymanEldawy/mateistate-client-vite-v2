@@ -47,6 +47,8 @@ const API_URL_CONSTANTS = {
   BASE_SERVICE: "/services",
   /************************************** BILLS **************************************/
   BASE_BILLS: "/bills",
+  /************************************** ENTRIES **************************************/
+  BASE_ENTRIES: "/entries",
 };
 
 export default API_URL_CONSTANTS;

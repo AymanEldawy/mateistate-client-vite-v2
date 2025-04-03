@@ -49,3 +49,7 @@ export const deleteManyVouchers = (ids) => {
 export const getVoucherLastNumberByType = (code) => {
   return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/last?code=${code}`);
 };
+
+export const getSearchVoucher = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${value}`);
+};

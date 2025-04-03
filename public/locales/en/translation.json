@@ -8,6 +8,9 @@
   "save": "Save",
   "search_in": "search in",
 
+  "no_options": "There are no options",
+  "select_all": "select all",
+
   "Add": "Add",
   "Edit": "Edit",
   "Delete": "Delete",
@@ -205,4 +208,5 @@
     "exist": "Exist",
     "yes": "Yes"
   }
+  
 }

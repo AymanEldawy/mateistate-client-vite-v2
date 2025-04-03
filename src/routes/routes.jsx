@@ -1,6 +1,5 @@
 import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
-import Account from "@/pages/views/Account/Account";
 import React from "react";
 import { Navigate } from "react-router-dom";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
@@ -33,6 +32,8 @@ const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
 const Parking = React.lazy(() => import("../pages/views/Parking/Parking"));
 const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
+const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
+const Account = React.lazy(() => import("../pages/views/Account/Account"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -41,8 +42,13 @@ const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 // const ResetPassword = React.lazy(() => import("./auth/ResetPassword"));
 /************************************** Announcements **************************************/
 // const AllAnnouncements = React.lazy(() =>
-//   import("./AllAnnouncements")
+  //   import("./AllAnnouncements")
 // );
+
+// Reports 
+const ChequeReport = React.lazy(() => import("../pages/reports/ChequeReport"));
+
+
 
 const routes = [
   {
@@ -146,6 +152,15 @@ const routes = [
       {
         path: PATHS.VOUCHERS,
         element: <Vouchers />,
+      },
+      {
+        path: PATHS.ENTRIES,
+        element: <Entries />,
+      },
+      /************************************** Reports **************************************/
+      {
+        path: PATHS.CHEQUE_REPORT,
+        element: <ChequeReport />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/
