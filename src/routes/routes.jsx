@@ -34,6 +34,10 @@ const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
+const MaterialGroup = React.lazy(() =>
+  import("../pages/views/MaterialGroup/MaterialGroup")
+);
+const Category = React.lazy(() => import("../pages/views/Category/Category"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -42,7 +46,7 @@ const Account = React.lazy(() => import("../pages/views/Account/Account"));
 // const ResetPassword = React.lazy(() => import("./auth/ResetPassword"));
 /************************************** Announcements **************************************/
 // const AllAnnouncements = React.lazy(() =>
-  //   import("./AllAnnouncements")
+//   import("./AllAnnouncements")
 // );
 
 // Reports 
@@ -144,7 +148,7 @@ const routes = [
       {
         path: PATHS.USER_WORK_TIMES,
         element: <UserWorkTime />,
-      }, 
+      },
       {
         path: PATHS.BILLS,
         element: <Bills />,
@@ -161,6 +165,15 @@ const routes = [
       {
         path: PATHS.CHEQUE_REPORT,
         element: <ChequeReport />,
+
+      },
+      {
+        path: PATHS.MATERIAL_GROUP,
+        element: <MaterialGroup />,
+      },
+      {
+        path: PATHS.CATEGORY,
+        element: <Category />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

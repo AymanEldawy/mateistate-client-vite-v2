@@ -27,6 +27,8 @@ const QUERY_KEYS = {
   BILLS: "bills",
   VOUCHERS: "vouchers",
   ENTRIES: "entries",
+  MATERIAL_GROUP: "materialGroup",
+  CATEGORY: "category",
 };
 
 export default QUERY_KEYS;
