@@ -29,6 +29,8 @@ const QUERY_KEYS = {
   ENTRIES: "entries",
   MATERIAL_GROUP: "materialGroup",
   CATEGORY: "category",
+  CATEGORY_PROBLEM: "categoryProblem",
+  STORE: "store",
 };
 
 export default QUERY_KEYS;

@@ -38,6 +38,8 @@ const MaterialGroup = React.lazy(() =>
   import("../pages/views/MaterialGroup/MaterialGroup")
 );
 const Category = React.lazy(() => import("../pages/views/Category/Category"));
+const CategoryProblem = React.lazy(() => import("../pages/views/Category/CategoryProblem"));
+const Store = React.lazy(() => import("../pages/views/Store/Store"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -165,15 +167,24 @@ const routes = [
       {
         path: PATHS.CHEQUE_REPORT,
         element: <ChequeReport />,
-
       },
       {
         path: PATHS.MATERIAL_GROUP,
         element: <MaterialGroup />,
       },
+      /************************************** Category **************************************/
       {
         path: PATHS.CATEGORY,
         element: <Category />,
+      },
+      {
+        path: PATHS.CATEGORY_PROBLEM,
+        element: <CategoryProblem />,
+      },
+      /******************** STORE ********************/
+      {
+        path: PATHS.STORE,
+        element: <Store />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/
