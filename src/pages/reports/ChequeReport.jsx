@@ -13,7 +13,6 @@ const ChequeReport = () => {
         header: "cheque_report"
       }}
     >
-      test
       {/* children */}
     </ReportWrapper>
   )
