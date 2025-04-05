@@ -1,4 +1,4 @@
-import { DEFAULT_COLORS, FLAT_PROPERTY_TABS } from "@/data/constants";
+import { DEFAULT_COLORS, FLAT_PROPERTY_TABS } from "@/helpers/building/buildingHelpers";
 import {
   createContext,
   useCallback,

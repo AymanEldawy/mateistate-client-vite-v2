@@ -10,10 +10,6 @@ const UserForm = () => {
   const [buildingsIds, setBuildingsIds] = useState({});
   const [categoriesIds, setCategoriesIds] = useState({});
 
-
-  console.log(USER_FIELDS.length);
-
-
   return (
       <div className="overflow-auto max-h-[500px]">
         <DynamicForm

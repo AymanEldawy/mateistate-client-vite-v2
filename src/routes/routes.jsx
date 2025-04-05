@@ -26,6 +26,7 @@ const UserWorkTime = React.lazy(() => import("@/pages/views/UserWorkTime/UserWor
 const CostCenter = React.lazy(() =>
   import("../pages/views/CostCenter/CostCenter")
 );
+const Tools = React.lazy(() => import("../pages/views/Building/Tools"));
 const Country = React.lazy(() => import("../pages/views/Country/Country"));
 const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
 const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
@@ -174,6 +175,10 @@ const routes = [
       {
         path: PATHS.CATEGORY,
         element: <Category />,
+      },
+      {
+        path: PATHS.Tools,
+        element: <Tools />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

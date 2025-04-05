@@ -16,9 +16,6 @@ const RHFInputAmount = ({
   const { name, required, type, readOnly } = field
   const [hideNumber, setHideNumber] = useState(false)
 
-
-  console.log(watch(name), name, 'name');
-
   return (
     <Controller
       name={name}
@@ -50,7 +47,6 @@ const RHFInputAmount = ({
                 `}
                 name={name}
                 onChange={(e) => {
-                  console.log('called');
                   onChange(+e.target.value);
                 }}
                 onBlur={() => {

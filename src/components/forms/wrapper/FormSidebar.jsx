@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
 const FormSidebar = ({ tab, setTab, list, extraMenuContent }) => {
-  console.log("🚀 ~ FormSidebar ~ list:", list)
   const { t } = useTranslation();
   return (
     <div className="flex sticky top-0 flex-col bg-gray-200 py-4 text-gray-500 text-sm max-w-[150px] w-full ltr:border-r rtl:border-l border-gray-300">

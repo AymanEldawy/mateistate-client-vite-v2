@@ -13,7 +13,6 @@ const ReturnForm = lazy(() => import('../containers/cheque/ReturnForm'));
 
 const DynamicPopupForm = () => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
-  console.log("🚀 ~ DynamicPopupForm ~ popupFormConfig:", popupFormConfig)
   if (!popupFormConfig) return;
 
   const displayForm = () => {

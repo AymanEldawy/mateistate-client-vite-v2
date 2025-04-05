@@ -86,8 +86,6 @@ const PartialCollectionFrom = ({
         let total = +watch("total_value") || 0;
 
         let theTotalRest = total - prev - amount;
-        console.log(theTotalRest, 'theTotalRest');
-
         let theTotalSum = prev + amount;
 
         if (theTotalRest <= -1) {
@@ -112,7 +110,6 @@ const PartialCollectionFrom = ({
   }, [watch]);
 
   const goTo = async (value) => {
-    console.log("🚀 ~ onSubmit ~ value:", value)
     let response = null;
     if (value === 'FIRST')
       response = await getFirst()

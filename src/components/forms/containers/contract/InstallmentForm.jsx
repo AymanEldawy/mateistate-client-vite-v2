@@ -21,8 +21,6 @@ const updateNote = (watch, setValue, CACHE_LIST, index) => {
   );
   const bank_id = item?.bank_id || watch("installment.bank_id");
   const bank = CACHE_LIST?.bank?.find((c) => c.id === bank_id);
-  console.log("🚀 ~ updateNote ~ bank:", bank_id, bank)
-
   const note1 = `received chq number ${item?.internal_number || 'ـــ'} from mr ${client?.name || 'ـــ'} ${item?.amount || 'ـــ'} due date ${item?.due_Date || 'ـــ'} end date ${item?.end_due_date || 'ـــ'} bank name ${bank?.name || 'ـــ'}`;
   setValue(`installment_grid.${index}.note1`, note1)
 }
@@ -149,10 +147,7 @@ const InstallmentForm = ({
       toast.error("Failed to save Installment");
     }
     setIsLoading(false);
-  };
-
-  console.log(watch(), 'watch');
-  
+  };  
 
   return (
     <>

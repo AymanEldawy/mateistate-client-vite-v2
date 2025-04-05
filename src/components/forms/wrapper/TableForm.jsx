@@ -8,19 +8,18 @@ const TableForm = ({ gridName, withoutAction, headers, renderFields, formBodyPro
 
   const { control, formState: { errors } } = useFormContext();
   const tableError = errors?.[gridName]
-  console.log("🚀 ~ TableForm ~ tableError:", tableError)
-
-  
   const { fields, append, remove } = useFieldArray({
     control,
     name: gridName,
   });
+  console.log(fields, '---');
+
 
   return (
     <TableFormWrapper
       {...formWrapperProps}
       increasableBar={increasable ?
-        <TableFormIncreasableControl append={append} grid={fields} {...formIncreasableProps} remove={remove} /> : null
+        <TableFormIncreasableControl append={() => append({})} grid={fields} {...formIncreasableProps} remove={remove} /> : null
       }
     >
       <TableFormHead withoutAction={withoutAction} headers={headers} {...formHeadProps} />

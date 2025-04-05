@@ -21,9 +21,9 @@ export const createBuilding = (data) => {
   });
 };
 
-export const updateBuilding = (country_id, data) => {
+export const updateBuilding = (building_id, data) => {
   return http.patch(
-    `${API_URL_CONSTANTS.BASE_BUILDING}/${country_id}`,
+    `${API_URL_CONSTANTS.BASE_BUILDING}/${building_id}`,
     data,
     // {
     //   headers: {
@@ -43,4 +43,26 @@ export const deleteManyBuildings = (ids) => {
   return http.delete(
     `${API_URL_CONSTANTS.BASE_BUILDING}?ids=${ids.join(',')}`
   );
+};
+
+export const getBuildingDetails = () => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/details`);
+};
+
+export const getSingleBuildingDetails = (id) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/${id}/details`);
+};
+
+export const generateBuildingUnits = ({
+  grid,
+  flatsDetails,
+  row,
+  UPDATES_ROWS,
+}) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_BUILDING}/units`, {
+    grid,
+    flatsDetails,
+    row,
+    UPDATES_ROWS,
+  });
 };

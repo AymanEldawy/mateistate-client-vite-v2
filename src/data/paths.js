@@ -33,6 +33,8 @@ const PATHS = {
   USER: "/user",
   /******************** BUILDING ********************/
   BUILDING: "/building",
+  /******************** BUILDING ********************/
+  Tools: "/building/details/:id",
   /******************** APARTMENT ********************/
   APARTMENT: "/apartment",
   /******************** SHOP ********************/
