@@ -40,7 +40,7 @@ const buildingColumns = [
           {getValue()}
         </Link>
         <Link
-          to={`/tools/${row?.original?.id}`}
+          to={`/building/details/${row?.original?.id}`}
           className="border capitalize hover:bg-gray-100 dark:bg-dark-border dark:text-white rounded-md px-2 py-[2px] text-sm flex items-center gap-1 font-medium "
         >
           <PaletteIcon className="w-5 h-5" />

@@ -21,6 +21,12 @@ const feedback = (additional) => ({
   ...additional,
 });
 
+const checkboxField = (additional) => ({
+  type: "checkbox",
+  required: false,
+  ...additional,
+});
+
 const gen_entries = (additional) => ({
   label: 'gen_entries',
   name: 'gen_entries',
@@ -159,6 +165,7 @@ const FIELDS_STRUCTURE = {
   feedback,
   lawsuit,
   gen_entries,
+  checkboxField,
 };
 
 export default FIELDS_STRUCTURE;

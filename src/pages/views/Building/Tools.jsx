@@ -24,7 +24,6 @@ const Tools = () => {
   return (
     <FormProvider {...methods}>
       <FlatColoringProvider>
-        td
         <ToolsWarper />
       </FlatColoringProvider>
     </FormProvider>

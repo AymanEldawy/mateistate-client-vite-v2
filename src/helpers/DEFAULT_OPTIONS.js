@@ -249,7 +249,7 @@ export const CHEQUE_REPORT_DEPOSIT = [
 
 
 
-export const TYPE = ["Debit", "Credit"]
+export const ACCOUNT_GRID_TYPE = ["Debit", "Credit"]
 
 
 export const CHEQUE_CONNECT_WITH = [

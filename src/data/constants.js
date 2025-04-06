@@ -224,16 +224,6 @@ export const BILL_PATTERN_STEPS = {
   bill_pattern_materials: "bill_pattern_materials",
 };
 
-export const CHEQUE_PATTERN_STEPS = {
-  cheque_pattern_general: "cheque_pattern_general",
-  cheque_pattern_collection: "cheque_pattern_collection",
-  cheque_pattern_commission: "cheque_pattern_commission",
-  cheque_pattern_partial_collection: "cheque_pattern_partial_collection",
-  cheque_pattern_endorsement: "cheque_pattern_endorsement",
-  cheque_pattern_return: "cheque_pattern_return",
-  cheque_pattern_default_statement: "cheque_pattern_default_statement",
-  cheque_pattern_sms: "cheque_pattern_sms",
-};
 
 export const GLOBAL_CONTRACT_STEPS = {
   contract_general_step: "general",
@@ -388,8 +378,7 @@ export function toTree(data, pid = null) {
 }
 
 
-
-export const BASE_URL = "Kadinle";
+export const BASE_URL = "http://api.matiestate.com";
 
 export const MODAL_ICONS_TYPES = {
   WARNING: "warning",

@@ -117,7 +117,7 @@ const ToolsWarper = () => {
     <>
       {isLoading ? <Loading /> : null}
       <div
-        className={`p-4 shadow bg-white dark:bg-dark-bg rounded-md`}
+        className={`p-4 shadow bg-white dark:bg-dark-bg rounded-md container`}
       >
         <ToolsContentBar
           title="Flat Building Details"

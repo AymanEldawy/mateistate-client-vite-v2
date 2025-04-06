@@ -24,6 +24,8 @@ const ColorToolsField = ({
   useEffect(() => {
     if (color) {
       setValue(name, color);
+      console.log('called change ');
+      
     }
   }, [color]);
 

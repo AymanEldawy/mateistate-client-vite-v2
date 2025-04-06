@@ -41,9 +41,7 @@ const PaperLayout = ({
       pagination?.pageIndex,
       pagination?.pageSize,
     ],
-    queryFn: () => {
-      return []
-    },
+    queryFn,
   });
 
   const onDeleteSelected = async () => {

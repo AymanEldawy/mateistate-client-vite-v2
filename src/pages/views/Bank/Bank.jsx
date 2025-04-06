@@ -8,6 +8,7 @@ import {
 import { bankValidationSchema } from "@/helpers/bank/bankValidationSchema";
 import bankColumns from "@/helpers/bank/bankColumns";
 import BankForm from "@/components/forms/containers/bank/BankForm";
+import { createBank, deleteManyBanks, getAllBanks, updateBank } from "@/services/bankService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
@@ -16,10 +17,10 @@ const bankConfig = {
   formProps: {
     defaultValue,
     validationSchema: bankValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createBank,
+    mutationUpdateFunction: updateBank,
     onSuccessAction: () => {},
-    isSteps: true,
+    isSteps: false,
     onHandleDelete: deleteAccount,
     RenderForm: (props) => <BankForm {...props} />,
   },
@@ -37,8 +38,8 @@ const Bank = () => {
     <PaperLayout
       name="Bank"
       queryKey={QUERY_KEYS.Bank}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllBanks} //
+      handleDeleteSelected={deleteManyBanks} //
       paperHeaderProps={{
         header: "Bank",
       }}

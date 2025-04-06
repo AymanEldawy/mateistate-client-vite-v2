@@ -18,7 +18,8 @@ const FormWrapper = ({
   // 
   defaultValues,
   validationSchema,
-  mutationFunction,
+  mutationAddFunction,
+  mutationUpdateFunction,
   onHandlingDataBeforeSubmit,
   invalidateQueryKeyOnSuccess,
   onSuccessAction,
@@ -43,6 +44,10 @@ const FormWrapper = ({
     // resolver: zodResolver(validationSchema),
   });
 
+  console.log(mutationAddFunction, "mutationAddFunction");
+  console.log(mutationAddFunction, "mutationAddFunction");
+
+
   const {
     reset,
     handleSubmit,
@@ -50,7 +55,13 @@ const FormWrapper = ({
   } = methods;
 
   const { mutateAsync } = useMutation({
-    mutationFn: mutationFunction,
+    mutationFn: (data) => {
+      if (data?.id) {
+        formProps?.mutationUpdateFunction(data?.id, data)
+      } else {
+        formProps?.mutationAddFunction(data)
+      }
+    },
     onSuccess: (response) => {
       if (open)
         toast.success(isUpdate ? tToast('successUpdate') : tToast('successInsert'));
