@@ -1,4 +1,3 @@
-import { FLATS } from "@/data/constants";
 import { useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import DynamicForm from "../../wrapper/DynamicForm";
@@ -14,6 +13,7 @@ import {
   BUILDING_DEFAULT_ACCOUNTS_FIELDS,
   BUILDING_FIELDS
 } from "@/helpers/building/buildingFields";
+import { FLATS } from "@/helpers/building/buildingHelpers";
 
 const SUB_STEPS = [
   "real_estate_management",

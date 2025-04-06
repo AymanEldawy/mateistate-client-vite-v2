@@ -22,6 +22,7 @@ const PaperLayout = ({
   formProps,
   formPaginationProps,
   handleDeleteSelected,
+  queryKey,
 }) => {
   const [openViability, setOpenViability] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -36,7 +37,7 @@ const PaperLayout = ({
 
   const { isLoading, isError, data, error, isFetching, refetch } = useQuery({
     queryKey: [
-      name,
+      queryKey,
       columnFilters,
       pagination?.pageIndex,
       pagination?.pageSize,
@@ -67,6 +68,7 @@ const PaperLayout = ({
           formPaginationProps={formPaginationProps}
           formProps={formProps}
           defaultValues={formProps?.defaultValues}
+          queryKey={queryKey}
         />
       </PaperModal>
       <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">

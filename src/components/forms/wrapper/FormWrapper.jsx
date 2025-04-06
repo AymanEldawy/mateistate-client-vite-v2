@@ -3,7 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useFormPagination from "@/hook/useFormPagination";
@@ -29,7 +29,8 @@ const FormWrapper = ({
   formSidebarProps,
   formProps,
   formPaginationProps,
-  onClose
+  onClose,
+  queryKey
 }) => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -39,14 +40,23 @@ const FormWrapper = ({
   const [open, setOpen] = useState(false)
   const isUpdate = true
 
+  useQuery({
+    queryKey: [queryKey, 'single', paginationForm?.currentId],
+    queryFn: async () => {
+      const response = formProps?.getSingleFunction(paginationForm?.currentId)
+      if (response?.success) {
+        reset(response?.data)
+      } else {
+        reset()
+      }
+    },
+    enabled: !!paginationForm?.currentId,
+  })
+
   const methods = useForm({
     defaultValues,
     // resolver: zodResolver(validationSchema),
   });
-
-  console.log(mutationAddFunction, "mutationAddFunction");
-  console.log(mutationAddFunction, "mutationAddFunction");
-
 
   const {
     reset,
@@ -84,7 +94,6 @@ const FormWrapper = ({
   // });
 
   const handleSubmitFunc = async (data) => {
-    console.log("🚀 ~ handleSubmitFunc ~ data:", data)
     try {
       const dataToSubmit = onHandlingDataBeforeSubmit
         ? onHandlingDataBeforeSubmit({ ...data })

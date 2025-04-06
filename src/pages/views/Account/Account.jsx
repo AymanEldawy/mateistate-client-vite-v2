@@ -1,6 +1,6 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { deleteAccount, deleteManyAccounts, getAllAccounts } from '@/services/accountService'
+import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, getSingleAccount, updateAccount } from '@/services/accountService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import accountColumns from '@/helpers/account/accountColumns'
 import { lazy } from 'react'
@@ -15,8 +15,9 @@ const accountConfig = {
   formProps: {
     defaultValue,
     validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    mutationAddFunction: createAccount,
+    mutationUpdateFunction: updateAccount,
+    getSingleFunction: getSingleAccount,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteAccount,
