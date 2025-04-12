@@ -378,7 +378,8 @@ export function toTree(data, pid = null) {
 }
 
 
-export const BASE_URL = "http://api.matiestate.com";
+// export const BASE_URL = "https://api.matiestate.com";
+export const BASE_URL = "https://v2.matiestate.com";
 
 export const MODAL_ICONS_TYPES = {
   WARNING: "warning",

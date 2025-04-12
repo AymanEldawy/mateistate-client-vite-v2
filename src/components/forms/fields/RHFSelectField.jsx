@@ -45,25 +45,27 @@ const RHFSelectField = ({
                 labelClassName={labelClassName}
               />
             )}
-            <ReactSelectNormal
-              getOptionLabel={(option) => option?.[optionLabel || 'name']}
-              getOptionValue={(option) => option?.[optionValue || 'id']}
-              styles={styles}
-              error={error}
-              value={options?.find(c => c?.[optionValue] === value)}
-              options={options}
-              selectClassName={selectClassName}
-              isDarkMode={isDarkMode}
-              selectProps={selectProps}
-              small={small}
-              onChange={(option) => {
-                onChange(option?.[optionValue || 'id'])
-              }}
-            />
+            <div className='w-full relative' >
+              <ReactSelectNormal
+                getOptionLabel={(option) => option?.[optionLabel || 'name']}
+                getOptionValue={(option) => option?.[optionValue || 'id']}
+                styles={styles}
+                error={error}
+                value={options?.find(c => c?.[optionValue] === value)}
+                options={options}
+                selectClassName={selectClassName}
+                isDarkMode={isDarkMode}
+                selectProps={selectProps}
+                small={small}
+                onChange={(option) => {
+                  onChange(option?.[optionValue || 'id'])
+                }}
+              />
 
-            {error ? (
-              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
-            ) : null}
+              {error ? (
+                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+              ) : null}
+            </div>
           </div>
         );
       }}

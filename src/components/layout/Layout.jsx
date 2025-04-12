@@ -5,10 +5,10 @@ import Footer from './Footer'
 import sideMenuItems from '@/data/sideMenuItems'
 import { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
+import withLoggedIn from '@/HOC/withLoggedIn'
+import withLoggedOut from '@/HOC/withLoggedOut'
 
 const Layout = () => {
-  
-
   // useEffect(() => {
   //   const getMen = async () => {
   //     const menu = await getMenu();
@@ -29,4 +29,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default withLoggedOut(Layout)

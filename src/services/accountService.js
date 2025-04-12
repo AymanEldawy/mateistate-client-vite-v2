@@ -40,8 +40,8 @@ export const deleteAccount = (id) => {
 };
 
 export const deleteManyAccounts = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/bulk-delete`, ids
   );
 };
 

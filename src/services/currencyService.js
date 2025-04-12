@@ -41,7 +41,7 @@ export const deleteCurrency = (id) => {
 
 export const deleteManyCurrencies = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_CURRENCY}?ids=${ids.join(',')}`
+        `${API_URL_CONSTANTS.BASE_CURRENCY}/bulk-delete`, ids
     );
 };
 

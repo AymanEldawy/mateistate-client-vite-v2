@@ -16,9 +16,9 @@ export const getAllBanks = ({ signal }) => {
 export const createBank = (data) => {
   console.log("🚀 ~ createBank ~ data:", data)
   return http.post(API_URL_CONSTANTS.BASE_BANK, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    // },
   });
 };
 
@@ -41,8 +41,8 @@ export const deleteBank = (id) => {
 };
 
 export const deleteManyBanks = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_BANK}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_BANK}/bulk-delete`, ids
   );
 };
 

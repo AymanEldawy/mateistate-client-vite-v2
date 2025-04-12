@@ -5,6 +5,7 @@ export const COST_CENTER_FIELDS = {
   code: FIELDS_STRUCTURE.number({
     label: "code",
     name: "code",
+    required:true,
   }),
   name: FIELDS_STRUCTURE.name(),
   ltnname: { label: "ltnname", name: "ltnname", type: "text", required: false },
@@ -12,8 +13,6 @@ export const COST_CENTER_FIELDS = {
   parent_id: FIELDS_STRUCTURE.cost_center({
     label: "parent_id",
     name: "parent_id",
-    no_filter: true,
-    required: false,
   }),
 }
 

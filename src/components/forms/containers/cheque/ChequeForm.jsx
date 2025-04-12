@@ -20,10 +20,8 @@ const mergePatternWithChequeData = (pattern, watch, setValue) => {
 
 };
 
-const ChequeForm = ({ code: outerCode }) => {
+const ChequeForm = ({ code }) => {
   const { watch, setValue } = useFormContext();
-  const [searchParams] = useSearchParams();
-  const code = outerCode || searchParams.get('code');
 
   const { data: pattern } = useQuery({
     queryKey: ['pattern', 'cheque', code],

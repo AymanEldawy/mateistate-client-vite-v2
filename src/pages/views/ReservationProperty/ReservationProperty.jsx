@@ -1,6 +1,6 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '@/components/layout/paper/PaperLayout'
-import { deleteReservationProperty, deleteManyReservationProperties, getAllReservationProperties } from '@/services/reservationPropertyService'
+import { deleteReservationProperty, deleteManyReservationProperties, getAllReservationProperties, createReservationProperty, updateReservationProperty } from '@/services/reservationPropertyService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import reservationPropertyColumns from '@/helpers/reservationProperty/reservationPropertyColumns'
 import { lazy } from 'react'
@@ -14,8 +14,8 @@ const reservationPropertyConfig = {
     formProps: {
         defaultValue,
         validationSchema,
-        mutationAddFunction: () => { },
-        mutationUpdateFunction: () => { },
+        mutationAddFunction: createReservationProperty,
+        mutationUpdateFunction: updateReservationProperty,
         onSuccessAction: () => { },
         isSteps: false,
         onHandleDelete: deleteReservationProperty,

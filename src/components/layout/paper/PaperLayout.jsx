@@ -42,7 +42,8 @@ const PaperLayout = ({
       pagination?.pageIndex,
       pagination?.pageSize,
     ],
-    queryFn,
+    // queryFn,
+    queryFn: () => {},
   });
 
   const onDeleteSelected = async () => {
@@ -67,14 +68,12 @@ const PaperLayout = ({
           onClose={() => setOpenForm(false)}
           formPaginationProps={formPaginationProps}
           formProps={formProps}
-          defaultValues={formProps?.defaultValues}
+          defaultValue={formProps?.defaultValue}
           queryKey={queryKey}
         />
       </PaperModal>
       <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">
-        {isError &&
-          <PaperError error={error} />
-        }
+
         {(isLoading || isFetching) &&
           <Loading />
         }
@@ -89,21 +88,26 @@ const PaperLayout = ({
           setGlobalFilter={setGlobalFilter}
         />
         <PaperFiltersAndSort filters={columnFilters} sorts={[]} setColumnFilters={setColumnFilters} />
-        <CustomTable
-          {...tableProps}
-          name={name}
-          data={!isLoading && data?.length ? data : []}
-          setColumnFilters={setColumnFilters}
-          columnFilters={columnFilters}
-          pagination={pagination}
-          setPagination={setPagination}
-          rowSelection={rowSelection}
-          setRowSelection={setRowSelection}
-          setGlobalFilter={setGlobalFilter}
-          globalFilter={globalFilter}
-          setOpenViability={setOpenViability}
-          openViability={openViability}
-        />
+        <div className='relative'>
+          {isError &&
+            <PaperError error={error} />
+          }
+          <CustomTable
+            {...tableProps}
+            name={name}
+            data={!isLoading && data?.length ? data : []}
+            setColumnFilters={setColumnFilters}
+            columnFilters={columnFilters}
+            pagination={pagination}
+            setPagination={setPagination}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+            setGlobalFilter={setGlobalFilter}
+            globalFilter={globalFilter}
+            setOpenViability={setOpenViability}
+            openViability={openViability}
+          />
+        </div>
       </div>
     </>
   )

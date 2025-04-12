@@ -10,7 +10,7 @@ import { FormFooter, FormHeader } from '../../wrapper';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 
 
-const defaultValues = {}
+const defaultValue = {}
 
 const mergePattern = async (
   pattern,
@@ -76,7 +76,7 @@ const CollectionForm = ({
   outerClose
 }) => {
   const methods = useForm({
-    defaultValues
+    defaultValue
   });
   const chequeId = popupFormConfig?.chequeValue?.id
   const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods

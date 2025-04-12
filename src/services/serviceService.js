@@ -41,7 +41,7 @@ export const deleteService = (id) => {
 
 export const deleteManyServices = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_SERVICE}?ids=${ids.join(',')}`
+        `${API_URL_CONSTANTS.BASE_SERVICE}/bulk-delete`, ids
     );
 };
 

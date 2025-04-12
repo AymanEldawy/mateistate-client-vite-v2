@@ -22,7 +22,7 @@ const sideMenuItems = [
   {
     name: "Accounts",
     icon: <UserIcon />,
-    permissions: PERMISSIONS[PATHS.HOME],
+    permissions: PERMISSIONS[PATHS.ACCOUNT],
     children: [
       {
         name: "Accounts",
@@ -30,12 +30,12 @@ const sideMenuItems = [
           {
             name: "account card",
             path: PATHS.ACCOUNT,
-            permissions: PERMISSIONS[PATHS.HOME],
+            permissions: PERMISSIONS[PATHS.ACCOUNT],
           },
           {
             name: "Chart of Account",
             path: PATHS.ACCOUNT_CHART,
-            permissions: PERMISSIONS[PATHS.HOME],
+            permissions: PERMISSIONS[PATHS.ACCOUNT_CHART],
           },
         ],
       },
@@ -45,21 +45,26 @@ const sideMenuItems = [
           {
             name: "cost center card",
             path: PATHS.COST_CENTER,
-            permissions: PERMISSIONS[PATHS.HOME],
+            permissions: PERMISSIONS[PATHS.COST_CENTER],
           },
           {
             name: "Chart of cost center",
             path: PATHS.COST_CENTER_CHART,
-            permissions: PERMISSIONS[PATHS.HOME],
+            permissions: PERMISSIONS[PATHS.COST_CENTER_CHART],
           },
         ],
       },
+      { name: "owner card", path: PATHS.OWNER, permissions: PERMISSIONS[PATHS.OWNER] },
+      { name: "seller card", path: PATHS.SELLER, permissions: PERMISSIONS[PATHS.SELLER] },
+      { name: "lessor card", path: PATHS.LESSOR, permissions: PERMISSIONS[PATHS.LESSOR] },
+      { name: "bank card", path: PATHS.BANK, permissions: PERMISSIONS[PATHS.BANK] },
+      { name: "Currency card", path: PATHS.CURRENCY, permissions: PERMISSIONS[PATHS.CURRENCY] },
 
     ],
   },
   {
     name: "Cards",
-    permissions: PERMISSIONS[PATHS.HOME],
+    permissions: PERMISSIONS[PATHS.CARDS],
     icon: <ClipboardIcon />,
     children: [
 

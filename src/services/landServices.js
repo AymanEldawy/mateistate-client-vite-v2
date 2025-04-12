@@ -40,7 +40,7 @@ export const deleteLand = (id) => {
 };
 
 export const deleteManyLands = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_LAND}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_LAND}/bulk-delete`, ids
   );
 };

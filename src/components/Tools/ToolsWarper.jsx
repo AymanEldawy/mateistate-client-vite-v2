@@ -192,7 +192,7 @@ const ToolsWarper = () => {
             </div>
           </div>
           <div className="mt-8 flex justify-end">
-            <Btn kind="primary">Submit</Btn>
+            <Btn kind="primary" type="submit" >Submit</Btn>
           </div>
         </form>
       </div>

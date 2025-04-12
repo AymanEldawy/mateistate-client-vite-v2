@@ -3,8 +3,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { logout } from "./authService";
 
+
 const http = axios.create({
-  baseURL: `${BASE_URL}/api/v1/client`,
+  baseURL: `${BASE_URL}/api/v1`,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

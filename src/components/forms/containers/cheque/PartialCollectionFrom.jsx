@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import QUERY_KEYS from '@/data/queryKeys';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 
-const defaultValues = {}
+const defaultValue = {}
 
 const mergePattern = (pattern, chqValues, setValue) => {
 
@@ -51,7 +51,7 @@ const PartialCollectionFrom = ({
   outerClose
 }) => {
   const methods = useForm({
-    defaultValues
+    defaultValue
   });
   const chequeId = popupFormConfig?.chequeValue?.id
   const chequeValue = popupFormConfig?.chequeValue

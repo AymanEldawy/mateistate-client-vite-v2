@@ -2,6 +2,7 @@ import Layout from "@/components/layout/Layout";
 import PATHS from "@/data/paths";
 import React from "react";
 import { Navigate } from "react-router-dom";
+import SignPagesLayout from "./SignPagesLayout";
 // const Layout = React.lazy(() => import("@/components/layout/Layout"));
 // const SignPagesLayout = React.lazy(() =>
 //   import("@/components/signPagesLayout/SignPagesLayout")
@@ -41,6 +42,9 @@ const MaterialGroup = React.lazy(() =>
 const Category = React.lazy(() => import("../pages/views/Category/Category"));
 const CategoryProblem = React.lazy(() => import("../pages/views/Category/CategoryProblem"));
 const Store = React.lazy(() => import("../pages/views/Store/Store"));
+const Login = React.lazy(() => import("../pages/auth/Login"));
+const ForgotPassword = React.lazy(() => import("../pages/auth/ForgotPassword"));
+const ResetPassword = React.lazy(() => import("../pages/auth/ResetPassword"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -201,24 +205,24 @@ const routes = [
     ],
   },
   /************************************** Authentication **************************************/
-  // {
-  //   path: "/",
-  //   element: <SignPagesLayout />,
-  //   children: [
-  //     {
-  //       path: PATHS.LOGIN,
-  //       element: <Login />,
-  //     },
-  //     {
-  //       path: PATHS.FORGOT_PASSWORD,
-  //       element: <ForgotPassword />,
-  //     },
-  //     {
-  //       path: PATHS.RESET_PASSWORD,
-  //       element: <ResetPassword />,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/",
+    element: <SignPagesLayout />,
+    children: [
+      {
+        path: PATHS.LOGIN,
+        element: <Login />,
+      },
+      {
+        path: PATHS.FORGOT_PASSWORD,
+        element: <ForgotPassword />,
+      },
+      {
+        path: PATHS.RESET_PASSWORD,
+        element: <ResetPassword />,
+      },
+    ],
+  },
 ];
 
 export default routes;

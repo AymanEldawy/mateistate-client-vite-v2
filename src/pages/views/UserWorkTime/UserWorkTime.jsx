@@ -6,7 +6,7 @@ import userWorkTimeColumns from '@/helpers/userWorkTime/userWorkTimeColumns'
 import { lazy } from 'react'
 const UserWorkTimeForm = lazy(() => import("@/components/forms/containers/userWorkTime/UserWorkTimeForm"))
 
-const defaultValues = {
+const defaultValue = {
     repeat_type: 1
 }
 
@@ -14,7 +14,7 @@ const validationSchema = () => { }
 
 const userWorkTimeConfig = {
     formProps: {
-        defaultValues,
+        defaultValue,
         validationSchema,
         mutationAddFunction: () => { },
         mutationUpdateFunction: () => { },

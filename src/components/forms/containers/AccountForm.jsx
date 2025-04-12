@@ -38,18 +38,23 @@ const AccountForm = () => {
   //   setValue("code", account.code);
   // };
 
+  console.log(watch(), "watch");
+  
 
   return (
       <div className="">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
           <RHFInput
             {...ACCOUNT_FIELDS?.code}
+            required
           />
           <RHFInput
             {...ACCOUNT_FIELDS?.name}
+            required
           />
           <RHFSelectField
             {...ACCOUNT_FIELDS?.type}
+            required
           />
         </div>
         {watch("type") === 1 ? (

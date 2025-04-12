@@ -140,7 +140,7 @@ const ReactSelectAsync = ({
                 <Btn
                   type="button"
                   kind="info"
-                  containerClassName="h-[25px] w-[25px] !rounded-full !p-1 mx-1"
+                  containerClassName="h-[25px] w-[25px] !rounded-full mt-[2px] !p-1 mx-1"
                   onClick={(e) => {
                     e.stopPropagation()
                     handleDispatchForm({

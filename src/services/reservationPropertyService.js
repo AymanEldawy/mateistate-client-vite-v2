@@ -41,7 +41,7 @@ export const deleteReservationProperty = (id) => {
 
 export const deleteManyReservationProperties = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}?ids=${ids.join(',')}`
+        `${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}/bulk-delete`, ids
     );
 };
 

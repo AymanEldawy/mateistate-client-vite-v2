@@ -133,7 +133,7 @@ const ContractFormTermination = ({
                   label="clearance_printed_date"
                 />
               ) : null}
-              <Btn kind="info" containerClassName="!w-fit text-sm">
+              <Btn kind="info" containerClassName="!w-fit text-sm" onClick={() => {}}>
                 Print Clearance
               </Btn>
             </div>

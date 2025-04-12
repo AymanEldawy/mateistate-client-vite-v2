@@ -40,8 +40,8 @@ export const deleteBuilding = (id) => {
 };
 
 export const deleteManyBuildings = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_BUILDING}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_BUILDING}/bulk-delete`, ids
   );
 };
 

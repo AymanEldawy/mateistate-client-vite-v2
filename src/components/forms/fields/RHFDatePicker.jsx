@@ -37,29 +37,31 @@ const RHFDatePicker = ({
                 labelClassName={labelClassName}
               />
             )}
+            <div className='w-full relative' >
 
-            <ReactDatePicker
-              // ref={ref}
-              selected={value}
-              timeIntervals={5}
-              timeFormat="HH:mm"
-              onChange={onChange}
-              className={`w-full flex-1 ${inputClassName} border h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
+              <ReactDatePicker
+                // ref={ref}
+                selected={value}
+                timeIntervals={5}
+                timeFormat="HH:mm"
+                onChange={onChange}
+                className={`w-full flex-1 ${inputClassName} border h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
                 ${error ? "border-red-200 text-red-500" : ""}
                 `}
-              showIcon
-              icon={<CalenderIcon />}
-              showYearDropdown
-              dateFormat={"dd/MM/yyyy"}
-              // showTimeSelect={showTimeSelect}
-              // minDate={disablePast && new Date()}
-              // dateFormat={showTimeSelect ? "dd/MM/yyyy h:mm aa" : "dd/MM/yyyy"}
-              {...field}
-            />
+                showIcon
+                icon={<CalenderIcon />}
+                showYearDropdown
+                dateFormat={"dd/MM/yyyy"}
+                // showTimeSelect={showTimeSelect}
+                // minDate={disablePast && new Date()}
+                // dateFormat={showTimeSelect ? "dd/MM/yyyy h:mm aa" : "dd/MM/yyyy"}
+                {...field}
+              />
 
-            {error ? (
-              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
-            ) : null}
+              {error ? (
+                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+              ) : null}
+            </div>
           </div>
         );
       }}

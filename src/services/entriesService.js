@@ -40,8 +40,8 @@ export const deleteEntry = (id) => {
 };
 
 export const deleteManyEntries = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_ENTRIES}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_ENTRIES}/bulk-delete`, ids
   );
 };
 

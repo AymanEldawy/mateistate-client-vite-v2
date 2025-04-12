@@ -41,7 +41,7 @@ export const deleteUserWorkTime = (id) => {
 
 export const deleteManyUserWorkTimes = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_USER_WORK_TIME}?ids=${ids.join(',')}`
+        `${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/bulk-delete`, ids
     );
 };
 

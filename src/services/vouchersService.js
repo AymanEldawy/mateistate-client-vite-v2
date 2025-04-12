@@ -40,8 +40,8 @@ export const deleteVoucher = (id) => {
 };
 
 export const deleteManyVouchers = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_VOUCHER}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_VOUCHER}/bulk-delete`, ids
   );
 };
 

@@ -1,26 +1,33 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
 import {
+  createAccount,
   deleteAccount,
   deleteManyAccounts,
   getAllAccounts,
+  updateAccount,
 } from "@/services/accountService";
 import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
 import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 // import QUERY_KEYS from './../../../data/queryKeys';
+const defaultValue = {
+  code: "",
+  name: "",
+  note: "",
+  parent_id: null,
+  ltnname: ""
+};
 
-const defaultValue = {};
-
-const lessorConfig = {
+const costCenterConfig = {
   formProps: {
     defaultValue,
     validationSchema: costCenterValidationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    mutationAddFunction: createAccount,
+    mutationUpdateFunction: updateAccount,
     onSuccessAction: () => { },
-    isSteps: true,
+    isSteps: false,
     onHandleDelete: deleteAccount,
     RenderForm: (props) => <CostCenterForm {...props} />,
   },
@@ -35,7 +42,7 @@ const lessorConfig = {
 
 const CostCenter = ({ formOnly, outerClose }) => {
   if (formOnly) {
-    return <FormWrapper {...lessorConfig} outerClose={outerClose} />;
+    return <FormWrapper {...costCenterConfig} outerClose={outerClose} />;
   }
   // const navigate = useNavigate();
 
@@ -55,7 +62,7 @@ const CostCenter = ({ formOnly, outerClose }) => {
       tableProps={{
         columns: costCenterColumns,
       }}
-      {...lessorConfig}
+      {...costCenterConfig}
     />
   );
 };

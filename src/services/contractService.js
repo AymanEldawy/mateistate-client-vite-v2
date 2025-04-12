@@ -40,8 +40,8 @@ export const deleteContract = (id) => {
 };
 
 export const deleteManyContracts = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_CONTRACT}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_CONTRACT}/bulk-delete`, ids
   );
 };
 

@@ -2,13 +2,12 @@ import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy } from 'react'
 import { createBuilding, deleteBuilding, deleteManyBuildings, getAllBuildings, updateBuilding } from '@/services/buildingService'
-import { buildingValidationSchema } from '@/helpers/building/buildingValidationSchema'
+import { buildingDefaultValues, buildingValidationSchema } from '@/helpers/building/buildingValidationSchema'
 import buildingColumns from '@/helpers/building/buildingColumns'
 import { useNavigate } from 'react-router-dom'
 import { BUILDING_STEPS } from '@/helpers/building/buildingSteps'
 const BuildingForm = lazy(() => import("@/components/forms/containers/building/BuildingForm"))
 
-const defaultValue = {}
 
 const Building = () => {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ const Building = () => {
         columns: buildingColumns
       }}
       formProps={{
-        defaultValue,
+        defaultValue: buildingDefaultValues,
         validationSchema: buildingValidationSchema,
         mutationAddFunction: createBuilding,
         mutationUpdateFunction: updateBuilding,

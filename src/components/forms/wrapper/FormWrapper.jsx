@@ -16,7 +16,7 @@ import { usePopupForm } from "@/hook/usePopupForm";
 
 const FormWrapper = ({
   // 
-  defaultValues,
+  defaultValue,
   validationSchema,
   mutationAddFunction,
   mutationUpdateFunction,
@@ -32,6 +32,7 @@ const FormWrapper = ({
   onClose,
   queryKey
 }) => {
+
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
@@ -47,26 +48,36 @@ const FormWrapper = ({
       if (response?.success) {
         reset(response?.data)
       } else {
-        reset()
+        reset(defaultValue)
       }
     },
     enabled: !!paginationForm?.currentId,
   })
 
+
   const methods = useForm({
-    defaultValues,
+    defaultValues: defaultValue,
     // resolver: zodResolver(validationSchema),
+    mode: "onBlur",
+    resolver: zodResolver(formProps?.validationSchema),
   });
+
+  
 
   const {
     reset,
     handleSubmit,
-    formState: { isSubmitting, isLoading },
+    watch,
+    formState: { isSubmitting, isLoading, isDirty, errors },
   } = methods;
+  
+  console.log(watch(), 'watch');
+
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
       if (data?.id) {
+
         formProps?.mutationUpdateFunction(data?.id, data)
       } else {
         formProps?.mutationAddFunction(data)
@@ -86,6 +97,7 @@ const FormWrapper = ({
     },
   });
 
+
   // const handleSubmitErrors = useHandleSubmissionErrors({
   //   errors,
   //   selectedLangTab,
@@ -94,10 +106,14 @@ const FormWrapper = ({
   // });
 
   const handleSubmitFunc = async (data) => {
+    console.log(data, 'called');
+    // if (!isDirty) return toast.warn(tToast('formDirty'))
     try {
+
       const dataToSubmit = onHandlingDataBeforeSubmit
         ? onHandlingDataBeforeSubmit({ ...data })
         : data;
+      console.log("🚀 ~ handleSubmitFunc ~ dataToSubmit:", dataToSubmit)
       // if (typeof dataToSubmit === "string") return toast.warn(t(dataToSubmit));
       await mutateAsync(dataToSubmit);
       isUpdate ? reset(data) : reset();
@@ -105,8 +121,9 @@ const FormWrapper = ({
       console.log(error);
     }
   };
+  console.log(errors);
 
-  const resetFormHandler = () => reset(defaultValues);
+  const resetFormHandler = () => reset(defaultValue);
 
   const handleOnClose = () => {
     setOpen(true)

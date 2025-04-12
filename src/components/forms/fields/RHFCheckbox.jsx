@@ -34,18 +34,19 @@ const RHFCheckbox = ({
               {...field}
               checked={value}
             />
-            {label && (
-              <Label
-                name={name}
-                required={required}
-                label={label}
-                labelClassName={labelClassName}
-              />
-            )}
-
-            {error ? (
-              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
-            ) : null}
+            <div className='w-full relative' >
+              {label && (
+                <Label
+                  name={name}
+                  required={required}
+                  label={label}
+                  labelClassName={labelClassName}
+                />
+              )}
+              {error ? (
+                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+              ) : null}
+            </div>
           </div>
         );
       }}

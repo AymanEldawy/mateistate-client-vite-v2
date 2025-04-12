@@ -6,10 +6,28 @@ import accountColumns from '@/helpers/account/accountColumns'
 import { lazy } from 'react'
 // import QUERY_KEYS from './../../../data/queryKeys';
 const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
+import { z } from "zod";
 
-const defaultValue = {}
+const validationSchema = z.object({
+  code: z.string().min(1, { message: "Code is required" }),
+  name: z.string().min(3, { message: "Name is required" }),
+  type: z.number().int(),
+});
 
-const validationSchema = () => { }
+const defaultValue = {
+  code: "",
+  type: 1,
+  name: "",
+  note: "",
+  parent_id: null,
+  final_id: null,
+  account_assembly: [
+    { account_id: null }
+  ],
+  account_distributive: [
+    { account_id: null, percentage: 0 }
+  ]
+};
 
 const accountConfig = {
   formProps: {
@@ -42,7 +60,7 @@ const Account = ({ formOnly, outerClose }) => {
       />
     )
   }
-  
+
   return (
     <PaperLayout
       name="account"

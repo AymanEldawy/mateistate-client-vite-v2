@@ -31,23 +31,25 @@ const RHFInput = ({
                 labelClassName={labelClassName}
               />
             )}
-            <input
-              ref={ref}
-              className={`border  h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
+            <div className='relative w-full'>
+              <input
+                ref={ref}
+                className={`border  h-[30px] text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
                 ${error ? "border-red-200 text-red-500" : ""}
                 `}
-              name={name}
-              onChange={(e) => {
-                onChange(e.target.value);
-              }}
-              {...field}
-              value={value}
-            />
+                name={name}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                }}
+                {...field}
+                value={value}
+              />
 
 
-            {error ? (
-              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
-            ) : null}
+              {error ? (
+                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+              ) : null}
+            </div>
           </div>
         );
       }}

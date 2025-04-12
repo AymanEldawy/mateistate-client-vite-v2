@@ -9,7 +9,7 @@ import ContractFormContractCycle from "./ContractFormContractCycle"
 import { useForm } from "react-hook-form"
 import InstallmentForm from "./InstallmentForm"
 
-const ContractForm = ({ tab, isInstallmentOpen, setIsInstallmentOpen }) => {
+const ContractForm = ({ code, tab, isInstallmentOpen, setIsInstallmentOpen }) => {
   const {
     formState: { errors },
     handleSubmit,

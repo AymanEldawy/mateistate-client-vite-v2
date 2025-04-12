@@ -9,78 +9,26 @@ export const BUILDING_FIELDS = [
   FIELDS_STRUCTURE.textField({
     label: "city",
     name: "city",
-    type: "text",
   }),
   FIELDS_STRUCTURE.textField({
     label: "emirate",
     name: "emirate",
-    type: "text",
   }),
-  FIELDS_STRUCTURE.textField({ label: "suburb", name: "suburb", type: "text" }),
-  FIELDS_STRUCTURE.textField({ label: "area", name: "area", type: "text" }),
-  FIELDS_STRUCTURE.textField({ label: "street", name: "street", type: "text" }),
-  {
-    label: "building_number",
-    name: "building_number",
-    type: "number",
-    hide_in_form: true,
-  },
-  {
-    label: "part_number",
-    name: "part_number",
-    type: "text",
-  },
-  {
-    label: "basin_number",
-    name: "basin_number",
-    type: "text",
-  },
-  {
-    label: "bond_number",
-    name: "bond_number",
-    type: "text",
-  },
-  {
-    label: "bond_type",
-    name: "bond_type",
-    type: "text",
-  },
-  {
-    label: "bond_date",
-    name: "bond_date",
-    type: "date",
-  },
-  {
-    label: "owner_id",
-    name: "owner_id",
-    table: "owner",
-  },
-  {
-    label: "statement",
-    name: "statement",
-    type: "text",
-  },
-  {
-    label: "lessor_id",
-    name: "lessor_id",
-    table: "lessor",
-  },
-  {
-    label: "bank_account_number",
-    name: "bank_account_number",
-    type: "text",
-  },
-  {
-    label: "purchase_date",
-    name: "purchase_date",
-    type: "date",
-  },
-
-  // FIELDS_STRUCTURE.currency({
-  //   name: "building_currency_id",
-  //   hideValue: false,
-  // }),
-  { label: "display", name: "display", type: "checkbox", key: "checkbox" },
+  FIELDS_STRUCTURE.textField({ label: "suburb", name: "suburb" }),
+  FIELDS_STRUCTURE.textField({ label: "area", name: "area" }),
+  FIELDS_STRUCTURE.textField({ label: "street", name: "street" }),
+  FIELDS_STRUCTURE.textField({ label: "part_number", name: "part_number" }),
+  FIELDS_STRUCTURE.textField({ label: "basin_number", name: "basin_number" }),
+  FIELDS_STRUCTURE.textField({ label: "bond_number", name: "bond_number" }),
+  FIELDS_STRUCTURE.textField({ label: "bond_type", name: "bond_type" }),
+  FIELDS_STRUCTURE.dateField({ label: "bond_date", name: "bond_date" }),
+  
+  FIELDS_STRUCTURE.uniqueField({ label: 'owner_id', name: 'owner_id', table: "owner" }),
+  FIELDS_STRUCTURE.textField({ label: "statement", name: "statement" }),
+  FIELDS_STRUCTURE.uniqueField({ label: 'lessor_id', name: 'lessor_id', table: "lessor" }),
+  FIELDS_STRUCTURE.textField({ label: 'bank_account_number', name: 'bank_account_number',}),
+  FIELDS_STRUCTURE.dateField({ label: 'purchase_date', name: 'purchase_date'}),
+  FIELDS_STRUCTURE.checkboxField({ label: 'display', name: 'display'}),
 
 ];
 
@@ -250,7 +198,6 @@ export const BUILDING_INVESTMENT_FIELDS = [
   {
     label: "renters_insurance",
     name: "renters_insurance",
-    table: "account",
     key: "checkbox",
   },
 
@@ -314,7 +261,7 @@ export const BUILDING_REAL_ESTATE_MANAGEMENT_FIELDS = [
     label: "owner_account_id",
     name: "owner_account_id",
     // table: UNIQUE_REF_TABLES.suppliers,
-    table:"account"
+    table: "account"
   }),
   {
     label: "commission_rate",

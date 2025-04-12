@@ -37,7 +37,7 @@ export const deleteContractPattern = (id) => {
 };
 
 export const deleteManyContractPatterns = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}/bulk-delete`, ids
   );
 };

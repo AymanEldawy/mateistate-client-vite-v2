@@ -79,30 +79,32 @@ const RHFAsyncSelectField = ({
                 labelClassName={labelClassName}
               />
             )}
-            <ReactSelectAsync
-              getOptionLabel={(option) => option?.[optionLabel || 'name']}
-              getOptionValue={(option) => option?.[optionValue || 'id']}
-              styles={styles}
-              error={error}
-              selectClassName={selectClassName}
-              isDarkMode={isDarkMode}
-              selectProps={selectProps}
-              small={small}
-              getSearch={getSearch}
-              name={name}
-              defaultOption={defaultOption}
-              setDefaultOption={setDefaultOption}
-              onChange={(option) => {
-                setDefaultOption(option);
-                setValue(name, option?.[optionValue])
-              }}
-              allowAdd={allowAdd}
-              table={table}
-              formKey={name}
-            />
-            {error ? (
-              <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
-            ) : null}
+            <div className='relative w-full'>
+              <ReactSelectAsync
+                getOptionLabel={(option) => option?.[optionLabel || 'name']}
+                getOptionValue={(option) => option?.[optionValue || 'id']}
+                styles={styles}
+                error={error}
+                selectClassName={selectClassName}
+                isDarkMode={isDarkMode}
+                selectProps={selectProps}
+                small={small}
+                getSearch={getSearch}
+                name={name}
+                defaultOption={defaultOption}
+                setDefaultOption={setDefaultOption}
+                onChange={(option) => {
+                  setDefaultOption(option);
+                  setValue(name, option?.[optionValue])
+                }}
+                allowAdd={allowAdd}
+                table={table}
+                formKey={name}
+              />
+              {error ? (
+                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+              ) : null}
+            </div>
           </div>
         );
       }}

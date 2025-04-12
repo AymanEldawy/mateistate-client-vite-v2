@@ -40,7 +40,7 @@ export const deleteUser = (id) => {
 };
 
 export const deleteManyUsers = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_USER}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_USER}/bulk-delete`, ids
   );
 };

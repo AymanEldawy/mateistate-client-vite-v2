@@ -41,7 +41,7 @@ export const deleteVilla = (id) => {
 
 export const deleteManyVillas = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_VILLA}?ids=${ids.join(',')}`
+        `${API_URL_CONSTANTS.BASE_VILLA}/bulk-delete`, ids
     );
 };
 

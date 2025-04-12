@@ -33,18 +33,20 @@ const RHFColorPicker = ({
               labelClassName={labelClassName}
             />
           )}
-          <InputColor
-            value={value}
-            placement="bottom"
-            disabled={disabled}
-            className={inputClassName}
-            initialValue={value || "#2954c3"}
-            onChange={(pickedColor) => onChange(pickedColor.hex)}
-            {...field}
-          />
-          {error ? (
-            <ErrorText containerClassName="py-1">{message}</ErrorText>
-          ) : null}
+          <div className="w-full relative" >
+            <InputColor
+              value={value}
+              placement="bottom"
+              disabled={disabled}
+              className={inputClassName}
+              initialValue={value || "#2954c3"}
+              onChange={(pickedColor) => onChange(pickedColor.hex)}
+              {...field}
+            />
+            {error ? (
+              <ErrorText containerClassName="py-1">{message}</ErrorText>
+            ) : null}
+          </div>
         </div>
       )}
     />

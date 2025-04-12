@@ -40,8 +40,8 @@ export const deleteBill = (id) => {
 };
 
 export const deleteManyBills = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_BILLS}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_BILLS}/bulk-delete`, ids
   );
 };
 

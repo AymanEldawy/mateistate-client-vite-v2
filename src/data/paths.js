@@ -8,11 +8,11 @@ const PATHS = {
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
   /******************** ACCOUNT ********************/
-  ACCOUNT: "/account",
+  ACCOUNT: "/accounts",
   /******************** ACCOUNT_CHART ********************/
-  ACCOUNT_CHART: "/chart/account",
+  ACCOUNT_CHART: "/chart/accounts",
   /******************** COST_CENTER ********************/
-  COST_CENTER: "/cost_center",
+  COST_CENTER: "/cost-center",
   /******************** country ********************/
   COUNTRY: "/country",
   /******************** COST_CENTER_CHART ********************/
@@ -24,27 +24,27 @@ const PATHS = {
   /******************** VOUCHERS ********************/
   VOUCHERS: "/vouchers",
   /******************** LESSOR ********************/
-  LESSOR: "/lessor",
+  LESSOR: "/lessors",
   /******************** BANK ********************/
-  BANK: "/bank",
+  BANK: "/banks",
   /******************** CURRENCY ********************/
-  CURRENCY: "/currency",
+  CURRENCY: "/currencies",
   /******************** USER ********************/
-  USER: "/user",
+  USER: "/users",
   /******************** BUILDING ********************/
-  BUILDING: "/building",
+  BUILDING: "/buildings",
   /******************** BUILDING ********************/
   Tools: "/building/details/:id",
   /******************** APARTMENT ********************/
-  APARTMENT: "/apartment",
+  APARTMENT: "/apartments",
   /******************** SHOP ********************/
-  SHOP: "/shop",
+  SHOP: "/shops",
   /******************** PARKING ********************/
-  PARKING: "/parking",
+  PARKING: "/parkings",
   /******************** LAND ********************/
-  LAND: "/land",
+  LAND: "/lands",
   /******************** VILLA ********************/
-  VILLA: "/villa",
+  VILLA: "/villas",
   /******************** OWNER_EXPENSES_TYPES ********************/
   OWNER_EXPENSES_TYPES: "/owner_expenses_types",
   /******************** OWNER_EXPENSES ********************/
@@ -62,19 +62,19 @@ const PATHS = {
   /******************** ACCOUNTING_VOUCHER_PATTERN ********************/
   ACCOUNTING_VOUCHER_PATTERN: "/types/accounting_voucher_pattern",
   /******************** SERVICE ********************/
-  SERVICE: "/service",
+  SERVICE: "/services",
   /******************** LAWSUIT ********************/
-  LAWSUIT: "/lawsuit",
+  LAWSUIT: "/lawsuits",
   /******************** STORE ********************/
-  STORE: "/store",
+  STORE: "/stores",
   /******************** STORE_CHART ********************/
-  STORE_CHART: "/chart/store",
+  STORE_CHART: "/chart/stores",
   /******************** MATERIAL_GROUP ********************/
-  MATERIAL_GROUP: "/material_group",
+  MATERIAL_GROUP: "/material-group",
   /******************** MATERIAL ********************/
-  MATERIAL: "/material",
+  MATERIAL: "/materials",
   /******************** MATERIAL_CHART ********************/
-  MATERIAL_CHART: "/chart/material",
+  MATERIAL_CHART: "/chart/materials",
   /******************** UNREGISTER ********************/
   MATERIAL_UNREGISTER: "/unregister",
   /******************** SERVICE ********************/
@@ -84,21 +84,21 @@ const PATHS = {
   /******************** MAINTENANCES ********************/
   MAINTENANCES_SERVICE: "/maintenances/services",
   /******************** CATEGORY ********************/
-  CATEGORY: "/category",
+  CATEGORY: "/categories",
   /******************** CATEGORY_PROBLEM ********************/
-  CATEGORY_PROBLEM: "/category_problem",
+  CATEGORY_PROBLEM: "/category-problem",
   /******************** USER_WORK_TIMES ********************/
   USER_WORK_TIMES: "/user_work_times",
   /******************** LACK_REASON ********************/
-  LACK_REASON: "/lack_reason",
+  LACK_REASON: "/lack-reason",
   /******************** EVACUATION_REQUEST ********************/
-  EVACUATION_REQUEST: "/evacuation_request",
+  EVACUATION_REQUEST: "/evacuation-request",
   /******************** BILL ********************/
   BILLS: "/bills",
   /******************** CHEQUE ********************/
-  CHEQUE: "/cheque",
+  CHEQUE: "/cheques",
   /******************** CONTRACT ********************/
-  CONTRACT: "/contract",
+  CONTRACT: "/contracts",
   /******************** ENTRIES ********************/
   ENTRIES: "/entries",
 

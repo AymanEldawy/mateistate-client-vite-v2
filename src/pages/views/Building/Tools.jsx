@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 const Tools = () => {
   const { id } = useParams();
-  const methods = useForm({ defaultValues: {
+  const methods = useForm({ defaultValue: {
     grid: [
       {
         hex: "",

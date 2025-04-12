@@ -40,8 +40,8 @@ export const deleteCheque = (id) => {
 };
 
 export const deleteManyCheques = (ids) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_CHEQUE}?ids=${ids.join(',')}`
+  return http.post(
+    `${API_URL_CONSTANTS.BASE_CHEQUE}/bulk-delete`, ids
   );
 };
 
