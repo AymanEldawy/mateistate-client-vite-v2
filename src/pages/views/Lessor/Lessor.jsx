@@ -1,13 +1,9 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-} from "@/services/accountService";
 import { lessorValidationSchema } from "@/helpers/lessor/lessorValidationSchema";
 import LessorForm from "@/components/forms/containers/LessorForm";
 import lessorColumns from "@/helpers/lessor/lessorColumns";
+import { createLessor, deleteLessor, deleteManyLessor, getAllLessors, updateLessor } from "@/services/lessorService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {};
@@ -16,11 +12,11 @@ const lessorConfig = {
   formProps: {
     defaultValue,
     validationSchema: lessorValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createLessor,
+    mutationUpdateFunction: updateLessor,
     onSuccessAction: () => {},
     isSteps: true,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteLessor,
     RenderForm: (props) => <LessorForm {...props} />,
   },
   formHeaderProps: {
@@ -42,8 +38,8 @@ const Lessor = () => {
     <PaperLayout
       name="Lessor"
       queryKey={QUERY_KEYS.Lessor}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllLessors} //
+      handleDeleteSelected={deleteManyLessor} //
       paperHeaderProps={{
         header: "Lessor",
       }}
