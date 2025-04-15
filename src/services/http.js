@@ -1,7 +1,8 @@
 import { BASE_URL } from "@/data/constants";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { logout } from "./authService";
+import Cookies from "js-cookie";
+import { logoutService } from "./authService";
 
 
 const http = axios.create({
@@ -10,13 +11,12 @@ const http = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-  // withCredentials: true,
+  withCredentials: true,
 });
 
+
 const onRequest = (config) => {
-  // const token = store.getState().auth.accessToken;
-  // const token = store.getState().auth.accessToken;
-  const token = ''
+  const token = Cookies.get('MATEI_ACCESS_TOKEN');
   if (token) {
     config.headers["authorization"] = `Bearer ${token}`;
   }
@@ -41,7 +41,7 @@ const onResponseError = async (error) => {
   if (isForceLogout) {
     toast.error(errorMessage);
     // return store.dispatch(logout());
-    return logout();
+    return logoutService();
   }
 
   toast.error(errorMessage);

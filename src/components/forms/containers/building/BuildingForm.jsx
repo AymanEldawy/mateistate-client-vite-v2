@@ -98,13 +98,6 @@ const BuildingForm = ({ tab }) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const buildingFormValid = useCallback(() => {
-    let valid = false;
-    for (const flat in FLATS) {
-      if (FLATS?.[flat]) valid = true;
-    }
-    return valid;
-  }, []);
 
   const displayForm = () => {
     switch (tab) {

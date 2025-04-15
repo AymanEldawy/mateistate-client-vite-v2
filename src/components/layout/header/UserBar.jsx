@@ -1,16 +1,10 @@
-import Cookies from "js-cookie";
-import React, { useState } from "react";
+import { logoutService } from "@/services/authService";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserBar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  const logout = () => {
-    Cookies.remove("user_admin");
-    Cookies.remove("tenant_id");
-    window?.location?.reload()
-  };
 
   return (
     <div className="relative w-full">
@@ -68,8 +62,8 @@ const UserBar = () => {
             </li>
             <li>
               <button
-                onClick={logout}
-                href="#"
+                type="button"
+                onClick={logoutService}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Sign out

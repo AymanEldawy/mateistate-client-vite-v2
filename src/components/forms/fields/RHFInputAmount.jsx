@@ -60,7 +60,7 @@ const RHFInputAmount = ({
                 value={value}
               />
               {!hideNumber &&
-                <span className={`numbers absolute pointer-events-none w-full h-full top-0 left-0 ${inTable ? 'rounded-none' : 'border'} text-xs font-medium rounded p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}`}>{Number(value || 0)?.toLocaleString()}</span>
+                <span className={`numbers absolute pointer-events-none w-full h-full top-0 left-0 ${inTable ? 'rounded-none' : 'border'} text-xs font-medium rounded pt-2 p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}`}>{Number(value || 0)?.toLocaleString()}</span>
               }
             </div>
 

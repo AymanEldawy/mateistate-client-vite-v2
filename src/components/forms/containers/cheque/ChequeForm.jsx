@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField } from "../../fields";
+import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFDatePicker, RHFInputAmount } from "../../fields";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getChequePatternByCode } from "@/services/chequeService";
@@ -38,7 +38,7 @@ const ChequeForm = ({ code }) => {
         <div className="grid gap-y-2 gap-x-8 grid-cols-3">
           <div className="flex flex-col gap-2">
             <RHFInput name="internal_number" label="internal_number" />
-            <RHFInput name="amount" label="amount" />
+            <RHFInputAmount name="amount" label="amount" required />
             <RHFAsyncSelectField
               name="customer_id"
               label="customer_id"
@@ -52,18 +52,21 @@ const ChequeForm = ({ code }) => {
               <RHFAsyncSelectField
                 name="parking_id"
                 label="parking_id"
+                required
               />
               : null}
             {watch('shop_id') ?
               <RHFAsyncSelectField
                 name="shop_id"
                 label="shop_id"
+                required
               />
               : null}
             {watch('apartment_id') ?
               <RHFAsyncSelectField
                 name="apartment_id"
                 label="apartment_id"
+                required
               />
               : null}
 
@@ -83,6 +86,7 @@ const ChequeForm = ({ code }) => {
                   name={field}
                   label={field}
                   table={name}
+                  required={field !== "observe_cost_center_id"}
                 />
               );
             })}
@@ -95,18 +99,18 @@ const ChequeForm = ({ code }) => {
             {/* <CurrencyFieldGroup
               values={watch()}
             /> */}
-            <RHFInput name="created_at" label="created_at" />
+            <RHFDatePicker name="created_at" label="created_at" />
             <RHFCheckbox name="without_due_date" label="without_due_date" />
             {
               watch('without_due_date') ? null :
                 (
                   <>
-                    <RHFInput
+                    <RHFDatePicker
                       name="due_date"
                       label="due_date"
                       required={!watch('without_due_date')}
                     />
-                    <RHFInput
+                    <RHFDatePicker
                       name="end_due_date"
                       label="end_due_date"
                     />

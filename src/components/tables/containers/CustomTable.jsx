@@ -16,7 +16,7 @@ import { matchSorter } from 'match-sorter';
 import { DefaultColumnFilter } from "../filters/DefaultColumnFilter";
 import { SortIcon } from "@/components/Icons";
 import TablePagination from "./TablePagination";
-import { useLocalStorage } from "@/hook/useLocalStorage";
+import { useLocalStorage } from "@/hook/useLocalStorageTables";
 import TableColumnVisibility from "./TableColumnVisibility";
 
 

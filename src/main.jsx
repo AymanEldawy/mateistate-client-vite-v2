@@ -11,7 +11,10 @@ import { PopupFormProvider } from './hook/usePopupForm';
 import { lazy } from 'react';
 import Loading from './components/shared/Loading';
 import { VoucherEntriesViewProvider } from './hook/useVoucherEntriesView';
+import { ToastContainer } from 'react-toastify';
 const DynamicPopupForm = lazy(() => import('./components/forms/wrapper/DynamicPopupForm'));
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 const router = createBrowserRouter(routes);
@@ -25,6 +28,16 @@ createRoot(document.getElementById('root')).render(
           <GlobalOptionsProvider>
             <PopupFormProvider>
               <VoucherEntriesViewProvider>
+                <ToastContainer
+                  position={"top-center"}
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  closeOnClick={true}
+                  pauseOnHover={true}
+                  draggable={true}
+                  progress={undefined}
+                  theme={"light"}
+                />
                 <DynamicPopupForm />
                 <RouterProvider router={router} />
               </VoucherEntriesViewProvider>

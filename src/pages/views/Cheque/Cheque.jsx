@@ -1,7 +1,7 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import { deleteCheque, deleteManyCheques, getAllCheques, getSearchCheque } from '@/services/chequeService'
+import { createCheque, deleteCheque, deleteManyCheques, getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
 import chequeColumns from '@/helpers/cheque/chequeColumns'
 import { lazy, useState } from 'react'
 import EntryBar from '@/components/shared/EntryBar'
@@ -12,24 +12,21 @@ import ChequeFormBar from '@/components/forms/containers/cheque/ChequeFormBar'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
+import { chequeDefaultValue, chequeValidationSchema } from '@/helpers/cheque/ChequeValidationSchema'
 // import QUERY_KEYS from './../../../data/queryKeys';
 const ChequeForm = lazy(() => import("@/components/forms/containers/cheque/ChequeForm"))
 
-const defaultValue = {}
-
-const validationSchema = () => { }
-
 const chequeConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    defaultValue: chequeDefaultValue,
+    validationSchema: chequeValidationSchema,
+    mutationAddFunction: createCheque,
+    mutationUpdateFunction: updateCheque,
+    getSingleFunction: getSingleCheque,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteCheque,
     RenderForm: (props) => <ChequeForm {...props} />
-    // RenderForm: (props) => <>te</>
   },
   formHeaderProps: {
     header: "cheque",
@@ -45,11 +42,6 @@ const chequeConfig = {
       </>
     )
   },
-  // formFooterProps: {
-  //   additionalButtons: (data) => (
-  //     <ChequeFormBar data={data} />
-  //   )
-  // },
 }
 
 const Cheque = ({ formOnly, outerClose, }) => {
@@ -60,6 +52,9 @@ const Cheque = ({ formOnly, outerClose, }) => {
   const handleChangeCode = (code) => {
     updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
   }
+
+  console.log(chequeValidationSchema, 'ch');
+  
 
   if (formOnly) {
     return (

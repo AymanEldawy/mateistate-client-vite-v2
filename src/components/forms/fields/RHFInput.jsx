@@ -10,7 +10,7 @@ const RHFInput = ({
   ...field
 }) => {
   const { control } = useFormContext();
-  const { name, required } = field
+  const { name, required, type, placeholder } = field
 
   return (
     <Controller
@@ -39,8 +39,10 @@ const RHFInput = ({
                 `}
                 name={name}
                 onChange={(e) => {
-                  onChange(e.target.value);
+                  onChange(type === 'number' ? + e.target.value : e.target.value);
                 }}
+                type={type}
+                placeholder={placeholder || ''}
                 {...field}
                 value={value}
               />

@@ -4,35 +4,13 @@ import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, getSi
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import accountColumns from '@/helpers/account/accountColumns'
 import { lazy } from 'react'
-// import QUERY_KEYS from './../../../data/queryKeys';
+import { accountDefaultValue, accountValidationSchema } from '@/helpers/account/accountValidationSchema'
 const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
-import { z } from "zod";
-
-const validationSchema = z.object({
-  code: z.string().min(1, { message: "Code is required" }),
-  name: z.string().min(3, { message: "Name is required" }),
-  type: z.number().int(),
-});
-
-const defaultValue = {
-  code: "",
-  type: 1,
-  name: "",
-  note: "",
-  parent_id: null,
-  final_id: null,
-  account_assembly: [
-    { account_id: null }
-  ],
-  account_distributive: [
-    { account_id: null, percentage: 0 }
-  ]
-};
 
 const accountConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: accountDefaultValue,
+    validationSchema: accountValidationSchema,
     mutationAddFunction: createAccount,
     mutationUpdateFunction: updateAccount,
     getSingleFunction: getSingleAccount,

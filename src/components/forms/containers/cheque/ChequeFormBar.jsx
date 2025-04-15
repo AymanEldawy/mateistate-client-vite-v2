@@ -8,7 +8,7 @@ const ChequeFormBar = ({ pattern }) => {
   const { handleDispatchForm } = usePopupForm();
 
   return (
-    <div className="flex text-gray-500 border-r-2">
+    <div className="flex text-gray-500 border-r-2 gap-2 items-center mt-2">
       <Btn
         type="button"
         kind={watch("collection_status") ? "primary" : 'default'}

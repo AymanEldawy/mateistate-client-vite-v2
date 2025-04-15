@@ -1,0 +1,56 @@
+import { z } from "zod";
+
+export const chequeValidationSchema = () => {
+  return z.object({
+    account_id: z.string().nonempty({ message: "Account is required" }),
+    amount: z.number().min(0, { message: "Amount must be greater than 0" }),
+    bank_id: z.string().nullable().optional(),
+    beneficiary_name: z.string().nullable().optional(),
+    cost_center_id: z.string(),
+    created_at: z.date().optional(),
+    customer_id: z.string().nullable().optional(),
+    deposit_status: null,
+    due_date: z.date().optional(),
+    end_due_date: z.date().optional(),
+    feedback: z.boolean().optional(),
+    gen_entries: z.boolean(),
+    internal_number: z.number().nullable().optional(),
+    note1: z.string().nullable().optional(),
+    note2: z.string().nullable().optional(),
+    observe_account_id: z.string(),
+    observe_cost_center_id: z.string().nullable().optional(),
+    without_due_date: z.boolean().optional(),
+    // parking_id: z.string().nullable().optional(),
+    // apartment_id: z.string().nullable().optional(),
+    // shop_id: z.string().nullable().optional(),
+    // connect_with_id: z.string().nullable().optional(),
+    // connect_with: z.number().nullable().optional(),
+  })
+}
+
+
+export const chequeDefaultValue = {
+  account_id: null,
+  amount: 0,
+  bank_id: null,
+  beneficiary_name: null,
+  cost_center_id: null,
+  created_at: new Date(),
+  customer_id: null,
+  deposit_status: false,
+  due_date: new Date(),
+  end_due_date: new Date(),
+  feedback: false,
+  gen_entries: true,
+  internal_number: null,
+  note1: "",
+  note2: "",
+  observe_account_id: null,
+  observe_cost_center_id: null,
+  without_due_date: false,
+  parking_id: null,
+  apartment_id: null,
+  shop_id: null,
+  connect_with_id: null,
+  connect_with: null,
+};

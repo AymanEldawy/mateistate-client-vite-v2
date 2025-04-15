@@ -1,6 +1,6 @@
 
 
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, set, useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
@@ -32,8 +32,8 @@ const FormWrapper = ({
   onClose,
   queryKey
 }) => {
-
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
+  const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
@@ -59,10 +59,11 @@ const FormWrapper = ({
     defaultValues: defaultValue,
     // resolver: zodResolver(validationSchema),
     mode: "onBlur",
-    resolver: zodResolver(formProps?.validationSchema),
+    // resolver: zodResolver(typeof formProps?.validationSchema === 'function' ? formProps?.validationSchema(tab, setTab): formProps?.validationSchema),
   });
 
-  
+  console.log('validationSchema', formProps);
+
 
   const {
     reset,
@@ -70,22 +71,20 @@ const FormWrapper = ({
     watch,
     formState: { isSubmitting, isLoading, isDirty, errors },
   } = methods;
-  
-  console.log(watch(), 'watch');
 
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
       if (data?.id) {
-
-        formProps?.mutationUpdateFunction(data?.id, data)
+        return formProps?.mutationUpdateFunction(data?.id, data)
       } else {
-        formProps?.mutationAddFunction(data)
+        return formProps?.mutationAddFunction(data)
       }
     },
     onSuccess: (response) => {
-      if (open)
-        toast.success(isUpdate ? tToast('successUpdate') : tToast('successInsert'));
+      console.log('called onSuccess');
+
+      toast.success(isUpdate ? tToast('successUpdate') : tToast('successInsert'));
       if (invalidateQueryKeyOnSuccess) {
         queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
       }
@@ -94,6 +93,8 @@ const FormWrapper = ({
         popupFormConfig?.setDefaultOption(response?.data)
         onCloseDispatchedForm()
       }
+      // if(!isUpdate)
+      onClose()
     },
   });
 
@@ -104,6 +105,10 @@ const FormWrapper = ({
   //   onChangeLangTab,
   //   showLanguageBtns,
   // });
+
+  console.log(watch(), 'watch');
+  console.log(errors, 'errors');
+
 
   const handleSubmitFunc = async (data) => {
     console.log(data, 'called');
@@ -121,7 +126,6 @@ const FormWrapper = ({
       console.log(error);
     }
   };
-  console.log(errors);
 
   const resetFormHandler = () => reset(defaultValue);
 
@@ -157,7 +161,7 @@ const FormWrapper = ({
         >
           <FormHeader {...formHeaderProps} onClose={handleOnClose} />
           {formProps?.isSteps ?
-            <FormStepsLayout formSidebarProps={formSidebarProps}  {...formProps} /> : <FormSingularLayout {...formProps} />
+            <FormStepsLayout tab={tab} setTab={setTab} formSidebarProps={formSidebarProps}  {...formProps} /> : <FormSingularLayout {...formProps} />
           }
           <FormFooter
             resetFormHandler={resetFormHandler}

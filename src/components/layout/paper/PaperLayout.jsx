@@ -42,9 +42,28 @@ const PaperLayout = ({
       pagination?.pageIndex,
       pagination?.pageSize,
     ],
-    // queryFn,
-    queryFn: () => {},
+    queryFn: async () => {
+      const response = await queryFn(
+        pagination?.pageIndex,
+        pagination?.pageSize,
+        columnFilters,
+        globalFilter,
+      )
+
+      if (response) {
+        setPagination(prev => ({
+          ...prev,
+          pageSize: response?.pages
+        }))
+        return response?.data
+      }
+
+    },
+    // queryFn: () => {},
   });
+
+  console.log(data, pagination,'-tes');
+  
 
   const onDeleteSelected = async () => {
     const response = handleDeleteSelected()

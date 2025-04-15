@@ -4,7 +4,7 @@ const RHFTableInput = ({
   ...field
 }) => {
   const { control } = useFormContext();
-  const { name } = field;
+  const { name, type = 'text', placeholder } = field;
 
   return (
     <Controller
@@ -23,10 +23,14 @@ const RHFTableInput = ({
                 ${error ? "border-red-200 text-red-500" : ""}
               `}
               name={name}
-              onChange={(e) => onChange(e.target.value)}
               value={value || ""}
               aria-invalid={!!error}
               {...field}
+              onChange={(e) => {
+                onChange(type === 'number' ? + e.target.value : e.target.value);
+              }}
+              type={type}
+              placeholder={placeholder || ''}
             />
           </div>
         );

@@ -2,7 +2,7 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const loginService = (userData) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/signin`, userData);
+  return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/website-signin`, userData);
 };
 
 export const verifyService = (email, code) => {
@@ -40,6 +40,10 @@ export const refreshToken = (data) => {
   return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/refresh-token`, data);
 };
 
-export const logout = (data) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/refresh-token`, data);
+export const logoutService = (data) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/logout`, data);
+  // console.log("🚀 ~ logoutService ~ response:", response)
+  
+  
+  
 };

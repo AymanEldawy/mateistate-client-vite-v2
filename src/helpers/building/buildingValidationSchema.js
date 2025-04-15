@@ -1,4 +1,6 @@
-import { z } from "zod"
+import { object, z } from "zod"
+import { FLATS } from "./buildingHelpers";
+import { BUILDING_STEPS } from "./buildingSteps";
 
 export const buildingDefaultValues = {
   apartment_count: 0,
@@ -75,6 +77,89 @@ export const buildingDefaultValues = {
 }
 
 
-export const buildingValidationSchema = z.object({
-  name: z.string().min(1, { message: "building name is required" }),
-})
+export const buildingValidationSchema = (tab, setTab) => {
+  return z.object({
+    name: z.string().min(1, { message: "building name is required" }),
+    apartment_count: z.number().int(),
+    apartment_floor: z.number().int(),
+    area: z.string().nullable().optional(),
+    bank_account_number: z.string().nullable().optional(),
+    basin_number: z.string().nullable().optional(),
+    bond_date: z.string().nullable().optional(),
+    bond_number: z.string().nullable().optional(),
+    bond_type: z.string().nullable().optional(),
+    building_bank_account_id: z.string().nullable().optional(),
+    building_cash_account_id: z.string().nullable().optional(),
+    building_cheque_account_id: z.string().nullable().optional(),
+    building_cost: z.string().nullable().optional(),
+    building_deposit_account_id: z.string().nullable().optional(),
+    building_discount_account_id: z.string().nullable().optional(),
+    building_insurance_account_id: z.string().nullable().optional(),
+    building_number: z.string().nullable().optional(),
+    building_receipt: z.string().nullable().optional(),
+    building_revenue_account_id: z.string().nullable().optional(),
+    city: z.string().nullable().optional(),
+    commission_expense_account_id: z.string().nullable().optional(),
+    commission_rate: z.string().nullable().optional(),
+    created_at: z.string().nullable().optional(),
+    customers_main_account_id: z.string().nullable().optional(),
+    deferred_vat_account_id: z.string().nullable().optional(),
+    display: z.string().nullable().optional(),
+    emirate: z.string().nullable().optional(),
+    entry_commission_from_owner_account_id: z.string().nullable().optional(),
+    entry_commission_rate: z.string().nullable().optional(),
+    entry_landlord_account_id: z.string().nullable().optional(),
+    entry_revenue_account_id: z.string().nullable().optional(),
+    entry_vat_account_id: z.string().nullable().optional(),
+    entry_vat_rate: z.string().nullable().optional(),
+    investment_end_date: z.string().nullable().optional(),
+    investment_gen_entries: z.string().nullable().optional(),
+    investment_owner_account_id: z.string().nullable().optional(),
+    investment_start_date: z.string().nullable().optional(),
+    investment_value: z.string().nullable().optional(),
+    lessor_id: z.string().nullable().optional(),
+    ltnname: z.string().nullable().optional(),
+    mezzanine_count: z.number().int(),
+    mezzanine_floor: z.number().int(),
+    note: z.string().nullable().optional(),
+    office_count: z.number().int(),
+    office_floor: z.number().int(),
+    owner_account_id: z.string().nullable().optional(),
+    owner_balance: z.string().nullable().optional(),
+    owner_id: z.string().nullable().optional(),
+    owner_tax_account_id: z.string().nullable().optional(),
+    parking_count: z.number().int(),
+    parking_floor: z.number().int(),
+    part_number: z.string().nullable().optional(),
+    penthouse_count: z.number().int(),
+    penthouse_floor: z.number().int(),
+    purchase_date: z.string().nullable().optional(),
+    realestate_company_account_id: z.string().nullable().optional(),
+    received_account_id: z.string().nullable().optional(),
+    received_amount: z.string().nullable().optional(),
+    received_date: z.string().nullable().optional(),
+    received_note: z.string().nullable().optional(),
+    renters_insurance: z.string().nullable().optional(),
+    shop_count: z.number().int(),
+    statement: z.string().nullable().optional(),
+    store_count: z.number().int(),
+    street: z.string().nullable().optional(),
+    suburb: z.string().nullable().optional(),
+    supplier_account_id: z.string().nullable().optional(),
+    tenants: z.string().nullable().optional(),
+    underground_parking: z.string().nullable().optional(),
+    vat_account_id: z.string().nullable().optional(),
+    warehouse_count: z.number().int(),
+  }).refine((data) => {
+    for (const key of Object.keys(FLATS)) {
+      if (data[key]) {
+        return true
+      }
+    }
+    setTab(BUILDING_STEPS.building_units)
+    return false
+  }, {
+    message: 'units are required',
+    path: ['apartment_count'],
+  })
+}

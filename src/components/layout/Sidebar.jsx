@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLongIcon, ChevronIcon, PowerIcon } from '@/components/Icons';
 import { useTranslation } from 'react-i18next';
 import useGlobalOptions from '@/hook/useGlobalOptions';
+import { logoutService } from '@/services/authService';
 
 
 const Sidebar = ({ menu }) => {
@@ -99,7 +100,7 @@ const Sidebar = ({ menu }) => {
     });
   };
 
-  if(!open) return;
+  if (!open) return;
 
   return (
     <div className='bg-[#00000021] h-screen fixed top-[72px] left-0 w-full' onClick={() => setOpen(false)}>
@@ -121,7 +122,9 @@ const Sidebar = ({ menu }) => {
           {list(stack?.at(-1)?.list)}
           <li className="relative w-full">
             <button
+              type="button"
               className={`whitespace-nowrap py-2  border-b gap-3 flex items-center text-red-500 ltr:hover:pl-6 rtl:hover:pr-6 hover:bg-red-500 hover:text-white duration-300 w-full `}
+              onClick={logoutService}
             >
               <span className="scale-[80%] px-2">
                 <PowerIcon className="text-inherit h-6 w-6" />{' '}

@@ -2,12 +2,17 @@
 -[o] complete op and chq popup forms
 - complete others forms
 
+{
+    "email": "tenant-admin@gmail.com",
+    "password": "password"
+}
+
 ### Copy report from v1
 
 
 ### Complete defaultValue & validationSchema
 - [X] Account
-- [ ] Building
+- [X] Building
 - [ ] Cheque
 - [ ] Users
 - [ ] Contract
