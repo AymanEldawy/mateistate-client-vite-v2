@@ -1,10 +1,8 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleCurrency = ({ id, signal }) => {
-    return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`, {
-        signal,
-    });
+export const getSingleCurrency = (id) => {
+    return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`);
 };
 
 export const getAllCurrencies = ({ signal }) => {
@@ -40,7 +38,8 @@ export const deleteCurrency = (id) => {
 };
 
 export const deleteManyCurrencies = (ids) => {
-    return http.delete(
+    console.log("🚀 ~ deleteManyCurrencies ~ ids:", ids)
+    return http.post(
         `${API_URL_CONSTANTS.BASE_CURRENCY}/bulk-delete`, ids
     );
 };

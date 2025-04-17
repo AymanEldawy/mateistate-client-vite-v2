@@ -88,11 +88,6 @@ const Bills = () => {
             </>
           )
         }}
-        formPaginationProps={{
-          name: 'bill',
-          number: 1,
-          code: 1
-        }}
       />
     </>
 

@@ -4,11 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 const columns = ["id", "number"];
 
 const useFormPagination = ({ name, number, code }) => {
-
   const [currentNumber, setCurrentNumber] = useState();
   const [lastNumber, setLastNumber] = useState(number);
   const [currentId, setCurrentId] = useState(null);
-  
+
   useEffect(() => {
     if (number) {
       getPaginationTable();

@@ -1,7 +1,7 @@
 import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox";
 import { Link } from "react-router-dom";
 import { CONTACT_PATTERN_CONTRACT_TYPE } from "../DEFAULT_OPTIONS";
-import { getUnitType } from "@/utils/functions";
+// import { getUnitType } from "@/utils/functions";
 import { BanknoteIcon, UserIcon } from "@/components/Icons";
 
 
@@ -45,7 +45,7 @@ const contractColumns = [
       return (
         <Link
           to={`/contract/${type?.name?.toLowerCase()}/${unitType} ${type?.name
-            } Contract/${row?.original?.number}?flat_type=${unitType}&code=${row?.original?.code
+            } Contracts?number=${row?.original?.number}?flat_type=${unitType}&code=${row?.original?.code
             }`}
           className="text-blue-500 font-medium hover:underline"
         >
@@ -86,10 +86,10 @@ const contractColumns = [
   {
     header: "unit_type",
     accessorKey: "unit_type",
-    cell: ({ row, getValue }) => {
-      let unitType = getUnitType(row?.original, getValue());
-      return <span className="capitalize">{unitType}</span>;
-    },
+    // cell: ({ row, getValue }) => {
+    //   let unitType = getUnitType(row?.original, getValue());
+    //   return <span className="capitalize">{unitType}</span>;
+    // },
   },
   {
     header: "description",

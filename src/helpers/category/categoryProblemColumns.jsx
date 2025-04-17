@@ -40,7 +40,7 @@ const categoryProblemColumns = [
       return (
         <Link
           className="text-blue-500 hover:underline"
-          to={`/category_problem/${row?.original?.number}`}
+          to={`/category_problems?number=${row?.original?.number}`}
         >
           {getValue()}
         </Link>

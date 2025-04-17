@@ -40,7 +40,7 @@ const parkingColumns = [
         accessorKey: "parking_no",
         cell: ({ getValue, row }) => (
             <Link
-                to={`/parking/${row?.original?.number}`}
+                to={`/parkings?number=${row?.original?.number}`}
                 className="text-blue-500 font-medium hover:underline"
             >
                 {getValue()}
@@ -56,7 +56,7 @@ const parkingColumns = [
             ).name;
             return (
                 <span
-                    to={`/parking/${row?.original?.number}`}
+                    to={`/parkings?number=${row?.original?.number}`}
                     className="text-blue-500 font-medium hover:underline"
                 >
                     {kind}

@@ -1,7 +1,7 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy } from 'react'
-import { createBuilding, deleteBuilding, deleteManyBuildings, getAllBuildings, updateBuilding } from '@/services/buildingService'
+import { createBuilding, deleteBuilding, deleteManyBuildings, getAllBuildings, getSingleBuilding, updateBuilding } from '@/services/buildingService'
 import { buildingDefaultValues, buildingValidationSchema } from '@/helpers/building/buildingValidationSchema'
 import buildingColumns from '@/helpers/building/buildingColumns'
 import { useNavigate } from 'react-router-dom'
@@ -33,6 +33,7 @@ const Building = () => {
         validationSchema: buildingValidationSchema,
         mutationAddFunction: createBuilding,
         mutationUpdateFunction: updateBuilding,
+        getSingleFunction: getSingleBuilding,
         onSuccessAction: (data) => {
         navigate(`/building/details/${data?.id}`)
         },
@@ -46,11 +47,6 @@ const Building = () => {
       formSidebarProps={{
         list: Object.values(BUILDING_STEPS)
       }}
-      formPaginationProps={{
-        name: 'building',
-        number: 1
-      }}
-
     />
   )
 }

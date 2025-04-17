@@ -51,10 +51,7 @@ const Cheque = ({ formOnly, outerClose, }) => {
 
   const handleChangeCode = (code) => {
     updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
-  }
-
-  console.log(chequeValidationSchema, 'ch');
-  
+  }  
 
   if (formOnly) {
     return (
@@ -104,11 +101,6 @@ const Cheque = ({ formOnly, outerClose, }) => {
           columns: chequeColumns
         }}
         {...chequeConfig}
-        formPaginationProps={{
-          name: 'cheque',
-          number: 1,
-          code: searchParamsSelectedCode?.code,
-        }}
       />
     </>
   )

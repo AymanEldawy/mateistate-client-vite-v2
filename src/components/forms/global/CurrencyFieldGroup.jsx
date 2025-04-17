@@ -13,7 +13,6 @@ const CurrencyFieldGroup = ({
     formState: { errors },
   } = useFormContext();
   // const { currencies = [] } = useGlobalOptions();
-  // console.log("🚀 ~ currencies:", currencies)
   // const [currency, setCurrency] = useState(null);
   const { name = 'currency_id', required, label } = field || {}
   const error = errors?.[name];

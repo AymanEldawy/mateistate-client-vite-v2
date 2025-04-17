@@ -105,11 +105,6 @@ const Contract = () => {
         formSidebarProps={{
           list: APARTMENT_STEPS_CONTRACT
         }}
-        formPaginationProps={{
-          name: 'contract',
-          number: 1,
-          code: 1
-        }}
         formFooterProps={{
           additionalButtons: (data) => (
             <ContractFormFooter data={data}

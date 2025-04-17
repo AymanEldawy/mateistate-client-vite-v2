@@ -34,7 +34,7 @@ const buildingColumns = [
       <div className="flex items-center gap-4 justify-between">
 
         <Link
-          to={`/building/${row?.original?.number}`}
+          to={`/buildings?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

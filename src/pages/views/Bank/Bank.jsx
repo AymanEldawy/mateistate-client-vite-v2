@@ -1,17 +1,23 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
 import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
+  deleteAccount
 } from "@/services/accountService";
-import { bankValidationSchema } from "@/helpers/bank/bankValidationSchema";
 import bankColumns from "@/helpers/bank/bankColumns";
 import BankForm from "@/components/forms/containers/bank/BankForm";
-import { createBank, deleteManyBanks, getAllBanks, updateBank } from "@/services/bankService";
+import { createBank, deleteManyBanks, getAllBanks, getSingleBank, updateBank } from "@/services/bankService";
 // import QUERY_KEYS from './../../../data/queryKeys';
+import { z } from 'zod';
 
-const defaultValue = {};
+const bankValidationSchema = () => z.object({
+  name: z.string().nonempty({ message: 'Name is Required' }),
+  address: z.string().optional(),
+});
+
+const defaultValue = {
+  name: '',
+  address: '',
+};
 
 const bankConfig = {
   formProps: {
@@ -19,17 +25,14 @@ const bankConfig = {
     validationSchema: bankValidationSchema,
     mutationAddFunction: createBank,
     mutationUpdateFunction: updateBank,
-    onSuccessAction: () => {},
+    getSingleFunction: getSingleBank,
+    onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteAccount,
     RenderForm: (props) => <BankForm {...props} />,
   },
   formHeaderProps: {
     header: "Bank",
-  },
-  formPaginationProps: {
-    name: "Bank",
-    number: 1,
   },
 };
 

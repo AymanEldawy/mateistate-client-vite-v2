@@ -37,7 +37,7 @@ const billColumns = [
       );
       return (
         <Link
-          to={`/bill/${row?.original.code}/${row?.original?.number}`}
+          to={`/bill/${row?.original.code}s?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           # {getValue()}

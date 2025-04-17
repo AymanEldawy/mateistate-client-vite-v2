@@ -1,10 +1,8 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleBank = ({ id, signal }) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_BANK}/${id}`, {
-    signal,
-  });
+export const getSingleBank = (id) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BANK}/${id}`);
 };
 
 export const getAllBanks = ({ signal }) => {
@@ -14,7 +12,6 @@ export const getAllBanks = ({ signal }) => {
 };
 
 export const createBank = (data) => {
-  console.log("🚀 ~ createBank ~ data:", data)
   return http.post(API_URL_CONSTANTS.BASE_BANK, data, {
     // headers: {
     //   "Content-Type": "multipart/form-data",
@@ -22,9 +19,9 @@ export const createBank = (data) => {
   });
 };
 
-export const updateBank = (country_id, data) => {
+export const updateBank = (bank_id, data) => {
   return http.patch(
-    `${API_URL_CONSTANTS.BASE_BANK}/${country_id}`,
+    `${API_URL_CONSTANTS.BASE_BANK}/${bank_id}`,
     data,
     // {
     //   headers: {

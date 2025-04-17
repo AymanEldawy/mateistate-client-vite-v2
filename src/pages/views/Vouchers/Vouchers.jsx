@@ -108,11 +108,6 @@ const Vouchers = ({ formOnly }) => {
             </>
           )
         }}
-        formPaginationProps={{
-          name: 'voucher',
-          number: 1,
-          code: 1
-        }}
       />
     </>
 

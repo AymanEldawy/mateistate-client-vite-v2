@@ -71,6 +71,8 @@ const API_URL_CONSTANTS = {
   BASE_BILL_PATTERN: "/patterns/bill",
   /************************************** ENTRIES **************************************/
   BASE_ENTRIES: "/entries",
+  /************************************** MATERIAL_GROUPS **************************************/
+  BASE_MATERIAL_GROUPS: "/material-groups",
 };
 
 export default API_URL_CONSTANTS;

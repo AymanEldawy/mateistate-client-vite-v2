@@ -33,7 +33,7 @@ const userColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/user/${row?.original?.number}`}
+          to={`/users?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           # {getValue()}
@@ -47,7 +47,7 @@ const userColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/user/${row?.original?.number}`}
+          to={`/users?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

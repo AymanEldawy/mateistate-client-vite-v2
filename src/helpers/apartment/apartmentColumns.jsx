@@ -33,7 +33,7 @@ const apartmentColumns = [
     accessorKey: "apartment_no",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/apartment/${row?.original?.number}`}
+        to={`/apartments?number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
       >
         {getValue()}
@@ -50,7 +50,7 @@ const apartmentColumns = [
       ).name;
       return (
         <span
-          to={`/apartment/${row?.original?.number}`}
+          to={`/apartments?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {kind}

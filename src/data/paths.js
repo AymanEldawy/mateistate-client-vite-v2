@@ -70,7 +70,7 @@ const PATHS = {
   /******************** STORE_CHART ********************/
   STORE_CHART: "/chart/stores",
   /******************** MATERIAL_GROUP ********************/
-  MATERIAL_GROUP: "/material-group",
+  MATERIAL_GROUP: "/material-groups",
   /******************** MATERIAL ********************/
   MATERIAL: "/materials",
   /******************** MATERIAL_CHART ********************/

@@ -6,7 +6,7 @@ const SEARCH_PARAMS = {
   SORT: "sort",
   ORDER: "order",
   NAME: "name",
-  Number: "number",
+  NUMBER: "number",
 };
 
 export default SEARCH_PARAMS;

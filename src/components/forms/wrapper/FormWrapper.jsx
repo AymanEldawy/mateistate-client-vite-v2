@@ -40,18 +40,21 @@ const FormWrapper = ({
   const paginationForm = useFormPagination(formPaginationProps)
   const [open, setOpen] = useState(false)
   const isUpdate = true
+  const id = paginationForm?.currentId || '2336a416-3f17-4c13-99c9-d8d20554aa5c'
 
-  useQuery({
-    queryKey: [queryKey, 'single', paginationForm?.currentId],
+  const { data: oldData } = useQuery({
+    queryKey: [queryKey, 'single', id],
     queryFn: async () => {
-      const response = formProps?.getSingleFunction(paginationForm?.currentId)
+      const response = await formProps?.getSingleFunction(id)
       if (response?.success) {
-        reset(response?.data)
+        // reset(response?.data)
+        reset(response)
+        return response
       } else {
         reset(defaultValue)
       }
     },
-    enabled: !!paginationForm?.currentId,
+    enabled: !!id,
   })
 
 
@@ -59,32 +62,32 @@ const FormWrapper = ({
     defaultValues: defaultValue,
     // resolver: zodResolver(validationSchema),
     mode: "onBlur",
-    // resolver: zodResolver(typeof formProps?.validationSchema === 'function' ? formProps?.validationSchema(tab, setTab): formProps?.validationSchema),
+    resolver: zodResolver(typeof formProps?.validationSchema === 'function' ? formProps?.validationSchema(tab, setTab) : formProps?.validationSchema),
   });
-
-  console.log('validationSchema', formProps);
-
 
   const {
     reset,
     handleSubmit,
     watch,
-    formState: { isSubmitting, isLoading, isDirty, errors },
+    formState: { isSubmitting, isLoading, isDirty, errors, dirtyFields },
   } = methods;
+
+  console.log(watch(), 'watch');
+  console.log(errors, 'errors');
 
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
-      if (data?.id) {
-        return formProps?.mutationUpdateFunction(data?.id, data)
+      console.log("🚀 ~ call update:", oldData)
+      if (oldData?.id) {
+        return formProps?.mutationUpdateFunction(oldData?.id, data)
       } else {
         return formProps?.mutationAddFunction(data)
       }
     },
     onSuccess: (response) => {
-      console.log('called onSuccess');
-
       toast.success(isUpdate ? tToast('successUpdate') : tToast('successInsert'));
+      queryClient.invalidateQueries();
       if (invalidateQueryKeyOnSuccess) {
         queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
       }
@@ -106,19 +109,14 @@ const FormWrapper = ({
   //   showLanguageBtns,
   // });
 
-  console.log(watch(), 'watch');
-  console.log(errors, 'errors');
-
-
   const handleSubmitFunc = async (data) => {
-    console.log(data, 'called');
+    console.log("🚀 ~ handleSubmitFunc ~ data:", data)
     // if (!isDirty) return toast.warn(tToast('formDirty'))
     try {
 
       const dataToSubmit = onHandlingDataBeforeSubmit
         ? onHandlingDataBeforeSubmit({ ...data })
         : data;
-      console.log("🚀 ~ handleSubmitFunc ~ dataToSubmit:", dataToSubmit)
       // if (typeof dataToSubmit === "string") return toast.warn(t(dataToSubmit));
       await mutateAsync(dataToSubmit);
       isUpdate ? reset(data) : reset();
@@ -131,6 +129,23 @@ const FormWrapper = ({
 
   const handleOnClose = () => {
     setOpen(true)
+  }
+
+  const handleDelete = async () => {
+    try {
+      const response = await formProps?.onHandleDelete(oldData?.id)
+      if (response?.success) {
+        toast.success(tToast('successDelete'))
+        queryClient.invalidateQueries();
+        if (invalidateQueryKeyOnSuccess) {
+          queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
+        }
+        onSuccessAction?.(response?.data);
+        onClose()
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -147,7 +162,7 @@ const FormWrapper = ({
         }}
       />
       <ConfirmModal
-        onConfirm={formProps?.onHandleDelete}
+        onConfirm={handleDelete}
         open={openConfirmation}
         setOpen={setOpenConfirmation}
       />

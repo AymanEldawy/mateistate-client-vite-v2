@@ -32,7 +32,7 @@ const lessorColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/lessor/${row?.original?.number}`}
+          to={`/lessors?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

@@ -49,7 +49,7 @@ const accountColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/account/${row?.original?.number}`}
+          to={`/accounts?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

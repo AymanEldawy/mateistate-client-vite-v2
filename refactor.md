@@ -3,6 +3,8 @@
 Manual
 
 - account
+- account_assembly []
+- account_distributive [] 
 - user
 - building
 

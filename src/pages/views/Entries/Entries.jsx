@@ -56,11 +56,6 @@ const Entries = () => {
             </>
           )
         }}
-        formPaginationProps={{
-          name: 'entry',
-          number: 1,
-          code: 1
-        }}
         formFooterProps={{
           additionalButtons: (data) => (
             <EntryOriginalLink

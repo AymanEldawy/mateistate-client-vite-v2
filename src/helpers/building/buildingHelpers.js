@@ -1,15 +1,15 @@
 import { getSingleBuilding } from "@/services/buildingService";
 
 export const FLATS = {
-  apartment_count: 0,
-  penthouse_count: 0,
-  parking_count: 0,
-  mezzanine_count: 0,
-  office_count: 0,
-  store_count: 0,
-  warehouse_count: 0,
-  shop_count: 0,
-  underground_parking: 0,
+  apartmentCount: 0,
+  penthouseCount: 0,
+  parkingCount: 0,
+  mezzanineCount: 0,
+  officeCount: 0,
+  storeCount: 0,
+  warehouseCount: 0,
+  shopCount: 0,
+  undergroundParking: 0,
 };
 
 export const FLAT_PROPERTY_COLORS = {
@@ -39,57 +39,46 @@ export const FLAT_PROPERTY_TYPES = {
   parking_2: "underground parking",
 };
 
-export function getUnitType(contract, value) {
-  let type = contract?.parking_id
-    ? "parking_"
-    : contract?.shop_id
-      ? "shop_"
-      : "apartment_";
-
-  return FLAT_PROPERTY_TYPES[`${type}${value}`];
-}
-
-
 export const FLAT_PROPERTY_TABS = {
   apartment: {
     tabName: "apartment",
-    x: "apartment_floor",
-    y: "apartment_count",
-    no: "apartment_no",
+    x: "apartmentFloor",
+    y: "apartmentCount",
+    no: "apartmentNo",
     type: 1,
-    type_col_name: "apartment_kind",
+    type_col_name: "apartmentKind",
     table: "apartment",
     prefix: "",
     start: 101,
   },
   mezzanine: {
     tabName: "mezzanine",
-    x: "mezzanine_floor",
-    y: "mezzanine_count",
-    no: "apartment_no",
+    x: "mezzanineFloor",
+    y: "mezzanineCount",
+    no: "apartmentNo",
     type: 2,
-    type_col_name: "apartment_kind",
+    type_col_name: "apartmentKind",
     table: "apartment",
     prefix: "M",
     start: "01",
   },
   office: {
     tabName: "office",
-    x: "office_floor",
-    y: "office_count",
-    no: "apartment_no",
+    x: "officeFloor",
+    y: "officeCount",
+    no: "apartmentNo",
     type: 3,
-    type_col_name: "apartment_kind",
+    type_col_name: "apartmentKind",
     table: "apartment",
     prefix: "O",
     start: "101",
   },
   store: {
     tabName: "store",
-    x: "store_count",
+    x: "storeCount",
     y: "",
-    no: "shop_no",
-    type_col_name: "shop_kind",
+    no: "shopNo",
+    type_col_name: "shopKind",
     type: 2,
     table: "shop",
     prefix: "S",
@@ -97,55 +86,55 @@ export const FLAT_PROPERTY_TABS = {
   },
   shop: {
     tabName: "shop",
-    x: "shop_count",
+    x: "shopCount",
     y: "",
-    no: "shop_no",
+    no: "shopNo",
     type: 1,
-    type_col_name: "shop_kind",
+    type_col_name: "shopKind",
     table: "shop",
     prefix: "SH",
     start: "01",
   },
   parking: {
     tabName: "parking",
-    x: "parking_floor",
-    y: "parking_count",
-    no: "parking_no",
+    x: "parkingFloor",
+    y: "parkingCount",
+    no: "parkingNo",
     type: 1,
-    type_col_name: "parking_kind",
+    type_col_name: "parkingKind",
     table: "parking",
     prefix: "P",
     start: "01",
   },
   penthouse: {
     tabName: "penthouse",
-    x: "penthouse_floor",
-    y: "penthouse_count",
-    no: "apartment_no",
+    x: "penthouseFloor",
+    y: "penthouseCount",
+    no: "apartmentNo",
     type: 4,
-    type_col_name: "apartment_kind",
+    type_col_name: "apartmentKind",
     table: "apartment",
     prefix: "PH",
     start: "101",
   },
   "underground parking": {
     tabName: "underground parking",
-    x: "underground_parking",
+    x: "undergroundParking",
     y: "",
-    no: "parking_no",
+    no: "parkingNo",
     type: 2,
-    type_col_name: "parking_kind",
+    type_col_name: "parkingKind",
     table: "parking",
     prefix: "UP",
     start: "01",
   },
   warehouse: {
     tabName: "warehouse",
-    x: "warehouse_count",
+    x: "warehouseCount",
     y: "",
-    no: "apartment_no",
+    no: "apartmentNo",
     type: 5,
-    type_col_name: "apartment_kind",
+    type_col_name: "apartmentKind",
     table: "apartment",
     prefix: "W",
     start: "01",
@@ -177,11 +166,11 @@ export const findList = async (
     for (const row of data) {
       let assetsType =
         type === "apartment"
-          ? `${type}_${row?.apartment_kind}`
+          ? `${type}_${row?.apartmentKind}`
           : type === "parking"
-            ? `${type}_${row?.parking_kind}`
+            ? `${type}_${row?.parkingKind}`
             : type === "shop"
-              ? `${type}_${row?.shop_kind}`
+              ? `${type}_${row?.shopKind}`
               : type;
 
       newType = FLAT_PROPERTY_TYPES[assetsType];

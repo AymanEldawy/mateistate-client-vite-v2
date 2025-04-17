@@ -41,7 +41,7 @@ const shopColumns = [
 
     cell: ({ getValue, row }) => (
       <Link
-        to={`/shop/${row?.original?.number}`}
+        to={`/shops?number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
       >
         {getValue()}
@@ -57,7 +57,7 @@ const shopColumns = [
       ).name;
       return (
         <span
-          to={`/shop/${row?.original?.number}`}
+          to={`/shops?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {kind}

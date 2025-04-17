@@ -38,7 +38,7 @@ const storeColumns = [
     accessorKey: "number",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/store/${row?.original?.number}`}
+        to={`/stores?number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
       >
         # {getValue()}

@@ -12,8 +12,6 @@ const TableForm = ({ gridName, withoutAction, headers, renderFields, formBodyPro
     control,
     name: gridName,
   });
-  console.log(fields, '---');
-
 
   return (
     <TableFormWrapper

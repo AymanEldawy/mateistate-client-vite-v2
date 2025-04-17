@@ -40,9 +40,6 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
     setIncreaseCount((prev) => prev - 1);
   };
 
-  console.log(watch('grid'), '---');
-
-
 
   // onDecrement
   // setIncreaseCount
