@@ -3,10 +3,33 @@ import PaperLayout from "../../../components/layout/paper/PaperLayout";
 import { lessorValidationSchema } from "@/helpers/lessor/lessorValidationSchema";
 import LessorForm from "@/components/forms/containers/LessorForm";
 import lessorColumns from "@/helpers/lessor/lessorColumns";
-import { createLessor, deleteLessor, deleteManyLessor, getAllLessors, updateLessor } from "@/services/lessorService";
+import {
+  createLessor,
+  deleteLessor,
+  deleteManyLessor,
+  getAllLessors,
+  updateLessor,
+} from "@/services/lessorService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  name: "",
+  ltnname: "",
+  passport: "",
+  passport_expiry_date: "",
+  id_card: "",
+  lessor_card: "",
+  cell_phone: "",
+  number: "",
+  address: "",
+  fax: "",
+  nationality: "",
+  mobile: "",
+  note: "",
+  mailbox: "",
+  email: "",
+  role: "",
+};
 
 const lessorConfig = {
   formProps: {

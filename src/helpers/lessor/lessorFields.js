@@ -6,13 +6,15 @@ export const Lessor_FIELDS = {
   passport: FIELDS_STRUCTURE.numberField({
     label: "passport",
     name: "passport",
-    type: "number",
+    type: "text",
+    required: true,
   }),
 
   passport_expiry_date: {
     label: "passport_expiry_date",
     name: "passport_expiry_date",
     type: "date",
+    required: true,
   },
   id_card: FIELDS_STRUCTURE.numberField({
     label: "id_card",
@@ -56,7 +58,8 @@ export const Lessor_FIELDS = {
   email: FIELDS_STRUCTURE.textField({
     label: "email",
     name: "email",
-    type: "text",
+    type: "email",
+    required: true,
   }),
   note: FIELDS_STRUCTURE.textField({
     label: "note",

@@ -8,19 +8,40 @@ import {
 import sellerColumns from "@/helpers/seller/sellerColumns";
 import { sellerValidationSchema } from "@/helpers/seller/sellerValidationSchema";
 import SellerForm from "@/components/forms/seller/sellerForm";
+import {
+  createSeller,
+  deleteManySellers,
+  deleteSeller,
+  getAllSellers,
+  updateSeller,
+} from "@/services/SellerService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  name: "",
+  ltnname: "",
+  id_card: "",
+  passport: 0,
+  work_card_number: 0,
+  mobile: "",
+  cellPhone: "",
+  mailbox: "",
+  email: "",
+  address: "",
+  minimumCommission: 1, // 
+  maximumDiscount: 1, // 
+  statement: "",
+};
 
 const sellerConfig = {
   formProps: {
     defaultValue,
     validationSchema: sellerValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createSeller,
+    mutationUpdateFunction: updateSeller,
     onSuccessAction: () => {},
     isSteps: true,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteSeller,
     RenderForm: (props) => <SellerForm {...props} />,
   },
   formHeaderProps: {
@@ -41,9 +62,9 @@ const Seller = () => {
   return (
     <PaperLayout
       name="Seller"
-      queryKey={QUERY_KEYS.Lessor}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryKey={QUERY_KEYS.Seller}
+      queryFn={getAllSellers} //
+      handleDeleteSelected={deleteManySellers} //
       paperHeaderProps={{
         header: "Seller",
       }}

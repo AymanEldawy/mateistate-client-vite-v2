@@ -1,5 +1,6 @@
 import { RHFInput } from "../../fields";
 import { Owner_FIELDS } from "@/helpers/owner/ownerFields";
+import { AccountField } from "../../global";
 
 const OwnerForm = () => {
   return (
@@ -17,6 +18,7 @@ const OwnerForm = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput {...Owner_FIELDS?.nationality} />
+        <AccountField name="accountId" label="account_Id" />
       </div>
     </div>
   );

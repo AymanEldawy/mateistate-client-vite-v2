@@ -1,26 +1,37 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-} from "@/services/accountService";
 import { ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
 import ownerColumns from "@/helpers/owner/ownerColumns";
 import OwnerForm from "@/components/forms/containers/owner/OwnerForm";
+import {
+  createOwner,
+  deleteManyOwners,
+  deleteOwner,
+  getAllOwners,
+  updateOwner,
+} from "@/services/ownerService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  accountId: "",
+  name: "",
+  ltnname: "",
+  id_card: "",
+  cell_phone: "",
+  mailbox: "",
+  address: "",
+  nationality: "",
+};
 
 const ownerConfig = {
   formProps: {
     defaultValue,
     validationSchema: ownerValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createOwner,
+    mutationUpdateFunction: updateOwner,
     onSuccessAction: () => {},
     isSteps: true,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteOwner,
     RenderForm: (props) => <OwnerForm {...props} />,
   },
   formHeaderProps: {
@@ -42,8 +53,8 @@ const Owner = () => {
     <PaperLayout
       name="Owner"
       queryKey={QUERY_KEYS.Owner}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllOwners} //
+      handleDeleteSelected={deleteManyOwners} //
       paperHeaderProps={{
         header: "Owner",
       }}
