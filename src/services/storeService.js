@@ -1,10 +1,8 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleStore = ({ id, signal }) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_STORE}/${id}`, {
-    signal,
-  });
+export const getSingleStore = (id) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_STORE}/${id}`);
 };
 
 export const getAllStores = ({ signal }) => {

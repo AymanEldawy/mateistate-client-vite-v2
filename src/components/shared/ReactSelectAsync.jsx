@@ -32,21 +32,24 @@ const ReactSelectAsync = ({
 }) => {
   const { handleDispatchForm } = usePopupForm()
   const queryClient = new QueryClient();
-  const loadOptions = async (value, callback, id) => {
+
+  const loadOptions = async (value, callback) => {
     try {
       const res = await queryClient.fetchQuery({
-        queryKey: [queryKey || name, 'search', id, value],
+        queryKey: [queryKey || name, 'search', value],
         queryFn: async () => {
-          const response = await getSearch(
-            value,
-          )
-          return response.result;
+          const response = await getSearch(value);
+          if (response?.data) {
+            callback(response.data);
+          }
+          return response.data;
         },
       });
-      callback(res);
       return res;
     } catch (error) {
-      throw Error(JSON.stringify(error));
+      console.error("Error fetching options:", error);
+      callback([]);
+      return [];
     }
   };
 

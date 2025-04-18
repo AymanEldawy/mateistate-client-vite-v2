@@ -73,6 +73,8 @@ const API_URL_CONSTANTS = {
   BASE_ENTRIES: "/entries",
   /************************************** MATERIAL_GROUPS **************************************/
   BASE_MATERIAL_GROUPS: "/material-groups",
+  /************************************** MATERIALS **************************************/
+  BASE_MATERIALS: "/materials",
 };
 
 export default API_URL_CONSTANTS;

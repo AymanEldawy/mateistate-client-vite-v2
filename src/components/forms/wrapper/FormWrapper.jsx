@@ -40,7 +40,7 @@ const FormWrapper = ({
   const paginationForm = useFormPagination(formPaginationProps)
   const [open, setOpen] = useState(false)
   const isUpdate = true
-  const id = paginationForm?.currentId || '2336a416-3f17-4c13-99c9-d8d20554aa5c'
+  const id = paginationForm?.currentId || ''
 
   const { data: oldData } = useQuery({
     queryKey: [queryKey, 'single', id],

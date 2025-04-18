@@ -7,10 +7,12 @@ import { ACCOUNT_ASSEMBLY, ACCOUNT_DISTRIBUTIVE, ACCOUNT_FIELDS } from "@/helper
 import TableForm from "../wrapper/TableForm";
 import { RHFTableInput, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFSelectField, RHFTableAsyncSelect } from "../fields";
 import { AccountField } from "../global";
+import { getAccountSearch, getSingleAccount } from "@/services/accountService";
+import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 
 const AccountForm = () => {
   // let name = 'account';
-  const { watch, formState: { errors }, clearErrors } = useFormContext();
+  const { watch, setValue, formState: { errors }, clearErrors } = useFormContext();
   const [totalPercentage, setTotalPercentage] = useState(0)
   useEffect(() => {
     // let isAccount = name === "account";
@@ -29,6 +31,10 @@ const AccountForm = () => {
         clearErrors(ACCOUNT_DISTRIBUTIVE_TYPE_NAME);
         calculatePercentage(watch, setTotalPercentage);
       }
+
+      if (name === 'account.type') {
+        setValue('type', value.account.type);
+      }
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -39,33 +45,42 @@ const AccountForm = () => {
   //   setValue("code", account.code);
   // };
 
+  
+
   return (
     <div className="">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput
-          {...ACCOUNT_FIELDS?.code}
+          name="account.code"
+          label="code"
+          type="number"
           required
         />
         <RHFInput
-          {...ACCOUNT_FIELDS?.name}
+          name="account.name"
+          label="name"
           required
         />
         <RHFSelectField
-          {...ACCOUNT_FIELDS?.type}
+          name="account.type"
+          label="type"
           required
+          options={ACCOUNT_TYPE}
         />
       </div>
       {watch("type") === 1 ? (
         <div className="flex-1 grid grid-cols-1 my-4 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
-          <RHFAsyncSelectField
-            {...ACCOUNT_FIELDS?.parent_id}
+          <AccountField
+            name="account.parentId"
+            label="parent_id"
           />
-          <RHFAsyncSelectField
-            {...ACCOUNT_FIELDS?.final_id}
+          <AccountField
+            name="account.finalId"
+            label="final_id"
           />
         </div>
       ) : null}
-      <RHFTextarea {...ACCOUNT_FIELDS?.note} />
+      <RHFTextarea name="account.note" label="note" />
       {watch("type") === 3 ? (
         <div
           className={
@@ -83,7 +98,7 @@ const AccountForm = () => {
             renderFields={(item, index) => (
               <div key={index}>
                 <AccountField
-                  name={`${ACCOUNT_ASSEMBLY_TYPE_NAME}.${index}.account_id`}
+                  name={`${ACCOUNT_ASSEMBLY_TYPE_NAME}.${index}.mainAccountId`}
                 />
               </div>
             )}
@@ -122,14 +137,12 @@ const AccountForm = () => {
               <>
                 <td>
                   <AccountField
-                    {...ACCOUNT_ASSEMBLY?.account_id}
-                    name={`${ACCOUNT_DISTRIBUTIVE_TYPE_NAME}.${index}.account_id`}
+                    name={`${ACCOUNT_DISTRIBUTIVE_TYPE_NAME}.${index}.mainAccountId`}
                     label=""
                   />
                 </td>
                 <td>
                   <RHFTableInput
-                    {...ACCOUNT_DISTRIBUTIVE?.percentage}
                     name={`${ACCOUNT_DISTRIBUTIVE_TYPE_NAME}.${index}.percentage`}
                     label=""
                     type="number"

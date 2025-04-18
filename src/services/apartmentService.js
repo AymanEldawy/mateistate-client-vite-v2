@@ -1,10 +1,8 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleApartment = ({ id, signal }) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_APARTMENT}/${id}`, {
-    signal,
-  });
+export const getSingleApartment = (id) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_APARTMENT}/${id}`);
 };
 
 export const getAllApartments = ({ signal }) => {

@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleShop = ({ id, signal }) => {
+export const getSingleShop = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_SHOP}/${id}`, {
     signal,
   });
@@ -21,9 +21,9 @@ export const createShop = (data) => {
   });
 };
 
-export const updateApartment = (country_id, data) => {
+export const updateShop= (shopId, data) => {
   return http.patch(
-    `${API_URL_CONSTANTS.BASE_SHOP}/${country_id}`,
+    `${API_URL_CONSTANTS.BASE_SHOP}/${shopId}`,
     data,
     // {
     //   headers: {
@@ -42,13 +42,5 @@ export const deleteShop = (id) => {
 export const deleteManyShops = (ids) => {
   return http.post(
     `${API_URL_CONSTANTS.BASE_SHOP}/bulk-delete`, ids
-  );
-};
-
-
-
-export const getShopCode = (parentId) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_SHOP}/code=${parentId}`
   );
 };

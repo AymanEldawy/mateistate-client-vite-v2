@@ -5,13 +5,13 @@ export const ACCOUNT_FIELDS = {
   created_at: FIELDS_STRUCTURE.created_at(),
   code: FIELDS_STRUCTURE.number({
     label: "code",
-    name: "code",
+    name: "account.code",
   }),
   name: FIELDS_STRUCTURE.name(),
-  ltnname: { label: "ltnname", name: "ltnname", type: "text", required: false },
+  ltnname: { label: "ltnname", name: "account.ltnname", type: "text", required: false },
   type: {
     label: "type",
-    name: "type",
+    name: "account.type",
     key: "select",
     intValue: true,
     selectFirstAsDefault: true,

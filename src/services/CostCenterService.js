@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleCostCenter = ({ id, signal }) => {
+export const getSingleCostCenter = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}/${id}`, {
     signal,
   });

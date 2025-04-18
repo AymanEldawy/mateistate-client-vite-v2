@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleOwner = ({ id, signal }) => {
+export const getSingleOwner = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_owner}/${id}`, {
     signal,
   });

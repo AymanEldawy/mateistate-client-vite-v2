@@ -51,6 +51,10 @@ export const getSingleBuildingDetails = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/${id}/details`);
 };
 
+export const getSearchBuilding = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/${value}`);
+};
+
 export const generateBuildingUnits = ({
   grid,
   flatsDetails,

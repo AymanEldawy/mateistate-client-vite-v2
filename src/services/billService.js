@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleBill = ({ id, signal }) => {
+export const getSingleBill = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BILLS}/${id}`, {
     signal,
   });

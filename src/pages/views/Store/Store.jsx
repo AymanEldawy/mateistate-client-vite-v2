@@ -1,34 +1,25 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-} from "@/services/accountService";
-import { storeValidationSchema } from "@/helpers/store/storeValidationSchema";
+
+import { storeDefaultValue, storeValidationSchema } from "@/helpers/store/storeValidationSchema";
 import storeColumns from "@/helpers/store/storeColumns";
 import StoreForm from "@/components/forms/containers/store/StoreForm";
-// import QUERY_KEYS from './../../../data/queryKeys';
-
-const defaultValue = {};
+import { createStore, deleteManyStores, deleteStore, getAllStores, getSingleStore, updateStore } from "@/services/storeService";
 
 const storeConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: storeDefaultValue,
     validationSchema: storeValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createStore,
+    mutationUpdateFunction: updateStore,
+    getSingleFunction: getSingleStore,
     onSuccessAction: () => {},
-    isSteps: true,
-    onHandleDelete: deleteAccount,
+    isSteps: false,
+    onHandleDelete: deleteStore,
     RenderForm: (props) => <StoreForm {...props} />,
   },
   formHeaderProps: {
     header: "store",
-  },
-  formPaginationProps: {
-    name: "store",
-    number: 1,
   },
 };
 
@@ -37,8 +28,8 @@ const Store = () => {
     <PaperLayout
       name="store"
       queryKey={QUERY_KEYS.STORE}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllStores} //
+      handleDeleteSelected={deleteManyStores} //
       paperHeaderProps={{
         header: "store",
       }}

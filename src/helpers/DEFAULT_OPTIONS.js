@@ -268,7 +268,7 @@ export const USER_TYPE = [
 ]
 
 
-export const ACCOUNT_TYPE = [
+export const  ACCOUNT_TYPE = [
   { name: "Normal", id: ACCOUNT_NORMAL_TYPE_CODE },
   { name: "Assembly", id: ACCOUNT_ASSEMBLY_TYPE_CODE },
   { name: "Distributive", id: ACCOUNT_DISTRIBUTIVE_TYPE_CODE },

@@ -30,7 +30,7 @@ const QUERY_KEYS = {
   MATERIAL_GROUP: "materialGroup",
   CATEGORY: "category",
   CATEGORY_PROBLEM: "categoryProblem",
-  STORE: "store",
+  STORE: "stores",
 };
 
 export default QUERY_KEYS;

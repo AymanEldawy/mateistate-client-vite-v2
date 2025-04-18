@@ -69,6 +69,8 @@ const RHFTableAsyncSelect = ({
             defaultOption={defaultOption}
             setDefaultOption={setDefaultOption}
             onChange={(option) => {
+              console.log(option, 'option');
+              
               setDefaultOption(option);
               setValue(name, option?.[optionValue])
             }}

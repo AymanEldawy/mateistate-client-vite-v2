@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleContract = ({ id, signal }) => {
+export const getSingleContract = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${id}`, {
     signal,
   });

@@ -32,7 +32,7 @@ const RHFAsyncSelectField = ({
 }) => {
   const { control, watch, setValue } = useFormContext();
   const [defaultOption, setDefaultOption] = useState(null)
-  const { name, optionValue, optionLabel, table, required, allowAdd } = field || {}
+  const { name, optionValue = 'id', optionLabel = 'name', table, required, allowAdd } = field || {}
   const queryClient = new QueryClient();
 
   const getDefaultOption = async (value) => {
@@ -81,8 +81,8 @@ const RHFAsyncSelectField = ({
             )}
             <div className='relative w-full'>
               <ReactSelectAsync
-                getOptionLabel={(option) => option?.[optionLabel || 'name']}
-                getOptionValue={(option) => option?.[optionValue || 'id']}
+                getOptionLabel={(option) => option?.[optionLabel]}
+                getOptionValue={(option) => option?.[optionValue]}
                 styles={styles}
                 error={error}
                 selectClassName={selectClassName}
@@ -95,7 +95,7 @@ const RHFAsyncSelectField = ({
                 setDefaultOption={setDefaultOption}
                 onChange={(option) => {
                   setDefaultOption(option);
-                  setValue(name, option?.[optionValue])
+                  setValue(name, option?.[optionValue]);
                 }}
                 allowAdd={allowAdd}
                 table={table}

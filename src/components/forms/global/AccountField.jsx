@@ -1,8 +1,14 @@
-import React from 'react'
+import { RHFAsyncSelectField } from '../fields'
+import { getAccountSearch, getSingleAccount } from '@/services/accountService'
 
-const AccountField = () => {
+const AccountField = ({ name, ...props }) => {
   return (
-    <div>AccountField</div>
+    <RHFAsyncSelectField
+      name={name}
+      getSearch={getAccountSearch}
+      getSingle={getSingleAccount}
+      {...props}
+    />
   )
 }
 

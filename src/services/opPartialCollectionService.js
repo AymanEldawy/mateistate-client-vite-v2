@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSinglePartial = ({ id, signal }) => {
+export const getSinglePartial = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/${id}`, {
     signal,
   });

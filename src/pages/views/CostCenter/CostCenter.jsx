@@ -9,20 +9,13 @@ import {
 } from "@/services/accountService";
 import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
-import { costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
+import { costCenterDefaultValue, costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 // import QUERY_KEYS from './../../../data/queryKeys';
-const defaultValue = {
-  code: "",
-  name: "",
-  note: "",
-  parent_id: null,
-  ltnname: ""
-};
 
 const costCenterConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: costCenterDefaultValue,
     validationSchema: costCenterValidationSchema,
     mutationAddFunction: createAccount,
     mutationUpdateFunction: updateAccount,

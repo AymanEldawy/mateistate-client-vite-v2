@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleReservationProperty = ({ id, signal }) => {
+export const getSingleReservationProperty = (id, signal) => {
     return http.get(`${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}/${id}`, {
         signal,
     });

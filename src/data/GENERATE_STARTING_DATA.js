@@ -16,8 +16,8 @@ export const ACCOUNT_ASSEMBLY_TYPE_CODE = 3;
 export const ACCOUNT_DISTRIBUTIVE_TYPE_CODE = 4;
 export const ACCOUNT_NORMAL_TYPE_NAME = "account_normal";
 export const ACCOUNT_CLOSING_TYPE_NAME = "account_closing";
-export const ACCOUNT_ASSEMBLY_TYPE_NAME = "account_assembly";
-export const ACCOUNT_DISTRIBUTIVE_TYPE_NAME = "account_distributive";
+export const ACCOUNT_ASSEMBLY_TYPE_NAME = "accountAssemblies";
+export const ACCOUNT_DISTRIBUTIVE_TYPE_NAME = "accountDistributives";
 
 // Connect With DEFAULT
 export const CONNECT_WITH_NOTHING_CODE = 0;
