@@ -4,7 +4,7 @@ Manual
 
 - account
 - account_assembly []
-- account_distributive [] 
+- account_distributive []
 - user
 - building
 
@@ -55,6 +55,7 @@ Normal (4-5 days)
 - currency
 - material_group
 - category
+
 - category_problem
 - store
 - owner_expenses_types

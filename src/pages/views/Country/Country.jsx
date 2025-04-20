@@ -8,19 +8,30 @@ import {
 import countryColumns from "@/helpers/country/countryColumns";
 import { countryValidationSchema } from "@/helpers/country/countryValidationSchema";
 import CountryForm from "@/components/forms/containers/country/CountryForm";
+import {
+  createCountry,
+  deleteCountry,
+  deleteManyCountries,
+  getAllCountries,
+  updateCountry,
+} from "@/services/countryService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  code: 0,
+  name: "",
+  ltnname: "",
+};
 
 const countryConfig = {
   formProps: {
     defaultValue,
     validationSchema: countryValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createCountry,
+    mutationUpdateFunction: updateCountry,
     onSuccessAction: () => {},
     isSteps: true,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteCountry,
     RenderForm: (props) => <CountryForm {...props} />,
   },
   formHeaderProps: {
@@ -33,13 +44,12 @@ const countryConfig = {
 };
 
 const Country = () => {
-
   return (
     <PaperLayout
       name="Country"
       queryKey={QUERY_KEYS.Country}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllCountries} //
+      handleDeleteSelected={deleteManyCountries} //
       paperHeaderProps={{
         header: "Country",
       }}

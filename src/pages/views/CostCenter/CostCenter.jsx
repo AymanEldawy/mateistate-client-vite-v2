@@ -1,27 +1,21 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  createAccount,
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-  updateAccount,
-} from "@/services/accountService";
 import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
 import { costCenterDefaultValue, costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import FormWrapper from "@/components/forms/wrapper/FormWrapper";
+import { createCostCenter, deleteCostCenter, deleteManyCostCenters, getAllCostCenters, updateCostCenter } from "@/services/CostCenterService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const costCenterConfig = {
   formProps: {
     defaultValue: costCenterDefaultValue,
     validationSchema: costCenterValidationSchema,
-    mutationAddFunction: createAccount,
-    mutationUpdateFunction: updateAccount,
+    mutationAddFunction: createCostCenter,
+    mutationUpdateFunction: updateCostCenter,
     onSuccessAction: () => { },
     isSteps: false,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteCostCenter,
     RenderForm: (props) => <CostCenterForm {...props} />,
   },
   formHeaderProps: {
@@ -43,8 +37,8 @@ const CostCenter = ({ formOnly, outerClose }) => {
     <PaperLayout
       name="Cost_center"
       queryKey={QUERY_KEYS.Cost_center}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllCostCenters} //
+      handleDeleteSelected={deleteManyCostCenters} //
       paperHeaderProps={{
         header: "Cost_center",
       }}
