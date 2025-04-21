@@ -107,6 +107,8 @@ const PaperLayout = ({
           defaultValue={formProps?.defaultValue}
           queryKey={queryKey}
           number={numberSearchParam}
+          findAll={queryFn}
+          name={name}
         />
       </PaperModal>
       <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">

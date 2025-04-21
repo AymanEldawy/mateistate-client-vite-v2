@@ -30,14 +30,16 @@ const FormWrapper = ({
   formProps,
   formPaginationProps,
   onClose,
-  queryKey
+  queryKey,
+  findAll,
+  name
 }) => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
-  const paginationForm = useFormPagination(formPaginationProps)
+  const paginationForm = useFormPagination(findAll, formProps?.getSingleFunction, name)
   const [open, setOpen] = useState(false)
   const isUpdate = true
   const id = paginationForm?.currentId || ''

@@ -1,3 +1,4 @@
+import { UNIQUE_REF_TABLES } from "@/data/constants";
 import { NATIONALITY_LISTS } from "./DEFAULT_OPTIONS";
 
 const textField = (additional) => ({
@@ -129,19 +130,26 @@ const bank = (additional) => ({
   ...additional,
 });
 
-// const client = (additional) => ({
-//   label: "client_id",
-//   name: "client_id",
-//   table: UNIQUE_TABLES.clients,
-//   ...additional,
-// });
+const client = (additional) => ({
+  label: "client_id",
+  name: "client_id",
+  table: UNIQUE_REF_TABLES.clients,
+  ...additional,
+});
 
-// const suppliers = (additional) => ({
-//   label: "owner_id",
-//   name: "owner_id",
-//   table: UNIQUE_TABLES.suppliers,
-//   ...additional,
-// });
+const currency = (additional) => ({
+  label: "currency_id",
+  name: "currency_id",
+  table: 'currency',
+  ...additional,
+});
+
+const suppliers = (additional) => ({
+  label: "owner_id",
+  name: "owner_id",
+  table: UNIQUE_REF_TABLES.suppliers,
+  ...additional,
+});
 
 const FIELDS_STRUCTURE = {
   number,
@@ -151,8 +159,9 @@ const FIELDS_STRUCTURE = {
   note,
   nationality,
   cost_center,
-  // client,
-  // suppliers,
+  client,
+  currency,
+  suppliers,
   bank,
   building,
   // Fields,

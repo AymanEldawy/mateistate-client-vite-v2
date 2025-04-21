@@ -19,7 +19,7 @@ const Layout = () => {
 
 
   return (
-    <div id="layout-wrapper" className={"flex flex-col h-screen"}>
+    <div id="layout-wrapper" className={"flex flex-col pb-12 min-h-screen"}>
       <Header />
       <Menu menu={sideMenuItems} />
       <Sidebar menu={sideMenuItems} />

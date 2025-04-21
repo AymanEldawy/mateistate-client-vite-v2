@@ -3,8 +3,7 @@ import ReportResultsWrapper from './ReportResultsWrapper';
 import { FormProvider, useForm } from 'react-hook-form';
 import { PaperHeader } from '../../layout/paper/PaperHeader';
 
-const ReportWrapper = ({ getReportData, columns, children, extraContent, reportHeadProps }) => {
-  const methods = useForm();
+const ReportWrapper = ({ getReportData, columns, children, extraContent, reportHeadProps, methods }) => {
   const { handleSubmit } = methods;
   const [showResult, setShowResult] = useState();
   const [data, setData] = useState();
@@ -16,7 +15,7 @@ const ReportWrapper = ({ getReportData, columns, children, extraContent, reportH
 
   return (
     <>
-      <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">
+      <div className="bg-[#fff] shadow p-4 container rounded-md !my-4 relative">
         <PaperHeader {...reportHeadProps} />
         <FormProvider {...methods}>
           <form

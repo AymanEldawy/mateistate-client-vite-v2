@@ -707,3 +707,16 @@ export const NATIONALITY_LISTS = [
 ];
 
 
+
+
+export const RETURNED_CHEQUE_REPORT_DATA_BY = [
+  { id: 1, name: "Issue date" },
+  { id: 2, name: "Due Date" },
+  { id: 3, name: "Return Date" },
+];
+
+export const COLLECTION_CHEQUE_REPORT_DATA_BY = [
+  { id: 1, name: "Issue date" },
+  { id: 2, name: "Due Date" },
+  { id: 3, name: "collect Date" },
+];

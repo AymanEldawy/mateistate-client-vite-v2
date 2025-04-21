@@ -1,6 +1,4 @@
-import { ChevronIcon, LongArrow } from "@components/Icons";
-import Layout from "Components/Layout";
-import React from "react";
+import { LongArrow } from "@components/Icons";
 import { useNavigate } from "react-router-dom";
 
 const BlockLayout = ({

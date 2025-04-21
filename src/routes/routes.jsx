@@ -57,7 +57,11 @@ const ResetPassword = React.lazy(() => import("../pages/auth/ResetPassword"));
 // );
 
 // Reports 
-const ChequeReport = React.lazy(() => import("../pages/reports/ChequeReport"));
+const ChequeReport = React.lazy(() => import("../pages/reports/realstate/ChequeReport"));
+const ChangesFlatsRentPricingReport = React.lazy(() => import("../pages/reports/realstate/ChangesFlatsRentPricingReport"));
+const CollectionChqReport = React.lazy(() => import("../pages/reports/realstate/CollectionChqReport"));
+const ChangesFlatsSalePricingReport = React.lazy(() => import("../pages/reports/realstate/ChangesFlatsSalePricingReport"));
+const ComplaintsReport = React.lazy(() => import("../pages/reports/realstate/ComplaintsReport"));
 
 
 
@@ -168,15 +172,32 @@ const routes = [
         path: PATHS.ENTRIES,
         element: <Entries />,
       },
+      {
+        path: PATHS.MATERIAL_GROUP,
+        element: <MaterialGroup />,
+      },
       /************************************** Reports **************************************/
       {
         path: PATHS.CHEQUE_REPORT,
         element: <ChequeReport />,
       },
       {
-        path: PATHS.MATERIAL_GROUP,
-        element: <MaterialGroup />,
+        path: PATHS.CHANGES_FLATS_RENT_PRICING_REPORT,
+        element: <ChangesFlatsRentPricingReport />,
       },
+      {
+        path: PATHS.CHANGES_FLATS_SALE_PRICING_REPORT,
+        element: <ChangesFlatsSalePricingReport />,
+      },
+      {
+        path: PATHS.COLLECTION_CHEQUE_REPORT,
+        element: <CollectionChqReport />,
+      },
+      {
+        path: PATHS.COMPLAINTS_REPORT,
+        element: <ComplaintsReport />,
+      },
+   
       /************************************** Category **************************************/
       {
         path: PATHS.CATEGORY,

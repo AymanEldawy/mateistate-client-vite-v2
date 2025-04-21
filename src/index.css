@@ -26,11 +26,17 @@ body {
   overflow-x: hidden;
 }
 
-.container {
+.container,
+.container-full  {
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
+}
+.container-full {
+  width: 100%;
+  max-width: 100%;
 }
 
 input[type="search"]::-webkit-search-decoration,

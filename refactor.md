@@ -8,21 +8,13 @@ Manual
 - user
 - building
 
----
-
 - op_collection
 - op_partial_collection
 - op_return
 - cheque
-
----
-
 - installment
 
----
-
 - bill
-
 ---
 
 - vouchers
