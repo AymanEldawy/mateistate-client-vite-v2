@@ -42,7 +42,7 @@ const MaterialGroup = React.lazy(() =>
 const Category = React.lazy(() => import("../pages/views/Category/Category"));
 const CategoryProblem = React.lazy(() => import("../pages/views/Category/CategoryProblem"));
 const Store = React.lazy(() => import("../pages/views/Store/Store"));
-const Login = React.lazy(() => import("../pages/auth/Login"));
+const Login = React.lazy-(() => import("../pages/auth/Login"));
 const ForgotPassword = React.lazy(() => import("../pages/auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("../pages/auth/ResetPassword"));
 // const Profile = React.lazy(() => import("./profile/Profile"));

@@ -8,16 +8,22 @@ import {
 import { materialGroupValidationSchema } from "@/helpers/materialGroup/materialGroupValidationSchema";
 import materialGroupColumns from "@/helpers/materialGroup/materialGroupColumns";
 import MaterialGroupForm from "@/components/forms/containers/materialGroup/materialGroupForm";
+import { createMaterialGroup, deleteManyMaterialGroup, getAllMaterialGroups, updateMaterialGroup } from "@/services/materialGroupsService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  name: "",
+  // parentId: "",
+  note: "",
+  ltnname: "",
+};
 
 const materialGroupConfig = {
   formProps: {
     defaultValue,
     validationSchema: materialGroupValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createMaterialGroup,
+    mutationUpdateFunction: updateMaterialGroup,
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteAccount,
@@ -37,8 +43,8 @@ const MaterialGroup = () => {
     <PaperLayout
       name="material_group"
       queryKey={QUERY_KEYS.MATERIAL_GROUP}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllMaterialGroups} //
+      handleDeleteSelected={deleteManyMaterialGroup} //
       paperHeaderProps={{
         header: "material_group",
       }}

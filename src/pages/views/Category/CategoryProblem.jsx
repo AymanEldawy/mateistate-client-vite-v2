@@ -1,26 +1,29 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-} from "@/services/accountService";
 import { categoryProblemValidationSchema } from "@/helpers/category/categoryProblemValidationSchema";
 import categoryProblemColumns from "@/helpers/category/categoryProblemColumns";
 import CategoryProblemForm from "@/components/forms/containers/category/CategoryProblemForm";
+import { createCategoryProblem, deleteCategoryProblem, deleteManyCategoryProblems, getAllCategoryProblems, updateCategoryProblem } from "@/services/categoryProblemService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {};
+const defaultValue = {
+  description: "",
+  ltndescription: "",
+  isAvailable: true,
+  minutes: 0,
+  price: 0,
+  categoryId: "",
+};
 
 const categoryProblemConfig = {
   formProps: {
     defaultValue,
     validationSchema: categoryProblemValidationSchema,
-    mutationAddFunction: () => {},
-    mutationUpdateFunction: () => {},
+    mutationAddFunction: createCategoryProblem,
+    mutationUpdateFunction: updateCategoryProblem,
     onSuccessAction: () => {},
     isSteps: true,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteCategoryProblem,
     RenderForm: (props) => <CategoryProblemForm {...props} />,
   },
   formHeaderProps: {
@@ -37,8 +40,8 @@ const CategoryProblem = () => {
     <PaperLayout
       name="category_problem"
       queryKey={QUERY_KEYS.CATEGORY_PROBLEM}
-      queryFn={getAllAccounts} //
-      handleDeleteSelected={deleteManyAccounts} //
+      queryFn={getAllCategoryProblems} //
+      handleDeleteSelected={deleteManyCategoryProblems} //
       paperHeaderProps={{
         header: "material_group",
       }}

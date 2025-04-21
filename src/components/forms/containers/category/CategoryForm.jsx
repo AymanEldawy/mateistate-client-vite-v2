@@ -13,7 +13,7 @@ const CategoryForm = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput {...CATEGORY_FIELDS?.parent_id} />
       </div>
-      <RHFUploadFilesController {...CATEGORY_FIELDS?.image} />
+      {/* <RHFUploadFilesController {...CATEGORY_FIELDS?.image} /> */}
     </div>
   );
 };

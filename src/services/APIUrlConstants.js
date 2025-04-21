@@ -26,11 +26,12 @@ const API_URL_CONSTANTS = {
   /************************************** Seller **************************************/
   BASE_SELLER: "/sellers",
   /************************************** Cost_Center **************************************/
-  BASE_COST_CENTER: "/cost_center",
+  BASE_COST_CENTER: "/cost-centers",
   /************************************** Country **************************************/
   BASE_COUNTRY: "/countries",
   /************************************** Category **************************************/
-  BASE_CATEGORY: "/categories",
+  BASE_CATEGORY: "/category",
+  BASE_CATEGORY_PROBLEM: "/category-problem",
   /************************************** Store **************************************/
   BASE_STORE: "/stores",
   /************************************** PARTIAL_COLLECTION **************************************/

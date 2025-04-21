@@ -8,6 +8,6 @@ export const COUNTRY_FIELDS = {
   code: {
     label: "code",
     name: "code",
-    type: "text",
+    type: "number",
   },
 };
