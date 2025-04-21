@@ -31,6 +31,7 @@ const API_URL_CONSTANTS = {
   BASE_COUNTRY: "/countries",
   /************************************** Category **************************************/
   BASE_CATEGORY: "/category",
+  BASE_CATEGORY_PROBLEM: "/category-problem",
   /************************************** Store **************************************/
   BASE_STORE: "/stores",
   /************************************** PARTIAL_COLLECTION **************************************/
