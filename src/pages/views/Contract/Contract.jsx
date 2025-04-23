@@ -4,9 +4,8 @@ import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import contractColumns from '@/helpers/contract/contractColumns'
 // import ContractForm from '@/components/forms/containers/contract/ContractForm'
-import { createContract, deleteContract, deleteManyContracts, getAllContracts, getSearchContract, updateContract } from '@/services/contractService'
+import { createContract, deleteContract, deleteManyContracts, getAllContracts, getSearchContract, getSingleContract, updateContract } from '@/services/contractService'
 // import { useState } from 'react'
-import { APARTMENT_STEPS_CONTRACT } from '@/data/constants'
 import { contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
 import { lazy, useState } from 'react'
 import ContractFormFooter from '@/components/forms/containers/contract/ContractFormFooter'
@@ -17,6 +16,7 @@ import BtnGroups from '@/components/shared/BtnGroups'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
+import { APARTMENT_STEPS_CONTRACT } from '@/helpers/contract/contractSteps'
 const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
 const defaultValue = {}
@@ -75,6 +75,7 @@ const Contract = () => {
           validationSchema: contractValidationSchema,
           mutationAddFunction: createContract,
           mutationUpdateFunction: updateContract,
+          getSingleFunction: getSingleContract,
           onSuccessAction: () => { },
           isSteps: true,
           onHandleDelete: deleteContract,

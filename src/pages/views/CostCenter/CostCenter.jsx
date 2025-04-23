@@ -4,7 +4,7 @@ import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
 import { costCenterDefaultValue, costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import FormWrapper from "@/components/forms/wrapper/FormWrapper";
-import { createCostCenter, deleteCostCenter, deleteManyCostCenters, getAllCostCenters, updateCostCenter } from "@/services/CostCenterService";
+import { createCostCenter, deleteCostCenter, deleteManyCostCenters, getAllCostCenters, getSingleCostCenter, updateCostCenter } from "@/services/CostCenterService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const costCenterConfig = {
@@ -13,6 +13,7 @@ const costCenterConfig = {
     validationSchema: costCenterValidationSchema,
     mutationAddFunction: createCostCenter,
     mutationUpdateFunction: updateCostCenter,
+    getSingleFunction: getSingleCostCenter,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteCostCenter,

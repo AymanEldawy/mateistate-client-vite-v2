@@ -5,10 +5,11 @@ import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
-import { createEntry, deleteEntry, deleteManyEntries, getAllEntries, getSearchEntry, updateEntry } from '@/services/entriesService'
+import { createEntry, deleteEntry, deleteManyEntries, getAllEntries, getSearchEntry, getSingleEntry, updateEntry } from '@/services/entriesService'
 import entriesColumns from '@/helpers/entries/entriesColumns'
 import { entriesValidationSchema } from '@/helpers/entries/entriesValidationSchema'
 import EntryOriginalLink from '@/components/EntryOriginalLink/EntryOriginalLink'
+import { get } from 'react-hook-form'
 const EntriesForm = lazy(() => import("@/components/forms/containers/entries/EntriesForm"))
 
 const defaultValue = {}
@@ -37,6 +38,7 @@ const Entries = () => {
           validationSchema: entriesValidationSchema,
           mutationAddFunction: createEntry,
           mutationUpdateFunction: updateEntry,
+          getSingleFunction: getSingleEntry,
           onSuccessAction: () => { },
           isSteps: false,
           onHandleDelete: deleteEntry,

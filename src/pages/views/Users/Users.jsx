@@ -2,7 +2,7 @@ import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import userColumns from '@/helpers/user/userColumns'
-import { createUser, deleteManyUsers, deleteUser, getAllUsers, updateUser } from '@/services/userService'
+import { createUser, deleteManyUsers, deleteUser, getAllUsers, getSingleUser, updateUser } from '@/services/userService'
 import { userValidationSchema } from '@/helpers/user/userValidationSchema'
 import { lazy } from 'react'
 const UserForm = lazy(() => import("@/components/forms/containers/user/UserForm"))
@@ -15,6 +15,7 @@ const userConfig = {
     validationSchema: userValidationSchema,
     mutationAddFunction: createUser,
     mutationUpdateFunction: updateUser,
+    getSingleFunction: getSingleUser,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteUser,
@@ -22,10 +23,6 @@ const userConfig = {
   },
   formHeaderProps: {
     header: "user"
-  },
-  formPaginationProps: {
-    name: 'user',
-    number: 1
   },
 }
 
@@ -39,7 +36,7 @@ const Users = ({ formOnly, outerClose }) => {
       />
     )
   }
-  
+
   return (
     <PaperLayout
       name="user"

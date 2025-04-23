@@ -3,7 +3,7 @@ import { LAND_STEPS } from "@/data/constants";
 import QUERY_KEYS from "@/data/queryKeys";
 import landColumns from "@/helpers/land/landColumns";
 import { landValidationSchema } from "@/helpers/land/landValidationSchema";
-import { updateLand, deleteLand, createLand } from "@/services/landServices";
+import { updateLand, deleteLand, createLand, getSingleLand } from "@/services/landServices";
 import { deleteManyLands, getAllLands } from "@/services/landServices";
 import { lazy } from "react";
 const LandForm = lazy(() => import("@/components/forms/containers/land/LandForm"))
@@ -15,6 +15,7 @@ const landConfig = {
     validationSchema: landValidationSchema,
     mutationAddFunction: createLand,
     mutationUpdateFunction: updateLand,
+    getSingleFunction: getSingleLand,
     onSuccessAction: () => { },
     isSteps: true,
     onHandleDelete: deleteLand,

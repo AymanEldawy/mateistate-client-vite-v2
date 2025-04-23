@@ -35,7 +35,7 @@ const Building = () => {
         mutationUpdateFunction: updateBuilding,
         getSingleFunction: getSingleBuilding,
         onSuccessAction: (data) => {
-        navigate(`/building/details/${data?.id}`)
+          navigate(`/building/details/${data?.id}`)
         },
         isSteps: true,
         onHandleDelete: deleteBuilding,

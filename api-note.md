@@ -12,7 +12,26 @@
 - bulk delete
 ## [x] accounts 
 - bulk delete 
-
+## lessor
+- bulk delete 
+## owner
+- bulk delete 
+## seller
+- bulk delete 
+## cost_center
+- bulk delete 
+## country
+- bulk delete 
+## bank
+- bulk delete 
+## currency
+- bulk delete 
+## material_group
+- bulk delete 
+## category
+- bulk delete 
+## category_problem
+- bulk delete 
 
 ## apartment
 ## land
@@ -30,30 +49,11 @@
 ## op_collection
 ## op_partial_collection
 ## op_return
-## cheque
 ## installment
-## bill
-## vouchers
-## entries
-## apartment
-## parking
-## shop
-## villa
 ## land
-## currency
 ## reservation_property
 ## user_work_times
 ## service
-## lessor
-## owner
-## seller
-## cost_center
-## country
-## bank
-## currency
-## material_group
-## category
-## category_problem
-## store
+
 ## owner_expenses_types
 ## owner_expenses

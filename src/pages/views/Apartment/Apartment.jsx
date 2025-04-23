@@ -1,6 +1,6 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '@/components/layout/paper/PaperLayout'
-import { deleteApartment, deleteManyApartments, getAllApartments } from '@/services/apartmentService'
+import { createApartment, deleteApartment, deleteManyApartments, getAllApartments, getSingleApartment, updateApartment } from '@/services/apartmentService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import apartmentColumns from '@/helpers/apartment/apartmentColumns'
 import { lazy } from 'react'
@@ -16,8 +16,9 @@ const apartmentConfig = {
   formProps: {
     defaultValue,
     validationSchema,
-    mutationAddFunction: () => { },
-    mutationUpdateFunction: () => { },
+    mutationAddFunction: createApartment,
+    mutationUpdateFunction: updateApartment,
+    getSingleFunction: getSingleApartment,
     onSuccessAction: () => { },
     isSteps: true,
     onHandleDelete: deleteApartment,

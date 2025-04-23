@@ -1,33 +1,27 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, updateAccount } from '@/services/accountService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import accountColumns from '@/helpers/account/accountColumns'
-import { lazy } from 'react'
-// import QUERY_KEYS from './../../../data/queryKeys';
-const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
+import ChequePatternForm from '@/components/forms/containers/patterns/cheque/ChequePatternForm'
+import { createChequePattern, deleteChequePattern, deleteManyChequePatterns, getAllChequePatterns, getSingleChequePattern, updateChequePattern } from '@/services/chequePatternsService'
 
 const defaultValue = {}
 
 const validationSchema = () => { }
 
-const accountConfig = {
+const chequePatternConfig = {
   formProps: {
     defaultValue,
     validationSchema,
-    mutationAddFunction: createAccount,
-    mutationUpdateFunction: updateAccount,
+    mutationAddFunction: createChequePattern,
+    mutationUpdateFunction: updateChequePattern,
+    getSingleFunction: getSingleChequePattern,
     onSuccessAction: () => { },
     isSteps: false,
-    onHandleDelete: deleteAccount,
-    RenderForm: (props) => <AccountForm {...props} />
+    onHandleDelete: deleteChequePattern,
+    RenderForm: (props) => <ChequePatternForm {...props} />
   },
   formHeaderProps: {
-    header: "Account"
-  },
-  formPaginationProps: {
-    name: 'account',
-    number: 1
+    header: "cheque_pattern",
   },
 }
 
@@ -36,7 +30,7 @@ const ContractPattern = ({ formOnly, outerClose }) => {
   if (formOnly) {
     return (
       <FormWrapper
-        {...accountConfig}
+        {...chequePatternConfig}
         outerClose={outerClose}
       />
     )
@@ -44,21 +38,21 @@ const ContractPattern = ({ formOnly, outerClose }) => {
   
   return (
     <PaperLayout
-      name="contract_pattern"
-      queryKey={QUERY_KEYS.CONTRACT_PATTERN}
-      queryFn={getAllAccounts}
-      handleDeleteSelected={deleteManyAccounts}
+      name="cheque_pattern"
+      queryKey={QUERY_KEYS.CHEQUE_PATTERN}
+      queryFn={getAllChequePatterns}
+      handleDeleteSelected={deleteManyChequePatterns}
       paperHeaderProps={{
-        header: "contract_pattern"
+        header: "cheque_pattern"
       }}
       paperBarProps={{
         onClickPrint: true,
         onClickAdd: true,
       }}
       tableProps={{
-        columns: accountColumns
+        columns: [] // 
       }}
-      {...accountConfig}
+      {...chequePatternConfig}
 
     />
   )

@@ -31,6 +31,9 @@ const QUERY_KEYS = {
   CATEGORY: "category",
   CATEGORY_PROBLEM: "categoryProblem",
   STORE: "stores",
+  BILL_PATTERN: "bill_pattern",
+  CHEQUE_PATTERN: "cheque_pattern",
+  VOUCHER_PATTERN: "voucher_pattern",
 };
 
 export default QUERY_KEYS;

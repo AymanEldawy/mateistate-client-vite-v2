@@ -8,7 +8,7 @@ import {
 import { materialGroupValidationSchema } from "@/helpers/materialGroup/materialGroupValidationSchema";
 import materialGroupColumns from "@/helpers/materialGroup/materialGroupColumns";
 import MaterialGroupForm from "@/components/forms/containers/materialGroup/materialGroupForm";
-import { createMaterialGroup, deleteManyMaterialGroup, getAllMaterialGroups, updateMaterialGroup } from "@/services/materialGroupsService";
+import { createMaterialGroup, deleteManyMaterialGroup, getAllMaterialGroups, getSingleMaterialGroup, updateMaterialGroup } from "@/services/materialGroupsService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {
@@ -24,8 +24,9 @@ const materialGroupConfig = {
     validationSchema: materialGroupValidationSchema,
     mutationAddFunction: createMaterialGroup,
     mutationUpdateFunction: updateMaterialGroup,
-    onSuccessAction: () => {},
-    isSteps: true,
+    getSingleFunction: getSingleMaterialGroup,
+    onSuccessAction: () => { },
+    isSteps: false,
     onHandleDelete: deleteAccount,
     RenderForm: (props) => <MaterialGroupForm {...props} />,
   },

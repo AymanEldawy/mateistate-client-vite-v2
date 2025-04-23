@@ -13,8 +13,10 @@ import {
   deleteCountry,
   deleteManyCountries,
   getAllCountries,
+  getSingleCountry,
   updateCountry,
 } from "@/services/countryService";
+import { get } from "react-hook-form";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {
@@ -29,6 +31,7 @@ const countryConfig = {
     validationSchema: countryValidationSchema,
     mutationAddFunction: createCountry,
     mutationUpdateFunction: updateCountry,
+    getSingleFunction: getSingleCountry,
     onSuccessAction: () => {},
     isSteps: true,
     onHandleDelete: deleteCountry,

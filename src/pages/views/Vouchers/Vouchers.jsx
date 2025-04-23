@@ -5,7 +5,7 @@ import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy, useState } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
-import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, updateVoucher } from '@/services/vouchersService'
+import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, getSingleVoucher, updateVoucher } from '@/services/vouchersService'
 import voucherColumns from '@/helpers/voucher/voucherColumns'
 import { voucherValidationSchema } from '@/helpers/voucher/voucherValidationSchema'
 import Modal from '@/components/shared/Modal'
@@ -87,6 +87,7 @@ const Vouchers = ({ formOnly }) => {
           validationSchema: voucherValidationSchema,
           mutationAddFunction: createVoucher,
           mutationUpdateFunction: updateVoucher,
+          getSingleFunction: getSingleVoucher,
           onSuccessAction: () => { },
           isSteps: false,
           onHandleDelete: deleteVoucher,

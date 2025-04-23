@@ -13,6 +13,7 @@ import {
   deleteManySellers,
   deleteSeller,
   getAllSellers,
+  getSingleSeller,
   updateSeller,
 } from "@/services/SellerService";
 // import QUERY_KEYS from './../../../data/queryKeys';
@@ -39,8 +40,9 @@ const sellerConfig = {
     validationSchema: sellerValidationSchema,
     mutationAddFunction: createSeller,
     mutationUpdateFunction: updateSeller,
+    getSingleFunction: getSingleSeller,
     onSuccessAction: () => {},
-    isSteps: true,
+    isSteps: false,
     onHandleDelete: deleteSeller,
     RenderForm: (props) => <SellerForm {...props} />,
   },

@@ -8,6 +8,7 @@ import {
   deleteManyOwners,
   deleteOwner,
   getAllOwners,
+  getSingleOwner,
   updateOwner,
 } from "@/services/ownerService";
 // import QUERY_KEYS from './../../../data/queryKeys';
@@ -29,8 +30,9 @@ const ownerConfig = {
     validationSchema: ownerValidationSchema,
     mutationAddFunction: createOwner,
     mutationUpdateFunction: updateOwner,
+    getSingleFunction: getSingleOwner,
     onSuccessAction: () => {},
-    isSteps: true,
+    isSteps: false,
     onHandleDelete: deleteOwner,
     RenderForm: (props) => <OwnerForm {...props} />,
   },

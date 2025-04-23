@@ -1,5 +1,5 @@
 
-const GLOBAL_CONTRACT_STEPS = {
+export const GLOBAL_CONTRACT_STEPS = {
   contract_general_step: "general",
   contract_payments_step: "payments",
   contract_commission_step: "commission",

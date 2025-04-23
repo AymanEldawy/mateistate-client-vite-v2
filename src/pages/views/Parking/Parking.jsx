@@ -1,6 +1,6 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '@/components/layout/paper/PaperLayout'
-import { deleteParking, deleteManyParkings, getAllParkings } from '@/services/parkingService'
+import { deleteParking, deleteManyParkings, getAllParkings, createParking, updateParking, getSingleParking } from '@/services/parkingService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import parkingColumns from '@/helpers/parking/parkingColumns'
 import { lazy } from 'react'
@@ -16,8 +16,9 @@ const parkingConfig = {
     formProps: {
         defaultValue,
         validationSchema,
-        mutationAddFunction: () => { },
-        mutationUpdateFunction: () => { },
+        mutationAddFunction: createParking,
+        mutationUpdateFunction: updateParking,
+        getSingleFunction: getSingleParking,
         onSuccessAction: () => { },
         isSteps: true,
         onHandleDelete: deleteParking,

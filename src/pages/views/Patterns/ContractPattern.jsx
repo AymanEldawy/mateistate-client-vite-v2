@@ -1,12 +1,8 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import accountColumns from '@/helpers/account/accountColumns'
 import { lazy } from 'react'
-import ContractPatternForm from '@/components/forms/containers/patterns/contract/ContractPatternForm'
 import { createContractPattern, deleteContractPattern, deleteManyContractPatterns, getAllContractPatterns, updateContractPattern } from '@/services/contractPatternsService'
-// import QUERY_KEYS from './../../../data/queryKeys';
-const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
+const ContractPatternForm = lazy(() => import('@/components/forms/containers/patterns/contract/ContractPatternForm'))
 
 const defaultValue = {}
 
@@ -47,7 +43,7 @@ const ContractPattern = () => {
         onClickAdd: true,
       }}
       tableProps={{
-        columns: accountColumns
+        columns: [] //update
       }}
       {...contractPatternConfig}
 

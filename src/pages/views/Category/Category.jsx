@@ -13,8 +13,10 @@ import {
   deleteCategory,
   deleteManyCategories,
   getAllCategories,
+  getSingleCategory,
   updateCategory,
 } from "@/services/categoryService";
+import { get } from "react-hook-form";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const defaultValue = {
@@ -32,8 +34,9 @@ const categoryConfig = {
     validationSchema: categoryValidationSchema,
     mutationAddFunction: createCategory,
     mutationUpdateFunction: updateCategory,
+    getSingleFunction: getSingleCategory,
     onSuccessAction: () => {},
-    isSteps: true,
+    isSteps: false,
     onHandleDelete: deleteCategory,
     RenderForm: (props) => <CategoryForm {...props} />,
   },

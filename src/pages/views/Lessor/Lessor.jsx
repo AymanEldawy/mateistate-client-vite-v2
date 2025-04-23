@@ -8,6 +8,7 @@ import {
   deleteLessor,
   deleteManyLessor,
   getAllLessors,
+  getSingleLessor,
   updateLessor,
 } from "@/services/lessorService";
 // import QUERY_KEYS from './../../../data/queryKeys';
@@ -37,8 +38,9 @@ const lessorConfig = {
     validationSchema: lessorValidationSchema,
     mutationAddFunction: createLessor,
     mutationUpdateFunction: updateLessor,
-    onSuccessAction: () => {},
-    isSteps: true,
+    getSingleFunction: getSingleLessor,
+    onSuccessAction: () => { },
+    isSteps: false,
     onHandleDelete: deleteLessor,
     RenderForm: (props) => <LessorForm {...props} />,
   },

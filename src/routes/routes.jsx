@@ -57,12 +57,25 @@ const ResetPassword = React.lazy(() => import("../pages/auth/ResetPassword"));
 // );
 
 // Reports 
+// 1.Realstate Reports
 const ChequeReport = React.lazy(() => import("../pages/reports/realstate/ChequeReport"));
 const ChangesFlatsRentPricingReport = React.lazy(() => import("../pages/reports/realstate/ChangesFlatsRentPricingReport"));
 const CollectionChqReport = React.lazy(() => import("../pages/reports/realstate/CollectionChqReport"));
 const ChangesFlatsSalePricingReport = React.lazy(() => import("../pages/reports/realstate/ChangesFlatsSalePricingReport"));
 const ComplaintsReport = React.lazy(() => import("../pages/reports/realstate/ComplaintsReport"));
+const ContractChequeReport = React.lazy(() => import("../pages/reports/realstate/ContractChequeReport"));
+const ContractCycleReport = React.lazy(() => import("../pages/reports/realstate/ContractCycleReport"));
+const ContractNearToExpireReport = React.lazy(() => import("../pages/reports/realstate/ContractNearToExpireReport"));
+const ContractPaymentsReport = React.lazy(() => import("../pages/reports/realstate/ContractPaymentsReport"));
+const ContractsDepositReport = React.lazy(() => import("../pages/reports/realstate/ContractsDepositReport"));
+const ContractsExpiredReport = React.lazy(() => import("../pages/reports/realstate/ContractsExpiredReport"));
+const ContractsReport = React.lazy(() => import("../pages/reports/realstate/ContractsReport"));
+const CreditorsAgesReport = React.lazy(() => import("../pages/reports/realstate/CreditorsAgesReport"));
 
+// 2.Accounting Reports
+const CostCenterGeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting/CostCenterGeneralLedgerReport"));
+const CustomersAccountStatementReport = React.lazy(() => import("../pages/reports/accounting/CustomersAccountStatementReport"));
+const CostCenterTrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/CostCenterTrialBalanceReport"));
 
 
 const routes = [
@@ -196,6 +209,50 @@ const routes = [
       {
         path: PATHS.COMPLAINTS_REPORT,
         element: <ComplaintsReport />,
+      },
+      {
+        path: PATHS.CONTRACT_CHEQUE_REPORT,
+        element: <ContractChequeReport />,
+      },
+      {
+        path: PATHS.CONTRACT_CYCLE_REPORT,
+        element: <ContractCycleReport />,
+      },
+      {
+        path: PATHS.NEAR_TO_EXPIRE_CONTRACT,
+        element: <ContractNearToExpireReport />,
+      },
+      {
+        path: PATHS.CONTRACT_PAYMENTS_REPORT,
+        element: <ContractPaymentsReport />,
+      },
+      {
+        path: PATHS.CONTRACTS_DEPOSIT_REPORT,
+        element: <ContractsDepositReport />,
+      },
+      {
+        path: PATHS.EXPIRED_CONTRACT,
+        element: <ContractsExpiredReport />,
+      },
+      {
+        path: PATHS.CONTRACT_REPORT,
+        element: <ContractsReport />,
+      },
+      {
+        path: PATHS.CREDITORS_AGES_REPORT,
+        element: <CreditorsAgesReport />,
+      },
+      {
+        path: PATHS.COST_CENTER_GENERAL_LEDGER_REPORT,
+        element: <CostCenterGeneralLedgerReport />,
+      },
+      {
+        path: PATHS.CUSTOMER_ACCOUNT_STATEMENT_REPORT,
+        element: <CustomersAccountStatementReport />,
+      },
+      {
+        path: PATHS.COST_CENTER_TRIAL_BALANCE_REPORT,
+        element: <CostCenterTrialBalanceReport />,
       },
    
       /************************************** Category **************************************/

@@ -5,7 +5,7 @@ import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy, useState } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
-import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, updateBill } from '@/services/billService'
+import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, getSingleBill, updateBill } from '@/services/billService'
 import { billValidationSchema } from '@/helpers/bill/billValidationSchema'
 import billColumns from '@/helpers/bill/billColumns'
 import Modal from '@/components/shared/Modal'
@@ -13,6 +13,7 @@ import BtnGroups from '@/components/shared/BtnGroups'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
+import { get } from 'react-hook-form'
 const BillForm = lazy(() => import("@/components/forms/containers/bill/BillForm"))
 const defaultValue = {}
 
@@ -69,6 +70,7 @@ const Bills = () => {
           validationSchema: billValidationSchema,
           mutationAddFunction: createBill,
           mutationUpdateFunction: updateBill,
+          getSingleFunction: getSingleBill,
           onSuccessAction: () => { },
           isSteps: false,
           onHandleDelete: deleteBill,

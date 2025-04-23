@@ -1,4 +1,3 @@
-import { APARTMENT_STEPS, GLOBAL_CONTRACT_STEPS } from "@/data/constants"
 import ContractFormGeneral from "./ContractFormGeneral"
 import ContractFormPayments from "./ContractFormPayments"
 import ContractFormCommission from "./ContractFormCommission"
@@ -8,6 +7,7 @@ import ContractFormLinkedParking from "./ContractFormLinkedParking"
 import ContractFormContractCycle from "./ContractFormContractCycle"
 import { useForm } from "react-hook-form"
 import InstallmentForm from "./InstallmentForm"
+import { GLOBAL_CONTRACT_STEPS } from "@/helpers/contract/contractSteps"
 
 const ContractForm = ({ code, tab, isInstallmentOpen, setIsInstallmentOpen }) => {
   const {
