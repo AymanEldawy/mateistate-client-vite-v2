@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { ReportFilterFields } from "../shared/ReportFilterFields";
-import { getReportFields } from "@/helpers/Reports";
+import { getReportFields } from "@/helpers/reports";
 import { useMemo } from "react";
 import { ReportFields } from "../shared/ReportFields";
 import { CurrencyFieldGroup } from "@/components/forms/global";

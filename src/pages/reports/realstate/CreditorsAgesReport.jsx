@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useMemo, useState } from "react";
-import { getReportColumns, getReportFields } from "@/helpers/Reports";
+import { getReportColumns, getReportFields } from "@/helpers/reports";
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
 import { RHFCheckbox } from "@/components/forms/fields";
 import { ReportFilterColumns } from "@/components/filters/ReportFilterColumns";
