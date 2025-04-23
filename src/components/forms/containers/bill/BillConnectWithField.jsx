@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { RHFAsyncSelectField, RHFSelectField } from "../../fields";
-// import { getConnectWithUrl } from 'Helpers/functions';
 
 const REF_TABLES = {
   [BILL_CONNECT_WITH_MAINTENANCES_CODE]: BILL_CONNECT_WITH_MAINTENANCES_NAME,

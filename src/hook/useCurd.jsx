@@ -1,4 +1,3 @@
-// import { CURD } from "Helpers/Lib/api";
 
 const useCurd = () => {
   // const curd = CURD();

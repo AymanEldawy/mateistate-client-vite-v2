@@ -6,7 +6,7 @@ import { ReportFields } from "@/components/reports/shared/ReportFields";
 import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFields";
 import { ReportReviewField } from "@/components/reports/shared/ReportReviewField";
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
-import { getReportColumns, getReportFields } from "@/helpers/reports";
+import { getReportColumns, getReportFields } from "@/helpers/Reports";
 import { getContractDepositReportData } from "@/services/reportsServices";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";

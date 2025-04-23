@@ -9,7 +9,7 @@ import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFiel
 import { ReportStatementField } from "@/components/reports/shared/ReportStatementField";
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
 import { FILTER_USING } from "@/helpers/DEFAULT_OPTIONS";
-import { getReportColumns, getReportFields } from "@/helpers/reports";
+import { getReportColumns, getReportFields } from "@/helpers/Reports";
 import { getExpiredContractReportData } from "@/services/reportsServices";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";

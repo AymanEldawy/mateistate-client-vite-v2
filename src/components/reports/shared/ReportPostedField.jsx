@@ -1,5 +1,5 @@
-import { ReportFilterCard } from "../ReportFilterCard";
 import { RHFCheckbox } from "@/components/forms/fields";
+import { ReportFilterCard } from "./ReportFilterCard";
 
 export const ReportPostedField = ({ containerClassName }) => {
   return (
