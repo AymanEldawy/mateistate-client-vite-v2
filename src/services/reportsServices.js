@@ -52,4 +52,7 @@ export const getLeasedUnitsReportData = () => {}
 // ===============  GET: announcement report data ==============
 export const getLeasedVillasReportData = () => {}
 // ===============  GET: announcement report data ==============
+export const getWorkerReportData = () => {}
+// ===============  GET: announcement report data ==============
+// ===============  GET: announcement report data ==============
 export const getAnnouncementReportData = () => {}
