@@ -14,8 +14,8 @@ export const CATEGORY_FIELDS = {
     type: "uuid",
     required: false,
     is_ref: true,
-    ref_table: "category",
-    ref_col: "id",
+    table: "category",
+    col: "id",
   },
   image: { label: "image", name: "image", key: "image", required: false },
 };

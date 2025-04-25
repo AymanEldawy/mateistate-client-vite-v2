@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 const FormSidebar = ({ tab, setTab, list, extraMenuContent }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex sticky top-0 flex-col bg-gray-200 py-4 text-gray-500 text-sm max-w-[150px] w-full ltr:border-r rtl:border-l border-gray-300">
+    <div className="flex sticky top-0 flex-col bg-gray-200 py-4 text-gray-500 text-sm max-w-[200px] w-full ltr:border-r rtl:border-l border-gray-300">
       {list?.map((step) => (
         <button
           key={step}

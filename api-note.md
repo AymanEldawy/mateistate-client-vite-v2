@@ -32,6 +32,8 @@
 - bulk delete 
 ## category_problem
 - bulk delete 
+## owner_expenses_types
+
 
 ## apartment
 ## land
@@ -55,5 +57,5 @@
 ## user_work_times
 ## service
 
-## owner_expenses_types
+
 ## owner_expenses

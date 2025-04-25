@@ -60,5 +60,12 @@
   "toastMessages": {
     "successToDelete": "Successfully deleted",
     "failedToDelete": "Failed to deleted"
+  },
+  "headers": {
+    "account": "Account",
+    "owner": "owner"
+  },
+  "footer": {
+    "copyright": ""
   }
 }

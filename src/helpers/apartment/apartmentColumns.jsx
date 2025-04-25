@@ -47,7 +47,7 @@ const apartmentColumns = [
     cell: ({ getValue, row }) => {
       let kind = APARTMENT_FLAT_TYPE.find(
         (c) => c?.id === +getValue()
-      ).name;
+      )?.name;
       return (
         <span
           to={`/apartments?number=${row?.original?.number}`}

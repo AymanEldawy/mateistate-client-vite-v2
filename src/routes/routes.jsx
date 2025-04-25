@@ -71,11 +71,19 @@ const ContractsDepositReport = React.lazy(() => import("../pages/reports/realsta
 const ContractsExpiredReport = React.lazy(() => import("../pages/reports/realstate/ContractsExpiredReport"));
 const ContractsReport = React.lazy(() => import("../pages/reports/realstate/ContractsReport"));
 const CreditorsAgesReport = React.lazy(() => import("../pages/reports/realstate/CreditorsAgesReport"));
+const EarningRentalIncomeEarnedReport = React.lazy(() => import("../pages/reports/realstate/EarningRentalIncomeEarnedReport"));
+const LeasedLandsReport = React.lazy(() => import("../pages/reports/realstate/LeasedLandsReport"));
+const LeasedParkingReport = React.lazy(() => import("../pages/reports/realstate/LeasedParkingReport"));
+const LeasedPropertyActivityReport = React.lazy(() => import("../pages/reports/realstate/LeasedPropertyActivityReport"));
+const LeasedUnitsReport = React.lazy(() => import("../pages/reports/realstate/LeasedUnitsReport"));
 
 // 2.Accounting Reports
 const CostCenterGeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting/CostCenterGeneralLedgerReport"));
 const CustomersAccountStatementReport = React.lazy(() => import("../pages/reports/accounting/CustomersAccountStatementReport"));
 const CostCenterTrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/CostCenterTrialBalanceReport"));
+const DueNotePaperReport = React.lazy(() => import("../pages/reports/accounting/DueNotePaperReport"));
+const GeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting/GeneralLedgerReport"));
+const JournalLedgerReport = React.lazy(() => import("../pages/reports/accounting/JournalLedgerReport"));
 
 
 const routes = [
@@ -243,8 +251,32 @@ const routes = [
         element: <CreditorsAgesReport />,
       },
       {
+        path: PATHS.EARNING_RENTAL_INCOME_EARNED_REPORT,
+        element: <EarningRentalIncomeEarnedReport />,
+      },
+      {
+        path: PATHS.LEASE_LANDS_REPORT,
+        element: <LeasedLandsReport />,
+      },
+      {
+        path: PATHS.LEASE_PARKING_REPORT,
+        element: <LeasedParkingReport />,
+      },
+      {
+        path: PATHS.LEASED_PROPERTY_ACTIVITY_REPORT,
+        element: <LeasedPropertyActivityReport />,
+      },
+      {
+        path: PATHS.LEASE_UNITS_REPORT,
+        element: <LeasedUnitsReport />,
+      },
+      {
         path: PATHS.COST_CENTER_GENERAL_LEDGER_REPORT,
         element: <CostCenterGeneralLedgerReport />,
+      },
+      {
+        path: PATHS.JOURNAL_LEDGER_REPORT,
+        element: <JournalLedgerReport />,
       },
       {
         path: PATHS.CUSTOMER_ACCOUNT_STATEMENT_REPORT,
@@ -253,6 +285,14 @@ const routes = [
       {
         path: PATHS.COST_CENTER_TRIAL_BALANCE_REPORT,
         element: <CostCenterTrialBalanceReport />,
+      },
+      {
+        path: PATHS.DUE_NOTE_PAPERS_REPORT,
+        element: <DueNotePaperReport />,
+      },
+      {
+        path: PATHS.GENERAL_LEDGER_REPORT,
+        element: <GeneralLedgerReport />,
       },
    
       /************************************** Category **************************************/

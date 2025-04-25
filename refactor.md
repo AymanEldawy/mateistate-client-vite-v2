@@ -47,7 +47,6 @@ Normal (4-5 days)
 - currency
 - material_group
 - category
-
 - category_problem
 - store
 - owner_expenses_types

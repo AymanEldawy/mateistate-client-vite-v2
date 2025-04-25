@@ -111,7 +111,7 @@ const PaperLayout = ({
           name={name}
         />
       </PaperModal>
-      <div className="bg-[#fff] shadow p-2 container-full rounded-md m-4 relative">
+      <div className="bg-[#fff] shadow p-2 container-full rounded-md mt-4 relative">
 
         {(isLoading || isFetching) &&
           <Loading />

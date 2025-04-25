@@ -41,18 +41,6 @@ export const deleteManyCategories = (ids) => {
   return http.post(`${API_URL_CONSTANTS.BASE_CATEGORY}/bulk-delete`, ids);
 };
 
-export const getCategoryCode = (parentId) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CATEGORY}/code=${parentId}`);
-};
-
-export const getCategoryReceivable = (buildingId) => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_CATEGORY}/receivable?buildingId=${buildingId}`
-  );
-};
-
-export const getCategoryCash = (buildingId) => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_CATEGORY}/bank?buildingId=${buildingId}`
-  );
+export const getSearchCategory = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CATEGORY}/?search=${value}&page=1&limit=15`);
 };

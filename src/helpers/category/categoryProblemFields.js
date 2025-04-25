@@ -5,8 +5,8 @@ export const CATEGORY_PROBLEM_FIELDS = {
     type: "text",
     required: true,
   },
-  Ltnproblem: {
-    label: "Ltnproblem",
+  ltnproblem: {
+    label: "ltnproblem",
     name: "ltndescription",
     type: "text",
     required: true,

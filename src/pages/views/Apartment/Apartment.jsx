@@ -6,16 +6,13 @@ import apartmentColumns from '@/helpers/apartment/apartmentColumns'
 import { lazy } from 'react'
 import { APARTMENT_STEPS } from '@/data/constants'
 import { RHFCheckbox } from '@/components/forms/fields'
+import { apartmentDefaultValues, apartmentValidationSchema } from '@/helpers/apartment/apartmentValidationSchema'
 const ApartmentForm = lazy(() => import("@/components/forms/containers/apartment/ApartmentForm"))
-
-const defaultValue = {}
-
-const validationSchema = () => { }
 
 const apartmentConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: apartmentDefaultValues,
+    validationSchema: apartmentValidationSchema,
     mutationAddFunction: createApartment,
     mutationUpdateFunction: updateApartment,
     getSingleFunction: getSingleApartment,
@@ -35,8 +32,8 @@ const apartmentConfig = {
     header: "Apartment",
     ExtraContentBar: () => (
       <>
-        <RHFCheckbox name="has_lawsuit" label="Has Lawsuit" type="checkbox" />
-        <RHFCheckbox name="blocked" label="Blocked" type="checkbox" />
+        <RHFCheckbox name="apartments.has_lawsuit" label="Has Lawsuit" type="checkbox" />
+        <RHFCheckbox name="apartments.blocked" label="Blocked" type="checkbox" />
       </>
     )
   },
