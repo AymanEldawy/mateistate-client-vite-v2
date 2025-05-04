@@ -13,8 +13,8 @@ export const VoucherHead = ({
           label="internal_number"
         />
         <RHFDatePicker
-          name="created_at"
-          label="created_at"
+          name="createdAt"
+          label="createdAt"
         />
         <AccountField
           name="account_id"

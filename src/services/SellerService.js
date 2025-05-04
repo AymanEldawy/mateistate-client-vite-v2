@@ -7,7 +7,7 @@ export const getSingleSeller = (id, signal) => {
   });
 };
 
-export const getAllSellers = ({ signal }) => {
+export const getAllSellers = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_SELLER, {
     signal,
   });

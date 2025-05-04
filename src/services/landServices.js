@@ -7,7 +7,7 @@ export const getSingleLand = (id, signal) => {
   });
 };
 
-export const getAllLands = ({ signal }) => {
+export const getAllLands = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_LAND, {
     signal,
   });

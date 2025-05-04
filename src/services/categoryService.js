@@ -7,7 +7,7 @@ export const getSingleCategory = (id, signal) => {
   });
 };
 
-export const getAllCategories = ({ signal }) => {
+export const getAllCategories = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_CATEGORY, {
     signal,
   });

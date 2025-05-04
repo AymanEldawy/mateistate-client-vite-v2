@@ -1,22 +1,23 @@
+import { lazy } from 'react'
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import ChequePatternForm from '@/components/forms/containers/patterns/cheque/ChequePatternForm'
 import { createChequePattern, deleteChequePattern, deleteManyChequePatterns, getAllChequePatterns, getSingleChequePattern, updateChequePattern } from '@/services/chequePatternsService'
+import { chequePatternDefaultValues, chequePatternValidationSchema } from '@/helpers/patterns/cheque/chequePatternValidationSchema'
+import { CHEQUE_PATTERN_STEPS } from '@/helpers/patterns/cheque/chequePatternSteps'
+import chequePatternColumns from '@/helpers/patterns/cheque/chequePatternColumns'
 
-const defaultValue = {}
-
-const validationSchema = () => { }
+const ChequePatternForm = lazy(() => import('@/components/forms/containers/patterns/cheque/ChequePatternForm'))
 
 const chequePatternConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: chequePatternDefaultValues,
+    validationSchema: chequePatternValidationSchema,
     mutationAddFunction: createChequePattern,
     mutationUpdateFunction: updateChequePattern,
     getSingleFunction: getSingleChequePattern,
     onSuccessAction: () => { },
-    isSteps: false,
+    isSteps: true,
     onHandleDelete: deleteChequePattern,
     RenderForm: (props) => <ChequePatternForm {...props} />
   },
@@ -35,7 +36,7 @@ const ContractPattern = ({ formOnly, outerClose }) => {
       />
     )
   }
-  
+
   return (
     <PaperLayout
       name="cheque_pattern"
@@ -49,8 +50,11 @@ const ContractPattern = ({ formOnly, outerClose }) => {
         onClickPrint: true,
         onClickAdd: true,
       }}
+      formSidebarProps={{
+        list: Object.keys(CHEQUE_PATTERN_STEPS)
+      }}
       tableProps={{
-        columns: [] // 
+        columns: chequePatternColumns
       }}
       {...chequePatternConfig}
 

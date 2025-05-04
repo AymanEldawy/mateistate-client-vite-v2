@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { logoutService } from "./authService";
 
-
 const http = axios.create({
   baseURL: `${BASE_URL}/api/v1`,
   headers: {

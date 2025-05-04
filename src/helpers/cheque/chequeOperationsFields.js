@@ -10,13 +10,13 @@ export const OP_RETURN_FIELDS = [
   },
   // FIELDS_STRUCTURE.currency({ required: true }),
   FIELDS_STRUCTURE.account({
-    label: "debit_account_id",
-    name: "debit_account_id",
+    label: "debitAccountId",
+    name: "debitAccountId",
     required: true,
   }),
   FIELDS_STRUCTURE.account({
-    label: "credit_account_id",
-    name: "credit_account_id",
+    label: "creditAccountId",
+    name: "creditAccountId",
     required: true,
   }),
   FIELDS_STRUCTURE.cost_center({ required: true }),
@@ -28,8 +28,8 @@ export const OP_RETURN_FIELDS = [
     required: true,
   }),
   FIELDS_STRUCTURE.uniqueField({
-    label: "connect_with_chq_id",
-    name: "connect_with_chq_id",
+    label: "connectWithChqId",
+    name: "connectWithChqId",
     table: 'cheque'
   }),
 ];
@@ -45,40 +45,40 @@ export const OP_COLLECTION_FIELDS = [
   },
   // FIELDS_STRUCTURE.currency({ required: true }),
   FIELDS_STRUCTURE.account({
-    label: "debit_account_id",
-    name: "debit_account_id",
+    label: "debitAccountId",
+    name: "debitAccountId",
     required: true,
   }),
   FIELDS_STRUCTURE.account({
-    label: "credit_account_id",
-    name: "credit_account_id",
+    label: "creditAccountId",
+    name: "creditAccountId",
     required: true,
   }),
   FIELDS_STRUCTURE.cost_center({ required: true }),
   FIELDS_STRUCTURE.note(),
   
   FIELDS_STRUCTURE.numberField({
-    label: "commission_percentage",
-    name: "commission_percentage",
+    label: "commissionPercentage",
+    name: "commissionPercentage",
   }),
   FIELDS_STRUCTURE.numberField({
-    label: "commission_value",
-    name: "commission_value",
+    label: "commissionValue",
+    name: "commissionValue",
   }),
   FIELDS_STRUCTURE.account({
-    label: "commission_debit_id",
-    name: "commission_debit_id",
+    label: "commissionDebitId",
+    name: "commissionDebitId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "commission_credit_id",
-    name: "commission_credit_id",
+    label: "commissionCreditId",
+    name: "commissionCreditId",
   }),
   FIELDS_STRUCTURE.cost_center({
-    label: "commission_cost_center_id",
-    name: "commission_cost_center_id",
+    label: "commissionCostCenterId",
+    name: "commissionCostCenterId",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "commission_note",
-    name: "commission_note",
+    label: "commissionNote",
+    name: "commissionNote",
   }),
 ];

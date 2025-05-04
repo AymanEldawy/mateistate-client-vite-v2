@@ -1,11 +1,11 @@
-import { CHEQUE_PATTERN__PATTERN_DEFAULT_DATE, CHEQUE_PATTERN__PATTERN_PAPER_TYPE } from "../../DEFAULT_OPTIONS";
+import { CHEQUE_PATTERN_PAPER_TYPE, CHEQUE_PATTERN_DEFAULT_DATE } from "../../DEFAULT_OPTIONS";
 import FIELDS_STRUCTURE from "../../FIELDS_STRUCTURE";
 
 export const CHEQUE_PATTERN_GENERAL = [
   FIELDS_STRUCTURE.selectField({
-    label: "paper_type",
-    name: "paper_type",
-    options: CHEQUE_PATTERN__PATTERN_PAPER_TYPE,
+    label: "paperType",
+    name: "paperType",
+    options: CHEQUE_PATTERN_PAPER_TYPE,
     required: true,
   }),
   FIELDS_STRUCTURE.name(),
@@ -14,28 +14,29 @@ export const CHEQUE_PATTERN_GENERAL = [
     name: "ltnname",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "options_name",
-    name: "options_name",
+    label: "optionsName",
+    name: "optionsName",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "default_account_id",
-    name: "default_account_id",
-  }),
-
-  FIELDS_STRUCTURE.gen_entries(),
-  FIELDS_STRUCTURE.gen_entries({
-    label: "auto_gen_entries",
-    name: "auto_gen_entries",
-  }),
-  FIELDS_STRUCTURE.gen_entries({
-    label: "auto_transfer_entry",
-    name: "auto_transfer_entry",
+    label: "defaultAccountId",
+    name: "defaultAccountId",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "default_print_folder",
-    name: "default_print_folder",
-  })
+    label: "defaultPrintFolder",
+    name: "defaultPrintFolder",
+  }),
+  FIELDS_STRUCTURE.gen_entries(),
+  FIELDS_STRUCTURE.gen_entries({
+    label: "autoGenEntries",
+    name: "autoGenEntries",
+  }),
+
+ 
+  FIELDS_STRUCTURE.gen_entries({
+    label: "autoTransferEntry",
+    name: "autoTransferEntry",
+  }),
 ];
 
 export const CHEQUE_PATTERN_COLLECTION = [
@@ -46,132 +47,132 @@ export const CHEQUE_PATTERN_COLLECTION = [
   }),
 
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_gen_entries",
-    name: "collection_gen_entries",
+    label: "collectionGenEntries",
+    name: "collectionGenEntries",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_auto_gen_entries",
-    name: "collection_auto_gen_entries",
+    label: "collectionAutoGenEntries",
+    name: "collectionAutoGenEntries",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_auto_transfer_entry",
-    name: "collection_auto_transfer_entry",
+    label: "collectionAutoTransferEntry",
+    name: "collectionAutoTransferEntry",
   }),
 
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_default_account_is_building_bank",
-    name: "collection_default_account_is_building_bank",
+    label: "collectionDefaultAccountIsBuildingBank",
+    name: "collectionDefaultAccountIsBuildingBank",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_default_observe_account_is_client",
-    name: "collection_default_observe_account_is_client",
+    label: "collectionDefaultObserveAccountIsClient",
+    name: "collectionDefaultObserveAccountIsClient",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_move_cost_center_debit",
-    name: "collection_move_cost_center_debit",
+    label: "collectionMoveCostCenterDebit",
+    name: "collectionMoveCostCenterDebit",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "collection_move_cost_center_credit",
-    name: "collection_move_cost_center_credit",
+    label: "collectionMoveCostCenterCredit",
+    name: "collectionMoveCostCenterCredit",
   }),
   FIELDS_STRUCTURE.selectField({
-    label: "collection_default_date",
-    name: "collection_default_date",
-    options: CHEQUE_PATTERN__PATTERN_DEFAULT_DATE,
+    label: "collectionDefaultDate",
+    name: "collectionDefaultDate",
+    options: CHEQUE_PATTERN_DEFAULT_DATE,
   }),
   FIELDS_STRUCTURE.account({
-    label: "collection_credit_account_id",
-    name: "collection_credit_account_id",
+    label: "collectionCreditAccountId",
+    name: "collectionCreditAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "collection_debit_account_id",
-    name: "collection_debit_account_id",
+    label: "collectionDebitAccountId",
+    name: "collectionDebitAccountId",
   }),
 ];
 
 export const CHEQUE_PATTERN_COMMISSION = [
   FIELDS_STRUCTURE.checkboxField({
-    label: "commission_amount_from_building",
-    name: "commission_amount_from_building",
+    label: "commissionAmountFromBuilding",
+    name: "commissionAmountFromBuilding",
     type: "checkbox",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "commission_default_account_is_building_owner",
-    name: "commission_default_account_is_building_owner",
+    label: "commissionDefaultAccountIsBuildingOwner",
+    name: "commissionDefaultAccountIsBuildingOwner",
     type: "checkbox",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "commission_default_observe_is_revenue_account",
-    name: "commission_default_observe_is_revenue_account",
+    label: "commissionDefaultObserveIsRevenueAccount",
+    name: "commissionDefaultObserveIsRevenueAccount",
     type: "checkbox",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "commission_move_cost_center_debit",
-    name: "commission_move_cost_center_debit",
+    label: "commissionMoveCostCenterDebit",
+    name: "commissionMoveCostCenterDebit",
     type: "checkbox",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "commission_move_cost_center_credit",
-    name: "commission_move_cost_center_credit",
+    label: "commissionMoveCostCenterCredit",
+    name: "commissionMoveCostCenterCredit",
     type: "checkbox",
   }),
   FIELDS_STRUCTURE.selectField({
-    label: "commission_type",
-    name: "commission_type",
-    options: CHEQUE_PATTERN__PATTERN_DEFAULT_DATE,
+    label: "commissionType",
+    name: "commissionType",
+    options: CHEQUE_PATTERN_DEFAULT_DATE,
   }),
   FIELDS_STRUCTURE.account({
-    label: "commission_debit_account_id",
-    name: "commission_debit_account_id",
+    label: "commissionDebitAccountId",
+    name: "commissionDebitAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "commission_credit_account_id",
-    name: "commission_credit_account_id",
+    label: "commissionCreditAccountId",
+    name: "commissionCreditAccountId",
   }),
 ];
 
 export const CHEQUE_PATTERN_PARTIAL_COLLECTION = [
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_collection",
-    name: "partial_collection",
+    label: "partialCollection",
+    name: "partialCollection",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_gen_entries",
-    name: "partial_gen_entries",
+    label: "partialGenEntries",
+    name: "partialGenEntries",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_auto_gen_entries",
-    name: "partial_auto_gen_entries",
+    label: "partialAutoGenEntries",
+    name: "partialAutoGenEntries",
 
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_auto_transfer_entry",
-    name: "partial_auto_transfer_entry",
+    label: "partialAutoTransferEntry",
+    name: "partialAutoTransferEntry",
 
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_default_account_is_building_bank",
-    name: "partial_default_account_is_building_bank",
+    label: "partialDefaultAccountIsBuildingBank",
+    name: "partialDefaultAccountIsBuildingBank",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_default_observe_account_is_client",
-    name: "partial_default_observe_account_is_client",
+    label: "partialDefaultObserveAccountIsClient",
+    name: "partialDefaultObserveAccountIsClient",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_move_cost_center_debit",
-    name: "partial_move_cost_center_debit",
+    label: "partialMoveCostCenterDebit",
+    name: "partialMoveCostCenterDebit",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "partial_move_cost_center_credit",
-    name: "partial_move_cost_center_credit",
+    label: "partialMoveCostCenterCredit",
+    name: "partialMoveCostCenterCredit",
   }),
   FIELDS_STRUCTURE.account({
-    label: "partial_debit_account_id",
-    name: "partial_debit_account_id",
+    label: "partialDebitAccountId",
+    name: "partialDebitAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "partial_credit_account_id",
-    name: "partial_credit_account_id",
+    label: "partialCreditAccountId",
+    name: "partialCreditAccountId",
   }),
 ];
 
@@ -181,87 +182,87 @@ export const CHEQUE_PATTERN_RETURN = [
     name: "returnable",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_gen_entries",
-    name: "returnable_gen_entries",
+    label: "returnableGenEntries",
+    name: "returnableGenEntries",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_auto_gen_entries",
-    name: "returnable_auto_gen_entries",
+    label: "returnableAutoGenEntries",
+    name: "returnableAutoGenEntries",
 
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_auto_transfer_entry",
-    name: "returnable_auto_transfer_entry",
+    label: "returnableAutoTransferEntry",
+    name: "returnableAutoTransferEntry",
 
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_default_account_is_client",
-    name: "returnable_default_account_is_client",
+    label: "returnableDefaultAccountIsClient",
+    name: "returnableDefaultAccountIsClient",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_default_observe_account_is_building_bank",
-    name: "returnable_default_observe_account_is_building_bank",
+    label: "returnableDefaultObserveAccountIsBuildingBank",
+    name: "returnableDefaultObserveAccountIsBuildingBank",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_active_operations",
-    name: "returnable_active_operations",
+    label: "returnableActiveOperations",
+    name: "returnableActiveOperations",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_move_cost_center_debit",
-    name: "returnable_move_cost_center_debit",
+    label: "returnableMoveCostCenterDebit",
+    name: "returnableMoveCostCenterDebit",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "returnable_move_cost_center_credit",
-    name: "returnable_move_cost_center_credit",
+    label: "returnableMoveCostCenterCredit",
+    name: "returnableMoveCostCenterCredit",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "return_fee_default_account_is_client",
-    name: "return_fee_default_account_is_client",
+    label: "returnFeeDefaultAccountIsClient",
+    name: "returnFeeDefaultAccountIsClient",
   }),
   FIELDS_STRUCTURE.selectField({
-    label: "returnable_default_date",
-    name: "returnable_default_date",
-    options: CHEQUE_PATTERN__PATTERN_DEFAULT_DATE,
+    label: "returnableDefaultDate",
+    name: "returnableDefaultDate",
+    options: CHEQUE_PATTERN_DEFAULT_DATE,
   }),
   FIELDS_STRUCTURE.account({
-    label: "returnable_debit_account_id",
-    name: "returnable_debit_account_id",
+    label: "returnableDebitAccountId",
+    name: "returnableDebitAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "returnable_credit_account_id",
-    name: "returnable_credit_account_id",
+    label: "returnableCreditAccountId",
+    name: "returnableCreditAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "return_fee_debit_account_id",
-    name: "return_fee_debit_account_id",
+    label: "returnFeeDebitAccountId",
+    name: "returnFeeDebitAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "return_fee_credit_account_id",
-    name: "return_fee_credit_account_id",
+    label: "returnFeeCreditAccountId",
+    name: "returnFeeCreditAccountId",
   }),
 ];
 
 export const CHEQUE_PATTERN_STATEMENTS = [
   FIELDS_STRUCTURE.textField({
-    label: "statement_account",
-    name: "statement_account",
+    label: "statementAccount",
+    name: "statementAccount",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "statement_observe_account",
-    name: "statement_observe_account",
+    label: "statementObserveAccount",
+    name: "statementObserveAccount",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "statement_collection",
-    name: "statement_collection",
+    label: "statementCollection",
+    name: "statementCollection",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "statement_return",
-    name: "statement_return",
+    label: "statementReturn",
+    name: "statementReturn",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "statement_partial",
-    name: "statement_partial",
+    label: "statementPartial",
+    name: "statementPartial",
   }),
 ];
 

@@ -11,8 +11,8 @@ const LandForm = ({ tab }) => {
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
       <RHFInput name="name" label="Name" required />
       <RHFInput name="type" label="Type" type="number" />
-      <RHFInput name="land_no" label="Land Number" />
-      <RHFInput name="last_name" label="Last Name" />
+      <RHFInput name="landNo" label="Land Number" />
+      <RHFInput name="lastName" label="Last Name" />
       <RHFInput name="number" label="Number" required />
       <RHFDatePicker name="date" label="Date" type="date" />
 
@@ -21,60 +21,60 @@ const LandForm = ({ tab }) => {
       <RHFInput name="region" label="Region" />
       <RHFInput name="space" label="Space" />
       <RHFInput name="side" label="Side" />
-      <RHFInput name="street_count" label="Street Count" type="number" />
-      <RHFInput name="street_name" label="Street Name" />
+      <RHFInput name="streetCount" label="Street Count" type="number" />
+      <RHFInput name="streetName" label="Street Name" />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Property Details</h5>
       <RHFInput name="area" label="Area" type="number" />
-      <RHFInput name="area_unit" label="Area Unit" />
-      <RHFInput name="land_type" label="Land Type" type="number" />
+      <RHFInput name="areaUnit" label="Area Unit" />
+      <RHFInput name="landType" label="Land Type" type="number" />
       <RHFInput name="landowner" label="Land Owner" type="number" />
       <RHFInput name="buildble" label="Buildable" type="checkbox" />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">License Information</h5>
-      <RHFInput name="license_no" label="License Number" />
+      <RHFInput name="licenseNo" label="License Number" />
       <RHFInput name="license" label="License" />
-      <RHFDatePicker name="license_date" label="License Date" containerClassName="col-span-2" />
+      <RHFDatePicker name="licenseDate" label="License Date" containerClassName="col-span-2" />
       <RHFTextarea name="details" label="Details" containerClassName="col-span-2" />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Financial Information</h5>
-      <RHFInput name="begin_land_value" label="Begin Land Value" type="number" />
+      <RHFInput name="beginLandValue" label="Begin Land Value" type="number" />
       <RHFAsyncSelectField
         table="currency"
-        name="currency_begin_land_id"
+        name="currencyBeginLandId"
         label="Begin Land Currency"
         allowAdd
       />
-      <RHFInput name="currency_val_begin_land" label="Currency Value Begin Land" type="number" />
+      <RHFInput name="currencyValBeginLand" label="Currency Value Begin Land" type="number" />
       <RHFAsyncSelectField
         table="cost_center"
-        name="begin_land_cost_center_id"
+        name="beginLandCostCenterId"
         label="Begin Land Cost Center"
         allowAdd
       />
       <RHFAsyncSelectField
         table="currency"
-        name="currency_purchase_id"
+        name="currencyPurchaseId"
         label="Purchase Currency"
         allowAdd
       />
-      <RHFInput name="currency_val_purchase" label="Currency Value Purchase" type="number" />
-      <RHFInput name="purchase_note" label="Purchase Note" containerClassName="col-span-2" />
+      <RHFInput name="currencyValPurchase" label="Currency Value Purchase" type="number" />
+      <RHFInput name="purchaseNote" label="Purchase Note" containerClassName="col-span-2" />
       <RHFAsyncSelectField
         table="cost_center"
-        name="cost_center_id"
+        name="costCenterId"
         label="Cost Center"
         allowAdd
       />
       <RHFAsyncSelectField
         table="account"
-        name="bank_account_id"
+        name="bankAccountId"
         label="Bank Account"
         allowAdd
       />
       <RHFAsyncSelectField
         table="account"
-        name="account_comm_income_id"
+        name="accountCommIncomeId"
         label="Account Comm Income"
         allowAdd
       />
@@ -83,7 +83,7 @@ const LandForm = ({ tab }) => {
       <RHFInput name="rent" label="Rent" type="number" />
       <RHFAsyncSelectField
         table="currency"
-        name="rent_currency_id"
+        name="rentCurrencyId"
         label="Rent Currency"
         allowAdd
       />
@@ -91,72 +91,72 @@ const LandForm = ({ tab }) => {
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">References</h5>
       <RHFAsyncSelectField
         table="account"
-        name="account_id"
+        name="accountId"
         label="Account"
         allowAdd
       />
       <RHFAsyncSelectField
         table="account"
-        name="customer_id"
+        name="customerId"
         label="Customer"
         required
         allowAdd
       />
       <RHFAsyncSelectField
         table="owner"
-        name="cuowner_id"
+        name="cuownerId"
         label="Current Owner"
       />
       <RHFAsyncSelectField
         table="account"
-        name="bank_account_id"
+        name="bankAccountId"
         label="Bank Account"
         allowAdd
       />
       <RHFAsyncSelectField
         table="owner"
-        name="customer_owner_id"
+        name="customerOwnerId"
         label="Customer Owner"
       />
       <RHFAsyncSelectField
         table="owner"
-        name="owner_account_id"
+        name="ownerAccountId"
         label="Owner Account"
       />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Identity Information</h5>
-      <RHFInput name="identity_value" label="Identity Value" type="number" />
+      <RHFInput name="identityValue" label="Identity Value" type="number" />
       <RHFAsyncSelectField
         table="currency"
-        name="currency_identity_id"
+        name="currencyIdentityId"
         label="Currency Identity"
         allowAdd
       />
-      <RHFInput name="currency_valid_entity" label="Currency Valid Entity" type="number" />
-      <RHFDatePicker name="identity_begin_date" label="Identity Begin Date" type="date" />
-      <RHFDatePicker name="identity_end_date" label="Identity End Date" type="date" />
+      <RHFInput name="currencyValidEntity" label="Currency Valid Entity" type="number" />
+      <RHFDatePicker name="identityBeginDate" label="Identity Begin Date" type="date" />
+      <RHFDatePicker name="identityEndDate" label="Identity End Date" type="date" />
       <RHFAsyncSelectField
         table="identity_entry"
-        name="identity_entry_id"
+        name="identityEntryId"
         label="Identity Entry"
         allowAdd
       />
-      <RHFTextarea name="identity_note" label="Identity Note" containerClassName="col-span-2" />
+      <RHFTextarea name="identityNote" label="Identity Note" containerClassName="col-span-2" />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">LTN Information</h5>
       <RHFInput name="ltnname" label="LTN Name" />
-      <RHFInput name="ltn_land_type" label="LTN Land Type" type="text" />
-      <RHFInput name="ltn_city" label="LTN City" type="text" />
-      <RHFInput name="ltn_region" label="LTN Region" type="text" />
-      <RHFInput name="ltn_space" label="LTN Space" type="text" />
-      <RHFInput name="ltn_license" label="LTN License" type="text" />
-      <RHFInput name="ltn_side" label="LTN Side" type="text" />
+      <RHFInput name="ltnLandType" label="LTN Land Type" type="text" />
+      <RHFInput name="ltnCity" label="LTN City" type="text" />
+      <RHFInput name="ltnRegion" label="LTN Region" type="text" />
+      <RHFInput name="ltnSpace" label="LTN Space" type="text" />
+      <RHFInput name="ltnLicense" label="LTN License" type="text" />
+      <RHFInput name="ltnSide" label="LTN Side" type="text" />
 
       <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Additional Settings</h5>
       <RHFInput name="ban" label="Ban" type="checkbox" />
-      <RHFInput name="commission_percent" label="Commission Percent" type="number" />
-      <RHFInput name="used_end_date" label="Used End Date" type="checkbox" />
-      <RHFInput name="create_entry_investment" label="Create Entry Investment" type="checkbox" />
+      <RHFInput name="commissionPercent" label="Commission Percent" type="number" />
+      <RHFInput name="usedEndDate" label="Used End Date" type="checkbox" />
+      <RHFInput name="createEntryInvestment" label="Create Entry Investment" type="checkbox" />
     </FormFieldsGridContainer>
   )
 
@@ -168,11 +168,11 @@ const LandForm = ({ tab }) => {
             <RHFAsyncSelectField
               label="Land"
               table="land"
-              name={`land_accumulate.${index}.land_id`}
+              name={`landAccumulates.${index}.landId`}
             />
           </td>
         )}
-        gridName={"land_accumulate"}
+        gridName={"landAccumulates"}
         headers={[
           "Land",
         ]}
@@ -186,20 +186,20 @@ const LandForm = ({ tab }) => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`land_rental_price.${index}.date`} type="date" />
+              <RHFDatePicker name={`landRentalPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`land_rental_price.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`landRentalPrices.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFAsyncSelectField name={`land_rental_price.${index}.currency_id`} table="currency" allowAdd />
+              <RHFAsyncSelectField name={`landRentalPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`land_rental_price.${index}.note`} label="Note" />
+              <RHFTableInput name={`landRentalPrices.${index}.note`} label="Note" />
             </td>
           </>
         )}
-        gridName={"land_rental_price"}
+        gridName={"landRentalPrices"}
         headers={[
           "Date",
           "Price",
@@ -216,20 +216,20 @@ const LandForm = ({ tab }) => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`land_selling_price.${index}.date`} type="date" />
+              <RHFDatePicker name={`landSellingPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`land_selling_price.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`landSellingPrices.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFAsyncSelectField name={`land_selling_price.${index}.currency_id`} table="currency" allowAdd />
+              <RHFAsyncSelectField name={`landSellingPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`land_selling_price.${index}.note`} label="Note" />
+              <RHFTableInput name={`landSellingPrices.${index}.note`} label="Note" />
             </td>
           </>
         )}
-        gridName={"land_selling_price"}
+        gridName={"landSellingPrices"}
         headers={[
           "Date",
           "Price",

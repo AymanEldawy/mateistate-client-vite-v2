@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { ReportFilterColumns } from "./ReportFilterColumns";
+import { getAllCategories } from "@/services/categoryService";
+import { useQuery } from "@tanstack/react-query";
+import QUERY_KEYS from "@/data/queryKeys";
 
 export const ReportFilterCategories = ({
   categoriesIds,
@@ -7,22 +10,16 @@ export const ReportFilterCategories = ({
   bodyClassName,
   containerClassName,
 }) => {
-  const [categories, setCategories] = useState([]);
 
-  const getData = async () => {
-    // get category data
-    // const categoryResponse = await get("category");
-    // setCategories(categoryResponse?.result);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const { data } = useQuery({
+    queryKey: [QUERY_KEYS.CATEGORY],
+    queryFn:  async () => await getAllCategories()
+  })
 
   return (
     <ReportFilterColumns
       title="Categories"
-      columns={categories?.map((c) => ({
+      columns={data?.data?.map((c) => ({
         name: c?.id,
         label: c?.name,
       }))}

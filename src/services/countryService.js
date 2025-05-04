@@ -7,7 +7,7 @@ export const getSingleCountry = (id, signal) => {
   });
 };
 
-export const getAllCountries = ({ signal }) => {
+export const getAllCountries = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_COUNTRY, {
     signal,
   });

@@ -9,92 +9,92 @@ export const VOUCHER_PATTERN_GENERAL = [
   FIELDS_STRUCTURE.name(),
   FIELDS_STRUCTURE.textField({ label: "ltnname", name: "ltnname", }),
   FIELDS_STRUCTURE.textField({
-    label: "list_name",
-    name: "list_name",
+    label: "listName",
+    name: "listName",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "default_account_id",
-    name: "default_account_id",
+    label: "defaultAccountId",
+    name: "defaultAccountId",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "shortcut_key",
-    name: "shortcut_key",
+    label: "shortcutKey",
+    name: "shortcutKey",
   }),
   FIELDS_STRUCTURE.gen_entries({
-    label: "gen_entries",
-    name: "gen_entries",
+    label: "genEntries",
+    name: "genEntries",
   }),
   FIELDS_STRUCTURE.gen_entries({
-    label: "auto_gen_entries",
-    name: "auto_gen_entries",
+    label: "autoGenEntries",
+    name: "autoGenEntries",
   }),
   FIELDS_STRUCTURE.gen_entries({
-    label: "auto_transfer_entry",
-    name: "auto_transfer_entry",
+    label: "autoTransferEntry",
+    name: "autoTransferEntry",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "generate_records",
-    name: "generate_records",
+    label: "generateRecords",
+    name: "generateRecords",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_contract_field",
-    name: "show_contract_field",
+    label: "showContractField",
+    name: "showContractField",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_contract_cost_center",
-    name: "show_contract_cost_center",
+    label: "showContractCostCenter",
+    name: "showContractCostCenter",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "required_cost_center",
-    name: "required_cost_center",
+    label: "requiredCostCenter",
+    name: "requiredCostCenter",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "required_statement",
-    name: "required_statement",
+    label: "requiredStatement",
+    name: "requiredStatement",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "default_print_folder_path",
-    name: "default_print_folder_path",
+    label: "defaultPrintFolderPath",
+    name: "defaultPrintFolderPath",
   }),
 ];
 
 export const VOUCHER_PATTERN_FIELDS = [
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_debit_field",
-    name: "show_debit_field",
+    label: "showDebitField",
+    name: "showDebitField",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_credit_field",
-    name: "show_credit_field",
+    label: "showCreditField",
+    name: "showCreditField",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "debit_field_label",
-    name: "debit_field_label",
+    label: "debitFieldLabel",
+    name: "debitFieldLabel",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "credit_field_label",
-    name: "credit_field_label",
+    label: "creditFieldLabel",
+    name: "creditFieldLabel",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_currency",
-    name: "show_currency",
+    label: "showCurrency",
+    name: "showCurrency",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_cost_center",
-    name: "show_cost_center",
+    label: "showCostCenter",
+    name: "showCostCenter",
   }),
   FIELDS_STRUCTURE.checkboxField({
-    label: "show_note",
-    name: "show_note",
+    label: "showNote",
+    name: "showNote",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "odd_table_color",
-    name: "odd_table_color",
+    label: "oddTableColor",
+    name: "oddTableColor",
   }),
   FIELDS_STRUCTURE.textField({
-    label: "even_table_color",
-    name: "even_table_color",
+    label: "evenTableColor",
+    name: "evenTableColor",
   }),
 ];
 

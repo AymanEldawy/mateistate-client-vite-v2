@@ -7,7 +7,7 @@ export const getSingleService = (id, signal) => {
     });
 };
 
-export const getAllServices = ({ signal }) => {
+export const getAllServices = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_SERVICE, {
         signal,
     });

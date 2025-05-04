@@ -16,8 +16,8 @@ const BillConnectWithField = () => {
   const [selectedItemNumber, setSelectedItemNumber] = useState(1);
   const [viewUrl, setViewUrl] = useState(null);
 
-  const selectName = `bill.connect_with`;
-  const selectNameId = `bill.connect_with_id`;
+  const selectName = `bill.connectWith`;
+  const selectNameId = `bill.connectWithId`;
 
   useEffect(() => {
     async function fetchList(table) {

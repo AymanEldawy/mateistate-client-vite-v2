@@ -7,7 +7,7 @@ export const getSingleReturn = (id, signal) => {
   });
 };
 
-export const getAllReturns = ({ signal }) => {
+export const getAllReturns = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_RETURN, {
     signal,
   });

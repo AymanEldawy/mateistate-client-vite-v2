@@ -7,7 +7,7 @@ export const getSingleReservationProperty = (id, signal) => {
     });
 };
 
-export const getAllReservationProperties = ({ signal }) => {
+export const getAllReservationProperties = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY, {
         signal,
     });

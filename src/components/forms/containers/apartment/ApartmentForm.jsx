@@ -4,6 +4,9 @@ import { APARTMENT_STEPS } from "@/data/constants";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
 import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
+import { getSearchBuilding, getSingleBuilding } from './../../../../services/buildingService';
+import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
+import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
 
 const ApartmentForm = ({ tab }) => {
 
@@ -15,6 +18,8 @@ const ApartmentForm = ({ tab }) => {
         name="apartment.buildingId"
         label="Building"
         required
+        getSearch={getSearchBuilding}
+        getSingle={getSingleBuilding}
       />
       <RHFInput name="apartment.floorNo" label="Floor Number" />
       <RHFSelectField
@@ -56,12 +61,16 @@ const ApartmentForm = ({ tab }) => {
         name="apartment.mainCostCenterId"
         label="Main Cost Center"
         allowAdd
+        getSearch={getSearchCostCenter}
+        getSingle={getSingleCostCenter}
       />
       <RHFAsyncSelectField
         table="cost_center"
         name="apartment.costCenterId"
         label="Cost Center"
         allowAdd
+        getSearch={getSearchCostCenter}
+        getSingle={getSingleCostCenter}
       />
       {/* // todo replace this with currency field group */}
       <RHFAsyncSelectField
@@ -94,6 +103,8 @@ const ApartmentForm = ({ tab }) => {
               label="apartmentId"
               table="apartment"
               name={`apartmentAccumulators.${index}.apartmentId`}
+              getSearch={getSearchApartment}
+              getSingle={getSingleApartment}
             />
           </td>
         )}

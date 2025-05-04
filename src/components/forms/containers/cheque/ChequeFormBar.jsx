@@ -11,8 +11,8 @@ const ChequeFormBar = ({ pattern }) => {
     <div className="flex text-gray-500 border-r-2 gap-2 items-center mt-2">
       <Btn
         type="button"
-        kind={watch("collection_status") ? "primary" : 'default'}
-        disabled={watch("partial_collection_status")}
+        kind={watch("collectionStatus") ? "primary" : 'default'}
+        disabled={watch("partialCollectionStatus")}
         containerClassName="!px-1 text-gray-500 !border !text-sm"
         onClick={() =>
           handleDispatchForm({
@@ -22,7 +22,7 @@ const ChequeFormBar = ({ pattern }) => {
           })
         }
       >
-        {watch('collection_status') ? (
+        {watch('collectionStatus') ? (
           <span>
             <CheckIcon />
           </span>
@@ -31,8 +31,8 @@ const ChequeFormBar = ({ pattern }) => {
       </Btn>
       <Btn
         type="button"
-        kind={watch("partial_collection_status") ? "info" : 'default'}
-        disabled={watch("collection_status")}
+        kind={watch("partialCollectionStatus") ? "info" : 'default'}
+        disabled={watch("collectionStatus")}
         containerClassName="!px-1 text-gray-500 !border !text-sm"
         onClick={() =>
           handleDispatchForm({
@@ -43,7 +43,7 @@ const ChequeFormBar = ({ pattern }) => {
           })
         }
       >
-        {watch('partial_collection_status') ? (
+        {watch('partialCollectionStatus') ? (
           <span>
             <CheckIcon />
           </span>
@@ -52,7 +52,7 @@ const ChequeFormBar = ({ pattern }) => {
       </Btn>
       <Btn
         type="button"
-        kind={watch("return_status") ? "error" : 'default'}
+        kind={watch("returnStatus") ? "error" : 'default'}
         containerClassName="!px-1 text-gray-500 !border !text-sm"
         onClick={() =>
           handleDispatchForm({
@@ -62,7 +62,7 @@ const ChequeFormBar = ({ pattern }) => {
           })
         }
       >
-        {watch('return_status') ? (
+        {watch('returnStatus') ? (
           <span>
             <CheckIcon />
           </span>

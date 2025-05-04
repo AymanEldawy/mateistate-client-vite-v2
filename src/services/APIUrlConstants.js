@@ -47,7 +47,7 @@ const API_URL_CONSTANTS = {
   /************************************** VOUCHERS **************************************/
   BASE_VOUCHER: "/vouchers",
   /************************************** PARKING **************************************/
-  BASE_PARKING: "/parkings",
+  BASE_PARKING: "/parking",
   /************************************** VILLA **************************************/
   BASE_VILLA: "/villas",
   /************************************** BASE_LAND **************************************/
@@ -63,19 +63,23 @@ const API_URL_CONSTANTS = {
   /************************************** BILLS **************************************/
   BASE_BILLS: "/bills",
   /************************************** BASE_CONTRACT_PATTERN **************************************/
-  BASE_CONTRACT_PATTERN: "/patterns/contract",
+  BASE_CONTRACT_PATTERN: "/contract-patterns",
   /************************************** BASE_CHEQUE_PATTERN **************************************/
-  BASE_CHEQUE_PATTERN: "/patterns/cheque",
+  BASE_CHEQUE_PATTERN: "/cheque-patterns",
   /************************************** BASE_VOUCHER_PATTERN **************************************/
-  BASE_VOUCHER_PATTERN: "/patterns/voucher",
+  BASE_VOUCHER_PATTERN: "/voucher-patterns",
   /************************************** BASE_BILL_PATTERN **************************************/
-  BASE_BILL_PATTERN: "/patterns/bill",
+  BASE_BILL_PATTERN: "/bill-patterns",
   /************************************** ENTRIES **************************************/
   BASE_ENTRIES: "/entries",
   /************************************** MATERIAL_GROUPS **************************************/
   BASE_MATERIAL_GROUPS: "/material-groups",
   /************************************** MATERIALS **************************************/
   BASE_MATERIALS: "/materials",
+  /************************************** OWNER_EXPENSES_TYPE **************************************/
+  OWNER_EXPENSES_TYPES: "/owner-expenses-types",
+  /************************************** OWNER_EXPENSESE **************************************/
+  OWNER_EXPENSES: "/owner-expenses",
 };
 
 export default API_URL_CONSTANTS;

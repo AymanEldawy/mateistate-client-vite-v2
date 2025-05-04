@@ -7,7 +7,7 @@ export const getSingleShop = (id, signal) => {
   });
 };
 
-export const getAllShops = ({ signal }) => {
+export const getAllShops = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_SHOP, {
     signal,
   });

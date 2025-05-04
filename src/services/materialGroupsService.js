@@ -7,7 +7,7 @@ export const getSingleMaterialGroup = (id, signal) => {
   });
 };
 
-export const getAllMaterialGroups = ({ signal }) => {
+export const getAllMaterialGroups = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_MATERIAL_GROUPS, {
     signal,
   });

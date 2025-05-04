@@ -17,7 +17,7 @@ const BillFormTables = ({
       {
         activeTab === 1 ? (
           <TableForm
-            // rowsCount={watch("bill_material_details")?.length}
+            // rowsCount={watch("bilMaterialDetails")?.length}
             // rowStyles={(index) => ({
             //   background:
             //     index % 2
@@ -34,57 +34,57 @@ const BillFormTables = ({
               <>
                 <td>
                   <RHFTableSelect
-                    name={`bill_material_details.${index}.material_id`}
+                    name={`bilMaterialDetails.${index}.materialId`}
                     options={[]}
                   />
                 </td>
                 <td>
                   <RHFInput
-                    name={`bill_material_details.${index}.unit`}
+                    name={`bilMaterialDetails.${index}.unit`}
                   />
                 </td>
                 <td>
                   <RHFInput
-                    name={`bill_material_details.${index}.quantity`}
+                    name={`bilMaterialDetails.${index}.quantity`}
                     type="number"
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_material_details.${index}.unit_price`}
+                    name={`bilMaterialDetails.${index}.unitPrice`}
                   />
                 </td>
                 <td>
                   <RHFInput
-                    name={`bill_material_details.${index}.vat_percentage`}
+                    name={`bilMaterialDetails.${index}.vatPercentage`}
                     type="number"
 
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_material_details.${index}.vat_amount`}
+                    name={`bilMaterialDetails.${index}.vatAmount`}
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_material_details.${index}.total_price`}
+                    name={`bilMaterialDetails.${index}.totalPrice`}
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_material_details.${index}.net`}
+                    name={`bilMaterialDetails.${index}.net`}
                   />
                 </td>
                 <td>
                   <RHFInput
-                    name={`bill_material_details.${index}.note`}
+                    name={`bilMaterialDetails.${index}.note`}
                   />
                 </td>
               </>
             )}
 
-            gridName={"bill_material_details"}
+            gridName={"bilMaterialDetails"}
             headers={[
               'material_id',
               'unit',
@@ -114,40 +114,40 @@ const BillFormTables = ({
 
                 <td>
                   <AccountField
-                    name={`bill_discounts_details.${index}.account_id`}
+                    name={`billDiscountsDetails.${index}.accountId`}
                     options={[]}
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_discounts_details.${index}.discount`}
+                    name={`billDiscountsDetails.${index}.discount`}
                   />
                 </td>
                 <td>
                   <RHFInputAmount
-                    name={`bill_discounts_details.${index}.extra`}
+                    name={`billDiscountsDetails.${index}.extra`}
                   />
                 </td>
                 <td>
                   <RHFAsyncSelectField
-                    name={`bill_discounts_details.${index}.cost_center_id`}
+                    name={`billDiscountsDetails.${index}.costCenterId`}
                   />
                 </td>
                 <td>
                   <AccountField
-                    name={`bill_discounts_details.${index}.obverse_account_id`}
+                    name={`billDiscountsDetails.${index}.obverseAccountId`}
                     options={[]}
                   />
                 </td>
                 <td>
                   <RHFInput
-                    name={`bill_discounts_details.${index}.note`}
+                    name={`billDiscountsDetails.${index}.note`}
                   />
                 </td>
               </>
             )}
 
-            gridName={"bill_discounts_details"}
+            gridName={"billDiscountsDetails"}
             headers={[
               'account_id',
               'discount',

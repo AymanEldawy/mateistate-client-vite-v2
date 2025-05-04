@@ -31,56 +31,56 @@ const BuildingForm = ({ tab }) => {
     // return
     let flat = name?.split(".").at(-1);
     switch (flat) {
-      case "apartment_count":
-      case "apartment_floor":
-        FLATS.apartment_count =
-          watch("apartment_count") * watch("apartment_floor");
+      case "apartmentCount":
+      case "apartmentFloor":
+        FLATS.apartmentCount =
+          watch("apartmentCount") * watch("apartmentFloor");
         break;
-      case "penthouse_count":
-      case "penthouse_floor":
-        FLATS.penthouse_count =
-          watch("penthouse_count") * watch("penthouse_floor");
+      case "penthouseCount":
+      case "penthouseFloor":
+        FLATS.penthouseCount =
+          watch("penthouseCount") * watch("penthouseFloor");
 
         break;
-      case "parking_count":
-      case "parking_floor":
-        FLATS.parking_count = watch("parking_count") * watch("parking_floor");
+      case "parkingCount":
+      case "parkingFloor":
+        FLATS.parkingCount = watch("parkingCount") * watch("parkingFloor");
 
         break;
-      case "mezzanine_count":
-      case "mezzanine_floor":
-        FLATS.mezzanine_count =
-          watch("mezzanine_count") * watch("mezzanine_floor");
+      case "mezzanineCount":
+      case "mezzanineFloor":
+        FLATS.mezzanineCount =
+          watch("mezzanineCount") * watch("mezzanineFloor");
 
         break;
-      case "office_count":
-      case "office_floor":
-        FLATS.office_count = watch("office_count") * watch("office_floor");
+      case "officeCount":
+      case "officeFloor":
+        FLATS.officeCount = watch("officeCount") * watch("officeFloor");
 
         break;
-      case "store_count":
-        FLATS.store_count = watch("store_count");
+      case "storeCount":
+        FLATS.storeCount = watch("storeCount");
         break;
 
-      case "shop_count":
-        FLATS.shop_count = watch("shop_count");
+      case "shopCount":
+        FLATS.shopCount = watch("shopCount");
 
         break;
-      case "warehouse_count":
-        FLATS.warehouse_count = watch("warehouse_count");
+      case "warehouseCount":
+        FLATS.warehouseCount = watch("warehouseCount");
 
         break;
       case "service_apartments":
-        FLATS.service_apartments = watch("service_apartments");
+        FLATS.serviceApartments = watch("serviceApartments");
 
         break;
       case "drivers_apartments":
-        FLATS.drivers_apartments = watch("drivers_apartments");
+        FLATS.driversApartments = watch("driversApartments");
 
         break;
       case "underground_parking": {
-        let underground_parking = watch("underground_parking");
-        FLATS.underground_parking = underground_parking;
+        let undergroundParking = watch("undergroundParking");
+        FLATS.undergroundParking = undergroundParking;
       }
 
         break;

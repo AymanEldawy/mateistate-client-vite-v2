@@ -4,29 +4,13 @@ import { createCurrency, deleteCurrency, deleteManyCurrencies, getAllCurrencies,
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import currencyColumns from '@/helpers/currency/currencyColumns'
 import { lazy } from 'react'
-import { z } from 'zod'
+import { currencyDefaultValue, currencyValidationSchema } from '@/helpers/currency/currencyValidationSchema'
 const CurrencyForm = lazy(() => import("@/components/forms/containers/currency/CurrencyForm"))
-
-const defaultValue = {
-  id: '',
-  code: '',
-  name: '',
-  ltnname: '',
-  rate: 1,
-}
-
-const validationSchema = () => z.object({
-  id: z.string(),
-  code: z.string().nonempty({ message: 'Code is Required' }),
-  name: z.string().nonempty({ message: 'name is Required' }),
-  ltnname: z.string().optional(),
-  rate: z.number().min(0, { message: 'Rate must be greater than 0' }),
-})
 
 const currencyConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: currencyDefaultValue,
+    validationSchema: currencyValidationSchema,
     mutationAddFunction: createCurrency,
     mutationUpdateFunction: updateCurrency,
     getSingleFunction: getSingleCurrency, 

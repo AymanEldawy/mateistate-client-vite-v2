@@ -5,7 +5,7 @@ export const getSingleContractPattern = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}/${id}`);
 };
 
-export const getAllContractPatterns = ({ signal }) => {
+export const getAllContractPatterns = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_CONTRACT_PATTERN, {
     signal,
   });

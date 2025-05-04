@@ -63,8 +63,8 @@ export const apartmentDefaultValues = {
 
 
 const apartmentAccumulatorSchema = z.object({
-  number: VALIDATION.OPTIONAL_NUMBER.positive(),
-  apartmentId: VALIDATION.OPTIONAL_STRING.nullable()
+  number: VALIDATION.OPTIONAL_NUMBER,
+  apartmentId: VALIDATION.OPTIONAL_STRING
 });
 
 const apartmentRentalPriceSchema = z.object({
@@ -92,7 +92,7 @@ const apartmentSchema = z.object({
   bathroomCount: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   balconyCount: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   hasLawsuit: z.boolean(),
-  mainCostCenterId: VALIDATION.NON_EMPTY_STRING,
+  mainCostCenterId: VALIDATION.OPTIONAL_STRING,
   costCenterId: VALIDATION.OPTIONAL_STRING,
   propertyType: VALIDATION.OPTIONAL_STRING,
   waterMeter: VALIDATION.OPTIONAL_STRING,
@@ -101,24 +101,24 @@ const apartmentSchema = z.object({
   xIndex: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   yIndex: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   roomCount: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
-  propertyValueId: VALIDATION.NON_EMPTY_STRING,
+  propertyValueId: VALIDATION.OPTIONAL_STRING,
   hex: VALIDATION.OPTIONAL_STRING,
   costPrice: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   amountPaid: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   costCurrencyId: VALIDATION.OPTIONAL_STRING,
   note: VALIDATION.OPTIONAL_STRING,
   apartmentKind: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
-  rowIndex: z.union([VALIDATION.OPTIONAL_NUMBER.int(), z.null()]),
+  rowIndex: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   assetHash: VALIDATION.OPTIONAL_STRING,
   code: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   blocked: VALIDATION.OPTIONAL_BOOLEAN,
   kind: VALIDATION.OPTIONAL_STRING,
-  buildingId: VALIDATION.OPTIONAL_STRING
+  buildingId: VALIDATION.NON_EMPTY_STRING
 });
 
 export const apartmentValidationSchema = z.object({
   apartment: apartmentSchema,
-  apartmentAccumulators: z.array(apartmentAccumulatorSchema).min(1),
-  apartmentRentalPrices: z.array(apartmentRentalPriceSchema).min(1),
-  apartmentSellingPrices: z.array(apartmentSellingPriceSchema).min(1)
+  apartmentAccumulators: z.array(apartmentAccumulatorSchema),
+  apartmentRentalPrices: z.array(apartmentRentalPriceSchema),
+  apartmentSellingPrices: z.array(apartmentSellingPriceSchema),
 });

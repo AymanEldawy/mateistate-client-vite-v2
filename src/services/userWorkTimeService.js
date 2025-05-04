@@ -7,7 +7,7 @@ export const getSingleUserWorkTime = (id, signal) => {
     });
 };
 
-export const getAllUserWorkTimes = ({ signal }) => {
+export const getAllUserWorkTimes = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_USER_WORK_TIME, {
         signal,
     });

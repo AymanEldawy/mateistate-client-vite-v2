@@ -7,7 +7,7 @@ export const getSingleCollection = (id, signal) => {
   });
 };
 
-export const getAllCollections = ({ signal }) => {
+export const getAllCollections = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_COLLECTION, {
     signal,
   });

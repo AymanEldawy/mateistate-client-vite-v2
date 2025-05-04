@@ -62,7 +62,113 @@ let list = [
   'contract_round_to',
   'chq_return_reasons',
 ]
-for (const item of list) {
-  console.log(item.toUpperCase());
+// for (const item of list) {
+//   console.log(item.toUpperCase());
 
+// }
+
+function underscoreToCamelCase(str) {
+  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
 }
+
+function convertKeysToCamelCase(obj) {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => convertKeysToCamelCase(item));
+  }
+
+  const newObj = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const camelKey = underscoreToCamelCase(key);
+    newObj[camelKey] = convertKeysToCamelCase(value);
+  }
+
+  return newObj;
+}
+
+function convertArraysToCamelCase(arr) {
+  let newArr = []
+  for (const value of arr) {
+    let v = underscoreToCamelCase(value)
+    console.log("🚀 ~ convertArraysToCamelCase ~ v:", v)
+    newArr.push(v)
+  }
+
+  return newArr
+}
+
+const underscoreData = [
+ 'name',
+'type',
+'land_no',
+'last_name',
+'number',
+'date',
+'city',
+'region',
+'space',
+'side',
+'street_count',
+'street_name',
+'area',
+'area_unit',
+'land_type',
+'landowner',
+'buildble',
+'license_no',
+'license',
+'license_date',
+'details',
+'begin_land_value',
+'currency_begin_land_id',
+'currency_val_begin_land',
+'begin_land_cost_center_id',
+'currency_purchase_id',
+'currency_val_purchase',
+'purchase_note',
+'cost_center_id',
+'bank_account_id',
+'account_comm_income_id',
+'rent',
+'rent_currency_id',
+'account_id',
+'customer_id',
+'cuowner_id',
+'bank_account_id',
+'customer_owner_id',
+'owner_account_id',
+'identity_value',
+'currency_identity_id',
+'currency_valid_entity',
+'identity_begin_date',
+'identity_end_date',
+'identity_entry_id',
+'identity_note',
+'ltnname',
+'ltn_land_type',
+'ltn_city',
+'ltn_region',
+'ltn_space',
+'ltn_license',
+'ltn_side',
+'ban',
+'commission_percent',
+'used_end_date',
+'create_entry_investment'
+
+
+
+
+
+
+
+
+
+]
+
+
+const camelCaseData = convertArraysToCamelCase(underscoreData);
+console.log(camelCaseData);

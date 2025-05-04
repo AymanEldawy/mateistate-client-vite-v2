@@ -7,7 +7,7 @@ export const getSingleEntry = (id, signal) => {
   });
 };
 
-export const getAllEntries = ({ signal }) => {
+export const getAllEntries = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_ENTRIES, {
     signal,
   });

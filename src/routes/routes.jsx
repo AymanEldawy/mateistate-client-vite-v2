@@ -44,7 +44,12 @@ const CategoryProblem = React.lazy(() => import("../pages/views/Category/Categor
 const Store = React.lazy(() => import("../pages/views/Store/Store"));
 const Login = React.lazy(() => import("../pages/auth/Login"));
 const ForgotPassword = React.lazy(() => import("../pages/auth/ForgotPassword"));
-const ResetPassword = React.lazy(() => import("../pages/auth/ResetPassword"));
+const BillPattern = React.lazy(() => import("../pages/views/Patterns/BillPattern"));
+const ContractPattern = React.lazy(() => import("../pages/views/Patterns/ContractPattern"));
+const VoucherPattern = React.lazy(() => import("../pages/views/Patterns/VoucherPattern"));
+const ChequePattern = React.lazy(() => import("../pages/views/Patterns/ChequePattern"));
+const OwnerExpensesType = React.lazy(() => import("../pages/views/OwnerExpensesType/OwnerExpensesType"));
+const OwnerExpenses = React.lazy(() => import("../pages/views/OwnerExpenses/OwnerExpenses"));
 // const Profile = React.lazy(() => import("./profile/Profile"));
 // const ChangePassword = React.lazy(() => import("./profile/ChangePassword"));
 /************************************** Authentication **************************************/
@@ -76,6 +81,15 @@ const LeasedLandsReport = React.lazy(() => import("../pages/reports/realstate/Le
 const LeasedParkingReport = React.lazy(() => import("../pages/reports/realstate/LeasedParkingReport"));
 const LeasedPropertyActivityReport = React.lazy(() => import("../pages/reports/realstate/LeasedPropertyActivityReport"));
 const LeasedUnitsReport = React.lazy(() => import("../pages/reports/realstate/LeasedUnitsReport"));
+const UnitsWillVacatedReport = React.lazy(() => import("../pages/reports/realstate/UnitsWillVacatedReport"));
+const SoldVillasReport = React.lazy(() => import("../pages/reports/realstate/SoldVillasReport"));
+const SoldLandsReport = React.lazy(() => import("../pages/reports/realstate/SoldLandsReport"));
+const SoldUnitsReport = React.lazy(() => import("../pages/reports/realstate/SoldUnitsReport"));
+const ReturnedChqReport = React.lazy(() => import("../pages/reports/realstate/ReturnedChqReport"));
+const ReservedUnitsReport = React.lazy(() => import("../pages/reports/realstate/ReservedUnitsReport"));
+const OwnerExpensesReport = React.lazy(() => import("../pages/reports/realstate/OwnerExpensesReport"));
+const OverduePaymentsReport = React.lazy(() => import("../pages/reports/realstate/OverduePaymentsReport"));
+const MangerChequeReport = React.lazy(() => import("../pages/reports/realstate/MangerChequeReport"));
 
 // 2.Accounting Reports
 const CostCenterGeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting/CostCenterGeneralLedgerReport"));
@@ -84,6 +98,8 @@ const CostCenterTrialBalanceReport = React.lazy(() => import("../pages/reports/a
 const DueNotePaperReport = React.lazy(() => import("../pages/reports/accounting/DueNotePaperReport"));
 const GeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting/GeneralLedgerReport"));
 const JournalLedgerReport = React.lazy(() => import("../pages/reports/accounting/JournalLedgerReport"));
+const VATBillsReport = React.lazy(() => import("../pages/reports/accounting/VATBillsReport"));
+const TrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/TrialBalanceReport"));
 
 
 const routes = [
@@ -119,6 +135,14 @@ const routes = [
       {
         path: PATHS.OWNER,
         element: <Owner />,
+      },
+      {
+        path: PATHS.OWNER_EXPENSES_TYPES,
+        element: <OwnerExpensesType />,
+      },
+      {
+        path: PATHS.OWNER_EXPENSES,
+        element: <OwnerExpenses />,
       },
       {
         path: PATHS.SELLER,
@@ -197,6 +221,22 @@ const routes = [
         path: PATHS.MATERIAL_GROUP,
         element: <MaterialGroup />,
       },
+      {
+        path: PATHS.BILL_PATTERN,
+        element: <BillPattern />,
+      },
+      {
+        path: PATHS.CONTRACT_PATTERN,
+        element: <ContractPattern />,
+      },
+      {
+        path: PATHS.VOUCHER_PATTERN,
+        element: <VoucherPattern />,
+      },
+      {
+        path: PATHS.CHEQUE_PATTERN,
+        element: <ChequePattern />,
+      },
       /************************************** Reports **************************************/
       {
         path: PATHS.CHEQUE_REPORT,
@@ -271,12 +311,56 @@ const routes = [
         element: <LeasedUnitsReport />,
       },
       {
+        path: PATHS.UNITS_WILL_VACATED_REPORT,
+        element: <UnitsWillVacatedReport />,
+      },
+      {
+        path: PATHS.SOLD_VILLAS_REPORT,
+        element: <SoldVillasReport />,
+      },
+      {
+        path: PATHS.SOLD_LANDS_REPORT,
+        element: <SoldLandsReport />,
+      },
+      {
+        path: PATHS.SOLD_UNITS_REPORT,
+        element: <SoldUnitsReport />,
+      },
+      {
+        path: PATHS.RETURNED_CHEQUES_REPORT,
+        element: <ReturnedChqReport />,
+      },
+      {
+        path: PATHS.OWNER_EXPENSES_REPORT,
+        element: <OwnerExpensesReport />,
+      },
+      {
+        path: PATHS.OVERDUE_PAYMENTS_REPORT,
+        element: <OverduePaymentsReport />,
+      },
+      {
+        path: PATHS.MANAGER_CHEQUE_REPORT,
+        element: <MangerChequeReport />,
+      },
+      {
+        path: PATHS.RESERVED_UNITS_REPORT,
+        element: <ReservedUnitsReport />,
+      },
+      {
         path: PATHS.COST_CENTER_GENERAL_LEDGER_REPORT,
         element: <CostCenterGeneralLedgerReport />,
       },
       {
         path: PATHS.JOURNAL_LEDGER_REPORT,
         element: <JournalLedgerReport />,
+      },
+      {
+        path: PATHS.VAT_BILLS_REPORT,
+        element: <VATBillsReport />,
+      },
+      {
+        path: PATHS.TRIAL_BALANCE_REPORT,
+        element: <TrialBalanceReport />,
       },
       {
         path: PATHS.CUSTOMER_ACCOUNT_STATEMENT_REPORT,
@@ -335,10 +419,10 @@ const routes = [
         path: PATHS.FORGOT_PASSWORD,
         element: <ForgotPassword />,
       },
-      {
-        path: PATHS.RESET_PASSWORD,
-        element: <ResetPassword />,
-      },
+      // {
+      //   path: PATHS.RESET_PASSWORD,
+      //   element: <ResetPassword />,
+      // },
     ],
   },
 ];

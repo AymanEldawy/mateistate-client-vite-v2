@@ -14,8 +14,8 @@ export const EntryHead = ({
           // containerClassName="!flex-col !gap-1"
         />
         <RHFInput
-          name="created_at"
-          label="created_at"
+          name="createdAt"
+          label="createdAt"
           // className="border-0 !rounded-none !h-full"
           // containerClassName="!flex-col !gap-1"
           readOnly={onlyView}

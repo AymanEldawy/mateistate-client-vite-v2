@@ -5,7 +5,7 @@ export const getSingleCategoryProblem = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM}/${id}`);
 };
 
-export const getAllCategoryProblems = ({ signal }) => {
+export const getAllCategoryProblems = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM, {
     signal,
   });

@@ -6,9 +6,10 @@ export const DynamicForm = ({
   containerClassName,
   labelClassName,
   customGrid,
+  tab
 }) => {
 
-  
+
   return (
     <div
       className={`${containerClassName} grid gap-x-4 gap-y-2 ${customGrid ? customGrid : ' grid-cols-2 lg:grid-cols-3'}`}
@@ -19,6 +20,7 @@ export const DynamicForm = ({
             <RHFTextarea
               key={field?.name}
               {...field}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
               labelClassName={labelClassName}
             />
           );
@@ -27,6 +29,8 @@ export const DynamicForm = ({
             <CurrencyFieldGroup
               {...field}
               key={field?.name}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+
             />
           );
         } else if (field?.table) {
@@ -35,6 +39,8 @@ export const DynamicForm = ({
               {...field}
               key={field?.name}
               labelClassName={labelClassName}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+
             />
           );
         } else if (field?.key === "select") {
@@ -43,14 +49,18 @@ export const DynamicForm = ({
               {...field}
               key={field?.name}
               labelClassName={labelClassName}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+
             />
           );
-        } else if (field?.key === "checkbox") {
+        } else if (field?.type === "checkbox") {
           return (
             <RHFCheckbox
               {...field}
               key={field?.name}
               labelClassName={labelClassName}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+
             />
           );
         } else {
@@ -59,6 +69,8 @@ export const DynamicForm = ({
               {...field}
               key={field?.name}
               labelClassName={labelClassName}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+
             />
           );
         }

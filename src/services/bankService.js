@@ -5,7 +5,7 @@ export const getSingleBank = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BANK}/${id}`);
 };
 
-export const getAllBanks = ({ signal }) => {
+export const getAllBanks = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_BANK, {
     signal,
   });

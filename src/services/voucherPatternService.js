@@ -5,7 +5,7 @@ export const getSingleVoucherPattern = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/${id}`);
 };
 
-export const getAllVoucherPatterns = ({ signal }) => {
+export const getAllVoucherPatterns = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_VOUCHER_PATTERN, {
     signal,
   });

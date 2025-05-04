@@ -146,7 +146,7 @@ const ContractFormTermination = ({
                   <td>
                     <RHFDatePicker
 
-                      name={`contract_fines_grid.${index}.created_at`}
+                      name={`contract_fines_grid.${index}.createdAt`}
                     />
                   </td>
                   <td>

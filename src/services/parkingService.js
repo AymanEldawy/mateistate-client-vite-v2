@@ -7,7 +7,7 @@ export const getSingleParking = (id, signal) => {
   });
 };
 
-export const getAllParkings = ({ signal }) => {
+export const getAllParkings = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_PARKING, {
     signal,
   });
@@ -46,6 +46,9 @@ export const deleteManyParkings = (ids) => {
 };
 
 
+export const getSearchParking = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_PARKING}?search=${value}`);
+};
 
 export const getParkingCode = (parentId) => {
   return http.delete(

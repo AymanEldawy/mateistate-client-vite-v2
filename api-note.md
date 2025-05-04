@@ -45,17 +45,43 @@
 ## vouchers
 ## bills
 ## cheques
-
 ## user
-## building
 ## op_collection
 ## op_partial_collection
 ## op_return
 ## installment
-## land
 ## reservation_property
 ## user_work_times
 ## service
-
-
 ## owner_expenses
+
+
+
+
+## Contract pattern
+- change all these columns in database from json to string to only except enums 'DEBIT' || 'CREDIT' || 'NOTHING' 
+columns:
+    moveCostCenterWithRevenue
+    moveCostCenterWithTenant
+    moveCostCenterWithInsuranceRevenue
+    moveCostCenterWithPriceRevenue
+    moveCostCenterWithIntentionRatifying
+    moveCostCenterWithOtherFee
+    moveCostCenterWithCommissionClient
+    moveCostCenterWithCommissionOwner
+    moveCostCenterWithContractFinesTerminating
+    moveCostCenterWithDecisivenessGranted
+    moveCostCenterWithContractProceedsRerminating
+
+## owner expenses (CRUD)
+v1 url -> https://app.matiestate.com/owner_expenses
+
+modules
+- owner_expenses
+- owner_expenses_details []
+
+## bill pattern (CRUD)
+v1 url -> https://app.matiestate.com/patterns/bill_pattern
+
+module
+- bill_pattern

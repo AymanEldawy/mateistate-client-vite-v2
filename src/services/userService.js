@@ -7,7 +7,7 @@ export const getSingleUser = (id, signal) => {
   });
 };
 
-export const getAllUsers = ({ signal }) => {
+export const getAllUsers = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_USER, {
     signal,
   });

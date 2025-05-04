@@ -7,7 +7,7 @@ export const getSingleLessor = (id, signal) => {
   });
 };
 
-export const getAllLessors = ({ signal }) => {
+export const getAllLessors = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_Lessor, {
     signal,
   });

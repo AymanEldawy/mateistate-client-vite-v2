@@ -5,7 +5,7 @@ export const getSingleStore = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_STORE}/${id}`);
 };
 
-export const getAllStores = ({ signal }) => {
+export const getAllStores = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_STORE, {
     signal,
   });

@@ -194,11 +194,6 @@ export const CONTRACTS_PATTERN_STEPS = {
   contract_sms: "contract SMS",
 };
 
-export const VOUCHER_PATTERN_STEPS = {
-  voucher_general: "voucher_general",
-  voucher_fields: "voucher_fields",
-  voucher_sms: "SMS",
-};
 export const ACCOUNTING_VOUCHER_PATTERN_STEPS = {
   accounting_voucher_general: "accounting_voucher_general",
   accounting_voucher_fields: "accounting_voucher_fields",

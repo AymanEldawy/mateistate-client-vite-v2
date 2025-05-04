@@ -5,7 +5,7 @@ export const getSingleBuilding = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/${id}`);
 };
 
-export const getAllBuildings = ({ signal }) => {
+export const getAllBuildings = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_BUILDING, {
     signal,
   });
@@ -52,7 +52,7 @@ export const getSingleBuildingDetails = (id) => {
 };
 
 export const getSearchBuilding = (value) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}/${value}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}?search=${value}`);
 };
 
 export const generateBuildingUnits = ({

@@ -7,7 +7,7 @@ export const getSingleMaterial = (id, signal) => {
   });
 };
 
-export const getAllMaterials = ({ signal }) => {
+export const getAllMaterials = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_MATERIALS, {
     signal,
   });

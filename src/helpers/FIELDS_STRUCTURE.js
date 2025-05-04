@@ -29,8 +29,8 @@ const checkboxField = (additional) => ({
 });
 
 const gen_entries = (additional) => ({
-  label: 'gen_entries',
-  name: 'gen_entries',
+  label: 'genEntries',
+  name: 'genEntries',
   type: "checkbox",
   required: false,
   ...additional,
@@ -72,7 +72,7 @@ const number = (additional) => ({
 
 const created_at = (additional) => ({
   label: "date",
-  name: "created_at",
+  name: "createdAt",
   type: "date",
   defaultValue: new Date(),
   hide_in_form: true,
@@ -103,50 +103,50 @@ const nationality = (additional) => ({
   ...additional,
 });
 const account = (additional) => ({
-  label: "account_id",
-  name: "account_id",
+  label: "accountId",
+  name: "accountId",
   allowAdd: true,
   table: "account",
   ...additional,
 });
 const cost_center = (additional) => ({
-  label: "cost_center_id",
-  name: "cost_center_id",
+  label: "costCenterId",
+  name: "costCenterId",
   table: "cost_center",
   ...additional,
 });
 
 const building = (additional) => ({
   label: "building",
-  name: "building_id",
+  name: "buildingId",
   table: "building",
   ...additional,
 });
 
 const bank = (additional) => ({
-  label: "bank_id",
-  name: "bank_id",
+  label: "bankId",
+  name: "bankId",
   table: "bank",
   ...additional,
 });
 
 const client = (additional) => ({
-  label: "client_id",
-  name: "client_id",
+  label: "clientId",
+  name: "clientId",
   table: UNIQUE_REF_TABLES.clients,
   ...additional,
 });
 
 const currency = (additional) => ({
-  label: "currency_id",
-  name: "currency_id",
+  label: "currencyId",
+  name: "currencyId",
   table: 'currency',
   ...additional,
 });
 
 const suppliers = (additional) => ({
-  label: "owner_id",
-  name: "owner_id",
+  label: "ownerId",
+  name: "ownerId",
   table: UNIQUE_REF_TABLES.suppliers,
   ...additional,
 });

@@ -1,21 +1,21 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import { lazy } from 'react'
-import { createContractPattern, deleteContractPattern, deleteManyContractPatterns, getAllContractPatterns, updateContractPattern } from '@/services/contractPatternsService'
+import { createContractPattern, deleteContractPattern, deleteManyContractPatterns, getAllContractPatterns, getSingleContractPattern, updateContractPattern } from '@/services/contractPatternsService'
+import { contractPatternDefaultValues, contractPatternValidationSchema } from '@/helpers/patterns/contract/contractPatternValidationSchema'
+import { CONTRACTS_PATTERN_STEPS } from '@/helpers/patterns/contract/contractPatternSteps'
+import contractPatternColumns from '@/helpers/patterns/contract/contractPatternColumns'
 const ContractPatternForm = lazy(() => import('@/components/forms/containers/patterns/contract/ContractPatternForm'))
-
-const defaultValue = {}
-
-const validationSchema = () => { }
 
 const contractPatternConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: contractPatternDefaultValues,
+    validationSchema: contractPatternValidationSchema,
     mutationAddFunction: createContractPattern,
     mutationUpdateFunction: updateContractPattern,
+    getSingleFunction: getSingleContractPattern,
     onSuccessAction: () => { },
-    isSteps: false,
+    isSteps: true,
     onHandleDelete: deleteContractPattern,
     RenderForm: (props) => <ContractPatternForm {...props} />
   },
@@ -26,6 +26,9 @@ const contractPatternConfig = {
     name: 'contract_pattern',
     number: 1
   },
+  formSidebarProps: {
+    list: Object.keys(CONTRACTS_PATTERN_STEPS)
+  }
 }
 
 const ContractPattern = () => {
@@ -42,8 +45,9 @@ const ContractPattern = () => {
         onClickPrint: true,
         onClickAdd: true,
       }}
+
       tableProps={{
-        columns: [] //update
+        columns: contractPatternColumns
       }}
       {...contractPatternConfig}
 

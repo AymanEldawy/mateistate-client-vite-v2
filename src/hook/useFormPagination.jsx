@@ -2,30 +2,43 @@ import { useEffect, useMemo, useState } from "react";
 
 const columns = ["id", "number"];
 
-const useFormPagination = (findAll, findOne, name, code, id) => {
+const useFormPagination = ({
+  findAll, name, code, id, selectedItem
+}) => {
   const [currentNumber, setCurrentNumber] = useState();
   const [lastNumber, setLastNumber] = useState(id);
   const [currentId, setCurrentId] = useState(null);
 
+  // (page-1)*limit + current_order
+
   useEffect(() => {
     if (id) {
-      getPaginationTable();
+      // getPaginationTable();
       goLast();
     } else if (!currentNumber) {
       goLast(true);
     }
   }, [id]);
 
+  console.log("🚀 ~ useEffect ~ selectedItem:", selectedItem)
+
+  useEffect(() => {
+    if (!selectedItem) return
+    setCurrentNumber(selectedItem?.number)
+    setLastNumber(selectedItem?.page)
+    setCurrentId(selectedItem?.id)
+  }, [selectedItem])
+
   const getPaginationTable = async () => {
-    const current = await findOne(id);
-    if (current?.success) {
-      let data = current?.data;
-      setCurrentNumber(data?.pages);
-      setLastNumber(data?.total);
-      if (data?.id) {
-        setCurrentId(data?.id);
-      }
-    }
+    // const current = await findOne(id);
+    // if (current?.success) {
+    //   let data = current?.data;
+    //   setCurrentNumber(data?.pages);
+    //   setLastNumber(data?.total);
+    //   if (data?.id) {
+    //     setCurrentId(data?.id);
+    //   }
+    // }
   };
 
   const goLast = async (isNew) => {

@@ -48,21 +48,21 @@ export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, wa
   let total = firstTabData?.final_price;
   let date = firstTabData?.start_duration_date || firstTabData?.property_delivery_date;
 
-  if (!watch('installment.each_number')) {
-    setValue("installment.each_number", 3);
+  if (!watch('installment.eachNumber')) {
+    setValue("installment.eachNumber", 3);
   }
 
-  if (!watch('installment.installments_numbers')) {
-    setValue("installment.installments_numbers", 4);
+  if (!watch('installment.installmentsNumbers')) {
+    setValue("installment.installmentsNumbers", 4);
   }
 
   if (total) {
-    setValue("installment.total_amount", total);
+    setValue("installment.totalAmount", total);
   }
 
   if (date) {
     setValue(
-      `installment.first_installment_date`,
+      `installment.firstInstallmentDate`,
       new Date(date)?.toISOString()?.substring(0, 10)
     );
   }
@@ -77,20 +77,20 @@ export const generatePaymentBatches = async (
   CACHE_LIST,
   assetType
 ) => {
-  const rest_amount = watch("installment.rest_amount");
-  const each_duration = watch("installment.each_duration");
-  const each_number = watch("installment.each_number");
-  const first_installment_date = watch("installment.first_installment_date");
-  const installments_numbers = watch("installment.installments_numbers");
-  const begin_number = watch("installment.begin_number");
-  const beneficiary_name = watch("installment.beneficiary_name");
-  const account_id = watch(`contract.client_id`);
-  let observe_account_id = await getAccountReceivable(watch(`contract.building_id`))
+  const rest_amount = watch("installment.restAmount");
+  const each_duration = watch("installment.eachDuration");
+  const each_number = watch("installment.eachNumber");
+  const first_installment_date = watch("installment.firstInstallmentDate");
+  const installments_numbers = watch("installment.installmentsNumbers");
+  const begin_number = watch("installment.beginNumber");
+  const beneficiaryName = watch("installment.beneficiaryName");
+  const accountId = watch(`contract.clientId`);
+  let observeAccountId = await getAccountReceivable(watch(`contract.buildingId`))
   const client = CACHE_LIST?.client?.find(
-    (c) => c.id === watch(`contract.client_id`)
+    (c) => c.id === accountId
   );
-  const bank_id = watch("installment.bank_id");
-  const bank = CACHE_LIST?.bank?.find((c) => c.id === bank_id);
+  const bankId = watch("installment.bankId");
+  const bank = CACHE_LIST?.bank?.find((c) => c.id === bankId);
 
   const result = dividePrice(
     new Date(first_installment_date),
@@ -105,25 +105,25 @@ export const generatePaymentBatches = async (
   for (let i = 0; i < result.length; i++) {
     let dueDate = new Date(result[i]?.month)?.toLocaleDateString("en-UK");
     let endDueDate = new Date(result[i]?.end)?.toLocaleDateString("en-UK");
-    let internal_number = +(begin_number || 1) + i;
+    let internalNumber = +(begin_number || 1) + i;
     const note2 = `${COUNTER_CHQ_NUMBER?.[i]} Payment (${i + 1})`;
-    const note1 = `received chq number ${internal_number} from mr ${client?.name} ${result[i]?.price} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
+    const note1 = `received chq number ${internalNumber} from mr ${client?.name} ${result[i]?.price} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
 
     cheques.push({
-      internal_number,
-      created_at: new Date(),
-      due_date: result[i]?.month,
+      internalNumber,
+      createdAt: new Date(),
+      dueDate: result[i]?.month,
       amount: result[i]?.price,
-      end_due_date: result[i]?.end,
-      bank_id,
-      account_id,
-      observe_account_id: observe_account_id,
-      beneficiary_name,
-      cost_center_id: watch("cost_center_id"),
-      observe_cost_center_id: watch("cost_center_id"),
+      endDueDate: result[i]?.end,
+      bankId,
+      accountId,
+      observeAccountId: observeAccountId,
+      beneficiaryName,
+      costCenterId: watch("costCenterId"),
+      observeCostCenterId: watch("costCenterId"),
       note1,
       note2,
-      [`${assetType}_id`]: watch(`contract.${assetType}_id`),
+      [`${assetType}Id`]: watch(`contract.${assetType}Id`),
     });
   }
   setValue("installment_grid", cheques);

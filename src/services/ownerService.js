@@ -7,7 +7,7 @@ export const getSingleOwner = (id, signal) => {
   });
 };
 
-export const getAllOwners = ({ signal }) => {
+export const getAllOwners = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_owner, {
     signal,
   });
@@ -43,6 +43,9 @@ export const deleteManyOwners = (ids) => {
 
 export const getOwnerCode = (parentId) => {
   return http.get(`${API_URL_CONSTANTS.BASE_owner}/code=${parentId}`);
+};
+export const getSearchOwner = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_owner}?search=${value}`);
 };
 
 export const getOwnerReceivable = (buildingId) => {

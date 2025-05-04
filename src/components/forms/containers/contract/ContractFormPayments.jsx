@@ -5,7 +5,7 @@ import CustomTable from "@/components/tables/containers/CustomTable";
 import { CHQ_RECEIVED_CODE, CONNECT_WITH_CONTRACT_CODE, VOUCHER_RECEIPTS_CODE, VOUCHER_RECEIPTS_NAME } from "@/data/GENERATE_STARTING_DATA";
 import { CHEQUE_GRID_COLUMNS } from "@/helpers/cheque/chequeColumns";
 import { COUNTER_CHQ_NUMBER } from "@/helpers/contract/installmentHelpers";
-import { VOUCHER_GRID_COLUMNS } from "@/helpers/voucher/voucherColumns";
+import { VOUCHER_GRID_COLUMNS } from "@/helpers/patterns/voucher/voucherColumns";
 import { usePopupForm } from "@/hook/usePopupForm";
 import { getAccountCash } from "@/services/accountService";
 import { getVoucherLastNumberByType } from "@/services/vouchersService";
@@ -121,7 +121,7 @@ const ContractFormPayments = ({
         connect_with_id: watch("contract.id"),
         voucher_type: VOUCHER_RECEIPTS_CODE,
         account_id: account_cash_id,
-        created_at: new Date(),
+        createdAt: new Date(),
         note,
         grid: [
           {

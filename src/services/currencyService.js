@@ -5,7 +5,7 @@ export const getSingleCurrency = (id) => {
     return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`);
 };
 
-export const getAllCurrencies = ({ signal }) => {
+export const getAllCurrencies = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_CURRENCY, {
         signal,
     });

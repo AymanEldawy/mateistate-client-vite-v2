@@ -5,7 +5,7 @@ export const getSingleApartment = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_APARTMENT}/${id}`);
 };
 
-export const getAllApartments = ({ signal }) => {
+export const getAllApartments = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_APARTMENT, {
     signal,
   });
@@ -45,8 +45,8 @@ export const deleteManyApartments = (ids) => {
 
 
 
-export const getApartmentCode = (parentId) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_APARTMENT}/code=${parentId}`
+export const getSearchApartment = (value) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_APARTMENT}?search=${value}`
   );
 };

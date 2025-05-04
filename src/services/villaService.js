@@ -7,7 +7,7 @@ export const getSingleVilla = (id, signal) => {
     });
 };
 
-export const getAllVillas = ({ signal }) => {
+export const getAllVillas = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_VILLA, {
         signal,
     });

@@ -40,9 +40,9 @@ const mergePattern = async (
   // if(pattern?.returnable_active_operations)
 
   if (pattern?.returnable_default_date === 2) {
-    setValue("created_at", chqValues?.due_date);
+    setValue("createdAt", chqValues?.due_date);
   } else {
-    setValue("created_at", new Date());
+    setValue("createdAt", new Date());
   }
 
   if (pattern?.returnable_default_observe_account_is_building_bank) {

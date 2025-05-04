@@ -2,16 +2,16 @@ import PaperLayout from "@/components/layout/paper/PaperLayout";
 import { LAND_STEPS } from "@/data/constants";
 import QUERY_KEYS from "@/data/queryKeys";
 import landColumns from "@/helpers/land/landColumns";
-import { landValidationSchema } from "@/helpers/land/landValidationSchema";
+import { landDefaultValues, landValidationSchema } from "@/helpers/land/landValidationSchema";
 import { updateLand, deleteLand, createLand, getSingleLand } from "@/services/landServices";
 import { deleteManyLands, getAllLands } from "@/services/landServices";
 import { lazy } from "react";
 const LandForm = lazy(() => import("@/components/forms/containers/land/LandForm"))
 
-const defaultValue = {};
+
 const landConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: landDefaultValues,
     validationSchema: landValidationSchema,
     mutationAddFunction: createLand,
     mutationUpdateFunction: updateLand,
@@ -23,10 +23,6 @@ const landConfig = {
   },
   formHeaderProps: {
     header: "land",
-  },
-  formPaginationProps: {
-    name: "land",
-    number: 1,
   },
   formSidebarProps: {
     list: Object.values(LAND_STEPS)

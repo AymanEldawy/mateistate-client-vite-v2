@@ -7,7 +7,7 @@ export const getSingleCostCenter = (id, signal) => {
   });
 };
 
-export const getAllCostCenters = ({ signal }) => {
+export const getAllCostCenters = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_COST_CENTER, {
     signal,
   });
@@ -43,6 +43,9 @@ export const deleteManyCostCenters = (ids) => {
 
 export const getCostCenterCode = (parentId) => {
   return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}/code=${parentId}`);
+};
+export const getSearchCostCenter = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}?search=${value}`);
 };
 
 export const getCostCenterReceivable = (buildingId) => {

@@ -34,6 +34,8 @@ const QUERY_KEYS = {
   BILL_PATTERN: "bill_pattern",
   CHEQUE_PATTERN: "cheque_pattern",
   VOUCHER_PATTERN: "voucher_pattern",
+  OWNER_EXPENSES_TYPES: "owner_expenses_types",
+  OWNER_EXPENSES: "owner_expenses",
 };
 
 export default QUERY_KEYS;

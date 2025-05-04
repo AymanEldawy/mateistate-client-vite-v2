@@ -20,11 +20,7 @@ const accountConfig = {
     RenderForm: (props) => <AccountForm {...props} />
   },
   formHeaderProps: {
-    header: "Account"
-  },
-  formPaginationProps: {
-    name: 'account',
-    number: 1
+    header: "account"
   },
 }
 

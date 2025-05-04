@@ -143,7 +143,7 @@ const ReactSelectAsync = ({
                 <Btn
                   type="button"
                   kind="info"
-                  containerClassName="h-[25px] w-[25px] !rounded-full mt-[2px] !p-1 mx-1"
+                  containerClassName="h-[22px] w-[22px] !rounded-full mt-[2px] !p-1 mx-1"
                   onClick={(e) => {
                     e.stopPropagation()
                     handleDispatchForm({
@@ -153,7 +153,7 @@ const ReactSelectAsync = ({
                     })
                   }}
                 >
-                  <PlusIcon className={`h-4 w-4 rounded-full`} />
+                  <PlusIcon className={`h-5 w-5 rounded-full`} />
                 </Btn>
               ) : (
                 <SearchIcon className={`h-5 w-5 rounded-full mx-2 text-blue-500`} />

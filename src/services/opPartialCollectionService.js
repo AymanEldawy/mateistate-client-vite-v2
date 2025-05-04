@@ -7,7 +7,7 @@ export const getSinglePartial = (id, signal) => {
   });
 };
 
-export const getAllPartials = ({ signal }) => {
+export const getAllPartials = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION, {
     signal,
   });

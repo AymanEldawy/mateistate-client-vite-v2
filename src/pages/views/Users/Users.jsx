@@ -3,15 +3,14 @@ import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import userColumns from '@/helpers/user/userColumns'
 import { createUser, deleteManyUsers, deleteUser, getAllUsers, getSingleUser, updateUser } from '@/services/userService'
-import { userValidationSchema } from '@/helpers/user/userValidationSchema'
+import { userDefaultValue, userValidationSchema } from '@/helpers/user/userValidationSchema'
 import { lazy } from 'react'
 const UserForm = lazy(() => import("@/components/forms/containers/user/UserForm"))
 
-const defaultValue = {}
 
 const userConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: userDefaultValue,
     validationSchema: userValidationSchema,
     mutationAddFunction: createUser,
     mutationUpdateFunction: updateUser,

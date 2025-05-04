@@ -16,56 +16,26 @@
 - [ ] Cheque
 - [ ] Users
 - [ ] Contract
-- [ ] Lessor
-- [ ] Owner
-- [ ] Seller
-- [ ] Shop
+- [X] Lessor
+- [X] Owner
+- [X] Seller
+- [X] Shop
+- [X] Currency
+- [X] CostCenter
+- [X] Building
+- [X] Apartment
+- [X] Bank
 - [ ] villa
 - [ ] Land
-- [ ] Currency
 - [ ] ReservationProperty
 - [ ] Service
 - [ ] UserWorkTime
-- [ ] CostCenter
-- [ ] Building
 - [ ] Country
-- [ ] Apartment
-- [ ] Bank
 - [ ] Parking
 - [ ] Bills
 - [ ] Vouchers
 - [ ] Entries
 - [ ] MaterialGroup
-- [ ] Category
-- [ ] Category
-- [ ] Store
-
-### apis
-reports
-users
-bookings
-customer
-supervisor
-services
-worker
-other
-buildings
-reservation-properties
-apartments
-shops
-parkings
-lands
-owners
-banks
-currencies
-lessors
-sellers
-patterns
-materials
-entries
-vouchers
-cheques
-op
-bill
-accounts
-reports
+- [X] Category
+- [X] Category_problem
+- [X] Store

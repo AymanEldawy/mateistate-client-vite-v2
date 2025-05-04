@@ -7,17 +7,17 @@ const ChequePatternForm = ({ tab }) => {
   const displayForm = () => {
     switch (tab) {
       case CHEQUE_PATTERN_STEPS.commission:
-        return <DynamicForm fields={CHEQUE_PATTERN_COMMISSION} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_COMMISSION} />
       case CHEQUE_PATTERN_STEPS.collection:
-        return <DynamicForm fields={CHEQUE_PATTERN_COLLECTION} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_COLLECTION} />
       case CHEQUE_PATTERN_STEPS.partial_collection:
-        return <DynamicForm fields={CHEQUE_PATTERN_PARTIAL_COLLECTION} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_PARTIAL_COLLECTION} />
       case CHEQUE_PATTERN_STEPS.return:
-        return <DynamicForm fields={CHEQUE_PATTERN_RETURN} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_RETURN} />
       case CHEQUE_PATTERN_STEPS.default_statement:
-        return <DynamicForm fields={CHEQUE_PATTERN_STATEMENTS} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_STATEMENTS} />
       default:
-        return <DynamicForm fields={CHEQUE_PATTERN_GENERAL} />
+        return <DynamicForm customGrid="grid-cols-2" fields={CHEQUE_PATTERN_GENERAL} />
     }
   }
 

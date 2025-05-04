@@ -114,6 +114,8 @@ const PATHS = {
   COLLECTION_CHEQUE_REPORT: "/reports/collection-cheque-report",
   /******************** OVERDUE_PAYMENTS_REPORT ********************/
   OVERDUE_PAYMENTS_REPORT: "/reports/overdue-payments-report",
+  /******************** MANAGER_CHEQUE_REPORT ********************/
+  MANAGER_CHEQUE_REPORT: "/reports/manager-cheque-report",
   /******************** VAT_BILLS_REPORT/ ********************/
   VAT_BILLS_REPORT: "/reports/vat-bills-report/",
   /******************** CUSTOMER_ACCOUNT_STATEMENT_REPORT/ ********************/

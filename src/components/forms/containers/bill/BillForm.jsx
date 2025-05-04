@@ -155,59 +155,59 @@ const BillForm = () => {
           readOnly
         />
         <RHFInput
-          label="issue_date"
-          name="bill.issue_date"
+          label="issueDate"
+          name="bill.issueDate"
         />
         <RHFInput
-          label="bill_date"
-          name="bill.bill_date"
+          label="billDate"
+          name="bill.billDate"
         />
 
         <RHFInput
-          label="receipt_number"
-          name="bill.receipt_number"
+          label="receiptNumber"
+          name="bill.receiptNumber"
         />
         <CurrencyFieldGroup />
         <RHFSelectField
-          label="payment_method"
-          name="bill.payment_method"
+          label="paymentMethod"
+          name="bill.paymentMethod"
           options={BILL_PATTERN_PAYMENT_METHODS}
         />
 
         <RHFAsyncSelectField
-          label="cost_center_id"
-          name="bill.cost_center_id"
+          label="costCenterId"
+          name="bill.costCenterId"
         />
 
         <RHFAsyncSelectField
-          label="store_id"
-          name="bill.store_id"
+          label="storeId"
+          name="bill.storeId"
         />
         <RHFAsyncSelectField
-          name="bill.customer_id"
+          name="bill.customerId"
           label={
             +PATTERN_SETTINGS?.bill_type === 2
               ? "Customer Name"
               : "Supplier name"
           }
           required={
-            +watch('bill.payment_method') === 1
+            +watch('bill.paymentMethod') === 1
           }
         />
         <RHFAsyncSelectField
-          label="customer_account_id"
-          name="bill.customer_account_id"
+          label="customerAccountId"
+          name="bill.customerAccountId"
 
         />
         <RHFAsyncSelectField
-          label="material_account_id"
-          name="bill.material_account_id"
+          label="materialAccountId"
+          name="bill.materialAccountId"
 
         />
         <RHFAsyncSelectField
           required={false}
-          label="vat_account_id"
-          name="bill.vat_account_id"
+          label="vatAccountId"
+          name="bill.vatAccountId"
         />
       </div>
       <div className="grid grid-cols-3 gap-4 mt-2">
@@ -227,8 +227,8 @@ const BillForm = () => {
         <div className=" flex gap-12 items-center justify-between px-8">
           <div className="flex flex-col gap-2 max-w-sm">
             <RHFInput
-              label="total_quantities"
-              name="bill.total_quantities"
+              label="totalQuantities"
+              name="bill.totalQuantities"
             />
             <RHFInput
               label="discounts"
@@ -243,8 +243,8 @@ const BillForm = () => {
               name="bill.taxable"
             />
             <RHFInput
-              label="vat_amount"
-              name="bill.vat_amount"
+              label="vatAmount"
+              name="bill.vatAmount"
             />
           </div>
           <div className="flex flex-col gap-2 max-w-sm md:min-w-[400px]">
@@ -258,8 +258,8 @@ const BillForm = () => {
               name="bill.total"
             />
             <RHFTextarea
-              label="bill_total_text"
-              name="bill.bill_total_text"
+              label="billTotalText"
+              name="bill.billTotalText"
               textareaClassName="h-[60px]"
             />
           </div>

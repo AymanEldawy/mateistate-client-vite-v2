@@ -1,23 +1,23 @@
 import DynamicForm from '@/components/forms/wrapper/DynamicForm'
-import { CHEQUE_PATTERN_COLLECTION, CHEQUE_PATTERN_COMMISSION, CHEQUE_PATTERN_GENERAL, CHEQUE_PATTERN_PARTIAL_COLLECTION, CHEQUE_PATTERN_RETURN, CHEQUE_PATTERN_STATEMENTS } from '@/helpers/patterns/cheque/chequePatternFields'
-import { CHEQUE_PATTERN_STEPS } from '@/helpers/patterns/cheque/chequePatternSteps'
+import { BILL_PATTERN_accounts, BILL_PATTERN_bill_DETAILS, BILL_PATTERN_ENTRIES, BILL_PATTERN_general, BILL_PATTERN_OPTIONS, BILL_PATTERN_REFERENCES } from '@/helpers/patterns/bill/billPatternFields'
+import { BILL_PATTERN_STEPS } from '@/helpers/patterns/bill/billPatternSteps'
 
 const BillPatternForm = ({ tab }) => {
 
   const displayForm = () => {
     switch (tab) {
-      case CHEQUE_PATTERN_STEPS.commission:
-        return <DynamicForm fields={CHEQUE_PATTERN_COMMISSION} />
-      case CHEQUE_PATTERN_STEPS.collection:
-        return <DynamicForm fields={CHEQUE_PATTERN_COLLECTION} />
-      case CHEQUE_PATTERN_STEPS.partial_collection:
-        return <DynamicForm fields={CHEQUE_PATTERN_PARTIAL_COLLECTION} />
-      case CHEQUE_PATTERN_STEPS.return:
-        return <DynamicForm fields={CHEQUE_PATTERN_RETURN} />
-      case CHEQUE_PATTERN_STEPS.default_statement:
-        return <DynamicForm fields={CHEQUE_PATTERN_STATEMENTS} />
+      case BILL_PATTERN_STEPS.accounts:
+        return <DynamicForm fields={BILL_PATTERN_accounts} />
+      case BILL_PATTERN_STEPS.entries:
+        return <DynamicForm fields={BILL_PATTERN_ENTRIES} />
+      case BILL_PATTERN_STEPS.options:
+        return <DynamicForm fields={BILL_PATTERN_OPTIONS} />
+      case BILL_PATTERN_STEPS.bill_details:
+        return <DynamicForm fields={BILL_PATTERN_bill_DETAILS} />
+      case BILL_PATTERN_STEPS.references:
+        return <DynamicForm fields={BILL_PATTERN_REFERENCES} />
       default:
-        return <DynamicForm fields={CHEQUE_PATTERN_GENERAL} />
+        return <DynamicForm fields={BILL_PATTERN_general} />
     }
   }
 

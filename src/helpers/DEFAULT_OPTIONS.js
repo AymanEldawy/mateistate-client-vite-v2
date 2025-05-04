@@ -249,7 +249,10 @@ export const CHEQUE_REPORT_DEPOSIT = [
 
 
 
-export const ACCOUNT_GRID_TYPE = ["Debit", "Credit"]
+export const ACCOUNT_GRID_TYPE = [
+  { id: "DEBIT", name: "Debit" },
+  { id: "CREDIT", name: "Credit" }
+]
 
 
 export const CHEQUE_CONNECT_WITH = [
@@ -268,7 +271,7 @@ export const USER_TYPE = [
 ]
 
 
-export const  ACCOUNT_TYPE = [
+export const ACCOUNT_TYPE = [
   { name: "Normal", id: ACCOUNT_NORMAL_TYPE_CODE },
   { name: "Assembly", id: ACCOUNT_ASSEMBLY_TYPE_CODE },
   { name: "Distributive", id: ACCOUNT_DISTRIBUTIVE_TYPE_CODE },

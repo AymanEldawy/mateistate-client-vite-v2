@@ -7,7 +7,7 @@ export const getSingleContract = (id, signal) => {
   });
 };
 
-export const getAllContracts = ({ signal }) => {
+export const getAllContracts = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_CONTRACT, {
     signal,
   });

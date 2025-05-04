@@ -18,14 +18,14 @@ const mergePattern = async (
   setValue,
 ) => {
   setValue("amount", chqValues?.amount);
-  setValue("cheque_id", chqValues?.id);
+  setValue("chequeId", chqValues?.id);
   if (pattern?.commission_credit_account_id) {
-    setValue("commission_cost_center_id", chqValues?.cost_center_id);
-    setValue('commission_credit_id', pattern?.commission_credit_account_id)
+    setValue("commissionCostCenterId", chqValues?.costCenterId);
+    setValue('commissionCreditId', pattern?.commission_credit_account_id)
   }
 
   if (pattern?.commission_debit_account_id) {
-    setValue('commission_debit_id', pattern?.commission_debit_account_id)
+    setValue('commissionDebitId', pattern?.commission_debit_account_id)
   }
   // if (
   //   pattern?.collection_move_cost_center_credit ||
@@ -36,29 +36,29 @@ const mergePattern = async (
   setValue("note", pattern?.statement_collection);
 
   if (+pattern?.code === CHQ_RECEIVED_CODE) {
-    setValue("credit_account_id", pattern?.collection_credit_account_id);
+    setValue("creditAccountId", pattern?.collection_credit_account_id);
   }
 
   if (+pattern?.code === CHQ_RECEIVED_CODE) {
-    setValue("debit_account_id", pattern?.collection_debit_account_id);
+    setValue("debitAccountId", pattern?.collection_debit_account_id);
   }
 
-  if (pattern?.collection_gen_entries) setValue("gen_entries", true);
+  if (pattern?.collection_gen_entries) setValue("genEntries", true);
   if (pattern?.collection_default_date === 2) {
-    setValue("created_at", chqValues?.due_date);
+    setValue("createdAt", chqValues?.dueDate);
   } else {
-    setValue("created_at", new Date());
+    setValue("createdAt", new Date());
   }
 
   if (pattern?.collection_default_observe_account_is_client) {
-    setValue("credit_account_id", chqValues?.account_id, { shouldDirty: true });
+    setValue("creditAccountId", chqValues?.accountId, { shouldDirty: true });
   }
 
   if (
     pattern?.collection_move_cost_center_credit ||
     pattern?.collection_move_cost_center_debit
   ) {
-    setValue("cost_center_id", chqValues?.cost_center_id);
+    setValue("costCenterId", chqValues?.costCenterId);
   }
 
   if (pattern?.collection_default_account_is_building_bank) {
@@ -66,8 +66,8 @@ const mergePattern = async (
   }
 
   // const buildingAccounts = await getBuildingBank(chqValues);
-  // setValue("debit_account_id", buildingAccounts?.bank_id);
-  // setValue("credit_account_id", buildingAccounts?.cheque_id);
+  // setValue("debitAccountId", buildingAccounts?.bank_id);
+  // setValue("creditAccountId", buildingAccounts?.cheque_id);
   // setRefresh(p => !p);
 };
 
