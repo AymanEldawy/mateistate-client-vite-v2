@@ -7,22 +7,15 @@ import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
 import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, getSingleVoucher, updateVoucher } from '@/services/vouchersService'
 import voucherColumns from '@/helpers/voucher/voucherColumns'
-import { voucherValidationSchema } from '@/helpers/voucher/voucherValidationSchema'
+import { voucherDefaultValues, voucherValidationSchema } from '@/helpers/voucher/voucherValidationSchema'
 import Modal from '@/components/shared/Modal'
 import BtnGroups from '@/components/shared/BtnGroups'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
-const defaultValue = {
-  gen_entries: true,
-  credit_total: 0,
-  debit_total: 0,
-  debit_amount: 0,
-  credit_amount: 0,
-}
+const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
 
 const Vouchers = ({ formOnly }) => {
@@ -83,7 +76,7 @@ const Vouchers = ({ formOnly }) => {
           columns: voucherColumns
         }}
         formProps={{
-          defaultValue,
+          defaultValue: voucherDefaultValues,
           validationSchema: voucherValidationSchema,
           mutationAddFunction: createVoucher,
           mutationUpdateFunction: updateVoucher,
