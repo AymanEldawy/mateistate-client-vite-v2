@@ -83,7 +83,7 @@ const Contract = () => {
             <ContractForm
               isInstallmentOpen={isInstallmentOpen}
               setIsInstallmentOpen={setIsInstallmentOpen}
-              list={APARTMENT_STEPS_CONTRACT}
+              list={Object.keys(APARTMENT_STEPS_CONTRACT)}
               code={searchParamsSelectedCode?.code}
               {...props}
             />

@@ -36,7 +36,7 @@ const chequeColumns = [
     cell: ({ getValue, row }) => {
       return (
         <Link
-          to={`/cheque/${row?.original?.code}s?number=${row?.original?.number}`}
+          to={`/cheques?code=${row?.original?.code}&number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           # {getValue()}
