@@ -1,5 +1,21 @@
 import { z } from "zod";
 
+export const sellerDefaultValue = {
+  name: "",
+  ltnname: "",
+  id_card: "",
+  passport: 0,
+  work_card_number: 0,
+  mobile: "",
+  cellPhone: "",
+  mailbox: "",
+  email: "",
+  address: "",
+  minimumCommission: 1, // 
+  maximumDiscount: 1, // 
+  statement: "",
+};
+
 export const sellerValidationSchema = () =>
   z.object({
     name: z.string().nonempty({ message: "Name is Required" }),

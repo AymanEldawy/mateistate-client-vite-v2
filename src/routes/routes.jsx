@@ -102,11 +102,23 @@ const VATBillsReport = React.lazy(() => import("../pages/reports/accounting/VATB
 const TrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/TrialBalanceReport"));
 
 
+// Chart
+const AccountChart = React.lazy(() => import("../pages/views/Account/AccountChart"));
+
+
 const routes = [
   {
     path: "/",
     element: <Layout />,
     children: [
+      /************************************** Chart **************************************/
+      {
+        path: PATHS.ACCOUNT_CHART,
+        element: <AccountChart />,
+      },
+      
+      
+      
       /************************************** General **************************************/
       {
         path: PATHS.ACCOUNT,

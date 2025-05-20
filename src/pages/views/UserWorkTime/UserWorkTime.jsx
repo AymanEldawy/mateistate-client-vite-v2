@@ -24,26 +24,12 @@ const userWorkTimeConfig = {
     onHandleDelete: deleteUserWorkTime,
     RenderForm: (props) => <UserWorkTimeForm {...props} />
   },
-  formPaginationProps: {
-    name: 'userWorkTime',
-    number: 1
-  },
   formHeaderProps: {
     header: "User Work Time",
   },
 }
 
-const UserWorkTime = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...userWorkTimeConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const UserWorkTime = () => {
   return (
     <PaperLayout
       name="userWorkTime"

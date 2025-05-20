@@ -35,17 +35,7 @@ const parkingConfig = {
   },
 }
 
-const Parking = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...parkingConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const Parking = () => {
   return (
     <PaperLayout
       name="parking"

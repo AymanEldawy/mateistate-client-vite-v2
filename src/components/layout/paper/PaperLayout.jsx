@@ -98,11 +98,8 @@ const PaperLayout = ({
           formFooterProps={formFooterProps}
           formSidebarProps={formSidebarProps}
           onClose={() => setOpenForm(false)}
-          formPaginationProps={{
-            name,
-            number: numberSearchParam,
-            code: codeSearchParam
-          }}
+          numberSearchParam={numberSearchParam}
+          codeSearchParam={codeSearchParam}
           formProps={formProps}
           defaultValue={formProps?.defaultValue}
           queryKey={queryKey}

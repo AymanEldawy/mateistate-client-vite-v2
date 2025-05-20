@@ -1,5 +1,24 @@
 import { z } from "zod";
 
+export const lessorDefaultValue = {
+  name: "",
+  ltnname: "",
+  passport: "",
+  passport_expiry_date: "",
+  id_card: "",
+  lessor_card: "",
+  cell_phone: "",
+  number: "",
+  address: "",
+  fax: "",
+  nationality: "",
+  mobile: "",
+  note: "",
+  mailbox: "",
+  email: "",
+  role: "",
+};
+
 export const lessorValidationSchema = () =>
   z.object({
     name: z.string().nonempty({ message: "Name is Required" }),

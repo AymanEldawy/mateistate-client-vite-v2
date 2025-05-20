@@ -1,23 +1,14 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import { categoryProblemValidationSchema } from "@/helpers/category/categoryProblemValidationSchema";
+import { categoryProblemDefaultValue, categoryProblemValidationSchema } from "@/helpers/category/categoryProblemValidationSchema";
 import categoryProblemColumns from "@/helpers/category/categoryProblemColumns";
 import CategoryProblemForm from "@/components/forms/containers/category/CategoryProblemForm";
 import { createCategoryProblem, deleteCategoryProblem, deleteManyCategoryProblems, getAllCategoryProblems, getSingleCategoryProblem, updateCategoryProblem } from "@/services/categoryProblemService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {
-  description: "",
-  ltndescription: "",
-  isAvailable: true,
-  minutes: 0,
-  price: 0,
-  categoryId: "",
-};
-
 const categoryProblemConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: categoryProblemDefaultValue,
     validationSchema: categoryProblemValidationSchema,
     mutationAddFunction: createCategoryProblem,
     mutationUpdateFunction: updateCategoryProblem,
@@ -29,10 +20,6 @@ const categoryProblemConfig = {
   },
   formHeaderProps: {
     header: "category_problem",
-  },
-  formPaginationProps: {
-    name: "category_problem",
-    number: 1,
   },
 };
 

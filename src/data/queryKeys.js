@@ -1,5 +1,6 @@
 const QUERY_KEYS = {
   ANNOUNCEMENTS: "announcements",
+  ACCOUNT_CHART: "account_chart",
   ACCOUNT: "account",
   BUILDING: "building",
   CONTRACT: "contract",

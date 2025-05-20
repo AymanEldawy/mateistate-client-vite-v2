@@ -24,13 +24,20 @@ const accountConfig = {
   },
 }
 
-const Account = ({ formOnly, outerClose }) => {
+const Account = ({
+  formOnly,
+  outerClose,
+  defaultNumber,
+  defaultCode,
+}) => {
 
   if (formOnly) {
     return (
       <FormWrapper
         {...accountConfig}
         outerClose={outerClose}
+        numberSearchParam={defaultNumber}
+        codeSearchParam={defaultCode}
       />
     )
   }

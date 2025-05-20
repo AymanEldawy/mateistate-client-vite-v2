@@ -25,13 +25,14 @@ const userConfig = {
   },
 }
 
-const Users = ({ formOnly, outerClose }) => {
+const Users = ({ formOnly, outerClose, defaultNumber }) => {
 
   if (formOnly) {
     return (
       <FormWrapper
         {...userConfig}
         outerClose={outerClose}
+        numberSearchParam={defaultNumber}
       />
     )
   }

@@ -22,22 +22,9 @@ const serviceConfig = {
     onHandleDelete: deleteService,
     RenderForm: (props) => <ServiceForm {...props} />
   },
-  formPaginationProps: {
-    name: 'service',
-    number: 1
-  },
 }
 
-const Service = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...serviceConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
+const Service = () => {
 
   return (
     <PaperLayout

@@ -18,13 +18,14 @@ import useGlobalOptions from "@/hook/useGlobalOptions";
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'invalidEmail' }).min(1, { message: 'requiredEmail' }),
-  password: z.string().min(8, { message: 'requiredPassword' }),
+  password: z.string().min(4, { message: 'requiredPassword' }),
 });
 
 const loginDefaultValue = {
   email: "",
   password: "",
-};
+}
+
 
 const Login = () => {
   const { t } = useTranslation("login");
@@ -61,7 +62,7 @@ const Login = () => {
 
   const handleSubmitFunc = async (data) => {
     // data.remember_me = rememberMe;
-    data.remember_me = false;
+    // data.remember_me = false;
     mutate(data);
   };
 

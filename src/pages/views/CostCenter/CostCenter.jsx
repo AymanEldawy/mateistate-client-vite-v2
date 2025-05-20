@@ -22,15 +22,15 @@ const costCenterConfig = {
   formHeaderProps: {
     header: "Cost_center",
   },
-  formPaginationProps: {
-    name: 'cost_center',
-    number: 1
-  },
 };
 
-const CostCenter = ({ formOnly, outerClose }) => {
+const CostCenter = ({ formOnly, outerClose, defaultNumber }) => {
   if (formOnly) {
-    return <FormWrapper {...costCenterConfig} outerClose={outerClose} />;
+    return <FormWrapper
+      {...costCenterConfig}
+      outerClose={outerClose}
+      numberSearchParam={defaultNumber}
+    />;
   }
   // const navigate = useNavigate();
 

@@ -40,10 +40,6 @@ const countryConfig = {
   formHeaderProps: {
     header: "Country",
   },
-  formPaginationProps: {
-    name: "Country",
-    number: 1,
-  },
 };
 
 const Country = () => {

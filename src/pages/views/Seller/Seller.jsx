@@ -6,7 +6,7 @@ import {
   getAllAccounts,
 } from "@/services/accountService";
 import sellerColumns from "@/helpers/seller/sellerColumns";
-import { sellerValidationSchema } from "@/helpers/seller/sellerValidationSchema";
+import { sellerDefaultValue, sellerValidationSchema } from "@/helpers/seller/sellerValidationSchema";
 import SellerForm from "@/components/forms/seller/sellerForm";
 import {
   createSeller,
@@ -16,32 +16,18 @@ import {
   getSingleSeller,
   updateSeller,
 } from "@/services/SellerService";
+import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {
-  name: "",
-  ltnname: "",
-  id_card: "",
-  passport: 0,
-  work_card_number: 0,
-  mobile: "",
-  cellPhone: "",
-  mailbox: "",
-  email: "",
-  address: "",
-  minimumCommission: 1, // 
-  maximumDiscount: 1, // 
-  statement: "",
-};
 
 const sellerConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: sellerDefaultValue,
     validationSchema: sellerValidationSchema,
     mutationAddFunction: createSeller,
     mutationUpdateFunction: updateSeller,
     getSingleFunction: getSingleSeller,
-    onSuccessAction: () => {},
+    onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteSeller,
     RenderForm: (props) => <SellerForm {...props} />,
@@ -49,17 +35,17 @@ const sellerConfig = {
   formHeaderProps: {
     header: "Seller",
   },
-  formPaginationProps: {
-    name: "Seller",
-    number: 1,
-  },
 };
 
-const Seller = () => {
-  // if (formOnly) {
-  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
-  // }
-  // const navigate = useNavigate();
+const Seller = ({ formOnly, outerClose, defaultNumber }) => {
+  
+  if (formOnly) {
+    return <FormWrapper
+      {...sellerConfig}
+      outerClose={outerClose}
+      numberSearchParam={defaultNumber}
+    />;
+  }
 
   return (
     <PaperLayout

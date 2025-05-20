@@ -1,15 +1,15 @@
 import { useMemo, useState } from "react";
-import BlockPaper from "Components/Global/BlockPaper";
+import BlockPaper from "@/components/Global/BlockPaper";
 import { ReportFilterColumns } from "../../../Components/ReportsComponents/ReportFilterColumns";
-import { Button } from "Components/Global/Button";
+import { Button } from "@/components/Global/Button";
 import { FormProvider, useForm } from "react-hook-form";
-import { ReportBetweenDateField } from "Components/ReportsComponents/ReportsFields/ReportDateField";
+import { ReportBetweenDateField } from "@/components/ReportsComponents/ReportsFields/ReportDateField";
 import { getReportColumns, getReportFields } from "Helpers/Reports";
 import useRefTable from "Hooks/useRefTables";
-import { ReportFilterFields } from "Components/ReportsComponents/ReportFilterFields";
-import { ReportFields } from "Components/ReportsComponents/ReportsFields/ReportFields";
-import { ReportFilterBillPattern } from "Components/ReportsComponents/TypesFilter/ReportFilterBillPattern";
-import { ReportResultsWrapper } from "Components/ReportsComponents/ReportResultsWrapper";
+import { ReportFilterFields } from "@/components/ReportsComponents/ReportFilterFields";
+import { ReportFields } from "@/components/ReportsComponents/ReportsFields/ReportFields";
+import { ReportFilterBillPattern } from "@/components/ReportsComponents/TypesFilter/ReportFilterBillPattern";
+import { ReportResultsWrapper } from "@/components/ReportsComponents/ReportResultsWrapper";
 import REPORTS from "Helpers/Lib/global-reports";
 
 // ## Metadata

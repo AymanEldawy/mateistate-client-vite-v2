@@ -33,10 +33,7 @@ const materialGroupConfig = {
   formHeaderProps: {
     header: "material_group",
   },
-  formPaginationProps: {
-    name: "material_group",
-    number: 1,
-  },
+
 };
 
 const MaterialGroup = () => {

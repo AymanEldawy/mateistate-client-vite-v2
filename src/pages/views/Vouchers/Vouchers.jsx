@@ -18,7 +18,12 @@ import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
 
-const Vouchers = ({ formOnly }) => {
+const Vouchers = ({
+  formOnly,
+  outerClose,
+  defaultNumber,
+  defaultCode,
+}) => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
   const updateSearchParams = useUpdateSearchParams();
   const [openFormType, setOpenFormType] = useState(false);
@@ -31,7 +36,9 @@ const Vouchers = ({ formOnly }) => {
     return (
       <FormWrapper
         {...voucherColumns}
-        code={searchParamsSelectedCode?.code}
+        outerClose={outerClose}
+        numberSearchParam={defaultNumber}
+        codeSearchParam={defaultCode}
       />
     )
   }

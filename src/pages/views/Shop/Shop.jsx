@@ -23,10 +23,6 @@ const shopConfig = {
     onHandleDelete: deleteShop,
     RenderForm: (props) => <ShopForm {...props} />
   },
-  formPaginationProps: {
-    name: 'shop',
-    number: 1
-  },
   formSidebarProps: {
     list: Object.values(SHOP_STEPS)
   },
@@ -35,17 +31,7 @@ const shopConfig = {
   },
 }
 
-const Shop = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...shopConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const Shop = () => {
   return (
     <PaperLayout
       name="shop"

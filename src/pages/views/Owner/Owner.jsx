@@ -39,10 +39,6 @@ const ownerConfig = {
   formHeaderProps: {
     header: "Owner",
   },
-  formPaginationProps: {
-    name: "Owner",
-    number: 1,
-  },
 };
 
 const Owner = () => {
