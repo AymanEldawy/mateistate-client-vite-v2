@@ -30,73 +30,47 @@ const chequeColumns = [
     ),
   },
   {
-    size: 40,
-    header: "no",
-    accessorKey: "number",
-    cell: ({ getValue, row }) => {
-      return (
-        <Link
-          to={`/cheque/${row?.original?.code}s?number=${row?.original?.number}`}
-          className="text-blue-500 font-medium hover:underline"
-        >
-          # {getValue()}
-        </Link>
-      );
-    },
+    header: "Created At",
+    accessorKey: "createdAt",
+    cell: ({ getValue }) => (
+      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+    ),
   },
-
-  { header: "number", accessorKey: "number" },
-  { header: "account", accessorKey: "account" },
-  { header: "cost_center", accessorKey: "cost_center" },
-  { header: "note", accessorKey: "note" },
-  { header: "connect_with", accessorKey: "connect_with" },
+  {
+    header: "number",
+    accessorKey: "number",
+    cell: ({ getValue, row }) => (
+      <Link
+        to={`/cheques?number=${row?.original?.number}`}
+        className="text-blue-500 font-medium hover:underline"
+      >
+        # {getValue()}
+      </Link>
+    ),
+  },
+  { header: "code", accessorKey: "code" },
   { header: "type", accessorKey: "type" },
   { header: "amount", accessorKey: "amount" },
-  { header: "currency_id", accessorKey: "currency_id" },
-  { header: "code", accessorKey: "code" },
-  { header: "feedback", accessorKey: "feedback" },
-  { header: "currency_val", accessorKey: "currency_val" },
-  { header: "seller_id", accessorKey: "seller_id" },
-  { header: "observe_account_id", accessorKey: "observe_account_id" },
-  { header: "observe_cost_center_id", accessorKey: "observe_cost_center_id" },
-  { header: "observe_account_note", accessorKey: "observe_account_note" },
-  { header: "beneficiary_name", accessorKey: "beneficiary_name" },
-  { header: "parking_id", accessorKey: "parking_id" },
-  { header: "shop_id", accessorKey: "shop_id" },
-  { header: "shop_no", accessorKey: "shop_no" },
-  { header: "apartment_id", accessorKey: "apartment_id" },
-  { header: "apartment_no", accessorKey: "apartment_no" },
+  { header: "Beneficiary Name", accessorKey: "beneficiary_name" },
+  { header: "note", accessorKey: "note" },
+  { header: "Currency Val", accessorKey: "currency_val" },
   {
-    header: "due_date",
-    accessorKey: "due_date",
+    header: "feedback",
+    accessorKey: "feedback",
     cell: ({ getValue }) => (
-      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+      <span>{getValue() ? "Yes" : "No"}</span>
     ),
   },
   {
-    header: "end_due_date",
-    accessorKey: "end_due_date",
+    header: "status",
+    accessorKey: "is_deleted",
     cell: ({ getValue }) => (
-      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+      <span className={`px-2 py-1 rounded-full text-xs ${getValue() ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"}`}>
+        {getValue() ? "Deleted" : "Active"}
+      </span>
     ),
   },
-  { header: "without_due_date", accessorKey: "without_due_date" },
-  { header: "bank_id", accessorKey: "bank_id" },
-  { header: "note1", accessorKey: "note1" },
-  { header: "note2", accessorKey: "note2" },
-  { header: "deport_status", accessorKey: "deport_status" },
-  { header: "collection_status", accessorKey: "collection_status" },
-  {
-    header: "partial_collection_status",
-    accessorKey: "partial_collection_status",
-  },
-  { header: "return_status", accessorKey: "return_status" },
-  { header: "deposit_status", accessorKey: "deposit_status" },
-  { header: "gen_entries", accessorKey: "gen_entries" },
 ];
-
-
-
 
 export const CHEQUE_GRID_COLUMNS = [
   {
