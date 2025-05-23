@@ -20,7 +20,7 @@ export const getNextOne = async (entity, value, columns = ["*"], code) => {
 };
 
 export const getPreviousOne = async (entity, value, columns = ["*"], code) => {
- return http.post(`pagination//previous-one`, {
+ return http.post(`pagination/previous-one`, {
     entity,
     value,
     code,
@@ -28,7 +28,7 @@ export const getPreviousOne = async (entity, value, columns = ["*"], code) => {
 };
 
 export const getFirstOne = async (entity, columns = ["*"], code) => {
-  return http.post(`pagination//first-one`, {
+  return http.post(`pagination/first-one`, {
     entity,
     code,
   });

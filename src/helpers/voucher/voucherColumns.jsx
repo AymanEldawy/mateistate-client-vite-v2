@@ -3,6 +3,7 @@ import Btn from "@/components/shared/Btn"
 import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox"
 import { VOUCHER_RECEIPTS_CODE, VOUCHER_RECEIPTS_NAME } from "@/data/GENERATE_STARTING_DATA"
 import { usePopupForm } from "@/hook/usePopupForm"
+import { Link } from "react-router-dom"
 
 export const VOUCHER_GRID_COLUMNS = [
   {
@@ -52,7 +53,6 @@ export const VOUCHER_GRID_COLUMNS = [
   { header: "note", accessorKey: "note", enableColumnFilter: false, },
 ]
 
-
 const voucherColumns = [
   {
     id: "select",
@@ -80,16 +80,61 @@ const voucherColumns = [
   },
   {
     header: "created_at",
-    accessorKey: "created_at",
+    accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "currency_id", accessorKey: "currency_id" },
+  {
+    header: "number",
+    accessorKey: "number",
+    cell: ({ getValue, row }) => (
+      <Link
+        to={`/vouchers?number=${row?.original?.number}`}
+        className="text-blue-500 font-medium hover:underline"
+      >
+        # {getValue()}
+      </Link>
+    ),
+  },
   { header: "note", accessorKey: "note" },
-  { header: "debit", accessorKey: "debit" },
-  { header: "credit", accessorKey: "credit" },
-  { header: "difference", accessorKey: "difference" },
+  { header: "debit_amount", accessorKey: "debitAmount" },
+  { header: "credit_amount", accessorKey: "creditAmount" },
+  { header: "debit_total", accessorKey: "debitTotal" },
+  { header: "credit_total", accessorKey: "creditTotal" },
+  { header: "voucher_type", accessorKey: "voucherType" },
+  { header: "currency_val", accessorKey: "currencyVal" },
+  { header: "connect_with", accessorKey: "connectWith" },
+  {
+    header: "feedback",
+    accessorKey: "feedback",
+    cell: ({ getValue }) => (
+      <span>{getValue() ? "Yes" : "No"}</span>
+    ),
+  },
+  {
+    header: "gen_entries",
+    accessorKey: "genEntries",
+    cell: ({ getValue }) => (
+      <span>{getValue() ? "Yes" : "No"}</span>
+    ),
+  },
+  {
+    header: "first_batch",
+    accessorKey: "isFirstBatch",
+    cell: ({ getValue }) => (
+      <span>{getValue() ? "Yes" : "No"}</span>
+    ),
+  },
+  {
+    header: "status",
+    accessorKey: "isDeleted",
+    cell: ({ getValue }) => (
+      <span className={`px-2 py-1 rounded-full text-xs ${getValue() ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"}`}>
+        {getValue() ? "Deleted" : "Active"}
+      </span>
+    ),
+  },
 ];
 
 export default voucherColumns;

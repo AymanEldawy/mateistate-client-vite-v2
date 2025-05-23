@@ -5,6 +5,10 @@ export const getSingleCurrency = (id) => {
     return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`);
 };
 
+export const getSearchCurrency = (value) => {
+    return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}?search=${value}`);
+};
+
 export const getAllCurrencies = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_CURRENCY, {
         signal,
@@ -12,7 +16,7 @@ export const getAllCurrencies = (signal) => {
 };
 
 export const createCurrency = (data) => {
-    return http.post(API_URL_CONSTANTS.BASE_CURRENCY, data, {
+    return http.post(API_URL_CONSTANTS. BASE_CURRENCY, data, {
         // headers: {
         //   "Content-Type": "multipart/form-data",
         // },

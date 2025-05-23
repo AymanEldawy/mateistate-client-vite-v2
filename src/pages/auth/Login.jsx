@@ -18,7 +18,7 @@ import useGlobalOptions from "@/hook/useGlobalOptions";
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'invalidEmail' }).min(1, { message: 'requiredEmail' }),
-  password: z.string().min(8, { message: 'requiredPassword' }),
+  password: z.string().min(5, { message: 'requiredPassword' }),
 });
 
 const loginDefaultValue = {
