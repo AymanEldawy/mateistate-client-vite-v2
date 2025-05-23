@@ -10,18 +10,6 @@ export const getOneBy = async (entity, value, column = "id", columns = ["*"]) =>
 
   return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}?${params.toString()}`);
 };
-return http.post(`pagination/previous-one`, {
-  entity,
-  value,
-  code,
-});
-};
-
-export const getFirstOne = async (entity, columns = ["*"], code) => {
-return http.post(`pagination/first-one`, {
-  entity,
-  code,
-});
 
 export const getNextOne = async (entity, value, columns = ["*"], code) => {
    return http.post(`pagination/next-one`, {

@@ -5,13 +5,41 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BillFormTables from "./BillFormTables";
-import { RHFAsyncSelectField, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import { RHFAsyncSelectField, RHFInput, RHFSelectField, RHFTextarea, RHFDatePicker, RHFTableInput } from "../../fields";
 import { calculateMaterialsTotal, calculateTotal, calculateVatAndDiscounts } from "@/helpers/bill/billHelpers";
 import { CurrencyFieldGroup } from "../../global";
 import { BILL_PATTERN_PAYMENT_METHODS } from "@/helpers/DEFAULT_OPTIONS";
 import BillConnectWithField from "./BillConnectWithField";
+import { BILL_STEPS } from "@/data/constants";
+import TableForm from "../../wrapper/TableForm";
+import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
+import { getSearchAccount, getSingleAccount } from "@/services/accountService";
+import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
+import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
+import { getSearchStore, getSingleStore } from "@/services/storeService";
+// import { getSingleCustomer, getSearchCustomer } from '@/services/customerService';
+// import { getSearchCustomer } from '@/services/customerService';
+  // import { getSingleMaterial } from "@/services/materialsService";
+  // import { getSearchMaterial } from '@/services/materialService';
+const PAYMENT_METHOD_OPTIONS = [
+  { id: 1, name: "Cash" },
+  { id: 2, name: "Credit Card" },
+  { id: 3, name: "Bank Transfer" },
+  { id: 4, name: "Check" }
+];
 
-const BillForm = () => {
+const BILL_KIND_OPTIONS = [
+  { id: 1, name: "Purchase" },
+  { id: 2, name: "Sale" }
+];
+
+const CONNECT_WITH_OPTIONS = [
+  { id: 1, name: "Customer" },
+  { id: 2, name: "Supplier" },
+  { id: 3, name: "Internal" }
+];
+
+const BillForm = ({ tab }) => {
   const { t } = useTranslation();
   const [refresh, setRefresh] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
@@ -136,135 +164,248 @@ const BillForm = () => {
     setRefresh((p) => !p);
   };
 
-  return (
-    <div className="overflow-auto max-h-[500px]">
-      {/* {openMaterialForm && <MaterialForm />} */}
-      {/* <ContextMenu id="BILL_MENU" label="gray-50 border border-gray-200 rounded-md p-2 text-sm shadow flex flex-col gap-1">
-      {/* <ContextMenu id="BILL_MENU" className="bg-gray-50 border border-gray-200 rounded-md p-2 text-sm shadow flex flex-col gap-1">
-        <MenuItem
-          className={`flex hover:text-blue-500 gap-2 items-center cursor-pointer whitespace-nowrap hover:bg-blue-50 text-sm p-1 text-gray-600`}
-          onClick={() => setOpenMaterialForm(true)}
-        >
-          Add Material
-        </MenuItem>
-      </ContextMenu> */}
-      <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 items-start justify-between gap-y-1 overflow-auto">
-        <RHFInput
-          label="number"
-          name="bill.number"
-          readOnly
-        />
-        <RHFInput
-          label="issueDate"
-          name="bill.issueDate"
-        />
-        <RHFInput
-          label="billDate"
-          name="bill.billDate"
-        />
+  const BillGeneralFields = (
+    <FormFieldsGridContainer key="generalFields">
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
+      <RHFDatePicker name="bill.issueDate" label="Issue Date" required />
+      <RHFDatePicker name="bill.billDate" label="Bill Date" required />
+      <RHFSelectField
+        name="bill.billKind"
+        label="Bill Kind"
+        options={BILL_KIND_OPTIONS}
+        required
+      />
+      <RHFInput name="bill.kind" label="Kind" placeholder="purchase/sale" />
+      <RHFSelectField
+        name="bill.paymentMethod"
+        label="Payment Method"
+        options={PAYMENT_METHOD_OPTIONS}
+        required
+      />
+      <RHFInput name="bill.receiptNumber" label="Receipt Number" />
+      <RHFInput name="bill.code" label="Code" />
+      <RHFTextarea name="bill.note" label="Note" containerClassName="col-span-2" />
 
-        <RHFInput
-          label="receiptNumber"
-          name="bill.receiptNumber"
-        />
-        <CurrencyFieldGroup />
-        <RHFSelectField
-          label="paymentMethod"
-          name="bill.paymentMethod"
-          options={BILL_PATTERN_PAYMENT_METHODS}
-        />
-
-        <RHFAsyncSelectField
-          label="costCenterId"
-          name="bill.costCenterId"
-        />
-
-        <RHFAsyncSelectField
-          label="storeId"
-          name="bill.storeId"
-        />
-        <RHFAsyncSelectField
-          name="bill.customerId"
-          label={
-            +PATTERN_SETTINGS?.bill_type === 2
-              ? "Customer Name"
-              : "Supplier name"
-          }
-          required={
-            +watch('bill.paymentMethod') === 1
-          }
-        />
-        <RHFAsyncSelectField
-          label="customerAccountId"
-          name="bill.customerAccountId"
-
-        />
-        <RHFAsyncSelectField
-          label="materialAccountId"
-          name="bill.materialAccountId"
-
-        />
-        <RHFAsyncSelectField
-          required={false}
-          label="vatAccountId"
-          name="bill.vatAccountId"
-        />
-      </div>
-      <div className="grid grid-cols-3 gap-4 mt-2">
-        {+PATTERN_SETTINGS?.bill_type === 2 ? (
-          <BillConnectWithField />
-        ) : null}
-      </div>
-      <RHFTextarea
-        label="note"
-        name="bill.note"
-        textareaClassName="h-[60px]"
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Accounts & References</h5>
+      <RHFAsyncSelectField
+        table="account"
+        name="bill.clientAccountId"
+        label="Client Account"
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+      />
+      <RHFAsyncSelectField
+        table="account"
+        name="bill.customerAccountId"
+        label="Customer Account"
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+      />
+      <RHFAsyncSelectField
+        table="account"
+        name="bill.materialAccountId"
+        label="Material Account"
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+      />
+      <RHFAsyncSelectField
+        table="account"
+        name="bill.vatAccountId"
+        label="VAT Account"
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+      />
+      <RHFAsyncSelectField
+        table="currency"
+        name="bill.currencyId"
+        label="Currency"
+        getSearch={getSearchCurrency}
+        getSingle={getSingleCurrency}
+        required
+      />
+      <RHFInput name="bill.currencyVal" label="Currency Value" type="number" required />
+      <RHFAsyncSelectField
+        table="costCenter"
+        name="bill.costCenterId"
+        label="Cost Center"
+        getSearch={getSearchCostCenter}
+        getSingle={getSingleCostCenter}
+      />
+      <RHFAsyncSelectField
+        table="customer"
+        name="bill.customerId"
+        label="Customer"
+        // getSearch={getSearchCustomer}
+        // getSingle={getSingleCustomer}
+      />
+      <RHFAsyncSelectField
+        table="store"
+        name="bill.storeId"
+        label="Store"
+        getSearch={getSearchStore}
+        getSingle={getSingleStore}
       />
 
-      <BillFormTables setActiveTab={setActiveTab} activeTab={activeTab} PATTERN_SETTINGS={PATTERN_SETTINGS} />
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Connection & Pattern</h5>
+      <RHFSelectField
+        name="bill.connectWith"
+        label="Connect With"
+        options={CONNECT_WITH_OPTIONS}
+      />
+      <RHFInput name="bill.connectWithId" label="Connect With ID" />
+      <RHFAsyncSelectField
+        table="billPattern"
+        name="bill.billPatternId"
+        label="Bill Pattern"
+      />
 
-      <div className="my-4 bg-gray-200 dark:bg-[#303030] p-2">
-        <div className=" flex gap-12 items-center justify-between px-8">
-          <div className="flex flex-col gap-2 max-w-sm">
-            <RHFInput
-              label="totalQuantities"
-              name="bill.totalQuantities"
-            />
-            <RHFInput
-              label="discounts"
-              name="bill.discounts"
-            />
-            <RHFInput
-              label="extras"
-              name="bill.extras"
-            />
-            <RHFInput
-              label="taxable"
-              name="bill.taxable"
-            />
-            <RHFInput
-              label="vatAmount"
-              name="bill.vatAmount"
-            />
-          </div>
-          <div className="flex flex-col gap-2 max-w-sm md:min-w-[400px]">
-            <RHFInput
-              label="subtotal"
-              name="bill.subtotal"
-            />
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Quantities & Percentages</h5>
+      <RHFInput name="bill.totalQuantities" label="Total Quantities" type="number" />
+      <RHFInput name="bill.totalQuantitiesPercentage" label="Total Quantities %" type="number" />
+      <RHFInput name="bill.totalQuantitiesPercentage2" label="Total Quantities % 2" type="number" />
 
-            <RHFInput
-              label="total"
-              name="bill.total"
-            />
-            <RHFTextarea
-              label="billTotalText"
-              name="bill.billTotalText"
-              textareaClassName="h-[60px]"
-            />
-          </div>
-        </div>
-      </div>
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Amounts & Taxes</h5>
+      <RHFInput name="bill.refundedTaxableAmount" label="Refunded Taxable Amount" type="number" />
+      <RHFInput name="bill.nonRefundedTaxableAmount" label="Non-Refunded Taxable" type="number" />
+      <RHFInput name="bill.notTaxable" label="Not Taxable" type="number" />
+      <RHFInput name="bill.taxable" label="Taxable" type="number" />
+      <RHFInput name="bill.nonRefundableVat" label="Non-Refundable VAT" type="number" />
+      <RHFInput name="bill.nonRefundableVat2" label="Non-Refundable VAT 2" type="number" />
+      <RHFInput name="bill.vatAmount" label="VAT Amount" type="number" />
+      <RHFInput name="bill.extras" label="Extras" type="number" />
+
+      <h5 className="col-span-3 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Totals</h5>
+      <RHFInput name="bill.total" label="Total" type="number" required />
+      <RHFInput name="bill.discounts" label="Discounts" type="number" />
+      <RHFInput name="bill.discountsExtra" label="Discounts Extra" type="number" />
+      <RHFInput name="bill.net" label="Net" type="number" />
+      <RHFInput name="bill.subtotal" label="Subtotal" type="number" />
+      <RHFInput name="bill.grandTotal" label="Grand Total" type="number" required />
+      <RHFTextarea name="bill.billTotalText" label="Bill Total Text" containerClassName="col-span-3" />
+    </FormFieldsGridContainer>
+  );
+
+  const BillDiscountDetailsFields = (
+    <div key="billDiscountDetailsFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
+      <TableForm
+        renderFields={(item, index) => (
+          <>
+            <td>
+              <RHFAsyncSelectField
+                name={`billDiscountDetails.${index}.accountId`}
+                table="account"
+                getSearch={getSearchAccount}
+                getSingle={getSingleAccount}
+              />
+            </td>
+            <td>
+              <RHFTableInput name={`billDiscountDetails.${index}.discount`} label="Discount" type="number" />
+            </td>
+            <td>
+              <RHFTableInput name={`billDiscountDetails.${index}.extra`} label="Extra" type="number" />
+            </td>
+            <td>
+              <RHFAsyncSelectField
+                name={`billDiscountDetails.${index}.currencyId`}
+                table="currency"
+                getSearch={getSearchCurrency}
+                getSingle={getSingleCurrency}
+              />
+            </td>
+            <td>
+              <RHFTableInput name={`billDiscountDetails.${index}.currencyVal`} label="Currency Val" type="number" />
+            </td>
+            <td>
+              <RHFAsyncSelectField
+                name={`billDiscountDetails.${index}.costCenterId`}
+                table="costCenter"
+                getSearch={getSearchCostCenter}
+                getSingle={getSingleCostCenter}
+              />
+            </td>
+            <td>
+              <RHFAsyncSelectField
+                name={`billDiscountDetails.${index}.obverseAccountId`}
+                table="account"
+                getSearch={getSearchAccount}
+                getSingle={getSingleAccount}
+              />
+            </td>
+            <td>
+              <RHFTableInput name={`billDiscountDetails.${index}.note`} label="Note" />
+            </td>
+          </>
+        )}
+        gridName={"billDiscountDetails"}
+        headers={[
+          "Account",
+          "Discount",
+          "Extra",
+          "Currency",
+          "Currency Val",
+          "Cost Center",
+          "Obverse Account",
+          "Note"
+        ]}
+      />
+    </div>
+  );
+
+  const BillMaterialDetailsFields = (
+    <div key="billMaterialDetailsFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
+      <TableForm
+        renderFields={(item, index) => (
+          <>
+            <td>
+              <RHFAsyncSelectField
+                name={`billMaterialDetails.${index}.materialId`}
+                table="material"
+                // getSearch={getSearchMaterial}
+                // getSingle={getSingleMaterial}
+              />
+            </td>
+            <td>
+              <RHFTableInput name={`billMaterialDetails.${index}.quantity`} label="Quantity" type="number" />
+            </td>
+            <td>
+              <RHFTableInput name={`billMaterialDetails.${index}.unitPrice`} label="Unit Price" type="number" />
+            </td>
+            <td>
+              <RHFTableInput name={`billMaterialDetails.${index}.totalPrice`} label="Total Price" type="number" />
+            </td>
+            <td>
+              <RHFTableInput name={`billMaterialDetails.${index}.note`} label="Note" />
+            </td>
+          </>
+        )}
+        gridName={"billMaterialDetails"}
+        headers={[
+          "Material",
+          "Quantity",
+          "Unit Price",
+          "Total Price",
+          "Note"
+        ]}
+      />
+    </div>
+  );
+
+  const renderFields = () => {
+    switch (tab) {
+      case BILL_STEPS.bill:
+        return BillGeneralFields;
+      case BILL_STEPS.bill_discounts_details:
+        return BillDiscountDetailsFields;
+      case BILL_STEPS.bill_material_details:
+        return BillMaterialDetailsFields;
+      default:
+        return BillGeneralFields;
+    }
+  };
+
+  return (
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+      {renderFields()}
     </div>
   );
 };

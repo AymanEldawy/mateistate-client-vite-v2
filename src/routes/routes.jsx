@@ -32,7 +32,7 @@ const Country = React.lazy(() => import("../pages/views/Country/Country"));
 const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
 const Bank = React.lazy(() => import("../pages/views/Bank/Bank"));
 const Parking = React.lazy(() => import("../pages/views/Parking/Parking"));
-const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
+const Bills = React.lazy(() => import("../pages/views/Bill/Bill"));
 const Vouchers = React.lazy(() => import("../pages/views/Voucher/Voucher"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
