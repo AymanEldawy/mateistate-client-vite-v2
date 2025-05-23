@@ -20,10 +20,6 @@ const materialsConfig = {
   formHeaderProps: {
     header: "materials",
   },
-  formPaginationProps: {
-    name: "materials",
-    number: 1,
-  },
 };
 
 const Materials = () => {

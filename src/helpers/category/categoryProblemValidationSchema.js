@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+export const categoryProblemDefaultValue = {
+  description: "",
+  ltndescription: "",
+  isAvailable: true,
+  minutes: 0,
+  price: 0,
+  categoryId: "",
+};
+
 export const categoryProblemValidationSchema = () =>
   z.object({
     description: z.string().nonempty({ message: "description is Required" }),

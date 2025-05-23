@@ -1,32 +1,30 @@
 # API Notes
 
-## [x] currency
-- bulk delete
 ## [O] bank 
 - bulk delete
 ## [O] Building
 - bulk delete
-## [x] store 
+## [o] store 
 - bulk delete
-## [x] shop 
+## [o] shop 
 - bulk delete
-## [x] accounts 
+## [o] accounts 
 - bulk delete 
-## lessor
+## [o] lessor
 - bulk delete 
-## owner
+## [o] owner
 - bulk delete 
-## seller
+## [o] seller
 - bulk delete 
-## cost_center
+## [o] cost_center
 - bulk delete 
-## country
+## [o] country
 - bulk delete 
-## bank
+## [o] bank
 - bulk delete 
-## currency
+## [o] currency
 - bulk delete 
-## material_group
+## [o] material_group
 - bulk delete 
 ## category
 - bulk delete 
@@ -35,25 +33,45 @@
 ## owner_expenses_types
 
 
-## apartment
-## land
-## villa
-## parking
-## contract
-## patterns
-## entries
-## vouchers
-## bills
-## cheques
-## user
-## op_collection
-## op_partial_collection
-## op_return
-## installment
-## reservation_property
-## user_work_times
-## service
-## owner_expenses
+## [] apartment
+- 
+## [] land
+- 
+## [] villa
+- 
+## [] parking
+- 
+## [] contract
+- 
+## [] patterns
+- 
+## [] entries
+- 
+## [] vouchers
+- 
+## [] bills
+- 
+## [] cheques
+- 
+## [] user
+- 
+## [] op_collection
+- 
+## [] op_partial_collection
+- 
+## [] op_return
+- 
+## [] installment
+- 
+## [] reservation_property
+- 
+## [] user_work_times
+- 
+## [] service
+- 
+## [] owner_expenses
+- 
+
 
 
 
@@ -73,15 +91,9 @@ columns:
     moveCostCenterWithDecisivenessGranted
     moveCostCenterWithContractProceedsRerminating
 
-## owner expenses (CRUD)
-v1 url -> https://app.matiestate.com/owner_expenses
 
-modules
-- owner_expenses
-- owner_expenses_details []
 
-## bill pattern (CRUD)
-v1 url -> https://app.matiestate.com/patterns/bill_pattern
-
-module
-- bill_pattern
+- pagination 
+- cheques
+- vouchers
+- entries

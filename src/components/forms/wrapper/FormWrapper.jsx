@@ -15,11 +15,7 @@ import ConfirmModal from "@/components/shared/ConfirmModal";
 import { usePopupForm } from "@/hook/usePopupForm";
 
 const FormWrapper = ({
-  // 
   defaultValue,
-  validationSchema,
-  mutationAddFunction,
-  mutationUpdateFunction,
   onHandlingDataBeforeSubmit,
   invalidateQueryKeyOnSuccess,
   onSuccessAction,
@@ -28,18 +24,23 @@ const FormWrapper = ({
   formFooterProps,
   formSidebarProps,
   formProps,
-  formPaginationProps,
   onClose,
   queryKey,
-  findAll,
-  name
+  name,
+  numberSearchParam,
+  codeSearchParam,
 }) => {
+
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
-  const paginationForm = useFormPagination(formPaginationProps)
+  const paginationForm = useFormPagination({
+    name,
+    numberSearchParam,
+    codeSearchParam,
+  })
   const [open, setOpen] = useState(false)
   const isUpdate = true
   const id = paginationForm?.currentId || ''

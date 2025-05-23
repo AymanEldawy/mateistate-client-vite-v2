@@ -21,10 +21,6 @@ const apartmentConfig = {
     onHandleDelete: deleteApartment,
     RenderForm: (props) => <ApartmentForm {...props} />
   },
-  formPaginationProps: {
-    name: 'apartment',
-    number: 1
-  },
   formSidebarProps: {
     list: Object.values(APARTMENT_STEPS)
   },
@@ -39,16 +35,7 @@ const apartmentConfig = {
   },
 }
 
-const Apartment = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...apartmentConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
+const Apartment = () => {
 
   return (
     <PaperLayout

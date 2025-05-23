@@ -1,17 +1,17 @@
 import { useMemo, useState } from "react";
-import BlockPaper from "Components/Global/BlockPaper";
+import BlockPaper from "@/components/Global/BlockPaper";
 import { ReportFilterColumns } from "../../../Components/ReportsComponents/ReportFilterColumns";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button } from "Components/Global/Button";
+import { Button } from "@/components/Global/Button";
 import REPORTS from "Helpers/Lib/global-reports";
 import useRefTable from "Hooks/useRefTables";
 import { getReportColumns, getReportFields } from "Helpers/Reports";
-import { ReportFilterFields } from "Components/ReportsComponents/ReportFilterFields";
-import { ReportFields } from "Components/ReportsComponents/ReportsFields/ReportFields";
-import { ReportResultsWrapper } from "Components/ReportsComponents/ReportResultsWrapper";
-import { ReportBetweenDateField } from "Components/ReportsComponents/ReportsFields/ReportDateField";
-import { ReportFilterBuildings } from "Components/ReportsComponents/TypesFilter/ReportFilterBuildings";
-import { ReportFilterContractPatterns } from "Components/ReportsComponents/TypesFilter/ReportFilterContractPatterns";
+import { ReportFilterFields } from "@/components/ReportsComponents/ReportFilterFields";
+import { ReportFields } from "@/components/ReportsComponents/ReportsFields/ReportFields";
+import { ReportResultsWrapper } from "@/components/ReportsComponents/ReportResultsWrapper";
+import { ReportBetweenDateField } from "@/components/ReportsComponents/ReportsFields/ReportDateField";
+import { ReportFilterBuildings } from "@/components/ReportsComponents/TypesFilter/ReportFilterBuildings";
+import { ReportFilterContractPatterns } from "@/components/ReportsComponents/TypesFilter/ReportFilterContractPatterns";
 
 const ComplaintsReport = () => {
   const name = "complaints_report";

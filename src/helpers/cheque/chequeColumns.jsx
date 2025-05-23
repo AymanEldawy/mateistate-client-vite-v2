@@ -39,14 +39,16 @@ const chequeColumns = [
   {
     header: "number",
     accessorKey: "number",
-    cell: ({ getValue, row }) => (
-      <Link
-        to={`/cheques?number=${row?.original?.number}`}
+    cell: ({ getValue, row }) => {
+      return (
+        <Link
+        to={`/cheques?code=${row?.original?.code}&number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
-      >
-        # {getValue()}
-      </Link>
-    ),
+        >
+          # {getValue()}
+        </Link>
+      );
+    },
   },
   { header: "code", accessorKey: "code" },
   { header: "type", accessorKey: "type" },

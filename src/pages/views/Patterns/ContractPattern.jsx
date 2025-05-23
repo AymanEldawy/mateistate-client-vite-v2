@@ -22,10 +22,6 @@ const contractPatternConfig = {
   formHeaderProps: {
     header: "contract_pattern",
   },
-  formPaginationProps: {
-    name: 'contract_pattern',
-    number: 1
-  },
   formSidebarProps: {
     list: Object.keys(CONTRACTS_PATTERN_STEPS)
   }

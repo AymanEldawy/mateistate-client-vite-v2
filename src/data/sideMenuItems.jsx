@@ -131,6 +131,7 @@ const sideMenuItems = [
     ],
   },
   {
+    key: "Accounting_Transactions",
     name: "Accounting Transactions",
     permissions: PERMISSIONS[PATHS.HOME],
     icon: <ToolsIcon />,

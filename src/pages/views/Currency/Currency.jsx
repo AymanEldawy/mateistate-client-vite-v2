@@ -13,28 +13,25 @@ const currencyConfig = {
     validationSchema: currencyValidationSchema,
     mutationAddFunction: createCurrency,
     mutationUpdateFunction: updateCurrency,
-    getSingleFunction: getSingleCurrency, 
+    getSingleFunction: getSingleCurrency,
     onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteCurrency,
     RenderForm: (props) => <CurrencyForm {...props} />
-  },
-  formPaginationProps: {
-    name: 'currency',
-    number: 1
   },
   formHeaderProps: {
     header: "Currency",
   },
 }
 
-const Currency = ({ formOnly, outerClose }) => {
+const Currency = ({ formOnly, outerClose, defaultNumber }) => {
 
   if (formOnly) {
     return (
       <FormWrapper
         {...currencyConfig}
         outerClose={outerClose}
+        numberSearchParam={defaultNumber}
       />
     )
   }

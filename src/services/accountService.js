@@ -72,3 +72,43 @@ export const getAccountCash = (buildingId) => {
     `${API_URL_CONSTANTS.BASE_ACCOUNT}/bank?buildingId=${buildingId}`
   );
 };
+
+
+export const getAccountChildrenByParentId = (parentId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/${parentId}/children`
+  );
+};
+
+
+export const getAccountCodeNumber = (parentId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/${parentId}/next-child-info`
+  );
+};
+
+export const getLeavesAccounts = () => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/leaves`
+  );
+};
+
+
+export const getAccountSuppliersOnly = () => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/suppliers-customers?=supplier`
+  );
+};
+
+
+export const getAccountCustomersOnly = () => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_ACCOUNT}/suppliers-customers?=customer`
+  );
+};
+
+export const getAllChartAccounts = () => {
+  return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}?is_root=true`);
+};
+
+

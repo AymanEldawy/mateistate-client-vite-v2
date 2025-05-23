@@ -31,17 +31,7 @@ const villaConfig = {
   },
 }
 
-const Villa = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...villaConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const Villa = () => {
   return (
     <PaperLayout
       name="villa"

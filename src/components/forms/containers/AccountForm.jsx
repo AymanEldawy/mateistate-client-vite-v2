@@ -7,7 +7,7 @@ import { ACCOUNT_ASSEMBLY, ACCOUNT_DISTRIBUTIVE, ACCOUNT_FIELDS } from "@/helper
 import TableForm from "../wrapper/TableForm";
 import { RHFTableInput, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFSelectField, RHFTableAsyncSelect } from "../fields";
 import { AccountField } from "../global";
-import { getAccountSearch, getSingleAccount } from "@/services/accountService";
+import { getAccountCodeNumber, getAccountSearch, getSingleAccount } from "@/services/accountService";
 import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 
 const AccountForm = () => {
@@ -39,13 +39,11 @@ const AccountForm = () => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  // const automaticChangesOnAccount = async (watch) => {
-  //   const account = await getAccountCode(watch('parent_id'));
-  //   setValue("final_id", account?.final_id || account?.parent_id);
-  //   setValue("code", account.code);
-  // };
-
-  
+  const automaticChangesOnAccount = async (watch) => {
+    const account = await getAccountCodeNumber(watch('parent_id'));
+    setValue("final_id", account?.final_id || account?.parent_id);
+    setValue("code", account.code);
+  };
 
   return (
     <div className="">

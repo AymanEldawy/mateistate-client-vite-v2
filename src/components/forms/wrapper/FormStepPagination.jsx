@@ -1,6 +1,19 @@
 import { ChevronIcon, DoubleArrowIcon, PlusIcon } from "@/components/Icons";
 import Btn from "@/components/shared/Btn";
 
+const BtnPagination = ({ children, ...props }) => {
+  return (
+    <button
+      type="button"
+      className="bg-light-green h-7 w-7 text-gray-100 disabled:bg-gray-100 disabled:text-gray-300 dark:disabled:!text-gray-700 disabled:opacity-90   rounded-md shadow flex items-center justify-center p-[2px]"
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+
 const FormStepPagination = (props) => {
   const {
     goTo,
@@ -12,6 +25,8 @@ const FormStepPagination = (props) => {
     isLast,
     goNew,
   } = props || {};
+
+  console.log(props, "props");
 
   const handleChange = (e) => {
     // Allow only numeric input
@@ -25,25 +40,24 @@ const FormStepPagination = (props) => {
     }
   };
 
+  console.log(currentNumber, lastNumber, "currentNumber");
+
+
   return (
-    
+
     <div className="flex flex-nowrap w-fit items-center justify-center gap-1 dark:bg-[#f1f1f121] dark:text-white">
-      <button
+      <BtnPagination
         disabled={+currentNumber === 1}
-        type="button"
         onClick={() => goTo("FIRST")}
-        className="bg-light-green h-7 w-7 text-gray-100 disabled:text-gray-300 dark:disabled:!text-gray-700 disabled:opacity-90   rounded-md shadow flex items-center justify-center p-[2px]"
       >
         <DoubleArrowIcon className="ltr:rotate-180 w-5 h-5 text-inherit" />
-      </button>
-      <button
+      </BtnPagination>
+      <BtnPagination
         disabled={+currentNumber === 1}
-        type="button"
         onClick={goBack}
-        className="bg-light-green h-7 w-7 text-gray-100 disabled:text-gray-300 dark:disabled:!text-gray-700 disabled:opacity-90   rounded-md shadow flex items-center justify-center p-[2px]"
       >
         <ChevronIcon className="rtl:-rotate-90 ltr:rotate-90 w-5 h-5 text-inherit" />
-      </button>
+      </BtnPagination>
       <span className="min-w-[40px] flex gap-1 text-center font-medium text-lg bg-gray-200 px-1">
         <input
           type="number"
@@ -55,22 +69,18 @@ const FormStepPagination = (props) => {
         /
         {lastNumber}
       </span>
-      <button
+      <BtnPagination
         disabled={isLast}
-        type="button"
-        className="bg-light-green h-7 w-7 text-gray-100 rounded-md shadow flex items-center justify-center p-[2px]"
         onClick={goNext}
       >
         <ChevronIcon className="rtl:rotate-90 ltr:-rotate-90 w-5 h-5 text-inherit" />
-      </button>
-      <button
+      </BtnPagination>
+      <BtnPagination
         disabled={isLast}
-        type="button"
-        className="bg-light-green h-7 w-7 text-gray-100   rounded-md shadow flex items-center justify-center p-[2px]"
         onClick={() => goTo("LAST")}
       >
         <DoubleArrowIcon className="rtl:rotate-180 w-5 h-5 text-inherit" />
-      </button>
+      </BtnPagination>
       {currentNumber > lastNumber ? (
         <span className="text-blue-500 border mx-4 border-blue-500 bg-blue-50 rounded p-1 text-sm">
           New

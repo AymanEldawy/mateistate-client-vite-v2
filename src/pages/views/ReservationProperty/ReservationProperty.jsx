@@ -23,26 +23,12 @@ const reservationPropertyConfig = {
     onHandleDelete: deleteReservationProperty,
     RenderForm: (props) => <ReservationPropertyForm {...props} />
   },
-  formPaginationProps: {
-    name: 'reservationProperty',
-    number: 1
-  },
   formHeaderProps: {
     header: "Reservation Property",
   },
 }
 
-const ReservationProperty = ({ formOnly, outerClose }) => {
-
-  if (formOnly) {
-    return (
-      <FormWrapper
-        {...reservationPropertyConfig}
-        outerClose={outerClose}
-      />
-    )
-  }
-
+const ReservationProperty = () => {
   return (
     <PaperLayout
       name="reservationProperty"

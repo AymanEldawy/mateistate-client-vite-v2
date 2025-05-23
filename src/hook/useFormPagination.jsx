@@ -26,8 +26,8 @@ const useFormPagination = ({name, number, code}) => {
       columns,
       code
     );
-    if (current?.result?.length) {
-      let data = current?.result?.at(0);
+    if (current?.success) {
+      let data = current?.data;
       setCurrentNumber(data?.number);
       if (data?.id) {
         setCurrentId(data?.id);
@@ -37,13 +37,16 @@ const useFormPagination = ({name, number, code}) => {
 
   const goLast = async (isNew) => {
     const current = await getLastOne(name, columns, code);
-    if (current?.result?.length) {
-      let data = current?.result?.at(0);
+    if (current?.success) {
+      let data = current?.data;
       let last = +data?.number || 0;
+      console.log(data, 'called last');
+      
       setLastNumber(last);
       if (isNew) {
         setCurrentNumber(last + 1);
       } else {
+        setCurrentNumber(last);
         setCurrentId(data?.id);
       }
     }
@@ -51,11 +54,11 @@ const useFormPagination = ({name, number, code}) => {
 
 
   const isFirst = useMemo(() => {
-    return currentNumber === 1;
+    return +currentNumber === 1;
   }, [currentNumber]);
 
   const isLast = useMemo(() => {
-    return currentNumber === lastNumber;
+    return +currentNumber === +lastNumber;
   }, [currentNumber, lastNumber]);
 
   const goNew = async () => {
@@ -68,8 +71,8 @@ const useFormPagination = ({name, number, code}) => {
 
   const goNext = async () => {
     const current = await getNextOne(name, currentNumber, columns, code);
-    if (current?.result?.length) {
-      let data = current?.result?.at(0);
+    if (current?.success) {
+      let data = current?.data;
       setCurrentNumber(data?.number);
       setCurrentId(data?.id);
     }
@@ -78,8 +81,8 @@ const useFormPagination = ({name, number, code}) => {
   const goBack = async () => {
     if (currentNumber === 1) return;
     const current = await getPreviousOne(name, currentNumber, columns, code);
-    if (current?.result?.length) {
-      let data = current?.result?.at(0);
+    if (current?.success) {
+      let data = current?.data;
       setCurrentNumber(data?.number);
       setCurrentId(data?.id);
     }
@@ -88,8 +91,8 @@ const useFormPagination = ({name, number, code}) => {
   const goFirst = async () => {
     if (currentNumber === 1) return;
     const current = await getFirstOne(name, columns, code);
-    if (current?.result?.length) {
-      let data = current?.result?.at(0);
+    if (current?.success) {
+      let data = current?.data;
       setCurrentNumber(data?.number);
       setCurrentId(data?.id);
     }

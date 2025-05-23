@@ -43,10 +43,6 @@ const categoryConfig = {
   formHeaderProps: {
     header: "category",
   },
-  formPaginationProps: {
-    name: "category",
-    number: 1,
-  },
 };
 
 const Category = () => {
