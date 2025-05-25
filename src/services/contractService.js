@@ -46,7 +46,7 @@ export const deleteManyContracts = (ids) => {
 };
 
 export const getSearchContract = (value) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${value}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}?search=${value}`);
 };
 
 

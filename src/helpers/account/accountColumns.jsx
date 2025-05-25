@@ -67,8 +67,8 @@ const accountColumns = [
       return <span>{type?.name}</span>;
     },
   },
-  { header: "parent name", accessorKey: "parent_name" },
-  { header: "final name", accessorKey: "final_name" },
+  { header: "parent_name", accessorKey: "parent_name" },
+  { header: "final_name", accessorKey: "final_name" },
   {
     header: "created_at",
     accessorKey: "created_at",

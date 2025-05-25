@@ -17,93 +17,93 @@ export const BUILDING_FIELDS = [
   FIELDS_STRUCTURE.textField({ label: "suburb", name: "suburb" }),
   FIELDS_STRUCTURE.textField({ label: "area", name: "area" }),
   FIELDS_STRUCTURE.textField({ label: "street", name: "street" }),
-  FIELDS_STRUCTURE.textField({ label: "partNumber", name: "partNumber" }),
-  FIELDS_STRUCTURE.textField({ label: "basinNumber", name: "basinNumber" }),
-  FIELDS_STRUCTURE.textField({ label: "bondNumber", name: "bondNumber" }),
-  FIELDS_STRUCTURE.textField({ label: "bondType", name: "bondType" }),
-  FIELDS_STRUCTURE.dateField({ label: "bondDate", name: "bondDate" }),
+  FIELDS_STRUCTURE.textField({ label: "part_number", name: "partNumber" }),
+  FIELDS_STRUCTURE.textField({ label: "basin_number", name: "basinNumber" }),
+  FIELDS_STRUCTURE.textField({ label: "bond_number", name: "bondNumber" }),
+  FIELDS_STRUCTURE.textField({ label: "bond_type", name: "bondType" }),
+  FIELDS_STRUCTURE.dateField({ label: "bond_date", name: "bondDate" }),
   
-  FIELDS_STRUCTURE.uniqueField({ label: 'ownerId', name: 'ownerId', table: "owner" }),
+  FIELDS_STRUCTURE.uniqueField({ label: 'owner_id', name: 'ownerId', table: "owner" }),
   FIELDS_STRUCTURE.textField({ label: "statement", name: "statement" }),
-  FIELDS_STRUCTURE.uniqueField({ label: 'lessorId', name: 'lessorId', table: "lessor" }),
-  FIELDS_STRUCTURE.textField({ label: 'bankAccountNumber', name: 'bankAccountNumber',}),
-  FIELDS_STRUCTURE.dateField({ label: 'purchaseDate', name: 'purchaseDate'}),
+  FIELDS_STRUCTURE.uniqueField({ label: 'lessor_id', name: 'lessorId', table: "lessor" }),
+  FIELDS_STRUCTURE.textField({ label: 'bank_account_number', name: 'bankAccountNumber',}),
+  FIELDS_STRUCTURE.dateField({ label: 'purchase_date', name: 'purchaseDate'}),
   FIELDS_STRUCTURE.checkboxField({ label: 'display', name: 'display'}),
 
 ];
 
 export const BUILDING_UNITS_FIELDS = [
   {
-    label: "apartmentFloor",
+    label: "apartment_floor",
     name: "apartmentFloor",
     type: "number",
   },
   {
-    label: "apartmentCountEachFloor",
+    label: "apartment_count_each_floor",
     name: "apartmentCount",
     type: "number",
   },
   {
-    label: "shopCount",
+    label: "shop_count",
     name: "shopCount",
     type: "number",
   },
   {
-    label: "parkingFloor",
+    label: "parking_floor",
     name: "parkingFloor",
     type: "number",
   },
 
   {
-    label: "parkingCountEachFloor",
+    label: "parking_count_each_floor",
     name: "parkingCount",
     type: "number",
   },
   {
-    label: "undergroundParking",
+    label: "underground_parking",
     name: "undergroundParking",
     type: "number",
   },
   {
-    label: "storeCount",
+    label: "store_count",
     name: "storeCount",
     type: "number",
   },
   {
-    label: "penthouseFloor",
+    label: "penthouse_floor",
     name: "penthouseFloor",
     type: "number",
   },
   {
-    label: "penthouseCountEachFloor",
+    label: "penthouse_count_each_floor",
     name: "penthouseCount",
     type: "number",
   },
 
   {
-    label: "mezzanineFloor",
+    label: "mezzanine_floor",
     name: "mezzanineFloor",
     type: "number",
   },
   {
-    label: "mezzanineCountEachFloor",
+    label: "mezzanine_count_each_floor",
     name: "mezzanineCount",
     type: "number",
   },
 
   {
-    label: "officeFloor",
+    label: "office_floor",
     name: "officeFloor",
     type: "number",
   },
   {
-    label: "officeCountEachFloor",
+    label: "office_count_each_floor",
     name: "officeCount",
     type: "number",
   },
 
   {
-    label: "warehouseCount",
+    label: "warehouse_count",
     name: "warehouseCount",
     type: "number",
   },
@@ -111,7 +111,7 @@ export const BUILDING_UNITS_FIELDS = [
 
 export const BUILDING_BUYING_FIELDS = [
   {
-    label: "supplierAccountId",
+    label: "supplier_account_id",
     name: "supplierAccountId",
     table: "account",
   },
@@ -132,34 +132,34 @@ export const BUILDING_EDITORIAL_FIELDS = [
 
   FIELDS_STRUCTURE.created_at(),
   {
-    label: "buildingCost",
+    label: "building_cost",
     name: "buildingCost",
     type: "number",
   },
   {
-    label: "commissionRate",
+    label: "commission_rate",
     name: "entryCommissionRate",
     type: "number",
   },
   {
-    label: "vatRate",
+    label: "vat_rate",
     name: "entryEatRate",
     type: "number",
   },
   FIELDS_STRUCTURE.account({
-    label: "vatAccountId",
+    label: "vat_account_id",
     name: "entryEatAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "landlordAccountId",
+    label: "landlord_account_id",
     name: "entryLandlordAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "commissionFromOwnerAccountId",
+    label: "commission_from_owner_account_id",
     name: "entryCommissionFromOwnerAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "revenueAccountId",
+    label: "revenue_account_id",
     name: "entryRevenueAccountId",
   }),
 ];
@@ -167,22 +167,22 @@ export const BUILDING_EDITORIAL_FIELDS = [
 export const BUILDING_INVESTMENT_FIELDS = [
 
   {
-    label: "ownerAccountId",
+    label: "owner_account_id",
     name: "investmentOwnerAccountId",
     table: "account",
   },
   {
-    label: "investmentValue",
+    label: "investment_value",
     name: "investmentValue",
     type: "number",
   },
   {
-    label: "investmentStartDate",
+    label: "investment_start_date",
     name: "investmentStartDate",
     type: "date",
   },
   {
-    label: "investmentEndDate",
+    label: "investment_end_date",
     name: "investmentEndDate",
     type: "date",
   },
@@ -196,13 +196,13 @@ export const BUILDING_INVESTMENT_FIELDS = [
     table: "account",
   },
   {
-    label: "rentersInsurance",
+    label: "renters_insurance",
     name: "rentersInsurance",
     key: "checkbox",
   },
 
   {
-    label: "genEntries",
+    label: "gen_entries",
     name: "investmentGenEntries",
     type: "checkbox",
     key: "checkbox",
@@ -237,18 +237,18 @@ export const BUILDING_REAL_ESTATE_DEVELOPMENT_FIELDS = [
   //   name: "received_currencyId",
   // }),
   FIELDS_STRUCTURE.textField({
-    label: "receivedNote",
+    label: "received_note",
     name: "receivedNote",
   }),
   {
-    label: "receivedDate",
+    label: "received_date",
     name: "receivedDate",
     type: "date",
   },
   FIELDS_STRUCTURE.note(),
 
   {
-    label: "buildingReceipt",
+    label: "building_receipt",
     name: "buildingReceipt",
     type: "checkbox",
     key: "checkbox",
@@ -258,18 +258,18 @@ export const BUILDING_REAL_ESTATE_DEVELOPMENT_FIELDS = [
 export const BUILDING_REAL_ESTATE_MANAGEMENT_FIELDS = [
 
   FIELDS_STRUCTURE.account({
-    label: "ownerAccountId",
+    label: "owner_account_id",
     name: "ownerAccountId",
     // table: UNIQUE_REF_TABLES.suppliers,
     table: "account"
   }),
   {
-    label: "commissionRate",
+    label: "commission_rate",
     name: "commissionRate",
     type: "number",
   },
   {
-    label: "buildingRevenueAccountId",
+    label: "building_revenue_account_id",
     name: "buildingRevenueAccountId",
     table: "account",
   },
@@ -315,61 +315,61 @@ export const BUILDING_DEFAULT_ACCOUNTS_FIELDS = [
   //
   // },
   FIELDS_STRUCTURE.account({
-    label: "buildingInsuranceAccountId",
+    label: "building_insurance_account_id",
     name: "buildingInsuranceAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "buildingDiscountAccountId",
+    label: "building_discount_account_id",
     name: "buildingDiscountAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "buildingBankAccountId",
+    label: "building_bank_account_id",
     name: "buildingBankAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "buildingCashAccountId",
+    label: "building_cash_account_id",
     name: "buildingCashAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "buildingDepositAccountId",
+    label: "building_deposit_account_id",
     name: "buildingDepositAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "buildingChequeAccountId",
+    label: "building_cheque_account_id",
     name: "buildingChequeAccountId",
   }),
 
-  FIELDS_STRUCTURE.account({ label: "vatAccountId", name: "vatAccountId" }),
+  FIELDS_STRUCTURE.account({ label: "vat_account_id", name: "vatAccountId" }),
 
   FIELDS_STRUCTURE.account({
-    label: "deferredEatAccountId",
+    label: "deferred_eat_account_id",
     name: "deferredEatAccountId",
   }),
   FIELDS_STRUCTURE.account({
-    label: "ownerBalance",
+    label: "owner_balance",
     name: "ownerBalance",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "ownerTaxAccountId",
+    label: "owner_tax_account_id",
     name: "ownerTaxAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "commissionExpenseAccountId",
+    label: "commission_expense_account_id",
     name: "commissionExpenseAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "realestateCompanyAccountId",
+    label: "realestate_company_account_id",
     name: "realestateCompanyAccountId",
   }),
 
   FIELDS_STRUCTURE.account({
-    label: "customersMainAccountId",
+    label: "customers_main_account_id",
     name: "customersMainAccountId",
   }),
 ];

@@ -27,7 +27,7 @@ const shopConfig = {
     list: Object.values(SHOP_STEPS)
   },
   formHeaderProps: {
-    header: "Shop",
+    header: "shop",
   },
 }
 

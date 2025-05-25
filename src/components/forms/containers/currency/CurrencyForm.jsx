@@ -7,17 +7,17 @@ const CurrencyForm = () => {
     <div className="grid grid-cols-2 gap-4">
       <RHFInput
         name="code"
-        label="Code"
+        label="code"
         required
       />
       <RHFInput
         name="name"
-        label="Name"
+        label="name"
         required
       />
       <RHFInput
         name="ltnname"
-        label="Latin Name"
+        label="ltnname"
       />
       <RHFInput
         name="rate"

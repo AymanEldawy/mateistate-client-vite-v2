@@ -7,58 +7,60 @@ import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer
 import { getSearchBuilding, getSingleBuilding } from "@/services/buildingService";
 import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
+import { useTranslation } from "react-i18next";
 
 const ParkingForm = ({ tab }) => {
+  const { t } = useTranslation();
 
   const ParkingGeneralFields = (
     <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location')}</h5>
       <RHFSelectField
-        label="Parking Kind"
+        label="parking_kind"
         name="parking.parkingKind"
         options={PARKING_KIND_TYPE}
         required
       />
-      <RHFInput name="parking.parkingNo" label="Parking Number" />
+      <RHFInput name="parking.parkingNo" label="parking_number" />
       <RHFAsyncSelectField
         table="building"
         name="parking.buildingId"
-        label="Building"
+        label="building"
         required
         getSearch={getSearchBuilding}
         getSingle={getSingleBuilding}
       />
-      <RHFInput name="parking.floorNo" label="Floor Number" />
-      <RHFInput name="parking.area" label="Area" />
-      <RHFInput name="parking.areaUnit" label="Area Unit" />
-      <RHFTextarea name="parking.description" label="Description" containerClassName="col-span-2" />
+      <RHFInput name="parking.floorNo" label="floor_number" />
+      <RHFInput name="parking.area" label="area" />
+      <RHFInput name="parking.areaUnit" label="area_unit" />
+      <RHFTextarea name="parking.description" label="description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Details</h5>
-      <RHFColorPicker name="parking.hex" label="Hex" />
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('details')}</h5>
+      <RHFColorPicker name="parking.hex" label="hex" />
       <RHFAsyncSelectField
         table="account"
         name="parking.customerId"
-        label="Customer"
+        label="customer"
         allowAdd
         containerClassName="col-span-2"
       />
       <RHFSelectField
-        label="Property Type"
+        label="property_type"
         name="parking.propertyType"
         options={FLAT_PROPERTY_TYPE}
       />
       <RHFAsyncSelectField
         table="property_values"
         name="parking.propertyValuesId"
-        label="Property Values"
+        label="property_values"
       />
-      <RHFInput name="parking.view" label="View" containerClassName="col-span-2" />
+      <RHFInput name="parking.view" label="view" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Cost</h5>
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('cost')}</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="parking.mainCostCenterId"
-        label="Main Cost Center"
+        label="main_cost_center"
         allowAdd
         getSearch={getSearchCostCenter}
         getSingle={getSingleCostCenter}
@@ -66,27 +68,27 @@ const ParkingForm = ({ tab }) => {
       <RHFAsyncSelectField
         table="cost_center"
         name="parking.costCenterId"
-        label="Cost Center"
+        label="cost_center"
         allowAdd
         getSearch={getSearchCostCenter}
         getSingle={getSingleCostCenter}
       />
       <RHFDatePicker
         name="parking.purchaseDate"
-        label="Purchase Date"
+        label="purchase_date"
       />
       <RHFAsyncSelectField
         table="account"
         name="parking.flatOwnerId"
-        label="Flat Owner"
+        label="flat_owner"
         allowAdd
       />
-      <RHFTextarea name="parking.note" label="Note" containerClassName="col-span-2" />
+      <RHFTextarea name="parking.note" label="note" containerClassName="col-span-2" />
     </FormFieldsGridContainer>
   )
   const ParkingPicturesFields = (
     <div key="parkingPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
-      <RHFUploadFilesController name="pictures" accept="image/*" containerClassName="col-span-2" label="Pictures" required />
+      <RHFUploadFilesController name="pictures" accept="image/*" containerClassName="col-span-2" label="pictures" required />
     </div>
   )
 
@@ -120,22 +122,22 @@ const ParkingForm = ({ tab }) => {
               <RHFDatePicker name={`rentalPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`rentalPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`rentalPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`rentalPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`rentalPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`rentalPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"rentalPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>
@@ -150,22 +152,22 @@ const ParkingForm = ({ tab }) => {
               <RHFDatePicker name={`sellingPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`sellingPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`sellingPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`sellingPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`sellingPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`sellingPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"sellingPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>

@@ -25,7 +25,7 @@ const userWorkTimeConfig = {
     RenderForm: (props) => <UserWorkTimeForm {...props} />
   },
   formHeaderProps: {
-    header: "User Work Time",
+    header: "user_work_time",
   },
 }
 
@@ -37,7 +37,7 @@ const UserWorkTime = () => {
       queryFn={getAllUserWorkTimes}
       handleDeleteSelected={deleteManyUserWorkTimes}
       paperHeaderProps={{
-        header: "userWorkTime"
+        header: "user_work_time"
       }}
       paperBarProps={{
         onClickPrint: true,

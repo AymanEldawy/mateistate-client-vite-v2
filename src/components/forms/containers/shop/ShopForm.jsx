@@ -5,28 +5,30 @@ import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import TableForm from "../../wrapper/TableForm";
 import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 import { getSearchBuilding, getSingleBuilding } from "@/services/buildingService";
+import { useTranslation } from "react-i18next";
 const ShopForm = ({ tab }) => {
+  const { t } = useTranslation();
 
   const ShopGeneralFields = (
     <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location')}</h5>
       <RHFAsyncSelectField
         table="building"
         name="shop.buildingId"
-        label="Building"
+        label="building"
         required
         getSearch={getSearchBuilding}
         getSingle={getSingleBuilding}
       />
-      <RHFInput name="shop.floorNo" label="Floor Number" />
-      <RHFInput name="shop.kind" label="Kind" />
-      <RHFInput name="shop.shopNo" label="Shop Number" />
-      <RHFTextarea name="shop.description" label="Description" containerClassName="col-span-2" />
+      <RHFInput name="shop.floorNo" label="floor_number" />
+      <RHFInput name="shop.kind" label="kind" />
+      <RHFInput name="shop.shopNo" label="shop_number" />
+      <RHFTextarea name="shop.description" label="description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Details</h5>
-      <RHFColorPicker required={false} name="shop.hex" label="Hex" containerClassName="col-span-2" />
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('details')}</h5>
+      <RHFColorPicker required={false} name="shop.hex" label="hex" containerClassName="col-span-2" />
       <RHFSelectField
-        label="Property Type"
+        label="property_type"
         name="shop.propertyType"
         options={FLAT_PROPERTY_TYPE}
         required={true}
@@ -34,54 +36,54 @@ const ShopForm = ({ tab }) => {
       <RHFAsyncSelectField
         table="property_values"
         name="shop.propertyValuesId"
-        label="Property Values"
+        label="property_values"
         allowAdd
       />
-      <RHFInput name="shop.area" label="Area" type="number" />
-      <RHFInput name="shop.areaUnit" label="Area Unit" />
-      <RHFInput name="shop.view" label="View" containerClassName="col-span-2" />
-      <RHFInput name="shop.waterMeter" label="Water Meter" />
-      <RHFInput name="shop.electricityMeter" label="Electricity Meter" />
+      <RHFInput name="shop.area" label="area" type="number" />
+      <RHFInput name="shop.areaUnit" label="area_unit" />
+      <RHFInput name="shop.view" label="view" containerClassName="col-span-2" />
+      <RHFInput name="shop.waterMeter" label="water_meter" />
+      <RHFInput name="shop.electricityMeter" label="electricity_meter" />
       <RHFAsyncSelectField
         table="account"
         name="shop.customerId"
-        label="Customer"
+        label="customer"
       />
       <RHFAsyncSelectField
         table="owner"
         name="shop.customerOwnerId"
-        label="Customer Owner"
+        label="customer_owner"
       />
       <RHFAsyncSelectField
         table="account"
         name="shop.flatOwnerId"
-        label="Flat Owner"
+        label="flat_owner"
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Licenses & Documents</h5>
-      <RHFInput name="shop.license1" label="License 1" />
-      <RHFInput name="shop.license2" label="License 2" />
-      <RHFInput name="shop.unifiedNum" label="Unified Number" />
-      <RHFInput name="shop.bondType" label="Bond Type" />
-      <RHFInput name="shop.bondNo" label="Bond Number" />
-      <RHFDatePicker name="shop.bondDate" label="Bond Date" />
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('licenses_documents')}</h5>
+      <RHFInput name="shop.license1" label="license1" />
+      <RHFInput name="shop.license2" label="license2" />
+      <RHFInput name="shop.unifiedNum" label="unified_number" />
+      <RHFInput name="shop.bondType" label="bond_type" />
+      <RHFInput name="shop.bondNo" label="bond_number" />
+      <RHFDatePicker name="shop.bondDate" label="bond_date" />
 
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Cost Centers</h5>
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('cost_centers')}</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="shop.mainCostCenterId"
-        label="Main Cost Center"
+        label="main_cost_center"
         allowAdd
       />
       <RHFAsyncSelectField
         table="cost_center"
         name="shop.costCenterId"
-        label="Cost Center"
+        label="cost_center"
         allowAdd
       />
 
-      <RHFTextarea name="shop.note" label="Note" containerClassName="col-span-2" />
+      <RHFTextarea name="shop.note" label="note" containerClassName="col-span-2" />
     </FormFieldsGridContainer>
   )
 
@@ -92,23 +94,23 @@ const ShopForm = ({ tab }) => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFTableAsyncSelect name={`shopFixedAssets.${index}.shopId`} label="shopId" />
+              <RHFTableAsyncSelect name={`shopFixedAssets.${index}.shopId`} label="shop_id" />
             </td>
             <td>
-              <RHFTableAsyncSelect name={`shopFixedAssets.${index}.assetId`} label="assetId" />
+              <RHFTableAsyncSelect name={`shopFixedAssets.${index}.assetId`} label="asset_id" />
             </td>
             <td>
               <RHFTableInput name={`shopFixedAssets.${index}.value`} label="value" />
             </td>
             <td>
-              <RHFTableInput name={`shopFixedAssets.${index}.note`} label="Note" />
+              <RHFTableInput name={`shopFixedAssets.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"shopFixedAssets"}
         headers={[
-          "shopId",
-          "assetId",
+          "shop_id",
+          "asset_id",
           "value",
           "note",
         ]}
@@ -118,7 +120,7 @@ const ShopForm = ({ tab }) => {
 
   const ShopPicturesFields = (
     <div key="shopPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
-      <RHFUploadFilesController name="shopPictures.pictures" accept="image/*" containerClassName="col-span-2" label="Pictures" required />
+      <RHFUploadFilesController name="shopPictures.pictures" accept="image/*" containerClassName="col-span-2" label="pictures" required />
     </div>
   )
 
@@ -128,7 +130,7 @@ const ShopForm = ({ tab }) => {
         renderFields={(item, index) => (
           <td>
             <RHFAsyncSelectField
-              label="shopId"
+              label="shop_id"
               table="shop"
               name={`shopAccomulators.${index}.shopId`}
             />
@@ -136,7 +138,7 @@ const ShopForm = ({ tab }) => {
         )}
         gridName={"shopAccomulators"}
         headers={[
-          "Shop",
+          "shop_id",
         ]}
       />
     </div>
@@ -151,22 +153,22 @@ const ShopForm = ({ tab }) => {
               <RHFDatePicker name={`shopRentalPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`shopRentalPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`shopRentalPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`shopRentalPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`shopRentalPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`shopRentalPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"shopRentalPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>
@@ -181,22 +183,22 @@ const ShopForm = ({ tab }) => {
               <RHFDatePicker name={`shopSellingPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`shopSellingPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`shopSellingPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`shopSellingPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`shopSellingPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`shopSellingPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"shopSellingPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>

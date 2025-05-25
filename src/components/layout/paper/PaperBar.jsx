@@ -82,7 +82,7 @@ const PaperBar = ({
           onClick={() => setOpenViability(true)}
           kind="warn"
         >
-          view
+          {t("view")}
           <EyeIcon />
         </Btn>
       </div>

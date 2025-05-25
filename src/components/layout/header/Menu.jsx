@@ -67,7 +67,7 @@ const Menu = ({ menu }) => {
                   {t(item.name)}
                   <ArrowSolidIcon className="!w-4 !h-4 rtl:rotate-180" />
                 </button>
-                <ul className={`absolute ${item?.classes} ${item?.name === dropdown?.[level] ? 'min-w-full opacity-1 pointer-events-auto' : 'opacity-0 pointer-events-none '} bg-white bg_dark gap-x-1 top-[0] py-4 rounded-md z-[99] left-full`}>
+                <ul className={`absolute ${item?.classes} ${item?.name === dropdown?.[level] ? 'min-w-full opacity-1 pointer-events-auto' : 'opacity-0 pointer-events-none '} bg-white bg_dark gap-x-1 top-[0] py-4 rounded-md z-[99] start-full`}>
                   {list(item.subChild)}
                 </ul>
               </li>

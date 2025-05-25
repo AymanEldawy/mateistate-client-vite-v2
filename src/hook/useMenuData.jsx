@@ -6,8 +6,10 @@ import { getAllBillPatterns } from "@/services/billPatternsService";
 import { getAllVoucherPatterns } from "@/services/voucherPatternService";
 import PATHS from "@/data/paths";
 import PERMISSIONS from "@/data/permissions";
+import { useTranslation } from "react-i18next";
 
 export const useMenuData = () => {
+  const { t } = useTranslation();
   const response = useQuery({
     queryKey: ['menu'],
     queryFn: async () => {
@@ -24,7 +26,7 @@ export const useMenuData = () => {
         let menu = [];
         const chequesMenu = cheques?.data?.map((item) => {
           return {
-            name: item?.name,
+            name: t(`menu.${item?.name}`),
             path: PATHS.CHEQUE + '?code=' + item?.code,
             permissions: PERMISSIONS[PATHS.CHEQUE],
           }
@@ -32,7 +34,7 @@ export const useMenuData = () => {
 
         const contractsMenu = contracts?.data?.map((item) => {
           return {
-            name: item?.name,
+            name: t(`menu.${item?.name}`),
             path: PATHS.CONTRACT + '?code=' + item?.code,
             permissions: PERMISSIONS[PATHS.CONTRACT],
           }
@@ -40,23 +42,23 @@ export const useMenuData = () => {
 
         const billsMenu = bills?.data?.map((item) => {
           return {
-            name: item?.name,
+            name: t(`menu.${item?.name}`),
             path: PATHS.BILLS + '?code=' + item?.code,
             permissions: PERMISSIONS[PATHS.BILLS],
           }
         })
         const vouchersMenu = vouchers?.data?.map((item) => {
           return {
-            name: item?.name,
+            name: t(`menu.${item?.name}`),
             path: PATHS.VOUCHERS + '?code=' + item?.code,
             permissions: PERMISSIONS[PATHS.VOUCHERS],
           }
         })
 
-        menu.push({ name: 'contracts', subChild: contractsMenu })
-        menu.push({ name: 'cheques', subChild: chequesMenu })
-        menu.push({ name: 'bills', subChild: billsMenu })
-        menu.push({ name: 'vouchers', subChild: vouchersMenu })
+        menu.push({ name: 'menu.contracts', subChild: contractsMenu })
+        menu.push({ name: 'menu.cheques', subChild: chequesMenu })
+        menu.push({ name: 'menu.bills', subChild: billsMenu })
+        menu.push({ name: 'menu.vouchers', subChild: vouchersMenu })
 
         return menu;
       } catch (error) {

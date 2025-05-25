@@ -158,6 +158,10 @@ const CustomTable = ({
                 return (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
+                      const headerText = flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )
                       return (
                         <th
                           key={header.id}
@@ -186,10 +190,7 @@ const CustomTable = ({
                               {" "}
                               {header.isPlaceholder
                                 ? null
-                                : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
+                                : typeof headerText === "string" ? t(headerText) : flexRender(headerText, header.getContext())}
                             </span>
 
                             {header?.column.getCanFilter() && (

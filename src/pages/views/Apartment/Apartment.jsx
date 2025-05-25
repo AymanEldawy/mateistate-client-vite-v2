@@ -25,11 +25,11 @@ const apartmentConfig = {
     list: Object.values(APARTMENT_STEPS)
   },
   formHeaderProps: {
-    header: "Apartment",
+    header: "apartment",
     ExtraContentBar: () => (
       <>
-        <RHFCheckbox name="apartments.has_lawsuit" label="Has Lawsuit" type="checkbox" />
-        <RHFCheckbox name="apartments.blocked" label="Blocked" type="checkbox" />
+        <RHFCheckbox name="apartments.has_lawsuit" label="has_lawsuit" type="checkbox" />
+        <RHFCheckbox name="apartments.blocked" label="blocked" type="checkbox" />
       </>
     )
   },

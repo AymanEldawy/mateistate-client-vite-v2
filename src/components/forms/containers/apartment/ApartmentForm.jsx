@@ -7,34 +7,35 @@ import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer
 import { getSearchBuilding, getSingleBuilding } from './../../../../services/buildingService';
 import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
+import { useTranslation } from "react-i18next";
 
 const ApartmentForm = ({ tab }) => {
-
+  const { t } = useTranslation();
   const ApartmentGeneralFields = (
     <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location')}</h5>
       <RHFAsyncSelectField
         table="building"
         name="apartment.buildingId"
-        label="Building"
+        label="building"
         required
         getSearch={getSearchBuilding}
         getSingle={getSingleBuilding}
       />
-      <RHFInput name="apartment.floorNo" label="Floor Number" />
+      <RHFInput name="apartment.floorNo" label="floor_number" />
       <RHFSelectField
-        label="Apartment Kind"
+        label="apartment_kind"
         name="apartment.apartmentKind"
         options={APARTMENT_FLAT_TYPE}
         required={true}
       />
-      <RHFInput name="apartment.apartmentNo" label="Apartment Number" required />
-      <RHFTextarea name="apartment.description" label="Description" containerClassName="col-span-2" />
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Details</h5>
-      <RHFInput name="apartment.category" label="Category" />
-      <RHFInput name="apartment.kind" label="Kind" />
+      <RHFInput name="apartment.apartmentNo" label="apartment_number" required />
+      <RHFTextarea name="apartment.description" label="description" containerClassName="col-span-2" />
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('details')}</h5>
+      <RHFInput name="apartment.category" label="category" />
+      <RHFInput name="apartment.kind" label="kind" />
       <RHFSelectField
-        label="Property Type"
+        label="property_type"
         name="apartment.propertyType"
         options={FLAT_PROPERTY_TYPE}
         required={true}
@@ -42,24 +43,24 @@ const ApartmentForm = ({ tab }) => {
       <RHFAsyncSelectField
         table="property_values"
         name="apartment.propertyValuesId"
-        label="Property Values"
+        label="property_values"
         allowAdd
       />
-      <RHFColorPicker required={false} name="apartment.hex" label="Hex" containerClassName="col-span-2" />
-      <RHFInput name="apartment.area" label="Area" type="number" />
-      <RHFInput name="apartment.areaUnit" label="Area Unit" />
-      <RHFInput name="apartment.view" label="View" containerClassName="col-span-2" />
-      <RHFInput name="apartment.bathroomCount" label="Bathroom Count" type="number" />
-      <RHFInput name="apartment.balconyCount" label="Balcony Count" type="number" />
-      <RHFInput name="apartment.roomCount" label="Room Count" type="number" />
-      <RHFInput name="apartment.water_meter" label="Water Meter" type="text" />
-      <RHFInput name="apartment.electricityMeter" label="Electricity Meter" type="text" />
-      <RHFInput name="apartment.statement" label="Statement" type="text" />
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Cost</h5>
+      <RHFColorPicker required={false} name="apartment.hex" label="hex" containerClassName="col-span-2" />
+      <RHFInput name="apartment.area" label="area" type="number" />
+      <RHFInput name="apartment.areaUnit" label="area_unit" />
+      <RHFInput name="apartment.view" label="view" containerClassName="col-span-2" />
+      <RHFInput name="apartment.bathroomCount" label="bathroom_count" type="number" />
+      <RHFInput name="apartment.balconyCount" label="balcony_count" type="number" />
+      <RHFInput name="apartment.roomCount" label="room_count" type="number" />
+      <RHFInput name="apartment.water_meter" label="water_meter" type="text" />
+      <RHFInput name="apartment.electricityMeter" label="electricity_meter" type="text" />
+      <RHFInput name="apartment.statement" label="statement" type="text" />
+      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('cost')}</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="apartment.mainCostCenterId"
-        label="Main Cost Center"
+        label="main_cost_center"
         allowAdd
         getSearch={getSearchCostCenter}
         getSingle={getSingleCostCenter}
@@ -67,7 +68,7 @@ const ApartmentForm = ({ tab }) => {
       <RHFAsyncSelectField
         table="cost_center"
         name="apartment.costCenterId"
-        label="Cost Center"
+        label="cost_center"
         allowAdd
         getSearch={getSearchCostCenter}
         getSingle={getSingleCostCenter}
@@ -76,15 +77,15 @@ const ApartmentForm = ({ tab }) => {
       <RHFAsyncSelectField
         table="currency"
         name="apartment.costCurrencyId"
-        label="Cost Currency"
+        label="cost_currency"
         allowAdd
       />
-      <RHFInput name="apartment.costPrice" label="Cost Price" type="number" />
-      <RHFInput name="apartment.amountPaid" label="Amount Paid" type="number" containerClassName="col-span-2" />
+      <RHFInput name="apartment.costPrice" label="cost_price" type="number" />
+      <RHFInput name="apartment.amountPaid" label="amount_paid" type="number" containerClassName="col-span-2" />
       {/* // todo add this fields in another way */}
       {/* <RHFInput name="apartment.xIndex" label="X Index" type="number" required />
       <RHFInput name="apartment.yIndex" label="Y Index" type="number" required /> */}
-      <RHFTextarea name="apartment.note" label="Note" containerClassName="col-span-2" />
+      <RHFTextarea name="apartment.note" label="note" containerClassName="col-span-2" />
     </FormFieldsGridContainer>
   )
 
@@ -100,7 +101,7 @@ const ApartmentForm = ({ tab }) => {
         renderFields={(item, index) => (
           <td>
             <RHFAsyncSelectField
-              label="apartmentId"
+              label="apartment_id"
               table="apartment"
               name={`apartmentAccumulators.${index}.apartmentId`}
               getSearch={getSearchApartment}
@@ -110,7 +111,7 @@ const ApartmentForm = ({ tab }) => {
         )}
         gridName={"apartmentAccumulators"}
         headers={[
-          "apartmentId",
+          "apartment_id",
         ]}
       />
     </div>
@@ -125,22 +126,22 @@ const ApartmentForm = ({ tab }) => {
               <RHFDatePicker name={`apartmentRentalPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`apartmentRentalPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`apartmentRentalPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`apartmentRentalPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`apartmentRentalPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`apartmentRentalPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"apartmentRentalPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>
@@ -155,22 +156,22 @@ const ApartmentForm = ({ tab }) => {
               <RHFDatePicker name={`apartmentSellingPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`apartmentSellingPrices.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`apartmentSellingPrices.${index}.price`} label="price" type="number" />
             </td>
             <td>
               <RHFAsyncSelectField name={`apartmentSellingPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`apartmentSellingPrices.${index}.note`} label="Note" />
+              <RHFTableInput name={`apartmentSellingPrices.${index}.note`} label="note" />
             </td>
           </>
         )}
         gridName={"apartmentSellingPrices"}
         headers={[
-          "Date",
-          "Price",
-          "Currency",
-          "Note",
+          "date",
+          "price",
+          "currency",
+          "note",
         ]}
       />
     </div>

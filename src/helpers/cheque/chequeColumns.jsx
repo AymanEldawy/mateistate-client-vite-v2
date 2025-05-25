@@ -30,7 +30,7 @@ const chequeColumns = [
     ),
   },
   {
-    header: "Created At",
+    header: "created_at",
     accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
@@ -53,9 +53,9 @@ const chequeColumns = [
   { header: "code", accessorKey: "code" },
   { header: "type", accessorKey: "type" },
   { header: "amount", accessorKey: "amount" },
-  { header: "Beneficiary Name", accessorKey: "beneficiary_name" },
+  { header: "beneficiary_name", accessorKey: "beneficiary_name" },
   { header: "note", accessorKey: "note" },
-  { header: "Currency Val", accessorKey: "currency_val" },
+  { header: "currency_val", accessorKey: "currency_val" },
   {
     header: "feedback",
     accessorKey: "feedback",

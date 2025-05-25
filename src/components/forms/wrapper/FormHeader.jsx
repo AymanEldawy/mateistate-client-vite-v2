@@ -3,7 +3,7 @@ import { useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 const FormHeader = ({ header, ExtraContentBar, onClose, allowClose = true }) => {
-  const { t } = useTranslation('formHeaderTitles')
+  const { t } = useTranslation()
   const watch = useWatch();
 
   return (

@@ -100,6 +100,7 @@ const RHFAsyncSelectField = ({
                 allowAdd={allowAdd}
                 table={table}
                 formKey={name}
+                required={required}
               />
               {error ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>

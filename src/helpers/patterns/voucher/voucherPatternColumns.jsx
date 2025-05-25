@@ -27,7 +27,7 @@ const voucherPatternColumns = [
     ),
   },
   {
-    header: "createdAt",
+    header: "created_at",
     accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>

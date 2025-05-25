@@ -142,7 +142,7 @@ const landSchema = z.object({
   cuownerId: VALIDATION.OPTIONAL_STRING,
   costCenterId: VALIDATION.OPTIONAL_STRING,
   bankAccountId: VALIDATION.OPTIONAL_STRING,
-  commissionPercent: VALIDATION.OPTIONAL_NUMBER.max(100),
+  commissionPercent: ()=> VALIDATION.OPTIONAL_NUMBER.max(100),
   commissionIncomeAccountId: VALIDATION.OPTIONAL_STRING,
   customerOwnerId: VALIDATION.OPTIONAL_STRING,
   ownerAccountId: VALIDATION.OPTIONAL_STRING,

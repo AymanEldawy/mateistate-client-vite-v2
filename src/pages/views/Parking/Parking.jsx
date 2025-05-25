@@ -25,11 +25,11 @@ const parkingConfig = {
     list: Object.values(PARKING_STEPS)
   },
   formHeaderProps: {
-    header: "Parking",
+    header: "parking",
     ExtraContentBar: () => (
       <>
-        <RHFCheckbox name="parking.has_lawsuit" label="Has Lawsuit" type="checkbox" />
-        <RHFCheckbox name="parking.blocked" label="Blocked" type="checkbox" />
+        <RHFCheckbox name="parking.has_lawsuit" label="has_lawsuit" type="checkbox" />
+        <RHFCheckbox name="parking.blocked" label="blocked" type="checkbox" />
       </>
     )
   },

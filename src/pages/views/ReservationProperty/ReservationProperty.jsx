@@ -36,7 +36,7 @@ const ReservationProperty = () => {
       queryFn={getAllReservationProperties}
       handleDeleteSelected={deleteManyReservationProperties}
       paperHeaderProps={{
-        header: "reservationProperty"
+        header: "reservation_property"
       }}
       paperBarProps={{
         onClickPrint: true,

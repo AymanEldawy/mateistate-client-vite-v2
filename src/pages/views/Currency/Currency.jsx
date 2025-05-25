@@ -20,7 +20,7 @@ const currencyConfig = {
     RenderForm: (props) => <CurrencyForm {...props} />
   },
   formHeaderProps: {
-    header: "Currency",
+    header: "currency",
   },
 }
 

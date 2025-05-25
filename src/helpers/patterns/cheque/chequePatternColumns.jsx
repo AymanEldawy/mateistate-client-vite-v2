@@ -59,7 +59,7 @@ const chequePatternColumns = [
     },
   },
   {
-    header: "paperType",
+    header: "paper_type",
     accessorKey: "paperType",
     cell: ({ getValue }) => {
       let type = CHEQUE_PATTERN_PAPER_TYPE?.find(
@@ -68,10 +68,10 @@ const chequePatternColumns = [
       return <span>{type?.name}</span>;
     },
   },
-  { header: "listName", accessorKey: "listName" },
-  { header: "defaultAccountId", accessorKey: "defaultAccountId" },
+  { header: "list_name", accessorKey: "listName" },
+  { header: "default_account_id", accessorKey: "defaultAccountId" },
   {
-    header: "genEntries",
+    header: "gen_entries",
     accessorKey: "genEntries",
     cell: ({ getValue, row }) => (
       <span className="text-blue-500 font-medium hover:underline">
@@ -79,7 +79,7 @@ const chequePatternColumns = [
       </span>
     ),
   },
-  { header: "defaultPrintFolder", accessorKey: "defaultPrintFolder" },
+  { header: "default_print_folder", accessorKey: "defaultPrintFolder" },
 ];
 
 export default chequePatternColumns

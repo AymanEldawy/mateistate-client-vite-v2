@@ -93,6 +93,7 @@ const VoucherForm = ({ tab }) => {
                 table="account"
                 getSearch={getSearchAccount}
                 getSingle={getSingleAccount}
+                required
               />
             </td>
             <td>
@@ -101,6 +102,7 @@ const VoucherForm = ({ tab }) => {
                 table="costCenter"
                 getSearch={getSearchCostCenter}
                 getSingle={getSingleCostCenter}
+                required
               />
             </td>
           </>
