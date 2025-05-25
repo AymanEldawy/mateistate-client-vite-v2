@@ -32,12 +32,12 @@ const Btn = ({ children, kind, containerClassName, isLoading, isActive, onClick,
 
   return (
     <button
-      onClick={() => {
+      onClick={(e) => {
         if(!onClick) {
           console.log('No onClick function provided');
           return;
         }
-        onClick();
+        onClick(e);
       }}
       className={`text-sm flex items-center gap-2 disabled:bg-gray-200 disabled:text-gray-400 px-2 h-7 tracking-wide rounded-md py-1 font-medium capitalize duration-300 ${classes} ${containerClassName}`}
       {...props}

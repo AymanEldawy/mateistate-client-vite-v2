@@ -6,9 +6,7 @@ export const getSingleCheque = (id) => {
 };
 
 export const getAllCheques = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_CHEQUE, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_CHEQUE);
 };
 
 export const createCheque = (data) => {

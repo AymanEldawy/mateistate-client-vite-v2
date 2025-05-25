@@ -24,7 +24,7 @@ export const ownerExpensesDefaultValues = {
 
 const ownerExpensesSchema = z.object({
   date: VALIDATION.OPTIONAL_DATE,
-  receiptNumber: VALIDATION.OPTIONAL_NUMBER,
+  receiptNumber: VALIDATION.OPTIONAL_STRING,
   buildingId: VALIDATION.NON_EMPTY_STRING,
   ownerId: VALIDATION.NON_EMPTY_STRING,
   note: VALIDATION.OPTIONAL_STRING,
@@ -33,12 +33,12 @@ const ownerExpensesSchema = z.object({
 const ownerExpensesDetailsSchema = z.object({
   date: VALIDATION.OPTIONAL_DATE,
   amount: VALIDATION.NON_NEGATIVE_NUMBER,
-  receiptNumber: VALIDATION.OPTIONAL_NUMBER,
+  receiptNumber: VALIDATION.OPTIONAL_STRING,
   note: VALIDATION.OPTIONAL_STRING,
   expenseTypeId: VALIDATION.NON_EMPTY_STRING,
 });
 
-export const ownerExpensesValidationSchema = z.object({
+export const ownerExpensesValidationSchema = () => z.object({
   ownerExpense: ownerExpensesSchema,
   expenseDetails: z.array(ownerExpensesDetailsSchema),
 });

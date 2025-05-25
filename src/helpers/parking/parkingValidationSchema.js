@@ -49,18 +49,18 @@ export const parkingDefaultValues = {
 }
 
 const parkingRentalPriceSchema = z.object({
-  price: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
-  date: z.date().optional(),
-  number: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
+  price: VALIDATION.OPTIONAL_NUMBER,
+  date: VALIDATION.OPTIONAL_STRING, // z.date().optional().nullable(),
+  // number: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   currencyId: VALIDATION.OPTIONAL_STRING,
   note: VALIDATION.OPTIONAL_STRING
 });
 
 const parkingSellingPriceSchema = z.object({
-  price: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
-  date: z.date().optional(),
+  price: VALIDATION.OPTIONAL_NUMBER,
+  date: VALIDATION.OPTIONAL_STRING, // z.date().optional().nullable(),
   currencyId: VALIDATION.OPTIONAL_STRING,
-  number: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
+  // number: z.union([VALIDATION.OPTIONAL_NUMBER, z.null()]),
   note: VALIDATION.OPTIONAL_STRING
 });
 
@@ -90,8 +90,8 @@ const parkingSchema = z.object({
   buildingId: VALIDATION.NON_EMPTY_STRING,
 });
 
-export const parkingValidationSchema = z.object({
+export const parkingValidationSchema = () => z.object({
   parking: parkingSchema,
-  parkingRentalPrices: z.array(parkingRentalPriceSchema),
-  parkingSellingPrices: z.array(parkingSellingPriceSchema),
+  parkingRentalPrices: z.array(parkingRentalPriceSchema).nullable(),
+  parkingSellingPrices: z.array(parkingSellingPriceSchema).nullable(),
 });

@@ -301,8 +301,8 @@ export const PARKING_KIND_TYPE = [
 
 
 export const FLAT_PROPERTY_TYPE = [
-  { label: "Ownership", value: "0" },
-  { label: "Real Estate Management", value: "1" },
+  { name: "Ownership", id: "0" },
+  { name: "Real Estate Management", id: "1" },
 ]
 
 

@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleLand = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_LAND}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_LAND}/${id}`);
 };
 
 export const getAllLands = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_LAND, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_LAND);
 };
 
 export const createLand = (data) => {

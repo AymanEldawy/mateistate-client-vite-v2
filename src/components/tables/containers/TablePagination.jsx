@@ -1,7 +1,11 @@
 import { Fragment } from "react";
 
-const TablePagination = ({ table }) => {
+const TablePagination = ({ table, pagination }) => {
 
+  if (!table.getPageCount()) return;
+
+  console.log(table.getPageCount(), pagination, 'pagin');
+  
   return (
     <div>
       <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
@@ -32,18 +36,17 @@ const TablePagination = ({ table }) => {
           </li>
 
           {
-            Array.from({ length: table.getPageCount() }, (_, i) => i + 1)
+            Array.from({ length: table.getPageCount() || 1 }, (_, i) => i + 1)
               .filter((page) => {
                 const currentPage = table.getState().pagination.pageIndex + 1;
                 return (
-                  page === 1 || // Always show the first page
-                  page === table.getPageCount() || // Always show the last page
-                  (page >= currentPage - 3 && page <= currentPage + 3) // Show prev 3, current, and next 3
+                  page === 1 ||
+                  page === table.getPageCount() ||
+                  (page >= currentPage - 3 && page <= currentPage + 3)
                 );
               })
               .map((page, index, array) => (
                 <Fragment key={page}>
-                  {/* Add ellipsis if there's a gap between pages */}
                   {index > 0 && array[index - 1] !== page - 1 && (
                     <li>
                       <span className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500">...</span>

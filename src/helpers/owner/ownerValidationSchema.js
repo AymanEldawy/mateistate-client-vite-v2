@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const ownerDefaultValue = {
+  accountId: "",
+  name: "",
+  ltnname: "",
+  id_card: "",
+  cell_phone: "",
+  mailbox: "",
+  address: "",
+  nationality: "",
+};
+
+
 export const ownerValidationSchema = z.object({
   accountId: z.string().nonempty({ message: "accountId is Required" }),
   name: z.string().nonempty({ message: "Name is Required" }),

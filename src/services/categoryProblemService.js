@@ -6,9 +6,7 @@ export const getSingleCategoryProblem = (id) => {
 };
 
 export const getAllCategoryProblems = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM);
 };
 
 export const createCategoryProblem = (data) => {

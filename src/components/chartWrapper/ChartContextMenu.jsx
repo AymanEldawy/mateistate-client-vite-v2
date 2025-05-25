@@ -10,7 +10,7 @@ const ChartContextMenu = ({
   onDeleteItemHandler,
 }) => {
   return (
-    <ContextMenu id={item?.id} className="bg-gray-50 border border-gray-200 rounded-md p-2 text-sm shadow flex flex-col gap-1">
+    <ContextMenu id={item?.id} className="bg-gray-50 border border-gray-200 rounded-md p-2 text-sm shadow flex flex-col gap-1 z-20">
       <MenuItem
         className={`flex hover:text-blue-500 gap-2 items-center cursor-pointer whitespace-nowrap hover:bg-blue-50 text-sm p-1 text-gray-600`}
         onClick={() => onAddItemHandler(item, name)}

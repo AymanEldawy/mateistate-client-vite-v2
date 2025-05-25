@@ -6,9 +6,7 @@ export const getSingleVoucher = (id) => {
 };
 
 export const getAllVouchers = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_VOUCHER, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_VOUCHER);
 };
 
 export const createVoucher = (data) => {

@@ -16,7 +16,7 @@ export const getAllCurrencies = (signal) => {
 };
 
 export const createCurrency = (data) => {
-    return http.post(API_URL_CONSTANTS. BASE_CURRENCY, data, {
+    return http.post(API_URL_CONSTANTS.BASE_CURRENCY, data, {
         // headers: {
         //   "Content-Type": "multipart/form-data",
         // },

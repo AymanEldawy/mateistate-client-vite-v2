@@ -34,7 +34,7 @@ const accountDistributiveSchema = z.object({
 // Base schema with common fields
 const baseSchema = z.object({
   account: z.object({
-    code: z.number()
+    code: z.string()
       .min(1, "Code is required"),
     name: z.string()
       .min(1, "Name is required")

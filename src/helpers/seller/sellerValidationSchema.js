@@ -1,4 +1,5 @@
 import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 export const sellerDefaultValue = {
   name: "",
@@ -11,24 +12,24 @@ export const sellerDefaultValue = {
   mailbox: "",
   email: "",
   address: "",
-  minimumCommission: 1, // 
-  maximumDiscount: 1, // 
+  minimumCommission: 0, // 
+  maximumDiscount: 0, // 
   statement: "",
 };
 
 export const sellerValidationSchema = () =>
   z.object({
     name: z.string().nonempty({ message: "Name is Required" }),
-    ltnname: z.string().optional(),
-    id_card: z.string().optional(),
-    passport: z.number().optional(),
-    work_card_number: z.number().optional(),
-    mobile: z.string().optional(),
-    cellPhone: z.string().optional(),
-    mailbox: z.string().optional(),
-    email: z.string().optional(),
-    address: z.string().optional(),
-    minimumCommission: z.number(),
-    maximumDiscount: z.number(),
-    statement: z.string().optional(),
+    ltnname: VALIDATION.OPTIONAL_STRING,
+    id_card: VALIDATION.OPTIONAL_STRING,
+    passport: VALIDATION.OPTIONAL_NUMBER,
+    work_card_number: VALIDATION.OPTIONAL_NUMBER,
+    mobile: VALIDATION.OPTIONAL_STRING,
+    cellPhone: VALIDATION.OPTIONAL_STRING,
+    mailbox: VALIDATION.OPTIONAL_STRING,
+    email: z.string().email().nullable(),
+    address: VALIDATION.OPTIONAL_STRING,
+    minimumCommission: VALIDATION.POSITIVE_NUMBER,
+    maximumDiscount: VALIDATION.POSITIVE_NUMBER,
+    statement: VALIDATION.OPTIONAL_STRING,
   });

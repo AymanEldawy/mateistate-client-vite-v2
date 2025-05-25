@@ -6,6 +6,7 @@ import { PaperHeader } from '../layout/paper/PaperHeader'
 import { ErrorText } from '../shared/ErrorText'
 import { toast } from 'react-toastify'
 import { usePopupForm } from '@/hook/usePopupForm'
+import { toTree } from '@/data/constants'
 
 const ChartWrapper = ({
   title,
@@ -15,6 +16,7 @@ const ChartWrapper = ({
   onSelectItem,
   onDeleteItem,
   onClickAdd,
+  onAddItemHandler
 }) => {
   const { t } = useTranslation()
   const { handleDispatchForm } = usePopupForm()
@@ -24,8 +26,8 @@ const ChartWrapper = ({
       const response = await queryFn()
 
       if (response?.success) {
-        // return toTree(response?.data || [])
-        return response?.data || []
+        return toTree(response?.data || [])
+        // return response?.data || []
       }
     },
     // queryFn: () => {},
@@ -43,22 +45,6 @@ const ChartWrapper = ({
       table: name,
       oldValues: item
     })
-  };
-
-  // onSelectAddHandler
-  const onAddItemHandler = async (item) => {
-    const response = await onClickAdd(item?.id);
-    if (response?.success) {
-      let defaultValues = {
-        code: response?.data?.nextChildCode,
-        parentId: response?.data?.parentId,
-        finalId: response?.data?.finalId,
-      };
-      handleDispatchForm({
-        table: name,
-        oldValues: defaultValues
-      })
-    }
   };
 
   // OnDeleteItemHandler

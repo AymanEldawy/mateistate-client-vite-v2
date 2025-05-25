@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleCountry = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_COUNTRY}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_COUNTRY}/${id}`);
 };
 
 export const getAllCountries = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_COUNTRY, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_COUNTRY);
 };
 
 export const createCountry = (data) => {

@@ -9,10 +9,8 @@ export const getSearchAccount = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}?search=${value}`);
 };
 
-export const getAllAccounts = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_ACCOUNT, {
-    signal,
-  });
+export const getAllAccounts = () => {
+  return http.get(API_URL_CONSTANTS.BASE_ACCOUNT);
 };
 
 export const createAccount = (data) => {

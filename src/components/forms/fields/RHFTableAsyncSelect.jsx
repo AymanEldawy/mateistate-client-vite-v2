@@ -14,6 +14,9 @@ const RHFTableAsyncSelect = ({
   ...field
 }) => {
 
+  console.log(getSearch,'getsearch');
+  
+
   const { control, watch, setValue } = useFormContext();
   const [defaultOption, setDefaultOption] = useState(null)
   const { name, optionValue, optionLabel, table } = field
@@ -68,9 +71,7 @@ const RHFTableAsyncSelect = ({
             name={name}
             defaultOption={defaultOption}
             setDefaultOption={setDefaultOption}
-            onChange={(option) => {
-              console.log(option, 'option');
-              
+            onChange={(option) => {              
               setDefaultOption(option);
               setValue(name, option?.[optionValue])
             }}

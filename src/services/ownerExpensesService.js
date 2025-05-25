@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleOwnerExpenses = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.OWNER_EXPENSES}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.OWNER_EXPENSES}/${id}`);
 };
 
 export const getAllOwnerExpenses = (signal) => {
-  return http.get(API_URL_CONSTANTS.OWNER_EXPENSES, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.OWNER_EXPENSES);
 };
 
 export const createOwnerExpenses = (data) => {

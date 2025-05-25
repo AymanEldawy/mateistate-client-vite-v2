@@ -1,6 +1,6 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import { ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
+import { ownerDefaultValue, ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
 import ownerColumns from "@/helpers/owner/ownerColumns";
 import OwnerForm from "@/components/forms/containers/owner/OwnerForm";
 import {
@@ -13,20 +13,9 @@ import {
 } from "@/services/ownerService";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
-const defaultValue = {
-  accountId: "",
-  name: "",
-  ltnname: "",
-  id_card: "",
-  cell_phone: "",
-  mailbox: "",
-  address: "",
-  nationality: "",
-};
-
 const ownerConfig = {
   formProps: {
-    defaultValue,
+    defaultValue: ownerDefaultValue,
     validationSchema: ownerValidationSchema,
     mutationAddFunction: createOwner,
     mutationUpdateFunction: updateOwner,

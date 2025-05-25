@@ -7,38 +7,32 @@ const LandForm = ({ tab }) => {
   const { t } = useTranslation();
   // todo: rethink this after client feedback
   const LandGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('basic_information')}</h5>
-      <RHFInput name="name" label="name" required />
-      <RHFInput name="type" label="type" type="number" />
-      <RHFInput name="landNo" label="land_number" />
-      <RHFInput name="lastName" label="last_name" />
-      <RHFInput name="number" label="number" required />
-      <RHFDatePicker name="date" label="date" type="date" />
+    <div className="grid grid-cols-2 gap-2">
+      <RHFInput name="name" label="Name" required />
+      {/* <RHFInput name="type" label="Type" type="number" /> */}
+      <RHFInput name="landNo" label="Land Number" />
+      <RHFInput name="lastName" label="Last Name" />
+      <RHFInput name="number" label="Number" required />
+      <RHFDatePicker name="date" label="Date" type="date" />
+      <RHFInput name="city" label="City" />
+      <RHFInput name="region" label="Region" />
+      <RHFInput name="space" label="Space" />
+      <RHFInput name="side" label="Side" />
+      <RHFInput name="streetCount" label="Street Count" type="number" />
+      <RHFInput name="streetName" label="Street Name" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location_details')}</h5>
-      <RHFInput name="city" label="city" />
-      <RHFInput name="region" label="region" />
-      <RHFInput name="space" label="space" />
-      <RHFInput name="side" label="side" />
-      <RHFInput name="streetCount" label="street_count" type="number" />
-      <RHFInput name="streetName" label="street_name" />
+      <RHFInput name="area" label="Area" type="number" />
+      <RHFInput name="areaUnit" label="Area Unit" />
+      <RHFInput name="landType" label="Land Type" type="number" />
+      <RHFInput name="landowner" label="Land Owner" type="number" />
+      <RHFInput name="buildble" label="Buildable" type="checkbox" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('property_details')}</h5>
-      <RHFInput name="area" label="area" type="number" />
-      <RHFInput name="areaUnit" label="area_unit" />
-      <RHFInput name="landType" label="land_type" type="number" />
-      <RHFInput name="landowner" label="land_owner" type="number" />
-      <RHFInput name="buildble" label="buildable" type="checkbox" />
+      <RHFInput name="licenseNo" label="License Number" />
+      <RHFInput name="license" label="License" />
+      <RHFDatePicker name="licenseDate" label="License Date" containerClassName="col-span-2" />
+      <RHFTextarea name="details" label="Details" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('license_information')}</h5>
-      <RHFInput name="licenseNo" label="license_number" />
-      <RHFInput name="license" label="license" />
-      <RHFDatePicker name="licenseDate" label="license_date" containerClassName="col-span-2" />
-      <RHFTextarea name="details" label="details" containerClassName="col-span-2" />
-
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('financial_information')}</h5>
-      <RHFInput name="beginLandValue" label="begin_land_value" type="number" />
+      <RHFInput name="beginLandValue" label="Begin Land Value" type="number" />
       <RHFAsyncSelectField
         table="currency"
         name="currencyBeginLandId"
@@ -79,8 +73,7 @@ const LandForm = ({ tab }) => {
         allowAdd
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('rental_information')}</h5>
-      <RHFInput name="rent" label="rent" type="number" />
+      <RHFInput name="rent" label="Rent" type="number" />
       <RHFAsyncSelectField
         table="currency"
         name="rentCurrencyId"
@@ -88,7 +81,6 @@ const LandForm = ({ tab }) => {
         allowAdd
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('references')}</h5>
       <RHFAsyncSelectField
         table="account"
         name="accountId"
@@ -124,7 +116,6 @@ const LandForm = ({ tab }) => {
         label="owner_account_id"
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Identity Information</h5>
       <RHFInput name="identityValue" label="Identity Value" type="number" />
       <RHFAsyncSelectField
         table="currency"
@@ -143,21 +134,19 @@ const LandForm = ({ tab }) => {
       />
       <RHFTextarea name="identityNote" label="identity_note" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">LTN Information</h5>
-      <RHFInput name="ltnname" label="ltn_name" />
-      <RHFInput name="ltnLandType" label="ltn_land_type" type="text" />
-      <RHFInput name="ltnCity" label="ltn_city" type="text" />
-      <RHFInput name="ltnRegion" label="ltn_region" type="text" />
-      <RHFInput name="ltnSpace" label="ltn_space" type="text" />
-      <RHFInput name="ltnLicense" label="ltn_license" type="text" />
-      <RHFInput name="ltnSide" label="ltn_side" type="text" />
+      <RHFInput name="ltnname" label="LTN Name" />
+      <RHFInput name="ltnLandType" label="LTN Land Type" type="text" />
+      <RHFInput name="ltnCity" label="LTN City" type="text" />
+      <RHFInput name="ltnRegion" label="LTN Region" type="text" />
+      <RHFInput name="ltnSpace" label="LTN Space" type="text" />
+      <RHFInput name="ltnLicense" label="LTN License" type="text" />
+      <RHFInput name="ltnSide" label="LTN Side" type="text" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Additional Settings</h5>
-      <RHFInput name="ban" label="ban" type="checkbox" />
-      <RHFInput name="commissionPercent" label="commission_percent" type="number" />
-      <RHFInput name="usedEndDate" label="used_end_date" type="checkbox" />
-      <RHFInput name="createEntryInvestment" label="create_entry_investment" type="checkbox" />
-    </FormFieldsGridContainer>
+      <RHFInput name="ban" label="Ban" type="checkbox" />
+      <RHFInput name="commissionPercent" label="Commission Percent" type="number" />
+      <RHFInput name="usedEndDate" label="Used End Date" type="checkbox" />
+      <RHFInput name="createEntryInvestment" label="Create Entry Investment" type="checkbox" />
+    </div>
   )
 
   const LandAccumulateFields = (
@@ -255,7 +244,7 @@ const LandForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[70lvh] overflow-auto min-w-[700px]">
       {renderFields()}
     </div>
   )

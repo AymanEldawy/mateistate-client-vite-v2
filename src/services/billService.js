@@ -6,9 +6,7 @@ export const getSingleBill = (id) => {
 };
 
 export const getAllBills = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_BILLS, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_BILLS);
 };
 
 export const createBill = (data) => {

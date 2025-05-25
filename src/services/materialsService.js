@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleMaterial = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/${id}`);
 };
 
 export const getAllMaterials = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_MATERIALS, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_MATERIALS);
 };
 
 export const createMaterial = (data) => {
@@ -43,4 +39,9 @@ export const deleteManyMaterial = (ids) => {
 
 export const getMaterialCode = (parentId) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/code=${parentId}`);
+};
+
+
+export const getSearchMaterials = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}?search=${value}`);
 };

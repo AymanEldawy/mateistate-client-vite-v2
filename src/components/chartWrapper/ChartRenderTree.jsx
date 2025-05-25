@@ -30,10 +30,10 @@ const ChartRenderTree = ({
         };
       });
   };
-
+    
   const displayTree = useCallback(
     (tree, level = 1) => {
-      return tree?.map((item) => {
+      return tree?.sort((a,b) => a?.code - b?.code)?.map((item) => {
         return (
           <>
             <ChartContextMenu
@@ -45,7 +45,7 @@ const ChartRenderTree = ({
             />
             <ContextMenuTrigger id={item?.id}>
               <li className="space-x-3 w-fit mt-2 mb-2 last:mb-0" key={item?.id}>
-                <div role="button" tabIndex="0" onClick={() => onSelectItemHandler(item)} className="flex capitalize cursor-pointer">
+                <div role="button" tabIndex="0" onClick={() => toggleOpen(item?.id, level)} className="flex capitalize cursor-pointer">
                   <div className="group options flex ltr:pl-8 rtl:pr-8 min-w-[190px] hover:text-black dark:hover:text-white dark:hover:bg-dark-bg dark:hover:border-dark-border hover:bg-gray-100 border-transparent rounded border hover:border-gray-300">
                     <ChartItemIcon item={item} level={level} open={open} />
                     <p className={`mx-2 ${item?.type && item?.type !== 1 ? 'text-blue-500' : ''}`}>{`${item?.code}-${item?.name}`}</p>

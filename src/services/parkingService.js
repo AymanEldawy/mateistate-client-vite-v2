@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleParking = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_PARKING}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_PARKING}/${id}`);
 };
 
 export const getAllParkings = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_PARKING, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_PARKING);
 };
 
 export const createParking = (data) => {

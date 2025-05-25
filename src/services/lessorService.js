@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleLessor = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_Lessor}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_Lessor}/${id}`);
 };
 
 export const getAllLessors = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_Lessor, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_Lessor);
 };
 
 export const createLessor = (data) => {

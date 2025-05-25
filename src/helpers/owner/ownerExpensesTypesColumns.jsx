@@ -33,7 +33,7 @@ const ownerExpensesTypesColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/owners?number=${row?.original?.number}`}
+          to={`/owner_expenses_types?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

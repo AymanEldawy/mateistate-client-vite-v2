@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleCostCenter = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}/${id}`);
 };
 
 export const getAllCostCenters = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_COST_CENTER, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_COST_CENTER);
 };
 
 export const createCostCenter = (data) => {

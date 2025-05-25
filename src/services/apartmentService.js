@@ -6,9 +6,7 @@ export const getSingleApartment = (id) => {
 };
 
 export const getAllApartments = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_APARTMENT, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_APARTMENT);
 };
 
 export const createApartment = (data) => {

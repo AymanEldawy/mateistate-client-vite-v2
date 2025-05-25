@@ -12,9 +12,7 @@ export const getSearchVoucherPattern = (value, signal) => {
 };
 
 export const getAllVoucherPatterns = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_VOUCHER_PATTERN, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_VOUCHER_PATTERN);
 };
 
 export const createVoucherPattern = (data) => {

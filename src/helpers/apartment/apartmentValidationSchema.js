@@ -116,7 +116,7 @@ const apartmentSchema = z.object({
   buildingId: VALIDATION.NON_EMPTY_STRING
 });
 
-export const apartmentValidationSchema = z.object({
+export const apartmentValidationSchema = () => z.object({
   apartment: apartmentSchema,
   apartmentAccumulators: z.array(apartmentAccumulatorSchema),
   apartmentRentalPrices: z.array(apartmentRentalPriceSchema),

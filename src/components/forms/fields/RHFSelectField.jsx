@@ -24,7 +24,7 @@ const RHFSelectField = ({
   ...field
 }) => {
   const { control } = useFormContext();
-  const { name, optionValue = "id", optionLabel = "name", required, options } = field
+  const { name, optionValue = "id", optionLabel = "name", required, options, value: defaultValue } = field
 
   return (
     <Controller
@@ -35,6 +35,8 @@ const RHFSelectField = ({
         field: { onChange, ref, value },
         fieldState: { error },
       }) => {
+        console.log(value, '---value');
+
         return (
           <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
             {label && (
@@ -51,7 +53,8 @@ const RHFSelectField = ({
                 getOptionValue={(option) => option?.[optionValue || 'id']}
                 styles={styles}
                 error={error}
-                value={options?.find(c => c?.[optionValue] === value)}
+                defaultValue={options?.find(c => c?.[optionValue] === (defaultValue || value))}
+                value={options?.find(c => c?.[optionValue] === (defaultValue || value))}
                 options={options}
                 selectClassName={selectClassName}
                 isDarkMode={isDarkMode}

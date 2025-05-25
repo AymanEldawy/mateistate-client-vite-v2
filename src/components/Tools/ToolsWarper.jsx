@@ -14,14 +14,14 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const calculateFlats = (building) => {
-  FLATS.apartment_count = building?.apartment_count * building?.apartment_floor;
-  FLATS.penthouse_count = building?.penthouse_count * building?.penthouse_floor;
-  FLATS.parking_count = building?.parking_count * building?.parking_floor;
-  FLATS.mezzanine_count = building?.mezzanine_count * building?.mezzanine_floor;
-  FLATS.office_count = building?.office_count * building?.office_floor;
-  FLATS.store_count = building?.store_count || 0;
-  FLATS.warehouse_count = building?.warehouse_count || 0;
-  FLATS.underground_parking = building?.underground_parking || 0;
+  FLATS.apartmentCount = building?.apartmentCount * building?.apartmentFloor;
+  FLATS.penthouseCount = building?.penthouseCount * building?.penthouseFloor;
+  FLATS.parkingCount = building?.parkingCount * building?.parkingFloor;
+  FLATS.mezzanineCount = building?.mezzanineCount * building?.mezzanineFloor;
+  FLATS.officeCount = building?.officeCount * building?.officeFloor;
+  FLATS.storeCount = building?.storeCount || 0;
+  FLATS.warehouseCount = building?.warehouseCount || 0;
+  FLATS.undergroundParking = building?.undergroundParking || 0;
 };
 
 const ToolsWarper = () => {
@@ -35,7 +35,6 @@ const ToolsWarper = () => {
     UNITS_COLORED_COUNT,
     setUNITS_COLORED_COUNT,
   } = useFlatColoring();
-  const [row, setRow] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -47,40 +46,121 @@ const ToolsWarper = () => {
   const [selectedTab, setSelectedTab] = useState(
     Object.values(FLAT_PROPERTY_TABS)?.[0]
   );
-  const getBuildingOwning = async (building) => {};
+
+  const getBuildingOwning = async (building) => { };
+
+  const { data: building } = useQuery({
+    queryKey: ["building", id],
+    queryFn: async () => {
+      const res = await getSingleBuilding(id);
+
+      return {
+        ...res,
+
+
+
+        "apartmentFloor": 4,
+
+        "mezzanineFloor": 5,
+
+        "officeFloor": 6,
+
+        "parkingFloor": 3,
+
+        "penthouseFloor": 3,
+
+        "undergroundParking": 4,
+
+        "apartmentCount": 4,
+
+        "bankAccountNumber": null,
+
+        "buildingBankAccountId": null,
+
+        "buildingCashAccountId": null,
+
+        "buildingChequeAccountId": null,
+
+        "buildingDepositAccountId": null,
+
+        "buildingDiscountAccountId": null,
+
+        "buildingInsuranceAccountId": null,
+
+        "buildingRevenueAccountId": null,
+
+        "commissionExpenseAccountId": null,
+
+        "customersMainAccountId": null,
+
+        "deferredVatAccountId": null,
+
+        "entryCommissionFromOwnerAccountId": null,
+
+        "entryLandlordAccountId": null,
+
+        "entryRevenueAccountId": null,
+
+        "entryVatAccountId": null,
+
+        "investmentOwnerAccountId": null,
+
+        "mezzanineCount": 3,
+
+        "officeCount": 4,
+
+        "ownerAccountId": null,
+
+        "ownerTaxAccountId": null,
+
+        "parkingCount": 2,
+
+        "penthouseCount": 2,
+
+        "realestateCompanyAccountId": null,
+
+        "receivedAccountId": null,
+
+        "shopCount": 3,
+
+        "storeCount": 3,
+
+        "supplierAccountId": null,
+
+        "vatAccountId": null,
+
+        "warehouseCount": 7
+
+      }
+    },
+    enabled: !!id
+  });
+
 
   const { refetch } = useQuery({
-    queryKey: ["property_values"],
+    queryKey: ["property_values", building?.id],
     queryFn: async () => {
-      const response = await getBuildingDetails(row?.id);
+      const response = await getBuildingDetails(building?.id);
       reset({
         grid: response?.result?.sort((a, b) => a?.row_index - b?.row_index),
       });
     },
-    enabled: !!row?.id
-  });
-  useQuery({
-    queryKey: ["building", id],
-    queryFn: async () => {
-      const res = await getSingleBuilding({ id });
-      setRow(res.result.at(0));
-    },
+    enabled: !!building?.id
   });
 
   useEffect(() => {
-    if (!row?.id) return;
-  }, [row?.id]);
+    if (!building?.id) return;
 
-  useEffect(() => {
-    calculateFlats(row);
-    getBuildingOwning(row);
+    calculateFlats(building);
+    getBuildingOwning(building);
     refetchBuildingAssets(
-      row?.id,
+      building?.id,
       setFlatsDetails,
       COLLECTION_COUNTS,
       setUNITS_COLORED_COUNT
     );
-  }, [row?.id]);
+  }, [building?.id]);
+
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => { });
@@ -96,7 +176,7 @@ const ToolsWarper = () => {
     const response = await generateBuildingUnits(
       grid,
       flatsDetails,
-      row,
+      building,
       UPDATES_ROWS
     );
 
@@ -104,7 +184,7 @@ const ToolsWarper = () => {
       setUPDATES_ROWS({});
       refetch();
       refetchBuildingAssets(
-        row?.id,
+        building?.id,
         setFlatsDetails,
         COLLECTION_COUNTS,
         setUNITS_COLORED_COUNT
@@ -112,6 +192,12 @@ const ToolsWarper = () => {
     }
     setIsLoading(false);
   };
+
+  console.log({
+    flatsDetails,
+    grid: watch("grid")
+  });
+  
 
   return (
     <>
@@ -123,11 +209,11 @@ const ToolsWarper = () => {
           title="Flat Building Details"
           description={
             <Link
-              to={`/building/${row?.number}`}
-              state={{ row, table: "building" }}
+              to={`/buildings?number=${building?.number}`}
+              state={{ row: building, table: "building" }}
               className="text-blue-500 dark:text-white hover:underline text-sm"
             >
-              Edit Building: {row?.name}
+              Edit Building: {building?.name}
             </Link>
           }
         >
@@ -160,12 +246,12 @@ const ToolsWarper = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="overflow-auto max-h-96">
-            <ToolsTabsTableForm errors={errors} row={row} />
+            <ToolsTabsTableForm errors={errors} row={building} />
           </div>
           <div className="mt-9 shadow border border-gray-300 dark:border-dark-border overflow-hidden">
             <div className="flex items-center overflow-auto text-left bg-gray-100 dark:bg-dark-bg ">
               {Object.values(FLAT_PROPERTY_TABS)?.map((tab, index) => {
-                if (row?.[tab?.x])
+                if (building?.[tab?.x])
                   return (
                     <button
                       type="button"
@@ -186,7 +272,7 @@ const ToolsWarper = () => {
                 flatsDetails={flatsDetails}
                 setFlatsDetails={setFlatsDetails}
                 selectedTab={selectedTab}
-                row={row}
+                row={building}
                 tab={FLAT_PROPERTY_TABS}
               />
             </div>

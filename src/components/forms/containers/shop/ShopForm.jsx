@@ -10,8 +10,7 @@ const ShopForm = ({ tab }) => {
   const { t } = useTranslation();
 
   const ShopGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location')}</h5>
+    <div className="grid grid-cols-2 gap-2">
       <RHFAsyncSelectField
         table="building"
         name="shop.buildingId"
@@ -25,8 +24,7 @@ const ShopForm = ({ tab }) => {
       <RHFInput name="shop.shopNo" label="shop_number" />
       <RHFTextarea name="shop.description" label="description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('details')}</h5>
-      <RHFColorPicker required={false} name="shop.hex" label="hex" containerClassName="col-span-2" />
+      <RHFColorPicker required={false} name="shop.hex" label="Hex" />
       <RHFSelectField
         label="property_type"
         name="shop.propertyType"
@@ -39,11 +37,11 @@ const ShopForm = ({ tab }) => {
         label="property_values"
         allowAdd
       />
-      <RHFInput name="shop.area" label="area" type="number" />
-      <RHFInput name="shop.areaUnit" label="area_unit" />
-      <RHFInput name="shop.view" label="view" containerClassName="col-span-2" />
-      <RHFInput name="shop.waterMeter" label="water_meter" />
-      <RHFInput name="shop.electricityMeter" label="electricity_meter" />
+      <RHFInput name="shop.area" label="Area" type="number" />
+      <RHFInput name="shop.areaUnit" label="Area Unit" />
+      <RHFInput name="shop.view" label="View" />
+      <RHFInput name="shop.waterMeter" label="Water Meter" />
+      <RHFInput name="shop.electricityMeter" label="Electricity Meter" />
       <RHFAsyncSelectField
         table="account"
         name="shop.customerId"
@@ -60,16 +58,14 @@ const ShopForm = ({ tab }) => {
         label="flat_owner"
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('licenses_documents')}</h5>
-      <RHFInput name="shop.license1" label="license1" />
-      <RHFInput name="shop.license2" label="license2" />
-      <RHFInput name="shop.unifiedNum" label="unified_number" />
-      <RHFInput name="shop.bondType" label="bond_type" />
-      <RHFInput name="shop.bondNo" label="bond_number" />
-      <RHFDatePicker name="shop.bondDate" label="bond_date" />
+      <RHFInput name="shop.license1" label="License 1" />
+      <RHFInput name="shop.license2" label="License 2" />
+      <RHFInput name="shop.unifiedNum" label="Unified Number" />
+      <RHFInput name="shop.bondType" label="Bond Type" />
+      <RHFInput name="shop.bondNo" label="Bond Number" />
+      <RHFDatePicker name="shop.bondDate" label="Bond Date" />
 
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('cost_centers')}</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="shop.mainCostCenterId"
@@ -83,8 +79,8 @@ const ShopForm = ({ tab }) => {
         allowAdd
       />
 
-      <RHFTextarea name="shop.note" label="note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
+      <RHFTextarea name="shop.note" label="Note" containerClassName="col-span-2" />
+    </div>
   )
 
   const ShopFixedAssetsFields = (
@@ -223,7 +219,7 @@ const ShopForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] overflow-auto max-h-[75vh] min-w-[70%]">
       {renderFields()}
     </div>
   )

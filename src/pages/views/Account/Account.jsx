@@ -29,15 +29,20 @@ const Account = ({
   outerClose,
   defaultNumber,
   defaultCode,
+  popupFormConfig
 }) => {
 
+  console.log(popupFormConfig,'popupFormConfig');
+  
   if (formOnly) {
     return (
       <FormWrapper
         {...accountConfig}
+        name="account"
         outerClose={outerClose}
         numberSearchParam={defaultNumber}
         codeSearchParam={defaultCode}
+        oldValues={popupFormConfig?.oldValues}
       />
     )
   }

@@ -36,10 +36,11 @@ const PaperLayout = ({
   const [globalFilter, setGlobalFilter] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [openConfirmation, setOpenConfirmation] = useState(false);
+  const [pageCount, setPageCount] = useState(1);
   const [rowSelection, setRowSelection] = useState([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 50,
+    pageSize: 100,
   });
 
   useEffect(() => {
@@ -60,17 +61,20 @@ const PaperLayout = ({
         columnFilters,
         globalFilter,
       )
-
       if (response?.success) {
         setPagination(prev => ({
           ...prev,
-          pageSize: response?.pages
+          pageIndex: response?.pages
         }))
+        setPageCount(response?.pages)
         return response?.data
       }
     },
     // queryFn: () => {},
   });
+  console.log(data, '---called data  ');
+
+
 
   const onDeleteSelected = async () => {
     const response = handleDeleteSelected(Object.keys(rowSelection))
@@ -106,6 +110,7 @@ const PaperLayout = ({
           number={numberSearchParam}
           findAll={queryFn}
           name={name}
+          refetch={refetch}
         />
       </PaperModal>
       <div className="bg-[#fff] shadow p-2 container-full rounded-md mt-4 relative">
@@ -142,6 +147,7 @@ const PaperLayout = ({
             globalFilter={globalFilter}
             setOpenViability={setOpenViability}
             openViability={openViability}
+            pageCount={pageCount}
           />
         </div>
       </div>

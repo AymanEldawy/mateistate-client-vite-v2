@@ -15,7 +15,6 @@ const OwnerExpensesForm = () => {
         <RHFInput
           label="receiptNumber"
           name={`ownerExpense.receiptNumber`}
-          type="number"
         />
         <RHFAsyncSelectField
           label="buildingId"
@@ -66,7 +65,6 @@ const OwnerExpensesForm = () => {
             <td>
               <RHFTableInput
                 name={`expenseDetails.${index}.receiptNumber`}
-                type="number"
               />
             </td>
           </>

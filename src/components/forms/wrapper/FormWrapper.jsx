@@ -1,7 +1,7 @@
 
 
 import { FormProvider, set, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -29,8 +29,9 @@ const FormWrapper = ({
   name,
   numberSearchParam,
   codeSearchParam,
+  oldValues,
+  refetch
 }) => {
-
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -38,19 +39,20 @@ const FormWrapper = ({
   const { t: tToast } = useTranslation("toastMessages");
   const paginationForm = useFormPagination({
     name,
-    numberSearchParam,
-    codeSearchParam,
+    number: numberSearchParam,
+    code: codeSearchParam,
   })
   const [open, setOpen] = useState(false)
   const isUpdate = true
   const id = paginationForm?.currentId || ''
 
+
   const { data: oldData } = useQuery({
     queryKey: [queryKey, 'single', id],
     queryFn: async () => {
+      if (!id) return;
       const response = await formProps?.getSingleFunction(id)
       if (response?.success) {
-        // reset(response?.data)
         reset(response)
         return response
       } else {
@@ -81,7 +83,6 @@ const FormWrapper = ({
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
-      console.log("🚀 ~ call update:", oldData)
       if (oldData?.id) {
         return formProps?.mutationUpdateFunction(oldData?.id, data)
       } else {
@@ -104,6 +105,13 @@ const FormWrapper = ({
     },
   });
 
+  useEffect(() => {
+    if (oldValues) {
+      console.log(oldValues, '--oldValues--');
+
+      reset(oldValues)
+    }
+  }, [oldValues])
 
   // const handleSubmitErrors = useHandleSubmissionErrors({
   //   errors,
@@ -131,22 +139,20 @@ const FormWrapper = ({
   const resetFormHandler = () => reset(defaultValue);
 
   const handleOnClose = () => {
-    setOpen(true)
+    setOpen(true);
+
   }
 
   const handleDelete = async () => {
     try {
-      const response = await formProps?.onHandleDelete(oldData?.id)
+      const response = await formProps?.onHandleDelete(id)
       if (response?.success) {
         toast.success(tToast('successDelete'))
-        queryClient.invalidateQueries();
-        if (invalidateQueryKeyOnSuccess) {
-          queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
-        }
-        onSuccessAction?.(response?.data);
+        if (refetch) refetch()
         onClose()
       }
     } catch (error) {
+      toast.error(tToast('failedDelete'))
       console.log(error);
     }
   }
@@ -179,7 +185,7 @@ const FormWrapper = ({
         >
           <FormHeader {...formHeaderProps} onClose={handleOnClose} />
           {formProps?.isSteps ?
-            <FormStepsLayout tab={tab} setTab={setTab} formSidebarProps={formSidebarProps}  {...formProps} /> : <FormSingularLayout {...formProps} />
+            <FormStepsLayout tab={tab} setTab={setTab} formSidebarProps={formSidebarProps}  {...formProps} paginationForm={paginationForm} /> : <FormSingularLayout {...formProps} paginationForm={paginationForm} />
           }
           <FormFooter
             resetFormHandler={resetFormHandler}

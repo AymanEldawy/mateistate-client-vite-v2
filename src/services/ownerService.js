@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleOwner = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_owner}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_owner}/${id}`);
 };
 
 export const getAllOwners = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_owner, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_owner);
 };
 
 export const createOwner = (data) => {

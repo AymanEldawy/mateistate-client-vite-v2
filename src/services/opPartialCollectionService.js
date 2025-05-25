@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSinglePartial = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/${id}`);
 };
 
 export const getAllPartials = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION);
 };
 
 export const createPartial = (data) => {

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import FormSidebar from "./FormSidebar"
 
-const FormStepsLayout = ({ RenderForm, formSidebarProps, tab, setTab }) => {
+const FormStepsLayout = ({ RenderForm, formSidebarProps, tab, setTab, paginationForm }) => {
   return (
     <div className="flex">
-      <FormSidebar {...formSidebarProps} tab={tab} setTab={setTab} />
+      <FormSidebar {...formSidebarProps} tab={tab} setTab={setTab} {...paginationForm} />
       <div className="p-4">
-        <RenderForm tab={tab} setTab={setTab} />
+        <RenderForm tab={tab} setTab={setTab} {...paginationForm} />
       </div>
     </div>
   )

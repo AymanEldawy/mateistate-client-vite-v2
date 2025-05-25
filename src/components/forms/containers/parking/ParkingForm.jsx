@@ -13,8 +13,7 @@ const ParkingForm = ({ tab }) => {
   const { t } = useTranslation();
 
   const ParkingGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('location')}</h5>
+    <div className="grid grid-cols-2 gap-2">
       <RHFSelectField
         label="parking_kind"
         name="parking.parkingKind"
@@ -35,14 +34,13 @@ const ParkingForm = ({ tab }) => {
       <RHFInput name="parking.areaUnit" label="area_unit" />
       <RHFTextarea name="parking.description" label="description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('details')}</h5>
-      <RHFColorPicker name="parking.hex" label="hex" />
+      <RHFColorPicker name="parking.hex" label="Hex" />
       <RHFAsyncSelectField
         table="account"
         name="parking.customerId"
         label="customer"
         allowAdd
-        containerClassName="col-span-2"
+        // containerClassName="col-span-2"
       />
       <RHFSelectField
         label="property_type"
@@ -54,9 +52,8 @@ const ParkingForm = ({ tab }) => {
         name="parking.propertyValuesId"
         label="property_values"
       />
-      <RHFInput name="parking.view" label="view" containerClassName="col-span-2" />
+      <RHFInput name="parking.view" label="View" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">{t('cost')}</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="parking.mainCostCenterId"
@@ -83,8 +80,8 @@ const ParkingForm = ({ tab }) => {
         label="flat_owner"
         allowAdd
       />
-      <RHFTextarea name="parking.note" label="note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
+      <RHFTextarea name="parking.note" label="Note" containerClassName="col-span-2" />
+    </div>
   )
   const ParkingPicturesFields = (
     <div key="parkingPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
@@ -190,7 +187,7 @@ const ParkingForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-auto min-w-[70%]">
       {renderFields()}
     </div>
   )

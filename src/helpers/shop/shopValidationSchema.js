@@ -38,40 +38,40 @@ export const shopDefaultValue = {
   },
   shopPictures: {},
   shopAccomulators: [
-    {
-      accumulatorName: "",
-      lastReading: 0,
-      currentReading: 0,
-      unit: "",
-      date: null
-    }
+    // {
+    //   accumulatorName: "",
+    //   lastReading: 0,
+    //   currentReading: 0,
+    //   unit: "",
+    //   date: null
+    // }
   ],
   shopFixedAssets: [
-    {
-      fixedAssetName: "",
-      fixedAssetValue: 0,
-      currencyId: "",
-      description: "",
-      date: null
-    }
+    // {
+    //   fixedAssetName: "",
+    //   fixedAssetValue: 0,
+    //   currencyId: "",
+    //   description: "",
+    //   date: null
+    // }
   ],
   shopRentalPrices: [
-    {
-      rentalPrice: 0,
-      currencyId: "",
-      startDate: null,
-      endDate: null,
-      priceType: 0,
-      // interval: null
-    }
+    // {
+    //   rentalPrice: 0,
+    //   currencyId: "",
+    //   startDate: null,
+    //   endDate: null,
+    //   priceType: 0,
+    //   // interval: null
+    // }
   ],
   shopSellingPrices: [
-    {
-      sellingPrice: 0,
-      currencyId: "",
-      date: null,
-      priceType: 0
-    }
+    // {
+    //   sellingPrice: 0,
+    //   currencyId: "",
+    //   date: null,
+    //   priceType: 0
+    // }
   ],
 }
 
@@ -105,6 +105,7 @@ export const shopValidationSchema = () => z.object({
     shopKind: z.number().min(0).max(3).default(0),
     code: z.number().default(0),
     blocked: z.boolean().default(false),
+    buildingId: z.string().uuid(),
   }),
   shopPictures: z.object({}).optional(),
   shopAccomulators: z.array(

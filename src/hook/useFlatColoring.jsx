@@ -36,7 +36,7 @@ const calculateRoomCount = (collections, setRoomCounts) => {
 
 export const FlatColoringProvider = ({ children }) => {
   const [hex, setHex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const [flatsDetails, setFlatsDetails] = useState({});
   const [canInsertColor, setCanInsertColor] = useState(false);
   const [roomCounts, setRoomCounts] = useState({});
@@ -52,7 +52,7 @@ export const FlatColoringProvider = ({ children }) => {
 
   // select color
   const onSelectColor = (rowIndex, hexValue) => {
-    setSelectedColor(rowIndex);
+    setSelectedIndex(rowIndex);
     setHex(hexValue);
     setCanInsertColor(true);
   };
@@ -63,7 +63,7 @@ export const FlatColoringProvider = ({ children }) => {
   }, []);
 
   const onPreventColor = () => {
-    setSelectedColor("");
+    setSelectedIndex("");
     setHex("");
     setCanInsertColor(false);
   };
@@ -130,9 +130,9 @@ export const FlatColoringProvider = ({ children }) => {
           ...prevData,
           ...rest,
           hex: hex,
-          row_index: selectedColor,
+          row_index: selectedIndex,
           asset_hash: indexHash,
-          // floor_no: selectedColor + 1,
+          // floor_no: selectedIndex + 1,
         },
       },
     }));
@@ -180,7 +180,7 @@ export const FlatColoringProvider = ({ children }) => {
       value={{
         flatsDetails,
         setFlatsDetails,
-        selectedColor,
+        selectedIndex,
         onSelectColor,
         onPreventColor,
         canInsertColor,
