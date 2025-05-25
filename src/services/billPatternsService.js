@@ -6,9 +6,7 @@ export const getSingleBillPattern = (id) => {
 };
 
 export const getAllBillPatterns = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_BILL_PATTERN, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_BILL_PATTERN);
 };
 
 export const createBillPattern = (data) => {

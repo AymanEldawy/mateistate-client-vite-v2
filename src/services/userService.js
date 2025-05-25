@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleUser = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_USER}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_USER}/${id}`);
 };
 
 export const getAllUsers = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_USER, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_USER);
 };
 
 export const createUser = (data) => {
@@ -43,4 +39,9 @@ export const deleteManyUsers = (ids) => {
   return http.post(
     `${API_URL_CONSTANTS.BASE_USER}/bulk-delete`, ids
   );
+};
+
+
+export const getSearchUser = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_USER}/?search=${value}`);
 };

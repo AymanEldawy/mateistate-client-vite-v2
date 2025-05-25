@@ -6,9 +6,7 @@ export const getSingleContractPattern = (id) => {
 };
 
 export const getAllContractPatterns = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_CONTRACT_PATTERN, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_CONTRACT_PATTERN);
 };
 
 export const createContractPattern = (data) => {

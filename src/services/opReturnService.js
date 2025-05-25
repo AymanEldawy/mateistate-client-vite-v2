@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleReturn = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_RETURN}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_RETURN}/${id}`);
 };
 
 export const getAllReturns = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_RETURN, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_RETURN);
 };
 
 export const createReturn = (data) => {

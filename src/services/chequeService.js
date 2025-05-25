@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleCheque = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${id}`);
 };
 
 export const getAllCheques = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_CHEQUE, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_CHEQUE);
 };
 
 export const createCheque = (data) => {

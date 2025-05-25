@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleMaterialGroup = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/${id}`);
 };
 
 export const getAllMaterialGroups = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_MATERIAL_GROUPS, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_MATERIAL_GROUPS);
 };
 
 export const createMaterialGroup = (data) => {

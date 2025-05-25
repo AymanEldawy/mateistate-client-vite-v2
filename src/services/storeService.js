@@ -6,9 +6,7 @@ export const getSingleStore = (id) => {
 };
 
 export const getAllStores = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_STORE, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_STORE);
 };
 
 export const createStore = (data) => {
@@ -41,6 +39,11 @@ export const deleteManyStores = (ids) => {
 
 export const getStoreCode = (parentId) => {
   return http.get(`${API_URL_CONSTANTS.BASE_STORE}/code=${parentId}`);
+};
+
+
+export const getSearchStore= (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_STORE}/?search=${value}`);
 };
 
 export const getStoreReceivable = (buildingId) => {

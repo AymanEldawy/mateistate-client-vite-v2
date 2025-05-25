@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleVoucher = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`);
 };
 
 export const getAllVouchers = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_VOUCHER, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_VOUCHER);
 };
 
 export const createVoucher = (data) => {

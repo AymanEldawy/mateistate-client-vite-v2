@@ -6,9 +6,7 @@ export const getSingleBank = (id) => {
 };
 
 export const getAllBanks = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_BANK, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_BANK);
 };
 
 export const createBank = (data) => {

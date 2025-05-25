@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleService = (id, signal) => {
-    return http.get(`${API_URL_CONSTANTS.BASE_SERVICE}/${id}`, {
-        signal,
-    });
+    return http.get(`${API_URL_CONSTANTS.BASE_SERVICE}/${id}`);
 };
 
 export const getAllServices = (signal) => {
-    return http.get(API_URL_CONSTANTS.BASE_SERVICE, {
-        signal,
-    });
+    return http.get(API_URL_CONSTANTS.BASE_SERVICE);
 };
 
 export const createService = (data) => {

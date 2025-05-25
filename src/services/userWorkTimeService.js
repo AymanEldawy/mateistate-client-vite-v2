@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleUserWorkTime = (id, signal) => {
-    return http.get(`${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/${id}`, {
-        signal,
-    });
+    return http.get(`${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/${id}`);
 };
 
 export const getAllUserWorkTimes = (signal) => {
-    return http.get(API_URL_CONSTANTS.BASE_USER_WORK_TIME, {
-        signal,
-    });
+    return http.get(API_URL_CONSTANTS.BASE_USER_WORK_TIME);
 };
 
 export const createUserWorkTime = (data) => {

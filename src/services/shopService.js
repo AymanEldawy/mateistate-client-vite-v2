@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleShop = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_SHOP}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_SHOP}/${id}`);
 };
 
 export const getAllShops = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_SHOP, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_SHOP);
 };
 
 export const createShop = (data) => {
@@ -42,5 +38,12 @@ export const deleteShop = (id) => {
 export const deleteManyShops = (ids) => {
   return http.post(
     `${API_URL_CONSTANTS.BASE_SHOP}/bulk-delete`, ids
+  );
+};
+
+
+export const getSearchShop = (value) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_SHOP}?search=${value}`
   );
 };

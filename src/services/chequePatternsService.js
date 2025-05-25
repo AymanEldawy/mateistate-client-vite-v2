@@ -6,9 +6,7 @@ export const getSingleChequePattern = (id) => {
 };
 
 export const getAllChequePatterns = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_CHEQUE_PATTERN, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_CHEQUE_PATTERN);
 };
 
 export const createChequePattern = (data) => {

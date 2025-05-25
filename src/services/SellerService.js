@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleSeller = (id, signal) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_SELLER}/${id}`, {
-    signal,
-  });
+  return http.get(`${API_URL_CONSTANTS.BASE_SELLER}/${id}`);
 };
 
 export const getAllSellers = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_SELLER, {
-    signal,
-  });
+  return http.get(API_URL_CONSTANTS.BASE_SELLER);
 };
 
 export const createSeller = (data) => {

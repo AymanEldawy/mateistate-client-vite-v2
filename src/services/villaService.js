@@ -2,15 +2,11 @@ import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
 export const getSingleVilla = (id, signal) => {
-    return http.get(`${API_URL_CONSTANTS.BASE_VILLA}/${id}`, {
-        signal,
-    });
+    return http.get(`${API_URL_CONSTANTS.BASE_VILLA}/${id}`);
 };
 
 export const getAllVillas = (signal) => {
-    return http.get(API_URL_CONSTANTS.BASE_VILLA, {
-        signal,
-    });
+    return http.get(API_URL_CONSTANTS.BASE_VILLA);
 };
 
 export const createVilla = (data) => {
