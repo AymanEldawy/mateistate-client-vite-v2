@@ -206,6 +206,11 @@ export const BILL_STEPS = {
   bill_material_details: "bill_material_details",
 };
 
+export const VOUCHER_STEPS = {
+  voucher_general: "voucher_general",
+  voucher_grid: "voucher_grid", 
+  voucher_pictures: "voucher_pictures"
+};
 
 export const GET_NEW_ENTRY_GRID = () => {
   return Array(2)

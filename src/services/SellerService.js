@@ -5,6 +5,12 @@ export const getSingleSeller = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_SELLER}/${id}`);
 };
 
+export const getSearchSeller = (value, signal) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_SELLER}?search=${value}`, {
+    signal,
+  });
+};
+
 export const getAllSellers = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_SELLER);
 };

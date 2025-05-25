@@ -1,7 +1,7 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import { createCheque, deleteCheque, deleteManyCheques, getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
+import { createCheque, deleteCheque,  getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
 import chequeColumns from '@/helpers/cheque/chequeColumns'
 import { lazy, useState } from 'react'
 import EntryBar from '@/components/shared/EntryBar'
@@ -13,7 +13,6 @@ import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import { chequeDefaultValue, chequeValidationSchema } from '@/helpers/cheque/ChequeValidationSchema'
-// import QUERY_KEYS from './../../../data/queryKeys';
 const ChequeForm = lazy(() => import("@/components/forms/containers/cheque/ChequeForm"))
 
 const chequeConfig = {
@@ -89,7 +88,7 @@ const Cheque = ({ formOnly, outerClose, }) => {
         name="cheque"
         queryKey={QUERY_KEYS.CHEQUE}
         queryFn={getAllCheques}
-        handleDeleteSelected={deleteManyCheques}
+        // handleDeleteSelected={deleteManyCheques}
         paperHeaderProps={{
           header: "cheque"
         }}

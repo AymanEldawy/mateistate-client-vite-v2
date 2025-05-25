@@ -4,6 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getChequePatternByCode } from "@/services/chequeService";
 import ChequeFormBar from "./ChequeFormBar";
+import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
+import { getSearchBank, getSingleBank } from "@/services/bankService";
+import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
+import { getSearchChequePattern, getSingleChequePattern } from "@/services/chequePatternsService";
+import { getSearchAccount, getSingleAccount } from "@/services/accountService";
+// import { getSearchParking, getSingleParking } from "@/services/parkingService";
+// import { getAccountSearch, getSingleAccount } from "@/services/accountService";
+// import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
+// import { getSearchBank, getSingleBank } from "@/services/bankService";
 
 const mergePatternWithChequeData = (pattern, watch, setValue) => {
 
@@ -33,106 +42,47 @@ const ChequeForm = ({ code }) => {
   })
 
   return (
-    <>
-      <div className="relative p-4">
-        <div className="grid gap-y-2 gap-x-8 grid-cols-3">
-          <div className="flex flex-col gap-2">
-            <RHFInput name="internalNumber" label="internalNumber" />
-            <RHFInputAmount name="amount" label="amount" required />
-            <RHFAsyncSelectField
-              name="customerId"
-              label="customerId"
-            />
-            <RHFInput
-              name="beneficiaryName"
-              label="beneficiaryName"
-            />
-            {/* <UniqueFieldGroup values={watch()} onSelectContract={onSelectContract} /> */}
-            {watch('parking_id') ?
-              <RHFAsyncSelectField
-                name="parkingId"
-                label="parkingId"
-                required
-              />
-              : null}
-            {watch('shop_id') ?
-              <RHFAsyncSelectField
-                name="shopId"
-                label="shopId"
-                required
-              />
-              : null}
-            {watch('apartment_id') ?
-              <RHFAsyncSelectField
-                name="apartmentId"
-                label="apartmentId"
-                required
-              />
-              : null}
-
-          </div>
-          <div className="flex flex-col gap-2">
-
-            {[
-              "account_id",
-              "cost_center_id",
-              "observe_account_id",
-              "observe_cost_center_id",
-            ]?.map((field) => {
-              let name = field?.replace(/observe_|_id/g, "");
-              return (
-                <RHFAsyncSelectField
-                  key={field}
-                  name={field}
-                  label={field}
-                  table={name}
-                  required={field !== "observe_cost_center_id"}
-                />
-              );
-            })}
-            <RHFAsyncSelectField
-              name="bankId"
-              label="bankId"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            {/* <CurrencyFieldGroup
-              values={watch()}
-            /> */}
-            <RHFDatePicker name="createdAt" label="createdAt" />
-            <RHFCheckbox name="withoutDueDate" label="withoutDueDate" />
-            {
-              watch('withoutDueDate') ? null :
-                (
-                  <>
-                    <RHFDatePicker
-                      name="dueDate"
-                      label="dueDate"
-                      required={!watch('withoutDueDate')}
-                    />
-                    <RHFDatePicker
-                      name="endDueDate"
-                      label="endDueDate"
-                    />
-                  </>
-                )
-            }
-            <RHFCheckbox name="depositStatus" label="depositStatus" />
-          </div>
-        </div>
-        <div className=" grid gap-y-3 gap-x-8 grid-cols-2 mt-4">
-          <RHFTextarea
-            name="note1"
-            label="note1"
-          />
-          <RHFTextarea
-            name="note2"
-            label="note2"
-          />
-        </div>
-        <ChequeFormBar pattern={pattern} />
-      </div>
-    </>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
+      <RHFInput name="type" label="type" type="number" required />
+      <RHFAsyncSelectField
+        getSearch={getSearchCurrency}
+        getSingle={getSingleCurrency}
+        table="currency" name="currencyId" label="currency" required />
+      <RHFAsyncSelectField
+        getSearch={getSearchCurrency}
+        getSingle={getSingleCurrency}
+        table="seller" name="sellerId" label="seller" />
+      <RHFAsyncSelectField
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+        table="account" name="accountId" label="account" required />
+      <RHFAsyncSelectField
+        getSearch={getSearchAccount}
+        getSingle={getSingleAccount}
+        table="account" name="observeAccountId" label="observe_account" />
+      <RHFAsyncSelectField
+        getSearch={getSearchChequePattern}
+        getSingle={getSingleChequePattern}
+        table="pattern" name="patternId" label="pattern" />
+      <RHFInput name="note" label="note" />
+      <RHFInput name="code" label="code" type="number"  />
+      <RHFInput name="amount" label="amount" type="number" required />
+      <RHFInput name="currencyVal" label="currency_value" type="number" />
+      <RHFInput name="beneficiaryName" label="beneficiary_name" />
+      <RHFAsyncSelectField
+        getSearch={getSearchCostCenter}
+        getSingle={getSingleCostCenter}
+        table="costCenter" name="costCenterId" label="cost_center" />
+      <RHFAsyncSelectField
+        getSearch={getSearchCostCenter}
+        getSingle={getSingleCostCenter}
+        table="costCenter" name="observeCostCenterId" label="observe_cost_center" />
+      <RHFAsyncSelectField
+        getSearch={getSearchBank}
+        getSingle={getSingleBank}
+        table="bank" name="bankId" label="bank" />
+      <RHFDatePicker name="date" label="date" />
+    </div>
   );
 }
 

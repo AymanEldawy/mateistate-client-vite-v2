@@ -5,8 +5,14 @@ export const getSingleCurrency = (id) => {
     return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`);
 };
 
-export const getAllCurrencies = () => {
-    return http.get(API_URL_CONSTANTS.BASE_CURRENCY);
+export const getSearchCurrency = (value) => {
+    return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}?search=${value}`);
+};
+
+export const getAllCurrencies = (signal) => {
+    return http.get(API_URL_CONSTANTS.BASE_CURRENCY, {
+        signal,
+    });
 };
 
 export const createCurrency = (data) => {

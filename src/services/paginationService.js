@@ -19,5 +19,4 @@ export const getFirstOne = async (entity, code, chequeId) => {
 
 export const getLastOne = async (entity, code, chequeId) => {
   return http.post(`/pagination/last-one`, { entity, code, chequeId });
-};
-
+}

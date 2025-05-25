@@ -5,6 +5,10 @@ export const getSingleBank = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BANK}/${id}`);
 };
 
+export const getSearchBank = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BANK}?search=${value}`);
+};
+
 export const getAllBanks = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_BANK);
 };

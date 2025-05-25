@@ -1,7 +1,7 @@
 import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
 
-export const getSingleVoucher = (id, signal) => {
+export const getSingleVoucher = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`);
 };
 
@@ -10,38 +10,29 @@ export const getAllVouchers = (signal) => {
 };
 
 export const createVoucher = (data) => {
-  return http.post(API_URL_CONSTANTS.BASE_VOUCHER, data, {
-    // headers: {
-    //   "Content-Type": "multipart/form-data",
-    // },
-  });
+  return http.post(API_URL_CONSTANTS.BASE_VOUCHER, data);
 };
 
-export const updateVoucher = (country_id, data) => {
-  return http.patch(
-    `${API_URL_CONSTANTS.BASE_VOUCHER}/${country_id}`,
-    data,
-    // {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // }
-  );
+export const createVoucherWithDetails = (data) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_VOUCHER}/with-details`, data);
 };
 
-export const deleteVoucher = (id) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`
-  );
+export const updateVoucher = (id, data) => {
+  return http.put(`${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`, data);
 };
 
-export const deleteManyVouchers = (ids) => {
-  return http.post(
-    `${API_URL_CONSTANTS.BASE_VOUCHER}/bulk-delete`, ids
-  );
+export const createVoucherGridEntry = (voucherId, data) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_VOUCHER}/${voucherId}/grid`, data);
 };
 
-
-export const getSearchVoucher = (value) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${value}`);
+export const getVoucherGridEntries = (voucherId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${voucherId}/grid`);
 };
+
+export const createVoucherPictures = (voucherId, data) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_VOUCHER}/${voucherId}/pictures`, data);
+};
+
+export const getVoucherPictures = (voucherId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${voucherId}/pictures`);
+}; 

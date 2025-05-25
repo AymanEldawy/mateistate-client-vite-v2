@@ -5,6 +5,10 @@ export const getSingleAccount = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}/${id}`);
 };
 
+export const getSearchAccount = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}?search=${value}`);
+};
+
 export const getAllAccounts = () => {
   return http.get(API_URL_CONSTANTS.BASE_ACCOUNT);
 };

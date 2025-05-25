@@ -1,5 +1,4 @@
 import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox";
-import { BILL_PATTERN_BILL_TYPE } from "../DEFAULT_OPTIONS";
 import { Link } from "react-router-dom";
 
 const billColumns = [
@@ -28,54 +27,62 @@ const billColumns = [
     ),
   },
   {
-    size: 40,
-    header: "no",
+    header: "created_at",
+    accessorKey: "createdAt",
+    cell: ({ getValue }) => (
+      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+    ),
+  },
+  {
+    header: "number",
     accessorKey: "number",
-    cell: ({ getValue, row }) => {
-      let type = BILL_PATTERN_BILL_TYPE?.find(
-        (c) => c?.id === row?.original.code
-      );
-      return (
-        <Link
-          to={`/bill/${row?.original.code}s?number=${row?.original?.number}`}
-          className="text-blue-500 font-medium hover:underline"
-        >
-          # {getValue()}
-        </Link>
-      );
-    },
+    cell: ({ getValue, row }) => (
+      <Link
+        to={`/bills?number=${row?.original?.number}`}
+        className="text-blue-500 font-medium hover:underline"
+      >
+        # {getValue()}
+      </Link>
+    ),
   },
-  { header: "bill_date", accessorKey: "bill_date" },
   {
-    header: "code",
-    accessorKey: "code",
-    cell: ({ getValue }) => {
-      let type = BILL_PATTERN_BILL_TYPE?.find(
-        (c) => c?.id === getValue()
-      );
-      return <span>{type?.name}</span>;
-    },
+    header: "issue_date",
+    accessorKey: "issueDate",
+    cell: ({ getValue }) => (
+      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+    ),
   },
-  { header: "note", accessorKey: "note" },
   {
-    header: "barcode_bill",
-    accessorKey: "barcode_bill",
+    header: "bill_date",
+    accessorKey: "billDate",
+    cell: ({ getValue }) => (
+      <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
+    ),
   },
-
-  { header: "total_quantities", accessorKey: "total_quantities" },
-  { header: "refunded_taxable_amount", accessorKey: "refunded_taxable_amount" },
-  {
-    header: "non_refunded_taxable_amount",
-    accessorKey: "non_refunded_taxable_amount",
+  { header: "bill_kind", accessorKey: "billKind" },
+  { header: "kind", accessorKey: "kind" },
+  { header: "payment_method", accessorKey: "paymentMethod" },
+  { header: "receipt_number", accessorKey: "receiptNumber" },
+  { header: "total_quantities", accessorKey: "totalQuantities" },
+  { 
+    header: "total", 
+    accessorKey: "total",
+    cell: ({ getValue }) => (
+      <span className="font-medium">${getValue()?.toFixed(2)}</span>
+    )
   },
-  { header: "not_taxable", accessorKey: "not_taxable" },
-  { header: "taxable", accessorKey: "taxable" },
+  { 
+    header: "grand_total", 
+    accessorKey: "grandTotal",
+    cell: ({ getValue }) => (
+      <span className="font-bold text-green-600">${getValue()?.toFixed(2)}</span>
+    )
+  },
   { header: "discounts", accessorKey: "discounts" },
-  { header: "discounts_extra", accessorKey: "discounts_extra" },
-  { header: "non_refundable_vat", accessorKey: "non_refundable_vat" },
-  { header: "non_refundable_vat2", accessorKey: "non_refundable_vat2" },
-  { header: "total", accessorKey: "total" },
-  { header: "grand_total", accessorKey: "grand_total" },
+  { header: "vat_amount", accessorKey: "vatAmount" },
   { header: "net", accessorKey: "net" },
+  { header: "note", accessorKey: "note" },
+  { header: "code", accessorKey: "code" },
 ];
-export default billColumns
+
+export default billColumns;
