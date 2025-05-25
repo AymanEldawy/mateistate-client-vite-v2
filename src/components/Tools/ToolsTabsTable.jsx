@@ -73,7 +73,7 @@ export const ToolsTabsTable = ({
           >
             <tr>
               {canInsertColor ? (
-                <th className="px-4 py-2 border border-gray-400 min-w-[20px]"></th>
+                <th className="px-4 py-2 border border-gray-400 min-w-[20px]">#</th>
               ) : null}
               {Array(selectedTab?.y ? yCount : xCount)
                 .fill(0)
