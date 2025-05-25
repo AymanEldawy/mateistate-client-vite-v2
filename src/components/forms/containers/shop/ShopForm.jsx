@@ -24,7 +24,7 @@ const ShopForm = ({ tab }) => {
       <RHFInput name="shop.shopNo" label="shop_number" />
       <RHFTextarea name="shop.description" label="description" containerClassName="col-span-2" />
 
-      <RHFColorPicker required={false} name="shop.hex" label="Hex" />
+      <RHFColorPicker required={false} name="shop.hex" label="hex" />
       <RHFSelectField
         label="property_type"
         name="shop.propertyType"
@@ -37,11 +37,11 @@ const ShopForm = ({ tab }) => {
         label="property_values"
         allowAdd
       />
-      <RHFInput name="shop.area" label="Area" type="number" />
-      <RHFInput name="shop.areaUnit" label="Area Unit" />
-      <RHFInput name="shop.view" label="View" />
-      <RHFInput name="shop.waterMeter" label="Water Meter" />
-      <RHFInput name="shop.electricityMeter" label="Electricity Meter" />
+      <RHFInput name="shop.area" label="area" type="number" />
+      <RHFInput name="shop.areaUnit" label="area_unit" />
+      <RHFInput name="shop.view" label="view" />
+      <RHFInput name="shop.waterMeter" label="water_meter" />
+      <RHFInput name="shop.electricityMeter" label="electricity_meter" />
       <RHFAsyncSelectField
         table="account"
         name="shop.customerId"
@@ -58,12 +58,12 @@ const ShopForm = ({ tab }) => {
         label="flat_owner"
       />
 
-      <RHFInput name="shop.license1" label="License 1" />
-      <RHFInput name="shop.license2" label="License 2" />
-      <RHFInput name="shop.unifiedNum" label="Unified Number" />
-      <RHFInput name="shop.bondType" label="Bond Type" />
-      <RHFInput name="shop.bondNo" label="Bond Number" />
-      <RHFDatePicker name="shop.bondDate" label="Bond Date" />
+      <RHFInput name="shop.license1" label="license1" />
+      <RHFInput name="shop.license2" label="license2" />
+      <RHFInput name="shop.unifiedNum" label="unified_number" />
+      <RHFInput name="shop.bondType" label="bond_type" />
+      <RHFInput name="shop.bondNo" label="bond_number" />
+      <RHFDatePicker name="shop.bondDate" label="bond_date" />
 
 
       <RHFAsyncSelectField
@@ -79,7 +79,7 @@ const ShopForm = ({ tab }) => {
         allowAdd
       />
 
-      <RHFTextarea name="shop.note" label="Note" containerClassName="col-span-2" />
+      <RHFTextarea name="shop.note" label="note" containerClassName="col-span-2" />
     </div>
   )
 

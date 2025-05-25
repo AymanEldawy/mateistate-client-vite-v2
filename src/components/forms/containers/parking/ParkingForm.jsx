@@ -34,7 +34,7 @@ const ParkingForm = ({ tab }) => {
       <RHFInput name="parking.areaUnit" label="area_unit" />
       <RHFTextarea name="parking.description" label="description" containerClassName="col-span-2" />
 
-      <RHFColorPicker name="parking.hex" label="Hex" />
+      <RHFColorPicker name="parking.hex" label="hex" />
       <RHFAsyncSelectField
         table="account"
         name="parking.customerId"
@@ -52,7 +52,7 @@ const ParkingForm = ({ tab }) => {
         name="parking.propertyValuesId"
         label="property_values"
       />
-      <RHFInput name="parking.view" label="View" />
+      <RHFInput name="parking.view" label="view" />
 
       <RHFAsyncSelectField
         table="cost_center"
@@ -80,7 +80,7 @@ const ParkingForm = ({ tab }) => {
         label="flat_owner"
         allowAdd
       />
-      <RHFTextarea name="parking.note" label="Note" containerClassName="col-span-2" />
+      <RHFTextarea name="parking.note" label="note" containerClassName="col-span-2" />
     </div>
   )
   const ParkingPicturesFields = (

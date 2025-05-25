@@ -8,31 +8,31 @@ const LandForm = ({ tab }) => {
   // todo: rethink this after client feedback
   const LandGeneralFields = (
     <div className="grid grid-cols-2 gap-2">
-      <RHFInput name="name" label="Name" required />
+      <RHFInput name="name" label="name" required />
       {/* <RHFInput name="type" label="Type" type="number" /> */}
-      <RHFInput name="landNo" label="Land Number" />
-      <RHFInput name="lastName" label="Last Name" />
-      <RHFInput name="number" label="Number" required />
-      <RHFDatePicker name="date" label="Date" type="date" />
-      <RHFInput name="city" label="City" />
-      <RHFInput name="region" label="Region" />
-      <RHFInput name="space" label="Space" />
-      <RHFInput name="side" label="Side" />
-      <RHFInput name="streetCount" label="Street Count" type="number" />
-      <RHFInput name="streetName" label="Street Name" />
+      <RHFInput name="landNo" label="land_number" />
+      <RHFInput name="lastName" label="last_name" />
+      <RHFInput name="number" label="number" required />
+      <RHFDatePicker name="date" label="date" type="date" />
+      <RHFInput name="city" label="city" />
+      <RHFInput name="region" label="region" />
+      <RHFInput name="space" label="space" />
+      <RHFInput name="side" label="side" />
+      <RHFInput name="streetCount" label="street_count" type="number" />
+      <RHFInput name="streetName" label="street_name" />
 
-      <RHFInput name="area" label="Area" type="number" />
-      <RHFInput name="areaUnit" label="Area Unit" />
-      <RHFInput name="landType" label="Land Type" type="number" />
-      <RHFInput name="landowner" label="Land Owner" type="number" />
-      <RHFInput name="buildble" label="Buildable" type="checkbox" />
+      <RHFInput name="area" label="area" type="number" />
+      <RHFInput name="areaUnit" label="area_unit" />
+      <RHFInput name="landType" label="land_type" type="number" />
+      <RHFInput name="landowner" label="land_owner" type="number" />
+      <RHFInput name="buildble" label="buildable" type="checkbox" />
 
-      <RHFInput name="licenseNo" label="License Number" />
-      <RHFInput name="license" label="License" />
-      <RHFDatePicker name="licenseDate" label="License Date" containerClassName="col-span-2" />
-      <RHFTextarea name="details" label="Details" containerClassName="col-span-2" />
+      <RHFInput name="licenseNo" label="license_number" />
+      <RHFInput name="license" label="license" />
+      <RHFDatePicker name="licenseDate" label="license_date" containerClassName="col-span-2" />
+      <RHFTextarea name="details" label="details" containerClassName="col-span-2" />
 
-      <RHFInput name="beginLandValue" label="Begin Land Value" type="number" />
+      <RHFInput name="beginLandValue" label="begin_land_value" type="number" />
       <RHFAsyncSelectField
         table="currency"
         name="currencyBeginLandId"
