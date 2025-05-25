@@ -145,6 +145,8 @@ const ReactSelectAsync = ({
                   kind="info"
                   containerClassName="h-[22px] w-[22px] !rounded-full mt-[2px] !p-1 mx-1"
                   onClick={(e) => {
+                    console.log(e,'---');
+                    
                     e.stopPropagation()
                     handleDispatchForm({
                       setDefaultOption,

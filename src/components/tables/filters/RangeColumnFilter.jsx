@@ -5,7 +5,7 @@ export function RangeColumnFilter({
   return (
     <div style={{ display: 'flex' }}>
       <input
-        value={filterValue[0] || ''}
+        value={filterValue?.[0] || ''}
         type="number"
         onChange={e => {
           const val = e.target.value;
@@ -19,7 +19,7 @@ export function RangeColumnFilter({
       />
       to
       <input
-        value={filterValue[1] || ''}
+        value={filterValue?.[1] || ''}
         type="number"
         onChange={e => {
           const val = e.target.value;

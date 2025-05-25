@@ -66,7 +66,7 @@ const CustomTable = ({
       range: (rows, id, filterValue) => {
         return rows.filter(row => {
           const rowValue = row.values[id];
-          return rowValue >= filterValue[0] && rowValue <= filterValue[1];
+          return rowValue >= filterValue?.[0] && rowValue <= filterValue?.[1];
         });
       },
     }),
@@ -264,7 +264,7 @@ const CustomTable = ({
         </div>
 
         {pagination &&
-          <TablePagination table={table} />
+          <TablePagination table={table}  pagination={pagination} />
         }
       </div>
     </>
