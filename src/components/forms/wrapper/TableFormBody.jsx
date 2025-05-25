@@ -3,11 +3,13 @@ import Btn from "@/components/shared/Btn"
 
 const TableFormBody = ({ fields, withoutAction, renderFields, remove, tbodyClassName, trClassName, tdClassName, customIndex }) => {
 
+  console.log(trClassName,'trClassName');
+  
   return (
     <tbody className={`${tbodyClassName}`}>
       {fields.map((item, index) => (
         <>
-          <tr key={item.id || index} className={`${trClassName}`}>
+          <tr key={item.id || index} className={`${trClassName && trClassName(index)}`}>
             {customIndex ? null :
               <td className={`border min-w-[25px] text-center`}>
                 {index + 1}

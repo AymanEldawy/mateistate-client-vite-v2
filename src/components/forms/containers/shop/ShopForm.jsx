@@ -8,8 +8,7 @@ import { getSearchBuilding, getSingleBuilding } from "@/services/buildingService
 const ShopForm = ({ tab }) => {
 
   const ShopGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+    <div className="grid grid-cols-2 gap-2">
       <RHFAsyncSelectField
         table="building"
         name="shop.buildingId"
@@ -23,8 +22,7 @@ const ShopForm = ({ tab }) => {
       <RHFInput name="shop.shopNo" label="Shop Number" />
       <RHFTextarea name="shop.description" label="Description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Details</h5>
-      <RHFColorPicker required={false} name="shop.hex" label="Hex" containerClassName="col-span-2" />
+      <RHFColorPicker required={false} name="shop.hex" label="Hex" />
       <RHFSelectField
         label="Property Type"
         name="shop.propertyType"
@@ -39,7 +37,7 @@ const ShopForm = ({ tab }) => {
       />
       <RHFInput name="shop.area" label="Area" type="number" />
       <RHFInput name="shop.areaUnit" label="Area Unit" />
-      <RHFInput name="shop.view" label="View" containerClassName="col-span-2" />
+      <RHFInput name="shop.view" label="View" />
       <RHFInput name="shop.waterMeter" label="Water Meter" />
       <RHFInput name="shop.electricityMeter" label="Electricity Meter" />
       <RHFAsyncSelectField
@@ -58,7 +56,6 @@ const ShopForm = ({ tab }) => {
         label="Flat Owner"
       />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Licenses & Documents</h5>
       <RHFInput name="shop.license1" label="License 1" />
       <RHFInput name="shop.license2" label="License 2" />
       <RHFInput name="shop.unifiedNum" label="Unified Number" />
@@ -67,7 +64,6 @@ const ShopForm = ({ tab }) => {
       <RHFDatePicker name="shop.bondDate" label="Bond Date" />
 
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Cost Centers</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="shop.mainCostCenterId"
@@ -82,7 +78,7 @@ const ShopForm = ({ tab }) => {
       />
 
       <RHFTextarea name="shop.note" label="Note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
+    </div>
   )
 
   const ShopFixedAssetsFields = (
@@ -221,7 +217,7 @@ const ShopForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] overflow-auto max-h-[75vh] min-w-[70%]">
       {renderFields()}
     </div>
   )

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 export const lessorDefaultValue = {
   name: "",
@@ -22,21 +23,19 @@ export const lessorDefaultValue = {
 export const lessorValidationSchema = () =>
   z.object({
     name: z.string().nonempty({ message: "Name is Required" }),
-    ltnname: z.string().optional(),
-    passport: z.string().optional(),
-    passport_expiry_date: z
-      .string()
-      .nonempty({ message: "passport expiry date is Required" }),
-    id_card: z.string().optional(),
-    lessor_card: z.string().optional(),
-    cell_phone: z.string().optional(),
-    number: z.string().optional(),
-    address: z.string().optional(),
-    fax: z.string().optional(),
-    nationality: z.string().optional(),
-    mobile: z.string().optional(),
-    note: z.string().optional(),
-    mailbox: z.string().optional(),
-    email: z.string().email().optional(),
-    role: z.string().optional(),
+    ltnname: VALIDATION.OPTIONAL_STRING,
+    passport: VALIDATION.NON_EMPTY_STRING,
+    passport_expiry_date: VALIDATION.OPTIONAL_STRING,
+    id_card: VALIDATION.OPTIONAL_STRING,
+    lessor_card: VALIDATION.OPTIONAL_STRING,
+    cell_phone: VALIDATION.OPTIONAL_STRING,
+    number: VALIDATION.OPTIONAL_STRING,
+    address: VALIDATION.OPTIONAL_STRING,
+    fax: VALIDATION.OPTIONAL_STRING,
+    nationality: VALIDATION.OPTIONAL_STRING,
+    mobile: VALIDATION.OPTIONAL_STRING,
+    note: VALIDATION.OPTIONAL_STRING,
+    mailbox: VALIDATION.OPTIONAL_STRING,
+    email: z.string().email({ message: 'email is required' }),
+    role: VALIDATION.OPTIONAL_STRING,
   });

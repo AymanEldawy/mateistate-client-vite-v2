@@ -8,6 +8,7 @@ const AccountField = ({ name, ...props }) => {
       getSearch={getAccountSearch}
       getSingle={getSingleAccount}
       {...props}
+      allowAdd
     />
   )
 }

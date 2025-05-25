@@ -17,9 +17,9 @@ const AccountForm = () => {
   useEffect(() => {
     // let isAccount = name === "account";
     const subscription = watch((value, { name }) => {
-      // if (isAccount) {
-      //   automaticChangesOnAccount(name, watch, setValue);
-      // }
+      if (name === 'account.parentId') {
+        automaticChangesOnAccount(watch(name));
+      }
       if (name === "type") {
         // UPDATE WITH API
         // onChangeAccountType(watch(name), setValue);
@@ -39,11 +39,14 @@ const AccountForm = () => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const automaticChangesOnAccount = async (watch) => {
-    const account = await getAccountCodeNumber(watch('parent_id'));
-    setValue("final_id", account?.final_id || account?.parent_id);
-    setValue("code", account.code);
-  };
+  const automaticChangesOnAccount = async (parentId) => {
+    const response = await getAccountCodeNumber(parentId);
+    if(response?.success) {
+      const data = response?.data
+      setValue("account.finalId", data?.finalId || data?.parentId);
+      setValue("account.code", data.nextChildCode);
+    }
+  };  
 
   return (
     <div className="">
@@ -51,7 +54,7 @@ const AccountForm = () => {
         <RHFInput
           name="account.code"
           label="code"
-          type="number"
+          type="text"
           required
         />
         <RHFInput

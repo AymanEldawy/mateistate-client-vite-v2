@@ -5,99 +5,69 @@ import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer
 const VillaForm = ({ tab }) => {
 
   const VillaGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Basic Information</h5>
-      <RHFInput name="complex_name" label="Complex Name" required />
-      <RHFInput name="villa_no" label="Villa Number" required />
+    <div className="grid grid-cols-2 gap-2">
+      <RHFInput name="villa.complexName" label="Complex Name" required />
+      <RHFInput name="villa.villaNo" label="Villa Number" required />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
-      <RHFInput name="emirate" label="Emirate" />
-      <RHFInput name="area" label="Area" />
-      <RHFInput name="suburb" label="Suburb" />
-      <RHFInput name="street" label="Street" />
+      <RHFInput name="villa.emirate" label="Emirate" />
+      <RHFInput name="villa.area" label="Area" />
+      <RHFInput name="villa.suburb" label="Suburb" />
+      <RHFInput name="villa.street" label="Street" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Documentation</h5>
-      <RHFInput name="doc_type" label="Document Type" />
-      <RHFInput name="doc_no" label="Document Number" />
-      <RHFDatePicker name="doc_date" label="Document Date" />
-      <RHFInput name="piece_no" label="Piece Number" />
-      <RHFInput name="basin_no" label="Basin Number" />
+      <RHFInput name="villa.docType" label="Document Type" />
+      <RHFInput name="villa.docNo" label="Document Number" />
+      <RHFDatePicker name="villa.docDate" label="Document Date" />
+      <RHFInput name="villa.pieceNo" label="Piece Number" />
+      <RHFInput name="villa.basinNo" label="Basin Number" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Utilities</h5>
-      <RHFInput name="water_meter" label="Water Meter" type="number" />
-      <RHFInput name="electricity_meter" label="Electricity Meter" type="number" />
+      <RHFInput name="villa.waterMeter" label="Water Meter" type="number" />
+      <RHFInput name="villa.electricityMeter" label="Electricity Meter" type="number" />
 
-      <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
-  )
+      <RHFTextarea name="villa.note" label="Note" containerClassName="col-span-2" />
+      <RHFAsyncSelectField name="villa.assetsId" table="assets" label="Assets" allowAdd />
+      <RHFInput name="villa.value" label="Value" type="number" />
+      <RHFTextarea name="villa.note" label="Note" containerClassName="col-span-2" />
+      <RHFAsyncSelectField name="villa.villaAccountId" table="account" label="Villa Account" allowAdd />
+      <RHFAsyncSelectField name="villa.costCenterId" table="cost_center" label="Cost Center" allowAdd />
+      <RHFAsyncSelectField name="villa.accountBankVillaId" table="account" label="Bank Account" allowAdd />
+      <RHFAsyncSelectField name="villa.cashAccountId" table="account" label="Cash Account" allowAdd />
+      <RHFAsyncSelectField name="villa.insuranceAccountId" table="account" label="Insurance Account" allowAdd />
+      <RHFAsyncSelectField name="villa.lessorId" table="lessor" label="Lessor" allowAdd />
+      <RHFInput name="villa.roomState" label="Room State" />
+      <RHFInput name="villa.roomCount" label="Room Count" type="number" />
+      <RHFInput name="villa.serviceRoomCount" label="Service Room Count" type="number" />
+      <RHFInput name="villa.bathRoomCount" label="Bathroom Count" type="number" />
+      <RHFInput name="villa.otherRoomCount" label="Other Room Count" type="number" />
+      <RHFInput name="villa.balconyCount" label="Balcony Count" type="number" />
+      <RHFInput name="villa.floorCount" label="Floor Count" />
+      <RHFInput name="villa.stairsInternal" label="Internal Stairs" />
 
-  const VillaAssetsFields = (
-    <FormFieldsGridContainer key="villaAssetsFields" >
-      <RHFAsyncSelectField name="assets_id" table="assets" label="Assets" allowAdd />
-      <RHFInput name="value" label="Value" type="number" />
-      <RHFTextarea name="note" label="Note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
-  )
+      <RHFInput name="villa.areaUnit" label="Area Unit" containerClassName="villa.col-span-2" />
+      <RHFInput name="villa.landArea" label="Land Area" />
+      <RHFInput name="villa.landAreaBuilding" label="Building Area" />
 
-  const VillaAccountsFields = (
-    <FormFieldsGridContainer key="villaAccountsFields" >
-      <RHFAsyncSelectField name="villa_account_id" table="account" label="Villa Account" allowAdd />
-      <RHFAsyncSelectField name="cost_center_id" table="cost_center" label="Cost Center" allowAdd />
-      <RHFAsyncSelectField name="account_bank_villa_id" table="account" label="Bank Account" allowAdd />
-      <RHFAsyncSelectField name="cash_account_id" table="account" label="Cash Account" allowAdd />
-      <RHFAsyncSelectField name="insurance_account_id" table="account" label="Insurance Account" allowAdd />
-      <RHFAsyncSelectField name="lessor_id" table="lessor" label="Lessor" allowAdd />
-    </FormFieldsGridContainer>
-  )
+      <RHFInput name="villa.finishingState" label="Finishing State" containerClassName="villa.col-span-2" />
+      <RHFInput name="villa.securitySystem" label="Security System" />
+      <RHFInput name="villa.securityType" label="Security Type" type="number" />
 
-  const VillaExteriorDetailsFields = (
-    <FormFieldsGridContainer key="villaExteriorDetailsFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Wall Details</h5>
-      <RHFInput name="wall" label="Wall" />
-      <RHFInput name="wall_state" label="Wall State" />
+      <RHFInput name="villa.wall" label="Wall" />
+      <RHFInput name="villa.wallState" label="Wall State" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Lighting & Parking</h5>
-      <RHFInput name="lighting_count" label="Lighting Count" type="number" />
-      <RHFInput name="parking_count" label="Parking Count" type="number" />
-      <RHFInput name="parking_area" label="Parking Area" />
-      <RHFInput name="parking_shaded" label="Parking Shaded" />
+      <RHFInput name="villa.lightingCount" label="Lighting Count" type="number" />
+      <RHFInput name="villa.parkingCount" label="Parking Count" type="number" />
+      <RHFInput name="villa.parkingArea" label="Parking Area" />
+      <RHFInput name="villa.parkingShaded" label="Parking Shaded" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Pool Information</h5>
-      <RHFInput name="pool_count" label="Pool Count" type="number" />
-      <RHFInput name="pool_state" label="Pool State" />
-      <RHFInput name="pool_system" label="Pool System" />
+      <RHFInput name="villa.poolCount" label="Pool Count" type="number" />
+      <RHFInput name="villa.poolState" label="Pool State" />
+      <RHFInput name="villa.poolSystem" label="Pool System" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Playground & Garden</h5>
-      <RHFInput name="play_ground_count" label="Playground Count" type="number" />
-      <RHFInput name="play_ground_area" label="Playground Area" />
-      <RHFInput name="garden_count" label="Garden Count" type="number" />
-      <RHFInput name="garden_area" label="Garden Area" />
-      <RHFInput name="garden_state" label="Garden State" />
-    </FormFieldsGridContainer>
-  )
-
-  const VillaInteriorDetailsFields = (
-    <FormFieldsGridContainer key="villaInteriorDetailsFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Room Information</h5>
-      <RHFInput name="room_state" label="Room State" />
-      <RHFInput name="room_count" label="Room Count" type="number" />
-      <RHFInput name="service_room_count" label="Service Room Count" type="number" />
-      <RHFInput name="bath_room_count" label="Bathroom Count" type="number" />
-      <RHFInput name="other_room_count" label="Other Room Count" type="number" />
-      <RHFInput name="balcony_count" label="Balcony Count" type="number" />
-      <RHFInput name="floor_count" label="Floor Count" />
-      <RHFInput name="stairs_internal" label="Internal Stairs" />
-
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Area Details</h5>
-      <RHFInput name="area_unit" label="Area Unit" containerClassName="col-span-2" />
-      <RHFInput name="land_area" label="Land Area" />
-      <RHFInput name="land_area_building" label="Building Area" />
-
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Property Status</h5>
-      <RHFInput name="finishing_state" label="Finishing State" containerClassName="col-span-2" />
-      <RHFInput name="security_system" label="Security System" />
-      <RHFInput name="security_type" label="Security Type" type="number" />
-    </FormFieldsGridContainer>
+      <RHFInput name="villa.playGroundCount" label="Playground Count" type="number" />
+      <RHFInput name="villa.playGroundArea" label="Playground Area" />
+      <RHFInput name="villa.gardenCount" label="Garden Count" type="number" />
+      <RHFInput name="villa.gardenArea" label="Garden Area" />
+      <RHFInput name="villa.gardenState" label="Garden State" />
+    </div>
   )
 
   const VillaRentalPriceFields = (
@@ -106,20 +76,20 @@ const VillaForm = ({ tab }) => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`villa_rental_price.${index}.date`} type="date" />
+              <RHFDatePicker name={`villaRentalPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`villa_rental_price.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`villaRentalPrices.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFAsyncSelectField name={`villa_rental_price.${index}.currency_id`} table="currency" allowAdd />
+              <RHFAsyncSelectField name={`villaRentalPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`villa_rental_price.${index}.note`} label="Note" />
+              <RHFTableInput name={`villaRentalPrices.${index}.note`} label="Note" />
             </td>
           </>
         )}
-        gridName={"villa_rental_price"}
+        gridName={"villaRentalPrices"}
         headers={[
           "Date",
           "Price",
@@ -136,20 +106,20 @@ const VillaForm = ({ tab }) => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`villa_selling_price.${index}.date`} type="date" />
+              <RHFDatePicker name={`villaSellingPrices.${index}.date`} type="date" />
             </td>
             <td>
-              <RHFTableInput name={`villa_selling_price.${index}.price`} label="Price" type="number" />
+              <RHFTableInput name={`villaSellingPrices.${index}.price`} label="Price" type="number" />
             </td>
             <td>
-              <RHFAsyncSelectField name={`villa_selling_price.${index}.currency_id`} table="currency" allowAdd />
+              <RHFAsyncSelectField name={`villaSellingPrices.${index}.currencyId`} table="currency" allowAdd />
             </td>
             <td>
-              <RHFTableInput name={`villa_selling_price.${index}.note`} label="Note" />
+              <RHFTableInput name={`villaSellingPrices.${index}.note`} label="Note" />
             </td>
           </>
         )}
-        gridName={"villa_selling_price"}
+        gridName={"villaSellingPrices"}
         headers={[
           "Date",
           "Price",
@@ -164,14 +134,14 @@ const VillaForm = ({ tab }) => {
     switch (tab) {
       case VILLA_STEPS.villa_general:
         return VillaGeneralFields
-      case VILLA_STEPS.villa_accounts:
-        return VillaAccountsFields
-      case VILLA_STEPS.villa_assets:
-        return VillaAssetsFields
-      case VILLA_STEPS.villa_exterior_details:
-        return VillaExteriorDetailsFields
-      case VILLA_STEPS.villa_interior_details:
-        return VillaInteriorDetailsFields
+      // case VILLA_STEPS.villa_accounts:
+      //   return VillaAccountsFields
+      // case VILLA_STEPS.villa_assets:
+      //   return VillaAssetsFields
+      // case VILLA_STEPS.villa_exterior_details:
+      //   return VillaExteriorDetailsFields
+      // case VILLA_STEPS.villa_interior_details:
+      //   return VillaInteriorDetailsFields
       case VILLA_STEPS.villa_rental_price:
         return VillaRentalPriceFields
       case VILLA_STEPS.villa_selling_price:

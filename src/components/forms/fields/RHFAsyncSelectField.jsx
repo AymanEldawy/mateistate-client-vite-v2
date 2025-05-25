@@ -41,10 +41,10 @@ const RHFAsyncSelectField = ({
         queryKey: ["list", table],
         queryFn: async () => {
           if (!value) return;
-          let response;
-          response = await getSingle(table, value);
-          setDefaultOption(response)
+          const response = await getSingle(value);
+          setDefaultOption(response?.data)
         },
+        enable: value
       });
       return res;
     } catch (error) {
@@ -55,7 +55,9 @@ const RHFAsyncSelectField = ({
   useEffect(() => {
     if (!watch(name)) return;
     if (defaultOption && defaultOption?.[name] === watch(name)) return;
-
+    console.log(defaultOption && defaultOption?.[name] === watch(name), '----fds');
+    
+    
     getDefaultOption(watch(name))
 
   }, [watch(name), defaultOption])

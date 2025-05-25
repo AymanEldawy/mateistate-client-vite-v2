@@ -12,6 +12,6 @@ export const currencyValidationSchema = () => z.object({
   id: z.string(),
   code: z.string().nonempty({ message: 'Code is Required' }),
   name: z.string().nonempty({ message: 'name is Required' }),
-  ltnname: z.string().optional(),
+  ltnname: z.string().optional().nullable(),
   rate: z.number().min(0, { message: 'Rate must be greater than 0' }),
 })

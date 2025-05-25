@@ -5,16 +5,14 @@ import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import villaColumns from '@/helpers/villa/villaColumns'
 import { lazy } from 'react'
 import { VILLA_STEPS } from '@/data/constants'
+import { villaDefaultValues, villaValidationSchema } from '@/helpers/villa/villaValidationSchema'
 const VillaForm = lazy(() => import("@/components/forms/containers/villa/VillaForm"))
 
-const defaultValue = {}
-
-const validationSchema = () => { }
 
 const villaConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: villaDefaultValues,
+    validationSchema: villaValidationSchema,
     mutationAddFunction: createVilla,
     mutationUpdateFunction: updateVilla,
     getSingleFunction: getSingleVilla,

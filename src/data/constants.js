@@ -300,7 +300,7 @@ export const UPLOAD_TYPES = {
 
 export function toTree(data, pid = null) {
   return data?.reduce((r, e) => {
-    if (e.parent_id === pid) {
+    if (e.parentId === pid) {
       const obj = { ...e };
       const children = toTree(data, e.id);
       if (children.length) obj.children = children;

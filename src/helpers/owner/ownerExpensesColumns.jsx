@@ -38,7 +38,7 @@ const ownerExpensesColumns = [
     accessorKey: "number",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/owner_expenses/${row?.original?.number}`}
+        to={`/owner_expenses?number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
       >
         # {getValue()}

@@ -30,7 +30,10 @@ const buildingColumns = [
   {
     header: "name",
     accessorKey: "name",
-    cell: ({ getValue, row }) => (
+    cell: ({ getValue, row }) => {
+      console.log(row,'---row');
+      
+      return (
       <div className="flex items-center gap-4 justify-between">
 
         <Link
@@ -46,7 +49,7 @@ const buildingColumns = [
           <PaletteIcon className="w-5 h-5" />
         </Link>
       </div>
-    ),
+    )},
   },
   { header: "emirate", accessorKey: "emirate" },
   { header: "suburb", accessorKey: "suburb" },

@@ -40,7 +40,7 @@ const costCenterColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/cost_centers?number=${row?.original?.number}`}
+          to={`/cost-center?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

@@ -38,6 +38,7 @@ const ColorToolsField = ({
     <div className="relative">
       <div className={"flex flex-row " + containerClassName} key={field?.name}>
         <button
+          aria-label="choose color"
           type="button"
           className={`border read-only:bg-[#2289fb1c] w-full h-8 dark:read-only:bg-[#444] rounded p-1 ${inputClassName} ${error ? "border-red-200 text-red-600" : ""
             } 
@@ -55,7 +56,7 @@ const ColorToolsField = ({
             <div
               open={openColorList}
               onClick={() => setOpenColorList(false)}
-              className={` fixed top-0 left-0 bottom-0 right-0 z-10 ${openColorList
+              className={`fixed top-0 left-0 bottom-0 right-0 z-20 ${openColorList
                 ? "opacity-60 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
                 } `}

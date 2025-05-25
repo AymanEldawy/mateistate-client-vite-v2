@@ -1,1 +1,132 @@
-export const billValidationSchema = () => { }
+import { z } from 'zod';
+import VALIDATION from '../VALIDATIONS';
+
+const BillMaterialDetailSchema = z.object({
+  materialId: z.string(),
+  quantity: z.number().positive(),
+  unitPrice: z.number().positive(),
+  totalPrice: z.number().positive(),
+  note: z.string(),
+});
+
+// Zod schema for billDiscountDetails
+const BillDiscountDetailSchema = z.object({
+  accountId: z.string(),
+  discount: z.number().nonnegative(),
+  extra: z.number().nonnegative(),
+  currencyId: z.string(),
+  currencyVal: z.number().positive(),
+  obverseAccountId: z.string(),
+  note: z.string(),
+});
+
+// Zod schema for the main bill object
+const billValidationSchema = () => z.object({
+  bill: z.object({
+    issueDate: z.string().datetime(),
+    billDate: z.string().datetime(),
+    billKind: z.number().int(),
+    currencyId: VALIDATION.OPTIONAL_UUID,
+    currencyVal: VALIDATION.OPTIONAL_NUMBER,
+    paymentMethod: z.number().int(),
+    note: VALIDATION.POSITIVE_STRING,
+    receiptNumber: VALIDATION.OPTIONAL_NUMBER,
+    connectWith: z.number().int(),
+    kind: z.enum(['purchase', 'sale', 'refund']),
+    totalQuantities: VALIDATION.OPTIONAL_NUMBER,
+    totalQuantitiesPercentage: z.number().nonnegative(),
+    totalQuantitiesPercentage2: z.number().nonnegative(),
+    refundedTaxableAmount: z.number().nonnegative(),
+    nonRefundedTaxableAmount: z.number().nonnegative(),
+    notTaxable: z.number().nonnegative(),
+    taxable: z.number().nonnegative(),
+    total: z.number().nonnegative(),
+    discounts: z.number().nonnegative(),
+    discountsExtra: z.number().nonnegative(),
+    nonRefundableVat: z.number().nonnegative(),
+    nonRefundableVat2: z.number().nonnegative(),
+    grandTotal: z.number().nonnegative(),
+    net: z.number().nonnegative(),
+    billTotalText: z.string(),
+    code: VALIDATION.OPTIONAL_NUMBER,
+    extras: z.number().nonnegative(),
+    vatAmount: z.number().nonnegative(),
+    subtotal: z.number().nonnegative(),
+    clientAccountId: z.string().optional(),
+    costCenterId: z.string().optional(),
+    connectWithId: z.string().optional(),
+    storeId: z.string().optional(),
+    customerAccountId: z.string().optional(),
+    materialAccountId: z.string().optional(),
+    billPatternId: z.string().optional(),
+    vatAccountId: z.string().optional(),
+    customerId: z.string().optional(),
+  }),
+  billDiscountDetails: z.array(BillDiscountDetailSchema).optional(),
+  billMaterialDetails: z.array(BillMaterialDetailSchema).optional(),
+});
+
+const billDefaultValues = {
+  bill: {
+    issueDate: null,
+    billDate: null,
+    billKind: undefined,
+    currencyId: null,
+    currencyVal: undefined,
+    paymentMethod: undefined,
+    note: null,
+    receiptNumber: undefined,
+    connectWith: undefined,
+    kind: null,
+    totalQuantities: undefined,
+    totalQuantitiesPercentage: undefined,
+    totalQuantitiesPercentage2: undefined,
+    refundedTaxableAmount: undefined,
+    nonRefundedTaxableAmount: undefined,
+    notTaxable: undefined,
+    taxable: undefined,
+    total: undefined,
+    discounts: undefined,
+    discountsExtra: undefined,
+    nonRefundableVat: undefined,
+    nonRefundableVat2: undefined,
+    grandTotal: undefined,
+    net: undefined,
+    billTotalText: undefined,
+    code: undefined,
+    extras: undefined,
+    vatAmount: undefined,
+    subtotal: undefined,
+    clientAccountId: null,
+    costCenterId: null,
+    connectWithId: null,
+    storeId: null,
+    customerAccountId: null,
+    materialAccountId: null,
+    billPatternId: null,
+    vatAccountId: null,
+    customerId: null,
+  },
+  billDiscountDetails: [
+    {
+      accountId: null,
+      discount: undefined,
+      extra: undefined,
+      currencyId: null,
+      currencyVal: undefined,
+      obverseAccountId: null,
+      note: undefined,
+    },
+  ],
+  billMaterialDetails: [
+    {
+      materialId: null,
+      quantity: undefined,
+      unitPrice: undefined,
+      totalPrice: undefined,
+      note: undefined,
+    },
+  ],
+};
+
+export { billValidationSchema, billDefaultValues };

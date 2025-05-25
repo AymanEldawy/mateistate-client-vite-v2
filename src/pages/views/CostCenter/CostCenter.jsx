@@ -36,7 +36,7 @@ const CostCenter = ({ formOnly, outerClose, defaultNumber }) => {
 
   return (
     <PaperLayout
-      name="Cost_center"
+      name="cost_center"
       queryKey={QUERY_KEYS.Cost_center}
       queryFn={getAllCostCenters} //
       handleDeleteSelected={deleteManyCostCenters} //

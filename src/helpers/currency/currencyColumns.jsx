@@ -32,7 +32,7 @@ const currencyColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/currencys?number=${row?.original?.number}`}
+          to={`/currencies?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

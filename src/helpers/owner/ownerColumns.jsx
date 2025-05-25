@@ -32,7 +32,7 @@ const ownerColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/owners?number=${row?.original?.number}`}
+          to={`/owner?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

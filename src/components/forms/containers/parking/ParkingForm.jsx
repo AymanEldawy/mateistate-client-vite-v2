@@ -11,8 +11,7 @@ import { getSearchParking, getSingleParking } from "@/services/parkingService";
 const ParkingForm = ({ tab }) => {
 
   const ParkingGeneralFields = (
-    <FormFieldsGridContainer key="generalFields" >
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Location</h5>
+    <div className="grid grid-cols-2 gap-2">
       <RHFSelectField
         label="Parking Kind"
         name="parking.parkingKind"
@@ -33,14 +32,13 @@ const ParkingForm = ({ tab }) => {
       <RHFInput name="parking.areaUnit" label="Area Unit" />
       <RHFTextarea name="parking.description" label="Description" containerClassName="col-span-2" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Details</h5>
       <RHFColorPicker name="parking.hex" label="Hex" />
       <RHFAsyncSelectField
         table="account"
         name="parking.customerId"
         label="Customer"
         allowAdd
-        containerClassName="col-span-2"
+        // containerClassName="col-span-2"
       />
       <RHFSelectField
         label="Property Type"
@@ -52,9 +50,8 @@ const ParkingForm = ({ tab }) => {
         name="parking.propertyValuesId"
         label="Property Values"
       />
-      <RHFInput name="parking.view" label="View" containerClassName="col-span-2" />
+      <RHFInput name="parking.view" label="View" />
 
-      <h5 className="col-span-2 text-lg font-bold text-primary border-b border-primary pb-2 mb-0">Cost</h5>
       <RHFAsyncSelectField
         table="cost_center"
         name="parking.mainCostCenterId"
@@ -82,7 +79,7 @@ const ParkingForm = ({ tab }) => {
         allowAdd
       />
       <RHFTextarea name="parking.note" label="Note" containerClassName="col-span-2" />
-    </FormFieldsGridContainer>
+    </div>
   )
   const ParkingPicturesFields = (
     <div key="parkingPicturesFields" className="grid grid-cols-2 gap-x-4 gap-y-4 ">
@@ -188,7 +185,7 @@ const ParkingForm = ({ tab }) => {
   }
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-x-hidden overflow-y-scroll lg:w-[60vw] md:w-[90vw]">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-auto min-w-[70%]">
       {renderFields()}
     </div>
   )

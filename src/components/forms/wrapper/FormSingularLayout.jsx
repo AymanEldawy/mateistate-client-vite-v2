@@ -1,7 +1,7 @@
-const FormSingularLayout = ({ RenderForm }) => {
+const FormSingularLayout = ({ RenderForm, paginationForm }) => {
   return (
     <div className="p-4">
-      <RenderForm />
+      <RenderForm {...paginationForm} />
     </div>
   )
 }

@@ -13,6 +13,9 @@ const TableForm = ({ gridName, withoutAction, headers, renderFields, formBodyPro
     name: gridName,
   });
 
+  console.log(remove,'mpve');
+  
+
   return (
     <TableFormWrapper
       {...formWrapperProps}

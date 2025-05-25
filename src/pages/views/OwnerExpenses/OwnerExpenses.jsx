@@ -4,8 +4,7 @@
 import PaperLayout from "@/components/layout/paper/PaperLayout";
 import QUERY_KEYS from "@/data/queryKeys";
 import ownerExpensesColumns from "@/helpers/owner/ownerExpensesColumns";
-import { ownerExpensesValidationSchema } from "@/helpers/owner/ownerExpensesTypesValidationSchema";
-import { ownerExpensesDefaultValues } from "@/helpers/owner/ownerExpensesValidationSchema";
+import { ownerExpensesDefaultValues, ownerExpensesValidationSchema } from "@/helpers/owner/ownerExpensesValidationSchema";
 import { createOwnerExpenses, deleteManyOwnerExpenses, deleteOwnerExpenses, getAllOwnerExpenses, getSingleOwnerExpenses, updateOwnerExpenses } from "@/services/ownerExpensesService";
 import { lazy } from "react";
 const OwnerExpenseForm = lazy(() => import('@/components/forms/containers/owner/OwnerExpensesForm'));
@@ -17,7 +16,7 @@ const ownerConfig = {
     mutationAddFunction: createOwnerExpenses,
     mutationUpdateFunction: updateOwnerExpenses,
     getSingleFunction: getSingleOwnerExpenses,
-    onSuccessAction: () => {},
+    onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteOwnerExpenses,
     RenderForm: (props) => <OwnerExpenseForm {...props} />,

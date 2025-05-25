@@ -7,7 +7,7 @@ export const ownerExpensesTypesDefaultValues = {
   description: '',
   isActive: false,
 }
-export const ownerExpensesValidationSchema = () => z.object({
+export const ownerExpensesTypesValidationSchema = () => z.object({
   code: VALIDATION.OPTIONAL_NUMBER,
   name: VALIDATION.NON_EMPTY_STRING,
   description: VALIDATION.OPTIONAL_STRING,

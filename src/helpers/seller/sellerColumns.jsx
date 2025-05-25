@@ -39,7 +39,7 @@ const sellerColumns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={`/sellers?number=${row?.original?.number}`}
+          to={`/seller?number=${row?.original?.number}`}
           className="text-blue-500 font-medium hover:underline"
         >
           {getValue()}

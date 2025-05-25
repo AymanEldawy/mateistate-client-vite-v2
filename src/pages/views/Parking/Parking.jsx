@@ -28,7 +28,7 @@ const parkingConfig = {
     header: "Parking",
     ExtraContentBar: () => (
       <>
-        <RHFCheckbox name="parking.has_lawsuit" label="Has Lawsuit" type="checkbox" />
+        <RHFCheckbox name="parking.hasLawsuit" label="Has Lawsuit" type="checkbox" />
         <RHFCheckbox name="parking.blocked" label="Blocked" type="checkbox" />
       </>
     )

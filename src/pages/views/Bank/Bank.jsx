@@ -1,11 +1,8 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount
-} from "@/services/accountService";
 import bankColumns from "@/helpers/bank/bankColumns";
 import BankForm from "@/components/forms/containers/bank/BankForm";
-import { createBank, deleteManyBanks, getAllBanks, getSingleBank, updateBank } from "@/services/bankService";
+import { createBank, deleteBank, deleteManyBanks, getAllBanks, getSingleBank, updateBank } from "@/services/bankService";
 import { bankDefaultValues, bankValidationSchema } from "@/helpers/bank/bankValidationSchema";
 
 const bankConfig = {
@@ -17,7 +14,7 @@ const bankConfig = {
     getSingleFunction: getSingleBank,
     onSuccessAction: () => { },
     isSteps: false,
-    onHandleDelete: deleteAccount,
+    onHandleDelete: deleteBank,
     RenderForm: (props) => <BankForm {...props} />,
   },
   formHeaderProps: {
