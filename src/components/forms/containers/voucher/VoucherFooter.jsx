@@ -18,14 +18,12 @@ export const VoucherFooter = ({
         <div className="flex items-center gap-4 mb-4">
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              readOnly
               name="debit_amount"
             // label="debit_amount"
             />
           </div>
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              readOnly
               name="credit_amount"
             // label="credit_amount"
             />
@@ -35,14 +33,12 @@ export const VoucherFooter = ({
         <div className="flex items-center gap-4">
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              readOnly
               name="debit_total"
             // label="debit_total"
             />
           </div>
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              readOnly
               name="credit_total"
             // label="credit_total"
             />

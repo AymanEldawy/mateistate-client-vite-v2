@@ -14,7 +14,7 @@ export const VoucherHead = ({
         />
         <RHFDatePicker
           name="createdAt"
-          label="createdAt"
+          label="created_at"
         />
         <AccountField
           name="account_id"

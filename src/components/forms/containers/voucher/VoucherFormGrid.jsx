@@ -36,7 +36,7 @@ const VoucherFormGrid = ({ PATTERN_SETTINGS }) => {
             </td>
             <td>
               <RHFTableInput
-                name={`grid.${index}.note`}
+                name={`grid.${index}.description`}
               />
             </td>
           </>

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const voucherDefaultValue = {
+export const voucherDefaultValues = {
   voucher: {
     voucherType: 1,
     connectWith: 0,
@@ -39,7 +39,7 @@ const voucherGridDataSchema = z.object({
   debit: z.number().min(0),
   credit: z.number().min(0),
   description: z.string().optional(),
-  accountId: z.string().optional(),
+  accountId: z.string().min(1),
   costCenterId: z.string().optional()
 });
 
@@ -59,11 +59,11 @@ const voucherSchema = z.object({
   feedback: z.boolean().optional(),
   genEntires: z.boolean().optional(),
   isFirstBatch: z.boolean().optional(),
-  accountId: z.string().optional(),
-  currencyId: z.string().optional(),
-  sellerId: z.string().optional(),
-  voucherPatternId: z.string().optional(),
-  contractId: z.string().optional()
+  accountId: z.string().min(1),
+  currencyId: z.string().min(1),
+  sellerId: z.string().min(1),
+  voucherPatternId: z.string().min(1),
+  contractId: z.string().min(1)
 });
 
 export const voucherValidationSchema = () => z.object({
