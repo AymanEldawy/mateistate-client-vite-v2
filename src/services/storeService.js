@@ -46,10 +46,6 @@ export const getStoreCode = (parentId) => {
 };
 
 
-export const getSearchStore= (value) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_STORE}/?search=${value}`);
-};
-
 export const getStoreReceivable = (buildingId) => {
   return http.get(
     `${API_URL_CONSTANTS.BASE_STORE}/receivable?buildingId=${buildingId}`

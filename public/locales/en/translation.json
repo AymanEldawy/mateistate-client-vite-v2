@@ -551,5 +551,16 @@
   "ownership": "Ownership",
   "store_count": "Store Count",
   "editorial_entry": "Editorial Entry",
-  "investment": "Investment"
+  "investment": "Investment",
+  "observe_account": "Observe Account",
+  "currency_value": "Currency Value",
+  "observe_cost_center": "Observe Cost Center",
+  "seller": "Seller",
+  "observe_account_id": "Observe Account ID",
+  "observe_cost_center_id": "Observe Cost Center ID",
+  "internal_number": "Internal Number",
+  "without_due_date": "Without Due Date",
+  "due_date": "Due Date",
+  "end_due_date": "End Due Date",
+  "deposit_status": "Deposit Status"  
 }
