@@ -18,32 +18,36 @@ export const VoucherFooter = ({
         <div className="flex items-center gap-4 mb-4">
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              name="debit_amount"
+              readOnly
+              name="voucher.debitAmount"
             // label="debit_amount"
             />
           </div>
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              name="credit_amount"
+              readOnly
+              name="voucher.creditAmount"
             // label="credit_amount"
             />
           </div>
-          <div className=" whitespace-nowrap">Total current amount</div>
+          <div className=" whitespace-nowrap">{t("total_current_amount")}</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              name="debit_total"
+              readOnly
+              name="voucher.debitTotal"
             // label="debit_total"
             />
           </div>
           <div className="w-[100px] shrink-0">
             <RHFInputAmount
-              name="credit_total"
+              readOnly
+              name="voucher.creditTotal"
             // label="credit_total"
             />
           </div>
-          <div className=" whitespace-nowrap">Final amount</div>
+          <div className=" whitespace-nowrap">{t("final_amount")}</div>
         </div>
       </div>
       <div className="flex gap-4 items-end">

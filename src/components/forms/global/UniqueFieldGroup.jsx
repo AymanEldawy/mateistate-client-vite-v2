@@ -33,7 +33,7 @@ const UniqueFieldGroup = ({ tab, containerClassName, onSelectContract }) => {
     <div className={`flex flex-row gap-2 text-sm items-center ${containerClassName}`}>
       <RHFSelectField
         name={selectName}
-        label="connect with"
+        label="connect_with"
         options={CHEQUE_CONNECT_WITH}
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.id}
@@ -43,7 +43,7 @@ const UniqueFieldGroup = ({ tab, containerClassName, onSelectContract }) => {
       {watch(selectName) > CONNECT_WITH_NOTHING_CODE ? (
         <RHFSelectField
           name={selectNameId}
-          label="connect with"
+          label="connect_with"
           options={list}
           getOptionLabel={(option) => option.name}
           getOptionValue={(option) => option.id}

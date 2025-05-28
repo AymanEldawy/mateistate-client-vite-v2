@@ -34,12 +34,18 @@ export const voucherDefaultValues = {
     }
   ]
 };
+// "voucher.currencyId must be a UUID",
+// "voucher.sellerId must be a UUID",
+// "voucher.voucherPatternId must be a UUID",
+// "voucher.contractId must be a UUID",
+// "voucherGridData.0.accountId must be a UUID",
+// "voucherGridData.0.costCenterId must be a UUID"
 
 const voucherGridDataSchema = z.object({
-  debit: z.number().min(0),
-  credit: z.number().min(0),
+  debit: z.number().optional(),
+  credit: z.number().optional(),
   description: z.string().optional(),
-  accountId: z.string().min(1),
+  accountId: z.string().optional(),
   costCenterId: z.string().optional()
 });
 
@@ -59,7 +65,7 @@ const voucherSchema = z.object({
   feedback: z.boolean().optional(),
   genEntires: z.boolean().optional(),
   isFirstBatch: z.boolean().optional(),
-  accountId: z.string().min(1),
+  accountId: z.string().optional(),
   currencyId: z.string().min(1),
   sellerId: z.string().min(1),
   voucherPatternId: z.string().min(1),
