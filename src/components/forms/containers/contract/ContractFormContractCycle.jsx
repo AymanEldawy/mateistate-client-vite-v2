@@ -1,8 +1,4 @@
 
-// contract_certifying
-// contract_delivered
-// contract_signed
-
 import { RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFTextarea } from "../../fields"
 
 // contract_received
@@ -11,71 +7,71 @@ const ContractFormContractCycle = () => {
     <div className="py-4 flex flex-col gap-2">
       <div className="grid grid-cols-2 gap-4">
         <RHFInput
-          label="contract_certifying_body"
-          name={`contract_cycle.contract_certifying_body`}
+          label="contractCertifyingBody"
+          name={`contractCycle.contractCertifyingBody`}
         />
         <RHFInputAmount
-          label="commission_from_owner_value"
-          name={`contract_cycle.commission_from_owner_value`}
+          label="commissionFromOwnerValue"
+          name={`contractCycle.commissionFromOwnerValue`}
         />
         <RHFDatePicker
-          label="municipal_license_from"
-          name={`contract_cycle.municipal_license_from`}
+          label="municipalLicenseFrom"
+          name={`contractCycle.municipalLicenseFrom`}
         />
         <RHFDatePicker
-          label="municipal_license_to"
-          name={`contract_cycle.municipal_license_to`}
+          label="municipalLicenseTo"
+          name={`contractCycle.municipalLicenseTo`}
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <RHFInput
-            label="license_num"
-            name={`contract_cycle.license_num`}
+            label="licenseNum"
+            name={`contractCycle.licenseNum`}
             type="number"
           />
           <RHFDatePicker
-            label="license_from"
-            name={`contract_cycle.license_from`}
+            label="licenseFrom"
+            name={`contractCycle.licenseFrom`}
           />
           <RHFDatePicker
-            label="license_to"
-            name={`contract_cycle.license_to`}
+            label="licenseTo"
+            name={`contractCycle.licenseTo`}
           />
         </div>
         <div className="flex flex-col gap-2">
           <RHFInput
-            label="civil_license_num"
-            name={`contract_cycle.civil_license_num`}
+            label="civilLicenseNum"
+            name={`contractCycle.civilLicenseNum`}
             type="number"
           />
           <RHFDatePicker
-            label="civil_license_from"
-            name={`contract_cycle.civil_license_from`}
+            label="civilLicenseFrom"
+            name={`contractCycle.civilLicenseFrom`}
           />
           <RHFDatePicker
-            label="civil_license_to"
-            name={`contract_cycle.civil_license_to`}
+            label="civilLicenseTo"
+            name={`contractCycle.civilLicenseTo`}
           />
         </div>
       </div>
 
 
       <RHFCheckbox
-        label="contract_documented"
-        name={`contract_cycle.contract_documented`}
+        label="contractDocumented"
+        name={`contractCycle.contractDocumented`}
       />
       <RHFCheckbox
-        label="contract_certifying"
-        name={`contract_cycle.contract_certifying`}
+        label="contractCertifying"
+        name={`contractCycle.contractCertifying`}
       />
       <RHFCheckbox
-        label="contract_delivered"
-        name={`contract_cycle.contract_delivered`}
+        label="contractDelivered"
+        name={`contractCycle.contractDelivered`}
       />
       <RHFCheckbox
-        label="contract_signed"
-        name={`contract_cycle.contract_signed`}
+        label="contractSigned"
+        name={`contractCycle.contractSigned`}
       />
     </div>
   )

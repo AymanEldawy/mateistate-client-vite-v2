@@ -1,11 +1,16 @@
 import { FLAT_PROPERTY_TYPES } from "../building/buildingHelpers";
 
+export function getNextYear() {
+  let date = new Date();
+  date.setDate(date.getDate() - 1);
+  return new Date(date.setFullYear(date.getFullYear() + 1))
+}
 export function getUnitType(contract, value) {
-  let type = contract?.parking_id
-    ? "parking_"
-    : contract?.shop_id
-      ? "shop_"
-      : "apartment_";
+  let type = contract?.parkingId
+    ? "parking"
+    : contract?.shopId
+      ? "shop"
+      : "apartment";
 
   return FLAT_PROPERTY_TYPES[`${type}${value}`];
 }

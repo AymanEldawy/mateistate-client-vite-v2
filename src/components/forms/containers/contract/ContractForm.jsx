@@ -6,10 +6,9 @@ import ContractFormTermination from "./ContractFormTermination"
 import ContractFormLinkedParking from "./ContractFormLinkedParking"
 import ContractFormContractCycle from "./ContractFormContractCycle"
 import { useForm } from "react-hook-form"
-import InstallmentForm from "./InstallmentForm"
 import { GLOBAL_CONTRACT_STEPS } from "@/helpers/contract/contractSteps"
 
-const ContractForm = ({ code, tab, isInstallmentOpen, setIsInstallmentOpen }) => {
+const ContractForm = ({ tab }) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -21,17 +20,17 @@ const ContractForm = ({ code, tab, isInstallmentOpen, setIsInstallmentOpen }) =>
 
   const displayForm = () => {
     switch (tab) {
-      case GLOBAL_CONTRACT_STEPS.contract_payments_step:
+      case GLOBAL_CONTRACT_STEPS.payments:
         return <ContractFormPayments />
-      case GLOBAL_CONTRACT_STEPS.contract_commission_step:
+      case GLOBAL_CONTRACT_STEPS.commission:
         return <ContractFormCommission />
-      case GLOBAL_CONTRACT_STEPS.contract_other_fees_step:
+      case GLOBAL_CONTRACT_STEPS.other_fees:
         return <ContractFormOtherFees />
-      case GLOBAL_CONTRACT_STEPS.contract_termination_step:
+      case GLOBAL_CONTRACT_STEPS.termination:
         return <ContractFormTermination />
-      case GLOBAL_CONTRACT_STEPS.contract_linked_parking_step:
+      case GLOBAL_CONTRACT_STEPS.linked_parking:
         return <ContractFormLinkedParking />
-      case GLOBAL_CONTRACT_STEPS.contract_contract_cycle_step:
+      case GLOBAL_CONTRACT_STEPS.contract_cycle:
         return <ContractFormContractCycle />
       default:
         return <ContractFormGeneral />
@@ -39,14 +38,9 @@ const ContractForm = ({ code, tab, isInstallmentOpen, setIsInstallmentOpen }) =>
   }
 
   return (
-    <>
-      {isInstallmentOpen ?
-        <InstallmentForm isInstallmentOpen={isInstallmentOpen} setIsInstallmentOpen={setIsInstallmentOpen} />
-        : null}
-      <div className="min-w-[800px] h-[75vh]">
-        {displayForm()}
-      </div>
-    </>
+    <div className="flex flex-col min-h-[400px] max-h-[72vh] overflow-auto min-w-[700px]">
+      {displayForm()}
+    </div>
   )
 }
 

@@ -9,18 +9,8 @@ import TableForm from "../../wrapper/TableForm";
 import { CREATED_FROM_CONTRACT_FINES } from "@/data/GENERATE_STARTING_DATA";
 import { AccountField } from "../../global";
 
-const ContractFormTermination = ({
-  CACHE_LIST,
-  tab,
-  onClickRenew,
-}) => {
-  const {
-    watch,
-    setValue,
-    errors,
-    formState: { isSubmitSuccessful },
-  } = useFormContext();
-  const { dispatchVoucherEntries } = useVoucherEntriesView();
+const ContractFormTermination = () => {
+  const { watch, setValue } = useFormContext();
   const [stage, setStage] = useState(1);
 
   useEffect(() => {
@@ -70,70 +60,68 @@ const ContractFormTermination = ({
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-10">
                 <RHFCheckbox
-                  name="contract_termination.terminated"
+                  name="contractTermination.terminated"
                   label="terminated" />
                 <div className="flex items-center gap-4">
                   <RHFCheckbox
-                    name="contract_termination.gen_entries"
-                    label="gen_entries" />
-                  {watch(`contract_termination.id`) ? <ViewEntry id={watch(`contract_termination.id`)} /> : null}
+                    name="contractTermination.genEntries"
+                    label="genEntries" />
+                  {watch(`contractTermination.id`) ? <ViewEntry id={watch(`contractTermination.id`)} /> : null}
                 </div>
               </div>
               <RHFInput
-
-                name="contract_termination.termination_date"
-                label="termination_date"
-                tab={tab}
+                name="contractTermination.terminationDate"
+                label="terminationDate"
               />
               <RHFInput
 
-                name="contract_termination.owner_total_amount"
-                label="owner_total_amount"
+                name="contractTermination.ownerTotalAmount"
+                label="ownerTotalAmount"
               />
               <div className="grid grid-cols-2 gap-2">
                 <RHFInput
-                  name="contract_termination.owner_rest_amount"
-                  label="owner_rest_amount"
+                  name="contractTermination.ownerRestAmount"
+                  label="ownerRestAmount"
                   containerClassName="flex-1"
                 />
                 <RHFSelectField
-                  name="contract_termination.round_to"
-                  label="round_to"
+                  name="contractTermination.roundTo"
+                  label="roundTo"
                   labelClassName="!w-fit"
                   selectClassName="w-full"
-                  value={watch(`contract_termination.round_to`)}
+                  value={watch(`contractTermination.roundTo`)}
                   options={CONTRACT_ROUND_TO}
                 />
               </div>
               <RHFTextarea
-                name="contract_termination.revenue_note"
-                label="revenue_note"
+                name="contractTermination.revenueNote"
+                label="revenueNote"
                 containerClassName="flex-1"
               />
             </div>
             <div className="flex flex-col gap-4">
 
               <RHFCheckbox
-                name="contract_termination.evacuation_request"
-                label="evacuation_request"
+                name="contractTermination.evacuationRequest"
+                label="evacuationRequest"
               />
               <RHFInput
-                name="contract_termination.evacuation_date"
-                label="evacuation_date"
+                name="contractTermination.evacuationDate"
+                label="evacuationDate"
                 containerClassName="flex-1"
-                readOnly={!watch(`contract_termination.evacuation_request`)}
+                readOnly={!watch(`contractTermination.evacuationRequest`)}
               />
               <RHFCheckbox
-                name="contract_termination.clearance_printed"
-                label="clearance_printed"
+                name="contractTermination.clearancePrinted"
+                label="clearancePrinted"
               />
-              {watch(`contract_termination.clearance_printed`) ? (
+              {watch(`contractTermination.clearancePrinted`) ? (
                 <RHFInput
-                  name="contract_termination.clearance_printed_date"
-                  label="clearance_printed_date"
+                  name="contractTermination.clearancePrintedDate"
+                  label="clearancePrintedDate"
                 />
               ) : null}
-              <Btn kind="info" containerClassName="!w-fit text-sm" onClick={() => {}}>
+              <Btn kind="info" containerClassName="!w-fit text-sm" onClick={() => { }}>
                 Print Clearance
               </Btn>
             </div>
@@ -146,30 +134,30 @@ const ContractFormTermination = ({
                   <td>
                     <RHFDatePicker
 
-                      name={`contract_fines_grid.${index}.createdAt`}
+                      name={`contractFinesGrid.${index}.createdAt`}
                     />
                   </td>
                   <td>
                     <RHFInputAmount
 
-                      name={`contract_fines_grid.${index}.fee_amount`}
+                      name={`contractFinesGrid.${index}.fee_amount`}
                     />
                   </td>
                   <td>
                     <AccountField
 
-                      name={`contract_fines_grid.${index}.account_id`}
+                      name={`contractFinesGrid.${index}.account_id`}
                     />
                   </td>
                   <td>
                     <RHFInput
 
-                      name={`contract_fines_grid.${index}.notes`}
+                      name={`contractFinesGrid.${index}.notes`}
                     />
                   </td>
                 </>
               )}
-              gridName={"contract_fines_grid"}
+              gridName={"contractFinesGrid"}
               headers={[
                 "date",
                 "fee_amount",
@@ -178,7 +166,7 @@ const ContractFormTermination = ({
               ]}
             />
             <div className="mt-4" />
-            {watch(`contract_fines_grid.0.id`) ? <ViewEntry id={watch(`contract.id`)} created_from={CREATED_FROM_CONTRACT_FINES} /> : null}
+            {watch(`contractFinesGrid.0.id`) ? <ViewEntry id={watch(`contract.id`)} created_from={CREATED_FROM_CONTRACT_FINES} /> : null}
           </div>
         }
       </div>

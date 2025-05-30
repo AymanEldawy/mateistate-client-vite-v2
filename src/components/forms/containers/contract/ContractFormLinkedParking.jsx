@@ -11,27 +11,27 @@ const ContractFormLinkedParking = () => {
             <td>
               <RHFTableAsyncSelect
 
-                name={`contract_linked_parking.${index}.building_id`}
+                name={`contractLinkedParking.${index}.buildingId`}
               />
             </td>
             <td>
               <RHFTableAsyncSelect
-                name={`contract_linked_parking.${index}.main_contract_id`}
+                name={`contractLinkedParking.${index}.mainContractId`}
               />
             </td>
             <td>
               <AccountField
-                name={`contract_linked_parking.${index}.account_id`}
+                name={`contractLinkedParking.${index}.accountId`}
               />
             </td>
            
           </>
         )}
-        gridName={"contract_linked_parking"}
+        gridName={"contractLinkedParking"}
         headers={[
-          "building_id",
-          "main_contract_id",
-          "account_id",
+          "buildingId",
+          "mainContractId",
+          "accountId",
         ]}
       />
     </div>

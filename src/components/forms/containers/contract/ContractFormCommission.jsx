@@ -6,38 +6,38 @@ const ContractFormCommission = () => {
     <div className="grid grid-cols-2 gap-x-8 gap-2 py-4">
       <div className="flex flex-col gap-2">
         <RHFInput
-          label="commission_percentage"
-          name={`contract_commission.commission_percentage`}
+          label="commissionPercentage"
+          name={`contractCommission.commissionPercentage`}
         />
         <RHFInputAmount
-          label="commission_value"
-          name={`contract_commission.commission_value`}
+          label="commissionValue"
+          name={`contractCommission.commissionValue`}
         />
         <AccountField
-          name={`contract_commission.commission_account_id`}
-          label="commission_account_id"
+          name={`contractCommission.commissionAccountId`}
+          label="commissionAccountId"
         />
         <RHFTextarea
-          label="commission_note"
-          name={`contract_commission.commission_note`}
+          label="commissionNote"
+          name={`contractCommission.commissionNote`}
         />
       </div>
       <div className="flex flex-col gap-2">
         <RHFInput
-          label="commission_from_owner_percentage"
-          name={`contract_commission.commission_from_owner_percentage`}
+          label="commissionFromOwnerPercentage"
+          name={`contractCommission.commissionFromOwnerPercentage`}
         />
         <RHFInputAmount
-          label="commission_from_owner_value"
-          name={`contract_commission.commission_from_owner_value`}
+          label="commissionFromOwnerValue"
+          name={`contractCommission.commissionFromOwnerValue`}
         />
         <AccountField
-          name={`contract_commission.commission_from_owner_account_id`}
-          label="commission_from_owner_account_id"
+          name={`contractCommission.commissionFromOwnerAccountId`}
+          label="commissionFromOwnerAccountId"
         />
         <RHFTextarea
-          label="commission_from_owner_note"
-          name={`contract_commission.commission_from_owner_note`}
+          label="commissionFromOwnerNote"
+          name={`contractCommission.commissionFromOwnerNote`}
         />
       </div>
     </div>

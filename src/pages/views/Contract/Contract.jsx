@@ -3,10 +3,8 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import contractColumns from '@/helpers/contract/contractColumns'
-// import ContractForm from '@/components/forms/containers/contract/ContractForm'
 import { createContract, deleteContract, deleteManyContracts, getAllContracts, getSearchContract, getSingleContract, updateContract } from '@/services/contractService'
-// import { useState } from 'react'
-import { contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
+import { contractDefaultValues, contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
 import { lazy, useState } from 'react'
 import ContractFormFooter from '@/components/forms/containers/contract/ContractFormFooter'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
@@ -16,14 +14,11 @@ import BtnGroups from '@/components/shared/BtnGroups'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
-import { APARTMENT_STEPS_CONTRACT } from '@/helpers/contract/contractSteps'
+import { APARTMENTS_CONTRACT_STEPS, GLOBAL_CONTRACT_STEPS } from '@/helpers/contract/contractSteps'
+
 const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
-const defaultValue = {}
-
-
 const Contract = () => {
-  const [isInstallmentOpen, setIsInstallmentOpen] = useState(false);
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
   const updateSearchParams = useUpdateSearchParams();
   const [openFormType, setOpenFormType] = useState(false);
@@ -52,7 +47,6 @@ const Contract = () => {
             }
           ]}
         />
-        {/* setCode */}
       </Modal>
       <PaperLayout
         name="contract"
@@ -71,7 +65,7 @@ const Contract = () => {
           columns: contractColumns
         }}
         formProps={{
-          defaultValue,
+          defaultValue: contractDefaultValues,
           validationSchema: contractValidationSchema,
           mutationAddFunction: createContract,
           mutationUpdateFunction: updateContract,
@@ -81,9 +75,6 @@ const Contract = () => {
           onHandleDelete: deleteContract,
           RenderForm: (props) => (
             <ContractForm
-              isInstallmentOpen={isInstallmentOpen}
-              setIsInstallmentOpen={setIsInstallmentOpen}
-              list={Object.keys(APARTMENT_STEPS_CONTRACT)}
               code={searchParamsSelectedCode?.code}
               {...props}
             />
@@ -104,14 +95,11 @@ const Contract = () => {
           )
         }}
         formSidebarProps={{
-          list: APARTMENT_STEPS_CONTRACT
+          list: Object.keys(GLOBAL_CONTRACT_STEPS)
         }}
         formFooterProps={{
           additionalButtons: (data) => (
-            <ContractFormFooter data={data}
-              isInstallmentOpen={isInstallmentOpen}
-              setIsInstallmentOpen={setIsInstallmentOpen}
-            />
+            <ContractFormFooter data={data} />
           )
         }}
 

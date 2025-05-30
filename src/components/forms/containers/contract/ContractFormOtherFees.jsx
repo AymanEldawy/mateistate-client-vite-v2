@@ -15,36 +15,36 @@ const ContractFormOtherFees = () => {
           <>
             <td>
               <RHFDatePicker
-                name={`contract_other_fees.${index}.date`}
+                name={`contractOtherFees.${index}.date`}
               />
             </td>
             <td>
               <RHFInputAmount
-                name={`contract_other_fees.${index}.fee_amount`}
+                name={`contractOtherFees.${index}.feeAmount`}
               />
             </td>
             <td>
               <AccountField
-                name={`contract_other_fees.${index}.account_id`}
+                name={`contractOtherFees.${index}.accountId`}
               />
             </td>
             <td>
               <RHFInput
-                name={`contract_other_fees.${index}.notes`}
+                name={`contractOtherFees.${index}.notes`}
               />
             </td>
           </>
         )}
-        gridName={"contract_other_fees"}
+        gridName={"contractOtherFees"}
         headers={[
           "date",
-          "fee_amount",
-          "account_id",
+          "feeAmount",
+          "accountId",
           "notes",
         ]}
 
       />
-      {watch('contract_other_fees.0.id') && (
+      {watch('contractOtherFees.0.id') && (
         <ViewEntry id={watch('contract.id')} created_from={CREATED_FROM_CONTRACT_FEES} />
       )}
     </div>

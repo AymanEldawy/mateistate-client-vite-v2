@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
-import { CONTRACT_PAID_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import { CONTRACT_DURATION, CONTRACT_PAID_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 
 const ContractFormGeneral = () => {
   const contractType = 'rent';
@@ -11,17 +11,17 @@ const ContractFormGeneral = () => {
     <div className="p-4">
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-x-6 w-full  items-start">
         <RHFInput
-          label="gov_number"
-          name={`contract.gov_number`}
+          label="govNumber"
+          name={`contract.govNumber`}
         />
         <RHFInput
-          label="prev_contracts_no"
-          name={`contract.contracts_number_prev`}
+          label="contractsNumberPrev"
+          name={`contract.contractsNumberPrev`}
           readOnly={watch('contract.id')}
         />
         <RHFDatePicker
-          label={`issue_date`}
-          name={`contract.issue_date`}
+          label={`issueDate`}
+          name={`contract.issueDate`}
         />
 
       </div>
@@ -29,41 +29,20 @@ const ContractFormGeneral = () => {
         <div className="grid grid-cols-1 gap-y-2 gap-x-6 ">
           <RHFAsyncSelectField
             options={[]}
-            label="client_id"
-            name="contract.client_id"
+            label="clientId"
+            name="contract.clientId"
             allowAdd
           />
           <RHFSelectField
             options={[]}
-            label="building_id"
-            name="contract.building_id"
-            />
+            label="buildingId"
+            name="contract.buildingId"
+          />
           <RHFSelectField
             options={[]}
-            label="client_id"
-            name={`contract.${assetType}_id`}
+            label="clientId"
+            name={`contract.${assetType}Id`}
           />
-          {/* {["client_id", "building_id", `${assetType}_id`]?.map(
-            (field, i) => {
-              let name = field?.replace("_id", "");
-              let table = name;
-              if (field === "client_id") {
-                name = UNIQUE_REF_TABLES.clients;
-                table = "account";
-              }
-              return (
-                <UniqueFieldNormal
-                  key={i === 2 ? watch('contract.building_id') : `${field}-${i}`}
-                  {...fieldsHash?.[field]}
-                  name={`contract.${field}`}
-                  table={table}
-                  CACHE_LIST={CACHE_LIST}
-                  list={!!CACHE_LIST ? CACHE_LIST?.[name] : []}
-                  readOnly={i === 2 && !watch('contract.building_id')}
-                />
-              );
-            }
-          )} */}
           <RHFInput
             label={`description`}
             name={`contract.description`}
@@ -77,31 +56,32 @@ const ContractFormGeneral = () => {
           {contractType === "rent" ? (
             <>
               <RHFSelectField
-                label={`contract_duration`}
-                name={`contract.contract_duration`}
+                label={`contractDuration`}
+                name={`contract.contractDuration`}
+                options={CONTRACT_DURATION}
               />
               <RHFInput
-                label={`start_duration_date`}
-                name={`contract.start_duration_date`}
+                label={`startDurationDate`}
+                name={`contract.startDurationDate`}
               />
               <RHFInput
-                label={`end_duration_date`}
-                name={`contract.end_duration_date`}
-                readOnly={watch(`contract.contract_duration`) < 4}
+                label={`endDurationDate`}
+                name={`contract.endDurationDate`}
+                readOnly={watch(`contract.contractDuration`) < 4}
               />
             </>
           ) : (
             <>
               <RHFInput
-                label={`property_delivery_date`}
-                name={`contract.property_delivery_date`}
+                label={`propertyDeliveryDate`}
+                name={`contract.propertyDeliveryDate`}
               />
             </>
           )}
 
           <RHFSelectField
-            label={`lessor_id`}
-            name={`contract.lessor_id`}
+            label={`lessorId`}
+            name={`contract.lessorId`}
             table={'lessor'}
           />
         </div>
@@ -109,34 +89,34 @@ const ContractFormGeneral = () => {
         <div className="flex flex-col gap-y-2 gap-x-6">
           <RHFAsyncSelectField
             inputClassName={
-              watch(`contract.revenue_account_id`) ? "bg-blue-100" : ""
+              watch(`contract.revenueAccountId`) ? "bg-blue-100" : ""
             }
-            label={`revenue_account_id`}
-            name={`contract.revenue_account_id`}
+            label={`revenueAccountId`}
+            name={`contract.revenueAccountId`}
             table={"account"}
           />
           <RHFAsyncSelectField
             inputClassName={
-              watch(`contract.discount_account_id`) ? "bg-blue-100" : ""
+              watch(`contract.discountAccountId`) ? "bg-blue-100" : ""
             }
-            label={`discount_account_id`}
-            name={`contract.discount_account_id`}
+            label={`discountAccountId`}
+            name={`contract.discountAccountId`}
             table={"account"}
           />
           <RHFAsyncSelectField
             inputClassName={
-              watch(`contract.insurance_account_id`) ? "bg-blue-100" : ""
+              watch(`contract.insuranceAccountId`) ? "bg-blue-100" : ""
             }
-            label={`insurance_account_id`}
-            name={`contract.insurance_account_id`}
+            label={`insuranceAccountId`}
+            name={`contract.insuranceAccountId`}
             table={"account"}
           />
           <RHFAsyncSelectField
             inputClassName={
-              watch(`contract.vat_account_id`) ? "bg-blue-100" : ""
+              watch(`contract.vatAccountId`) ? "bg-blue-100" : ""
             }
-            label={`vat_account_id`}
-            name={`contract.vat_account_id`}
+            label={`vatAccountId`}
+            name={`contract.vatAccountId`}
             table={"account"}
           />
         </div>
@@ -145,51 +125,50 @@ const ContractFormGeneral = () => {
       <div className={`grid grid-cols-2 md:grid-cols-3  gap-x-6 mb-2 mt-4`}>
         <div className="flex flex-col gap-y-2">
           {[
-            "contract_value",
-            "price_before_vat",
-            "final_price",
+            "contractValue",
+            "priceBeforeVat",
+            "finalPrice",
           ]?.map((field, i) => (
             <RHFInput
               key={`${field}-${i}`}
               name={`contract.${field}`}
               label={field}
-              inputClassName={field === "final_price" ? "bg-blue-100" : ""}
-              readOnly={field === "final_price" || field === 'price_before_vat'}
+              inputClassName={field === "finalPrice" ? "bg-blue-100" : ""}
+              readOnly={field === "finalPrice" || field === 'priceBeforeVat'}
             />
           ))}
         </div>
         <div className="flex flex-col gap-y-2">
           {[
-            "discount_rate",
-            "vat_rate",
-            "current_securing_value",
+            "discountRate",
+            "vatRate",
+            "currentSecuringValue",
           ]?.map((field, i) => (
             <RHFInput
               key={`${field}-${i}`}
               name={`contract.${field}`}
               label={field}
-              inputClassName={field === "final_price" ? "bg-blue-100" : ""}
             />
           ))}
         </div>
         <div className="flex flex-col gap-y-2">
           {[
-            "discount_value",
-            "vat_value",
-            "previous_securing",
+            "discountValue",
+            "vatValue",
+            "previousSecuring",
           ]?.map((field, i) => (
             <RHFInput
               key={`${field}-${i}`}
               name={`contract.${field}`}
               label={field}
-              inputClassName={field === "final_price" ? "bg-blue-100" : ""}
+              inputClassName={field === "finalPrice" ? "bg-blue-100" : ""}
               readOnly
             />
           ))}
         </div>
         <RHFSelectField
-          label={`paid_type`}
-          name={`contract.paid_type`}
+          label={`paidType`}
+          name={`contract.paidType`}
           containerClassName="mt-1"
           options={CONTRACT_PAID_TYPE}
         />

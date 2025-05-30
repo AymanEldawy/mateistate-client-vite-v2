@@ -8,7 +8,7 @@ import { COUNTER_CHQ_NUMBER } from "@/helpers/contract/installmentHelpers";
 import { VOUCHER_GRID_COLUMNS } from "@/helpers/voucher/voucherColumns";
 import { usePopupForm } from "@/hook/usePopupForm";
 import { getAccountCash } from "@/services/accountService";
-import { getVoucherLastNumberByType } from "@/services/vouchersService";
+import { getLastOne } from "@/services/paginationService";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -96,7 +96,7 @@ const ContractFormPayments = ({
 
 
   const onClickAddNewCash = async () => {
-    const number = await getVoucherLastNumberByType(VOUCHER_RECEIPTS_CODE);
+    const last = await getLastOne('voucher', VOUCHER_RECEIPTS_CODE);
     const account_cash_id = await getAccountCash(watch('contract.building_id'));
 
     let clientName = CACHE_LIST.account?.find(
@@ -116,7 +116,7 @@ const ContractFormPayments = ({
       voucherType: VOUCHER_RECEIPTS_CODE,
       isNew: true,
       oldValues: {
-        number: number + 1,
+        number: +last?.data?.number + 1,
         connect_with: CONNECT_WITH_CONTRACT_CODE,
         connect_with_id: watch("contract.id"),
         voucher_type: VOUCHER_RECEIPTS_CODE,
