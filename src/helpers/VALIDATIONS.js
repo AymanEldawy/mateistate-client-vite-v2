@@ -6,8 +6,8 @@ const nonNegativeNumber = z.number().nonnegative();
 const optionalNumber = z.number().optional().nullable()
 const optionalString = z.string().optional().nullable()
 const optionalBoolean = z.boolean().optional().nullable()
-const optionalId = z.string().uuid().optional().nullable()
-const dateString = z.date().optional().nullable();
+const optionalId = z.string().uuid().or(z.literal("")).optional().nullable()
+const dateString = z.string().datetime().or(z.literal("")).optional().nullable();
 
 const VALIDATION = {
   OPTIONAL_BOOLEAN: optionalBoolean,

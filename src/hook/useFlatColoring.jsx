@@ -32,6 +32,9 @@ const calculateRoomCount = (collections, setRoomCounts) => {
       : 1;
   }
   setRoomCounts(counts);
+
+  console.log(collections, '---cocc', counts);
+  
 };
 
 export const FlatColoringProvider = ({ children }) => {
@@ -52,7 +55,7 @@ export const FlatColoringProvider = ({ children }) => {
 
   // select color
   const onSelectColor = (rowIndex, hexValue) => {
-    setSelectedIndex(rowIndex);
+    setSelectedIndex(+rowIndex);
     setHex(hexValue);
     setCanInsertColor(true);
   };
@@ -102,8 +105,9 @@ export const FlatColoringProvider = ({ children }) => {
       ? { ...additional, [tabSettings?.no]: additional?.name, ...flatType }
       : {};
     let prevData = flatsDetails?.[tab]?.[indexHash];
-
-    COLLECTION_COUNTS[additional?.name] = hex;
+    
+    if(additional.name)
+      COLLECTION_COUNTS[additional?.name] = hex;
 
     calculateUnitsColoringOnAdd(tab, indexHash);
     let prevItem = flatsDetails?.[tab]?.[indexHash];
@@ -130,8 +134,8 @@ export const FlatColoringProvider = ({ children }) => {
           ...prevData,
           ...rest,
           hex: hex,
-          row_index: selectedIndex,
-          asset_hash: indexHash,
+          rowIndex: selectedIndex,
+          assetHash: indexHash,
           // floor_no: selectedIndex + 1,
         },
       },

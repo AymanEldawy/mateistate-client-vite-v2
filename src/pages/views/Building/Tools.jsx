@@ -6,20 +6,26 @@ import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
+const gridDefaultValues = [
+  {
+    hex: "",
+    roomCount: 0,
+    description: "",
+    area: 0,
+    areaUnit: "Square Feet",
+    propertyType: 2,
+  },
+];
+
 const Tools = () => {
   const { id } = useParams();
-  const methods = useForm({ defaultValue: {
-    grid: [
-      {
-        hex: "",
-        room_count: 0,
-        description: "",
-        area: 0,
-        area_unit: "",
-        property_type: "",
-      },
-    ],
-  } });
+  const methods = useForm({
+    defaultValues: {
+      grid: gridDefaultValues,
+    }
+  })
+
+  console.log(methods.watch("grid"), '-s');
 
   return (
     <FormProvider {...methods}>

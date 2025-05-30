@@ -1,4 +1,5 @@
 import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 export const storeDefaultValue = {
   type: 0,
@@ -7,19 +8,19 @@ export const storeDefaultValue = {
   warehouseman: "",
   note: "",
   ltnname: "",
-  parent_id: null,
-  final_id: null
+  parentId: null,
+  finalId: null
 
 };
 
 export const storeValidationSchema = () => z.object({
   type: z.number().min(0, "required"),
   name: z.string().nonempty({ message: "name is required" }),
-  address: z.string().optional(),
-  warehouseman: z.string().optional(),
-  note: z.string().optional(),
-  ltnname: z.string().optional(),
-  parent_id: z.string().optional().nullable(),
-  final_id: z.string().optional().nullable(),
+  address: VALIDATION.OPTIONAL_STRING,
+  warehouseman: VALIDATION.OPTIONAL_STRING,
+  note: VALIDATION.OPTIONAL_STRING,
+  ltnname: VALIDATION.OPTIONAL_STRING,
+  parentIid: VALIDATION.OPTIONAL_STRING,
+  finalId: VALIDATION.OPTIONAL_STRING,
 
 });

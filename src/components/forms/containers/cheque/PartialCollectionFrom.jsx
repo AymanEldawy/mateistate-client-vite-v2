@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import FormWrapper from '../../wrapper/FormWrapper'
+import { useEffect, useState } from 'react';
 import { FormFooter, FormHeader } from '../../wrapper';
-import usePartialPagination from '@/hook/usePartialPagination';
 import { RHFAsyncSelectField, RHFInput, RHFTextarea } from '../../fields';
 import { FormProvider, useForm } from 'react-hook-form';
 import { AccountField, CurrencyFieldGroup } from '../../global';
@@ -9,40 +7,38 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import QUERY_KEYS from '@/data/queryKeys';
 import ConfirmModal from '@/components/shared/ConfirmModal';
-
-const defaultValue = {}
+import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from '@/services/paginationService';
 
 const mergePattern = (pattern, chqValues, setValue) => {
 
   if (chqValues?.id) {
-    setValue("cheque_id", chqValues?.id);
+    setValue("chequeId", chqValues?.id);
   }
   if (chqValues?.amount) {
-    setValue("total_value", chqValues?.amount);
-    setValue("total_sum", chqValues?.amount);
+    setValue("totalValue", chqValues?.amount);
+    setValue("totalSum", chqValues?.amount);
     setValue("rest", chqValues?.amount);
   }
-  if (pattern?.partial_credit_account_id) {
-    setValue("credit_account_id", pattern?.partial_credit_account_id);
+  if (pattern?.partial_creditAccountId) {
+    setValue("creditAccountId", pattern?.partialCreditAccountId);
   }
 
-  if (pattern?.partial_default_observe_account_is_client) {
-    setValue("credit_account_id", chqValues?.account_id);
+  if (pattern?.partialDefaultObserveAccountIsClient) {
+    setValue("creditAccountId", chqValues?.accountId);
   }
 
-  if (pattern?.partial_debit_account_id) {
-    setValue("debit_account_id", pattern?.partial_debit_account_id);
+  if (pattern?.partialDebitAccountId) {
+    setValue("debitAccountId", pattern?.partialDebitAccountId);
   }
 
-  if (pattern?.partial_gen_entries) setValue("gen_entries", true);
+  if (pattern?.partialGenEntries) setValue("genEntries", true);
 
   if (
-    pattern?.partial_move_cost_center_debit ||
-    pattern?.partial_move_cost_center_credit
+    pattern?.partialMoveCostCenterDebit ||
+    pattern?.partialMoveCostCenterCredit
   ) {
-    setValue("cost_center_id", chqValues?.cost_center_id);
+    setValue("costCenterId", chqValues?.costCenterId);
   }
-
 }
 
 
@@ -51,12 +47,30 @@ const PartialCollectionFrom = ({
   outerClose
 }) => {
   const methods = useForm({
-    defaultValue
+    defaultValue: {
+      id: null,
+      chequeId: null,
+      createdAt: new Date(),
+      amount: 0,
+      totalValue: 0,
+      totalSumPrev: 0,
+      totalSum: 0,
+      rest: 0,
+      debitAccountId: null,
+      creditAccountId: null,
+      costCenterId: null,
+      note: '',
+      commissionDebitId: null,
+      commission_credit_id: null,
+      commissionCostCenterId: null,
+      commissionPercentage: 0,
+      commissionValue: 0,
+      commissionNote: '',
+    }
   });
   const chequeId = popupFormConfig?.chequeValue?.id
   const chequeValue = popupFormConfig?.chequeValue
   const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
-  const { getFirst, getLast, getNext: goNext, getPrevious: goBack, getPartialByNumber } = usePartialPagination(chequeId)
   const [currentNumber, setCurrentNumber] = useState(0);
   const [lastNumber, setLastNumber] = useState(0);
   const [openConfirmation, setOpenConfirmation] = useState(false)
@@ -64,7 +78,7 @@ const PartialCollectionFrom = ({
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLast(chequeId);
+      const response = await getLastOne('op_partial_collection', null, chequeId);
       if (response?.success) {
         goNew(response?.result?.at(0));
         setLastNumber(response?.result?.at(0)?.number);
@@ -82,8 +96,8 @@ const PartialCollectionFrom = ({
     const subscription = watch((value, { name, type }) => {
       if (name === "amount") {
         let amount = +watch("amount") || 0;
-        let prev = +watch("total_sum_prev") || 0;
-        let total = +watch("total_value") || 0;
+        let prev = +watch("totalSumPrev") || 0;
+        let total = +watch("totalValue") || 0;
 
         let theTotalRest = total - prev - amount;
         let theTotalSum = prev + amount;
@@ -103,7 +117,7 @@ const PartialCollectionFrom = ({
           clearErrors("rest");
         }
         setValue("rest", theTotalRest);
-        setValue("total_sum", theTotalSum);
+        setValue("totalSum", theTotalSum);
       }
     });
     return () => subscription.unsubscribe();
@@ -112,10 +126,10 @@ const PartialCollectionFrom = ({
   const goTo = async (value) => {
     let response = null;
     if (value === 'FIRST')
-      response = await getFirst()
+      response = await getFirstOne('op_partial_collection', null, chequeId)
     else if (value === 'LAST')
-      response = await getLast()
-    else await getPartialByNumber(value)
+      response = await getLastOne('op_partial_collection', null, chequeId)
+    else await getOneBy('op_partial_collection', value, 'number', null, chequeId)
 
   }
 
@@ -125,18 +139,18 @@ const PartialCollectionFrom = ({
       reset(data);
       return
     }
-    let total_sum_prev = (data?.total_sum_prev || 0) + data?.amount;
+    let totalSumPrev = (data?.totalSumPrev || 0) + data?.amount;
 
     setValue("id", null);
     setValue("amount", 0);
-    setValue("total_sum", 0);
-    setValue("total_sum_prev", total_sum_prev || 0);
-    setValue("rest", +watch("total_value") - total_sum_prev);
-    setValue("cost_center_id", data?.cost_center_id);
-    setValue("cheque_id", data?.cheque_id || chequeId);
-    setValue("credit_account_id", data?.credit_account_id);
-    setValue("debit_account_id", data?.debit_account_id);
-    setValue("total_value", chequeValue?.amount);
+    setValue("totalSum", 0);
+    setValue("totalSumPrev", totalSumPrev || 0);
+    setValue("rest", +watch("totalValue") - totalSumPrev);
+    setValue("costCenterId", data?.costCenterId);
+    setValue("chequeId", data?.chequeId || chequeId);
+    setValue("creditAccountId", data?.creditAccountId);
+    setValue("debitAccountId", data?.debitAccountId);
+    setValue("totalValue", chequeValue?.amount);
     let num = +data?.number + 1 || 1
     setValue("number", num);
     setCurrentNumber(num);
@@ -161,32 +175,32 @@ const PartialCollectionFrom = ({
           <div className="max-w-3xl w-full p-4">
             <div className="grid grid-cols-3 gap-8 xl:gap-14">
               <div className="flex flex-col gap-2 col-span-2">
-                <RHFInput name="created_at" label="created_at" />
+                <RHFInput name="createdAt" label="createdAt" />
                 <CurrencyFieldGroup />
                 <RHFInput name="amount" label="amount" />
                 <RHFAsyncSelectField
-                  name="debit_account_id"
-                  label="debit_account_id"
+                  name="debitAccountId"
+                  label="debitAccountId"
                   getSearch={() => { }}
                   getSingle={() => { }}
                 />
                 <RHFAsyncSelectField
-                  name="credit_account_id"
-                  label="credit_account_id"
+                  name="creditAccountId"
+                  label="creditAccountId"
                   getSearch={() => { }}
                   getSingle={() => { }}
 
                 />
                 <RHFAsyncSelectField
-                  name="cost_center_id"
-                  label="cost_center_id"
+                  name="costCenterId"
+                  label="costCenterId"
                   getSearch={() => { }}
                   getSingle={() => { }}
 
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                {["total_value", "total_sum_prev", "total_sum", "rest"]?.map(
+                {["totalValue", "totalSumPrev", "totalSum", "rest"]?.map(
                   (field) => (
                     <RHFInput name={field} label={field} key={field} readOnly={true} />
                   )
@@ -198,25 +212,25 @@ const PartialCollectionFrom = ({
             <div className="grid grid-cols-2 gap-8 xl:gap-14 my-4">
               <div className="flex flex-col gap-2 ">
                 <AccountField
-                  name='commission_debit_id'
-                  label='commission_debit_id'
+                  name='commissionDebitId'
+                  label='commissionDebitId'
                 />
                 <AccountField
-                  name='commission_credit_id'
-                  label='commission_credit_id'
+                  name='commissionCreditId'
+                  label='commissionCreditId'
                 />
                 <RHFAsyncSelectField
-                  name='commission_cost_center_id'
-                  label='commission_cost_center_id'
+                  name='commissionCostCenterId'
+                  label='commissionCostCenterId'
                   getSearch={() => { }}
                   getSingle={() => { }}
 
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <RHFInput name="commission_percentage" label="commission_percentage" />
-                <RHFInput name="commission_value" label="commission_value" />
-                <RHFInput name="commission_note" label="commission_note" />
+                <RHFInput name="commissionPercentage" label="commissionPercentage" />
+                <RHFInput name="commissionValue" label="commissionValue" />
+                <RHFInput name="commissionNote" label="commissionNote" />
               </div>
             </div>
 
@@ -226,8 +240,8 @@ const PartialCollectionFrom = ({
             setOpenConfirmation={setOpenConfirmation}
             paginationForm={{
               goTo,
-              goBack,
-              goNext,
+              goBack: getPreviousOne('op_partial_collection', currentNumber, null, chequeId),
+              goNext: getNextOne('op_partial_collection', currentNumber, null, chequeId),
               lastNumber,
               setCurrentNumber,
               currentNumber,

@@ -28,7 +28,8 @@ const ReactSelectAsync = ({
   allowAdd,
   table,
   formKey,
-  ...selectProps
+  onChange,
+  ...props
 }) => {
   const { handleDispatchForm } = usePopupForm()
   const queryClient = new QueryClient();
@@ -42,10 +43,10 @@ const ReactSelectAsync = ({
           if (response?.data) {
             callback(response.data);
           }
-          return response.data;
+          // return response.data;
         },
       });
-      return res;
+      // return res;
     } catch (error) {
       console.error("Error fetching options:", error);
       callback([]);
@@ -145,8 +146,6 @@ const ReactSelectAsync = ({
                   kind="info"
                   containerClassName="h-[22px] w-[22px] !rounded-full mt-[2px] !p-1 mx-1"
                   onClick={(e) => {
-                    console.log(e,'---');
-                    
                     e.stopPropagation()
                     handleDispatchForm({
                       setDefaultOption,
@@ -164,7 +163,8 @@ const ReactSelectAsync = ({
           );
         },
       }}
-      {...selectProps}
+      {...props}
+      onChange={onChange}
     />
   )
 }

@@ -590,3 +590,21 @@ const sideMenuItems = [
 ];
 
 export default sideMenuItems;
+
+
+export const entryMenu = {
+  name: "menu.entries",
+  permissions: PERMISSIONS[PATHS.ENTRIES],
+  subChild: [
+    {
+      name: "menu.entries",
+      path: PATHS.ENTRIES,
+      permissions: PERMISSIONS[PATHS.ENTRIES],
+    },
+    {
+      name: "menu.create_entry",
+      path: PATHS.CREATE_ENTRY,
+      permissions: PERMISSIONS[PATHS.CREATE_ENTRY],
+    },
+  ]
+}

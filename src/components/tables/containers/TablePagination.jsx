@@ -1,11 +1,8 @@
 import { Fragment } from "react";
 
 const TablePagination = ({ table, pagination }) => {
-
   if (!table.getPageCount()) return;
 
-  console.log(table.getPageCount(), pagination, 'pagin');
-  
   return (
     <div>
       <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">

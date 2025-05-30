@@ -27,10 +27,10 @@ const apartmentColumns = [
       />
     ),
   },
-  { header: "building_id", accessorKey: "building_name" },
+  { header: "building_id", accessorKey: "buildingName" },
   {
     header: "apartment_number",
-    accessorKey: "apartment_no",
+    accessorKey: "apartmentNo",
     cell: ({ getValue, row }) => (
       <Link
         to={`/apartments?number=${row?.original?.number}`}
@@ -43,7 +43,7 @@ const apartmentColumns = [
   { header: "floor", accessorKey: "floor" },
   {
     header: "apartment_kind",
-    accessorKey: "apartment_kind",
+    accessorKey: "apartmentKind",
     cell: ({ getValue, row }) => {
       let kind = APARTMENT_FLAT_TYPE.find(
         (c) => c?.id === +getValue()
@@ -61,23 +61,23 @@ const apartmentColumns = [
   { header: "description", accessorKey: "description" },
   { header: "category", accessorKey: "category" },
   { header: "area", accessorKey: "area" },
-  { header: "area_unit", accessorKey: "area_unit" },
+  { header: "area_unit", accessorKey: "areaUnit" },
   { header: "view", accessorKey: "view" },
-  { header: "bathroom_count", accessorKey: "bathroom_count" },
-  { header: "balcony_count", accessorKey: "balcony_count" },
-  { header: "has_lawsuit", accessorKey: "has_lawsuit" },
-  { header: "main_cost_center_id", accessorKey: "main_cost_center_id" },
-  { header: "cost_center_id", accessorKey: "cost_center_id" },
-  { header: "property_type", accessorKey: "property_type" },
-  { header: "water_meter", accessorKey: "water_meter" },
-  { header: "electricity_meter", accessorKey: "electricity_meter" },
+  { header: "bathroom_count", accessorKey: "bathroomCount" },
+  { header: "balcony_count", accessorKey: "balconyCount" },
+  { header: "has_lawsuit", accessorKey: "hasLawsuit" },
+  { header: "main_cost_center_id", accessorKey: "mainCostCenterId" },
+  { header: "cost_center_id", accessorKey: "costCenterId" },
+  { header: "property_type", accessorKey: "propertyType" },
+  { header: "water_meter", accessorKey: "waterMeter" },
+  { header: "electricity_meter", accessorKey: "electricityMeter" },
   { header: "statement", accessorKey: "statement" },
-  { header: "room_count", accessorKey: "room_count" },
-  { header: "property_values_id", accessorKey: "property_values_id" },
+  { header: "room_count", accessorKey: "roomCount" },
+  { header: "property_values_id", accessorKey: "propertyValuesId" },
   { header: "hex", accessorKey: "hex" },
-  { header: "cost_price", accessorKey: "cost_price" },
-  { header: "amount_paid", accessorKey: "amount_paid" },
-  { header: "cost_currency_id", accessorKey: "cost_currency_id" },
+  { header: "cost_price", accessorKey: "costPrice" },
+  { header: "amount_paid", accessorKey: "amountPaid" },
+  { header: "cost_currency_id", accessorKey: "costCurrencyId" },
   { header: "note", accessorKey: "note" },
 ];
 

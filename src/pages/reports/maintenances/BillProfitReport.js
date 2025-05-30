@@ -42,7 +42,6 @@ const BillProfitReport = () => {
       filters: watch(),
     });
     setData(res?.data);
-    console.log("🚀 ~ onSubmit ~ res:", res);
   };
 
   return (

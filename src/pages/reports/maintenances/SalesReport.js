@@ -33,14 +33,11 @@ const SalesReport = () => {
   const columns = useMemo(() => getReportColumns(name), []);
 
   const onSubmit = async (value) => {
-    console.log("🚀 ~ onSubmit ~ fn: called");
     let fn = REPORTS?.[name];
-    console.log("🚀 ~ onSubmit ~ fn:", fn);
     const res = await fn({
       filters: watch(),
     });
     setData(res?.data);
-    console.log("🚀 ~ onSubmit ~ res:", res);
   };
 
   console.log({

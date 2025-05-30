@@ -5,8 +5,6 @@ const BtnGroups = ({
   renderItem
 }) => {
 
-  console.log(list,'ist');
-  
   return (
     <div className='flex items-center gap-4 '>
       {list?.map(item => {

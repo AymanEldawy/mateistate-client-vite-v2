@@ -39,7 +39,6 @@ const ChequeFormBar = ({ pattern }) => {
             table: 'op_partial_collection',
             pattern,
             chequeValue: watch()
-
           })
         }
       >

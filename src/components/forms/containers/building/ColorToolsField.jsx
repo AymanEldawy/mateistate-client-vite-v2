@@ -12,6 +12,7 @@ const ColorToolsField = ({
   error,
   availableColors,
   name,
+  hideErrors,
   ...field
 }) => {
   const coloring = useFlatColoring();
@@ -20,10 +21,11 @@ const ColorToolsField = ({
   const [openColorList, setOpenColorList] = useState();
   const [color, setColor] = useState("");
   const inputRef = useRef();
+  const buttonRef = useRef();
 
   useEffect(() => {
     if (color) {
-      setValue(name, color);      
+      setValue(name, color);
     }
   }, [color]);
 
@@ -33,11 +35,12 @@ const ColorToolsField = ({
       coloring?.changeAvailableColors(watch(name));
     }
   }, [openColorList]);
-
+  
   return (
     <div className="relative">
       <div className={"flex flex-row " + containerClassName} key={field?.name}>
         <button
+          ref={buttonRef}
           aria-label="choose color"
           type="button"
           className={`border read-only:bg-[#2289fb1c] w-full h-8 dark:read-only:bg-[#444] rounded p-1 ${inputClassName} ${error ? "border-red-200 text-red-600" : ""
@@ -46,7 +49,7 @@ const ColorToolsField = ({
           style={{ backgroundColor: watch(name) }}
           onClick={() => setOpenColorList(true)}
         />
-        {error ? (
+        {error && !hideErrors ? (
           <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
         ) : null}
       </div>
@@ -61,7 +64,9 @@ const ColorToolsField = ({
                 : "opacity-0 pointer-events-none"
                 } `}
             />
-            <div className="absolute z-20 min-w-[200px] p-4 top-0 ltr:left-full rtl:right-full bg-white shadow-md rounded-md">
+            <div
+              style={{ zIndex: 1000, top: buttonRef?.current?.getClientRects()?.[0].top + 30, left: buttonRef?.current?.getClientRects()?.[0].left  }}
+              className="z-20 min-w-[200px] p-4 top-0 ltr:left-full rtl:right-full bg-white shadow-md rounded-md fixed">
               <div
                 className={`relative h-6 mb-4 w-6 rounded-full border flex items-center justify-center text-white text-lg overflow-hidden ${color === inputRef?.current?.value ? "shadow-md" : ""
                   }`}
@@ -89,7 +94,11 @@ const ColorToolsField = ({
                     className={`h-6 w-6 rounded-full border relative flex items-center justify-center ${color === currentColor ? "shadow-md" : ""
                       }`}
                     style={{ backgroundColor: currentColor }}
-                    onClick={() => setColor(currentColor)}
+                    onClick={() => {
+                      setColor(currentColor);
+                      setOpenColorList(false);
+                      
+                    }}
                   >
                     {color === currentColor ? (
                       <span className="h-4 w-4 rounded-full border-[3px] border-white block" />

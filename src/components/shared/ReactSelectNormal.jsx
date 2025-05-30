@@ -7,7 +7,7 @@ const BORDER_COLOR = "#ced4da";
 const BORDER_COLOR_DARK = "#32383e";
 const RED_COLOR = "#d32424";
 
-const ReactSelectNormal = ({ 
+const ReactSelectNormal = ({
   selectClassName,
   isDarkMode,
   small,
@@ -19,6 +19,7 @@ const ReactSelectNormal = ({
   error,
   ...selectProps
 }) => {
+
   return (
     <Select
       menuPlacement="auto"
@@ -94,6 +95,7 @@ const ReactSelectNormal = ({
         ...styles,
       }}
       value={value}
+      defaultValue={value}
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       onChange={onChange}

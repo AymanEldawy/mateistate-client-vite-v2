@@ -4,12 +4,16 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const EntryOriginalLink = ({ data }) => {
+  console.log(data,'-data-EntryOriginalLink-');
+  
   const { t } = useTranslation();
 
   const original = useMemo(() => {
-    return getCreatedFromUrl(data?.created_from, data?.created_from_id)
+    return getCreatedFromUrl(data?.entry?.createdFrom, data?.entry?.createdFromId)
   }, [data])
 
+
+  if (!original) return null;
 
   return (
     <Link

@@ -41,12 +41,12 @@ const AccountForm = () => {
 
   const automaticChangesOnAccount = async (parentId) => {
     const response = await getAccountCodeNumber(parentId);
-    if(response?.success) {
+    if (response?.success) {
       const data = response?.data
       setValue("account.finalId", data?.finalId || data?.parentId);
       setValue("account.code", data.nextChildCode);
     }
-  };  
+  };
 
   return (
     <div className="">
@@ -74,10 +74,12 @@ const AccountForm = () => {
           <AccountField
             name="account.parentId"
             label="parent_id"
+            allowAdd={false}
           />
           <AccountField
             name="account.finalId"
             label="final_id"
+            allowAdd={false}
           />
         </div>
       ) : null}

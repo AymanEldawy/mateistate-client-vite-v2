@@ -13,7 +13,6 @@ export const useMenuData = () => {
   const response = useQuery({
     queryKey: ['menu'],
     queryFn: async () => {
-      console.log('called');
       try {
         const [cheques, bills, contracts, vouchers] = await Promise.all([
           getAllChequePatterns(),

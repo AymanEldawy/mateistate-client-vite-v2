@@ -34,13 +34,11 @@ const ItemActivityReport = () => {
   const columns = useMemo(() => getReportColumns(name), []);
 
   const onSubmit = async (value) => {
-    console.log("🚀 ~ onSubmit ~ fn: called")
     let fn = REPORTS?.[name];
     const res = await fn({
       filters: watch(),
     });
     setData(res?.data);
-    console.log("🚀 ~ onSubmit ~ res:", res);
   };
 
   return (

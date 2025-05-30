@@ -23,9 +23,9 @@ const Modal = ({
       fixed top-0 left-0 bottom-0 right-0 z-50 flex items-center justify-center backdrop-blur-sm bg-[#0008]
       ${containerClassName}
       `}
-      onClick={() => {
-        if (onClose) onClose();
-      }}
+      // onClick={() => {
+      //   if (onClose) onClose();
+      // }}
     >
       <div
         className={`bg-white dark:bg-[#282828] shadow ${classes} ${bodyClassName}`}

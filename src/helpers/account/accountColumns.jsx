@@ -67,16 +67,16 @@ const accountColumns = [
       return <span>{type?.name}</span>;
     },
   },
-  { header: "parent_name", accessorKey: "parent_name" },
-  { header: "final_name", accessorKey: "final_name" },
+  { header: "parent_name", accessorKey: "parentName" },
+  { header: "final_name", accessorKey: "finalName" },
   {
     header: "created_at",
-    accessorKey: "created_at",
+    accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "currency", accessorKey: "currency_name" },
+  { header: "currency", accessorKey: "currencyName" },
   { header: "note", accessorKey: "note" },
 ];
 

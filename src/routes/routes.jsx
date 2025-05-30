@@ -3,10 +3,6 @@ import PATHS from "@/data/paths";
 import React from "react";
 import { Navigate } from "react-router-dom";
 import SignPagesLayout from "./SignPagesLayout";
-// const Layout = React.lazy(() => import("@/components/layout/Layout"));
-// const SignPagesLayout = React.lazy(() =>
-//   import("@/components/signPagesLayout/SignPagesLayout")
-// );
 
 /************************************** General **************************************/
 const Home = React.lazy(() => import("../pages/views/Home/Home"));
@@ -36,6 +32,7 @@ const Bills = React.lazy(() => import("../pages/views/Bill/Bill"));
 const Vouchers = React.lazy(() => import("../pages/views/Voucher/Voucher"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
+const Materials = React.lazy(() => import("../pages/views/Materials/Materials"));
 const MaterialGroup = React.lazy(() =>
   import("../pages/views/MaterialGroup/MaterialGroup")
 );
@@ -228,6 +225,10 @@ const routes = [
       {
         path: PATHS.ENTRIES,
         element: <Entries />,
+      },
+      {
+        path: PATHS.MATERIAL,
+        element: <Materials />,
       },
       {
         path: PATHS.MATERIAL_GROUP,

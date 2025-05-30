@@ -12,8 +12,6 @@ const withLoggedOut = (Component) => {
 
     const isTemporaryLogin = userDataFromSessionStorage && !user;
     // const isTemporaryLogin = user || true;
-    console.log(user,'user');
-
     if (!user && !userDataFromSessionStorage) {
       return <Navigate to={PATHS.LOGIN} />;
     } else if (isTemporaryLogin) {

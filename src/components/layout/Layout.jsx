@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Menu from './header/Menu'
 import Header from './header/Header'
 import Footer from './Footer'
-import sideMenuItems from '@/data/sideMenuItems'
+import sideMenuItems, { entryMenu } from '@/data/sideMenuItems'
 import Sidebar from './Sidebar'
 import withLoggedOut from '@/HOC/withLoggedOut'
 import { useMenuData } from '@/hook/useMenuData'
@@ -13,13 +13,12 @@ const Layout = () => {
   
   const menu = useMemo(() => {
     return sideMenuItems.map((item) => {
-      if (item.key === 'Accounting_Transactions') {
-        item.children = data;
+      if (item.key === 'Accounting_Transactions' && data) {
+        item.children = [...data, entryMenu]
       }
       return item;
     })
   }, [data, isLoading])
-  console.log(menu, 'data', isLoading);
 
   return (
     <div id="layout-wrapper" className={"flex flex-col pb-12 min-h-screen"}>

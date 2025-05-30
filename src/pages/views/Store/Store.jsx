@@ -3,8 +3,11 @@ import PaperLayout from "../../../components/layout/paper/PaperLayout";
 
 import { storeDefaultValue, storeValidationSchema } from "@/helpers/store/storeValidationSchema";
 import storeColumns from "@/helpers/store/storeColumns";
-import StoreForm from "@/components/forms/containers/store/StoreForm";
 import { createStore, deleteManyStores, deleteStore, getAllStores, getSingleStore, updateStore } from "@/services/storeService";
+import { lazy } from "react";
+
+const StoreForm = lazy(() => import("@/components/forms/containers/store/StoreForm"))
+
 
 const storeConfig = {
   formProps: {

@@ -17,7 +17,6 @@ import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 
 const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
-
 const Vouchers = ({
   formOnly,
   outerClose,

@@ -32,8 +32,6 @@ const Account = ({
   popupFormConfig
 }) => {
 
-  console.log(popupFormConfig,'popupFormConfig');
-  
   if (formOnly) {
     return (
       <FormWrapper

@@ -101,6 +101,7 @@ const PATHS = {
   CONTRACT: "/contracts",
   /******************** ENTRIES ********************/
   ENTRIES: "/entries",
+  CREATE_ENTRY: "/create-entry",
 
   /******************** OWNER_EXPENSES_REPORT ********************/
   OWNER_EXPENSES_REPORT: "/reports/owner-expenses-report",

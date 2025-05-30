@@ -2,8 +2,7 @@ import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from "@
 import { useEffect, useMemo, useState } from "react";
 
 const useFormPagination = ({ name, number, code, chequeId }) => {
-  console.log({ name, number, code, chequeId, }, 'pagination');
-
+  console.log("useFormPagination", name, number, code, chequeId);
   const [currentNumber, setCurrentNumber] = useState();
   const [lastNumber, setLastNumber] = useState(number);
   const [currentId, setCurrentId] = useState(null);
@@ -41,8 +40,6 @@ const useFormPagination = ({ name, number, code, chequeId }) => {
     if (current?.success) {
       let data = current?.data;
       let last = +data?.number || 0;
-      console.log(data, 'called last', isNew);
-
       setLastNumber(last);
       if (isNew) {
         setCurrentNumber(last + 1);

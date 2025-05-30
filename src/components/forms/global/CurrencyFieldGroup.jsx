@@ -1,12 +1,13 @@
 import { useFormContext } from "react-hook-form";
 import { Label } from "../fields/Label";
 import { RHFInput, RHFTableSelect } from "../fields";
-import useGlobalOptions from "@/hook/useGlobalOptions";
 import { ErrorText } from "@/components/shared/ErrorText";
 
 const CurrencyFieldGroup = ({
   containerClassName,
   labelClassName,
+  hideErrors,
+  tab,
   ...field
 }) => {
   const {
@@ -14,7 +15,7 @@ const CurrencyFieldGroup = ({
   } = useFormContext();
   // const { currencies = [] } = useGlobalOptions();
   // const [currency, setCurrency] = useState(null);
-  const { name = 'currency_id', required, label } = field || {}
+  const { name = 'currencyId', required, label } = field || {}
   const error = errors?.[name];
 
   return (
@@ -36,12 +37,14 @@ const CurrencyFieldGroup = ({
         selectProps={{
           components: {
             IndicatorsContainer: () => {
-              return <RHFInput />
+              return <RHFInput
+                name="currencyValue"
+              />
             }
           }
         }}
       />
-      {error ? (
+      {error && !hideErrors ? (
         <ErrorText>{error?.message}</ErrorText>
       ) : null}
     </div>

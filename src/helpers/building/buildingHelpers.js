@@ -149,67 +149,61 @@ export const FLATS_TABLE_NAME = {
   apartment: "apartment",
 };
 
-export const findList = async (
+export const findListNew = async (
   type,
-  id,
+  key = 'apartmentKind',
   setFlatsDetails,
   COLLECTION_COUNTS,
-  setUNITS_COLORED_COUNT
+  setUNITS_COLORED_COUNT,
+  data
 ) => {
-  let name = FLAT_PROPERTY_TABS[type]?.no;
-  const response = await getSingleBuilding({ id })
 
-  let data = response?.result;
-  let hashApartmentTypes = {};
+  if (!data.length) return
+
   let newType = "";
-  if (data?.length) {
-    for (const row of data) {
-      let assetsType =
-        type === "apartment"
-          ? `${type}_${row?.apartmentKind}`
-          : type === "parking"
-            ? `${type}_${row?.parkingKind}`
-            : type === "shop"
-              ? `${type}_${row?.shopKind}`
-              : type;
+  let hashApartmentTypes = {};
+  for (const row of data) {
+    let assetsType = `${type}_${row?.[key]}`
 
-      newType = FLAT_PROPERTY_TYPES[assetsType];
-      hashApartmentTypes[newType] = {
-        ...hashApartmentTypes?.[newType],
-        [row?.asset_hash]: row,
-      };
-      COLLECTION_COUNTS[row?.asset_hash] = row?.hex;
-    }
-
-    setFlatsDetails((prev) => ({
-      ...prev,
-      ...hashApartmentTypes,
-    }));
-
-    setUNITS_COLORED_COUNT((prev) => ({
-      ...prev,
-      [newType]: Object.keys(hashApartmentTypes?.[newType]),
-    }));
+    newType = FLAT_PROPERTY_TYPES[assetsType];
+    hashApartmentTypes[newType] = {
+      ...hashApartmentTypes?.[newType],
+      [row?.assetHash]: row,
+    };
+    COLLECTION_COUNTS[row?.assetHash] = row?.hex;
   }
-};
 
+  setFlatsDetails((prev) => ({
+    ...prev,
+    ...hashApartmentTypes,
+  }));
+  console.log(hashApartmentTypes?.[newType], newType, hashApartmentTypes, 'hashApartmentTypes');
+  setUNITS_COLORED_COUNT((prev) => ({
+    ...prev,
+    [newType]: Object.keys(hashApartmentTypes?.[newType]),
+  }));
+
+
+
+}
 
 export const refetchBuildingAssets = (
-  id,
+  list,
   setFlatsDetails,
   COLLECTION_COUNTS,
-  setUNITS_COLORED_COUNT
+  setUNITS_COLORED_COUNT,
 ) => {
-  setFlatsDetails({});
+  setFlatsDetails(() => {});
   setUNITS_COLORED_COUNT({});
   COLLECTION_COUNTS = {};
   for (const asset of ["apartment", "shop", "parking"]) {
-    findList(
+    findListNew(
       asset,
-      id,
+      `${asset}Kind`,
       setFlatsDetails,
       COLLECTION_COUNTS,
-      setUNITS_COLORED_COUNT
+      setUNITS_COLORED_COUNT,
+      list?.[asset]
     );
   }
 };

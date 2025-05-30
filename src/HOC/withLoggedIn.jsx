@@ -10,12 +10,8 @@ const withLoggedIn = (Component) => {
     // Used if the user didn't select remember me
     const { user: userDataFromSessionStorage, accessToken } =
     useUserLocalStorage();
-    console.log("🚀 ~ Wrapper ~ accessToken:", accessToken)
-
     const isTemporaryLogin = userDataFromSessionStorage && !user;
     // const isTemporaryLogin = user || true
-    console.log(user,'user');
-
     if (user) {
       return <Navigate to={PATHS.HOME} />;
     } else if (isTemporaryLogin) {

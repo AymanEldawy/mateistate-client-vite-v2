@@ -32,7 +32,7 @@ const categoryColumns = [
     accessorKey: "number",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/categorys?number=${row?.original?.number}`}
+        to={`/categories?number=${row?.original?.number}`}
         className="text-blue-500 font-medium hover:underline"
       >
         # {getValue()}

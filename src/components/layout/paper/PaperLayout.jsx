@@ -9,11 +9,12 @@ import FormWrapper from '../../forms/wrapper/FormWrapper';
 import Loading from '@/components/shared/Loading';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 import PaperFiltersAndSort from './PaperFiltersAndSort';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import SEARCH_PARAMS from '@/data/searchParamsKeys';
 import useCustomSearchParams from '@/hook/useCustomSearchParams';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import usePathname from '@/hook/usePathname';
 
 const PaperLayout = ({
   name,
@@ -29,6 +30,7 @@ const PaperLayout = ({
   queryKey,
 }) => {
   const { t } = useTranslation()
+  const pathname = usePathname();
   const numberSearchParam = useCustomSearchParams(SEARCH_PARAMS.NUMBER)
   const codeSearchParam = useCustomSearchParams(SEARCH_PARAMS.CODE)
   const [openViability, setOpenViability] = useState(false);
@@ -43,9 +45,11 @@ const PaperLayout = ({
     pageSize: 100,
   });
 
+  // TODO: Refactor this to use a custom hook for search params
   useEffect(() => {
-    setOpenForm(numberSearchParam)
+    setOpenForm(!!numberSearchParam)
   }, [numberSearchParam])
+
 
   const { isLoading, isError, data, error, isFetching, refetch } = useQuery({
     queryKey: [
@@ -54,27 +58,24 @@ const PaperLayout = ({
       pagination?.pageIndex,
       pagination?.pageSize,
     ],
-    queryFn: async () => {
-      const response = await queryFn(
-        pagination?.pageIndex,
-        pagination?.pageSize,
-        columnFilters,
-        globalFilter,
-      )
-      if (response?.success) {
-        setPagination(prev => ({
-          ...prev,
-          pageIndex: response?.pages
-        }))
-        setPageCount(response?.pages)
-        return response?.data
-      }
-    },
-    // queryFn: () => {},
+    // queryFn: async () => {
+    //   const response = await queryFn(
+    //     pagination?.pageIndex,
+    //     pagination?.pageSize,
+    //     columnFilters,
+    //     globalFilter,
+    //   )
+    //   if (response?.success) {
+    //     setPagination(prev => ({
+    //       ...prev,
+    //       pageIndex: response?.pages
+    //     }))
+    //     setPageCount(response?.pages)
+    //     return response?.data
+    //   }
+    // },
+    queryFn: () => {},
   });
-  console.log(data, '---called data  ');
-
-
 
   const onDeleteSelected = async () => {
     const response = handleDeleteSelected(Object.keys(rowSelection))

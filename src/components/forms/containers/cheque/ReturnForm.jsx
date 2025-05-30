@@ -10,7 +10,6 @@ import { getSingleReturn } from '@/services/opReturnService';
 import { FormFooter, FormHeader } from '../../wrapper';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 
-
 const defaultValue = {}
 
 const mergePattern = async (
