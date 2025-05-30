@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, Fragment } from "react";
 import ChartItemIcon from "./ChartItemIcon";
 import ChartContextMenu from "./ChartContextMenu";
 import { ContextMenuTrigger } from "react-contextmenu";
@@ -30,13 +30,14 @@ const ChartRenderTree = ({
         };
       });
   };
-    
+
   const displayTree = useCallback(
     (tree, level = 1) => {
-      return tree?.sort((a,b) => a?.code - b?.code)?.map((item) => {
+      return tree?.sort((a, b) => a?.code - b?.code)?.map((item) => {
         return (
-          <>
+          <Fragment key={`${item?.id}`}>
             <ChartContextMenu
+              key={`${item?.id}-menu`}
               item={item}
               name={name}
               onUpdateItemHandler={onUpdateItemHandler}
@@ -65,7 +66,7 @@ const ChartRenderTree = ({
                 ) : null}
               </li>
             </ContextMenuTrigger>
-          </>
+          </Fragment>
         );
       });
     },

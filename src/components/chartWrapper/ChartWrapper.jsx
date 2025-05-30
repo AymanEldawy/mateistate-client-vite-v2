@@ -43,7 +43,8 @@ const ChartWrapper = ({
   const onUpdateItemHandler = async (item) => {
     handleDispatchForm({
       table: name,
-      oldValues: item
+      oldValues: item,
+      number: item?.number,
     })
   };
 
