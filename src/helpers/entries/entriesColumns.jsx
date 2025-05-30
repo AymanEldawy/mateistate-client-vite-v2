@@ -1,4 +1,5 @@
 import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox";
+import { Link } from "react-router-dom";
 
 const entriesColumns = [
   {
@@ -26,7 +27,7 @@ const entriesColumns = [
     ),
   },
   { header: "created_at", accessorKey: "created_at" },
-  { header: "number", accessorKey: "number" },
+  { header: "number", accessorKey: "number", cell: ({ getValue }) => <Link to={`/entries?number=${getValue()}`}>{getValue()}</Link> },
   { header: "debit", accessorKey: "debit" },
   { header: "credit", accessorKey: "credit" },
   { header: "account_name", accessorKey: "account_id" },

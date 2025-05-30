@@ -1,8 +1,16 @@
 import TableForm from '../../wrapper/TableForm'
-import { RHFTableAsyncSelect, RHFTableInput } from '../../fields'
+import { RHFInputAmount, RHFSelectField, RHFTableAsyncSelect, RHFTableInput, RHFTableSelect } from '../../fields'
 import { AccountField } from '../../global'
+import { useQuery } from '@tanstack/react-query';
+import { getLeavesAccounts } from '@/services/accountService';
+import useFetchData from '@/hook/useFetchQuery';
+import QUERY_KEYS from '@/data/queryKeys';
 
-const EntryFormGrid = () => {
+const EntryFormGrid = ({
+  accounts,
+  costCenters,
+}) => {
+
   return (
     <TableForm
       renderFields={(item, index) => {
@@ -10,43 +18,51 @@ const EntryFormGrid = () => {
           <>
 
             <td>
-              <AccountField
+              <RHFTableSelect
                 label=""
-                name={`grid.${index}.account_id`}
+                name={`entryGridData.${index}.accountId`}
+                hideErrors
+                options={accounts}
               />
             </td>
             <td>
-              <RHFTableInput
-                name={`grid.${index}.debit`}
-                label={`debit`}
+              <RHFInputAmount
+                name={`entryGridData.${index}.debit`}
+                label=""
+                hideErrors
               />
             </td>
             <td>
-              <RHFTableInput
-                name={`grid.${index}.credit`}
-                label={`credit`}
+              <RHFInputAmount
+                name={`entryGridData.${index}.credit`}
+                label=""
+                hideErrors
               />
             </td>
 
             <td>
-              <RHFTableAsyncSelect
-                name={`grid.${index}.cost_center_id`}
+              <RHFTableSelect
+                name={`entryGridData.${index}.costCenterId`}
+                hideErrors
+                options={costCenters}
               />
             </td>
             <td>
               <RHFTableInput
-                name={`grid.${index}.note`}
+                name={`entryGridData.${index}.note`}
+                hideErrors
               />
             </td>
             <td>
               <AccountField
-                name={`grid.${index}.observe_account_id`}
+                name={`entryGridData.${index}.observeAccountId`}
+                hideErrors
               />
             </td>
           </>
         )
       }}
-      gridName="grid"
+      gridName="entryGridData"
       headers={[
         'account',
         'debit',

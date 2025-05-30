@@ -1,4 +1,4 @@
-import { RHFInput, RHFTextarea } from "../../fields";
+import { RHFDatePicker, RHFInput, RHFTextarea } from "../../fields";
 import { CurrencyFieldGroup } from "../../global";
 
 export const EntryHead = ({
@@ -8,27 +8,24 @@ export const EntryHead = ({
     <div className="">
       <div className={`grid grid-cols-2 md:grid-cols-3 gap-4`}>
         <RHFInput
-          name="internal_number"
+          name="entry.internalNumber"
           label="internal_number"
-          // className="border-0 !rounded-none !h-full"
-          // containerClassName="!flex-col !gap-1"
+        // className="border-0 !rounded-none !h-full"
+        // containerClassName="!flex-col !gap-1"
         />
-        <RHFInput
-          name="createdAt"
+        <RHFDatePicker
+          name="entry.createdAt"
           label="createdAt"
           // className="border-0 !rounded-none !h-full"
           // containerClassName="!flex-col !gap-1"
           readOnly={onlyView}
         />
         <CurrencyFieldGroup
-          // className="min-w-[170px] border-0 !rounded-none !h-full"
-          table={"currency"}
-          name="currency_id"
           readOnly={onlyView}
         />
       </div>
       <RHFTextarea
-        name="note"
+        name="entry.note"
         label="note"
         containerClassName="col-span-full mt-1"
         labelClassName={"h-6"}

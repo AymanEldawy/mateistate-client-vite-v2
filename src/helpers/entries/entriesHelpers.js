@@ -1,19 +1,7 @@
-export const validationEntriesAccounts = (watch, setError) => {
-  let grid = watch("grid");
-  for (let i = 0; i < grid.length; i++) {
-    let current = grid?.[i]?.account_id;
-    let next = grid?.[i + 1]?.account_id;
-    if (current && next) {
-      if (current === next) {
-        // setError("The Accounts must be different");
-        return;
-      } else setError(``);
-    }
-  }
-}
-
 export const calculateEntriesDifferences = (watch, setValue) => {
-  let grid = watch("grid");
+  console.log('called calculateEntriesDifferences');
+  
+  let grid = watch("entryGridData");
   let credit = 0;
   let debit = 0;
   for (const item of grid) {
@@ -24,7 +12,7 @@ export const calculateEntriesDifferences = (watch, setValue) => {
       debit += +item?.debit;
     }
   }
-  setValue("debit", debit);
-  setValue("credit", credit);
-  setValue("difference", debit - credit);
+  setValue("entry.debit", debit);
+  setValue("entry.credit", credit);
+  setValue("entry.difference", debit - credit);
 }
