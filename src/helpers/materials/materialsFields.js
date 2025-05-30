@@ -8,7 +8,7 @@ export const MATERIAL_GENERAL_FIELDS = [
   { label: "ltnname", name: "ltnname", type: "text", required: false },
   {
     label: "category_id",
-    name: "category_id",
+    name: "categoryId",
     type: "uuid",
     required: false,
     is_ref: true,
@@ -17,7 +17,7 @@ export const MATERIAL_GENERAL_FIELDS = [
   },
   {
     label: "material_group_id",
-    name: "material_group_id",
+    name: "materialGroupId",
     type: "uuid",
     required: false,
     is_ref: true,
@@ -26,7 +26,7 @@ export const MATERIAL_GENERAL_FIELDS = [
   },
   FIELDS_STRUCTURE.selectField({
     label: "material_type",
-    name: "material_type",
+    name: "materialType",
     list: MATERIAL_TYPE,
   }),
   {
@@ -64,7 +64,7 @@ export const MATERIAL_GENERAL_FIELDS = [
 export const MATERIAL_BALANCE = [
   {
     label: "store_id",
-    name: "store_id",
+    name: "storeId",
     type: "uuid",
     required: false,
     is_ref: true,
@@ -81,7 +81,7 @@ export const MATERIAL_BALANCE = [
 export const MATERIAL_MINIMUM = [
   {
     label: "store_id",
-    name: "store_id",
+    name: "storeId",
     type: "uuid",
     required: false,
     is_ref: true,
@@ -95,7 +95,7 @@ export const MATERIAL_MINIMUM = [
 export const MATERIAL_PRICES = [
   {
     label: "currency_id",
-    name: "currency_id",
+    name: "currencyId",
     type: "uuid",
     required: false,
     is_ref: true,
@@ -104,52 +104,51 @@ export const MATERIAL_PRICES = [
   },
   {
     label: "currency_val",
-    name: "currency_val",
+    name: "currencyVal",
     type: "number",
     required: false,
   },
-  { label: "vat_rate", name: "vat_rate", type: "number", required: false },
+  { label: "vat_rate", name: "vatRate", type: "number", required: false },
   {
     label: "average_purchase",
-    name: "average_purchase",
+    name: "averagePurchase",
     type: "number",
     required: false,
   },
   {
     label: "biggest_purchase",
-    name: "biggest_purchase",
     type: "number",
     required: false,
   },
   {
     label: "pricing_policy",
-    name: "pricing_policy",
+    name: "pricingPolicy",
     type: "number",
     required: false,
   },
   {
     label: "purchase_date",
-    name: "purchase_date",
+    name: "purchaseDate",
     type: "date",
     required: false,
   },
   {
     label: "average_sales",
-    name: "average_sales",
+    name: "averageSales",
     type: "number",
     required: false,
   },
   {
     label: "largest_sales",
-    name: "largest_sales",
+    name: "largestSales",
     type: "number",
     required: false,
   },
-  { label: "last_price", name: "last_price", type: "number", required: false },
-  { label: "sales_date", name: "sales_date", type: "date", required: false },
+  { label: "last_price", name: "lastPrice", type: "number", required: false },
+  { label: "sales_date", name: "salesDate", type: "date", required: false },
 ];
 export const MATERIAL_PRICES_DETAILS = [
-  { label: "price_type", name: "price_type", type: "number", required: false },
+  { label: "price_type", name: "priceType", type: "number", required: false },
   { label: "unit1", name: "unit1", type: "number", required: false },
   { label: "unit2", name: "unit2", type: "number", required: false },
   { label: "unit3", name: "unit3", type: "number", required: false },

@@ -1,9 +1,13 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
 import { createMaterial, deleteManyMaterial, deleteMaterial, getAllMaterials, getSingleMaterial, updateMaterial } from "@/services/materialsService";
-import MaterialsForm from "@/components/forms/containers/materials/MaterialsForm";
 import materialsColumns from "@/helpers/materials/materialsColumns";
 import { materialsDefaultValue, materialsValidationSchema } from "@/helpers/materials/materialsValidationSchema";
+import { MATERIAL_STEPS } from "@/helpers/materials/materialsSteps";
+import { lazy } from "react";
+
+const MaterialsForm = lazy(() => import("@/components/forms/containers/materials/MaterialsForm"));
+
 
 const materialsConfig = {
   formProps: {
@@ -16,6 +20,9 @@ const materialsConfig = {
     isSteps: true,
     onHandleDelete: deleteMaterial,
     RenderForm: (props) => <MaterialsForm {...props} />,
+  },
+  formSidebarProps: {
+    list: Object.values(MATERIAL_STEPS)
   },
   formHeaderProps: {
     header: "materials",
