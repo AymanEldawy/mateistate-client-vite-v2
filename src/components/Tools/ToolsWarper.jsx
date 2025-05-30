@@ -1,8 +1,8 @@
 import { FLAT_PROPERTY_TABS, FLATS, refetchBuildingAssets } from "@/helpers/building/buildingHelpers";
 import useFlatColoring from "@/hook/useFlatColoring";
-import { generateBuildingUnits, getBuildingDetails, getSingleBuilding } from "@/services/buildingService";
+import { generateBuildingDetailsAndUnits, getBuildingDetails, getBuildingDetailsAndUnits, getSingleBuilding } from "@/services/buildingService";
 import { useEffect, useState } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import Loading from "../shared/Loading";
 import Btn from "../shared/Btn";
 import { ToolsTabsTable } from "./ToolsTabsTable";
@@ -11,6 +11,7 @@ import { ToolsContentBar } from "./ToolsContentBar";
 import { ToolsColorsBar } from "./ToolsColorsBar";
 import { ToolsTabsTableForm } from "./ToolsTabsTableForm";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 
 const calculateFlats = (building) => {
@@ -47,91 +48,11 @@ const ToolsWarper = () => {
     Object.values(FLAT_PROPERTY_TABS)?.[0]
   );
 
-  const getBuildingOwning = async (building) => { };
-
   const { data: building } = useQuery({
     queryKey: ["building", id],
     queryFn: async () => {
       const res = await getSingleBuilding(id);
-
-      return {
-        ...res,
-
-
-
-        "apartmentFloor": 4,
-
-        "mezzanineFloor": 5,
-
-        "officeFloor": 6,
-
-        "parkingFloor": 3,
-
-        "penthouseFloor": 3,
-
-        "undergroundParking": 4,
-
-        "apartmentCount": 4,
-
-        "bankAccountNumber": null,
-
-        "buildingBankAccountId": null,
-
-        "buildingCashAccountId": null,
-
-        "buildingChequeAccountId": null,
-
-        "buildingDepositAccountId": null,
-
-        "buildingDiscountAccountId": null,
-
-        "buildingInsuranceAccountId": null,
-
-        "buildingRevenueAccountId": null,
-
-        "commissionExpenseAccountId": null,
-
-        "customersMainAccountId": null,
-
-        "deferredVatAccountId": null,
-
-        "entryCommissionFromOwnerAccountId": null,
-
-        "entryLandlordAccountId": null,
-
-        "entryRevenueAccountId": null,
-
-        "entryVatAccountId": null,
-
-        "investmentOwnerAccountId": null,
-
-        "mezzanineCount": 3,
-
-        "officeCount": 4,
-
-        "ownerAccountId": null,
-
-        "ownerTaxAccountId": null,
-
-        "parkingCount": 2,
-
-        "penthouseCount": 2,
-
-        "realestateCompanyAccountId": null,
-
-        "receivedAccountId": null,
-
-        "shopCount": 3,
-
-        "storeCount": 3,
-
-        "supplierAccountId": null,
-
-        "vatAccountId": null,
-
-        "warehouseCount": 7
-
-      }
+      return res
     },
     enabled: !!id
   });
@@ -140,45 +61,62 @@ const ToolsWarper = () => {
   const { refetch } = useQuery({
     queryKey: ["property_values", building?.id],
     queryFn: async () => {
-      const response = await getBuildingDetails(building?.id);
-      reset({
-        grid: response?.result?.sort((a, b) => a?.row_index - b?.row_index),
-      });
+      const data = await getBuildingDetailsAndUnits(building?.id);
+      console.log(data, '-s');
+      if (data?.success) {
+        if (data?.propertyValues?.length)
+          reset({
+            grid: data?.propertyValues,
+          });
+        calculateFlats(building);
+        refetchBuildingAssets(
+          {
+            parking: data?.parkings,
+            shop: data?.shops,
+            apartment: data?.apartments,
+          },
+          setFlatsDetails,
+          COLLECTION_COUNTS,
+          setUNITS_COLORED_COUNT
+        );
+      }
     },
     enabled: !!building?.id
   });
 
-  useEffect(() => {
-    if (!building?.id) return;
-
-    calculateFlats(building);
-    getBuildingOwning(building);
-    refetchBuildingAssets(
-      building?.id,
-      setFlatsDetails,
-      COLLECTION_COUNTS,
-      setUNITS_COLORED_COUNT
-    );
-  }, [building?.id]);
 
 
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => { });
-  }, [watch]);
+  console.log(flatsDetails, 'flatsDetails');
+  console.log(errors, 'errors');
+  console.log(watch('grid'), 'grid');
 
-  console.log(watch(), 'watch');
 
   const onSubmit = async (value) => {
-    console.log("🚀 ~ onSubmit ~ value:", value)
-
     let grid = watch("grid");
+
+    if (!grid?.length || Object.keys(flatsDetails)?.length === 0) {
+      toast.error("Please fill the grid and flats details before submitting.");
+      return;
+    }
+
+    const collectFlats = (keys) =>
+      keys.flatMap(key => flatsDetails?.[key] ? Object.values(flatsDetails[key]) : []);
+
+    const apartments = collectFlats(['apartment', 'mezzanine', 'office', 'penthouse', 'warehouse']);
+    const shops = collectFlats(['store', 'shop']);
+    const parkings = collectFlats(['parking', 'underground']);
+
     setIsLoading(true);
-    const response = await generateBuildingUnits(
-      grid,
-      flatsDetails,
-      building,
-      UPDATES_ROWS
-    );
+
+    const response = await generateBuildingDetailsAndUnits({
+      propertyValues: grid,
+      mainBuildingId: building?.id,
+      units: {
+        apartments,
+        shops,
+        parkings,
+      }
+    });
 
     if (response?.isCompleted) {
       setUPDATES_ROWS({});
@@ -192,12 +130,6 @@ const ToolsWarper = () => {
     }
     setIsLoading(false);
   };
-
-  console.log({
-    flatsDetails,
-    grid: watch("grid")
-  });
-  
 
   return (
     <>

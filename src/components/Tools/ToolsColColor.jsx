@@ -35,10 +35,10 @@ const ToolsColColor = ({
   const itemHash = generateFlatHashName(tabName, tabSettings, yIndex, xIndex);
 
   const itemData =
-    flatsDetails?.[tabName]?.asset_hash || flatsDetails?.[tabName]?.[itemHash];
+    flatsDetails?.[tabName]?.assetHash || flatsDetails?.[tabName]?.[itemHash];
   const flatName = tabSettings?.no;
   const itemValue = flatsDetails?.[tabName]?.[itemHash]?.[flatName] || itemHash;
-  const itemColor = watch("grid")?.[itemData?.row_index]?.hex || itemData?.hex;
+  const itemColor = watch("grid")?.[itemData?.rowIndex]?.hex || itemData?.hex;
 
   return (
     <td className="px-4 py-2 dark:border-dark-border text-sm !p-0 border border-gray-400">
@@ -70,9 +70,9 @@ const ToolsColColor = ({
             if (canInsertColor)
               onInsertColor(tabName, itemHash, {
                 name: itemValue,
-                x_index: xIndex,
-                y_index: yIndex,
-                floor_no: xIndex + 1,
+                xIndex,
+                yIndex,
+                floorNo: (xIndex + 1).toString(),
               });
           }}
           style={{

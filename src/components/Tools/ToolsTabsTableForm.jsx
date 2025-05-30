@@ -21,7 +21,7 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
     let grid = watch()?.grid;
     for (let i = 0; i < grid?.length; i++) {
       if (roomCounts?.[grid[i].hex]) {
-        setValue(`grid.${i}.room_count`, roomCounts?.[grid[i].hex]);
+        setValue(`grid.${i}.roomCount`, roomCounts?.[grid[i].hex]);
       }
     }
   }, [JSON.stringify(roomCounts)]);
@@ -31,14 +31,12 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
       <TableForm
         gridName="grid"
         headers={[
-          // 'row_index',
           'hex',
-          'room_count',
+          'roomCount',
           'description',
           'area',
-          // 'area_unit',
           'view',
-          'property_type',
+          'propertyType',
         ]}
         formBodyProps={{
           customIndex: true,
@@ -71,7 +69,7 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
               </td>
               <td className={`min-w-[40px] whitespace-nowrap h-4 border dark:border-dark-border relative `}>
                 <RHFTableInput
-                  name={`grid.${index}.room_count`}
+                  name={`grid.${index}.roomCount`}
                   readOnly
                 />
               </td>
@@ -88,7 +86,7 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
                     "border-0 !rounded-none"
                   }
                   name={`grid.${index}.area`}
-                  area_unit={`grid.${index}.area_unit`}
+                  area_unit={`grid.${index}.areaUnit`}
                 />
               </td>
 
@@ -100,7 +98,7 @@ export const ToolsTabsTableForm = ({ errors, row }) => {
               </td>
               <td className={`min-w-[40px] whitespace-nowrap h-4 border dark:border-dark-border relative `}>
                 <RHFSelectField
-                  name={`grid.${index}.property_type`}
+                  name={`grid.${index}.propertyType`}
                   options={FLAT_PROPERTY_TYPE}
                   value={isOwnership ? FLAT_PROPERTY_TYPE[0].id : FLAT_PROPERTY_TYPE[1].id}
                 />

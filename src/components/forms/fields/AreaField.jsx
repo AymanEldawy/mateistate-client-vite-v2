@@ -21,7 +21,7 @@ const AreaField = ({
     >
       <input
         id={name}
-        className={`border max-w-[60px] h-[39px] read-only:bg-[#2289fb1c] dark:read-only:bg-[#444] rounded p-1 ${inputClassName} ${
+        className={`border max-w-[80px] h-[39px] read-only:bg-[#2289fb1c] dark:read-only:bg-[#444] rounded p-1 ${inputClassName} ${
           error ? "border-red-200 text-red-500" : ""
         } 
          `}
@@ -29,8 +29,7 @@ const AreaField = ({
         placeholder={'0'}
         value={watch(name)}
         {...register(name, {
-          valueAsNumber: field.type === "number",
-          validate: (value) => {},
+          valueAsNumber: true,
         })}
       />
       <select
