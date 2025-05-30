@@ -25,7 +25,7 @@ export const VOUCHER_GRID_COLUMNS = [
                 debit_total: 0,
                 debit_amount: 0,
                 credit_amount: 0,
-                grid: row?.original?.result,
+                voucherGridData: row?.original?.result,
               },
             })
           }}>

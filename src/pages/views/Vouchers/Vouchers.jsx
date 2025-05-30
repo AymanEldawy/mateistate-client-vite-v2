@@ -14,6 +14,7 @@ import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import { RHFCheckbox } from '@/components/forms/fields'
 
 const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
@@ -104,7 +105,11 @@ const Vouchers = ({
                 getSearch={getSearchVoucher}
                 queryKey={QUERY_KEYS.VOUCHERS}
               />
-              <EntryBar entryId={values?.id} />
+              <div className='flex gap-2'>
+                <RHFCheckbox containerClassName="!gap-1" labelClassName="!w-fit" name={`voucher.feedback`} label="feedback" />
+                <RHFCheckbox containerClassName="!gap-1" labelClassName="!w-fit whitespace-nowrap" name={`voucher.genEntires`} label="gen_entries" />
+              </div>
+              {/* <EntryBar tab={'voucher'} entryId={values?.id} /> */}
             </>
           )
         }}

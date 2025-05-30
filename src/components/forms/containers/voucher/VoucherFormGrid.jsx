@@ -2,6 +2,7 @@ import React from 'react'
 import TableForm from '../../wrapper/TableForm'
 import { RHFAsyncSelectField, RHFInput, RHFTableAsyncSelect, RHFTableInput } from '../../fields'
 import { AccountField } from '../../global'
+import { getSearchCostCenter, getSingleCostCenter } from '@/services/CostCenterService'
 
 // rowStyles={(index) => {
 //   if (PATTERN_SETTINGS?.even_table_color && index % 2 === 0) {
@@ -19,30 +20,36 @@ const VoucherFormGrid = ({ PATTERN_SETTINGS }) => {
           <>
             <td>
               <RHFTableInput
-                name={PATTERN_SETTINGS?.show_credit_field ? `grid.${index}.credit` : `grid.${index}.debit`}
+                type="number"
+                name={PATTERN_SETTINGS?.show_credit_field ? `voucherGridData.${index}.credit` : `voucherGridData.${index}.debit`}
                 label={PATTERN_SETTINGS?.show_credit_field ? `credit` : `debit`}
+                required={index === 0}
               />
             </td>
             <td>
               <AccountField
                 label=""
-                name={`grid.${index}.account_id`}
+                name={`voucherGridData.${index}.account_id`}
+                required={index === 0}
               />
             </td>
             <td>
               <RHFTableAsyncSelect
-                name={`grid.${index}.cost_center_id`}
+                name={`voucherGridData.${index}.cost_center_id`}
+                getSearch={getSearchCostCenter}
+                getSingle={getSingleCostCenter}
+                required={index === 0}
               />
             </td>
             <td>
               <RHFTableInput
-                name={`grid.${index}.note`}
+                name={`voucherGridData.${index}.description`}
               />
             </td>
           </>
         )
       }}
-      gridName="grid"
+      gridName="voucherGridData"
       headers={[
         PATTERN_SETTINGS?.show_credit_field ? `credit` : `debit`,
         "account",

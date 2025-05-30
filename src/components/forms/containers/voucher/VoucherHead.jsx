@@ -9,29 +9,31 @@ export const VoucherHead = ({
     <div>
       <div className={`grid gap-y-2 gap-x-8 grid-cols-2 md:grid-cols-3`}>
         <RHFInput
-          name="internal_number"
+          name="voucher.internal_number"
           label="internal_number"
         />
         <RHFDatePicker
-          name="createdAt"
-          label="createdAt"
+          name="voucher.createdAt"
+          label="created_at"
         />
         <AccountField
-          name="account_id"
+          name="voucher.accountId"
           label="account_id"
+          required
         />
         {PATTERN_SETTINGS?.show_contract_field ? (
           <UniqueFieldGroup />
-        ) : null}
+        ) : null} 
         {PATTERN_SETTINGS?.show_currency ? (
           <CurrencyFieldGroup
-            name="currency_id"
+            name="voucher.currencyId"
             label="currency_id"
+            required
           />
         ) : null}
       </div>
       <RHFTextarea
-        name="note"
+        name="voucher.note"
         label="note"
         containerClassName="col-span-full"
         className="border rounded-md !h-full w-full"

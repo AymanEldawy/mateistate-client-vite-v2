@@ -3,8 +3,8 @@ const CACHE_ROW_VALUE = {};
 export const calculateVoucherAmount = (row, val, column, watch, setValue) => {
   let value = 0;
   let amountColumnName =
-    column === "credit" ? "credit_amount" : "debit_amount";
-  let totalColumnName = column === "credit" ? "debit_total" : "credit_total";
+    column === "credit" ? "voucher.credit_amount" : "voucher.debit_amount";
+  let totalColumnName = column === "credit" ? "voucher.debit_total" : "voucher.credit_total";
 
   if (CACHE_ROW_VALUE?.[row]) {
     let oldValue = CACHE_ROW_VALUE?.[row];
@@ -21,7 +21,7 @@ export const calculateVoucherAmount = (row, val, column, watch, setValue) => {
 
 
 export const reCalculateVouchersResult = (watch, setValue) => {
-  let grid = watch("grid");
+  let grid = watch("voucherGridData");
   if (grid?.length) {
     let debit = 0
     let credit = 0
@@ -30,9 +30,9 @@ export const reCalculateVouchersResult = (watch, setValue) => {
       debit += +item?.debit || 0
 
     }
-    setValue('debit_amount', debit)
-    setValue('credit_total', debit)
-    setValue('credit_amount', credit)
-    setValue('debit_total', credit)
+    setValue('voucher.debitAmount', debit)
+    setValue('voucher.creditAmount', credit)
+    setValue('voucher.debitTotal', debit)
+    setValue('voucher.creditTotal', credit)
   }
 }

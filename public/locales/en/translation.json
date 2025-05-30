@@ -83,7 +83,7 @@
     "reservation_property_card": "Reservation Property Card",
     "reservation_property": "Reservation Property",
     "accounting_transactions": "Accounting Transactions",
-    
+
     "realty_transactions": "Realty Transactions",
     "services_contracts": "Services Contracts",
     "lawsuit": "Lawsuit",
@@ -203,6 +203,11 @@
   "user": "User",
   "contract": "Contract",
   "voucher": "Voucher",
+  "vouchers": "Vouchers",
+  "debit": "Debit",
+  "credit": "Credit",
+  "final_amount": "Final Amount",
+  "total_current_amount": "Total Current Amount",
   "bill": "Bill",
   "entry": "Entry",
   "bank": "Bank",
@@ -551,5 +556,16 @@
   "ownership": "Ownership",
   "store_count": "Store Count",
   "editorial_entry": "Editorial Entry",
-  "investment": "Investment"
+  "investment": "Investment",
+  "observe_account": "Observe Account",
+  "currency_value": "Currency Value",
+  "observe_cost_center": "Observe Cost Center",
+  "seller": "Seller",
+  "observe_account_id": "Observe Account ID",
+  "observe_cost_center_id": "Observe Cost Center ID",
+  "internal_number": "Internal Number",
+  "without_due_date": "Without Due Date",
+  "due_date": "Due Date",
+  "end_due_date": "End Due Date",
+  "deposit_status": "Deposit Status"  
 }
