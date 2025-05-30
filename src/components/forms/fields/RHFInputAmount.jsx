@@ -10,6 +10,7 @@ const RHFInputAmount = ({
   label,
   col,
   inTable,
+  hideErrors = false,
   ...field
 }) => {
   const { control, watch } = useFormContext();
@@ -38,11 +39,12 @@ const RHFInputAmount = ({
             <div className='relative w-full h-[30px]'>
               <input
                 ref={ref}
+                type="number"
                 className={`border text-xs font-medium read-only:bg-[#2289fb1c] w-full dark:read-only:bg-[#444] rounded p-1 focus-within:opacity-100 
                 ${type === 'number' && 'absolute top-0 left-0 w-full h-full opacity-0 z-10'} 
                 ${!hideNumber ? 'opacity-0' : ''}
                 ${inTable ? '!border-none !rounded-none' : ''}
-                ${error ? "border-red-200 text-red-500" : ""}
+                 ${error ? "border-red-200 text-red-500" : ""}
                 ${inputClassName}
                 `}
                 name={name}
@@ -60,11 +62,11 @@ const RHFInputAmount = ({
                 value={value}
               />
               {!hideNumber &&
-                <span className={`numbers absolute pointer-events-none w-full h-full top-0 left-0 ${inTable ? 'rounded-none' : 'border'} text-xs font-medium rounded pt-2 p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}`}>{Number(value || 0)?.toLocaleString()}</span>
+                <span className={`numbers absolute pointer-events-none w-full h-full top-0 left-0 ${inTable ? 'rounded-none' : 'border'} text-xs font-medium rounded pt-2 p-1 ${readOnly && 'bg-[#2289fb1c] w-full dark:bg-[#444]'}  ${error ? "border-red-200 text-red-500" : ""}`}>{Number(value || 0)?.toLocaleString()}</span>
               }
             </div>
 
-            {error ? (
+            {error && !hideErrors ? (
               <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
             ) : null}
           </div>

@@ -3,6 +3,7 @@ import TableFormWrapper from './TableFormWrapper';
 import TableFormHead from './TableFormHead';
 import TableFormBody from './TableFormBody';
 import TableFormIncreasableControl from './TableFormIncreasableControl';
+import TableFormErrors from './TableFormErrors';
 
 const TableForm = ({ gridName, withoutAction, headers, renderFields, formBodyProps, formHeadProps, formIncreasableProps, formWrapperProps, increasable = true }) => {
 
@@ -13,14 +14,15 @@ const TableForm = ({ gridName, withoutAction, headers, renderFields, formBodyPro
     name: gridName,
   });
 
-  console.log(remove,'mpve');
-  
-
   return (
     <TableFormWrapper
+      errors={tableError}
       {...formWrapperProps}
       increasableBar={increasable ?
         <TableFormIncreasableControl append={() => append({})} grid={fields} {...formIncreasableProps} remove={remove} /> : null
+      }
+      errorsWrapper={
+        <TableFormErrors errors={tableError} />
       }
     >
       <TableFormHead withoutAction={withoutAction} headers={headers} {...formHeadProps} />

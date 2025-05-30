@@ -18,7 +18,7 @@ const RHFTableSelect = ({
   ...field
 }) => {
   const { control } = useFormContext();
-  const { name, optionValue, optionLabel, options } = field || {}
+  const { name, optionValue = 'id', optionLabel = 'name', options } = field || {}
 
   return (
     <Controller
@@ -29,13 +29,15 @@ const RHFTableSelect = ({
         field: { onChange, ref, value },
         fieldState: { error },
       }) => {
+
         return (
           <ReactSelectNormal
-            getOptionLabel={(option) => option?.[optionLabel || 'name']}
-            getOptionValue={(option) => option?.[optionValue || 'id']}
+            getOptionLabel={(option) => option?.[optionLabel]}
+            getOptionValue={(option) => option?.[optionValue]}
             styles={styles}
             error={error}
             value={options?.find(c => c?.[optionValue] === value)}
+            defaultValue={options?.find(c => c?.[optionValue] === value)}
             options={options}
             selectClassName={selectClassName}
             isDarkMode={isDarkMode}

@@ -11,6 +11,7 @@ const RHFColorPicker = ({
   containerClassName,
   labelClassName,
   col,
+  hideErrors,
   ...field
 }) => {
   const { control, getFieldState } = useFormContext();
@@ -43,7 +44,7 @@ const RHFColorPicker = ({
               onChange={(pickedColor) => onChange(pickedColor.hex)}
               {...field}
             />
-            {error ? (
+            {error && !hideErrors ? (
               <ErrorText containerClassName="py-1">{message}</ErrorText>
             ) : null}
           </div>

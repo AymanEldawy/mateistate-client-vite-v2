@@ -6,6 +6,7 @@ const RHFTextarea = ({
   containerClassName,
   labelClassName,
   label,
+  hideErrors,
   ...field
 }) => {
   const { control } = useFormContext();
@@ -49,7 +50,7 @@ const RHFTextarea = ({
               value={value}
             />
 
-            {error ? (
+            {error && !hideErrors ? (
               <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
             ) : null}
           </div>

@@ -7,6 +7,7 @@ const RHFCheckbox = ({
   labelClassName,
   label,
   col,
+  hideErrors,
   ...field
 }) => {
   const { control } = useFormContext();
@@ -43,7 +44,7 @@ const RHFCheckbox = ({
                   labelClassName={labelClassName}
                 />
               )}
-              {error ? (
+              {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
               ) : null}
             </div>

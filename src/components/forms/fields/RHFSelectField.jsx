@@ -21,6 +21,7 @@ const RHFSelectField = ({
   label,
   col,
   small = true,
+  hideErrors,
   ...field
 }) => {
   const { control } = useFormContext();
@@ -35,8 +36,6 @@ const RHFSelectField = ({
         field: { onChange, ref, value },
         fieldState: { error },
       }) => {
-        console.log(value, '---value');
-
         return (
           <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
             {label && (
@@ -65,7 +64,7 @@ const RHFSelectField = ({
                 }}
               />
 
-              {error ? (
+              {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
               ) : null}
             </div>

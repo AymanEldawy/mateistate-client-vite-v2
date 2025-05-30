@@ -13,6 +13,7 @@ import { FormSingularLayout, FormStepsLayout, FormWarnModal } from ".";
 import Loading from "@/components/shared/Loading";
 import ConfirmModal from "@/components/shared/ConfirmModal";
 import { usePopupForm } from "@/hook/usePopupForm";
+import usePathname from "@/hook/usePathname";
 
 const FormWrapper = ({
   defaultValue,
@@ -32,6 +33,9 @@ const FormWrapper = ({
   oldValues,
   refetch
 }) => {
+  const searchParams = new URLSearchParams();
+  console.log(numberSearchParam, codeSearchParam, 'numberSearchParam, codeSearchParam');
+  const pathname = usePathname()
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -83,7 +87,7 @@ const FormWrapper = ({
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
-      if (oldData?.id) {
+      if (oldData?.id || id) {
         return formProps?.mutationUpdateFunction(oldData?.id, data)
       } else {
         return formProps?.mutationAddFunction(data)
@@ -104,6 +108,14 @@ const FormWrapper = ({
       onClose()
     },
   });
+
+  const removeSearchParams = () => {
+    if (numberSearchParam) searchParams.delete(numberSearchParam);
+    if (codeSearchParam) searchParams.delete(codeSearchParam);
+    if (pathname) {
+      window.history.replaceState({}, '', pathname);
+    }
+  };
 
   useEffect(() => {
     if (oldValues) {
@@ -139,8 +151,17 @@ const FormWrapper = ({
   const resetFormHandler = () => reset(defaultValue);
 
   const handleOnClose = () => {
-    setOpen(true);
+    if (!isDirty) {
+      if (onClose) onClose();
+      if (outerClose) outerClose();
+      console.log(name, 'name');
+      removeSearchParams()
 
+      return;
+    }
+
+
+    setOpen(true);
   }
 
   const handleDelete = async () => {

@@ -25,9 +25,6 @@ const FormStepPagination = (props) => {
     isLast,
     goNew,
   } = props || {};
-
-  console.log(props, "props");
-
   const handleChange = (e) => {
     // Allow only numeric input
     setCurrentNumber(e.target.value.replace(/[^0-9]/g, ""));
@@ -39,9 +36,6 @@ const FormStepPagination = (props) => {
       goTo(+e.target.value); // Call `goTo` function with the numeric value
     }
   };
-
-  console.log(currentNumber, lastNumber, "currentNumber");
-
 
   return (
 

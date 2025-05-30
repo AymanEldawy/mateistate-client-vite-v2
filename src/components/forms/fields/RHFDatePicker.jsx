@@ -13,6 +13,7 @@ const RHFDatePicker = ({
   label,
   inputClassName,
   col,
+  hideErrors,
   ...field
 }) => {
   const { control } = useFormContext();
@@ -58,7 +59,7 @@ const RHFDatePicker = ({
                 {...field}
               />
 
-              {error ? (
+              {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
               ) : null}
             </div>

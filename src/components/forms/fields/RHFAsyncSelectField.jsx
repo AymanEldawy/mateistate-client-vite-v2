@@ -28,6 +28,7 @@ const RHFAsyncSelectField = ({
   label,
   col,
   small = true,
+  hideErrors,
   ...field
 }) => {
   const { control, watch, setValue } = useFormContext();
@@ -53,11 +54,7 @@ const RHFAsyncSelectField = ({
   }
 
   useEffect(() => {
-    if (!watch(name)) return;
-    if (defaultOption && defaultOption?.[name] === watch(name)) return;
-    console.log(defaultOption && defaultOption?.[name] === watch(name), '----fds');
-    
-    
+    if ((defaultOption && defaultOption?.id === watch(name)) || !watch(name)) return;
     getDefaultOption(watch(name))
 
   }, [watch(name), defaultOption])
@@ -97,14 +94,14 @@ const RHFAsyncSelectField = ({
                 setDefaultOption={setDefaultOption}
                 onChange={(option) => {
                   setDefaultOption(option);
-                  setValue(name, option?.[optionValue]);
+                  setValue(name, option?.[optionValue])
                 }}
                 allowAdd={allowAdd}
                 table={table}
                 formKey={name}
                 required={required}
               />
-              {error ? (
+              {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
               ) : null}
             </div>

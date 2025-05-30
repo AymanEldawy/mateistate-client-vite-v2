@@ -3,8 +3,6 @@ import Btn from "@/components/shared/Btn"
 
 const TableFormBody = ({ fields, withoutAction, renderFields, remove, tbodyClassName, trClassName, tdClassName, customIndex }) => {
 
-  console.log(trClassName,'trClassName');
-  
   return (
     <tbody className={`${tbodyClassName}`}>
       {fields.map((item, index) => (

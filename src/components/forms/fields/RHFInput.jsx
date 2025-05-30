@@ -7,6 +7,7 @@ const RHFInput = ({
   labelClassName,
   label,
   col,
+  hideErrors,
   ...field
 }) => {
   const { control } = useFormContext();
@@ -48,7 +49,7 @@ const RHFInput = ({
               />
 
 
-              {error ? (
+              {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
               ) : null}
             </div>

@@ -30,7 +30,6 @@ export const DynamicForm = ({
               {...field}
               key={field?.name}
               name={tab ? `${tab}.${field?.name}` : field?.name}
-
             />
           );
         } else if (field?.table) {
