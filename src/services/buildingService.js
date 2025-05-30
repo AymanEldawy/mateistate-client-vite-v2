@@ -53,16 +53,20 @@ export const getSearchBuilding = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BUILDING}?search=${value}`);
 };
 
-export const generateBuildingUnits = ({
-  grid,
-  flatsDetails,
-  row,
-  UPDATES_ROWS,
+
+export const generateBuildingDetailsAndUnits = ({
+  propertyValues,
+  mainBuildingId,
+  units
 }) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_BUILDING}/units`, {
-    grid,
-    flatsDetails,
-    row,
-    UPDATES_ROWS,
+  return http.post(`property-values/create-with-color`, {
+    propertyValues,
+    mainBuildingId,
+    ...units,
   });
+};
+
+
+export const getBuildingDetailsAndUnits = (buildingId) => {
+  return http.get(`/property-values/find-with-color/${buildingId}`);
 };

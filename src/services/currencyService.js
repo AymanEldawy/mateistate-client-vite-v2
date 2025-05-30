@@ -42,7 +42,6 @@ export const deleteCurrency = (id) => {
 };
 
 export const deleteManyCurrencies = (ids) => {
-    console.log("🚀 ~ deleteManyCurrencies ~ ids:", ids)
     return http.post(
         `${API_URL_CONSTANTS.BASE_CURRENCY}/bulk-delete`, ids
     );

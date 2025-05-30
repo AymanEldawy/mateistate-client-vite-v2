@@ -41,6 +41,5 @@ export const refreshToken = (data) => {
 };
 
 export const logoutService = (data) => {
-  console.log(data);
   return http.post(`${API_URL_CONSTANTS.BASE_AUTH}/logout`, data);
 };

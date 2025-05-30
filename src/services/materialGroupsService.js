@@ -40,3 +40,6 @@ export const deleteManyMaterialGroup = (ids) => {
 export const getMaterialGroupCode = (parentId) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/code=${parentId}`);
 };
+export const getSearchMaterial = (value) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}?search=${value}`);
+};
