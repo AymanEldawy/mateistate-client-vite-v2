@@ -15,37 +15,21 @@ import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import { APARTMENTS_CONTRACT_STEPS, GLOBAL_CONTRACT_STEPS } from '@/helpers/contract/contractSteps'
+import { getAllContractPatterns } from '@/services/contractPatternsService'
 
 const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
 const Contract = () => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
-  const updateSearchParams = useUpdateSearchParams();
   const [openFormType, setOpenFormType] = useState(false);
-
-  const handleChangeCode = (code) => {
-    updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
-  }
 
   return (
     <>
       <Modal containerClassName="!z-[100]" open={openFormType} onClose={() => setOpenFormType(false)}>
-        {/* get all chq patterns and display them */}
         <BtnGroups
-          list={[
-            {
-              name: 'received', onClick: () => {
-                handleChangeCode(1)
-                setOpenFormType(false)
-              }
-            },
-            {
-              name: 'paid', onClick: () => {
-                handleChangeCode(2)
-                setOpenFormType(false)
-              }
-            }
-          ]}
+          queryKey={QUERY_KEYS.CONTRACT_PATTERN}
+          queryFn={getAllContractPatterns}
+          onClose={() => setOpenFormType(false)}
         />
       </Modal>
       <PaperLayout

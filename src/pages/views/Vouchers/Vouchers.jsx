@@ -15,6 +15,7 @@ import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import { RHFCheckbox } from '@/components/forms/fields'
+import { getAllVoucherPatterns } from '@/services/voucherPatternService'
 
 const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
@@ -46,25 +47,12 @@ const Vouchers = ({
 
   return (
     <>
-      <Modal containerClassName="!z-[100]" open={openFormType} onClose={() => setOpenFormType(false)}>
-        {/* get all chq patterns and display them */}
+      <Modal containerClassName="!z-[100]" open={openFormType} >
         <BtnGroups
-          list={[
-            {
-              name: 'received', onClick: () => {
-                handleChangeCode(1)
-                setOpenFormType(false)
-              }
-            },
-            {
-              name: 'paid', onClick: () => {
-                handleChangeCode(2)
-                setOpenFormType(false)
-              }
-            }
-          ]}
+          queryKey={QUERY_KEYS.VOUCHER_PATTERN}
+          queryFn={getAllVoucherPatterns}
+          onClose={() => setOpenFormType(false)}
         />
-        {/* setCode */}
       </Modal>
       <PaperLayout
         name="vouchers"

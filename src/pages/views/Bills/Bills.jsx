@@ -6,7 +6,7 @@ import { lazy, useState } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import EntryBar from '@/components/shared/EntryBar'
 import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, getSingleBill, updateBill } from '@/services/billService'
-import { billValidationSchema } from '@/helpers/bill/billValidationSchema'
+import { billDefaultValue, billValidationSchema } from '@/helpers/bill/billValidationSchema'
 import billColumns from '@/helpers/bill/billColumns'
 import Modal from '@/components/shared/Modal'
 import BtnGroups from '@/components/shared/BtnGroups'
@@ -14,8 +14,8 @@ import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import { get } from 'react-hook-form'
+import { getAllBillPatterns } from '@/services/billPatternsService'
 const BillForm = lazy(() => import("@/components/forms/containers/bill/BillForm"))
-const defaultValue = {}
 
 
 const Bills = () => {
@@ -30,24 +30,11 @@ const Bills = () => {
   return (
     <>
       <Modal containerClassName="!z-[100]" open={openFormType} onClose={() => setOpenFormType(false)}>
-        {/* get all chq patterns and display them */}
         <BtnGroups
-          list={[
-            {
-              name: 'received', onClick: () => {
-                handleChangeCode(1)
-                setOpenFormType(false)
-              }
-            },
-            {
-              name: 'paid', onClick: () => {
-                handleChangeCode(2)
-                setOpenFormType(false)
-              }
-            }
-          ]}
+          queryKey={QUERY_KEYS.BILL_PATTERN}
+          queryFn={getAllBillPatterns}
+          onClose={() => setOpenFormType(false)}
         />
-        {/* setCode */}
       </Modal>
       <PaperLayout
         name="bills"
@@ -66,7 +53,7 @@ const Bills = () => {
           columns: billColumns
         }}
         formProps={{
-          defaultValue,
+          defaultValue: billDefaultValue,
           validationSchema: billValidationSchema,
           mutationAddFunction: createBill,
           mutationUpdateFunction: updateBill,

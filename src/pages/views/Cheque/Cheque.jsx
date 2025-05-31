@@ -1,7 +1,7 @@
 import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '../../../components/layout/paper/PaperLayout'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import { createCheque, deleteCheque,  getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
+import { createCheque, deleteCheque, getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
 import chequeColumns from '@/helpers/cheque/chequeColumns'
 import { lazy, useState } from 'react'
 import EntryBar from '@/components/shared/EntryBar'
@@ -13,9 +13,12 @@ import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import { chequeDefaultValue, chequeValidationSchema } from '@/helpers/cheque/ChequeValidationSchema'
+import { useQuery } from '@tanstack/react-query'
+import { getAllChequePatterns } from '@/services/chequePatternsService'
 const ChequeForm = lazy(() => import("@/components/forms/containers/cheque/ChequeForm"))
 
 const chequeConfig = {
+  name: "cheque",
   formProps: {
     defaultValue: chequeDefaultValue,
     validationSchema: chequeValidationSchema,
@@ -43,14 +46,16 @@ const chequeConfig = {
   },
 }
 
-const Cheque = ({ formOnly, outerClose, }) => {
-  const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
-  const updateSearchParams = useUpdateSearchParams();
-  const [openFormType, setOpenFormType] = useState(false);
+const Cheque = ({
+  formOnly,
+  outerClose,
+  defaultNumber,
+  defaultCode,
+  popupFormConfig,
 
-  const handleChangeCode = (code) => {
-    updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
-  }  
+}) => {
+  const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
+  const [openFormType, setOpenFormType] = useState(false);
 
   if (formOnly) {
     return (
@@ -58,6 +63,9 @@ const Cheque = ({ formOnly, outerClose, }) => {
         {...chequeConfig}
         outerClose={outerClose}
         code={searchParamsSelectedCode?.code}
+        numberSearchParam={defaultNumber}
+        codeSearchParam={defaultCode}
+        oldValues={popupFormConfig?.oldValues}
       />
     )
   }
@@ -65,24 +73,11 @@ const Cheque = ({ formOnly, outerClose, }) => {
   return (
     <>
       <Modal containerClassName="!z-[100]" open={openFormType} onClose={() => setOpenFormType(false)}>
-        {/* get all chq patterns and display them */}
         <BtnGroups
-          list={[
-            {
-              name: 'received', onClick: () => {
-                handleChangeCode(1)
-                setOpenFormType(false)
-              }
-            },
-            {
-              name: 'paid', onClick: () => {
-                handleChangeCode(2)
-                setOpenFormType(false)
-              }
-            }
-          ]}
+          queryFn={getAllChequePatterns}
+          queryKey={QUERY_KEYS.CHEQUE_PATTERN}
+          onClose={() => setOpenFormType(false)}
         />
-        {/* setCode */}
       </Modal>
       <PaperLayout
         name="cheque"
