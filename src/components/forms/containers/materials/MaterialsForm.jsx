@@ -13,7 +13,7 @@ const MaterialFormPricesDetails = lazy(() => import("./MaterialFormPricesDetails
 
 const MaterialsForm = ({ tab }) => {
 
-    const { data: stores } = useQuery({
+  const { data: stores } = useQuery({
     queryKey: [QUERY_KEYS.STORE],
     queryFn: async () => {
       const response = await getAllStores();
@@ -21,7 +21,7 @@ const MaterialsForm = ({ tab }) => {
     },
   });
 
- 
+
 
   const displayForm = () => {
     switch (tab) {
