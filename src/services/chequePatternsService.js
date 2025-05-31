@@ -43,3 +43,7 @@ export const deleteManyChequePatterns = (ids) => {
     `${API_URL_CONSTANTS.BASE_CHEQUE_PATTERN}/bulk-delete`, ids
   );
 };
+
+export const getChequePatternByCode = (code) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE_PATTERN}/${code}`);
+};

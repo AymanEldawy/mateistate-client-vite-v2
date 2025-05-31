@@ -37,7 +37,3 @@ export const deleteCheque = (id) => {
 export const getSearchCheque = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}?search=${value}`);
 };
-
-export const getChequePatternByCode = (code) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE}/${code}`);
-};

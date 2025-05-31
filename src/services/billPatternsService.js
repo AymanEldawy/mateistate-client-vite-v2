@@ -39,3 +39,7 @@ export const deleteManyBillPatterns = (ids) => {
     `${API_URL_CONSTANTS.BASE_BILL_PATTERN}/bulk-delete`, ids
   );
 };
+
+export const getBillPatternByCode = (code) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_BILL_PATTERN}/${code}`);
+};

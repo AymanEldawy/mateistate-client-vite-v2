@@ -17,9 +17,9 @@ export const createReturn = (data) => {
   });
 };
 
-export const updateReturn = (country_id, data) => {
+export const updateReturn = (id, data) => {
   return http.patch(
-    `${API_URL_CONSTANTS.BASE_RETURN}/${country_id}`,
+    `${API_URL_CONSTANTS.BASE_RETURN}/${id}`,
     data,
     // {
     //   headers: {

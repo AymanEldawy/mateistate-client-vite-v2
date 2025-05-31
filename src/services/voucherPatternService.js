@@ -45,3 +45,8 @@ export const deleteManyVoucherPatterns = (ids) => {
     `${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/bulk-delete`, ids
   );
 };
+
+
+export const getVoucherPatternByCode = (code) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/${code}`);
+};
