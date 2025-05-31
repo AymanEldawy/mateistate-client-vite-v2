@@ -31,7 +31,8 @@ const FormWrapper = ({
   numberSearchParam,
   codeSearchParam,
   oldValues,
-  refetch
+  refetch,
+  ...props
 }) => {
   const searchParams = new URLSearchParams();
   console.log(numberSearchParam, codeSearchParam, 'numberSearchParam, codeSearchParam');
@@ -205,8 +206,24 @@ const FormWrapper = ({
           autoComplete="off"
         >
           <FormHeader {...formHeaderProps} onClose={handleOnClose} />
-          {formProps?.isSteps ?
-            <FormStepsLayout tab={tab} setTab={setTab} formSidebarProps={formSidebarProps}  {...formProps} paginationForm={paginationForm} /> : <FormSingularLayout {...formProps} paginationForm={paginationForm} />
+          {formProps?.isSteps ? (
+            <FormStepsLayout
+              tab={tab}
+              setTab={setTab}
+              formSidebarProps={formSidebarProps}
+              paginationForm={paginationForm}
+              code={codeSearchParam}
+              {...props}
+              {...formProps}
+            />
+          ) : (
+            <FormSingularLayout
+              paginationForm={paginationForm}
+              code={codeSearchParam}
+              codeSearchParam={codeSearchParam}
+              {...props}
+              {...formProps}
+            />)
           }
           <FormFooter
             resetFormHandler={resetFormHandler}

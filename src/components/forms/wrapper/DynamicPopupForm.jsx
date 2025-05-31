@@ -3,7 +3,7 @@ import { usePopupForm } from '@/hook/usePopupForm'
 import { lazy } from 'react';
 import InstallmentForm from '../containers/contract/InstallmentForm';
 
-const Voucher = lazy(() => import('@/pages/views/Voucher/Voucher'));
+const Voucher = lazy(() => import('@/pages/views/Vouchers/Vouchers'));
 const Currency = lazy(() => import('@/pages/views/Currency/Currency'));
 const CostCenter = lazy(() => import('@/pages/views/CostCenter/CostCenter'));
 const Account = lazy(() => import('@/pages/views/Account/Account'));

@@ -58,23 +58,23 @@ const PaperLayout = ({
       pagination?.pageIndex,
       pagination?.pageSize,
     ],
-    // queryFn: async () => {
-    //   const response = await queryFn(
-    //     pagination?.pageIndex,
-    //     pagination?.pageSize,
-    //     columnFilters,
-    //     globalFilter,
-    //   )
-    //   if (response?.success) {
-    //     setPagination(prev => ({
-    //       ...prev,
-    //       pageIndex: response?.pages
-    //     }))
-    //     setPageCount(response?.pages)
-    //     return response?.data
-    //   }
-    // },
-    queryFn: () => {},
+    queryFn: async () => {
+      const response = await queryFn(
+        pagination?.pageIndex,
+        pagination?.pageSize,
+        columnFilters,
+        globalFilter,
+      )
+      if (response?.success) {
+        setPagination(prev => ({
+          ...prev,
+          pageIndex: response?.pages
+        }))
+        setPageCount(response?.pages)
+        return response?.data
+      }
+    },
+    // queryFn: () => {},
   });
 
   const onDeleteSelected = async () => {
