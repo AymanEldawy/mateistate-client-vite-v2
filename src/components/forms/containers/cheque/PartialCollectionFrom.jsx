@@ -8,6 +8,10 @@ import { toast } from 'react-toastify';
 import QUERY_KEYS from '@/data/queryKeys';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from '@/services/paginationService';
+import { deletePartial, getSinglePartial, updatePartial } from '@/services/opPartialCollectionService';
+import Loading from '@/components/shared/Loading';
+import { opPartialDefaultValues, opPartialValidationSchema } from '@/helpers/operations/opPartialValidationSchema';
+import { createParking } from '@/services/parkingService';
 
 const mergePattern = (pattern, chqValues, setValue) => {
 
@@ -19,7 +23,7 @@ const mergePattern = (pattern, chqValues, setValue) => {
     setValue("totalSum", chqValues?.amount);
     setValue("rest", chqValues?.amount);
   }
-  if (pattern?.partial_creditAccountId) {
+  if (pattern?.partialCreditAccountId) {
     setValue("creditAccountId", pattern?.partialCreditAccountId);
   }
 
@@ -46,44 +50,30 @@ const PartialCollectionFrom = ({
   popupFormConfig,
   outerClose
 }) => {
+  const name = name
   const methods = useForm({
-    defaultValue: {
-      id: null,
-      chequeId: null,
-      createdAt: new Date(),
-      amount: 0,
-      totalValue: 0,
-      totalSumPrev: 0,
-      totalSum: 0,
-      rest: 0,
-      debitAccountId: null,
-      creditAccountId: null,
-      costCenterId: null,
-      note: '',
-      commissionDebitId: null,
-      commission_credit_id: null,
-      commissionCostCenterId: null,
-      commissionPercentage: 0,
-      commissionValue: 0,
-      commissionNote: '',
-    }
+    defaultValue: opPartialDefaultValues,
+    mode: "onBlur",
+    resolver: opPartialValidationSchema
   });
   const chequeId = popupFormConfig?.chequeValue?.id
   const chequeValue = popupFormConfig?.chequeValue
   const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
-  const [currentNumber, setCurrentNumber] = useState(0);
+  const [currentNumber, setCurrentNumber] = useState(1);
   const [lastNumber, setLastNumber] = useState(0);
   const [openConfirmation, setOpenConfirmation] = useState(false)
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLastOne('op_partial_collection', null, chequeId);
+      const response = await getLastOne(name, null, chequeId);
       if (response?.success) {
-        goNew(response?.result?.at(0));
-        setLastNumber(response?.result?.at(0)?.number);
+        const current = await getSinglePartial(response?.id);
+        goNew(current);
+        setLastNumber(response?.number);
+        return current
       }
-      return response?.result
     },
     enabled: !!chequeId
   });
@@ -126,10 +116,10 @@ const PartialCollectionFrom = ({
   const goTo = async (value) => {
     let response = null;
     if (value === 'FIRST')
-      response = await getFirstOne('op_partial_collection', null, chequeId)
+      response = await getFirstOne(name, null, chequeId)
     else if (value === 'LAST')
-      response = await getLastOne('op_partial_collection', null, chequeId)
-    else await getOneBy('op_partial_collection', value, 'number', null, chequeId)
+      response = await getLastOne(name, null, chequeId)
+    else await getOneBy(name, value, 'number', null, chequeId)
 
   }
 
@@ -156,14 +146,35 @@ const PartialCollectionFrom = ({
     setCurrentNumber(num);
   }
 
-  const onHandleDelete = async () => { }
+  const onHandleDelete = async () => {
+    setIsDeleteLoading(true)
+    const response = await deletePartial(data?.id);
+    if (response?.success) {
+      outerClose()
+    }
+    setIsDeleteLoading(false)
+  }
 
-  const onSubmit = async (value) => {
+  const onSubmit = async (values) => {
+    const isUpdate = data?.id
+    let response;
+    if (isUpdate) {
+      response = await updatePartial(data?.id, values)
+    } else {
+      response = await createParking(values)
+    }
 
-  };
+    if (response?.success) {
+      toast.success(`Successfully ${isUpdate ? 'updated' : 'inserted'} cheque partial collection`)
+    } else {
+      toast.success(`Failed to ${isUpdate ? 'updated' : 'inserted'} cheque partial collection`)
+    }
+  }
 
   return (
     <>
+      {isLoading || isDeleteLoading ? <Loading /> : null}
+
       <ConfirmModal
         onConfirm={onHandleDelete}
         open={openConfirmation}
@@ -240,12 +251,12 @@ const PartialCollectionFrom = ({
             setOpenConfirmation={setOpenConfirmation}
             paginationForm={{
               goTo,
-              goBack: getPreviousOne('op_partial_collection', currentNumber, null, chequeId),
-              goNext: getNextOne('op_partial_collection', currentNumber, null, chequeId),
+              goBack: () => getPreviousOne(name, currentNumber, null, chequeId),
+              goNext: () => getNextOne(name, currentNumber, null, chequeId),
               lastNumber,
               setCurrentNumber,
               currentNumber,
-              isLast: currentNumber === lastNumber,
+              isLast: currentNumber >= lastNumber,
               goNew,
             }}
           />

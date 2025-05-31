@@ -1,16 +1,16 @@
-import { CHQ_RECEIVED_CODE } from '@/data/GENERATE_STARTING_DATA';
 import QUERY_KEYS from '@/data/queryKeys';
 import { OP_RETURN_FIELDS } from '@/helpers/cheque/chequeOperationsFields';
-import { getSingleCollection } from '@/services/opCollectionService';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import DynamicForm from '../../wrapper/DynamicForm';
-import { getSingleReturn } from '@/services/opReturnService';
+import { createReturn, deleteReturn, getSingleReturn, updateReturn } from '@/services/opReturnService';
 import { FormFooter, FormHeader } from '../../wrapper';
 import ConfirmModal from '@/components/shared/ConfirmModal';
-
-const defaultValue = {}
+import Loading from '@/components/shared/Loading';
+import { opReturnDefaultValues, opReturnValidationSchema } from '@/helpers/operations/opReturnValidationSchema';
+import { toast } from 'react-toastify';
+import { getLastOne } from '@/services/paginationService';
 
 const mergePattern = async (
   pattern,
@@ -20,44 +20,44 @@ const mergePattern = async (
   setValue("amount", chqValues?.amount);
   setValue("cheque_id", chqValues?.id);
 
-  if (pattern?.returnable_gen_entries) setValue("gen_entries", true);
-  if (pattern?.returnable_credit_account_id) {
-    setValue("credit_account_id", pattern?.returnable_credit_account_id);
+  if (pattern?.returnableGenEntries) setValue("genEntries", true);
+  if (pattern?.returnableCreditAccountId) {
+    setValue("creditAccountId", pattern?.returnableCreditAccountId);
   }
-  if (pattern?.return_default_observe_account_is_client) {
-    setValue("credit_account_id", chqValues?.account_id);
+  if (pattern?.returnDefaultObserveAccountIsClient) {
+    setValue("creditAccountId", chqValues?.accountId);
   }
-  setValue("debit_account_id", chqValues?.account_id);
-  // if (pattern?.returnable_default_account_is_client) {
-  //   setValue("debit_account_id", chqValues?.account_id);
+  setValue("debitAccountId", chqValues?.accountId);
+  // if (pattern?.returnableDefaultAccountIsClient) {
+  //   setValue("debitAccountId", chqValues?.accountId);
   // }
 
-  if (pattern?.returnable_debit_account_id) {
-    setValue("debit_account_id", pattern?.returnable_debit_account_id);
+  if (pattern?.returnableDebitAccountId) {
+    setValue("debitAccountId", pattern?.returnableDebitAccountId);
   }
 
-  // if(pattern?.returnable_active_operations)
+  // if(pattern?.returnableActiveOperations)
 
-  if (pattern?.returnable_default_date === 2) {
-    setValue("createdAt", chqValues?.due_date);
+  if (pattern?.returnableDefaultDate === 2) {
+    setValue("createdAt", chqValues?.dueDate);
   } else {
     setValue("createdAt", new Date());
   }
 
-  if (pattern?.returnable_default_observe_account_is_building_bank) {
+  if (pattern?.returnableDefaultObserveAccountIsBuildingBank) {
     //  get building bank
   }
 
   if (
-    pattern?.returnable_move_cost_center_credit ||
-    pattern?.returnable_move_cost_center_debit
+    pattern?.returnableMoveCostCenterCredit ||
+    pattern?.returnableMoveCostCenterDebit
   )
-    setValue("cost_center_id", chqValues?.cost_center_id);
+    setValue("costCenterId", chqValues?.costCenterId);
 
 
   // const buildingAccounts = await getBuildingBank(chqValues);
-  // setValue("debit_account_id", buildingAccounts?.bank_id);
-  // setValue("credit_account_id", buildingAccounts?.cheque_id);
+  // setValue("debitAccountId", buildingAccounts?.bankId);
+  // setValue("creditAccountId", buildingAccounts?.chequeId);
   // setRefresh(p => !p);
 };
 
@@ -66,16 +66,27 @@ const CollectionForm = ({
   outerClose
 }) => {
   const methods = useForm({
-    defaultValue
+    defaultValue: opReturnDefaultValues,
+    mode: "onBlur",
+    resolver: opReturnValidationSchema
   });
+
   const chequeId = popupFormConfig?.chequeValue?.id
   const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
-    queryFn: () => getSingleReturn({ id: chequeId }),
+    queryFn: async () => {
+      const response = await getLastOne('op_return', null, chequeId);
+      if (response?.success) {
+        const current = await getSingleReturn(response?.id)
+        reset(current)
+        return current;
+      }
+    },
     enabled: !!chequeId
   });
   const [openConfirmation, setOpenConfirmation] = useState(false)
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
 
   useEffect(() => {
@@ -83,14 +94,38 @@ const CollectionForm = ({
   }, [popupFormConfig, setValue])
 
 
-  const onHandleDelete = async () => { }
-
-  const onSubmit = async () => {
-
+  const onHandleDelete = async () => {
+    setIsDeleteLoading(true)
+    const response = await deleteReturn(data?.id);
+    if (response?.success) {
+      outerClose()
+    }
+    setIsDeleteLoading(false)
   }
+
+  const onSubmit = async (values) => {
+    const isUpdate = data?.id
+    let response;
+    if (isUpdate) {
+      response = await updateReturn(data?.id, values)
+    } else {
+      response = await createReturn(values)
+    }
+
+    if (response?.success) {
+      toast.success(`Successfully ${isUpdate ? 'updated' : 'inserted'} cheque return`)
+    } else {
+      toast.success(`Failed to ${isUpdate ? 'updated' : 'inserted'} cheque return`)
+    }
+  }
+
+  console.log(watch(), 'wa');
+
 
   return (
     <>
+      {isLoading || isDeleteLoading ? <Loading /> : null}
+
       <ConfirmModal
         onConfirm={onHandleDelete}
         open={openConfirmation}
