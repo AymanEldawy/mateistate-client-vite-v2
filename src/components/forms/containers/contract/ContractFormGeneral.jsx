@@ -1,11 +1,48 @@
 import { useFormContext } from "react-hook-form";
-import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import { RHFSelectField, RHFDatePicker, RHFInput, RHFTextarea } from "../../fields";
 import { CONTRACT_DURATION, CONTRACT_PAID_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import QUERY_KEYS from "@/data/queryKeys";
+import { useQuery } from "@tanstack/react-query";
+import { getAccountCustomersOnly, getLeavesAccounts } from "@/services/accountService";
+import { getAllBuildings } from "@/services/buildingService";
 
 const ContractFormGeneral = () => {
   const contractType = 'rent';
   const assetType = 'apartment';
   const { watch } = useFormContext();
+
+  const { data: customers } = useQuery({
+    queryKey: [QUERY_KEYS.ACCOUNT, 'customers'],
+    queryFn: async () => {
+      const response = await getAccountCustomersOnly();
+      return response?.data || [];
+    },
+  });
+
+  const { data: buildings } = useQuery({
+    queryKey: [QUERY_KEYS.BUILDING],
+    queryFn: async () => {
+      const response = await getAllBuildings();
+      return response?.data || [];
+    },
+  });
+
+  const { data: accountsLeaves } = useQuery({
+    queryKey: [QUERY_KEYS.ACCOUNT, 'leave'],
+    queryFn: async () => {
+      const response = await getLeavesAccounts();
+      return response?.data || [];
+    },
+  });
+
+
+  const { data: units } = useQuery({
+    queryKey: [QUERY_KEYS.BUILDING, watch('contract.buildingId')],
+    queryFn: async () => {
+      // const response = await getUnitsBy();
+      // return response?.data || [];
+    },
+  });
 
   return (
     <div className="p-4">
@@ -27,20 +64,20 @@ const ContractFormGeneral = () => {
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-2 gap-x-6 mt-4 w-full  items-start">
         <div className="grid grid-cols-1 gap-y-2 gap-x-6 ">
-          <RHFAsyncSelectField
-            options={[]}
+          <RHFSelectField
+            options={customers}
             label="clientId"
             name="contract.clientId"
             allowAdd
           />
           <RHFSelectField
-            options={[]}
+            options={buildings}
             label="buildingId"
             name="contract.buildingId"
           />
           <RHFSelectField
-            options={[]}
-            label="clientId"
+            options={units}
+            label="unitId"
             name={`contract.${assetType}Id`}
           />
           <RHFInput
@@ -87,37 +124,37 @@ const ContractFormGeneral = () => {
         </div>
 
         <div className="flex flex-col gap-y-2 gap-x-6">
-          <RHFAsyncSelectField
+          <RHFSelectField
             inputClassName={
               watch(`contract.revenueAccountId`) ? "bg-blue-100" : ""
             }
             label={`revenueAccountId`}
             name={`contract.revenueAccountId`}
-            table={"account"}
+            options={accountsLeaves}
           />
-          <RHFAsyncSelectField
+          <RHFSelectField
             inputClassName={
               watch(`contract.discountAccountId`) ? "bg-blue-100" : ""
             }
             label={`discountAccountId`}
             name={`contract.discountAccountId`}
-            table={"account"}
+            options={accountsLeaves}
           />
-          <RHFAsyncSelectField
+          <RHFSelectField
             inputClassName={
               watch(`contract.insuranceAccountId`) ? "bg-blue-100" : ""
             }
             label={`insuranceAccountId`}
             name={`contract.insuranceAccountId`}
-            table={"account"}
+            options={accountsLeaves}
           />
-          <RHFAsyncSelectField
+          <RHFSelectField
             inputClassName={
               watch(`contract.vatAccountId`) ? "bg-blue-100" : ""
             }
             label={`vatAccountId`}
             name={`contract.vatAccountId`}
-            table={"account"}
+            options={accountsLeaves}
           />
         </div>
       </div>
