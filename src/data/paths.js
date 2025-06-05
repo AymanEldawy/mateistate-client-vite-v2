@@ -71,6 +71,8 @@ const PATHS = {
   STORE_CHART: "/chart/stores",
   /******************** MATERIAL_GROUP ********************/
   MATERIAL_GROUP: "/material-groups",
+  /******************** MATERIAL_GROUP_CHART ********************/
+  MATERIAL_GROUP_CHART: "/chart/material-groups",
   /******************** MATERIAL ********************/
   MATERIAL: "/materials",
   /******************** MATERIAL_CHART ********************/

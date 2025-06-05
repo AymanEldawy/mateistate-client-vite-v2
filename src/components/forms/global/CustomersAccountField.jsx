@@ -1,13 +1,13 @@
 import QUERY_KEYS from '@/data/queryKeys';
-import { getAllAccounts } from '@/services/accountService';
+import { getAccountCustomersOnly } from '@/services/accountService';
 import { useQuery } from '@tanstack/react-query';
 import { RHFSelectFieldForTables } from '../fields';
 
-const AccountField = ({ name, allowAdd, ...props }) => {
+const CustomersAccountField = ({ name, allowAdd, ...props }) => {
   const { data: accounts } = useQuery({
-    queryKey: [QUERY_KEYS.ACCOUNT],
+    queryKey: [QUERY_KEYS.ACCOUNT, 'customers'],
     queryFn: async () => {
-      const response = await getAllAccounts();
+      const response = await getAccountCustomersOnly();
       return response?.data || [];
     },
   });
@@ -28,4 +28,4 @@ const AccountField = ({ name, allowAdd, ...props }) => {
   )
 }
 
-export default AccountField
+export default CustomersAccountField

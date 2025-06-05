@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { FormFooter, FormHeader } from '../../wrapper';
-import { RHFAsyncSelectField, RHFInput, RHFTextarea } from '../../fields';
-import { FormProvider, useForm } from 'react-hook-form';
-import { AccountField, CurrencyFieldGroup } from '../../global';
-import { useQuery } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
-import QUERY_KEYS from '@/data/queryKeys';
 import ConfirmModal from '@/components/shared/ConfirmModal';
-import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from '@/services/paginationService';
-import { deletePartial, getSinglePartial, updatePartial } from '@/services/opPartialCollectionService';
 import Loading from '@/components/shared/Loading';
+import QUERY_KEYS from '@/data/queryKeys';
 import { opPartialDefaultValues, opPartialValidationSchema } from '@/helpers/operations/opPartialValidationSchema';
-import { createParking } from '@/services/parkingService';
+import { createPartial, deletePartial, getSinglePartial, updatePartial } from '@/services/opPartialCollectionService';
+import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from '@/services/paginationService';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { RHFInput, RHFInputAmount, RHFTextarea } from '../../fields';
+import { AccountField, CurrencyFieldGroup } from '../../global';
+import CostCenterField from '../../global/CostCenterField';
+import { FormFooter, FormHeader } from '../../wrapper';
 
 const mergePattern = (pattern, chqValues, setValue) => {
 
@@ -50,11 +51,11 @@ const PartialCollectionFrom = ({
   popupFormConfig,
   outerClose
 }) => {
-  const name = name
+  const name = 'op_partial_collection'
   const methods = useForm({
     defaultValue: opPartialDefaultValues,
     mode: "onBlur",
-    resolver: opPartialValidationSchema
+    resolver: zodResolver(opPartialValidationSchema)
   });
   const chequeId = popupFormConfig?.chequeValue?.id
   const chequeValue = popupFormConfig?.chequeValue
@@ -68,11 +69,13 @@ const PartialCollectionFrom = ({
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
     queryFn: async () => {
       const response = await getLastOne(name, null, chequeId);
-      if (response?.success) {
+      if (response?.success && response?.data) {
         const current = await getSinglePartial(response?.id);
         goNew(current);
         setLastNumber(response?.number);
         return current
+      } else {
+        setValue("number", 1);
       }
     },
     enabled: !!chequeId
@@ -155,13 +158,15 @@ const PartialCollectionFrom = ({
     setIsDeleteLoading(false)
   }
 
+  console.log(currentNumber, lastNumber, 'uis');
+
   const onSubmit = async (values) => {
     const isUpdate = data?.id
     let response;
     if (isUpdate) {
       response = await updatePartial(data?.id, values)
     } else {
-      response = await createParking(values)
+      response = await createPartial(values)
     }
 
     if (response?.success) {
@@ -188,32 +193,26 @@ const PartialCollectionFrom = ({
               <div className="flex flex-col gap-2 col-span-2">
                 <RHFInput name="createdAt" label="createdAt" />
                 <CurrencyFieldGroup />
-                <RHFInput name="amount" label="amount" />
-                <RHFAsyncSelectField
+                <RHFInputAmount name="amount" label="amount" />
+                <AccountField
                   name="debitAccountId"
                   label="debitAccountId"
-                  getSearch={() => { }}
-                  getSingle={() => { }}
                 />
-                <RHFAsyncSelectField
+                <AccountField
                   name="creditAccountId"
                   label="creditAccountId"
-                  getSearch={() => { }}
-                  getSingle={() => { }}
 
                 />
-                <RHFAsyncSelectField
+                <CostCenterField
                   name="costCenterId"
                   label="costCenterId"
-                  getSearch={() => { }}
-                  getSingle={() => { }}
 
                 />
               </div>
               <div className="flex flex-col gap-2 ">
                 {["totalValue", "totalSumPrev", "totalSum", "rest"]?.map(
                   (field) => (
-                    <RHFInput name={field} label={field} key={field} readOnly={true} />
+                    <RHFInput name={field} label={field} key={field} readOnly={true} type="number" />
                   )
                 )}
                 {/* {watch('rest') < 0 ? <ErrorText>Failed to enter value the rest can't be less than 0</ErrorText> : null} */}
@@ -230,17 +229,15 @@ const PartialCollectionFrom = ({
                   name='commissionCreditId'
                   label='commissionCreditId'
                 />
-                <RHFAsyncSelectField
+                <CostCenterField
                   name='commissionCostCenterId'
                   label='commissionCostCenterId'
-                  getSearch={() => { }}
-                  getSingle={() => { }}
 
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <RHFInput name="commissionPercentage" label="commissionPercentage" />
-                <RHFInput name="commissionValue" label="commissionValue" />
+                <RHFInput name="commissionPercentage" label="commissionPercentage" type="number" />
+                <RHFInputAmount name="commissionValue" label="commissionValue" />
                 <RHFInput name="commissionNote" label="commissionNote" />
               </div>
             </div>

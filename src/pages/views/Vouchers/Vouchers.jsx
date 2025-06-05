@@ -1,21 +1,19 @@
 
 
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { lazy, useState } from 'react'
+import { RHFCheckbox } from '@/components/forms/fields'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
-import EntryBar from '@/components/shared/EntryBar'
-import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, getSingleVoucher, updateVoucher } from '@/services/vouchersService'
+import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import BtnGroups from '@/components/shared/BtnGroups'
+import Modal from '@/components/shared/Modal'
+import QUERY_KEYS from '@/data/queryKeys'
+import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import voucherColumns from '@/helpers/voucher/voucherColumns'
 import { voucherDefaultValues, voucherValidationSchema } from '@/helpers/voucher/voucherValidationSchema'
-import Modal from '@/components/shared/Modal'
-import BtnGroups from '@/components/shared/BtnGroups'
 import useCustomSearchParams from '@/hook/useCustomSearchParams'
-import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
-import SEARCH_PARAMS from '@/data/searchParamsKeys'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import { RHFCheckbox } from '@/components/forms/fields'
 import { getAllVoucherPatterns } from '@/services/voucherPatternService'
+import { createVoucher, deleteManyVouchers, deleteVoucher, getAllVouchers, getSearchVoucher, getSingleVoucher, updateVoucher } from '@/services/vouchersService'
+import { lazy, useState } from 'react'
+import PaperLayout from '../../../components/layout/paper/PaperLayout'
 
 const VoucherForm = lazy(() => import("@/components/forms/containers/voucher/VoucherForm"))
 
@@ -26,12 +24,7 @@ const Vouchers = ({
   defaultCode,
 }) => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
-  const updateSearchParams = useUpdateSearchParams();
   const [openFormType, setOpenFormType] = useState(false);
-
-  const handleChangeCode = (code) => {
-    updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
-  }
 
   if (formOnly) {
     return (

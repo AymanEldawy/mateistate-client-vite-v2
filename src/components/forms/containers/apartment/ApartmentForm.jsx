@@ -1,13 +1,12 @@
-import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../../fields";
-import { APARTMENT_FLAT_TYPE, FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { APARTMENT_STEPS } from "@/data/constants";
-import RHFUploadFilesController from "../../fields/RHFUploadFiles";
-import TableForm from "../../wrapper/TableForm";
-import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
-import { getSearchBuilding, getSingleBuilding } from './../../../../services/buildingService';
+import { APARTMENT_FLAT_TYPE, FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
 import { useTranslation } from "react-i18next";
+import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../../fields";
+import RHFUploadFilesController from "../../fields/RHFUploadFiles";
+import TableForm from "../../wrapper/TableForm";
+import { getSearchBuilding, getSingleBuilding } from './../../../../services/buildingService';
 
 const ApartmentForm = ({ tab }) => {
   const { t } = useTranslation();
@@ -21,6 +20,11 @@ const ApartmentForm = ({ tab }) => {
         getSearch={getSearchBuilding}
         getSingle={getSingleBuilding}
       />
+      {/* <BuildingField
+        name="apartment.buildingId"
+        label="building_id"
+        required
+      /> */}
       <RHFInput name="apartment.floorNo" label="floor_number" />
       <RHFSelectField
         label="apartment_kind"

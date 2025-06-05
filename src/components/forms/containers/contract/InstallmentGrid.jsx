@@ -1,30 +1,29 @@
 import { ErrorText } from "@/components/shared/ErrorText";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useFormContext } from "react-hook-form"
-import TableForm from "../../wrapper/TableForm";
 import { INSTALLMENT_GRID_FIELDS } from "@/helpers/contract/installmentFields";
-import DynamicForm from "../../wrapper/DynamicForm";
+import { useCallback, useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { RHFDatePicker, RHFInputAmount, RHFTableAsyncSelect, RHFTableInput } from "../../fields";
+import TableForm from "../../wrapper/TableForm";
 
 const InstallmentGrid = () => {
   const { watch, setError, clearErrors, formState: { errors } } = useFormContext();
   const [totalCheAmount, setTotalChqAmount] = useState(0)
 
   const calculateAmount = useCallback(() => {
-    let grid = watch("installment_grid");
+    let grid = watch("installmentGrid");
     let count = 0;
 
     for (const item of grid) {
       count += +item?.amount;
     }
     count = Math.round(count);
-    if (count > watch("installment.rest_amount")) {
-      setError("installment_grid_amount", {
+    if (count > watch("installment.restAmount")) {
+      setError("installmentGridAmount", {
         message:
           "The Total Amount of cheques must be equal or less than Rest Amount",
       });
       return;
-    } else clearErrors("installment_grid_amount");
+    } else clearErrors("installmentGridAmount");
 
     setTotalChqAmount(count)
   }, [])
@@ -34,9 +33,9 @@ const InstallmentGrid = () => {
       if (name?.indexOf(/amount/ig) !== -1) {
         calculateAmount()
       }
-      if (name === "installment.first_batch") {
+      if (name === "installment.firstBatch") {
         setTotalChqAmount(
-          watch("installment.total_amount") - watch("installment.first_batch")
+          watch("installment.totalAmount") - watch("installment.firstBatch")
         );
       }
     });
@@ -46,7 +45,7 @@ const InstallmentGrid = () => {
   return (
     <>
 
-      {watch("installment_grid")?.length ? (
+      {watch("installmentGrid")?.length ? (
         <div
           className={
             errors?.installment_grid_amount
@@ -61,14 +60,14 @@ const InstallmentGrid = () => {
             <span className="bg-gray-300 h-6 w-[2px] mx-8" />
             <span className="text-green-600 rounded-md">
               Rest:{" "}
-              {watch("installment.rest_amount") - totalCheAmount ||
-                watch("installment.rest_amount") || 0}
+              {watch("installment.restAmount") - totalCheAmount ||
+                watch("installment.restAmount") || 0}
             </span>
           </div>
           {errors?.installment_grid_amount ? (
             <ErrorText>
               {errors?.installment_grid_amount?.message}{" "}
-              {watch("installment.rest_amount")}
+              {watch("installment.restAmount")}
             </ErrorText>
           ) : null}
           <TableForm
@@ -78,7 +77,7 @@ const InstallmentGrid = () => {
               <>
                 <td className="border text-center">
                   <RHFTableInput
-                    name={`installment_grid.${index}.internal_number`}
+                    name={`installment_grid.${index}.internalNumber`}
                   />
                 </td>
                 <td className="border text-center">
@@ -89,12 +88,12 @@ const InstallmentGrid = () => {
                 </td>
                 <td className="border text-center">
                   <RHFDatePicker
-                    name={`installment_grid.${index}.due_date`}
+                    name={`installment_grid.${index}.dueDate`}
                   />
                 </td>
                 <td className="border text-center">
                   <RHFTableAsyncSelect
-                    name={`installment_grid.${index}.bank_id`}
+                    name={`installment_grid.${index}.bankId`}
                   />
                 </td>
                 <td className="border text-center w-[180px]">
@@ -109,7 +108,7 @@ const InstallmentGrid = () => {
                 </td>
                 <td className="border text-center">
                   <RHFDatePicker
-                    name={`installment_grid.${index}.end_due_date`}
+                    name={`installment_grid.${index}.endDueDate`}
                   />
                 </td>
 

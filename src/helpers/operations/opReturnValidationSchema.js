@@ -3,7 +3,7 @@ import VALIDATION from "../VALIDATIONS"
 
 export const opReturnDefaultValues = {
   amount: null,
-  cheque_id: null,
+  chequeId: null,
   connectWithChqId: null,
   costCenterId: null,
   createdAt: new Date(),
@@ -15,12 +15,12 @@ export const opReturnDefaultValues = {
 
 export const opReturnValidationSchema = z.object({
   amount: VALIDATION.NON_NEGATIVE_NUMBER,
-  cheque_id: VALIDATION.NON_EMPTY_STRING,
-  connectWithChqId: null,
-  costCenterId: null,
-  createdAt: new Date(),
+  chequeId: VALIDATION.NON_EMPTY_STRING,
+  connectWithChqId: VALIDATION.OPTIONAL_STRING,
+  costCenterId: VALIDATION.OPTIONAL_STRING,
+  createdAt: z.date(),
   creditAccountId: VALIDATION.NON_EMPTY_STRING,
   debitAccountId: VALIDATION.NON_EMPTY_STRING,
-  note: "",
+  note: VALIDATION.OPTIONAL_STRING,
   reason: VALIDATION.NON_NEGATIVE_NUMBER,
 })

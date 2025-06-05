@@ -1,16 +1,16 @@
-import { useFormContext } from "react-hook-form";
-import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFDatePicker, RHFInputAmount } from "../../fields";
-import { useQuery } from "@tanstack/react-query";
-import ChequeFormBar from "./ChequeFormBar";
-import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
-import { getSearchBank, getSingleBank } from "@/services/bankService";
-import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
-import { getChequePatternByCode } from "@/services/chequePatternsService";
 import { getSearchAccount, getSingleAccount } from "@/services/accountService";
-import { getSearchUser, getSingleUser } from "@/services/userService";
+import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
+import { getSearchBank, getSingleBank } from "@/services/bankService";
+import { getChequePatternByCode } from "@/services/chequePatternsService";
+import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
+import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
 import { getSearchShop, getSingleShop } from "@/services/shopService";
-import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
+import { getSearchUser, getSingleUser } from "@/services/userService";
+import { useQuery } from "@tanstack/react-query";
+import { useFormContext } from "react-hook-form";
+import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFTextarea } from "../../fields";
+import ChequeFormBar from "./ChequeFormBar";
 // import { getSearchParking, getSingleParking } from "@/services/parkingService";
 // import { getAccountSearch, getSingleAccount } from "@/services/accountService";
 // import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
@@ -135,7 +135,7 @@ const ChequeForm = ({ code, ...props }) => {
                   table={name}
                   getSearch={field.getSearch}
                   getSingle={field.getSingle}
-                  required={field.name !== "observeCostCenterId"}
+                  required={field.name !== "observeCostCenterId" && field.name !== "currencyId"}
                 />
               );
             })}

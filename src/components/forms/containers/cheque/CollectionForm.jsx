@@ -1,17 +1,19 @@
-import { CHQ_RECEIVED_CODE } from '@/data/GENERATE_STARTING_DATA';
-import QUERY_KEYS from '@/data/queryKeys';
-import { createCollection, deleteCollection, getSingleCollection, updateCollection } from '@/services/opCollectionService';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form';
-import DynamicForm from '../../wrapper/DynamicForm';
-import { OP_COLLECTION_FIELDS } from '@/helpers/cheque/chequeOperationsFields';
-import { FormFooter, FormHeader } from '../../wrapper';
 import ConfirmModal from '@/components/shared/ConfirmModal';
 import Loading from '@/components/shared/Loading';
+import { CHQ_RECEIVED_CODE } from '@/data/GENERATE_STARTING_DATA';
+import QUERY_KEYS from '@/data/queryKeys';
 import { opCollectionDefaultValues, opCollectionValidationSchema } from '@/helpers/operations/opCollectionValidationSchema';
-import { toast } from 'react-toastify';
+import { createCollection, deleteCollection, getSingleCollection, updateCollection } from '@/services/opCollectionService';
 import { getLastOne } from '@/services/paginationService';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { RHFDatePicker, RHFInput, RHFInputAmount } from '../../fields';
+import { AccountField, CurrencyFieldGroup } from '../../global';
+import CostCenterField from '../../global/CostCenterField';
+import { FormFooter, FormHeader } from '../../wrapper';
 
 const mergePattern = async (
   pattern,
@@ -79,10 +81,10 @@ const CollectionForm = ({
   const methods = useForm({
     defaultValue: opCollectionDefaultValues,
     mode: "onBlur",
-    resolver: opCollectionValidationSchema
+    resolver: zodResolver(opCollectionValidationSchema)
   });
   const chequeId = popupFormConfig?.chequeValue?.id
-  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
+  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { errors, isLoading, isSubmitting } } = methods
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
@@ -131,6 +133,7 @@ const CollectionForm = ({
   }
 
   console.log(watch(), 'wa');
+  console.log(errors, 'errors');
 
   return (
     <>
@@ -144,7 +147,21 @@ const CollectionForm = ({
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate >
             <FormHeader header="collection" onClose={outerClose} />
-            <DynamicForm containerClassName="p-4" fields={OP_COLLECTION_FIELDS} />
+            <div className='grid grid-cols-2 gap-4 p-4'>
+              <RHFDatePicker label="createdAt" name="createdAt" />
+              <CurrencyFieldGroup />
+              <RHFInputAmount label="amount" name="amount" />
+              <AccountField label="debitAccountId" name="debitAccountId" />
+              <AccountField label="creditAccountId" name="creditAccountId" />
+              <CostCenterField label="costCenterId" name="costCenterId" />
+              <RHFInput label="note" name="note" />
+              <RHFInput label="commissionPercentage" name="commissionPercentage" type="number" />
+              <RHFInputAmount label="commissionValue" name="commissionValue" />
+              <AccountField label="commissionDebitId" name="commissionDebitId" />
+              <AccountField label="commissionCreditId" name="commissionCreditId" />
+              <CostCenterField label="commissionCostCenterId" name="commissionCostCenterId" />
+              <RHFInput label="commissionNote" name="commissionNote" />
+            </div>
             <FormFooter
               isLoading={isLoading || isSubmitting}
               setOpenConfirmation={setOpenConfirmation}

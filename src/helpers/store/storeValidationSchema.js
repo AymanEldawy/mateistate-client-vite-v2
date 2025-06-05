@@ -20,7 +20,7 @@ export const storeValidationSchema = () => z.object({
   warehouseman: VALIDATION.OPTIONAL_STRING,
   note: VALIDATION.OPTIONAL_STRING,
   ltnname: VALIDATION.OPTIONAL_STRING,
-  parentIid: VALIDATION.OPTIONAL_STRING,
+  parentId: VALIDATION.OPTIONAL_STRING,
   finalId: VALIDATION.OPTIONAL_STRING,
 
 });

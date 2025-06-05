@@ -1,37 +1,38 @@
+import QUERY_KEYS from "@/data/queryKeys";
+import { getAllCurrencies } from "@/services/currencyService";
+import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
-import { Label } from "../fields/Label";
-import { RHFInput, RHFTableSelect } from "../fields";
-import { ErrorText } from "@/components/shared/ErrorText";
+import { RHFInput, RHFSelectField } from "../fields";
 
 const CurrencyFieldGroup = ({
   containerClassName,
   labelClassName,
   hideErrors,
   tab,
+  hideLabel,
   ...field
 }) => {
   const {
     formState: { errors },
   } = useFormContext();
-  // const { currencies = [] } = useGlobalOptions();
-  // const [currency, setCurrency] = useState(null);
+  const { data: currencies } = useQuery({
+    queryKey: [QUERY_KEYS.CURRENCY],
+    queryFn: async () => {
+      const response = await getAllCurrencies();
+      return response?.data || [];
+    },
+  });
+
+
   const { name = 'currencyId', required, label } = field || {}
   const error = errors?.[name];
 
   return (
     <div className={`flex-row flex rounded-md text-sm h-[31px] ${containerClassName}`}>
-      {label && (
-        <Label
-          name={name}
-          required={required}
-          label={label}
-          labelClassName={labelClassName}
-        />
-      )}
-      <RHFTableSelect
+      <RHFSelectField
+        label="currency"
         name={name}
-        options={[]}
-        // default option
+        options={currencies}
         optionValue="id"
         optionLabel="code"
         selectProps={{
@@ -44,9 +45,6 @@ const CurrencyFieldGroup = ({
           }
         }}
       />
-      {error && !hideErrors ? (
-        <ErrorText>{error?.message}</ErrorText>
-      ) : null}
     </div>
   );
 };

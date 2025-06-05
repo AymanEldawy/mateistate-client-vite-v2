@@ -1,5 +1,6 @@
 import Modal from '@/components/shared/Modal';
-import { usePopupForm } from '@/hook/usePopupForm'
+import { usePopupForm } from '@/hook/usePopupForm';
+import Store from '@/pages/views/Store/Store';
 import { lazy } from 'react';
 import InstallmentForm from '../containers/contract/InstallmentForm';
 
@@ -17,45 +18,50 @@ const DynamicPopupForm = () => {
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   if (!popupFormConfig) return;
 
+  const additional = {
+    outerClose: onCloseDispatchedForm,
+    popupFormConfig: popupFormConfig,
+    defaultNumber: popupFormConfig?.number,
+  }
+
   const displayForm = () => {
     switch (popupFormConfig?.table) {
       case 'account':
-        return <Account formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Account
+          formOnly
+          {...additional}
         />
       case 'user':
-        return <Users formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Users
+          formOnly
+          {...additional}
         />
       case 'cheque':
-        return <Cheque formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Cheque
+          formOnly
           defaultCode={popupFormConfig?.code}
+          {...additional}
         />
       case 'cost_center':
-        return <CostCenter formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <CostCenter
+          formOnly
+          {...additional}
+        />
+      case 'store':
+        return <Store
+          formOnly
+          {...additional}
         />
       case 'currency':
-        return <Currency formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Currency
+          formOnly
+          {...additional}
         />
       case 'voucher':
-        return <Voucher formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Voucher
+          formOnly
           defaultCode={popupFormConfig?.code}
+          {...additional}
         />
       case 'op_partial_collection':
         return <PartialCollectionFrom

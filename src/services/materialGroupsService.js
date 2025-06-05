@@ -43,3 +43,9 @@ export const getMaterialGroupCode = (parentId) => {
 export const getSearchMaterial = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}?search=${value}`);
 };
+
+export const getMaterialGroupCodeNumber = (parentId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/${parentId}/next-child-info`
+  );
+};

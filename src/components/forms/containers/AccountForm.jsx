@@ -7,11 +7,21 @@ import { ACCOUNT_ASSEMBLY, ACCOUNT_DISTRIBUTIVE, ACCOUNT_FIELDS } from "@/helper
 import TableForm from "../wrapper/TableForm";
 import { RHFTableInput, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFSelectField, RHFTableAsyncSelect } from "../fields";
 import { AccountField } from "../global";
-import { getAccountCodeNumber, getAccountSearch, getSingleAccount } from "@/services/accountService";
+import { getAccountCodeNumber, getAccountSearch, getAllAccounts, getLeavesAccounts, getSingleAccount } from "@/services/accountService";
 import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import QUERY_KEYS from "@/data/queryKeys";
+import { useQuery } from "@tanstack/react-query";
 
 const AccountForm = () => {
   // let name = 'account';
+  const { data: accounts } = useQuery({
+    queryKey: [QUERY_KEYS.ACCOUNT],
+    queryFn: async () => {
+      const response = await getAllAccounts();
+      return response?.data || [];
+    },
+  });
+
   const { watch, setValue, formState: { errors }, clearErrors } = useFormContext();
   const [totalPercentage, setTotalPercentage] = useState(0)
   useEffect(() => {
@@ -48,6 +58,9 @@ const AccountForm = () => {
     }
   };
 
+  console.log(watch(),'accounts');
+  
+
   return (
     <div className="">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
@@ -71,15 +84,15 @@ const AccountForm = () => {
       </div>
       {watch("type") === 1 ? (
         <div className="flex-1 grid grid-cols-1 my-4 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
-          <AccountField
+          <RHFSelectField
             name="account.parentId"
             label="parent_id"
-            allowAdd={false}
+            options={accounts}
           />
-          <AccountField
+          <RHFSelectField
             name="account.finalId"
             label="final_id"
-            allowAdd={false}
+            options={accounts}
           />
         </div>
       ) : null}
@@ -100,8 +113,10 @@ const AccountForm = () => {
           <TableForm
             renderFields={(item, index) => (
               <div key={index}>
-                <AccountField
+                <RHFSelectField
                   name={`${ACCOUNT_ASSEMBLY_TYPE_NAME}.${index}.mainAccountId`}
+                  options={accounts}
+                  hideErrors
                 />
               </div>
             )}
@@ -139,9 +154,10 @@ const AccountForm = () => {
             renderFields={(item, index) => (
               <>
                 <td>
-                  <AccountField
+                  <RHFSelectField
                     name={`${ACCOUNT_DISTRIBUTIVE_TYPE_NAME}.${index}.mainAccountId`}
-                    label=""
+                    options={accounts}
+                    hideErrors
                   />
                 </td>
                 <td>

@@ -1,8 +1,7 @@
-import React from 'react'
-import TableForm from '../../wrapper/TableForm'
-import { RHFAsyncSelectField, RHFInput, RHFTableAsyncSelect, RHFTableInput } from '../../fields'
+import { RHFTableInput } from '../../fields'
 import { AccountField } from '../../global'
-import { getSearchCostCenter, getSingleCostCenter } from '@/services/CostCenterService'
+import CostCenterField from '../../global/CostCenterField'
+import TableForm from '../../wrapper/TableForm'
 
 // rowStyles={(index) => {
 //   if (PATTERN_SETTINGS?.even_table_color && index % 2 === 0) {
@@ -29,15 +28,13 @@ const VoucherFormGrid = ({ PATTERN_SETTINGS }) => {
             <td>
               <AccountField
                 label=""
-                name={`voucherGridData.${index}.account_id`}
+                name={`voucherGridData.${index}.accountId`}
                 required={index === 0}
               />
             </td>
             <td>
-              <RHFTableAsyncSelect
-                name={`voucherGridData.${index}.cost_center_id`}
-                getSearch={getSearchCostCenter}
-                getSingle={getSingleCostCenter}
+              <CostCenterField
+                name={`voucherGridData.${index}.costCenterId`}
                 required={index === 0}
               />
             </td>

@@ -1,8 +1,7 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import Select from "react-select";
-import { Label } from "./Label";
 import { ErrorText } from "../../shared/ErrorText";
 import ReactSelectNormal from '../../shared/ReactSelectNormal';
+import { Label } from "./Label";
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -36,6 +35,8 @@ const RHFSelectField = ({
         field: { onChange, ref, value },
         fieldState: { error },
       }) => {
+        console.log(value,'value', options?.find(c => c?.[optionValue] === (defaultValue || value)), options);
+        
         return (
           <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
             {label && (
@@ -48,8 +49,8 @@ const RHFSelectField = ({
             )}
             <div className='w-full relative' >
               <ReactSelectNormal
-                getOptionLabel={(option) => option?.[optionLabel || 'name']}
-                getOptionValue={(option) => option?.[optionValue || 'id']}
+                getOptionLabel={(option) => option?.[optionLabel]}
+                getOptionValue={(option) => option?.[optionValue]}
                 styles={styles}
                 error={error}
                 defaultValue={options?.find(c => c?.[optionValue] === (defaultValue || value))}
@@ -60,7 +61,7 @@ const RHFSelectField = ({
                 selectProps={selectProps}
                 small={small}
                 onChange={(option) => {
-                  onChange(option?.[optionValue || 'id'])
+                  onChange(option?.[optionValue])
                 }}
               />
 

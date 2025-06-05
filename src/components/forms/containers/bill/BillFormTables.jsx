@@ -1,7 +1,7 @@
 import Btn from '@/components/shared/Btn'
-import TableForm from '../../wrapper/TableForm'
-import { RHFAsyncSelectField, RHFInput, RHFInputAmount, RHFSelectField, RHFTableSelect } from '../../fields'
+import { RHFAsyncSelectField, RHFInput, RHFInputAmount, RHFTableSelect } from '../../fields'
 import { AccountField } from '../../global'
+import TableForm from '../../wrapper/TableForm'
 
 const BillFormTables = ({
   setActiveTab,
@@ -115,7 +115,6 @@ const BillFormTables = ({
                 <td>
                   <AccountField
                     name={`billDiscountDetails.${index}.accountId`}
-                    options={[]}
                   />
                 </td>
                 <td>

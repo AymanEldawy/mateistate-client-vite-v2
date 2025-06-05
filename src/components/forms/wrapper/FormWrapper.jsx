@@ -34,9 +34,9 @@ const FormWrapper = ({
   refetch,
   ...props
 }) => {
-  const searchParams = new URLSearchParams();
+  // const searchParams = new URLSearchParams();
   console.log(numberSearchParam, codeSearchParam, 'numberSearchParam, codeSearchParam');
-  const pathname = usePathname()
+  // const pathname = usePathname()
   const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -110,13 +110,13 @@ const FormWrapper = ({
     },
   });
 
-  const removeSearchParams = () => {
-    if (numberSearchParam) searchParams.delete(numberSearchParam);
-    if (codeSearchParam) searchParams.delete(codeSearchParam);
-    if (pathname) {
-      window.history.replaceState({}, '', pathname);
-    }
-  };
+  // const removeSearchParams = () => {
+  //   if (numberSearchParam) searchParams.delete(numberSearchParam);
+  //   if (codeSearchParam) searchParams.delete(codeSearchParam);
+  //   if (pathname) {
+  //     window.history.replaceState({}, '', pathname);
+  //   }
+  // };
 
   useEffect(() => {
     if (oldValues) {
@@ -156,7 +156,7 @@ const FormWrapper = ({
       if (onClose) onClose();
       if (outerClose) outerClose();
       console.log(name, 'name');
-      removeSearchParams()
+      // removeSearchParams()
 
       return;
     }

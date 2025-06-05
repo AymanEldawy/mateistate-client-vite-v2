@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod";
 import VALIDATION from "../VALIDATIONS";
 
 export const opPartialDefaultValues = {
@@ -22,15 +22,17 @@ export const opPartialDefaultValues = {
 }
 
 export const opPartialValidationSchema = z.object({
+  number: VALIDATION.NON_NEGATIVE_NUMBER,
   chequeId: VALIDATION.NON_EMPTY_STRING,
   createdAt: VALIDATION.OPTIONAL_DATE,
   amount: VALIDATION.NON_NEGATIVE_NUMBER,
   totalValue: VALIDATION.NON_NEGATIVE_NUMBER,
-  totalSumPrev: VALIDATION.NON_NEGATIVE_NUMBER,
+  totalSumPrev: VALIDATION.OPTIONAL_NUMBER,
   totalSum: VALIDATION.NON_NEGATIVE_NUMBER,
-  rest: VALIDATION.NON_NEGATIVE_NUMBER,
+  rest: VALIDATION.OPTIONAL_NUMBER,
   debitAccountId: VALIDATION.NON_EMPTY_STRING,
   creditAccountId: VALIDATION.NON_EMPTY_STRING,
+  currencyId: VALIDATION.NON_EMPTY_STRING,
   costCenterId: VALIDATION.OPTIONAL_STRING,
   note: VALIDATION.OPTIONAL_STRING,
   commissionDebitId: VALIDATION.OPTIONAL_STRING,

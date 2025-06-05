@@ -1,8 +1,7 @@
 import ChartWrapper from '@/components/chartWrapper/ChartWrapper'
 import QUERY_KEYS from '@/data/queryKeys'
 import { usePopupForm } from '@/hook/usePopupForm'
-import { getAccountChildrenByParentId, getAccountCodeNumber, getAllAccounts, getAllChartAccounts } from '@/services/accountService'
-import React, { useTransition } from 'react'
+import { getAccountChildrenByParentId, getAccountCodeNumber, getAllAccounts } from '@/services/accountService'
 import { useTranslation } from 'react-i18next'
 
 const AccountChart = () => {
@@ -18,9 +17,9 @@ const AccountChart = () => {
         type: 1,
         account: {
           type: 1,
-          code: response?.data?.nextChildCode,
-          parentId: response?.data?.parentId,
-          finalId: response?.data?.finalId,
+          code: response?.nextChildCode,
+          parentId: response?.parentId,
+          finalId: response?.finalId ||  response?.parentId,
         }
       };
       handleDispatchForm({

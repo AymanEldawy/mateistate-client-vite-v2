@@ -45,3 +45,5 @@ export const getMaterialCode = (parentId) => {
 export const getSearchMaterials = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}?search=${value}`);
 };
+
+

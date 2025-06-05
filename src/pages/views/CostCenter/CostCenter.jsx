@@ -1,13 +1,14 @@
-import QUERY_KEYS from "@/data/queryKeys";
-import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
 import CostCenterForm from "@/components/forms/containers/costCenter/CostCenterForm";
-import { costCenterDefaultValue, costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import FormWrapper from "@/components/forms/wrapper/FormWrapper";
+import QUERY_KEYS from "@/data/queryKeys";
+import costCenterColumns from "@/helpers/costCenter/costCenterColumns";
+import { costCenterDefaultValue, costCenterValidationSchema } from "@/helpers/costCenter/costCenterValidationSchema";
 import { createCostCenter, deleteCostCenter, deleteManyCostCenters, getAllCostCenters, getSingleCostCenter, updateCostCenter } from "@/services/CostCenterService";
+import PaperLayout from "../../../components/layout/paper/PaperLayout";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const costCenterConfig = {
+  name:"cost_center",
   formProps: {
     defaultValue: costCenterDefaultValue,
     validationSchema: costCenterValidationSchema,
@@ -24,19 +25,20 @@ const costCenterConfig = {
   },
 };
 
-const CostCenter = ({ formOnly, outerClose, defaultNumber }) => {
+const CostCenter = ({ formOnly, outerClose, defaultNumber, popupFormConfig }) => {
   if (formOnly) {
     return <FormWrapper
       {...costCenterConfig}
       outerClose={outerClose}
       numberSearchParam={defaultNumber}
+      oldValues={popupFormConfig?.oldValues}
     />;
   }
   // const navigate = useNavigate();
 
   return (
     <PaperLayout
-      name="cost_center"
+
       queryKey={QUERY_KEYS.Cost_center}
       queryFn={getAllCostCenters} //
       handleDeleteSelected={deleteManyCostCenters} //

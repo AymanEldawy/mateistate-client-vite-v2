@@ -1,5 +1,6 @@
-import { RHFAsyncSelectField, RHFTableAsyncSelect } from "../../fields"
+import { RHFTableAsyncSelect } from "../../fields"
 import { AccountField } from "../../global"
+import BuildingField from "../../global/BuildingField"
 import TableForm from "../../wrapper/TableForm"
 
 const ContractFormLinkedParking = () => {
@@ -9,8 +10,7 @@ const ContractFormLinkedParking = () => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFTableAsyncSelect
-
+              <BuildingField
                 name={`contractLinkedParking.${index}.buildingId`}
               />
             </td>
@@ -24,7 +24,7 @@ const ContractFormLinkedParking = () => {
                 name={`contractLinkedParking.${index}.accountId`}
               />
             </td>
-           
+
           </>
         )}
         gridName={"contractLinkedParking"}

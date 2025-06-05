@@ -1,25 +1,23 @@
-
 import ChartWrapper from '@/components/chartWrapper/ChartWrapper'
 import QUERY_KEYS from '@/data/queryKeys'
 import { usePopupForm } from '@/hook/usePopupForm'
-import { getAllCostCenters, getCostCenterCodeNumber } from '@/services/CostCenterService'
+import { getAllMaterialGroups, getMaterialGroupCodeNumber } from '@/services/materialGroupsService'
 import { useTranslation } from 'react-i18next'
 
-const CostCenterChart = () => {
+const MaterialGroupChart = () => {
   const { t } = useTranslation()
   const { handleDispatchForm } = usePopupForm()
 
   // onSelectAddHandler
   const onAddItemHandler = async (item) => {
-    const id = item?.parentId ? item?.parentId : item?.id
-    const response = await getCostCenterCodeNumber(id);
+    const response = await getMaterialGroupCodeNumber(item?.id);
     if (response?.success) {
       let defaultValues = {
-        code: response?.nextChildCode,
-        parentId: response?.parentId,
+        code: response?.data?.nextChildCode,
+        parentId: response?.data?.parentId,
       };
       handleDispatchForm({
-        table: 'cost_center',
+        table: 'materia_group',
         oldValues: defaultValues
       })
     }
@@ -27,13 +25,13 @@ const CostCenterChart = () => {
 
   return (
     <ChartWrapper
-      title={t('costCenterChart')}
-      queryKey={QUERY_KEYS.Cost_center}
-      queryFn={getAllCostCenters}
-      name="cost_center"
+      title={t('materialGroupChart')}
+      queryKey={QUERY_KEYS.MATERIAL_GROUP}
+      queryFn={getAllMaterialGroups}
+      name="material_group"
       onAddItemHandler={onAddItemHandler}
     />
   )
 }
 
-export default CostCenterChart
+export default MaterialGroupChart

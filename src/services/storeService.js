@@ -53,3 +53,10 @@ export const getStoreCash = (buildingId) => {
     `${API_URL_CONSTANTS.BASE_STORE}/bank?buildingId=${buildingId}`
   );
 };
+
+
+export const getStoreCodeNumber = (parentId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_STORE}/${parentId}/next-child-info`
+  );
+};
