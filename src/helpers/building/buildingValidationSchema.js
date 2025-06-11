@@ -1,4 +1,4 @@
-import { object, z } from "zod"
+import { z } from "zod";
 import { FLATS } from "./buildingHelpers";
 import { BUILDING_STEPS } from "./buildingSteps";
 
@@ -36,7 +36,7 @@ export const buildingDefaultValues = {
   entryVatAccountId: null,
   entryVatRate: null,
   investmentEndDate: null,
-  investmentGenEntries: null,
+  investmentGenEntries: false,
   investmentOwnerAccountId: null,
   investmentStartDate: null,
   investmentValue: null,
@@ -113,7 +113,7 @@ export const buildingValidationSchema = (tab, setTab) => {
     entryVatAccountId: z.string().nullable().optional(),
     entryVatRate: z.string().nullable().optional(),
     investmentEndDate: z.string().nullable().optional(),
-    investmentGenEntries: z.boolean().nullable().optional(),
+    investmentGenEntries: z.boolean(),
     investmentOwnerAccountId: z.string().nullable().optional(),
     investmentStartDate: z.string().nullable().optional(),
     investmentValue: z.string().nullable().optional(),

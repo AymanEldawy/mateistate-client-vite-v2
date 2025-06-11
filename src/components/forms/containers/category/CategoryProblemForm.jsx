@@ -1,15 +1,25 @@
-import { getSearchCategory, getSingleCategory } from "@/services/categoryService";
-import { RHFAsyncSelectField, RHFCheckbox, RHFInput, RHFTextarea } from "../../fields";
+import QUERY_KEYS from "@/data/queryKeys";
+import { getAllCategories } from "@/services/categoryService";
+import { useQuery } from "@tanstack/react-query";
+import { RHFCheckbox, RHFInput, RHFSelectField } from "../../fields";
 
 const CategoryProblemForm = () => {
+
+  const { data: categories } = useQuery({
+    queryKey: [QUERY_KEYS.CATEGORY],
+    queryFn: async () => {
+      const response = await getAllCategories();
+      return response?.data || [];
+    },
+  })
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
       <RHFInput name="description" label="problem" required />
       <RHFInput name="ltndescription" label="ltnproblem" required />
-      <RHFAsyncSelectField
+      <RHFSelectField
         name="categoryId" label="category_id"
-        getSearch={getSearchCategory}
-        getSingle={getSingleCategory}
+        options={categories}
         required
       />
       <RHFInput name="minutes" label="minutes" required type="number" />

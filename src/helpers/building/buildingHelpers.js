@@ -1,4 +1,3 @@
-import { getSingleBuilding } from "@/services/buildingService";
 
 export const FLATS = {
   apartmentCount: 0,
@@ -177,7 +176,6 @@ export const findListNew = async (
     ...prev,
     ...hashApartmentTypes,
   }));
-  console.log(hashApartmentTypes?.[newType], newType, hashApartmentTypes, 'hashApartmentTypes');
   setUNITS_COLORED_COUNT((prev) => ({
     ...prev,
     [newType]: Object.keys(hashApartmentTypes?.[newType]),

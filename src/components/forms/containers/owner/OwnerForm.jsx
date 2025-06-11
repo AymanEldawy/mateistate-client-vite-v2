@@ -8,14 +8,9 @@ const OwnerForm = () => {
         <RHFInput name="name" lablel="name" required />
         <RHFInput name="ltnname" lablel="ltnname" />
         <RHFInput name="id_card" lablel="id_card" />
-      </div>
-      {/* <RHFDatePicker {...Lessor_FIELDS?.passport_expiry_date} /> */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput name="cell_phone" lablel="cell_phone" />
         <RHFInput name="mailbox" lablel="mailbox" />
         <RHFInput name="address" lablel="address" />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput name="nationality" lablel="nationality" />
         <AccountField name="accountId" label="account_id" />
       </div>
