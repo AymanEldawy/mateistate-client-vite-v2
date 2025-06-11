@@ -1,31 +1,37 @@
 
 
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { lazy, useState } from 'react'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
-import EntryBar from '@/components/shared/EntryBar'
-import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, getSingleBill, updateBill } from '@/services/billService'
-import { billDefaultValue, billValidationSchema } from '@/helpers/bill/billValidationSchema'
-import billColumns from '@/helpers/bill/billColumns'
-import Modal from '@/components/shared/Modal'
+import PaperLayout from '@/components/layout/paper/PaperLayout'
 import BtnGroups from '@/components/shared/BtnGroups'
-import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
-import useCustomSearchParams from '@/hook/useCustomSearchParams'
+import EntryBar from '@/components/shared/EntryBar'
+import Modal from '@/components/shared/Modal'
+import QUERY_KEYS from '@/data/queryKeys'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
-import { get } from 'react-hook-form'
-import { getAllBillPatterns } from '@/services/billPatternsService'
-const BillForm = lazy(() => import("@/components/forms/containers/bill/BillForm"))
+import billColumns from '@/helpers/bill/billColumns'
+import { billDefaultValue, billValidationSchema } from '@/helpers/bill/billValidationSchema'
+import useCustomSearchParams from '@/hook/useCustomSearchParams'
+import { getAllBillPatterns, getBillPatternByCode } from '@/services/billPatternsService'
+import { createBill, deleteBill, deleteManyBills, getAllBills, getSearchBill, getSingleBill, updateBill } from '@/services/billService'
+import { useQuery } from '@tanstack/react-query'
+import { lazy, useState } from 'react'
 
+const BillForm = lazy(() => import("@/components/forms/containers/bill/BillForm"))
 
 const Bills = () => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
-  const updateSearchParams = useUpdateSearchParams();
   const [openFormType, setOpenFormType] = useState(false);
 
-  const handleChangeCode = (code) => {
-    updateSearchParams([{ name: SEARCH_PARAMS.CODE, value: code }]);
-  }
+  const { data: pattern } = useQuery({
+    queryKey: [QUERY_KEYS.VOUCHER_PATTERN, searchParamsSelectedCode],
+    queryFn: async () => {
+      const response = await getBillPatternByCode(searchParamsSelectedCode)
+      if (response?.success) {
+        return response
+      }
+    },
+    enabled: !!searchParamsSelectedCode
+  })
+
 
   return (
     <>
@@ -37,7 +43,7 @@ const Bills = () => {
         />
       </Modal>
       <PaperLayout
-        name="bills"
+        name="bill"
         queryKey={QUERY_KEYS.BILLS}
         queryFn={getAllBills}
         handleDeleteSelected={deleteManyBills}
@@ -61,10 +67,10 @@ const Bills = () => {
           onSuccessAction: () => { },
           isSteps: false,
           onHandleDelete: deleteBill,
-          RenderForm: (props) => <BillForm {...props} code={searchParamsSelectedCode.code} />
+          RenderForm: (props) => <BillForm {...props} code={searchParamsSelectedCode} pattern={pattern} />
         }}
         formHeaderProps={{
-          header: "bill",
+          header: pattern?.name || "bill",
           ExtraContentBar: ({ values }) => (
             <>
               <FormHeaderSearchBar

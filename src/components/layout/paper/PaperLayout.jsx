@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
-import PaperBar from './PaperBar';
-import { useQuery } from '@tanstack/react-query';
-import CustomTable from '../../tables/containers/CustomTable';
-import { PaperHeader } from './PaperHeader';
-import PaperModal from './PaperModal';
-import PaperError from './PaperError';
-import FormWrapper from '../../forms/wrapper/FormWrapper';
-import Loading from '@/components/shared/Loading';
 import ConfirmModal from '@/components/shared/ConfirmModal';
-import PaperFiltersAndSort from './PaperFiltersAndSort';
-import { useParams, useSearchParams } from 'react-router-dom';
+import Loading from '@/components/shared/Loading';
 import SEARCH_PARAMS from '@/data/searchParamsKeys';
 import useCustomSearchParams from '@/hook/useCustomSearchParams';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 import usePathname from '@/hook/usePathname';
+import { useQuery } from '@tanstack/react-query';
+import { lazy, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import PaperBar from './PaperBar';
+import PaperHeader from './PaperHeader';
+
+const CustomTable = lazy(() => import('../../tables/containers/CustomTable'))
+const PaperModal = lazy(() => import('./PaperModal'))
+const PaperFiltersAndSort = lazy(() => import('./PaperFiltersAndSort'))
+const PaperError = lazy(() => import('./PaperError'))
+const FormWrapper = lazy(() => import('../../forms/wrapper/FormWrapper'))
 
 const PaperLayout = ({
   name,
@@ -47,7 +47,7 @@ const PaperLayout = ({
 
   // TODO: Refactor this to use a custom hook for search params
   useEffect(() => {
-    setOpenForm(!!numberSearchParam)
+    setOpenForm(!!numberSearchParam || !!codeSearchParam)
   }, [numberSearchParam])
 
 
@@ -128,7 +128,7 @@ const PaperLayout = ({
           setOpenViability={setOpenViability}
           records={data?.length}
           setGlobalFilter={setGlobalFilter}
-        />
+      />
         <PaperFiltersAndSort filters={columnFilters} sorts={[]} setColumnFilters={setColumnFilters} />
         <div className='relative'>
           {isError &&

@@ -1,16 +1,14 @@
 import { ErrorText } from "@/components/shared/ErrorText";
 import { ACCOUNT_ASSEMBLY_TYPE_NAME, ACCOUNT_DISTRIBUTIVE_TYPE_NAME } from "@/data/GENERATE_STARTING_DATA";
+import QUERY_KEYS from "@/data/queryKeys";
+import { calculatePercentage } from "@/helpers/account/accountHelpers";
+import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import { getAccountCodeNumber, getAllAccounts } from "@/services/accountService";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { calculatePercentage } from "@/helpers/account/accountHelpers";
-import { ACCOUNT_ASSEMBLY, ACCOUNT_DISTRIBUTIVE, ACCOUNT_FIELDS } from "@/helpers/account/accountFields";
+import { RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../fields";
 import TableForm from "../wrapper/TableForm";
-import { RHFTableInput, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFSelectField, RHFTableAsyncSelect } from "../fields";
-import { AccountField } from "../global";
-import { getAccountCodeNumber, getAccountSearch, getAllAccounts, getLeavesAccounts, getSingleAccount } from "@/services/accountService";
-import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
-import QUERY_KEYS from "@/data/queryKeys";
-import { useQuery } from "@tanstack/react-query";
 
 const AccountForm = () => {
   // let name = 'account';
@@ -121,7 +119,7 @@ const AccountForm = () => {
               </div>
             )}
             gridName={ACCOUNT_ASSEMBLY_TYPE_NAME}
-            headers={Object.values(ACCOUNT_ASSEMBLY)?.map(c => c?.label)}
+            headers={['mainAccountId']}
           />
         </div>
       ) : null}
@@ -170,7 +168,7 @@ const AccountForm = () => {
               </>
             )}
             gridName={ACCOUNT_DISTRIBUTIVE_TYPE_NAME}
-            headers={Object.values(ACCOUNT_DISTRIBUTIVE)?.map(c => c?.label)}
+            headers={['mainAccountId', 'percentage']}
           />
         </div>
       ) : null}

@@ -41,12 +41,11 @@ const contractColumns = [
       );
       // let unitType = getContractUnitType(row?.original);
       let unitType = null;
+      const link = `/contracts?code=${row?.original?.code}&number=${row?.original?.number}`
 
       return (
         <Link
-          to={`/contract/${type?.name?.toLowerCase()}/${unitType} ${type?.name
-            } Contracts?number=${row?.original?.number}?flat_type=${unitType}&code=${row?.original?.code
-            }`}
+          to={link}
           className="text-blue-500 font-medium hover:underline"
         >
           # {getValue()}
@@ -60,7 +59,7 @@ const contractColumns = [
     cell: ({ row, getValue }) => (
       <Link
         className="text-blue-500 hover:underline"
-        to={`/update/building/${row?.original?.building_id}`}
+        to={`/buildings?number=${row?.original?.building_id}`}
       >
         {getValue()}
       </Link>

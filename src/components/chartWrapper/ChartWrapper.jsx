@@ -3,7 +3,7 @@ import { usePopupForm } from '@/hook/usePopupForm'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { PaperHeader } from '../layout/paper/PaperHeader'
+import PaperHeader from '../layout/paper/PaperHeader'
 import { ErrorText } from '../shared/ErrorText'
 import Loading from '../shared/Loading'
 import ChartRenderTree from './ChartRenderTree'
@@ -40,8 +40,6 @@ const ChartWrapper = ({
 
   // onUpdateItemHandler
   const onUpdateItemHandler = async (item) => {
-    console.log(item, '----');
-
     handleDispatchForm({
       table: name,
       oldValues: item,

@@ -61,3 +61,12 @@ input[type="search"]::-webkit-search-cancel-button {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+textPath {
+  display: none;
+}
+
+text.recharts-text.recharts-polar-radius-axis-tick-value {
+  display: none;
+}

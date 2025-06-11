@@ -48,7 +48,7 @@ const VoucherFormGrid = ({ PATTERN_SETTINGS }) => {
       }}
       gridName="voucherGridData"
       headers={[
-        PATTERN_SETTINGS?.show_credit_field ? `credit` : `debit`,
+        PATTERN_SETTINGS?.showCreditField ? `credit` : `debit`,
         "account",
         "cost_center",
         "note",

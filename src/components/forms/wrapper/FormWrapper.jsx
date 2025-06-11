@@ -1,19 +1,18 @@
 
 
-import { FormProvider, set, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-import { zodResolver } from "@hookform/resolvers/zod";
+import ConfirmModal from "@/components/shared/ConfirmModal";
+import Loading from "@/components/shared/Loading";
 import useFormPagination from "@/hook/useFormPagination";
+import { usePopupForm } from "@/hook/usePopupForm";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import { FormSingularLayout, FormStepsLayout, FormWarnModal } from ".";
 import FormFooter from "./FormFooter";
 import FormHeader from "./FormHeader";
-import { FormSingularLayout, FormStepsLayout, FormWarnModal } from ".";
-import Loading from "@/components/shared/Loading";
-import ConfirmModal from "@/components/shared/ConfirmModal";
-import { usePopupForm } from "@/hook/usePopupForm";
-import usePathname from "@/hook/usePathname";
 
 const FormWrapper = ({
   defaultValue,
@@ -34,6 +33,9 @@ const FormWrapper = ({
   refetch,
   ...props
 }) => {
+
+  console.log(formHeaderProps,'formHeaderProps');
+  
   // const searchParams = new URLSearchParams();
   console.log(numberSearchParam, codeSearchParam, 'numberSearchParam, codeSearchParam');
   // const pathname = usePathname()

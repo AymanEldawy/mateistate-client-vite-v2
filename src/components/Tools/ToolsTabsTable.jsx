@@ -65,9 +65,7 @@ export const ToolsTabsTable = ({
           xIndex: y,
           yIndex: i + 1,
           floorNo: (i + 1).toString(),
-        };
-        console.log(tabName, itemHash, additional,' tabName, itemHash, additional');
-        
+        };        
         onInsertColor(tabName, itemHash, additional);
       } else {
         onRemoveFromColor(tabName, itemHash);

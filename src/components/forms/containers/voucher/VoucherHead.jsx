@@ -9,8 +9,8 @@ export const VoucherHead = ({
     <div>
       <div className={`grid gap-y-2 gap-x-8 grid-cols-2 md:grid-cols-3`}>
         <RHFInput
-          name="voucher.internal_number"
-          label="internal_number"
+          name="voucher.internalNumber"
+          label="internalNumber"
         />
         <RHFDatePicker
           name="voucher.createdAt"

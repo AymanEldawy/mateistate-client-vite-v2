@@ -1,39 +1,23 @@
+import { calculateMaterialsTotal, calculateTotal, calculateVatAndDiscounts } from "@/helpers/bill/billHelpers";
+import { BILL_PATTERN_PAYMENT_METHODS } from "@/helpers/DEFAULT_OPTIONS";
 import numberToText from "number-to-text";
 import { useEffect, useState } from "react";
-import { ContextMenu, MenuItem } from "react-contextmenu";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import BillFormTables from "./BillFormTables";
 import { RHFAsyncSelectField, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
-import { calculateMaterialsTotal, calculateTotal, calculateVatAndDiscounts } from "@/helpers/bill/billHelpers";
 import { CurrencyFieldGroup } from "../../global";
-import { BILL_PATTERN_PAYMENT_METHODS } from "@/helpers/DEFAULT_OPTIONS";
 import BillConnectWithField from "./BillConnectWithField";
+import BillFormTables from "./BillFormTables";
 
-const BillForm = () => {
+const BillForm = ({ code, pattern }) => {
   const { t } = useTranslation();
   const [refresh, setRefresh] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
-  const [PATTERN_SETTINGS, setPATTERN_SETTINGS] = useState({});
   const {
     watch,
     setValue,
     clearErrors,
   } = useFormContext();
-
-  // const { isLoading: LoadingPattern } = useQuery({
-  //   queryKey: ["bill_pattern", code],
-  //   queryFn: async () => {
-  //     const response = await getOneBy("bill_pattern", code, "code");
-  //     let pattern = response?.result?.at(0);
-  //     setPATTERN_SETTINGS(pattern);
-  //     if (!id) {
-  //       await mergePatternWithBillData(pattern, watch, setValue);
-  //     }
-  //     return pattern;
-  //   },
-  // });
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
@@ -49,7 +33,7 @@ const BillForm = () => {
         if (watch(name) === 2) {
           setValue(
             "bill.customer_account_id",
-            PATTERN_SETTINGS.cash_account_id
+            pattern.cash_account_id
           );
 
         } else {
@@ -186,7 +170,7 @@ const BillForm = () => {
         <RHFAsyncSelectField
           name="bill.customerId"
           label={
-            +PATTERN_SETTINGS?.bill_type === 2
+            +pattern?.bill_type === 2
               ? "Customer Name"
               : "Supplier name"
           }
@@ -211,7 +195,7 @@ const BillForm = () => {
         />
       </div>
       <div className="grid grid-cols-3 gap-4 mt-2">
-        {+PATTERN_SETTINGS?.bill_type === 2 ? (
+        {+pattern?.bill_type === 2 ? (
           <BillConnectWithField />
         ) : null}
       </div>
@@ -221,7 +205,7 @@ const BillForm = () => {
         textareaClassName="h-[60px]"
       />
 
-      <BillFormTables setActiveTab={setActiveTab} activeTab={activeTab} PATTERN_SETTINGS={PATTERN_SETTINGS} />
+      <BillFormTables setActiveTab={setActiveTab} activeTab={activeTab} pattern={pattern} />
 
       <div className="my-4 bg-gray-200 dark:bg-[#303030] p-2">
         <div className=" flex gap-12 items-center justify-between px-8">

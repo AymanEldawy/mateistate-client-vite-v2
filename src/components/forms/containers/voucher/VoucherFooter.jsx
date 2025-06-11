@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { RHFInput, RHFInputAmount, RHFUploadFilesController } from "../../fields";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { RHFInputAmount, RHFUploadFilesController } from "../../fields";
 
 export const VoucherFooter = ({
   PATTERN_SETTINGS,

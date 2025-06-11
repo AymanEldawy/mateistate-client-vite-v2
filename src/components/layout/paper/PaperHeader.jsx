@@ -1,8 +1,8 @@
-import { ArrowLongIcon } from "@/components/Icons"
-import { useTranslation } from "react-i18next"
+import { ArrowLongIcon } from "@/components/Icons";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
-export const PaperHeader = ({ header }) => {
+const PaperHeader = ({ header }) => {
   const navigate = useNavigate()
   const { t } = useTranslation();
 
@@ -16,3 +16,4 @@ export const PaperHeader = ({ header }) => {
     </div>
   )
 }
+export default PaperHeader

@@ -1,13 +1,12 @@
 import { getSearchAccount, getSingleAccount } from "@/services/accountService";
 import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
 import { getSearchBank, getSingleBank } from "@/services/bankService";
-import { getChequePatternByCode } from "@/services/chequePatternsService";
 import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
 import { getSearchShop, getSingleShop } from "@/services/shopService";
 import { getSearchUser, getSingleUser } from "@/services/userService";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFTextarea } from "../../fields";
 import ChequeFormBar from "./ChequeFormBar";
@@ -31,19 +30,13 @@ const mergePatternWithChequeData = (pattern, watch, setValue) => {
 
 };
 
-const ChequeForm = ({ code, ...props }) => {
-  console.log(props, code, 'props');
-
+const ChequeForm = ({ code, pattern, ...props }) => {
   const { watch, setValue } = useFormContext();
 
-  const { data: pattern } = useQuery({
-    queryKey: ['pattern', 'cheque', code],
-    queryFn: async () => {
-      const response = await getChequePatternByCode(code)
-      mergePatternWithChequeData(response, watch, setValue)
-    },
-    enabled: !!code
-  })
+  useEffect(() => {
+    if (!pattern) return;
+    mergePatternWithChequeData(pattern, watch, setValue)
+  }, [pattern]);
 
   return (
     <>
@@ -176,10 +169,10 @@ const ChequeForm = ({ code, ...props }) => {
             name="note"
             label="note"
           />
-          {/* <RHFTextarea
-          name="note2"
-          label="note2"
-        /> */}
+          <RHFTextarea
+            name="note2"
+            label="note2"
+          />
         </div>
         <ChequeFormBar pattern={pattern} />
       </div>

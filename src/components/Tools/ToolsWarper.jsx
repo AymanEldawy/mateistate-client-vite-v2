@@ -1,17 +1,17 @@
 import { FLAT_PROPERTY_TABS, FLATS, refetchBuildingAssets } from "@/helpers/building/buildingHelpers";
 import useFlatColoring from "@/hook/useFlatColoring";
-import { generateBuildingDetailsAndUnits, getBuildingDetails, getBuildingDetailsAndUnits, getSingleBuilding } from "@/services/buildingService";
-import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
-import Loading from "../shared/Loading";
-import Btn from "../shared/Btn";
-import { ToolsTabsTable } from "./ToolsTabsTable";
-import { Link, useParams } from "react-router-dom";
-import { ToolsContentBar } from "./ToolsContentBar";
-import { ToolsColorsBar } from "./ToolsColorsBar";
-import { ToolsTabsTableForm } from "./ToolsTabsTableForm";
+import { generateBuildingDetailsAndUnits, getBuildingDetailsAndUnits, getSingleBuilding } from "@/services/buildingService";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Btn from "../shared/Btn";
+import Loading from "../shared/Loading";
+import { ToolsColorsBar } from "./ToolsColorsBar";
+import { ToolsContentBar } from "./ToolsContentBar";
+import { ToolsTabsTable } from "./ToolsTabsTable";
+import { ToolsTabsTableForm } from "./ToolsTabsTableForm";
 
 
 const calculateFlats = (building) => {
@@ -62,7 +62,6 @@ const ToolsWarper = () => {
     queryKey: ["property_values", building?.id],
     queryFn: async () => {
       const data = await getBuildingDetailsAndUnits(building?.id);
-      console.log(data, '-s');
       if (data?.success) {
         if (data?.propertyValues?.length)
           reset({
@@ -83,13 +82,6 @@ const ToolsWarper = () => {
     },
     enabled: !!building?.id
   });
-
-
-
-  console.log(flatsDetails, 'flatsDetails');
-  console.log(errors, 'errors');
-  console.log(watch('grid'), 'grid');
-
 
   const onSubmit = async (value) => {
     let grid = watch("grid");

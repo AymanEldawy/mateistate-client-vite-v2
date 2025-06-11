@@ -1,5 +1,4 @@
 import { ErrorText } from "@/components/shared/ErrorText";
-import { INSTALLMENT_GRID_FIELDS } from "@/helpers/contract/installmentFields";
 import { useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { RHFDatePicker, RHFInputAmount, RHFTableAsyncSelect, RHFTableInput } from "../../fields";
@@ -72,43 +71,51 @@ const InstallmentGrid = () => {
           ) : null}
           <TableForm
             gridName="installment_grid"
-            headers={INSTALLMENT_GRID_FIELDS?.map(c => c?.label)}
+            headers={[
+              'internalNumber',
+              'amount',
+              'dueDate',
+              'bankId',
+              'note1',
+              'note2',
+              'endDueDate',
+            ]}
             renderFields={(item, index) => (
               <>
                 <td className="border text-center">
                   <RHFTableInput
-                    name={`installment_grid.${index}.internalNumber`}
+                    name={`installmentGrid.${index}.internalNumber`}
                   />
                 </td>
                 <td className="border text-center">
                   <RHFInputAmount
-                    name={`installment_grid.${index}.amount`}
+                    name={`installmentGrid.${index}.amount`}
                     inTable
                   />
                 </td>
                 <td className="border text-center">
                   <RHFDatePicker
-                    name={`installment_grid.${index}.dueDate`}
+                    name={`installmentGrid.${index}.dueDate`}
                   />
                 </td>
                 <td className="border text-center">
                   <RHFTableAsyncSelect
-                    name={`installment_grid.${index}.bankId`}
+                    name={`installmentGrid.${index}.bankId`}
                   />
                 </td>
                 <td className="border text-center w-[180px]">
                   <RHFTableInput
-                    name={`installment_grid.${index}.note1`}
+                    name={`installmentGrid.${index}.note1`}
                   />
                 </td>
                 <td className="border text-center w-[180px]">
                   <RHFTableInput
-                    name={`installment_grid.${index}.note2`}
+                    name={`installmentGrid.${index}.note2`}
                   />
                 </td>
                 <td className="border text-center">
                   <RHFDatePicker
-                    name={`installment_grid.${index}.endDueDate`}
+                    name={`installmentGrid.${index}.endDueDate`}
                   />
                 </td>
 
