@@ -3,8 +3,7 @@ import Loading from '@/components/shared/Loading';
 import { CHQ_RECEIVED_CODE } from '@/data/GENERATE_STARTING_DATA';
 import QUERY_KEYS from '@/data/queryKeys';
 import { opCollectionDefaultValues, opCollectionValidationSchema } from '@/helpers/operations/opCollectionValidationSchema';
-import { createCollection, deleteCollection, getSingleCollection, updateCollection } from '@/services/opCollectionService';
-import { getLastOne } from '@/services/paginationService';
+import { createCollection, deleteCollection, getCollectionByChequeId, updateCollection } from '@/services/opCollectionService';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -89,11 +88,10 @@ const CollectionForm = ({
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLastOne('op_collection', null, chequeId);
+      const response = await getCollectionByChequeId(chequeId);
       if (response?.success) {
-        const current = await getSingleCollection(response?.id)
-        reset(current)
-        return current;
+        reset(response)
+        return response;
       }
     },
     enabled: !!chequeId
@@ -102,6 +100,8 @@ const CollectionForm = ({
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
+  console.log(popupFormConfig, 'popupFormConfig', popupFormConfig?.chequeValue);
+  
   useEffect(() => {
     mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, setValue)
   }, [popupFormConfig, setValue])
@@ -133,7 +133,7 @@ const CollectionForm = ({
   }
 
   console.log(watch(), 'wa');
-  console.log(errors, 'errors');
+  console.log(errors, 'errors', outerClose);
 
   return (
     <>

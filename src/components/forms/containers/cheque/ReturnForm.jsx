@@ -4,8 +4,7 @@ import QUERY_KEYS from '@/data/queryKeys';
 import { CHQ_RETURN_REASONS } from '@/helpers/DEFAULT_OPTIONS';
 import { opReturnDefaultValues, opReturnValidationSchema } from '@/helpers/operations/opReturnValidationSchema';
 import { getSearchCheque, getSingleCheque } from '@/services/chequeService';
-import { createReturn, deleteReturn, getSingleReturn, updateReturn } from '@/services/opReturnService';
-import { getLastOne } from '@/services/paginationService';
+import { createReturn, deleteReturn, getReturnByChequeId, updateReturn } from '@/services/opReturnService';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -80,11 +79,10 @@ const CollectionForm = ({
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLastOne('op_return', null, chequeId);
+      const response = await getReturnByChequeId(chequeId);
       if (response?.success) {
-        const current = await getSingleReturn(response?.id)
-        reset(current)
-        return current;
+        reset(response)
+        return response;
       }
     },
     enabled: !!chequeId

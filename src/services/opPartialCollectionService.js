@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSinglePartial = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/${id}`);
@@ -65,3 +65,6 @@ export const getPartialBy = (chqId, number) => {
   );
 };
 
+export const getPartialByChequeId = (chequeId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/cheque/${chequeId}`);
+};
