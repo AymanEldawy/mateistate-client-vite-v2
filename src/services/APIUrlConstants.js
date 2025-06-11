@@ -59,7 +59,7 @@ const API_URL_CONSTANTS = {
   /************************************** BASE_RESERVATION_PROPERTY **************************************/
   BASE_RESERVATION_PROPERTY: "/reservation-properties",
   /************************************** BASE_USER_WORK_TIME **************************************/
-  BASE_USER_WORK_TIME: "/user_work_times",
+  BASE_USER_WORK_TIME: "/user-work-times",
   /************************************** BASE_SERVICE **************************************/
   BASE_SERVICE: "/services",
   /************************************** BILLS **************************************/

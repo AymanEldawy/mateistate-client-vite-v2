@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleVoucherPattern = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/${id}`);
@@ -48,5 +48,5 @@ export const deleteManyVoucherPatterns = (ids) => {
 
 
 export const getVoucherPatternByCode = (code) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/${code}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/code/${code}`);
 };

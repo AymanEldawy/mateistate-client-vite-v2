@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleChequePattern = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE_PATTERN}/${id}`);
@@ -45,5 +45,5 @@ export const deleteManyChequePatterns = (ids) => {
 };
 
 export const getChequePatternByCode = (code) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE_PATTERN}/${code}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_CHEQUE_PATTERN}/code/${code}`);
 };

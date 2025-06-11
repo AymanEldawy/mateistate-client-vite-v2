@@ -1,14 +1,12 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleVoucher = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_VOUCHER}/${id}`);
 };
 
-export const getAllVouchers = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_VOUCHER, {
-    signal,
-  });
+export const getAllVouchers = () => {
+  return http.get(API_URL_CONSTANTS.BASE_VOUCHER);
 };
 
 export const createVoucher = (data) => {
