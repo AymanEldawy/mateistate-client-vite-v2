@@ -45,6 +45,8 @@ export const COUNTER_CHQ_NUMBER = [
 ];
 
 export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, watch) {
+  console.log('called mergeInstallmentAndFirstTabData with firstTabData:', firstTabData);
+  
   let total = firstTabData?.final_price;
   let date = firstTabData?.start_duration_date || firstTabData?.property_delivery_date;
 
@@ -75,7 +77,7 @@ export const generatePaymentBatches = async (
   watch,
   setValue,
   CACHE_LIST,
-  assetType
+  unitId
 ) => {
   const rest_amount = watch("installment.restAmount");
   const each_duration = watch("installment.eachDuration");
@@ -123,8 +125,79 @@ export const generatePaymentBatches = async (
       observeCostCenterId: watch("costCenterId"),
       note1,
       note2,
-      [`${assetType}Id`]: watch(`contract.${assetType}Id`),
+      [unitId]: watch(`contract.${unitId}`),
     });
   }
   setValue("installment_grid", cheques);
 };
+
+
+
+export function onWatchChangesInstallmentTab(name, value, setValue, watch) {
+  switch (name) {
+    case "totalAmount": {
+
+      let first_batch = watch(`installment.firstBatch`) || 0;
+      setValue(`installment.restAmount`, value - +first_batch);
+      break;
+    }
+    case "firstBatch": {
+
+      let totalAmount = watch(`installment.totalAmount`);
+      setValue(`installment.restAmount`, totalAmount - (value || 0));
+
+      return;
+    }
+
+    case "hasFirstBatch":
+      if (!value) {
+        setValue("installment.paymentDate", null);
+        setValue("installment.firstBatch", 0);
+      }
+      return;
+
+    default:
+      return;
+  }
+}
+
+export function onWatchChangesInstallmentGridTab(name, setValue, watch, cache) {
+  let row = name?.split(".").slice(0, 2).join(".");
+  let note1 = ``;
+
+  switch (name?.split(".")?.at(-1)) {
+    case "dueDate":
+    case "number":
+    case "amount":
+    case "bankId":
+    case "endDueDate": {
+
+      const number = watch(`${row}.number`);
+      const clientId = watch(`contract.clientId`);
+      const amount = watch(`${row}.amount`);
+
+      const dueDate = new Date(watch(`${row}.dueDate`)).toLocaleDateString(
+        "en-UK"
+      );
+
+      const endDueDate = new Date(
+        watch(`${row}.endDueDate`)
+      ).toLocaleDateString("en-UK");
+
+      // const bank = getCacheRowData(cache, "bank", watch(`${row}.bank_id`));
+      const bank = {};
+      const client = {};
+      // const client = getCacheRowData(
+      //   cache,
+      //   UNIQUE_REF_TABLES.clients,
+      //   clientId
+      // );
+
+      note1 = `received chq number ${number} from mr ${client?.name} ${amount} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
+    }
+      break;
+    default:
+      break;
+  }
+  setValue(`${row}.note1`, note1);
+}

@@ -1,8 +1,12 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
-export const getSingleInstallment = (contractId) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}/${contractId}`);
+export const getSingleInstallment = (id) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}/${id}`);
+};
+
+export const getInstallmentByContractId = (contractId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}?contractId=${contractId}`);
 };
 
 export const createInstallment = (data) => {
