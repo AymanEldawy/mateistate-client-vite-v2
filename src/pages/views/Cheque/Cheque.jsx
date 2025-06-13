@@ -47,7 +47,7 @@ const Cheque = ({
       onSuccessAction: () => { },
       isSteps: false,
       onHandleDelete: deleteCheque,
-      RenderForm: (props) => <ChequeForm {...props} />
+      RenderForm: (props) => <ChequeForm {...props} pattern={pattern} code={code} />
     },
     formHeaderProps: {
       header: pattern?.name || "Cheque",

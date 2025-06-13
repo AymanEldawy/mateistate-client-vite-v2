@@ -1,22 +1,27 @@
-import { getSearchAccount, getSingleAccount } from "@/services/accountService";
+import QUERY_KEYS from "@/data/queryKeys";
 import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
-import { getSearchBank, getSingleBank } from "@/services/bankService";
-import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
-import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
+import { getAllBanks } from "@/services/bankService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
 import { getSearchShop, getSingleShop } from "@/services/shopService";
-import { getSearchUser, getSingleUser } from "@/services/userService";
+import { getAllUsers } from "@/services/userService";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFTextarea } from "../../fields";
+import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFSelectField, RHFTextarea } from "../../fields";
+import { AccountField, CurrencyFieldGroup } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
 import ChequeFormBar from "./ChequeFormBar";
 // import { getSearchParking, getSingleParking } from "@/services/parkingService";
 // import { getAccountSearch, getSingleAccount } from "@/services/accountService";
 // import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 // import { getSearchBank, getSingleBank } from "@/services/bankService";
 
-const mergePatternWithChequeData = (pattern, watch, setValue) => {
+const mergePatternWithChequeData = (pattern, watch, setValue, reset) => {
 
+  console.log('call mergePatternWithChequeData', pattern, watch, setValue, reset);
+  
+  setValue('code', pattern?.code);
+  setValue('chequePatternId', pattern?.id);
   if (pattern?.auto_gen_entries) {
     setValue('genEntries', true)
   }
@@ -28,15 +33,38 @@ const mergePatternWithChequeData = (pattern, watch, setValue) => {
     setValue('accountId', pattern?.default_account_id)
   }
 
+    // reset({
+    //   code: pattern?.code || '',
+    //   chequePatternId: pattern?.id || '',
+    // })
 };
 
 const ChequeForm = ({ code, pattern, ...props }) => {
-  const { watch, setValue } = useFormContext();
+  const { watch, setValue,reset } = useFormContext();
+console.log(pattern, 'pattern in ChequeForm');
+
+  const { data: users } = useQuery({
+    queryKey: [QUERY_KEYS.USER],
+    queryFn: async () => {
+      const response = await getAllUsers();
+      return response?.data || [];
+    },
+  });
+
+  const { data: banks } = useQuery({
+    queryKey: [QUERY_KEYS.Bank],
+    queryFn: async () => {
+      const response = await getAllBanks();
+      return response?.data || [];
+    },
+  });
 
   useEffect(() => {
     if (!pattern) return;
-    mergePatternWithChequeData(pattern, watch, setValue)
+    mergePatternWithChequeData(pattern, watch, setValue, reset)
   }, [pattern]);
+
+
 
   return (
     <>
@@ -45,11 +73,10 @@ const ChequeForm = ({ code, pattern, ...props }) => {
           <div className="flex flex-col gap-2">
             <RHFInput name="internalNumber" label="internal_number" />  {/* Not in Postman */}
             <RHFInputAmount name="amount" label="amount" required />
-            <RHFAsyncSelectField
+            <RHFSelectField
               name="customerId"
               label="customer_id"
-              getSearch={getSearchUser}
-              getSingle={getSingleUser}
+              options={users}
             />
             <RHFInput
               name="beneficiaryName"
@@ -87,56 +114,35 @@ const ChequeForm = ({ code, pattern, ...props }) => {
           </div>
           <div className="flex flex-col gap-2">
 
-            {[
-              {
-                label: "account_id",
-                name: "accountId",
-                getSearch: getSearchAccount,
-                getSingle: getSingleAccount
-              },
-              {
-                label: "cost_center_id",
-                name: "costCenterId",
-                getSearch: getSearchCostCenter,
-                getSingle: getSingleCostCenter
-              },
-              {
-                label: "observe_account_id",
-                name: "observeAccountId",
-                getSearch: getSearchAccount,
-                getSingle: getSingleAccount
-              },
-              {
-                label: "observe_cost_center_id",
-                name: "observeCostCenterId",
-                getSearch: getSearchCostCenter,
-                getSingle: getSingleCostCenter
-              },
-              {
-                label: "currency_id",
-                name: "currencyId",
-                getSearch: getSearchCurrency,
-                getSingle: getSingleCurrency
-              }
-            ]?.map((field) => {
-              let name = field.name?.replace(/observe_|_id/g, "");
-              return (
-                <RHFAsyncSelectField
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  table={name}
-                  getSearch={field.getSearch}
-                  getSingle={field.getSingle}
-                  required={field.name !== "observeCostCenterId" && field.name !== "currencyId"}
-                />
-              );
-            })}
-            <RHFAsyncSelectField
-              getSearch={getSearchBank}
-              getSingle={getSingleBank}
+            <AccountField
+              label="account_id"
+              name="accountId"
+              required
+              allowAdd
+            />
+            <CostCenterField
+              label="cost_center_id"
+              name="costCenterId"
+              required
+            />
+            <AccountField
+              label="observe_account_id"
+              name="observeAccountId"
+              required
+              allowAdd
+            />
+
+            <CostCenterField
+              label="observe_cost_center_id"
+              name="observeCostCenterId"
+            />
+
+            <CurrencyFieldGroup />
+
+            <RHFSelectField
               name="bankId"
               label="bank_id"
+              options={banks}
             />
           </div>
           <div className="flex flex-col gap-2">

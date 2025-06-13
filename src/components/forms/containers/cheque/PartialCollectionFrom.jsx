@@ -158,8 +158,6 @@ const PartialCollectionFrom = ({
     setIsDeleteLoading(false)
   }
 
-  console.log(currentNumber, lastNumber, 'uis');
-
   const onSubmit = async (values) => {
     const isUpdate = data?.id
     let response;
