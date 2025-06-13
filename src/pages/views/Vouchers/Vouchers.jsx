@@ -94,6 +94,9 @@ const Vouchers = ({
     )
   }
 
+  console.log(defaultCode, defaultNumber, 'defaultCode, defaultNumber');
+
+
 
   return (
     <>
