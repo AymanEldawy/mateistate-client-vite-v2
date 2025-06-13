@@ -54,10 +54,7 @@ const AccountForm = () => {
       setValue("account.finalId", data?.finalId || data?.parentId);
       setValue("account.code", data.nextChildCode);
     }
-  };
-
-  console.log(watch(),'accounts');
-  
+  };  
 
   return (
     <div className="">

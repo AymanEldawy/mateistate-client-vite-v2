@@ -13,7 +13,8 @@ const AccountField = ({ name, allowAdd, ...props }) => {
   });
 
   const onInertNewOne = (value) => {
-
+    console.log('called herer');
+    
   }
 
   return (

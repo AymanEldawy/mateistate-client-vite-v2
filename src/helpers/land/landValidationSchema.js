@@ -47,37 +47,37 @@ export const landDefaultValues = {
     ban: null
   },
   landRentalPrices: [
-    // {
-    //   price: null,
-    //   date: null,
-    //   currencyId: null,
-    //   note: null,
-    //   number: 1
-    // }
+    {
+      price: null,
+      date: null,
+      currencyId: null,
+      note: null,
+      number: 1
+    }
   ],
   landSellingPrices: [
-    // {
-    //   price: null,
-    //   date: null,
-    //   currencyId: null,
-    //   note: null,
-    //   number: 1
-    // }
+    {
+      price: null,
+      date: null,
+      currencyId: null,
+      note: null,
+      number: undefined
+    }
   ],
   landWallets: [
-    // {
-    //   // number: "W-001",
-    //   mainCost: null,
-    //   expense: null,
-    //   beginDate: null,
-    //   contractId: null,
-    // }
+    {
+      // number: "W-001",
+      mainCost: null,
+      expense: null,
+      beginDate: null,
+      contractId: null,
+    }
   ],
   landAccumulates: [
-    // {
-    //   number: 1,
-    //   landId: null
-    // }
+    {
+      number: undefined,
+      landId: null
+    }
   ]
 };
 

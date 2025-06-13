@@ -8,7 +8,7 @@ export const ownerExpensesTypesDefaultValues = {
   isActive: false,
 }
 export const ownerExpensesTypesValidationSchema = () => z.object({
-  code: VALIDATION.OPTIONAL_NUMBER,
+  code: VALIDATION.NON_NEGATIVE_NUMBER,
   name: VALIDATION.NON_EMPTY_STRING,
   description: VALIDATION.OPTIONAL_STRING,
   isActive: VALIDATION.OPTIONAL_BOOLEAN,

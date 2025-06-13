@@ -38,7 +38,7 @@ const billColumns = [
     accessorKey: "number",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/bills?number=${row?.original?.number}`}
+        to={`/bills?number=${row?.original?.number}&code=${row?.original?.code}`}
         className="text-blue-500 font-medium hover:underline"
       >
         # {getValue()}

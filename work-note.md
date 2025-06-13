@@ -55,7 +55,7 @@
 - [x] store & cost center & material group charts
 - [] user work time
 - [] services
-- [] close form after reset
+- [x] close form after reset
 - [] sorting and filtering
 
 ## set the inserted data as choosing data

@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
-import { EntryFooter } from "./EntryFooter";
-import { EntryHead } from "./EntryHead";
-import EntryFormGrid from "./EntryFormGrid";
-import { calculateEntriesDifferences } from "@/helpers/entries/entriesHelpers";
 import QUERY_KEYS from "@/data/queryKeys";
+import { calculateEntriesDifferences } from "@/helpers/entries/entriesHelpers";
 import { getAllCostCenters } from "@/services/CostCenterService";
 import { getLeavesAccounts } from "@/services/accountService";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+import { EntryFooter } from "./EntryFooter";
+import EntryFormGrid from "./EntryFormGrid";
+import { EntryHead } from "./EntryHead";
 
 const EntriesForm = ({
-  oldValue = null,
+  oldValues = null,
 }) => {
   const {
     handleSubmit,
@@ -39,10 +39,10 @@ const EntriesForm = ({
 
 
   useEffect(() => {
-    if (oldValue) {
-      reset(oldValue);
+    if (oldValues) {
+      reset(oldValues);
     }
-  }, [oldValue]);
+  }, [oldValues]);
 
   // useEffect(() => {
   //   if (formPagination?.currentNumber > formPagination.lastNumber) {
@@ -51,14 +51,10 @@ const EntriesForm = ({
   // }, [formPagination?.currentNumber])
 
   useEffect(() => {
-    console.log('called entries form useEffect');
-
     const subscription = watch((value, { name, type }) => {
       if (name?.indexOf(`entryGridData.`) === -1) return;
       let subName = name?.split(".")?.at(-1);
       let row = name?.split(".")?.slice(0, 2)?.join(".");
-      console.log(row, subName, value, 'sub');
-
 
       if (watch(`${row}.debit`) && watch(`${row}.credit`)) {
         if (subName === "debit") {

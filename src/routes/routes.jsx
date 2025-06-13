@@ -97,7 +97,6 @@ const JournalLedgerReport = React.lazy(() => import("../pages/reports/accounting
 const VATBillsReport = React.lazy(() => import("../pages/reports/accounting/VATBillsReport"));
 const TrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/TrialBalanceReport"));
 
-
 // Chart
 const AccountChart = React.lazy(() => import("../pages/views/Account/AccountChart"));
 
