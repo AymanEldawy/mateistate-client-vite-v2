@@ -4,32 +4,31 @@ export const PopupFormContext = createContext();
 
 export const PopupFormProvider = ({ children }) => {
   const [stack, setStack] = useState({})
+  const [open, setOpen] = useState(false);
 
   const handleDispatchForm = (form) => {
     setStack({
       [form.table]: form
     })
+    setOpen(true);
   };
 
-  const onCloseDispatchedForm = (item) => {
-    console.log(item, 'item');
-    
+  const onCloseDispatchedForm = (item) => {    
     const newStack = stack;
     delete newStack[item];
-    console.log(stack, 'stack', newStack, 'newStack');
-    
     setStack(newStack)
+    if(!Object.keys(newStack).length) {
+      setOpen(false);
+    }
   }
-
-  console.log(stack,'---');
   
-
   return (
     <PopupFormContext.Provider
       value={{
         handleDispatchForm,
         onCloseDispatchedForm,
         stack,
+        open
       }}
     >
       {children}

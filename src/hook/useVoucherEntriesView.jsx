@@ -1,5 +1,4 @@
-import { createContext, useContext } from "react";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const VoucherEntriesViewContext = createContext();
 
@@ -18,7 +17,7 @@ export const VoucherEntriesViewProvider = ({ children }) => {
     } else {
       setVoucherInfo({});
     }
-  };
+  };  
 
   return (
     <VoucherEntriesViewContext.Provider

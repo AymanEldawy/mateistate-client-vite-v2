@@ -5,6 +5,8 @@ const useCustomSearchParams = (paramName) => {
   const paramValue = searchParams.get(paramName);
   const searchParamsObject = Object.fromEntries(searchParams);
 
+  console.log('called useCustomSearchParams', paramName, paramValue, searchParamsObject);
+  
   return paramName
     ? (paramValue && decodeURIComponent(paramValue)) || ""
     : searchParamsObject || {};

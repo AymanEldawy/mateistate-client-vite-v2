@@ -15,8 +15,8 @@ const CollectionForm = lazy(() => import('../containers/cheque/CollectionForm'))
 const ReturnForm = lazy(() => import('../containers/cheque/ReturnForm'));
 
 const DynamicPopupForm = () => {
-  const { onCloseDispatchedForm, stack } = usePopupForm()
-  if (!Object.keys(stack)) return;
+  const { onCloseDispatchedForm, stack, open } = usePopupForm()
+  if (!open) return null
 
   const displayForm = (props) => {
     const additional = {
@@ -82,17 +82,21 @@ const DynamicPopupForm = () => {
         return <InstallmentForm
           popupFormConfig={props}
           outerClose={() => onCloseDispatchedForm(props.table)}
+          {...props}
         />
       default:
         return
     }
   }
 
+  console.log('called herere', stack);
+
+  if (!stack || !Object.keys(stack).length) return null
 
   return (
     <>
       {Object.entries(stack)?.map(([key, value]) => (
-        <Modal key={key} open={true} onClose={onCloseDispatchedForm} bodyClassName="!p-0">
+        <Modal key={key} open={key && open} onClose={onCloseDispatchedForm} bodyClassName="!p-0">
           {displayForm(value)}
         </Modal>
       ))}

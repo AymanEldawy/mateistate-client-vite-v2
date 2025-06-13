@@ -113,3 +113,68 @@ export const generateUserTiming = (setting) => {
 
   return { timings, views };
 };
+
+
+export const getUnitInfo = (assetType) => {
+  switch (assetType) {
+    case 1: // Apartment
+      return {
+        table: 'apartment',
+        value: 'apartmentId',
+        label: 'apartmentNo',
+        unitType: 'apartment',
+        unitTypeName: 'apartments',
+        unitTypeId: 1,
+      };
+    case 2: // Parking
+      return {
+        table: 'parking',
+        value: 'parkingId',
+        label: 'parkingNo',
+        unitType: 'parking',
+        unitTypeName: 'parkings',
+        unitTypeId: 2,
+      };
+    case 3: // Shop
+      return {
+        table: 'shop',
+        value: 'shopId',
+        label: 'shopNo',
+        unitType: 'shop',
+        unitTypeName: 'shops',
+        unitTypeId: 3,
+      };
+    default:
+      return {
+        name: 'Unknown',
+        unitType: 'unknown',
+        unitTypeName: 'unknowns',
+        unitTypeId: 0,
+      };
+  }
+}
+
+export function cleanObject(obj) {
+  if (Array.isArray(obj)) {
+    const cleanedArray = obj
+      .map(item => cleanObject(item))
+      .filter(item => item !== null && Object.keys(item).length > 0);
+    return cleanedArray.length > 0 ? cleanedArray : null;
+  }
+
+  if (typeof obj === 'object' && obj !== null) {
+    const cleaned = {};
+    for (const [key, value] of Object.entries(obj)) {
+      if (value === null || value === undefined || value === '') continue;
+      if (Array.isArray(value) && value.length === 0) continue;
+
+      const cleanedValue = cleanObject(value);
+      if (cleanedValue !== null && !(Array.isArray(cleanedValue) && cleanedValue.length === 0)) {
+        cleaned[key] = cleanedValue;
+      }
+    }
+    return Object.keys(cleaned).length > 0 ? cleaned : null;
+  }
+
+  return obj;
+}
