@@ -5,6 +5,7 @@ import { FormHeaderSearchBar } from '@/components/forms/wrapper'
 import BtnGroups from '@/components/shared/BtnGroups'
 import EntryBar from '@/components/shared/EntryBar'
 import Modal from '@/components/shared/Modal'
+import { CREATED_FROM_CONTRACT } from '@/data/GENERATE_STARTING_DATA'
 import QUERY_KEYS from '@/data/queryKeys'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
 import contractColumns from '@/helpers/contract/contractColumns'
@@ -75,7 +76,7 @@ const Contract = () => {
           )
         }}
         formHeaderProps={{
-          header: "contract",
+          header: pattern?.name || "contract",
           ExtraContentBar: ({ values }) => (
             <>
               <FormHeaderSearchBar
@@ -84,7 +85,7 @@ const Contract = () => {
                 getSearch={getSearchContract}
                 queryKey={QUERY_KEYS.CONTRACT}
               />
-              <EntryBar entryId={values?.id} />
+              <EntryBar values={values} entryId={"aad8cece-ec13-4e9e-b7f4-e3e81a7ad425"} tab="contract" created_from={CREATED_FROM_CONTRACT} />
             </>
           )
         }}
@@ -93,7 +94,7 @@ const Contract = () => {
         }}
         formFooterProps={{
           additionalButtons: (data) => (
-            <ContractFormFooter data={data} />
+            <ContractFormFooter data={data} pattern={pattern} />
           )
         }}
 

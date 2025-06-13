@@ -6,14 +6,14 @@ import { getAllBuildings } from "@/services/buildingService";
 import { getAllParkings } from "@/services/parkingService";
 import { getAllShops } from "@/services/shopService";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import { RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import { AccountField } from "../../global";
 
-const ContractFormGeneral = ({ pattern }) => {
-  const contractType = pattern?.contractType === 1 ? 'rent' : 'sale';
+const ContractFormGeneral = ({ pattern, unit }) => {
+  const contractType = +pattern?.contractType === 2 ? 'rent' : 'sale';
   const assetType = pattern?.assetsType;
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const { data: customers } = useQuery({
     queryKey: [QUERY_KEYS.ACCOUNT, 'customers'],
@@ -39,10 +39,6 @@ const ContractFormGeneral = ({ pattern }) => {
     },
   });
 
-  const unit = useMemo(() => {
-    const assetType = pattern?.assetsType;
-
-  }, [pattern?.assetsType]);
 
 
   const { data: units } = useQuery({
@@ -81,26 +77,31 @@ const ContractFormGeneral = ({ pattern }) => {
         <RHFDatePicker
           label={`issueDate`}
           name={`contract.issueDate`}
+          required
         />
 
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-2 gap-x-6 mt-4 w-full  items-start">
         <div className="grid grid-cols-1 gap-y-2 gap-x-6 ">
-          <RHFSelectField
-            options={customers}
+          <AccountField
+            // options={customers}
             label="clientId"
             name="contract.clientId"
             allowAdd
+            required
           />
           <RHFSelectField
             options={buildings}
             label="buildingId"
             name="contract.buildingId"
+            required
           />
           <RHFSelectField
             options={units}
-            label="unitId"
-            name={`contract.${assetType}Id`}
+            label={unit.table}
+            name={`contract.${unit.value}`}
+            optionLabel={`${unit.label}`}
+            required
           />
           <RHFInput
             label={`description`}
@@ -118,15 +119,18 @@ const ContractFormGeneral = ({ pattern }) => {
                 label={`contractDuration`}
                 name={`contract.contractDuration`}
                 options={CONTRACT_DURATION}
+                required
               />
               <RHFDatePicker
                 label={`startDurationDate`}
                 name={`contract.startDurationDate`}
+                required
               />
               <RHFDatePicker
                 label={`endDurationDate`}
                 name={`contract.endDurationDate`}
                 readOnly={watch(`contract.contractDuration`) < 4}
+                required
               />
             </>
           ) : (
@@ -134,6 +138,7 @@ const ContractFormGeneral = ({ pattern }) => {
               <RHFInput
                 label={`propertyDeliveryDate`}
                 name={`contract.propertyDeliveryDate`}
+                required={contractType !== "rent"}
               />
             </>
           )}
@@ -153,6 +158,7 @@ const ContractFormGeneral = ({ pattern }) => {
             label={`revenueAccountId`}
             name={`contract.revenueAccountId`}
             options={accountsLeaves}
+            required
           />
           <RHFSelectField
             inputClassName={
@@ -189,6 +195,7 @@ const ContractFormGeneral = ({ pattern }) => {
             name={`contract.contractValue`}
             label="contractValue"
             type="number"
+            required
           />
           <RHFInput
             name={`contract.priceBeforeVat`}
@@ -249,6 +256,7 @@ const ContractFormGeneral = ({ pattern }) => {
           name={`contract.paidType`}
           containerClassName="mt-1"
           options={CONTRACT_PAID_TYPE}
+          required
         />
         <div />
         {/* <ContractStatus status={watch('contract.status')} containerClassName="!mt-2 flex items-center justify-center !text-base w-full block text-center" /> */}

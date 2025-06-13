@@ -1,3 +1,7 @@
+import { getSingleApartment } from "@/services/apartmentService";
+import { getSingleBuilding } from "@/services/buildingService";
+import { getSingleParking } from "@/services/parkingService";
+import { getSingleShop } from "@/services/shopService";
 import { FLAT_PROPERTY_TYPES } from "../building/buildingHelpers";
 
 export function getNextYear() {
@@ -127,53 +131,56 @@ export const CONTRACT_STATUS = {
   Expired_and_renewed: 4,
 };
 
-// export async function fetchAndMergeBuildingInfo(buildingId, setValue) {
-//   const response = await ApiActions.read("building", {
-//     conditions: [{ type: "and", conditions: [["id", "=", buildingId]] }],
-//   });
-//   if (response?.success) {
-//     let data = response?.result?.at(0);
-//     if (data?.lessorId)
-//       setValue(`contract.lessorId`, data?.lessorId);
-//     if (data?.commissionRate) {
-//       setValue(
-//         "contractCommission.commissionPercentage",
-//         data?.commissionRate
-//       );
-//       setValue(
-//         "contractCommission.commissionFromOwnerAccountId",
-//         data?.ownerAccountId
-//       );
-//       setValue("contractCommission.commissionAccountId", data?.buildingRevenueAccountId);
-//     }
-//     if (data?.buildingRevenueAccountId)
-//       setValue(`contract.revenueAccountId`, data?.buildingRevenueAccountId);
-//     if (data?.buildingDiscountAccountId)
-//       setValue(
-//         `contract.discountAccountId`,
-//         data?.buildingDiscountAccountId
-//       );
-//     if (data?.buildingInsuranceAccountId)
-//       setValue(
-//         `contract.insuranceAccountId`,
-//         data?.buildingInsuranceAccountId
-//       );
-//   }
-// }
+export async function fetchAndMergeBuildingInfo(buildingId, setValue) {
+  const data = await getSingleBuilding(buildingId);
+  if (data?.success) {
+    if (data?.lessorId)
+      setValue(`contract.lessorId`, data?.lessorId);
+    if (data?.commissionRate) {
+      setValue(
+        "contractCommission.commissionPercentage",
+        data?.commissionRate
+      );
+      setValue(
+        "contractCommission.commissionFromOwnerAccountId",
+        data?.ownerAccountId
+      );
+      setValue("contractCommission.commissionAccountId", data?.buildingRevenueAccountId);
+    }
+    if (data?.buildingRevenueAccountId)
+      setValue(`contract.revenueAccountId`, data?.buildingRevenueAccountId);
+    if (data?.buildingDiscountAccountId)
+      setValue(
+        `contract.discountAccountId`,
+        data?.buildingDiscountAccountId
+      );
+    if (data?.buildingInsuranceAccountId)
+      setValue(
+        `contract.insuranceAccountId`,
+        data?.buildingInsuranceAccountId
+      );
+  }
+}
 
-// export async function fetchAndMergeAssetInfo(asset, assetId, setValue) {
-//   let flatType = getAssetType(asset);
-//   const response = await ApiActions.read(flatType, {
-//     conditions: [{ type: "and", conditions: [["id", "=", assetId]] }],
-//   });
+export async function fetchAndMergeAssetInfo(asset, assetId, setValue) {
+  let response = null
+  switch (asset) {
+    case 2: // Parking Unit
+      response = await getSingleParking(assetId);
+      break
+    case 3: // shop
+      response = await getSingleShop(assetId);
+      break
+    default:
+      response = await getSingleApartment(assetId);
+  }
 
-//   if (response?.success) {
-//     let data = response?.result?.at(0);
-//     setValue(`contract.lawsuit`, data?.hasLawsuit);
-//     setValue(`contract.description`, data?.description);
-//     setValue(`contract.costCenterId`, data?.costCenterId);
-//   }
-// }
+  if (response?.success) {
+    setValue(`contract.lawsuit`, response?.hasLawsuit);
+    setValue(`contract.description`, response?.description);
+    setValue(`contract.costCenterId`, response?.costCenterId);
+  }
+}
 
 export function onWatchChangesInTab1(name, setValue, watch) {
   switch (name) {
@@ -298,88 +305,20 @@ export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, wa
 
 }
 
-export function onWatchChangesInstallmentTab(name, value, setValue, watch) {
-  switch (name) {
-    case "totalAmount": {
-
-      let first_batch = watch(`installment.firstBatch`) || 0;
-      setValue(`installment.restAmount`, value - +first_batch);
-      break;
-    }
-    case "firstBatch": {
-
-      let totalAmount = watch(`installment.totalAmount`);
-      setValue(`installment.restAmount`, totalAmount - (value || 0));
-
-      return;
-    }
-
-    case "hasFirstBatch":
-      if (!value) {
-        setValue("installment.paymentDate", null);
-        setValue("installment.firstBatch", 0);
-      }
-      return;
-
-    default:
-      return;
-  }
-}
-
-export function onWatchChangesInstallmentGridTab(name, setValue, watch, cache) {
-  let row = name?.split(".").slice(0, 2).join(".");
-  let note1 = ``;
-
-  switch (name?.split(".")?.at(-1)) {
-    case "dueDate":
-    case "number":
-    case "amount":
-    case "bankId":
-    case "endDueDate": {
-
-      const number = watch(`${row}.number`);
-      const clientId = watch(`contract.clientId`);
-      const amount = watch(`${row}.amount`);
-
-      const dueDate = new Date(watch(`${row}.dueDate`)).toLocaleDateString(
-        "en-UK"
-      );
-
-      const endDueDate = new Date(
-        watch(`${row}.endDueDate`)
-      ).toLocaleDateString("en-UK");
-
-      // const bank = getCacheRowData(cache, "bank", watch(`${row}.bank_id`));
-      const bank = {};
-      const client = {};
-      // const client = getCacheRowData(
-      //   cache,
-      //   UNIQUE_REF_TABLES.clients,
-      //   clientId
-      // );
-
-      note1 = `received chq number ${number} from mr ${client?.name} ${amount} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
-    }
-      break;
-    default:
-      break;
-  }
-  setValue(`${row}.note1`, note1);
-}
 export async function mergePatternWithContractData(
   pattern,
   watch,
   setValue,
 ) {
 
-  setValue(
-    `contract.contractType`,
-    pattern?.contractType
-  );
-  setValue(
-    `contract.code`,
-    pattern?.code
-  );
+console.log('called pattern merge', pattern);
+
+
+
+  setValue('contract.contractType', pattern?.contractType);
+  setValue('contract.contractPatternId', pattern?.id);
+  setValue('contract.code', +pattern?.code);
+  setValue('contract.flatType', pattern?.assetsType);
   if (pattern?.defaultRevenueAccountId)
     setValue(
       `contract.revenueAccountId`,
