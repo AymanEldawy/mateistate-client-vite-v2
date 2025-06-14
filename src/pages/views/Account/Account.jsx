@@ -30,8 +30,9 @@ const Account = ({
   outerClose,
   defaultNumber,
   defaultCode,
-  popupFormConfig
+  ...props
 }) => {
+  console.log(props, 'props in account');
 
   if (formOnly) {
     return (
@@ -40,7 +41,7 @@ const Account = ({
         outerClose={outerClose}
         numberSearchParam={defaultNumber}
         codeSearchParam={defaultCode}
-        oldValues={popupFormConfig?.oldValues}
+        {...props}
       />
     )
   }

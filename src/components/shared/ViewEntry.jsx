@@ -1,12 +1,29 @@
-import Btn from "./Btn";
-import { EyeIcon } from "../Icons";
-import { useTranslation } from "react-i18next";
+import QUERY_KEYS from "@/data/queryKeys";
 import { useVoucherEntriesView } from "@/hook/useVoucherEntriesView";
+import { getEntriesByCreatedFrom } from "@/services/entriesService";
+import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { EyeIcon } from "../Icons";
+import Btn from "./Btn";
 
 
 export const ViewEntry = ({ id, created_from, hideText }) => {
   const { t } = useTranslation();
   const { dispatchVoucherEntries } = useVoucherEntriesView();
+
+  const { data } = useQuery({
+    queryKey: [QUERY_KEYS.ENTRIES, 'CREATED_FROM', id],
+    queryFn: async () => {
+      const response = await getEntriesByCreatedFrom(id);
+      console.log(response, '-res');
+
+      return response || {};
+    },
+    enabled: !!id
+  });
+
+
+  console.log(data, 'entry', id);
 
   return (
     <Btn
@@ -20,7 +37,7 @@ export const ViewEntry = ({ id, created_from, hideText }) => {
           table: "entry_main_data",
           grid: "entry_grid_data",
           ref_name: "created_from_id",
-          id,
+          id: data?.entry?.id,
         })
       }
     >

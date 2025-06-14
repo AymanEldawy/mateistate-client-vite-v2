@@ -18,10 +18,8 @@ import ChequeFormBar from "./ChequeFormBar";
 
 const mergePatternWithChequeData = (pattern, watch, setValue, reset) => {
 
-  console.log('call mergePatternWithChequeData', pattern, watch, setValue, reset);
-  
   setValue('code', pattern?.code);
-  setValue('chequePatternId', pattern?.id);
+  setValue('patternId', pattern?.id);
   if (pattern?.auto_gen_entries) {
     setValue('genEntries', true)
   }
@@ -35,13 +33,12 @@ const mergePatternWithChequeData = (pattern, watch, setValue, reset) => {
 
     // reset({
     //   code: pattern?.code || '',
-    //   chequePatternId: pattern?.id || '',
+    //   patternId: pattern?.id || '',
     // })
 };
 
 const ChequeForm = ({ code, pattern, ...props }) => {
   const { watch, setValue,reset } = useFormContext();
-console.log(pattern, 'pattern in ChequeForm');
 
   const { data: users } = useQuery({
     queryKey: [QUERY_KEYS.USER],

@@ -114,118 +114,15 @@ const ContractOtherFeesSchema = z.object({
 // Combined Schema for the entire form
 export const contractValidationSchema = () => z.object({
   contract: ContractSchema,
-  contractCommission: ContractCommissionSchema.optional(),
-  contractCycle: ContractCycleSchema.optional(),
+  contractCommission: ContractCommissionSchema.optional().nullable(),
+  contractCycle: ContractCycleSchema.optional().nullable(),
   contractLinkedParking: ContractLinkedParkingSchema.array().optional(),
-  contractTermination: ContractTerminationSchema.optional(),
+  contractTermination: ContractTerminationSchema.optional().nullable(),
   contractFinesGrid: ContractFinesGridSchema.array().optional(),
   contractOtherFees: ContractOtherFeesSchema.array().optional(),
 });
 
 // Utility function to clean form data
-export const cleanContractFormData = (data) => {
-  const isEmptyObject = (obj, defaults) => {
-    return Object.keys(obj).every((key) => {
-      const defaultsKey = Object.keys(defaults).find(k => k.toLowerCase() === key.toLowerCase()) || key;
-      const value = obj[key];
-      const defaultValue = defaults[defaultsKey];
-      return value === defaultValue || value === null || value === '' || value === undefined;
-    });
-  };
-
-  const cleanedData = { ...data };
-
-  // Clean contractLinkedParking
-  cleanedData.contractLinkedParking = data.contractLinkedParking.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        buildingId: null,
-        mainContractId: null,
-        accountId: null,
-      })
-  );
-
-  // Clean contractFinesGrid
-  cleanedData.contractFinesGrid = data.contractFinesGrid.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        createdAt: null,
-        fee_amount: null,
-        account_id: null,
-        notes: null,
-      })
-  );
-
-  // Clean contractOtherFees
-  cleanedData.contractOtherFees = data.contractOtherFees.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        date: null,
-        feeAmount: null,
-        accountId: null,
-        notes: null,
-      })
-  );
-
-  // Clean contractCommission if all fields are default
-  if (
-    isEmptyObject(data.contractCommission, {
-      commissionPercentage: null,
-      commissionValue: null,
-      commissionAccountId: null,
-      commissionNote: null,
-      commissionFromOwnerPercentage: null,
-      commissionFromOwnerValue: null,
-      commissionFromOwnerAccountId: null,
-      commissionFromOwnerNote: null,
-    })
-  ) {
-    delete cleanedData.contractCommission;
-  }
-
-  // Clean contractCycle if all fields are default
-  if (
-    isEmptyObject(data.contractCycle, {
-      contractCertifyingBody: null,
-      commissionFromOwnerValue: null,
-      municipalLicenseFrom: null,
-      municipalLicenseTo: null,
-      licenseNum: null,
-      licenseFrom: null,
-      licenseTo: null,
-      civilLicenseNum: null,
-      civilLicenseFrom: null,
-      civilLicenseTo: null,
-      contractDocumented: null,
-      contractCertifying: null,
-      contractDelivered: null,
-      contractSigned: null,
-    })
-  ) {
-    delete cleanedData.contractCycle;
-  }
-
-  // Clean contractTermination if all fields are default
-  if (
-    isEmptyObject(data.contractTermination, {
-      terminated: null,
-      genEntries: null,
-      terminationDate: null,
-      ownerTotalAmount: null,
-      ownerRestAmount: null,
-      roundTo: null,
-      revenueNote: null,
-      evacuationRequest: null,
-      evacuationDate: null,
-      clearancePrinted: null,
-      clearancePrintedDate: null,
-    })
-  ) {
-    delete cleanedData.contractTermination;
-  }
-
-  return cleanedData;
-};
 
 // React Hook Form Default Values
 export const contractDefaultValues = {

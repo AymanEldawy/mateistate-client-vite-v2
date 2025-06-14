@@ -85,7 +85,7 @@ const Contract = () => {
                 getSearch={getSearchContract}
                 queryKey={QUERY_KEYS.CONTRACT}
               />
-              <EntryBar values={values} entryId={"aad8cece-ec13-4e9e-b7f4-e3e81a7ad425"} tab="contract" created_from={CREATED_FROM_CONTRACT} />
+              <EntryBar values={values} entryId={values?.contract?.id} tab="contract" created_from={CREATED_FROM_CONTRACT} />
             </>
           )
         }}

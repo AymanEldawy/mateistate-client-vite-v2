@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleEntry = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_ENTRIES}/${id}`);
@@ -48,4 +48,10 @@ export const getEntryLastNumberByType = (code) => {
 
 export const getSearchEntry = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_ENTRIES}/${value}`);
+};
+
+
+
+export const getEntriesByCreatedFrom = (createdFromId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_ENTRIES}/created-from/${createdFromId}`);
 };

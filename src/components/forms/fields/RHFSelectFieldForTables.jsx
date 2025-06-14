@@ -27,7 +27,7 @@ const RHFSelectFieldForTables = ({
   small = true,
   options,
   hideErrors,
-  onInertNewOne,
+  onInsertDispatchedForm,
   ...field
 }) => {
   const { handleDispatchForm } = usePopupForm()
@@ -85,7 +85,7 @@ const RHFSelectFieldForTables = ({
                               e.stopPropagation()
                               handleDispatchForm({
                                 table,
-                                onInertNewOne,
+                                onInsertDispatchedForm,
                               })
                             }}
                           >

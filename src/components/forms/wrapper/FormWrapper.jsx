@@ -6,7 +6,6 @@ import SEARCH_PARAMS from "@/data/searchParamsKeys";
 import useCustomSearchParams from "@/hook/useCustomSearchParams";
 import useFormPagination from "@/hook/useFormPagination";
 import usePathname from "@/hook/usePathname";
-import { usePopupForm } from "@/hook/usePopupForm";
 import { cleanObject } from "@/utils/functions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +20,6 @@ import FormHeader from "./FormHeader";
 
 const FormWrapper = ({
   defaultValue,
-  onHandlingDataBeforeSubmit,
   invalidateQueryKeyOnSuccess,
   onSuccessAction,
   outerClose,
@@ -36,14 +34,16 @@ const FormWrapper = ({
   codeSearchParam,
   oldValues,
   refetch,
+  onInsertDispatchedForm,
   ...props
 }) => {
+  console.log({ outerClose, onInsertDispatchedForm, refetch }, 'props in FormWrapper');
+
   const navigate = useNavigate();
   const pathname = usePathname()
   const [searchParams] = useSearchParams();
   const searchParamsSelectedNumber = useCustomSearchParams(SEARCH_PARAMS.NUMBER);
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
-  const { popupFormConfig, onCloseDispatchedForm, stack } = usePopupForm();
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
@@ -108,12 +108,12 @@ const FormWrapper = ({
       if (invalidateQueryKeyOnSuccess) {
         queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
       }
-      onSuccessAction?.(response?.data);
-      if (popupFormConfig) {
-        popupFormConfig?.setDefaultOption(response?.data)
-        onCloseDispatchedForm()
+      onSuccessAction?.(response);
+      if (onInsertDispatchedForm) {
+        onInsertDispatchedForm(response)
       }
-      // if(!isUpdate)
+      if (outerClose)
+        outerClose()
       onClose()
     },
   });
@@ -158,13 +158,11 @@ const FormWrapper = ({
   //   onChangeLangTab,
   //   showLanguageBtns,
   // });
-  console.log(preventClose, 'preventClose');
 
   const handleOnClose = () => {
     if (!preventClose) {
       if (onClose) onClose();
       if (outerClose) outerClose();
-      console.log(name, 'name');
       removeSearchParams()
       return;
     }
@@ -189,11 +187,6 @@ const FormWrapper = ({
   const handleSubmitFunc = async (data) => {
     if (!isDirty) return toast.warn(tToast('formDirty'))
     try {
-
-      // const dataToSubmit = onHandlingDataBeforeSubmit
-      //   ? onHandlingDataBeforeSubmit({ ...data })
-      //   : data;
-      // if (typeof dataToSubmit === "string") return toast.warn(t(dataToSubmit));
       await mutateAsync(cleanObject(data));
       id ? reset(data) : reset();
       setPreventClose(false);

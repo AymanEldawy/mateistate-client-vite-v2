@@ -1,9 +1,14 @@
 import QUERY_KEYS from '@/data/queryKeys';
 import { getAllUsers } from '@/services/userService';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useFormContext } from 'react-hook-form';
 import { RHFSelectFieldForTables } from '../fields';
 
 const UserField = ({ name, allowAdd, ...props }) => {
+  const { setValue } = useFormContext()
+  const queryClient = useQueryClient();
+
+
   const { data: users } = useQuery({
     queryKey: [QUERY_KEYS.USER],
     queryFn: async () => {
@@ -12,8 +17,16 @@ const UserField = ({ name, allowAdd, ...props }) => {
     },
   });
 
-  const onInertNewOne = (value) => {
-
+  const onInsertDispatchedForm = (value) => {
+    if (value && value?.account.id) {
+      queryClient.setQueryData([QUERY_KEYS.ACCOUNT, 'customers'], (oldData) => {
+        const newAccounts = [...(oldData || []), value];
+        return newAccounts;
+      });
+      setTimeout(() => {
+        setValue(name, value?.user.id);
+      }, 200);
+    }
   }
 
   return (
@@ -22,7 +35,7 @@ const UserField = ({ name, allowAdd, ...props }) => {
       name={name}
       allowAdd={allowAdd}
       table="user"
-      onInertNewOne={onInertNewOne}
+      onInsertDispatchedForm={onInsertDispatchedForm}
       {...props}
     />
   )

@@ -19,9 +19,11 @@ const DynamicPopupForm = () => {
   if (!open) return null
 
   const displayForm = (props) => {
+
     const additional = {
       outerClose: () => onCloseDispatchedForm(props.table),
       popupFormConfig: props,
+      ...props,
       defaultNumber: props?.number,
     }
 
@@ -89,7 +91,6 @@ const DynamicPopupForm = () => {
     }
   }
 
-  console.log('called herere', stack);
 
   if (!stack || !Object.keys(stack).length) return null
 

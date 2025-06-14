@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleContract = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${id}`);
@@ -18,7 +18,7 @@ export const createContract = (data) => {
 };
 
 export const updateContract = (country_id, data) => {
-  return http.patch(
+  return http.put(
     `${API_URL_CONSTANTS.BASE_CONTRACT}/${country_id}`,
     data,
     // {

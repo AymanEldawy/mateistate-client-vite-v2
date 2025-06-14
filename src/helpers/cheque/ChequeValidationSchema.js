@@ -17,7 +17,7 @@ export const chequeDefaultValue = {
   observeCostCenterId: "",
   bankId: "",
   date: new Date().toISOString(),
-  chequePatternId: '',
+  patternId: '',
 };
 
 export const chequeValidationSchema = () => z.object({
@@ -36,5 +36,5 @@ export const chequeValidationSchema = () => z.object({
   observeCostCenterId: z.string().optional(),
   bankId: z.string().optional(),
   date: z.string().or(z.date()),
-  chequePatternId: VALIDATION.NON_EMPTY_STRING,
+  patternId: VALIDATION.NON_EMPTY_STRING,
 });

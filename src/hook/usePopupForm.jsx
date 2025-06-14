@@ -6,7 +6,7 @@ export const PopupFormProvider = ({ children }) => {
   const [stack, setStack] = useState({})
   const [open, setOpen] = useState(false);
 
-  const handleDispatchForm = (form) => {
+  const handleDispatchForm = (form) => {    
     setStack({
       [form.table]: form
     })
