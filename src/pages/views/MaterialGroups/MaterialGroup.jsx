@@ -9,7 +9,7 @@ import { createMaterialGroup, deleteManyMaterialGroup, getAllMaterialGroups, get
 import { lazy } from "react";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
 
-const MaterialGroupForm = lazy(() => import("@/components/forms/containers/materialGroup/MaterialGroupForm"))
+const MaterialGroupForm = lazy(() => import("@/components/forms/containers/materialGroups/MaterialGroupForm"))
 
 const materialGroupConfig = {
   name: "material_group",
