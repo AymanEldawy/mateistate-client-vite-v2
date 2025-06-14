@@ -31,7 +31,7 @@ const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
-const Materials = React.lazy(() => import("../pages/views/Materials/Materials"));
+const Materials = React.lazy(() => import("../pages/views/MaterialsPage/Materials"));
 const MaterialGroup = React.lazy(() =>import("../pages/views/MaterialGroup/MaterialGroup"));
 const MaterialGroupChart = React.lazy(() =>import("../pages/views/MaterialGroup/MaterialGroupChart"));
 const Category = React.lazy(() => import("../pages/views/Category/Category"));
