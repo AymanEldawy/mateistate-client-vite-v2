@@ -1,23 +1,25 @@
-import { useFormContext } from "react-hook-form";
-import { RHFCheckbox, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFDatePicker, RHFInputAmount } from "../../fields";
-import { useQuery } from "@tanstack/react-query";
-import ChequeFormBar from "./ChequeFormBar";
-import { getSearchCurrency, getSingleCurrency } from "@/services/currencyService";
-import { getSearchBank, getSingleBank } from "@/services/bankService";
-import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
-import { getChequePatternByCode } from "@/services/chequePatternsService";
-import { getSearchAccount, getSingleAccount } from "@/services/accountService";
-import { getSearchUser, getSingleUser } from "@/services/userService";
+import QUERY_KEYS from "@/data/queryKeys";
+import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
+import { getAllBanks } from "@/services/bankService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
 import { getSearchShop, getSingleShop } from "@/services/shopService";
-import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
+import { getAllUsers } from "@/services/userService";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFSelectField, RHFTextarea } from "../../fields";
+import { AccountField, CurrencyFieldGroup } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
+import ChequeFormBar from "./ChequeFormBar";
 // import { getSearchParking, getSingleParking } from "@/services/parkingService";
 // import { getAccountSearch, getSingleAccount } from "@/services/accountService";
 // import { getSearchCostCenter, getSingleCostCenter } from "@/services/CostCenterService";
 // import { getSearchBank, getSingleBank } from "@/services/bankService";
 
-const mergePatternWithChequeData = (pattern, watch, setValue) => {
+const mergePatternWithChequeData = (pattern, watch, setValue, reset) => {
 
+  setValue('code', pattern?.code);
+  setValue('patternId', pattern?.id);
   if (pattern?.auto_gen_entries) {
     setValue('genEntries', true)
   }
@@ -29,21 +31,37 @@ const mergePatternWithChequeData = (pattern, watch, setValue) => {
     setValue('accountId', pattern?.default_account_id)
   }
 
+    // reset({
+    //   code: pattern?.code || '',
+    //   patternId: pattern?.id || '',
+    // })
 };
 
-const ChequeForm = ({ code, ...props }) => {
-  console.log(props, code, 'props');
+const ChequeForm = ({ code, pattern, ...props }) => {
+  const { watch, setValue,reset } = useFormContext();
 
-  const { watch, setValue } = useFormContext();
-
-  const { data: pattern } = useQuery({
-    queryKey: ['pattern', 'cheque', code],
+  const { data: users } = useQuery({
+    queryKey: [QUERY_KEYS.USER],
     queryFn: async () => {
-      const response = await getChequePatternByCode(code)
-      mergePatternWithChequeData(response, watch, setValue)
+      const response = await getAllUsers();
+      return response?.data || [];
     },
-    enabled: !!code
-  })
+  });
+
+  const { data: banks } = useQuery({
+    queryKey: [QUERY_KEYS.Bank],
+    queryFn: async () => {
+      const response = await getAllBanks();
+      return response?.data || [];
+    },
+  });
+
+  useEffect(() => {
+    if (!pattern) return;
+    mergePatternWithChequeData(pattern, watch, setValue, reset)
+  }, [pattern]);
+
+
 
   return (
     <>
@@ -52,11 +70,10 @@ const ChequeForm = ({ code, ...props }) => {
           <div className="flex flex-col gap-2">
             <RHFInput name="internalNumber" label="internal_number" />  {/* Not in Postman */}
             <RHFInputAmount name="amount" label="amount" required />
-            <RHFAsyncSelectField
+            <RHFSelectField
               name="customerId"
               label="customer_id"
-              getSearch={getSearchUser}
-              getSingle={getSingleUser}
+              options={users}
             />
             <RHFInput
               name="beneficiaryName"
@@ -94,56 +111,35 @@ const ChequeForm = ({ code, ...props }) => {
           </div>
           <div className="flex flex-col gap-2">
 
-            {[
-              {
-                label: "account_id",
-                name: "accountId",
-                getSearch: getSearchAccount,
-                getSingle: getSingleAccount
-              },
-              {
-                label: "cost_center_id",
-                name: "costCenterId",
-                getSearch: getSearchCostCenter,
-                getSingle: getSingleCostCenter
-              },
-              {
-                label: "observe_account_id",
-                name: "observeAccountId",
-                getSearch: getSearchAccount,
-                getSingle: getSingleAccount
-              },
-              {
-                label: "observe_cost_center_id",
-                name: "observeCostCenterId",
-                getSearch: getSearchCostCenter,
-                getSingle: getSingleCostCenter
-              },
-              {
-                label: "currency_id",
-                name: "currencyId",
-                getSearch: getSearchCurrency,
-                getSingle: getSingleCurrency
-              }
-            ]?.map((field) => {
-              let name = field.name?.replace(/observe_|_id/g, "");
-              return (
-                <RHFAsyncSelectField
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  table={name}
-                  getSearch={field.getSearch}
-                  getSingle={field.getSingle}
-                  required={field.name !== "observeCostCenterId"}
-                />
-              );
-            })}
-            <RHFAsyncSelectField
-              getSearch={getSearchBank}
-              getSingle={getSingleBank}
+            <AccountField
+              label="account_id"
+              name="accountId"
+              required
+              allowAdd
+            />
+            <CostCenterField
+              label="cost_center_id"
+              name="costCenterId"
+              required
+            />
+            <AccountField
+              label="observe_account_id"
+              name="observeAccountId"
+              required
+              allowAdd
+            />
+
+            <CostCenterField
+              label="observe_cost_center_id"
+              name="observeCostCenterId"
+            />
+
+            <CurrencyFieldGroup />
+
+            <RHFSelectField
               name="bankId"
               label="bank_id"
+              options={banks}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -176,10 +172,10 @@ const ChequeForm = ({ code, ...props }) => {
             name="note"
             label="note"
           />
-          {/* <RHFTextarea
-          name="note2"
-          label="note2"
-        /> */}
+          <RHFTextarea
+            name="note2"
+            label="note2"
+          />
         </div>
         <ChequeFormBar pattern={pattern} />
       </div>

@@ -12,12 +12,11 @@ export const voucherDefaultValues = {
     note: "",
     feedback: false,
     genEntires: false,
-    isFirstBatch: true,
-    accountId: "",
-    currencyId: "",
-    sellerId: "",
-    voucherPatternId: "",
-    contractId: ""
+    isFirstBatch: false,
+    accountId: null,
+    currencyId: null,
+    voucherPatternId: null,
+    contractId: null
   },
   voucherGridData: [
     {
@@ -55,21 +54,20 @@ const voucherPictureSchema = z.object({
 
 const voucherSchema = z.object({
   voucherType: z.number().min(1),
-  connectWith: z.number().optional(),
+  connectWith: z.number().optional().nullable(),
   debitAmount: z.number().min(0),
   creditAmount: z.number().min(0),
   debitTotal: z.number().min(0),
   creditTotal: z.number().min(0),
-  currencyVal: z.number().min(0),
+  currencyVal: z.number().min(0).nullable(),
   note: z.string().optional(),
   feedback: z.boolean().optional(),
   genEntires: z.boolean().optional(),
-  isFirstBatch: z.boolean().optional(),
+  isFirstBatch: z.boolean().optional().nullable(),
   accountId: z.string().optional(),
-  currencyId: z.string().min(1),
-  sellerId: z.string().min(1),
-  voucherPatternId: z.string().min(1),
-  contractId: z.string().min(1)
+  currencyId: z.string().optional().nullable(),
+  voucherPatternId: z.string(),
+  contractId: z.string().optional().nullable()
 });
 
 export const voucherValidationSchema = () => z.object({

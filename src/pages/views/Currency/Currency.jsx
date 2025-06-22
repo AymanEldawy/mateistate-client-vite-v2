@@ -1,10 +1,10 @@
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '@/components/layout/paper/PaperLayout'
-import { createCurrency, deleteCurrency, deleteManyCurrencies, getAllCurrencies, getSingleCurrency, updateCurrency } from '@/services/currencyService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import PaperLayout from '@/components/layout/paper/PaperLayout'
+import QUERY_KEYS from '@/data/queryKeys'
 import currencyColumns from '@/helpers/currency/currencyColumns'
-import { lazy } from 'react'
 import { currencyDefaultValue, currencyValidationSchema } from '@/helpers/currency/currencyValidationSchema'
+import { createCurrency, deleteCurrency, deleteManyCurrencies, getAllCurrencies, getSingleCurrency, updateCurrency } from '@/services/currencyService'
+import { lazy } from 'react'
 const CurrencyForm = lazy(() => import("@/components/forms/containers/currency/CurrencyForm"))
 
 const currencyConfig = {

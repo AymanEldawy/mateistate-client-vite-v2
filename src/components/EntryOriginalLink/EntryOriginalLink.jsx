@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const EntryOriginalLink = ({ data }) => {
-  console.log(data,'-data-EntryOriginalLink-');
   
   const { t } = useTranslation();
 

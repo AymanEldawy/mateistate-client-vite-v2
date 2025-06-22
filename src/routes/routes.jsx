@@ -20,9 +20,8 @@ const Currency = React.lazy(() => import("@/pages/views/Currency/Currency"));
 const ReservationProperty = React.lazy(() => import("@/pages/views/ReservationProperty/ReservationProperty"));
 const Service = React.lazy(() => import("@/pages/views/Service/Service"));
 const UserWorkTime = React.lazy(() => import("@/pages/views/UserWorkTime/UserWorkTime"));
-const CostCenter = React.lazy(() =>
-  import("../pages/views/CostCenter/CostCenter")
-);
+const CostCenter = React.lazy(() =>import("../pages/views/CostCenter/CostCenter"));
+const CostCenterChart = React.lazy(() =>import("../pages/views/CostCenter/CostCenterChart"));
 const Tools = React.lazy(() => import("../pages/views/Building/Tools"));
 const Country = React.lazy(() => import("../pages/views/Country/Country"));
 const Apartment = React.lazy(() => import("../pages/views/Apartment/Apartment"));
@@ -32,13 +31,13 @@ const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
-const Materials = React.lazy(() => import("../pages/views/materials/Materials"));
-const MaterialGroup = React.lazy(() =>
-  import("../pages/views/MaterialGroup/MaterialGroup")
-);
+const Materials = React.lazy(() => import("../pages/views/MaterialsPage/Materials"));
+const MaterialGroup = React.lazy(() =>import("../pages/views/MaterialGroups/MaterialGroup"));
+const MaterialGroupChart = React.lazy(() =>import("../pages/views/MaterialGroups/MaterialGroupChart"));
 const Category = React.lazy(() => import("../pages/views/Category/Category"));
 const CategoryProblem = React.lazy(() => import("../pages/views/Category/CategoryProblem"));
 const Store = React.lazy(() => import("../pages/views/Store/Store"));
+const StoreChart = React.lazy(() => import("../pages/views/Store/StoreChart"));
 const Login = React.lazy(() => import("../pages/auth/Login"));
 const ForgotPassword = React.lazy(() => import("../pages/auth/ForgotPassword"));
 const BillPattern = React.lazy(() => import("../pages/views/Patterns/BillPattern"));
@@ -102,6 +101,8 @@ const BalanceSheetReport = React.lazy(() => import("../pages/reports/accounting/
 const BillDetailsReport = React.lazy(() => import("../pages/reports/maintenances/BillDetailsReport"));
 const InventoryReport = React.lazy(() => import("../pages/reports/maintenances/InventoryReport"));
 const ProfitAndLossReport = React.lazy(() => import("../pages/reports/accounting/ProfitAndLossReport"))
+
+
 // Chart
 const AccountChart = React.lazy(() => import("../pages/views/Account/AccountChart"));
 
@@ -163,6 +164,10 @@ const routes = [
       {
         path: PATHS.COST_CENTER,
         element: <CostCenter />,
+      },
+      {
+        path: PATHS.COST_CENTER_CHART,
+        element: <CostCenterChart />,
       },
       {
         path: PATHS.COUNTRY,
@@ -236,6 +241,10 @@ const routes = [
       {
         path: PATHS.MATERIAL_GROUP,
         element: <MaterialGroup />,
+      },
+      {
+        path: PATHS.MATERIAL_GROUP_CHART,
+        element: <MaterialGroupChart />,
       },
       {
         path: PATHS.BILL_PATTERN,
@@ -433,6 +442,10 @@ const routes = [
       {
         path: PATHS.STORE,
         element: <Store />,
+      },
+      {
+        path: PATHS.STORE_CHART,
+        element: <StoreChart />,
       },
       /************************************** Announcements **************************************/
       /************************************** Error **************************************/

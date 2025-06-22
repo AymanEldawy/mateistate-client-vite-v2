@@ -7,6 +7,7 @@ const ChequeFormBar = ({ pattern }) => {
   const { watch } = useFormContext()
   const { handleDispatchForm } = usePopupForm();
 
+
   return (
     <div className="flex text-gray-500 border-r-2 gap-2 items-center mt-2">
       <Btn

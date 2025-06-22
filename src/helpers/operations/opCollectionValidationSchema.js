@@ -19,6 +19,7 @@ export const opCollectionDefaultValues = {
 
 export const opCollectionValidationSchema = z.object({
   amount: VALIDATION.NON_NEGATIVE_NUMBER,
+  currencyId: VALIDATION.NON_EMPTY_STRING,
   chequeId: VALIDATION.NON_EMPTY_STRING,
   commissionCostCenterId: VALIDATION.OPTIONAL_UUID,
   commissionCreditId: VALIDATION.OPTIONAL_UUID,
@@ -27,7 +28,7 @@ export const opCollectionValidationSchema = z.object({
   commissionPercentage: VALIDATION.OPTIONAL_NUMBER,
   commissionValue: VALIDATION.OPTIONAL_NUMBER,
   costCenterId: VALIDATION.OPTIONAL_UUID,
-  createdAt: VALIDATION.OPTIONAL_DATE,
+  createdAt: z.date(),
   creditAccountId: VALIDATION.NON_EMPTY_STRING,
   debitAccountId: VALIDATION.NON_EMPTY_STRING,
   note: VALIDATION.OPTIONAL_STRING,

@@ -28,6 +28,7 @@ const QUERY_KEYS = {
   BILLS: "bills",
   VOUCHERS: "vouchers",
   ENTRIES: "entries",
+  MATERIAL: "material",
   MATERIAL_GROUP: "materialGroup",
   CATEGORY: "category",
   CATEGORY_PROBLEM: "categoryProblem",

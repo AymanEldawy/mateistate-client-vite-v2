@@ -1,13 +1,14 @@
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, getSingleAccount, updateAccount } from '@/services/accountService'
 import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import QUERY_KEYS from '@/data/queryKeys'
 import accountColumns from '@/helpers/account/accountColumns'
-import { lazy } from 'react'
 import { accountDefaultValue, accountValidationSchema } from '@/helpers/account/accountValidationSchema'
+import { createAccount, deleteAccount, deleteManyAccounts, getAllAccounts, getSingleAccount, updateAccount } from '@/services/accountService'
+import { lazy } from 'react'
+import PaperLayout from '../../../components/layout/paper/PaperLayout'
 const AccountForm = lazy(() => import("@/components/forms/containers/AccountForm"))
 
 const accountConfig = {
+  name: "account",
   formProps: {
     defaultValue: accountDefaultValue,
     validationSchema: accountValidationSchema,
@@ -29,18 +30,18 @@ const Account = ({
   outerClose,
   defaultNumber,
   defaultCode,
-  popupFormConfig
+  ...props
 }) => {
+  console.log(props, 'props in account');
 
   if (formOnly) {
     return (
       <FormWrapper
         {...accountConfig}
-        name="account"
         outerClose={outerClose}
         numberSearchParam={defaultNumber}
         codeSearchParam={defaultCode}
-        oldValues={popupFormConfig?.oldValues}
+        {...props}
       />
     )
   }

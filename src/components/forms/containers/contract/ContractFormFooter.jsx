@@ -1,7 +1,7 @@
 import Btn from '@/components/shared/Btn'
 import { usePopupForm } from '@/hook/usePopupForm'
 
-const ContractFormFooter = ({ data, setIsInstallmentOpen }) => {
+const ContractFormFooter = ({ data, pattern }) => {
   const { handleDispatchForm } = usePopupForm()
 
   const openInstallmentPanel = () => {
@@ -9,12 +9,13 @@ const ContractFormFooter = ({ data, setIsInstallmentOpen }) => {
     handleDispatchForm({
       contract: data?.contract,
       table: "installment",
+      pattern
     })
   }
 
   return (
     <div>
-      <Btn disabled={!data?.contract?.id} onClick={openInstallmentPanel} kind="info" type="button">installment</Btn>
+      <Btn disabled={!data?.data?.id} onClick={openInstallmentPanel} kind="info" type="button">installment</Btn>
     </div>
   )
 }

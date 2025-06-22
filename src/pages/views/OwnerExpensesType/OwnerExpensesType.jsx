@@ -4,7 +4,7 @@
 import PaperLayout from "@/components/layout/paper/PaperLayout";
 import QUERY_KEYS from "@/data/queryKeys";
 import ownerExpensesTypesColumns from "@/helpers/owner/ownerExpensesTypesColumns";
-import { ownerExpensesTypesDefaultValues, ownerExpensesTypesValidationSchema, ownerExpensesValidationSchema } from "@/helpers/owner/ownerExpensesTypesValidationSchema";
+import { ownerExpensesTypesDefaultValues, ownerExpensesTypesValidationSchema } from "@/helpers/owner/ownerExpensesTypesValidationSchema";
 import { createOwnerExpensesTypes, deleteManyOwnerExpensesTypes, deleteOwnerExpensesTypes, getAllOwnerExpensesTypes, getSingleOwnerExpensesTypes, updateOwnerExpensesTypes } from "@/services/ownerExpensesTypesService";
 import { lazy } from "react";
 const OwnerExpensesTypeForm = lazy(() => import('@/components/forms/containers/owner/OwnerExpensesTypeForm'));
@@ -29,7 +29,7 @@ const ownerConfig = {
 const OwnerExpensesType = () => {
   return (
     <PaperLayout
-      name="owner_expenses_types"
+      name="owner_expenses_type"
       queryKey={QUERY_KEYS.OWNER_EXPENSES_TYPES}
       queryFn={getAllOwnerExpensesTypes} //
       handleDeleteSelected={deleteManyOwnerExpensesTypes} //

@@ -1,12 +1,15 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleShop = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_SHOP}/${id}`);
 };
 
-export const getAllShops = (signal) => {
-  return http.get(API_URL_CONSTANTS.BASE_SHOP);
+export const getAllShops = ({ buildingId }) => {
+  if (!buildingId) {
+    return http.get(API_URL_CONSTANTS.BASE_SHOP);
+  }
+  return http.get(`${API_URL_CONSTANTS.BASE_SHOP}?buildingId=${buildingId}`);
 };
 
 export const createShop = (data) => {

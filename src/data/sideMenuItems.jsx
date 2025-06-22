@@ -444,6 +444,11 @@ const sideMenuItems = [
             permissions: PERMISSIONS[PATHS.MATERIAL_GROUP],
           },
           {
+            name: "menu.materials_group_chart",
+            path: PATHS.MATERIAL_GROUP_CHART,
+            permissions: PERMISSIONS[PATHS.MATERIAL_GROUP_CHART],
+          },
+          {
             name: "menu.material_card",
             path: PATHS.MATERIAL,
             permissions: PERMISSIONS[PATHS.MATERIAL],

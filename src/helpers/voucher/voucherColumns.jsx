@@ -2,7 +2,6 @@ import { PrintIcon, SearchIcon } from "@/components/Icons"
 import Btn from "@/components/shared/Btn"
 import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox"
 import { VOUCHER_RECEIPTS_CODE, VOUCHER_RECEIPTS_NAME } from "@/data/GENERATE_STARTING_DATA"
-import { usePopupForm } from "@/hook/usePopupForm"
 import { Link } from "react-router-dom"
 
 export const VOUCHER_GRID_COLUMNS = [
@@ -90,7 +89,7 @@ const voucherColumns = [
     accessorKey: "number",
     cell: ({ getValue, row }) => (
       <Link
-        to={`/vouchers?number=${row?.original?.number}`}
+        to={`/vouchers?number=${row?.original?.number}&code=${row?.original?.voucherType}`}
         className="text-blue-500 font-medium hover:underline"
       >
         # {getValue()}

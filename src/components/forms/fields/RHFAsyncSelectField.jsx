@@ -1,13 +1,9 @@
+import ReactSelectAsync from "@/components/shared/ReactSelectAsync";
 import { QueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from 'react-hook-form';
-import AsyncSelect from "react-select/async";
-import { Label } from "./Label";
 import { ErrorText } from "../../shared/ErrorText";
-import { PlusIcon, SearchIcon } from "@/components/Icons";
-import Btn from "@/components/shared/Btn";
-import { usePopupForm } from "@/hook/usePopupForm";
-import ReactSelectAsync from "@/components/shared/ReactSelectAsync";
+import { Label } from "./Label";
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -16,7 +12,7 @@ const BORDER_COLOR = "#ced4da";
 const BORDER_COLOR_DARK = "#32383e";
 const RED_COLOR = "#d32424";
 
-const RHFAsyncSelectField = ({
+const RHFSelectField = ({
   containerClassName,
   selectClassName,
   labelClassName,
@@ -31,9 +27,10 @@ const RHFAsyncSelectField = ({
   hideErrors,
   ...field
 }) => {
+  
   const { control, watch, setValue } = useFormContext();
   const [defaultOption, setDefaultOption] = useState(null)
-  const { name, optionValue = 'id', optionLabel = 'name', table, required, allowAdd } = field || {}
+  const { name, optionValue = 'id', optionLabel = 'name', table, required, allowAdd, options } = field || {}
   const queryClient = new QueryClient();
 
   const getDefaultOption = async (value) => {
@@ -65,7 +62,7 @@ const RHFAsyncSelectField = ({
       control={control}
       defaultValue={null}
       render={({
-        field: { ref },
+        field: { ref, onChange, value },
         fieldState: { error },
       }) => {
         return (
@@ -84,22 +81,20 @@ const RHFAsyncSelectField = ({
                 getOptionValue={(option) => option?.[optionValue]}
                 styles={styles}
                 error={error}
+                defaultValue={options?.find(c => c?.[optionValue] === value)}
+                value={options?.find(c => c?.[optionValue] === value)}
+                options={options}
                 selectClassName={selectClassName}
                 isDarkMode={isDarkMode}
                 selectProps={selectProps}
                 small={small}
-                getSearch={getSearch}
-                name={name}
-                defaultOption={defaultOption}
-                setDefaultOption={setDefaultOption}
                 onChange={(option) => {
-                  setDefaultOption(option);
-                  setValue(name, option?.[optionValue])
+                  onChange(option?.[optionValue])
                 }}
                 allowAdd={allowAdd}
                 table={table}
-                formKey={name}
                 required={required}
+                getSearch={getSearch}
               />
               {error && !hideErrors ? (
                 <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
@@ -112,4 +107,4 @@ const RHFAsyncSelectField = ({
   );
 };
 
-export default RHFAsyncSelectField;
+export default RHFSelectField;

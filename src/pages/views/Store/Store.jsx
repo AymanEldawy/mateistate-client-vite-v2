@@ -1,8 +1,9 @@
 import QUERY_KEYS from "@/data/queryKeys";
 import PaperLayout from "../../../components/layout/paper/PaperLayout";
 
-import { storeDefaultValue, storeValidationSchema } from "@/helpers/store/storeValidationSchema";
+import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 import storeColumns from "@/helpers/store/storeColumns";
+import { storeDefaultValue, storeValidationSchema } from "@/helpers/store/storeValidationSchema";
 import { createStore, deleteManyStores, deleteStore, getAllStores, getSingleStore, updateStore } from "@/services/storeService";
 import { lazy } from "react";
 
@@ -10,13 +11,14 @@ const StoreForm = lazy(() => import("@/components/forms/containers/store/StoreFo
 
 
 const storeConfig = {
+  name: "store",
   formProps: {
     defaultValue: storeDefaultValue,
     validationSchema: storeValidationSchema,
     mutationAddFunction: createStore,
     mutationUpdateFunction: updateStore,
     getSingleFunction: getSingleStore,
-    onSuccessAction: () => {},
+    onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteStore,
     RenderForm: (props) => <StoreForm {...props} />,
@@ -26,10 +28,20 @@ const storeConfig = {
   },
 };
 
-const Store = () => {
+const Store = ({ formOnly, outerClose, defaultNumber, popupFormConfig }) => {
+
+  if (formOnly) {
+    return <FormWrapper
+      {...storeConfig}
+      outerClose={outerClose}
+      numberSearchParam={defaultNumber}
+      oldValues={popupFormConfig?.oldValues}
+    />;
+  }
+
   return (
     <PaperLayout
-      name="store"
+
       queryKey={QUERY_KEYS.STORE}
       queryFn={getAllStores} //
       handleDeleteSelected={deleteManyStores} //

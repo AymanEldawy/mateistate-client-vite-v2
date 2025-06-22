@@ -1,15 +1,19 @@
-import { useFormContext } from "react-hook-form";
-import { RHFSelectField, RHFDatePicker, RHFInput, RHFTextarea } from "../../fields";
-import { CONTRACT_DURATION, CONTRACT_PAID_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import QUERY_KEYS from "@/data/queryKeys";
-import { useQuery } from "@tanstack/react-query";
+import { CONTRACT_DURATION, CONTRACT_PAID_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { getAccountCustomersOnly, getLeavesAccounts } from "@/services/accountService";
+import { getAllApartments } from "@/services/apartmentService";
 import { getAllBuildings } from "@/services/buildingService";
+import { getAllParkings } from "@/services/parkingService";
+import { getAllShops } from "@/services/shopService";
+import { useQuery } from "@tanstack/react-query";
+import { useFormContext } from "react-hook-form";
+import { RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import { AccountField } from "../../global";
 
-const ContractFormGeneral = () => {
-  const contractType = 'rent';
-  const assetType = 'apartment';
-  const { watch } = useFormContext();
+const ContractFormGeneral = ({ pattern, unit }) => {
+  const contractType = +pattern?.contractType === 2 ? 'rent' : 'sale';
+  const assetType = pattern?.assetsType;
+  const { watch, setValue } = useFormContext();
 
   const { data: customers } = useQuery({
     queryKey: [QUERY_KEYS.ACCOUNT, 'customers'],
@@ -36,13 +40,27 @@ const ContractFormGeneral = () => {
   });
 
 
+
   const { data: units } = useQuery({
     queryKey: [QUERY_KEYS.BUILDING, watch('contract.buildingId')],
     queryFn: async () => {
-      // const response = await getUnitsBy();
-      // return response?.data || [];
-    },
+      let fn = null
+      switch (assetType) {
+        case 2: // Parking Unit
+          fn = getAllParkings({ buildingId: watch('contract.buildingId') });
+          break
+        case 3: // shop
+          fn = getAllShops({ buildingId: watch('contract.buildingId') });
+          break
+        default:
+          fn = getAllApartments({ buildingId: watch('contract.buildingId') });
+      }
+      const response = await fn;
+      return response?.data || [];
+    }
   });
+
+
 
   return (
     <div className="p-4">
@@ -59,26 +77,31 @@ const ContractFormGeneral = () => {
         <RHFDatePicker
           label={`issueDate`}
           name={`contract.issueDate`}
+          required
         />
 
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-2 gap-x-6 mt-4 w-full  items-start">
         <div className="grid grid-cols-1 gap-y-2 gap-x-6 ">
-          <RHFSelectField
-            options={customers}
+          <AccountField
+            // options={customers}
             label="clientId"
             name="contract.clientId"
             allowAdd
+            required
           />
           <RHFSelectField
             options={buildings}
             label="buildingId"
             name="contract.buildingId"
+            required
           />
           <RHFSelectField
             options={units}
-            label="unitId"
-            name={`contract.${assetType}Id`}
+            label={unit.table}
+            name={`contract.${unit.value}`}
+            optionLabel={`${unit.label}`}
+            required
           />
           <RHFInput
             label={`description`}
@@ -96,15 +119,18 @@ const ContractFormGeneral = () => {
                 label={`contractDuration`}
                 name={`contract.contractDuration`}
                 options={CONTRACT_DURATION}
+                required
               />
-              <RHFInput
+              <RHFDatePicker
                 label={`startDurationDate`}
                 name={`contract.startDurationDate`}
+                required
               />
-              <RHFInput
+              <RHFDatePicker
                 label={`endDurationDate`}
                 name={`contract.endDurationDate`}
                 readOnly={watch(`contract.contractDuration`) < 4}
+                required
               />
             </>
           ) : (
@@ -112,6 +138,7 @@ const ContractFormGeneral = () => {
               <RHFInput
                 label={`propertyDeliveryDate`}
                 name={`contract.propertyDeliveryDate`}
+                required={contractType !== "rent"}
               />
             </>
           )}
@@ -131,6 +158,7 @@ const ContractFormGeneral = () => {
             label={`revenueAccountId`}
             name={`contract.revenueAccountId`}
             options={accountsLeaves}
+            required
           />
           <RHFSelectField
             inputClassName={
@@ -147,6 +175,8 @@ const ContractFormGeneral = () => {
             label={`insuranceAccountId`}
             name={`contract.insuranceAccountId`}
             options={accountsLeaves}
+            required={pattern?.insuranceRequired}
+
           />
           <RHFSelectField
             inputClassName={
@@ -161,53 +191,72 @@ const ContractFormGeneral = () => {
 
       <div className={`grid grid-cols-2 md:grid-cols-3  gap-x-6 mb-2 mt-4`}>
         <div className="flex flex-col gap-y-2">
-          {[
-            "contractValue",
-            "priceBeforeVat",
-            "finalPrice",
-          ]?.map((field, i) => (
-            <RHFInput
-              key={`${field}-${i}`}
-              name={`contract.${field}`}
-              label={field}
-              inputClassName={field === "finalPrice" ? "bg-blue-100" : ""}
-              readOnly={field === "finalPrice" || field === 'priceBeforeVat'}
-            />
-          ))}
+          <RHFInput
+            name={`contract.contractValue`}
+            label="contractValue"
+            type="number"
+            required
+          />
+          <RHFInput
+            name={`contract.priceBeforeVat`}
+            label="priceBeforeVat"
+            // readOnly
+            type="number"
+          />
+          <RHFInput
+            name={`contract.finalPrice`}
+            label="finalPrice"
+            inputClassName={"bg-blue-100"}
+            // readOnly
+            type="number"
+          />
+
         </div>
         <div className="flex flex-col gap-y-2">
-          {[
-            "discountRate",
-            "vatRate",
-            "currentSecuringValue",
-          ]?.map((field, i) => (
-            <RHFInput
-              key={`${field}-${i}`}
-              name={`contract.${field}`}
-              label={field}
-            />
-          ))}
+          <RHFInput
+            name={`contract.discountRate`}
+            label="discountRate"
+            type="number"
+          />
+          <RHFInput
+            name={`contract.vatRate`}
+            label="vatRate"
+            type="number"
+            required={pattern?.vatRequired}
+          />
+          <RHFInput
+            name={`contract.currentSecuringValue`}
+            label="currentSecuringValue"
+            type="number"
+            required={pattern?.insuranceRequired}
+
+
+          />
         </div>
         <div className="flex flex-col gap-y-2">
-          {[
-            "discountValue",
-            "vatValue",
-            "previousSecuring",
-          ]?.map((field, i) => (
-            <RHFInput
-              key={`${field}-${i}`}
-              name={`contract.${field}`}
-              label={field}
-              inputClassName={field === "finalPrice" ? "bg-blue-100" : ""}
-              readOnly
-            />
-          ))}
+          <RHFInput
+            name={`contract.discountValue`}
+            label="discountValue"
+            readOnly
+          />
+          <RHFInput
+            name={`contract.vatValue`}
+            label="vatValue"
+            required={pattern?.vatRequired}
+            readOnly
+          />
+          <RHFInput
+            name={`contract.previousSecuring`}
+            label="previousSecuring"
+            readOnly
+          />
         </div>
         <RHFSelectField
           label={`paidType`}
           name={`contract.paidType`}
           containerClassName="mt-1"
           options={CONTRACT_PAID_TYPE}
+          required
         />
         <div />
         {/* <ContractStatus status={watch('contract.status')} containerClassName="!mt-2 flex items-center justify-center !text-base w-full block text-center" /> */}

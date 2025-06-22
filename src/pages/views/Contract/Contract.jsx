@@ -1,27 +1,37 @@
 
 
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import contractColumns from '@/helpers/contract/contractColumns'
-import { createContract, deleteContract, deleteManyContracts, getAllContracts, getSearchContract, getSingleContract, updateContract } from '@/services/contractService'
-import { contractDefaultValues, contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
-import { lazy, useState } from 'react'
 import ContractFormFooter from '@/components/forms/containers/contract/ContractFormFooter'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
+import BtnGroups from '@/components/shared/BtnGroups'
 import EntryBar from '@/components/shared/EntryBar'
 import Modal from '@/components/shared/Modal'
-import BtnGroups from '@/components/shared/BtnGroups'
-import useCustomSearchParams from '@/hook/useCustomSearchParams'
-import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
+import { CREATED_FROM_CONTRACT } from '@/data/GENERATE_STARTING_DATA'
+import QUERY_KEYS from '@/data/queryKeys'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
-import { APARTMENTS_CONTRACT_STEPS, GLOBAL_CONTRACT_STEPS } from '@/helpers/contract/contractSteps'
-import { getAllContractPatterns } from '@/services/contractPatternsService'
+import contractColumns from '@/helpers/contract/contractColumns'
+import { GLOBAL_CONTRACT_STEPS } from '@/helpers/contract/contractSteps'
+import { contractDefaultValues, contractValidationSchema } from '@/helpers/contract/contractValidationSchema'
+import useCustomSearchParams from '@/hook/useCustomSearchParams'
+import { getAllContractPatterns, getContractPatternByCode } from '@/services/contractPatternsService'
+import { createContract, deleteContract, deleteManyContracts, getAllContracts, getSearchContract, getSingleContract, updateContract } from '@/services/contractService'
+import { useQuery } from '@tanstack/react-query'
+import { lazy, useState } from 'react'
+import PaperLayout from '../../../components/layout/paper/PaperLayout'
 
 const ContractForm = lazy(() => import("@/components/forms/containers/contract/ContractForm"))
 
 const Contract = () => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
   const [openFormType, setOpenFormType] = useState(false);
+
+  const { data: pattern } = useQuery({
+    queryKey: [QUERY_KEYS.CONTRACT_PATTERN, searchParamsSelectedCode],
+    queryFn: async () => {
+      const response = await getContractPatternByCode(searchParamsSelectedCode)
+      return response
+    },
+    enabled: !!searchParamsSelectedCode
+  })
 
   return (
     <>
@@ -38,7 +48,7 @@ const Contract = () => {
         queryFn={getAllContracts}
         handleDeleteSelected={deleteManyContracts}
         paperHeaderProps={{
-          header: "contract"
+          header: pattern?.name || "contract"
         }}
         paperBarProps={{
           onClickPrint: true,
@@ -59,13 +69,14 @@ const Contract = () => {
           onHandleDelete: deleteContract,
           RenderForm: (props) => (
             <ContractForm
-              code={searchParamsSelectedCode?.code}
+              code={searchParamsSelectedCode}
+              pattern={pattern}
               {...props}
             />
           )
         }}
         formHeaderProps={{
-          header: "contract",
+          header: pattern?.name || "contract",
           ExtraContentBar: ({ values }) => (
             <>
               <FormHeaderSearchBar
@@ -74,7 +85,7 @@ const Contract = () => {
                 getSearch={getSearchContract}
                 queryKey={QUERY_KEYS.CONTRACT}
               />
-              <EntryBar entryId={values?.id} />
+              <EntryBar values={values} entryId={values?.contract?.id} tab="contract" created_from={CREATED_FROM_CONTRACT} />
             </>
           )
         }}
@@ -83,7 +94,7 @@ const Contract = () => {
         }}
         formFooterProps={{
           additionalButtons: (data) => (
-            <ContractFormFooter data={data} />
+            <ContractFormFooter data={data} pattern={pattern} />
           )
         }}
 

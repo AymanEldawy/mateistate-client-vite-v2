@@ -1,8 +1,8 @@
+import { usePopupForm } from '@/hook/usePopupForm';
 import { QueryClient } from '@tanstack/react-query';
 import AsyncSelect from "react-select/async";
 import { PlusIcon, SearchIcon } from '../Icons';
 import Btn from './Btn';
-import { usePopupForm } from '@/hook/usePopupForm';
 
 const PRIMARY_COLOR = "#2954c3";
 const DARK_THREE_COLOR = "#202328";
@@ -27,7 +27,6 @@ const ReactSelectAsync = ({
   setDefaultOption,
   allowAdd,
   table,
-  formKey,
   onChange,
   ...props
 }) => {
@@ -150,7 +149,6 @@ const ReactSelectAsync = ({
                     handleDispatchForm({
                       setDefaultOption,
                       table,
-                      formKey
                     })
                   }}
                 >

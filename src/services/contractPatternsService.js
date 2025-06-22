@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleContractPattern = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}/${id}`);
@@ -41,5 +41,5 @@ export const deleteManyContractPatterns = (ids) => {
 };
 
 export const getContractPatternByCode = (code) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}/${code}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT_PATTERN}/code/${code}`);
 };

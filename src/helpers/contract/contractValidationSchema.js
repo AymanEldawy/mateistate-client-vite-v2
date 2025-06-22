@@ -1,31 +1,46 @@
 import { z } from 'zod';
+import VALIDATION from '../VALIDATIONS';
 
 // Contract Schema
 const ContractSchema = z.object({
+  feedback: z.boolean(),
+  lawsuit: z.boolean(),
   govNumber: z.number().nullable(),
   contractsNumberPrev: z.number().int().nonnegative(),
   issueDate: z.date().optional(),
-  contractValue: z.number().nullable(),
+  contractValue: VALIDATION.NON_NEGATIVE_NUMBER,
   priceBeforeVat: z.number().nullable(),
-  finalPrice: z.number().nullable(),
+  finalPrice: VALIDATION.POSITIVE_NUMBER,
   description: z.string().optional(),
   discountRate: z.number().nullable(),
   vatRate: z.number().nullable(),
   currentSecuringValue: z.number().nullable(),
-  contractDuration: z.number().int().positive(),
+  contractDuration: VALIDATION.NON_NEGATIVE_NUMBER,
   startDurationDate: z.date().optional(),
   endDurationDate: z.date().optional(),
   discountValue: z.number().nullable(),
   vatValue: z.number().nullable(),
   previousSecuring: z.number().nullable(),
   propertyDeliveryDate: z.date().nullable(),
-  lessorId: z.number().nullable(),
-  revenueAccountId: z.number().nullable(),
-  discountAccountId: z.number().nullable(),
-  insuranceAccountId: z.number().nullable(),
-  vatAccountId: z.number().nullable(),
+  clientId: VALIDATION.NON_EMPTY_STRING,
+  lessorId: VALIDATION.OPTIONAL_UUID,
+  revenueAccountId: VALIDATION.NON_EMPTY_STRING,
+  discountAccountId: VALIDATION.OPTIONAL_UUID,
+  insuranceAccountId: VALIDATION.OPTIONAL_UUID,
+  vatAccountId: VALIDATION.OPTIONAL_UUID,
   paidType: z.number().int().positive(),
   note: z.string().optional(),
+  contractType: VALIDATION.NON_NEGATIVE_NUMBER,
+  flatType: VALIDATION.NON_NEGATIVE_NUMBER,
+  status: z.number().optional().nullable(),
+  contractPatternId: VALIDATION.NON_EMPTY_STRING,
+  isArchived: VALIDATION.OPTIONAL_BOOLEAN,
+  isDeleted: VALIDATION.OPTIONAL_BOOLEAN,
+  code: VALIDATION.NON_NEGATIVE_NUMBER,
+  apartmentId: VALIDATION.OPTIONAL_UUID,
+  buildingId: VALIDATION.OPTIONAL_UUID,
+  shopId: VALIDATION.OPTIONAL_UUID,
+  parkingId: VALIDATION.OPTIONAL_UUID,
 });
 
 // Contract Commission Schema
@@ -99,123 +114,25 @@ const ContractOtherFeesSchema = z.object({
 // Combined Schema for the entire form
 export const contractValidationSchema = () => z.object({
   contract: ContractSchema,
-  contractCommission: ContractCommissionSchema,
-  contractCycle: ContractCycleSchema,
+  contractCommission: ContractCommissionSchema.optional().nullable(),
+  contractCycle: ContractCycleSchema.optional().nullable(),
   contractLinkedParking: ContractLinkedParkingSchema.array().optional(),
-  contractTermination: ContractTerminationSchema,
+  contractTermination: ContractTerminationSchema.optional().nullable(),
   contractFinesGrid: ContractFinesGridSchema.array().optional(),
   contractOtherFees: ContractOtherFeesSchema.array().optional(),
 });
 
 // Utility function to clean form data
-export const cleanContractFormData = (data) => {
-  const isEmptyObject = (obj, defaults) => {
-    return Object.keys(obj).every((key) => {
-      const defaultsKey = Object.keys(defaults).find(k => k.toLowerCase() === key.toLowerCase()) || key;
-      const value = obj[key];
-      const defaultValue = defaults[defaultsKey];
-      return value === defaultValue || value === null || value === '' || value === undefined;
-    });
-  };
-
-  const cleanedData = { ...data };
-
-  // Clean contractLinkedParking
-  cleanedData.contractLinkedParking = data.contractLinkedParking.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        buildingId: null,
-        mainContractId: null,
-        accountId: null,
-      })
-  );
-
-  // Clean contractFinesGrid
-  cleanedData.contractFinesGrid = data.contractFinesGrid.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        createdAt: null,
-        fee_amount: null,
-        account_id: null,
-        notes: null,
-      })
-  );
-
-  // Clean contractOtherFees
-  cleanedData.contractOtherFees = data.contractOtherFees.filter(
-    (item) =>
-      !isEmptyObject(item, {
-        date: null,
-        feeAmount: null,
-        accountId: null,
-        notes: null,
-      })
-  );
-
-  // Clean contractCommission if all fields are default
-  if (
-    isEmptyObject(data.contractCommission, {
-      commissionPercentage: null,
-      commissionValue: null,
-      commissionAccountId: null,
-      commissionNote: null,
-      commissionFromOwnerPercentage: null,
-      commissionFromOwnerValue: null,
-      commissionFromOwnerAccountId: null,
-      commissionFromOwnerNote: null,
-    })
-  ) {
-    delete cleanedData.contractCommission;
-  }
-
-  // Clean contractCycle if all fields are default
-  if (
-    isEmptyObject(data.contractCycle, {
-      contractCertifyingBody: null,
-      commissionFromOwnerValue: null,
-      municipalLicenseFrom: null,
-      municipalLicenseTo: null,
-      licenseNum: null,
-      licenseFrom: null,
-      licenseTo: null,
-      civilLicenseNum: null,
-      civilLicenseFrom: null,
-      civilLicenseTo: null,
-      contractDocumented: null,
-      contractCertifying: null,
-      contractDelivered: null,
-      contractSigned: null,
-    })
-  ) {
-    delete cleanedData.contractCycle;
-  }
-
-  // Clean contractTermination if all fields are default
-  if (
-    isEmptyObject(data.contractTermination, {
-      terminated: null,
-      genEntries: null,
-      terminationDate: null,
-      ownerTotalAmount: null,
-      ownerRestAmount: null,
-      roundTo: null,
-      revenueNote: null,
-      evacuationRequest: null,
-      evacuationDate: null,
-      clearancePrinted: null,
-      clearancePrintedDate: null,
-    })
-  ) {
-    delete cleanedData.contractTermination;
-  }
-
-  return cleanedData;
-};
 
 // React Hook Form Default Values
 export const contractDefaultValues = {
   contract: {
+    genEntries: true,
+    feedback: false,
+    lawsuit: false,
     govNumber: null,
+    contractType: 1,
+    flatType: 1,
     contractsNumberPrev: 0,
     issueDate: new Date().toISOString(),
     contractValue: null,
@@ -224,6 +141,8 @@ export const contractDefaultValues = {
     description: '',
     discountRate: null,
     vatRate: null,
+    contractPatternId: null,
+    status: 1,
     currentSecuringValue: null,
     contractDuration: 3,
     startDurationDate: new Date().toISOString(),
@@ -239,6 +158,12 @@ export const contractDefaultValues = {
     vatAccountId: null,
     paidType: 1,
     note: '',
+    isArchived: false,
+    isDeleted: false,
+    apartmentId: null,
+    buildingId: null,
+    shopId: null,
+    parkingId: null,
   },
   contractCommission: {
     commissionPercentage: null,

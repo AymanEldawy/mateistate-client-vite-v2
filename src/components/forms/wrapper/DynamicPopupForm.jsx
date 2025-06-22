@@ -1,5 +1,6 @@
 import Modal from '@/components/shared/Modal';
-import { usePopupForm } from '@/hook/usePopupForm'
+import { usePopupForm } from '@/hook/usePopupForm';
+import Store from '@/pages/views/Store/Store';
 import { lazy } from 'react';
 import InstallmentForm from '../containers/contract/InstallmentForm';
 
@@ -14,68 +15,76 @@ const CollectionForm = lazy(() => import('../containers/cheque/CollectionForm'))
 const ReturnForm = lazy(() => import('../containers/cheque/ReturnForm'));
 
 const DynamicPopupForm = () => {
-  const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
-  if (!popupFormConfig) return;
+  const { onCloseDispatchedForm, stack, open } = usePopupForm()
+  if (!open) return null
 
-  const displayForm = () => {
-    switch (popupFormConfig?.table) {
+  const displayForm = (props) => {
+
+    const additional = {
+      outerClose: () => onCloseDispatchedForm(props.table),
+      popupFormConfig: props,
+      ...props,
+      defaultNumber: props?.number,
+    }
+
+    switch (props?.table) {
       case 'account':
-        return <Account formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Account
+          formOnly
+          {...additional}
         />
       case 'user':
-        return <Users formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Users
+          formOnly
+          {...additional}
         />
       case 'cheque':
-        return <Cheque formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
-          defaultCode={popupFormConfig?.code}
+        return <Cheque
+          formOnly
+          defaultCode={props?.code}
+          {...additional}
         />
       case 'cost_center':
-        return <CostCenter formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <CostCenter
+          formOnly
+          {...additional}
+        />
+      case 'store':
+        return <Store
+          formOnly
+          {...additional}
         />
       case 'currency':
-        return <Currency formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
+        return <Currency
+          formOnly
+          {...additional}
         />
       case 'voucher':
-        return <Voucher formOnly
-          outerClose={onCloseDispatchedForm}
-          popupFormConfig={popupFormConfig}
-          defaultNumber={popupFormConfig?.number}
-          defaultCode={popupFormConfig?.code}
+        return <Voucher
+          formOnly
+          defaultCode={props?.code}
+          {...additional}
         />
       case 'op_partial_collection':
         return <PartialCollectionFrom
-          popupFormConfig={popupFormConfig}
-          outerClose={onCloseDispatchedForm}
+          popupFormConfig={props}
+          outerClose={() => onCloseDispatchedForm(props.table)}
         />
       case 'op_collection':
         return <CollectionForm
-          popupFormConfig={popupFormConfig}
-          outerClose={onCloseDispatchedForm}
+          popupFormConfig={props}
+          outerClose={() => onCloseDispatchedForm(props.table)}
         />
       case 'op_return':
         return <ReturnForm
-          popupFormConfig={popupFormConfig}
-          outerClose={onCloseDispatchedForm}
+          popupFormConfig={props}
+          outerClose={() => onCloseDispatchedForm(props.table)}
         />
       case 'installment':
         return <InstallmentForm
-          popupFormConfig={popupFormConfig}
-          outerClose={onCloseDispatchedForm}
+          popupFormConfig={props}
+          outerClose={() => onCloseDispatchedForm(props.table)}
+          {...props}
         />
       default:
         return
@@ -83,10 +92,16 @@ const DynamicPopupForm = () => {
   }
 
 
+  if (!stack || !Object.keys(stack).length) return null
+
   return (
-    <Modal open={true} onClose={onCloseDispatchedForm} bodyClassName="!p-0">
-      {displayForm()}
-    </Modal>
+    <>
+      {Object.entries(stack)?.map(([key, value]) => (
+        <Modal key={key} open={key && open} onClose={onCloseDispatchedForm} bodyClassName="!p-0">
+          {displayForm(value)}
+        </Modal>
+      ))}
+    </>
   )
 }
 

@@ -1,17 +1,25 @@
 import { ErrorText } from "@/components/shared/ErrorText";
 import { ACCOUNT_ASSEMBLY_TYPE_NAME, ACCOUNT_DISTRIBUTIVE_TYPE_NAME } from "@/data/GENERATE_STARTING_DATA";
+import QUERY_KEYS from "@/data/queryKeys";
+import { calculatePercentage } from "@/helpers/account/accountHelpers";
+import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
+import { getAccountCodeNumber, getAllAccounts } from "@/services/accountService";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { calculatePercentage } from "@/helpers/account/accountHelpers";
-import { ACCOUNT_ASSEMBLY, ACCOUNT_DISTRIBUTIVE, ACCOUNT_FIELDS } from "@/helpers/account/accountFields";
+import { RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../fields";
 import TableForm from "../wrapper/TableForm";
-import { RHFTableInput, RHFInput, RHFTextarea, RHFAsyncSelectField, RHFSelectField, RHFTableAsyncSelect } from "../fields";
-import { AccountField } from "../global";
-import { getAccountCodeNumber, getAccountSearch, getSingleAccount } from "@/services/accountService";
-import { ACCOUNT_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 
 const AccountForm = () => {
   // let name = 'account';
+  const { data: accounts } = useQuery({
+    queryKey: [QUERY_KEYS.ACCOUNT],
+    queryFn: async () => {
+      const response = await getAllAccounts();
+      return response?.data || [];
+    },
+  });
+
   const { watch, setValue, formState: { errors }, clearErrors } = useFormContext();
   const [totalPercentage, setTotalPercentage] = useState(0)
   useEffect(() => {
@@ -46,7 +54,7 @@ const AccountForm = () => {
       setValue("account.finalId", data?.finalId || data?.parentId);
       setValue("account.code", data.nextChildCode);
     }
-  };
+  };  
 
   return (
     <div className="">
@@ -71,15 +79,15 @@ const AccountForm = () => {
       </div>
       {watch("type") === 1 ? (
         <div className="flex-1 grid grid-cols-1 my-4 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
-          <AccountField
+          <RHFSelectField
             name="account.parentId"
             label="parent_id"
-            allowAdd={false}
+            options={accounts}
           />
-          <AccountField
+          <RHFSelectField
             name="account.finalId"
             label="final_id"
-            allowAdd={false}
+            options={accounts}
           />
         </div>
       ) : null}
@@ -100,13 +108,15 @@ const AccountForm = () => {
           <TableForm
             renderFields={(item, index) => (
               <div key={index}>
-                <AccountField
+                <RHFSelectField
                   name={`${ACCOUNT_ASSEMBLY_TYPE_NAME}.${index}.mainAccountId`}
+                  options={accounts}
+                  hideErrors
                 />
               </div>
             )}
             gridName={ACCOUNT_ASSEMBLY_TYPE_NAME}
-            headers={Object.values(ACCOUNT_ASSEMBLY)?.map(c => c?.label)}
+            headers={['mainAccountId']}
           />
         </div>
       ) : null}
@@ -139,9 +149,10 @@ const AccountForm = () => {
             renderFields={(item, index) => (
               <>
                 <td>
-                  <AccountField
+                  <RHFSelectField
                     name={`${ACCOUNT_DISTRIBUTIVE_TYPE_NAME}.${index}.mainAccountId`}
-                    label=""
+                    options={accounts}
+                    hideErrors
                   />
                 </td>
                 <td>
@@ -154,7 +165,7 @@ const AccountForm = () => {
               </>
             )}
             gridName={ACCOUNT_DISTRIBUTIVE_TYPE_NAME}
-            headers={Object.values(ACCOUNT_DISTRIBUTIVE)?.map(c => c?.label)}
+            headers={['mainAccountId', 'percentage']}
           />
         </div>
       ) : null}

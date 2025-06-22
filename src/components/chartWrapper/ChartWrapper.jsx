@@ -1,12 +1,12 @@
+import { toTree } from '@/data/constants'
+import { usePopupForm } from '@/hook/usePopupForm'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+import PaperHeader from '../layout/paper/PaperHeader'
+import { ErrorText } from '../shared/ErrorText'
 import Loading from '../shared/Loading'
 import ChartRenderTree from './ChartRenderTree'
-import { PaperHeader } from '../layout/paper/PaperHeader'
-import { ErrorText } from '../shared/ErrorText'
-import { toast } from 'react-toastify'
-import { usePopupForm } from '@/hook/usePopupForm'
-import { toTree } from '@/data/constants'
 
 const ChartWrapper = ({
   title,
@@ -15,16 +15,15 @@ const ChartWrapper = ({
   name,
   onSelectItem,
   onDeleteItem,
-  onClickAdd,
   onAddItemHandler
 }) => {
   const { t } = useTranslation()
   const { handleDispatchForm } = usePopupForm()
+
   const { isLoading, isError, data, error, isFetching, refetch } = useQuery({
     queryKey: [queryKey, 'chartTree'],
     queryFn: async () => {
       const response = await queryFn()
-
       if (response?.success) {
         return toTree(response?.data || [])
         // return response?.data || []

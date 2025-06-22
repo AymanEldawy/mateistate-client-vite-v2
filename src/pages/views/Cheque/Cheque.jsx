@@ -1,50 +1,19 @@
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
-import { createCheque, deleteCheque, getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
-import chequeColumns from '@/helpers/cheque/chequeColumns'
-import { lazy, useState } from 'react'
-import EntryBar from '@/components/shared/EntryBar'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
-import Modal from '@/components/shared/Modal'
+import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import BtnGroups from '@/components/shared/BtnGroups'
-import ChequeFormBar from '@/components/forms/containers/cheque/ChequeFormBar'
-import useUpdateSearchParams from '@/hook/useUpdateSearchParams'
-import useCustomSearchParams from '@/hook/useCustomSearchParams'
+import EntryBar from '@/components/shared/EntryBar'
+import Modal from '@/components/shared/Modal'
+import QUERY_KEYS from '@/data/queryKeys'
 import SEARCH_PARAMS from '@/data/searchParamsKeys'
+import chequeColumns from '@/helpers/cheque/chequeColumns'
 import { chequeDefaultValue, chequeValidationSchema } from '@/helpers/cheque/ChequeValidationSchema'
+import useCustomSearchParams from '@/hook/useCustomSearchParams'
+import { getAllChequePatterns, getChequePatternByCode } from '@/services/chequePatternsService'
+import { createCheque, deleteCheque, getAllCheques, getSearchCheque, getSingleCheque, updateCheque } from '@/services/chequeService'
 import { useQuery } from '@tanstack/react-query'
-import { getAllChequePatterns } from '@/services/chequePatternsService'
+import { lazy, useMemo, useState } from 'react'
+import PaperLayout from '../../../components/layout/paper/PaperLayout'
 const ChequeForm = lazy(() => import("@/components/forms/containers/cheque/ChequeForm"))
-
-const chequeConfig = {
-  name: "cheque",
-  formProps: {
-    defaultValue: chequeDefaultValue,
-    validationSchema: chequeValidationSchema,
-    mutationAddFunction: createCheque,
-    mutationUpdateFunction: updateCheque,
-    getSingleFunction: getSingleCheque,
-    onSuccessAction: () => { },
-    isSteps: false,
-    onHandleDelete: deleteCheque,
-    RenderForm: (props) => <ChequeForm {...props} />
-  },
-  formHeaderProps: {
-    header: "cheque",
-    ExtraContentBar: ({ values }) => (
-      <>
-        <FormHeaderSearchBar
-          getOptionLabel={option => option?.name}
-          getOptionValue={option => option?.id}
-          getSearch={getSearchCheque}
-          queryKey={QUERY_KEYS.CHEQUE}
-        />
-        <EntryBar entryId={values?.id} />
-      </>
-    )
-  },
-}
 
 const Cheque = ({
   formOnly,
@@ -55,17 +24,60 @@ const Cheque = ({
 
 }) => {
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
+  const code = popupFormConfig?.oldValues?.code || defaultCode || searchParamsSelectedCode;
   const [openFormType, setOpenFormType] = useState(false);
+
+  const { data: pattern } = useQuery({
+    queryKey: ['pattern', 'cheque', code],
+    queryFn: async () => {
+      const response = await getChequePatternByCode(code)
+      return response
+    },
+    enabled: !!code
+  })
+
+  const chequeConfig = useMemo(() => ({
+    name: "cheque",
+    formProps: {
+      defaultValue: chequeDefaultValue,
+      validationSchema: chequeValidationSchema,
+      mutationAddFunction: createCheque,
+      mutationUpdateFunction: updateCheque,
+      getSingleFunction: getSingleCheque,
+      onSuccessAction: () => { },
+      isSteps: false,
+      onHandleDelete: deleteCheque,
+      RenderForm: (props) => <ChequeForm {...props} pattern={pattern} code={code} />
+    },
+    formHeaderProps: {
+      header: pattern?.name || "Cheque",
+      ExtraContentBar: ({ values }) => (
+        <>
+          <FormHeaderSearchBar
+            getOptionLabel={option => option?.name}
+            getOptionValue={option => option?.id}
+            getSearch={getSearchCheque}
+            queryKey={QUERY_KEYS.CHEQUE}
+          />
+          <EntryBar entryId={values?.id} />
+        </>
+      )
+    }
+  }), [code, pattern]);
+
+
 
   if (formOnly) {
     return (
       <FormWrapper
         {...chequeConfig}
         outerClose={outerClose}
-        code={searchParamsSelectedCode?.code}
+        code={code}
         numberSearchParam={defaultNumber}
         codeSearchParam={defaultCode}
         oldValues={popupFormConfig?.oldValues}
+        pattern={pattern}
+
       />
     )
   }
@@ -85,7 +97,7 @@ const Cheque = ({
         queryFn={getAllCheques}
         // handleDeleteSelected={deleteManyCheques}
         paperHeaderProps={{
-          header: "cheque"
+          header: pattern?.name
         }}
         paperBarProps={{
           onClickPrint: true,

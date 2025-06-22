@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleBill = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BILLS}/${id}`);
@@ -27,8 +27,4 @@ export const deleteManyBills = (ids) => {
 
 export const getSearchBill = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BILLS}?search=${value}`);
-};
-
-export const getBillPatternByCode = (code) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_BILLS}/${code}`);
 };

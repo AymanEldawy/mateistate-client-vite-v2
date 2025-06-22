@@ -1,26 +1,20 @@
+import FormWrapper from "@/components/forms/wrapper/FormWrapper";
 import QUERY_KEYS from "@/data/queryKeys";
-import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import {
-  deleteAccount,
-  deleteManyAccounts,
-  getAllAccounts,
-} from "@/services/accountService";
-import { materialGroupValidationSchema } from "@/helpers/materialGroup/materialGroupValidationSchema";
 import materialGroupColumns from "@/helpers/materialGroup/materialGroupColumns";
-import MaterialGroupForm from "@/components/forms/containers/materialGroup/materialGroupForm";
+import { materialGroupDefaultValues, materialGroupValidationSchema } from "@/helpers/materialGroup/materialGroupValidationSchema";
+import {
+  deleteAccount
+} from "@/services/accountService";
 import { createMaterialGroup, deleteManyMaterialGroup, getAllMaterialGroups, getSingleMaterialGroup, updateMaterialGroup } from "@/services/materialGroupsService";
-// import QUERY_KEYS from './../../../data/queryKeys';
+import { lazy } from "react";
+import PaperLayout from "../../../components/layout/paper/PaperLayout";
 
-const defaultValue = {
-  name: "",
-  // parentId: "",
-  note: "",
-  ltnname: "",
-};
+const MaterialGroupForm = lazy(() => import("@/components/forms/containers/materialGroups/MaterialGroupForm"))
 
 const materialGroupConfig = {
+  name: "material_group",
   formProps: {
-    defaultValue,
+    defaultValue: materialGroupDefaultValues,
     validationSchema: materialGroupValidationSchema,
     mutationAddFunction: createMaterialGroup,
     mutationUpdateFunction: updateMaterialGroup,
@@ -36,10 +30,18 @@ const materialGroupConfig = {
 
 };
 
-const MaterialGroup = () => {
+const MaterialGroup = ({ formOnly, outerClose, defaultNumber, popupFormConfig }) => {
+  if (formOnly) {
+    return <FormWrapper
+      {...materialGroupConfig}
+      outerClose={outerClose}
+      numberSearchParam={defaultNumber}
+      oldValues={popupFormConfig?.oldValues}
+    />;
+  }
+
   return (
     <PaperLayout
-      name="material_group"
       queryKey={QUERY_KEYS.MATERIAL_GROUP}
       queryFn={getAllMaterialGroups} //
       handleDeleteSelected={deleteManyMaterialGroup} //

@@ -1,23 +1,34 @@
-import { createContext, useContext } from "react";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const PopupFormContext = createContext();
 
 export const PopupFormProvider = ({ children }) => {
-  const [popupFormConfig, setPopupFormConfig] = useState(null);
+  const [stack, setStack] = useState({})
+  const [open, setOpen] = useState(false);
 
-  const handleDispatchForm = (form) => {
-    setPopupFormConfig(form);
+  const handleDispatchForm = (form) => {    
+    setStack({
+      [form.table]: form
+    })
+    setOpen(true);
   };
 
-  const onCloseDispatchedForm = () => setPopupFormConfig(null)
-
+  const onCloseDispatchedForm = (item) => {    
+    const newStack = stack;
+    delete newStack[item];
+    setStack(newStack)
+    if(!Object.keys(newStack).length) {
+      setOpen(false);
+    }
+  }
+  
   return (
     <PopupFormContext.Provider
       value={{
         handleDispatchForm,
-        popupFormConfig,
-        onCloseDispatchedForm
+        onCloseDispatchedForm,
+        stack,
+        open
       }}
     >
       {children}

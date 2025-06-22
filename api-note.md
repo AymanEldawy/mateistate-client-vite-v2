@@ -8,7 +8,7 @@
 - bulk delete
 ## [o] shop 
 - bulk delete
-## [o] accounts 
+## [o] accounts enhancement
 - bulk delete 
 ## [o] lessor
 - bulk delete 

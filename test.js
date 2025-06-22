@@ -93,7 +93,6 @@ function convertArraysToCamelCase(arr) {
   let newArr = []
   for (const value of arr) {
     let v = underscoreToCamelCase(value)
-    console.log("🚀 ~ convertArraysToCamelCase ~ v:", v)
     newArr.push(v)
   }
 
@@ -101,74 +100,31 @@ function convertArraysToCamelCase(arr) {
 }
 
 const underscoreData = [
- 'name',
-'type',
-'land_no',
-'last_name',
-'number',
-'date',
-'city',
-'region',
-'space',
-'side',
-'street_count',
-'street_name',
-'area',
-'area_unit',
-'land_type',
-'landowner',
-'buildble',
-'license_no',
-'license',
-'license_date',
-'details',
-'begin_land_value',
-'currency_begin_land_id',
-'currency_val_begin_land',
-'begin_land_cost_center_id',
-'currency_purchase_id',
-'currency_val_purchase',
-'purchase_note',
-'cost_center_id',
-'bank_account_id',
-'account_comm_income_id',
-'rent',
-'rent_currency_id',
-'account_id',
-'customer_id',
-'cuowner_id',
-'bank_account_id',
-'customer_owner_id',
-'owner_account_id',
-'identity_value',
-'currency_identity_id',
-'currency_valid_entity',
-'identity_begin_date',
-'identity_end_date',
-'identity_entry_id',
-'identity_note',
-'ltnname',
-'ltn_land_type',
-'ltn_city',
-'ltn_region',
-'ltn_space',
-'ltn_license',
-'ltn_side',
-'ban',
-'commission_percent',
-'used_end_date',
-'create_entry_investment'
-
-
-
-
-
-
-
-
-
+ "card_type",
+"phone",
+"trn_number",
+"account_id",
+"date_of_birth",
+"passport_number",
+"passport_expiry",
+"national_id",
+"national_id_expiry",
+"address",
+"user_type",
+"commercial_register",
+"barcode",
+"profession",
+"work_phone",
+"token",
+"fax",
+"mailbox",
+"email",
+"sponsor",
+"sponsor_data",
+"statement",
+"insurance_account_id",
+"bank_id",
 ]
-
 
 const camelCaseData = convertArraysToCamelCase(underscoreData);
 console.log(camelCaseData);

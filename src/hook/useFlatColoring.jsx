@@ -31,10 +31,7 @@ const calculateRoomCount = (collections, setRoomCounts) => {
       ? counts[collections[hex]] + 1
       : 1;
   }
-  setRoomCounts(counts);
-
-  console.log(collections, '---cocc', counts);
-  
+  setRoomCounts(counts);  
 };
 
 export const FlatColoringProvider = ({ children }) => {

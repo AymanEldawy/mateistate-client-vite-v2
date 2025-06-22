@@ -55,3 +55,11 @@ export const getCostCenterCash = (buildingId) => {
     `${API_URL_CONSTANTS.BASE_COST_CENTER}/bank?buildingId=${buildingId}`
   );
 };
+
+
+
+export const getCostCenterCodeNumber = (parentId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_COST_CENTER}/${parentId}/next-child-info`
+  );
+};

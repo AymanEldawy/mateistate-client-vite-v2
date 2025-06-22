@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleCurrency = (id) => {
     return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}/${id}`);

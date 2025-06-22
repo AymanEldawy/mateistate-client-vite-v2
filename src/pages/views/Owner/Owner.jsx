@@ -1,8 +1,7 @@
-import QUERY_KEYS from "@/data/queryKeys";
-import PaperLayout from "../../../components/layout/paper/PaperLayout";
-import { ownerDefaultValue, ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
-import ownerColumns from "@/helpers/owner/ownerColumns";
 import OwnerForm from "@/components/forms/containers/owner/OwnerForm";
+import QUERY_KEYS from "@/data/queryKeys";
+import ownerColumns from "@/helpers/owner/ownerColumns";
+import { ownerDefaultValue, ownerValidationSchema } from "@/helpers/owner/ownerValidationSchema";
 import {
   createOwner,
   deleteManyOwners,
@@ -11,6 +10,7 @@ import {
   getSingleOwner,
   updateOwner,
 } from "@/services/ownerService";
+import PaperLayout from "../../../components/layout/paper/PaperLayout";
 // import QUERY_KEYS from './../../../data/queryKeys';
 
 const ownerConfig = {
@@ -20,7 +20,7 @@ const ownerConfig = {
     mutationAddFunction: createOwner,
     mutationUpdateFunction: updateOwner,
     getSingleFunction: getSingleOwner,
-    onSuccessAction: () => {},
+    onSuccessAction: () => { },
     isSteps: false,
     onHandleDelete: deleteOwner,
     RenderForm: (props) => <OwnerForm {...props} />,
@@ -31,11 +31,6 @@ const ownerConfig = {
 };
 
 const Owner = () => {
-  // if (formOnly) {
-  //   return <FormWrapper {...accountConfig} outerClose={outerClose} />;
-  // }
-  // const navigate = useNavigate();
-
   return (
     <PaperLayout
       name="Owner"

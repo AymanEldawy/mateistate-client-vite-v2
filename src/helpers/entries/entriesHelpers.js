@@ -1,6 +1,4 @@
-export const calculateEntriesDifferences = (watch, setValue) => {
-  console.log('called calculateEntriesDifferences');
-  
+export const calculateEntriesDifferences = (watch, setValue) => {  
   let grid = watch("entryGridData");
   let credit = 0;
   let debit = 0;

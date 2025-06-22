@@ -1,21 +1,16 @@
-import QUERY_KEYS from '@/data/queryKeys'
 import PaperLayout from '@/components/layout/paper/PaperLayout'
-import { deleteUserWorkTime, deleteManyUserWorkTimes, getAllUserWorkTimes, createUserWorkTime, updateUserWorkTime, getSingleUserWorkTime } from '@/services/userWorkTimeService'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import QUERY_KEYS from '@/data/queryKeys'
+import { userWorkTimeDefaultValues } from '@/helpers/user-work-times/userWorkTimesValidationSchema'
 import userWorkTimeColumns from '@/helpers/userWorkTime/userWorkTimeColumns'
+import { userWorkTimeValidationSchema } from '@/helpers/userWorkTime/userWorkTimeValidationSchema'
+import { createUserWorkTime, deleteManyUserWorkTimes, deleteUserWorkTime, getAllUserWorkTimes, getSingleUserWorkTime, updateUserWorkTime } from '@/services/userWorkTimeService'
 import { lazy } from 'react'
 const UserWorkTimeForm = lazy(() => import("@/components/forms/containers/userWorkTime/UserWorkTimeForm"))
 
-const defaultValue = {
-  repeat_type: 1
-}
-
-const validationSchema = () => { }
-
 const userWorkTimeConfig = {
   formProps: {
-    defaultValue,
-    validationSchema,
+    defaultValue: userWorkTimeDefaultValues,
+    validationSchema: userWorkTimeValidationSchema,
     mutationAddFunction: createUserWorkTime,
     mutationUpdateFunction: updateUserWorkTime,
     getSingleFunction: getSingleUserWorkTime,

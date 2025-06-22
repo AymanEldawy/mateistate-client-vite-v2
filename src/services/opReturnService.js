@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleReturn = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_RETURN}/${id}`);
@@ -33,4 +33,8 @@ export const deleteReturn = (id) => {
   return http.delete(
     `${API_URL_CONSTANTS.BASE_RETURN}/${id}`
   );
+};
+
+export const getReturnByChequeId = (chequeId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_RETURN}/cheque/${chequeId}`);
 };

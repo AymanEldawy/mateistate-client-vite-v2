@@ -1,15 +1,15 @@
 
 
-import QUERY_KEYS from '@/data/queryKeys'
-import PaperLayout from '../../../components/layout/paper/PaperLayout'
-import { lazy } from 'react'
+import EntryOriginalLink from '@/components/EntryOriginalLink/EntryOriginalLink'
 import { FormHeaderSearchBar } from '@/components/forms/wrapper'
+import FormWrapper from '@/components/forms/wrapper/FormWrapper'
 import EntryBar from '@/components/shared/EntryBar'
-import { createEntry, deleteEntry, deleteManyEntries, getAllEntries, getSearchEntry, getSingleEntry, updateEntry } from '@/services/entriesService'
+import QUERY_KEYS from '@/data/queryKeys'
 import entriesColumns from '@/helpers/entries/entriesColumns'
 import { entriesDefaultValues, entriesValidationSchema } from '@/helpers/entries/entriesValidationSchema'
-import EntryOriginalLink from '@/components/EntryOriginalLink/EntryOriginalLink'
-import FormWrapper from '@/components/forms/wrapper/FormWrapper'
+import { createEntry, deleteEntry, deleteManyEntries, getAllEntries, getSearchEntry, getSingleEntry, updateEntry } from '@/services/entriesService'
+import { lazy } from 'react'
+import PaperLayout from '../../../components/layout/paper/PaperLayout'
 
 const EntriesForm = lazy(() => import("@/components/forms/containers/entries/EntriesForm"))
 
@@ -37,7 +37,7 @@ const entryConfig = {
           getSearch={getSearchEntry}
           queryKey={QUERY_KEYS.ENTRIES}
         />
-        <EntryBar entryId={values?.id} />
+        <EntryBar entryId={values?.id} tab="entry" />
       </>
     )
   },
@@ -57,6 +57,8 @@ const Entries = ({
   popupFormConfig
 }) => {
 
+  console.log(popupFormConfig, 'popupFormConfig in Entries');
+  
   if (formOnly) {
     return (
       <FormWrapper

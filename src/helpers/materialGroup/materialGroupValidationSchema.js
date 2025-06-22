@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+export const materialGroupDefaultValues = {
+   name: "",
+  // parentId: "",
+  note: "",
+  ltnname: "",
+}
 export const materialGroupValidationSchema = () =>
   z.object({
     // code: z.string().nonempty({ message: "Code is Required" }),

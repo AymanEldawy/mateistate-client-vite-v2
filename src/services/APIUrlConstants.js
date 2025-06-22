@@ -37,11 +37,11 @@ const API_URL_CONSTANTS = {
   /************************************** Store **************************************/
   BASE_STORE: "/stores",
   /************************************** PARTIAL_COLLECTION **************************************/
-  BASE_PARTIAL_COLLECTION: "/partial_collection",
+  BASE_PARTIAL_COLLECTION: "/op-partial-collections",
   /************************************** BASE_COLLECTION **************************************/
-  BASE_COLLECTION: "/collection",
+  BASE_COLLECTION: "/op-collections",
   /************************************** BASE_RETURN **************************************/
-  BASE_RETURN: "/return",
+  BASE_RETURN: "/op-returns",
   /************************************** SHOP **************************************/
   BASE_SHOP: "/shops",
   /************************************** APARTMENT **************************************/
@@ -59,7 +59,7 @@ const API_URL_CONSTANTS = {
   /************************************** BASE_RESERVATION_PROPERTY **************************************/
   BASE_RESERVATION_PROPERTY: "/reservation-properties",
   /************************************** BASE_USER_WORK_TIME **************************************/
-  BASE_USER_WORK_TIME: "/user_work_times",
+  BASE_USER_WORK_TIME: "/user-work-times",
   /************************************** BASE_SERVICE **************************************/
   BASE_SERVICE: "/services",
   /************************************** BILLS **************************************/

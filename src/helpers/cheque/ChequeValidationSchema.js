@@ -1,4 +1,5 @@
 import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 export const chequeDefaultValue = {
   type: 1,
@@ -15,7 +16,8 @@ export const chequeDefaultValue = {
   costCenterId: "",
   observeCostCenterId: "",
   bankId: "",
-  date: new Date().toISOString()
+  date: new Date().toISOString(),
+  patternId: '',
 };
 
 export const chequeValidationSchema = () => z.object({
@@ -33,5 +35,6 @@ export const chequeValidationSchema = () => z.object({
   costCenterId: z.string().optional(),
   observeCostCenterId: z.string().optional(),
   bankId: z.string().optional(),
-  date: z.string().or(z.date())
+  date: z.string().or(z.date()),
+  patternId: VALIDATION.NON_EMPTY_STRING,
 });

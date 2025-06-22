@@ -33,7 +33,7 @@ const Materials = () => {
   return (
     <PaperLayout
       name="materials"
-      queryKey={QUERY_KEYS.MATERIALs}
+      queryKey={QUERY_KEYS.MATERIAL}
       queryFn={getAllMaterials}
       handleDeleteSelected={deleteManyMaterial}
       paperHeaderProps={{

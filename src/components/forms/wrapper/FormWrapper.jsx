@@ -1,23 +1,25 @@
 
 
-import { FormProvider, set, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-import { zodResolver } from "@hookform/resolvers/zod";
+import ConfirmModal from "@/components/shared/ConfirmModal";
+import Loading from "@/components/shared/Loading";
+import SEARCH_PARAMS from "@/data/searchParamsKeys";
+import useCustomSearchParams from "@/hook/useCustomSearchParams";
 import useFormPagination from "@/hook/useFormPagination";
+import usePathname from "@/hook/usePathname";
+import { cleanObject } from "@/utils/functions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FormSingularLayout, FormStepsLayout, FormWarnModal } from ".";
 import FormFooter from "./FormFooter";
 import FormHeader from "./FormHeader";
-import { FormSingularLayout, FormStepsLayout, FormWarnModal } from ".";
-import Loading from "@/components/shared/Loading";
-import ConfirmModal from "@/components/shared/ConfirmModal";
-import { usePopupForm } from "@/hook/usePopupForm";
-import usePathname from "@/hook/usePathname";
 
 const FormWrapper = ({
   defaultValue,
-  onHandlingDataBeforeSubmit,
   invalidateQueryKeyOnSuccess,
   onSuccessAction,
   outerClose,
@@ -32,41 +34,47 @@ const FormWrapper = ({
   codeSearchParam,
   oldValues,
   refetch,
+  onInsertDispatchedForm,
   ...props
 }) => {
-  const searchParams = new URLSearchParams();
-  console.log(numberSearchParam, codeSearchParam, 'numberSearchParam, codeSearchParam');
+  console.log({ outerClose, onInsertDispatchedForm, refetch }, 'props in FormWrapper');
+
+  const navigate = useNavigate();
   const pathname = usePathname()
-  const { popupFormConfig, onCloseDispatchedForm } = usePopupForm()
-  const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
+  const [searchParams] = useSearchParams();
+  const searchParamsSelectedNumber = useCustomSearchParams(SEARCH_PARAMS.NUMBER);
+  const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
   const paginationForm = useFormPagination({
     name,
-    number: numberSearchParam,
-    code: codeSearchParam,
+    number: refetch ? searchParamsSelectedNumber : numberSearchParam,
+    code: refetch ? searchParamsSelectedCode : codeSearchParam,
   })
+  const [preventClose, setPreventClose] = useState(false);
   const [open, setOpen] = useState(false)
-  const isUpdate = true
-  const id = paginationForm?.currentId || ''
-
+  const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
 
   const { data: oldData } = useQuery({
-    queryKey: [queryKey, 'single', id],
+    queryKey: [queryKey, 'single', paginationForm?.currentId],
+
     queryFn: async () => {
-      if (!id) return;
-      const response = await formProps?.getSingleFunction(id)
+      if (!paginationForm?.currentId) return;
+      const response = await formProps?.getSingleFunction(paginationForm?.currentId)
       if (response?.success) {
-        reset(response)
+        reset(response, { keepDirty: false })
+        setPreventClose(false)
         return response
       } else {
-        reset(defaultValue)
+        reset(defaultValue, { keepDirty: false })
+        setPreventClose(false)
       }
     },
-    enabled: !!id,
+    enabled: !!paginationForm?.currentId,
   })
 
+  const id = paginationForm?.currentId || oldData?.id || formProps?.defaultValue?.id;
 
   const methods = useForm({
     defaultValues: defaultValue,
@@ -88,43 +96,61 @@ const FormWrapper = ({
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
-      if (oldData?.id || id) {
-        return formProps?.mutationUpdateFunction(oldData?.id, data)
+      if (id) {
+        return formProps?.mutationUpdateFunction(id, data)
       } else {
         return formProps?.mutationAddFunction(data)
       }
     },
     onSuccess: (response) => {
-      toast.success(isUpdate ? tToast('successUpdate') : tToast('successInsert'));
+      toast.success(id ? tToast('successUpdate') : tToast('successInsert'));
       queryClient.invalidateQueries();
       if (invalidateQueryKeyOnSuccess) {
         queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
       }
-      onSuccessAction?.(response?.data);
-      if (popupFormConfig) {
-        popupFormConfig?.setDefaultOption(response?.data)
-        onCloseDispatchedForm()
+      onSuccessAction?.(response);
+      if (onInsertDispatchedForm) {
+        onInsertDispatchedForm(response)
       }
-      // if(!isUpdate)
+      if (outerClose)
+        outerClose()
       onClose()
     },
   });
 
   const removeSearchParams = () => {
-    if (numberSearchParam) searchParams.delete(numberSearchParam);
-    if (codeSearchParam) searchParams.delete(codeSearchParam);
-    if (pathname) {
-      window.history.replaceState({}, '', pathname);
-    }
+    if (!refetch) return;
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (numberSearchParam) newSearchParams.delete(SEARCH_PARAMS.NUMBER);
+    if (codeSearchParam) newSearchParams.delete(SEARCH_PARAMS.CODE);
+    console.log({
+      numberSearchParam,
+      codeSearchParam
+    });
+
+    navigate(
+      {
+        pathname,
+        search: newSearchParams.toString(), // Empty string if no params left
+      },
+      { replace: true } // Replace current history entry
+    );
   };
 
   useEffect(() => {
     if (oldValues) {
-      console.log(oldValues, '--oldValues--');
-
       reset(oldValues)
     }
   }, [oldValues])
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      if (type === 'change') {
+        setPreventClose(true);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   // const handleSubmitErrors = useHandleSubmissionErrors({
   //   errors,
@@ -133,35 +159,13 @@ const FormWrapper = ({
   //   showLanguageBtns,
   // });
 
-  const handleSubmitFunc = async (data) => {
-    console.log("🚀 ~ handleSubmitFunc ~ data:", data)
-    // if (!isDirty) return toast.warn(tToast('formDirty'))
-    try {
-
-      const dataToSubmit = onHandlingDataBeforeSubmit
-        ? onHandlingDataBeforeSubmit({ ...data })
-        : data;
-      // if (typeof dataToSubmit === "string") return toast.warn(t(dataToSubmit));
-      await mutateAsync(dataToSubmit);
-      isUpdate ? reset(data) : reset();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const resetFormHandler = () => reset(defaultValue);
-
   const handleOnClose = () => {
-    if (!isDirty) {
+    if (!preventClose) {
       if (onClose) onClose();
       if (outerClose) outerClose();
-      console.log(name, 'name');
       removeSearchParams()
-
       return;
     }
-
-
     setOpen(true);
   }
 
@@ -179,6 +183,20 @@ const FormWrapper = ({
     }
   }
 
+
+  const handleSubmitFunc = async (data) => {
+    if (!isDirty) return toast.warn(tToast('formDirty'))
+    try {
+      await mutateAsync(cleanObject(data));
+      id ? reset(data) : reset();
+      setPreventClose(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const resetFormHandler = () => reset(defaultValue);
+
   return (
     <>
       {isLoading || isSubmitting ? <Loading /> : null}
@@ -190,6 +208,7 @@ const FormWrapper = ({
           if (onClose)
             onClose()
           if (outerClose) outerClose()
+          removeSearchParams()
         }}
       />
       <ConfirmModal

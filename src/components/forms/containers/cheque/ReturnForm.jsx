@@ -1,16 +1,19 @@
+import ConfirmModal from '@/components/shared/ConfirmModal';
+import Loading from '@/components/shared/Loading';
 import QUERY_KEYS from '@/data/queryKeys';
-import { OP_RETURN_FIELDS } from '@/helpers/cheque/chequeOperationsFields';
+import { CHQ_RETURN_REASONS } from '@/helpers/DEFAULT_OPTIONS';
+import { opReturnDefaultValues, opReturnValidationSchema } from '@/helpers/operations/opReturnValidationSchema';
+import { getSearchCheque, getSingleCheque } from '@/services/chequeService';
+import { createReturn, deleteReturn, getReturnByChequeId, updateReturn } from '@/services/opReturnService';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import DynamicForm from '../../wrapper/DynamicForm';
-import { createReturn, deleteReturn, getSingleReturn, updateReturn } from '@/services/opReturnService';
-import { FormFooter, FormHeader } from '../../wrapper';
-import ConfirmModal from '@/components/shared/ConfirmModal';
-import Loading from '@/components/shared/Loading';
-import { opReturnDefaultValues, opReturnValidationSchema } from '@/helpers/operations/opReturnValidationSchema';
 import { toast } from 'react-toastify';
-import { getLastOne } from '@/services/paginationService';
+import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFInputAmount, RHFSelectField } from '../../fields';
+import { AccountField } from '../../global';
+import CostCenterField from '../../global/CostCenterField';
+import { FormFooter, FormHeader } from '../../wrapper';
 
 const mergePattern = async (
   pattern,
@@ -68,19 +71,18 @@ const CollectionForm = ({
   const methods = useForm({
     defaultValue: opReturnDefaultValues,
     mode: "onBlur",
-    resolver: opReturnValidationSchema
+    resolver: zodResolver(opReturnValidationSchema)
   });
 
   const chequeId = popupFormConfig?.chequeValue?.id
-  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
+  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { errors, isLoading, isSubmitting } } = methods
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLastOne('op_return', null, chequeId);
+      const response = await getReturnByChequeId(chequeId);
       if (response?.success) {
-        const current = await getSingleReturn(response?.id)
-        reset(current)
-        return current;
+        reset(response)
+        return response;
       }
     },
     enabled: !!chequeId
@@ -91,6 +93,7 @@ const CollectionForm = ({
 
   useEffect(() => {
     mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, setValue)
+    setValue('chequeId', chequeId)
   }, [popupFormConfig, setValue])
 
 
@@ -106,6 +109,7 @@ const CollectionForm = ({
   const onSubmit = async (values) => {
     const isUpdate = data?.id
     let response;
+
     if (isUpdate) {
       response = await updateReturn(data?.id, values)
     } else {
@@ -120,7 +124,7 @@ const CollectionForm = ({
   }
 
   console.log(watch(), 'wa');
-
+  console.log(errors, 'errors');
 
   return (
     <>
@@ -134,7 +138,22 @@ const CollectionForm = ({
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <FormHeader header="return" onClose={outerClose} />
-          <DynamicForm containerClassName="p-4" fields={OP_RETURN_FIELDS} />
+          <div className='grid grid-cols-2 gap-4 p-4'>
+            <RHFDatePicker label="createdAt" name="createdAt" />
+            <RHFInputAmount label="amount" name="amount" />
+            <AccountField label="creditAccountId" name="creditAccountId" />
+            <AccountField label="debitAccountId" name="debitAccountId" required />
+            <CostCenterField label="costCenterId" name="costCenterId" required />
+            <RHFSelectField label="reason" name="reason" options={CHQ_RETURN_REASONS} required />
+            <RHFAsyncSelectField
+              label="connectWithChqId"
+              name="connectWithChqId"
+              getSearch={getSearchCheque}
+              getSingle={getSingleCheque}
+            />
+            <RHFInput label="note" name="note" />
+          </div>
+
           <FormFooter
             isLoading={isLoading || isSubmitting}
             setOpenConfirmation={setOpenConfirmation}
