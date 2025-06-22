@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import PaperHeader from '../../layout/paper/PaperHeader';
 import ReportResultsWrapper from './ReportResultsWrapper';
-import { FormProvider, useForm } from 'react-hook-form';
-import { PaperHeader } from '../../layout/paper/PaperHeader';
 import Loading from '@/components/shared/Loading';
 
 const ReportWrapper = ({ getReportData, columns, children, extraContent, reportHeadProps, methods }) => {
