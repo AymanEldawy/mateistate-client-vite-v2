@@ -82,6 +82,24 @@ const API_URL_CONSTANTS = {
   OWNER_EXPENSES_TYPES: "/owner-expenses-types",
   /************************************** OWNER_EXPENSESE **************************************/
   OWNER_EXPENSES: "/owner-expenses",
+  /************************************** REPORTS **************************************/
+  REPORTS: {
+    BALANCE_SHEET: "/reports/balance-sheet",
+    BILL_DETAILS: "/reports/bill-details",
+    CONTRACTS: "/reports/contracts",
+    LEASED_UNITS: "/reports/leased-units",
+    SOLD_UNITS: "/reports/sold-units",
+    EXPIRED_CONTRACTS: "/reports/expired-contracts",
+    LEASED_PROPERTY_ACTIVITY_REPORT: "/reports/leased-property-contract",
+    PROFIT_AND_LOSS: "/reports/profit-and-loss",
+    INVENTORY: "/reports/inventory",
+    JOURNAL_LEDGER: "/reports/journal-ledger",
+    LEASED_LANDS: "/reports/leased-lands",
+    LEASED_VILLAS: "/reports/leased-villas",
+    LEASED_PARKING: "/reports/leased-parking",
+    LAND_SOLD: "/reports/land-sold",
+    VILLA_SOLD: "/reports/villa-sold"
+  }
 };
 
 export default API_URL_CONSTANTS;

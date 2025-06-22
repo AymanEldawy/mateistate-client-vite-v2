@@ -41,7 +41,7 @@ const categoryColumns = [
   },
   { header: "name", accessorKey: "name" },
   { header: "description", accessorKey: "description" },
-  { header: "parent_name", accessorKey: "parent_name" },
+  { header: "parent_name", accessorKey: "parent.name" },
   { header: "image", accessorKey: "image" },
 ];
 

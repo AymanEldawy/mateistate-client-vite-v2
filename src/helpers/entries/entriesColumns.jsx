@@ -26,15 +26,15 @@ const entriesColumns = [
       />
     ),
   },
-  { header: "created_at", accessorKey: "created_at" },
+  { header: "created_at", accessorKey: "createdAt" },
   { header: "number", accessorKey: "number", cell: ({ getValue }) => <Link to={`/entries?number=${getValue()}`}>{getValue()}</Link> },
   { header: "debit", accessorKey: "debit" },
   { header: "credit", accessorKey: "credit" },
-  { header: "account_name", accessorKey: "account_id" },
-  { header: "cost_center", accessorKey: "cost_center_id" },
-  { header: "original", accessorKey: "created_from" },
+  { header: "account_name", accessorKey: "account.name" },
+  { header: "cost_center", accessorKey: "costCenter.name" },
+  { header: "original", accessorKey: "createdFrom" },
   { header: "note", accessorKey: "note" },
-  { header: "observe_account_id", accessorKey: "observe_account_id" },
+  { header: "observe_account_id", accessorKey: "observeAccountId" },
 ];
 
 export default entriesColumns

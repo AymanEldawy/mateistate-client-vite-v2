@@ -4,28 +4,22 @@ import { ReportFields } from "@/components/reports/shared/ReportFields";
 import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFields";
 import { ReportPostedField } from "@/components/reports/shared/ReportPostedField";
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
-import { getReportFields } from "@/helpers/reports";
-import { getSheetReportData } from "@/services/reportsServices";
+import { getReportColumns, getReportFields } from "@/helpers/reports";
+import { getProfitAndLossReportData } from "@/services/reportsServices";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const REPORT_OPTIONS = [
-  "include_previous_years",
-  "show_empty_accounts",
-  "show_closing_accounts_details",
-];
 
-const SheetReport = () => {
-  const name = "balance_sheet_report"
+const ProfitAndLossReport = () => {
+  const name = "profit_and_loss_report"
   const methods = useForm();
-  const { handleSubmit, watch } = methods;
 
   const fields = useMemo(() => getReportFields(name), []);
-
+  const columns = useMemo(() => getReportColumns(name), []);
   return (
     <ReportWrapper
-      columns={[]}
-      getReportData={getSheetReportData}
+      columns={columns}
+      getReportData={getProfitAndLossReportData}
       reportHeadProps={{
         header: name
       }}
@@ -64,4 +58,4 @@ const SheetReport = () => {
   );
 };
 
-export default SheetReport;
+export default ProfitAndLossReport;

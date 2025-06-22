@@ -32,7 +32,7 @@ const Bills = React.lazy(() => import("../pages/views/Bills/Bills"));
 const Vouchers = React.lazy(() => import("../pages/views/Vouchers/Vouchers"));
 const Entries = React.lazy(() => import("../pages/views/Entries/Entries"));
 const Account = React.lazy(() => import("../pages/views/Account/Account"));
-const Materials = React.lazy(() => import("../pages/views/Materials/Materials"));
+const Materials = React.lazy(() => import("../pages/views/materials/Materials"));
 const MaterialGroup = React.lazy(() =>
   import("../pages/views/MaterialGroup/MaterialGroup")
 );
@@ -75,6 +75,7 @@ const ContractsReport = React.lazy(() => import("../pages/reports/realstate/Cont
 const CreditorsAgesReport = React.lazy(() => import("../pages/reports/realstate/CreditorsAgesReport"));
 const EarningRentalIncomeEarnedReport = React.lazy(() => import("../pages/reports/realstate/EarningRentalIncomeEarnedReport"));
 const LeasedLandsReport = React.lazy(() => import("../pages/reports/realstate/LeasedLandsReport"));
+const LeasedVillasReport = React.lazy(() => import("../pages/reports/realstate/LeasedVillasReport"));
 const LeasedParkingReport = React.lazy(() => import("../pages/reports/realstate/LeasedParkingReport"));
 const LeasedPropertyActivityReport = React.lazy(() => import("../pages/reports/realstate/LeasedPropertyActivityReport"));
 const LeasedUnitsReport = React.lazy(() => import("../pages/reports/realstate/LeasedUnitsReport"));
@@ -97,8 +98,10 @@ const GeneralLedgerReport = React.lazy(() => import("../pages/reports/accounting
 const JournalLedgerReport = React.lazy(() => import("../pages/reports/accounting/JournalLedgerReport"));
 const VATBillsReport = React.lazy(() => import("../pages/reports/accounting/VATBillsReport"));
 const TrialBalanceReport = React.lazy(() => import("../pages/reports/accounting/TrialBalanceReport"));
-
-
+const BalanceSheetReport = React.lazy(() => import("../pages/reports/accounting/SheetReport"));
+const BillDetailsReport = React.lazy(() => import("../pages/reports/maintenances/BillDetailsReport"));
+const InventoryReport = React.lazy(() => import("../pages/reports/maintenances/InventoryReport"));
+const ProfitAndLossReport = React.lazy(() => import("../pages/reports/accounting/ProfitAndLossReport"))
 // Chart
 const AccountChart = React.lazy(() => import("../pages/views/Account/AccountChart"));
 
@@ -312,6 +315,10 @@ const routes = [
         element: <LeasedLandsReport />,
       },
       {
+        path: PATHS.LEASE_VILLAS_REPORT,
+        element: <LeasedVillasReport />,
+      },
+      {
         path: PATHS.LEASE_PARKING_REPORT,
         element: <LeasedParkingReport />,
       },
@@ -374,6 +381,22 @@ const routes = [
       {
         path: PATHS.TRIAL_BALANCE_REPORT,
         element: <TrialBalanceReport />,
+      },
+      {
+        path: PATHS.BALANCE_SHEET_REPORT,
+        element: <BalanceSheetReport />,
+      },
+      {
+        path: PATHS.PROFIT_AND_LOSS_REPORT,
+        element: <ProfitAndLossReport />,
+      },
+      {
+        path: PATHS.BILL_DETAILS_REPORT,
+        element: <BillDetailsReport />,
+      },
+      {
+        path: PATHS.INVENTORY_REPORT,
+        element: <InventoryReport />,
       },
       {
         path: PATHS.CUSTOMER_ACCOUNT_STATEMENT_REPORT,

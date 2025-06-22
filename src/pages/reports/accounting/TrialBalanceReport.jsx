@@ -1,11 +1,12 @@
 
-import { RHFCheckbox, RHFInput } from "@/components/forms/fields";
+import { RHFCheckbox, RHFInput, RHFSelectField } from "@/components/forms/fields";
 import { LedgerFilters } from "@/components/reports/filters/LedgerFilters";
 import { ReportBetweenDateField } from "@/components/reports/shared/ReportDateField";
 import { ReportFilterCard } from "@/components/reports/shared/ReportFilterCard";
 import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFields";
 import { ReportPostedField } from "@/components/reports/shared/ReportPostedField";
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
+import { LEVELS_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { getReportColumns } from "@/helpers/reports";
 import { getTrialBalanceReportData } from "@/services/reportsServices";
 import { useMemo } from "react";
@@ -32,12 +33,13 @@ const TrialBalanceReport = () => {
         <LedgerFilters
           // hideCurrency
           extraFields={
-            <RHFInput
+            <RHFSelectField
               containerClassName="!-mt-2"
               labelClassName="w-[260px]"
               name="level"
               label="level"
               type="number"
+              options={LEVELS_TYPE}
             />
           }
         />

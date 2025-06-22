@@ -48,7 +48,7 @@ const LeasedLandsReport = () => {
           />
         </div>
 
-        <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
+        {/* <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
           <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
@@ -56,7 +56,7 @@ const LeasedLandsReport = () => {
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[340px]"
           />
-        </div>
+        </div> */}
       </div>
     </ReportWrapper>
 

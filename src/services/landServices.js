@@ -9,6 +9,10 @@ export const getAllLands = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_LAND);
 };
 
+export const getSearchLand = (search) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_LAND}?search=${search}`);
+};
+
 export const createLand = (data) => {
   return http.post(API_URL_CONSTANTS.BASE_LAND, data, {
     // headers: {

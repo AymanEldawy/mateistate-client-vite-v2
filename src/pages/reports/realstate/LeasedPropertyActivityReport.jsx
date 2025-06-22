@@ -6,8 +6,8 @@ import { ReportReviewField } from "@/components/reports/shared/ReportReviewField
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
 import { getReportColumns, getReportFields } from "@/helpers/reports";
 import { getLeasedPropertyActivityReportData } from "@/services/reportsServices";
-import { useMemo, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { useMemo, useState } from "react";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 
 const property_columns = [
@@ -21,7 +21,7 @@ const property_columns = [
 const LeasedPropertyActivityReport = () => {
   const name = "leased_property_activity_report";
   const methods = useForm();
-  const { handleSubmit, watch } = methods;
+  const { handleSubmit, watch, setValue } = methods;
   const [selectedColumns, setSelectedColumns] = useState({});
   const [selectedPropertyColumns, setSelectedPropertyColumns] = useState({});
   const [data, setData] = useState([]);
@@ -29,7 +29,11 @@ const LeasedPropertyActivityReport = () => {
 
   const fields = useMemo(() => getReportFields(name), []);
   const columns = useMemo(() => getReportColumns(name), []);
-
+  React.useEffect(() => {
+    if (selectedPropertyColumns) {
+      setValue("property", Object.keys(selectedPropertyColumns));
+    }
+  }, [selectedPropertyColumns]);
   return (
     <ReportWrapper
       columns={columns}
@@ -47,12 +51,12 @@ const LeasedPropertyActivityReport = () => {
             sharedLabelClassName="w-[200px]"
           />
         </ReportFilterFields>
-        <ReportFilterColumns
+        {/* <ReportFilterColumns
           searchKey="accessorKey"
           columns={columns}
           selectedColumns={selectedColumns}
           setSelectedColumns={setSelectedColumns}
-        />
+        /> */}
         <div className="flex flex-col gap-4">
           <ReportFilterColumns
             columns={property_columns}

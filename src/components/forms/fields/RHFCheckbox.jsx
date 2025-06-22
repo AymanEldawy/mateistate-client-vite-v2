@@ -12,12 +12,11 @@ const RHFCheckbox = ({
 }) => {
   const { control } = useFormContext();
   const { name, required } = field
-
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={null}
+      defaultValue={false}
       render={({
         field: { onChange, ref, value },
         fieldState: { error },

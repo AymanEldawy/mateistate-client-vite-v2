@@ -1,10 +1,12 @@
 import { ReportFilterColumns } from "@/components/filters/ReportFilterColumns";
+import { RHFCheckbox } from "@/components/forms/fields";
 import { ReportFilterChequePattern } from "@/components/reports/filters/ReportFilterChequePattern";
 import { ReportFilterChqOperationsTypes } from "@/components/reports/filters/ReportFilterChqOperationsTypes";
 import { ReportFilterContractPatterns } from "@/components/reports/filters/ReportFilterContractPatterns";
 import { ReportFilterVoucherPattern } from "@/components/reports/filters/ReportFilterVoucherPattern";
 import { ReportBetweenDateField } from "@/components/reports/shared/ReportDateField";
 import { ReportFields } from "@/components/reports/shared/ReportFields";
+import { ReportFilterCard } from "@/components/reports/shared/ReportFilterCard";
 import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFields";
 import { ReportPostedField } from "@/components/reports/shared/ReportPostedField";
 import { ReportReviewField } from "@/components/reports/shared/ReportReviewField";
@@ -45,30 +47,52 @@ const JournalLedgerReport = () => {
             containerClassName="!mb-0 gap-3"
             sharedLabelClassName="w-[200px]"
           />
-          <ReportBetweenDateField containerClassName="!m-0" />
+          <ReportBetweenDateField date1Field={{
+            name:'created_at_from'
+          }}
+          date2Field={{
+            name: 'created_at_to'
+          }} containerClassName="!m-0" />
           <ReportSectionFilterValues />
-          <ReportStatementField
+          {/* <ReportStatementField
             name="statement"
             title="statement"
             containerClassName="!m-0"
-          />
+          /> */}
+                    <ReportFilterCard
+            title="Show moving"
+            containerClassName="!mt-0"
+          >
+            <RHFCheckbox
+              {...{
+                label: "show_debit",
+                name: "show_debit",
+              }}
+            />
+            <RHFCheckbox
+              {...{
+                label: "show_credit",
+                name: "show_credit",
+              }}
+            />
+          </ReportFilterCard>
         </ReportFilterFields>
         <div className="grid gap-4">
-          <ReportFilterContractPatterns
+          {/* <ReportFilterContractPatterns
             contractIds={contractIds}
             setContractIds={setContractIds}
-          />
+          /> */}
           <ReportFilterVoucherPattern
             voucherIds={voucherIds}
             setVoucherIds={setVoucherIds}
             bodyClassName="h-[90px]"
           />
-          <ReportFilterChqOperationsTypes
+          {/* <ReportFilterChqOperationsTypes
             operationIds={operationIds}
             setOperationIds={setOperationIds}
-          />
+          /> */}
         </div>
-        <div className="grid gap-4 max-[768px]:col-span-full max-[768px]:grid-cols-2">
+        {/* <div className="grid gap-4 max-[768px]:col-span-full max-[768px]:grid-cols-2">
           <ReportFilterChequePattern
             chqIds={chqIds}
             setChqIds={setChqIds}
@@ -80,9 +104,9 @@ const JournalLedgerReport = () => {
             setSelectedColumns={setSelectedColumns}
             bodyClassName="!max-h-[510px]"
           />
-        </div>
+        </div> */}
         <ReportReviewField containerClassName="!m-0" />
-        <ReportPostedField containerClassName="!m-0" />
+        {/* <ReportPostedField containerClassName="!m-0" /> */}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-start mt-8">
         <div className="flex flex-col gap-4"></div>

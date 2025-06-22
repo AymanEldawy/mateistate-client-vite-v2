@@ -28,7 +28,7 @@ const costCenterColumns = [
   },
   {
     header: "created_at",
-    accessorKey: "created_at",
+    accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
@@ -48,7 +48,7 @@ const costCenterColumns = [
       );
     },
   },
-  { header: "parent_id", accessorKey: "parent_name" },
+  { header: "parent_id", accessorKey: "parentId" },
   { header: "note", accessorKey: "note" },
 ];
 export default costCenterColumns;

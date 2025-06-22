@@ -5,6 +5,10 @@ export const getSingleStore = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_STORE}/${id}`);
 };
 
+export const getSearchStore = (search) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_STORE}?search=${search}`);
+};
+
 export const getAllStores = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_STORE);
 };

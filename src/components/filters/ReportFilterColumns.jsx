@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 export const ReportFilterColumns = ({
   columns,
@@ -10,9 +11,16 @@ export const ReportFilterColumns = ({
   titleClassName,
   title = "Columns",
   disabledItem,
+  name,
   searchKey = 'name'
 }) => {
   const [refresh, setRefresh] = useState(false);
+  const { setValue } = useFormContext();
+  useEffect(() => {
+    if(selectedColumns){
+      setValue(name?name:"columns",Object.keys(selectedColumns))
+    }
+  }, [selectedColumns]);
 
   const onChangeFilterColumns = (e) => {
     let name = e.target.name;

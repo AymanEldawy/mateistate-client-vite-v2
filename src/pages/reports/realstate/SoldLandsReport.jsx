@@ -46,19 +46,23 @@ const SoldLandsReport = () => {
             containerClassName="!m-0"
             name="property"
           />
-          <ReportBetweenDateField containerClassName="!m-0" />
-          <ReportReviewField containerClassName="!m-0" />
+          <ReportBetweenDateField date1Field={{
+            name:"from"
+          }} date2Field={{
+            name: "to"
+          }} containerClassName="!m-0" />
         </div>
 
-        <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
-          <ReportFilterColumns
+       <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
+          {/* <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
             selectedColumns={selectedColumns}
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[480px]"
-          />
-        </div>
+          /> */}
+          <ReportReviewField containerClassName="!m-0" />
+        </div> 
       </div>
     </ReportWrapper>
 

@@ -53,9 +53,9 @@ const chequeColumns = [
   { header: "code", accessorKey: "code" },
   { header: "type", accessorKey: "type" },
   { header: "amount", accessorKey: "amount" },
-  { header: "beneficiary_name", accessorKey: "beneficiary_name" },
+  { header: "beneficiary_name", accessorKey: "beneficiaryName" },
   { header: "note", accessorKey: "note" },
-  { header: "currency_val", accessorKey: "currency_val" },
+  { header: "currency_val", accessorKey: "currencyVal" },
   {
     header: "feedback",
     accessorKey: "feedback",
@@ -65,7 +65,7 @@ const chequeColumns = [
   },
   {
     header: "status",
-    accessorKey: "is_deleted",
+    accessorKey: "isDeleted",
     cell: ({ getValue }) => (
       <span className={`px-2 py-1 rounded-full text-xs ${getValue() ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"}`}>
         {getValue() ? "Deleted" : "Active"}
@@ -101,7 +101,7 @@ export const CHEQUE_GRID_COLUMNS = [
   },
   {
     header: "internal_number",
-    accessorKey: "internal_number",
+    accessorKey: "internalNumber",
     enableColumnFilter: false, cell: ({ row, getValue, table }) => {
       return (
         <div className="flex gap-2 items-center">
@@ -152,16 +152,16 @@ export const CHEQUE_GRID_COLUMNS = [
     }
   },
   {
-    header: "due_date", accessorKey: "due_date", enableColumnFilter: false, cell: ({ getValue }) => (
+    header: "due_date", accessorKey: "dueDate", enableColumnFilter: false, cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
   {
-    header: "end_due_date", accessorKey: "end_due_date", enableColumnFilter: false, cell: ({ getValue }) => (
+    header: "end_due_date", accessorKey: "endDueDate", enableColumnFilter: false, cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "bank_id", accessorKey: "bank_id", enableColumnFilter: false, },
+  { header: "bank_id", accessorKey: "bankId", enableColumnFilter: false, },
   { header: "note1", accessorKey: "note1", enableColumnFilter: false, },
   { header: "note2", accessorKey: "note2", enableColumnFilter: false, },
 ]

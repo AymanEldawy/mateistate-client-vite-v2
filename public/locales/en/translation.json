@@ -173,7 +173,9 @@
     "contracts": "Contracts",
     "cheques": "Cheques", 
     "bills": "Bills",
-    "vouchers": "Vouchers"
+    "vouchers": "Vouchers",
+    "entries": "Entries"   ,
+    "create_entry": "Create Entry"
   },
 
   "formWarnAlerts": {

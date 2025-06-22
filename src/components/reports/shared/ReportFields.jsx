@@ -18,12 +18,13 @@ export const ReportFields = ({
   return (
     <div className={`flex flex-col gap-2 ${containerClassName}`}>
       {fields?.map((field, i) => {
+        console.log({field});
         if (field?.is_ref) {
           return (
             <RHFAsyncSelectField
               {...field}
               key={`${field?.name}-${i}`}
-              name={tab ? `${tab}.${field?.name}` : ""}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
               table={field?.ref_table}
               labelClassName={sharedLabelClassName}
               containerClassName={sharedContainerClassName}
@@ -35,8 +36,8 @@ export const ReportFields = ({
             <RHFSelectField
               {...field}
               key={`${field?.name}-${i}`}
-              name={tab ? `${tab}.${field?.name}` : ""}
-              value={watch(tab ? `${tab}.${field?.name}` : field?.name)}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
+              value={values}
               labelClassName={sharedLabelClassName}
               containerClassName={sharedContainerClassName}
               selectContainerClassName={sharedInputClassName}
@@ -48,7 +49,7 @@ export const ReportFields = ({
               {...field}
               defaultChecked={values?.[field?.name]}
               key={`${field?.name}-${i}`}
-              name={tab ? `${tab}.${field?.name}` : ""}
+              name={tab ? `${tab}.${field?.name}` : field?.name}
               values={values}
               labelClassName={sharedLabelClassName}
               containerClassName={sharedContainerClassName}
@@ -70,7 +71,7 @@ export const ReportFields = ({
             <RHFInput
               {...field}
               key={`${field?.name}-${i}`}
-              updatedName={tab ? `${tab}.${field?.name}` : ""}
+              updatedName={tab ? `${tab}.${field?.name}` : field?.name}
               values={values}
               tab={tab}
               labelClassName={sharedLabelClassName}

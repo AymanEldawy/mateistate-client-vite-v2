@@ -53,7 +53,7 @@ const buildingColumns = [
   { header: "suburb", accessorKey: "suburb" },
   { header: "area", accessorKey: "area" },
   { header: "street", accessorKey: "street" },
-  { header: "building_number", accessorKey: "buildingNumber" },
+  { header: "building_number", accessorKey: "building_number" },
   { header: "part_number", accessorKey: "partNumber" },
   { header: "basin_number", accessorKey: "basinNumber" },
   { header: "bond_number", accessorKey: "bondNumber" },
@@ -97,7 +97,7 @@ const buildingColumns = [
   { header: "amount", accessorKey: "amount" },
   { header: "currency_id", accessorKey: "currencyId" },
   { header: "currency_val", accessorKey: "currencyVal" },
-  { header: "account_id", accessorKey: "accountId" },
+  { header: "account_id", accessorKey: "buildingAccountId" },
   { header: "apartment_floor", accessorKey: "apartmentFloor" },
   { header: "penthouse_floor", accessorKey: "penthouseFloor" },
   { header: "parking_floor", accessorKey: "parkingFloor" },
@@ -105,7 +105,7 @@ const buildingColumns = [
   { header: "office_floor", accessorKey: "officeFloor" },
   { header: "underground_parking", accessorKey: "undergroundParking" },
   { header: "bank_id", accessorKey: "bankId" },
-  { header: "gen_entries", accessorKey: "genEntries" },
+  { header: "gen_entries", accessorKey: "investmentGenEntries" },
 ];
 
 export default buildingColumns

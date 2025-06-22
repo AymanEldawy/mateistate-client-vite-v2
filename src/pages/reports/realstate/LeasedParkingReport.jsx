@@ -42,9 +42,9 @@ const LeasedParkingReport = () => {
           />
         </ReportFilterFields>
         <div className="grid gap-4">
-          {REPORT_OPTIONS?.map((option) => (
+          {/* {REPORT_OPTIONS?.map((option) => (
             <RHFCheckbox label={option} name={option} key={option} />
-          ))}
+          ))} */}
           <ReportFilterBuildings
             buildingsIds={buildingsIds}
             setBuildingsIds={setBuildingsIds}
@@ -52,7 +52,7 @@ const LeasedParkingReport = () => {
           />
         </div>
 
-        <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
+        {/* <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
           <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
@@ -60,7 +60,7 @@ const LeasedParkingReport = () => {
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[400px]"
           />
-        </div>
+        </div> */}
       </div>
     </ReportWrapper>
 
