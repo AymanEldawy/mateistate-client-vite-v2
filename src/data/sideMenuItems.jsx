@@ -356,8 +356,8 @@ const sideMenuItems = [
         subChild: [
           {
             name: "menu.contract_report",
-            path: PATHS.CONTRACT_DISCLOSURE_REPORT,
-            permissions: PERMISSIONS[PATHS.CONTRACT_DISCLOSURE_REPORT],
+            path: PATHS.CONTRACT_REPORT,
+            permissions: PERMISSIONS[PATHS.CONTRACT_REPORT],
           },
           {
             name: "menu.services_contracts_report",

@@ -27,7 +27,7 @@ const bankColumns = [
   },
   {
     header: "created_at",
-    accessorKey: "createdAt",
+    accessorKey: "created_at",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),

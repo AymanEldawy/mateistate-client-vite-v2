@@ -16,7 +16,7 @@ const SoldUnitsReport = () => {
   const { handleSubmit, watch } = methods;
   const [selectedColumns, setSelectedColumns] = useState({});
   const [buildingsIds, setBuildingsIds] = useState({});
-
+  console.log({buildingsIds});
   const fields = useMemo(() => getReportFields(name), []);
   const columns = useMemo(() => getReportColumns(name), []);
   
@@ -51,13 +51,13 @@ const SoldUnitsReport = () => {
         </div>
 
         <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
-          <ReportFilterColumns
+          {/* <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
             selectedColumns={selectedColumns}
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[340px]"
-          />
+          /> */}
         </div>
       </div>
     </ReportWrapper>

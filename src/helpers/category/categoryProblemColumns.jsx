@@ -28,7 +28,7 @@ const categoryProblemColumns = [
   },
   {
     header: "category_name",
-    accessorKey: "category_name",
+    accessorKey: "category.name",
     cell: ({ row, getValue }) => {
       return getValue();
     },
@@ -49,7 +49,7 @@ const categoryProblemColumns = [
   },
   { header: "price", accessorKey: "price" },
   { header: "minutes", accessorKey: "minutes" },
-  { header: "is_available", accessorKey: "is_available" },
+  { header: "is_available", accessorKey: "isAvailable" },
 ];
 
 export default categoryProblemColumns;

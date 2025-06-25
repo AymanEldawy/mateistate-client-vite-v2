@@ -9,6 +9,10 @@ export const getAllVillas = (signal) => {
     return http.get(API_URL_CONSTANTS.BASE_VILLA);
 };
 
+export const getSearchVilla = (search) => {
+    return http.get(`${API_URL_CONSTANTS.BASE_VILLA}?search=${search}`);
+};
+
 export const createVilla = (data) => {
     return http.post(API_URL_CONSTANTS.BASE_VILLA, data, {
         // headers: {

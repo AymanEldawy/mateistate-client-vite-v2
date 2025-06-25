@@ -37,7 +37,7 @@ const contractColumns = [
     cell: ({ getValue, row }) => {
       // contract_type
       let type = CONTACT_PATTERN_CONTRACT_TYPE?.find(
-        (c) => c?.id === row?.original?.contract_type
+        (c) => c?.id === row?.original?.contractType
       );
       // let unitType = getContractUnitType(row?.original);
       let unitType = null;
@@ -55,7 +55,7 @@ const contractColumns = [
   },
   {
     header: "building",
-    accessorKey: "building_name",
+    accessorKey: "building.name",
     cell: ({ row, getValue }) => (
       <Link
         className="text-blue-500 hover:underline"
@@ -67,12 +67,12 @@ const contractColumns = [
   },
   {
     header: "unit",
-    accessorKey: "unit_name",
+    accessorKey: "unit.name",
     cell: ({ row, getValue }) => (
       // <Link
       //   className={`font-medium hover:underline`}
       //   style={{ color: row?.original?.hex }}
-      //   to={`/update/building/${row?.original?.building_id}`}
+      //   to={`/update/building/${row?.original?.building._id}`}
       // >
       //   {getValue()}
       // </Link>
@@ -84,7 +84,7 @@ const contractColumns = [
 
   {
     header: "unit_type",
-    accessorKey: "unit_type",
+    accessorKey: "unit.type",
     // cell: ({ row, getValue }) => {
     //   let unitType = getUnitType(row?.original, getValue());
     //   return <span className="capitalize">{unitType}</span>;
@@ -121,12 +121,12 @@ const contractColumns = [
   // },
   {
     header: "contract date",
-    accessorKey: "start_duration_date",
+    accessorKey: "startDurationDate",
     cell: ({ row, getValue }) => (
       <div className="flex gap-1 items-center">
         {new Date(getValue()).toLocaleDateString("en-UK")} -{" "}
         <span className="text-red-500">
-          {new Date(row?.original?.end_duration_date).toLocaleDateString(
+          {new Date(row?.original?.endDurationDate).toLocaleDateString(
             "en-UK"
           )}
         </span>
@@ -142,7 +142,7 @@ const contractColumns = [
   // },
   {
     header: "contract_value",
-    accessorKey: "contract_value",
+    accessorKey: "contractValue",
     cell: ({ getValue }) => (
       <span className="flex gap-1 font-medium text-green-600">
         <BanknoteIcon className="h-5 w-5 text-green-500" /> {getValue()}
@@ -151,7 +151,7 @@ const contractColumns = [
   },
   {
     header: "price_before_vat",
-    accessorKey: "price_before_vat",
+    accessorKey: "priceBeforeVat",
     cell: ({ getValue }) => (
       <span className="flex gap-1 font-medium text-green-600">
         <BanknoteIcon className="h-5 w-5 text-green-500" /> {getValue()}
@@ -160,7 +160,7 @@ const contractColumns = [
   },
   {
     header: "final_price",
-    accessorKey: "final_price",
+    accessorKey: "finalPrice",
     cell: ({ getValue }) => (
       <span className="flex gap-1 font-medium text-green-600">
         <BanknoteIcon className="h-5 w-5 text-green-500" /> {getValue()}
@@ -169,7 +169,7 @@ const contractColumns = [
   },
   {
     header: "client",
-    accessorKey: "client_name",
+    accessorKey: "client.name",
     cell: ({ row, getValue }) => (
       <Link
         className="text-blue-500 hover:underline flex gap-1 items-center capitalize"

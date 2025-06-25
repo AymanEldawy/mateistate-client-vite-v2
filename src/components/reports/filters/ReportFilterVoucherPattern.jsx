@@ -8,7 +8,7 @@ export const ReportFilterVoucherPattern = ({
   setVoucherIds,
 }) => {
   const [voucherPatterns, setVoucherPatterns] = useState([]);
-
+  
   const getData = async () => {
     // const voucherResponse = await get("voucher_pattern");
     // setVoucherPatterns(voucherResponse?.result);

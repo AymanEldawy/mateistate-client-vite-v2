@@ -45,7 +45,7 @@ export const VOUCHER_GRID_COLUMNS = [
   },
   { header: "credit", accessorKey: "credit", enableColumnFilter: false, },
   {
-    header: "created_at", accessorKey: "created_at", enableColumnFilter: false, cell: ({ getValue }) => (
+    header: "created_at", accessorKey: "createdAt", enableColumnFilter: false, cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },

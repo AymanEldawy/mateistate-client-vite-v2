@@ -41,7 +41,7 @@ const ContractsReport = () => {
           // containerClassName="grid grid-cols-2 gap-4"
           />
         </ReportFilterFields>
-        <div className="grid gap-4">
+        {/* <div className="grid gap-4">
           <ReportFilterContractPatterns
             contractIds={contractIds}
             setContractIds={setContractIds}
@@ -52,18 +52,18 @@ const ContractsReport = () => {
             setBuildingsIds={setBuildingsIds}
             bodyClassName="h-[190px]"
           />
-        </div>
+        </div> */}
 
         <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
-          <ReportFilterColumns
+          {/* <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
             selectedColumns={selectedColumns}
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[300px]"
-          />
+          /> */}
           <div className="flex flex-col gap-4">
-            <ReportBetweenDateField />
+            {/* <ReportBetweenDateField /> */}
             <ReportReviewField />
           </div>
         </div>

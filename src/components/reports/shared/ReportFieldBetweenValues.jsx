@@ -17,16 +17,16 @@ export const ReportFieldBetweenValues = ({
 }) => {
   const { register } = useFormContext();
   const { t } = useTranslation();
-
+  console.log({label});
   return (
-    <div className={`flex items-center gap-4 lg:gap-8 ${containerClassName}`}>
-      {label ? (
+    <div className={`w-full ${containerClassName} flex flex-row items-center gap-1`}>
+      {label && (
         <Label
+          name={field1Props?.name || "from"}
+          label={label}
           labelClassName={labelClassName}
-        >
-          {t(label)?.replace(/_/g, " ")}{" "}
-        </Label>
-      ) : null}
+        />
+      )}
       <div className={`flex gap-4 items-center ${bodyClassName}`}>
         <RHFInput
           {...field1Props}
@@ -38,7 +38,7 @@ export const ReportFieldBetweenValues = ({
           readOnly={readOnly}
           {...field2Props}
           {...sharedProps}
-          name={field1Props?.name || "to"}
+          name={field2Props?.name || "to"}
         />
       </div>
     </div>

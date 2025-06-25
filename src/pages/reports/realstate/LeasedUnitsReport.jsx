@@ -1,6 +1,7 @@
 import { ReportFilterBuildings } from "@/components/filters/ReportFilterBuildings";
 import { ReportFilterColumns } from "@/components/filters/ReportFilterColumns";
 import { RHFCheckbox } from "@/components/forms/fields";
+import { ReportBetweenDateField } from "@/components/reports/shared/ReportDateField";
 import { ReportFields } from "@/components/reports/shared/ReportFields";
 import { ReportFilterFields } from "@/components/reports/shared/ReportFilterFields";
 import { ReportReviewField } from "@/components/reports/shared/ReportReviewField";
@@ -13,13 +14,42 @@ import { FormProvider, useForm } from "react-hook-form";
 
 
 const REPORT_OPTIONS = [
-  "show_merged_shops_and_flats",
-  "consider_assembled_units_in_as_leased",
-  "hide_assembled_unit",
-  "consider_assembled_flats_that_contract_has_been_terminated",
-  "show_sold_units",
-  "flats",
-  "shops",
+  // {
+  //   name: "show_merged_shops_and_flats",
+  //   label: "Show merged shops and flats",
+  // },
+  // {
+  //   name: "consider_assembled_units_in_as_leased",
+  //   label: "Consider assembled units in as leased",
+  // },
+  // {
+  //   name: "hide_assembled_unit",
+  //   label: "Hide assembled unit",
+  // },
+  // {
+  //   name: "consider_assembled_flats_that_contract_has_been_terminated",
+  //   label: "Consider assembled flats that contract has been terminated",
+  // },
+  {
+    name: "show_debit",
+    label: "Show debit",
+  },
+  {
+    name: "show_credit",
+    label: "Show credit",
+  },
+  {
+    name: "show_sold_units",
+    label: "Show sold units",
+  },
+  {
+    name: "flats",
+    label: "Flats",
+  },
+  {
+    name: "shops",
+    label: "Shops",
+  },
 ];
 
 const LeasedUnitsReport = () => {
@@ -51,7 +81,7 @@ const LeasedUnitsReport = () => {
         </ReportFilterFields>
         <div className="grid gap-4">
           {REPORT_OPTIONS?.map((option) => (
-            <RHFCheckbox label={option} name={option} key={option} />
+            <RHFCheckbox label={option.label} name={option.name} key={option.name} defaultValue={false} />
           ))}
           <ReportReviewField containerClassName="!m-0" />
           <ReportStatementField
@@ -65,12 +95,20 @@ const LeasedUnitsReport = () => {
         </div>
 
         <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
-          <ReportFilterColumns
+          {/* <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
             selectedColumns={selectedColumns}
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[340px]"
+          /> */}
+          <ReportBetweenDateField
+            date1Field={{
+              name: "created_at_from",
+            }}
+            date2Field={{
+              name: "created_at_to",
+            }}
           />
           <ReportFilterBuildings
             buildingsIds={buildingsIds}

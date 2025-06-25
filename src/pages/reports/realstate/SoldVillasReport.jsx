@@ -36,7 +36,6 @@ const SoldVillasReport = () => {
             sharedLabelClassName="w-[200px]"
           // containerClassName="grid grid-cols-2 gap-4"
           />
-          <ReportReviewField containerClassName="!m-0" />
         </ReportFilterFields>
         <div className="grid gap-4">
           <ReportStatementField
@@ -47,17 +46,22 @@ const SoldVillasReport = () => {
             containerClassName="!m-0"
             name="property"
           />
-          <ReportBetweenDateField containerClassName="!m-0" />
+          <ReportBetweenDateField date1Field={{
+            name:"from"
+          }} date2Field={{
+            name: "to"
+          }} containerClassName="!m-0" />
         </div>
 
         <div className="flex md:flex-col gap-4 max-[768px]:col-span-full max-[768px]:grid max-[768px]:grid-cols-2">
-          <ReportFilterColumns
+          <ReportReviewField containerClassName="!m-0" />
+          {/* <ReportFilterColumns
             searchKey="accessorKey"
             columns={columns}
             selectedColumns={selectedColumns}
             setSelectedColumns={setSelectedColumns}
             bodyClassName="max-h-[420px]"
-          />
+          /> */}
         </div>
       </div>
     </ReportWrapper>

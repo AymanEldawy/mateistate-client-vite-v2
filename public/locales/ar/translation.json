@@ -173,6 +173,8 @@
     "cheques": "الشيكات",
     "bills": "الفواتير", 
     "vouchers": "السندات",
+    "entries": "المدفوعات",
+    "create_entry": "إنشاء مدفوعة",
     "Parking Sale Contract": "عقد بيع موقف",
     "Shop Sale Contract": "عقد بيع محل",
     "Apartment Sale Contract": "عقد بيع شقة",

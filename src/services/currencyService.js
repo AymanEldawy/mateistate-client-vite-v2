@@ -9,7 +9,7 @@ export const getSearchCurrency = (value) => {
     return http.get(`${API_URL_CONSTANTS.BASE_CURRENCY}?search=${value}`);
 };
 
-export const getAllCurrencies = (signal) => {
+export const getAllCurrencies = () => {
     return http.get(API_URL_CONSTANTS.BASE_CURRENCY);
 };
 

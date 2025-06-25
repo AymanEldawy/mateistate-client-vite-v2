@@ -2,8 +2,11 @@ import { UNIQUE_REF_TABLES } from "@/data/constants";
 import FIELDS_STRUCTURE from "../FIELDS_STRUCTURE";
 import { APARTMENT_FLAT_TYPE, CHEQUE_REPORT_DEPOSIT, CHQ_RETURN_REASONS, CLEARANCE_LIST, COMPLAINT_APPROVED, COMPLAINT_PAID, COMPLAINT_STATUS, CONTACT_PATTERN_ASSETS_TYPE, CONTRACT_AMOUNT_LIST, CONTRACT_CYCLE_REPORT_LIST, CONTRACT_DATE_BY, CONTRACT_INPUT_CASE, CONTRACT_PAID_TYPE, CONTRACT_PAYMENT_METHODS, CONTRACT_PRINTED_LIST, CONTRACT_ROUND_TO, CONTRACT_STATUS_EXPIRED, INSTALLMENT_REPORT_LIST, LAWSUIT_REPORT, LAWSUIT_STATUS_REPORT, REGISTERED_BY_LIST, REVENUES_REPORT_CONTRACT_TERMINATION, TERMINATION_DATE, TERMINATION_DATE_OPTIONS, TERMINATION_STATUS, WORKER_STATUS } from "../DEFAULT_OPTIONS";
 
+
 const contract_payments_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "owner_account_id",
     name: "owner_account_id",
@@ -56,7 +59,9 @@ const contract_payments_report = [
     selectFirstAsDefault: true,
     options: [{ id: 0, name: "All" }],
   },
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   {
     label: "blocked_units",
     name: "blocked_units",
@@ -106,12 +111,16 @@ const returned_cheque_report = [
       { id: 2, name: "processed" },
     ],
   }),
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "observe_account_id",
     name: "observe_account_id",
   }),
-  FIELDS_STRUCTURE.bank(),
+  FIELDS_STRUCTURE.bank({
+    name:'bank_id'
+  }),
   FIELDS_STRUCTURE.textField({
     label: "beneficiary_name",
     name: "beneficiary_name",
@@ -153,7 +162,9 @@ const collection_cheque_report = [
       { id: 2, name: "Partial Collected" },
     ],
   }),
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "observe_account_id",
     name: "observe_account_id",
@@ -166,7 +177,9 @@ const collection_cheque_report = [
       { id: 2, name: "Collection" },
     ],
   }),
-  FIELDS_STRUCTURE.bank(),
+  FIELDS_STRUCTURE.bank({
+    name:'bank_id'
+  }),
   FIELDS_STRUCTURE.textField({
     label: "beneficiary_name",
     name: "beneficiary_name",
@@ -175,7 +188,9 @@ const collection_cheque_report = [
 
 //contract_reports
 const contract_reports = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name: "client_id",
+  }),
   FIELDS_STRUCTURE.uniqueField({
     label: "property_type",
     name: "property_type",
@@ -188,19 +203,19 @@ const contract_reports = [
     name: "paid_type",
     key: "select",
     intValue: true,
-    options: [{ id: 0, name: "All" }, CONTRACT_PAID_TYPE],
+    options: [{ id: 0, name: "All" }, ...CONTRACT_PAID_TYPE],
   },
-  {
-    label: "lessor_id",
+  FIELDS_STRUCTURE.lessor({
     name: "lessor_id",
-    type: "uuid",
-    is_ref: true,
-    table: "lessor",
-  },
+  }),
   FIELDS_STRUCTURE.selectField({
     label: "contract_status",
     name: "contract_status",
-    options: CONTRACT_STATUS_EXPIRED,
+    options: [
+      { id: "active", name: "Active" },
+      { id: "expired", name: "Expired" },
+      { id: "terminated", name: "Terminated" },
+    ],
   }),
   FIELDS_STRUCTURE.selectField({
     label: "payment_method",
@@ -213,7 +228,12 @@ const contract_reports = [
     name: "contract_termination",
     key: "select",
     intValue: true,
-    options: REVENUES_REPORT_CONTRACT_TERMINATION,
+    options: [
+      { id: "mutual_agreement", name: "Mutual agreement" },
+      { id: "termination", name: "Termination" },
+      { id: "expired", name: "Expired" },
+      { id: "terminated", name: "Terminated" },
+    ],
   },
 
   {
@@ -222,9 +242,9 @@ const contract_reports = [
     key: "select",
     intValue: true,
     options: [
-      { id: 0, name: "All" },
-      { id: 1, name: "New" },
-      { id: 2, name: "Renewal" },
+      { id: "All", name: "All" },
+      { id: "New", name: "New" },
+      { id: "Renewal", name: "Renewal" },
     ],
   },
 
@@ -234,9 +254,9 @@ const contract_reports = [
     key: "select",
     intValue: true,
     options: [
-      { id: 0, name: "All" },
-      { id: 1, name: "Printed" },
-      { id: 2, name: "Not printed" },
+      // { id: 0, name: "All" },
+      { id: true, name: "Cleared" },
+      { id: false, name: "Not cleared" },
     ],
   },
   {
@@ -245,27 +265,31 @@ const contract_reports = [
     key: "select",
     intValue: true,
     options: [
-      { id: 0, name: "All" },
-      { id: 1, name: "Blocked" },
-      { id: 2, name: "Unblocked" },
+      { id: true, name: "Blocked" },
+      { id: false, name: "Unblocked" },
     ],
   },
 
-  FIELDS_STRUCTURE.account(),
-  FIELDS_STRUCTURE.selectField({
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
+  FIELDS_STRUCTURE.dateTimeField({
     label: "termination_date",
     name: "termination_date",
-    options: TERMINATION_DATE_OPTIONS,
+    // options: TERMINATION_DATE_OPTIONS,
   }),
-  FIELDS_STRUCTURE.selectField({
+  FIELDS_STRUCTURE.dateField({
     label: "date_by",
     name: "date_by",
-    options: CONTRACT_DATE_BY,
+    // options: CONTRACT_DATE_BY,
   }),
   FIELDS_STRUCTURE.selectField({
     label: "lawsuit",
     name: "lawsuit",
-    options: LAWSUIT_REPORT,
+    options: [
+      { id: true, name: "Lawsuit" },
+      { id: false, name: "There is no lawsuit" },
+    ],
   }),
   FIELDS_STRUCTURE.selectField({
     label: "lawsuit_status",
@@ -275,27 +299,23 @@ const contract_reports = [
   FIELDS_STRUCTURE.selectField({
     label: "installments",
     name: "installments",
-    options: INSTALLMENT_REPORT_LIST,
+    options: [
+      { id: true, name: "With installments" },
+      { id: false, name: "Without installments" },
+    ],
   }),
-  FIELDS_STRUCTURE.selectField({
+  FIELDS_STRUCTURE.numberField({
     label: "contract_amount",
     name: "contract_amount",
-    options: CONTRACT_AMOUNT_LIST,
   }),
 ];
 
 // Leased reports
 const shared_leased_report_global = [
-  FIELDS_STRUCTURE.uniqueField({
-    label: "client_id",
-    name: "client_id",
-    table: UNIQUE_REF_TABLES.clients,
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
   }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "lessor_id",
-    name: "lessor_id",
-    table: "lessor",
-  }),
+  FIELDS_STRUCTURE.lessor(),
   FIELDS_STRUCTURE.selectField({
     label: "leasing_status",
     name: "leasing_status",
@@ -346,23 +366,23 @@ const leased_units_report = [
     name: "property_no",
   }),
 
-  FIELDS_STRUCTURE.textField({
-    label: "area_unit",
-    name: "area_unit",
-  }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "property_type",
-    name: "property_type",
-    table: "property_values",
-    ref_name: "description",
-  }),
+  // FIELDS_STRUCTURE.textField({
+  //   label: "area_unit",
+  //   name: "area_unit",
+  // }),
+  // FIELDS_STRUCTURE.uniqueField({
+  //   label: "property_type",
+  //   name: "property_type",
+  //   table: "property_values",
+  //   ref_name: "description",
+  // }),
   FIELDS_STRUCTURE.textField({
     label: "description",
     name: "description",
   }),
   {
     key: "between",
-    label: "Rent_value",
+    label: "rent_value",
     field1Props: {
       type: "number",
       name: "rent_form",
@@ -419,15 +439,15 @@ const leased_units_report = [
 ];
 
 const leased_parking_report = [
-  FIELDS_STRUCTURE.textField({
+  FIELDS_STRUCTURE.parking({
     label: "parking_no",
     name: "parking_no",
   }),
 
-  FIELDS_STRUCTURE.textField({
-    label: "area_name",
-    name: "area_name",
-  }),
+  // FIELDS_STRUCTURE.textField({
+  //   label: "area_name",
+  //   name: "area_name",
+  // }),
   ...shared_leased_report_global,
   FIELDS_STRUCTURE.selectField({
     label: "blocked_units",
@@ -443,19 +463,24 @@ const leased_parking_report = [
     name: "lawsuit",
     options: LAWSUIT_REPORT,
   }),
-  FIELDS_STRUCTURE.selectField({
-    label: "contract_amount",
-    name: "contract_amount",
-    options: CONTRACT_AMOUNT_LIST,
+  FIELDS_STRUCTURE.textField({
+    label: "property_no",
+    name: "property_no",
   }),
+
+  // FIELDS_STRUCTURE.selectField({
+  //   label: "contract_amount",
+  //   name: "contract_amount",
+  //   options: CONTRACT_AMOUNT_LIST,
+  // }),
 ];
 
 const leased_lands_report = [
-  FIELDS_STRUCTURE.uniqueField({
-    label: "land",
-    name: "name",
-    table: "land",
-  }),
+  // FIELDS_STRUCTURE.uniqueField({
+  //   label: "land",
+  //   name: "name",
+  //   table: "land",
+  // }),
   FIELDS_STRUCTURE.uniqueField({
     label: "land_no",
     name: "land_no",
@@ -464,7 +489,7 @@ const leased_lands_report = [
   }),
   FIELDS_STRUCTURE.uniqueField({
     label: "land_type",
-    name: "type",
+    name: "land_type",
     table: "land",
     ref_name: "type",
   }),
@@ -478,6 +503,13 @@ const leased_lands_report = [
     label: "area_no",
     name: "area_no",
   }),
+  FIELDS_STRUCTURE.uniqueField({
+    label: "area_type",
+    name: "area_type",
+    table: "area",
+    ref_name: "type",
+  }),
+
 
   FIELDS_STRUCTURE.textField({
     label: "area_unit",
@@ -487,11 +519,9 @@ const leased_lands_report = [
 ];
 
 const leased_villas_report = [
-  FIELDS_STRUCTURE.uniqueField({
+  FIELDS_STRUCTURE.villa({
     label: "villa_no",
     name: "villa_no",
-    table: "land",
-    ref_name: "villa_no",
   }),
   FIELDS_STRUCTURE.textField({
     label: "complex_name",
@@ -501,21 +531,34 @@ const leased_villas_report = [
     label: "basin_number",
     name: "basin_number",
   }),
-  FIELDS_STRUCTURE.textField({
-    label: "area_name",
-    name: "area_name",
-  }),
+  // FIELDS_STRUCTURE.textField({
+  //   label: "area_name",
+  //   name: "area_name",
+  // }),
 
   FIELDS_STRUCTURE.textField({
-    label: "area_no",
-    name: "area_no",
+    label: "area_unit",
+    name: "area_unit",
   }),
-
+  FIELDS_STRUCTURE.textField({
+    label: "city",
+    name: "city"
+  }),
+  {
+    label: "Case of termination",
+    name: "case_of_termination",
+    key: "select",
+    intValue: true,
+    selectFirstAsDefault: true,
+    options: REVENUES_REPORT_CONTRACT_TERMINATION,
+  },
   ...shared_leased_report,
 ];
 
 const units_that_will_be_vacated = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
 
   FIELDS_STRUCTURE.textField({
     label: "property_no",
@@ -539,7 +582,9 @@ const units_that_will_be_vacated = [
 ];
 
 const reserved_units_report = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.selectField({
     label: "unit_type",
     name: "unit_type",
@@ -562,29 +607,16 @@ const reserved_units_report = [
 ];
 
 const contracts_deposit_report = [
-  FIELDS_STRUCTURE.client(),
-
-  FIELDS_STRUCTURE.uniqueField({
-    label: "building_id",
-    name: "building_id",
-    table: "building",
-  }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "apartment_id",
-    name: "apartment_id",
-    table: "apartment",
-  }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "shop_id",
-    name: "shop_id",
-    table: "shop",
-  }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "parking_id",
-    name: "parking_id",
-    table: "parking",
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
   }),
 
+  FIELDS_STRUCTURE.building({
+    name:'building_id'
+  }),
+  FIELDS_STRUCTURE.apartment(),
+  FIELDS_STRUCTURE.shop(),
+  FIELDS_STRUCTURE.parking(),
   FIELDS_STRUCTURE.selectField({
     label: "contract_status",
     name: "contract_status",
@@ -617,31 +649,12 @@ const contracts_deposit_report = [
 
 // contract_expired_reports
 const contract_expired_reports = [
-  FIELDS_STRUCTURE.client(),
-  {
-    label: "apartment_id",
-    name: "apartment_id",
-    type: "uuid",
-    is_ref: true,
-    table: "apartment",
-    ref_name: "apartment_no",
-  },
-  {
-    label: "shop_id",
-    name: "shop_id",
-    type: "uuid",
-    is_ref: true,
-    table: "shop",
-    ref_name: "shop_no",
-  },
-  {
-    label: "parking_id",
-    name: "parking_id",
-    type: "uuid",
-    is_ref: true,
-    table: "parking",
-    ref_name: "parking_no",
-  },
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
+  FIELDS_STRUCTURE.apartment(),
+  FIELDS_STRUCTURE.shop(),
+  FIELDS_STRUCTURE.parking(),
   {
     label: "description",
     name: "description",
@@ -673,12 +686,16 @@ const earning_rental_income_earned_report = [
     intValue: true,
     options: CONTRACT_ROUND_TO,
   },
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
 ];
 
 // cheque report fields
 const cheques_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "observe_account_id",
     name: "observe_account_id",
@@ -689,33 +706,12 @@ const cheques_report = [
     is_ref: true,
     table: "bank",
   },
-  {
-    label: "building_id",
-    name: "building_id",
-    is_ref: true,
-    table: "building",
-  },
-  {
-    label: "apartment_id",
-    name: "apartment_id",
-    is_ref: true,
-    table: "apartment",
-    ref_name: "apartment_no",
-  },
-  {
-    label: "shop_id",
-    name: "shop_id",
-    is_ref: true,
-    table: "shop",
-    ref_name: "shop_no",
-  },
-  {
-    label: "parking_id",
-    name: "parking_id",
-    is_ref: true,
-    table: "parking",
-    ref_name: "parking_no",
-  },
+  FIELDS_STRUCTURE.building({
+    name:'building_id'
+  }),
+  FIELDS_STRUCTURE.apartment(),
+  FIELDS_STRUCTURE.shop(),
+  FIELDS_STRUCTURE.parking(),
   FIELDS_STRUCTURE.textField({
     label: "beneficiary_name",
     name: "beneficiary_name",
@@ -732,101 +728,109 @@ const cheques_report = [
 ];
 
 const general_ledger_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "observe_account_id",
     name: "observe_account_id",
   }),
-  FIELDS_STRUCTURE.cost_center(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
 ];
 
 // leased_property_activity_report
 const leased_property_activity_report = [
-  FIELDS_STRUCTURE.client(),
-  {
-    label: "building_id",
-    name: "building_id",
-    is_ref: true,
-    table: "building",
-  },
-  {
-    label: "apartment_id",
-    name: "apartment_id",
-    is_ref: true,
-    table: "apartment",
-    ref_name: "apartment_no",
-  },
-  {
-    label: "shop_id",
-    name: "shop_id",
-    is_ref: true,
-    table: "shop",
-    ref_name: "shop_no",
-  },
-  {
-    label: "parking_id",
-    name: "parking_id",
-    is_ref: true,
-    table: "parking",
-    ref_name: "parking_no",
-  },
-  {
-    label: "villa_id",
-    name: "villa_id",
-    is_ref: true,
-    table: "villa",
-    ref_name: "villa_no",
-  },
-  {
-    label: "land_id",
-    name: "land_id",
-    is_ref: true,
-    table: "land",
-    ref_name: "land_no",
-  },
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
+  FIELDS_STRUCTURE.building({
+    name:'building_id'
+  }),
+  FIELDS_STRUCTURE.apartment({
+    optionLabel: "apartmentNo",
+    name: "apartment_no",
+  }),
+  FIELDS_STRUCTURE.shop({
+    optionLabel: "shopNo",
+    name: "shop_no",
+  }),
+  FIELDS_STRUCTURE.parking({
+    optionLabel: "parkingNo",
+    name: "parking_no",
+  }),
+  FIELDS_STRUCTURE.villa({
+    optionLabel: "villaNo",
+    name: "villa_no",
+  }),
+  FIELDS_STRUCTURE.land({
+    optionLabel: "landNo",
+    name: "land_no",
+  }),
 ];
 
 const trading_sheet_report = [
-  FIELDS_STRUCTURE.account(),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.numberField({
+  FIELDS_STRUCTURE.account({
+    name: "account_id",
+  }),
+  FIELDS_STRUCTURE.cost_center({
+    name: "cost_center_id",
+  }),
+  FIELDS_STRUCTURE.account({
+    label: "observe_account_id",
+    name: "observe_account_id",
+  }),
+  FIELDS_STRUCTURE.level({
     label: "level",
     name: "level",
   }),
-  FIELDS_STRUCTURE.currency(),
-  FIELDS_STRUCTURE.selectField({
-    name: "last_purchase",
-    label: "last_purchase",
-    options: [
-      { id: 1, name: "maximum" },
-      { id: 2, name: "average" },
-      { id: 3, name: "pricing policy" },
-      { id: 4, name: "specific price" },
-    ],
+  FIELDS_STRUCTURE.currency({
+    name: "currency_id",
   }),
+  // FIELDS_STRUCTURE.selectField({
+  //   name: "last_purchase",
+  //   label: "last_purchase",
+  //   options: [
+  //     { id: 1, name: "maximum" },
+  //     { id: 2, name: "average" },
+  //     { id: 3, name: "pricing policy" },
+  //     { id: 4, name: "specific price" },
+  //   ],
+  // }),
 ];
 
 const journal_ledger_report = [
-  FIELDS_STRUCTURE.account(),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   {
     key: "between",
     label: "entry_number",
     field1Props: {
       type: "number",
-      name: "entry_num_from",
+      name: "entry_number_from",
     },
     field2Props: {
       type: "number",
-      name: "entry_num_to",
+      name: "entry_number_to",
     },
   },
 ];
 
 const cost_center_general_ledger_report = [
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.account({
     label: "observe_account_id",
     name: "observe_account_id",
@@ -838,14 +842,24 @@ const cost_center_general_ledger_report = [
 ];
 
 const customer_account_statement_report = [
-  FIELDS_STRUCTURE.client(),
-  FIELDS_STRUCTURE.account(),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
 ];
 
 const contract_cheque_report = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.suppliers(),
 
   FIELDS_STRUCTURE.textField({
@@ -927,17 +941,19 @@ const contract_cheque_report = [
 ];
 
 const sold_units_report = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.textField({
     label: "area_name",
     name: "area_name",
   }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "property_type",
-    name: "property_type",
-    table: "property_values",
-    ref_name: "description",
-  }),
+  // FIELDS_STRUCTURE.uniqueField({
+  //   label: "property_type",
+  //   name: "property_type",
+  //   table: "property_values",
+  //   ref_name: "description",
+  // }),
   FIELDS_STRUCTURE.textField({
     label: "description",
     name: "description",
@@ -954,12 +970,12 @@ const sold_units_report = [
       name: "area_to",
     },
   },
-  FIELDS_STRUCTURE.uniqueField({
-    label: "unit",
-    name: "unit",
-    table: "property_values",
-    ref_name: "unit",
-  }),
+  // FIELDS_STRUCTURE.uniqueField({
+  //   label: "unit",
+  //   name: "unit",
+  //   table: "property_values",
+  //   ref_name: "unit",
+  // }),
   FIELDS_STRUCTURE.selectField({
     label: "status",
     name: "status",
@@ -988,10 +1004,10 @@ const sold_lands_report = [
     label: "basin_number",
     name: "basin_number",
   }),
-  FIELDS_STRUCTURE.textField({
-    label: "area_no",
-    name: "area_no",
-  }),
+  // FIELDS_STRUCTURE.textField({
+  //   label: "area_no",
+  //   name: "area_no",
+  // }),
   {
     key: "between",
     label: "area_from",
@@ -1005,10 +1021,12 @@ const sold_lands_report = [
     },
   },
   FIELDS_STRUCTURE.textField({
-    label: "unit",
-    name: "unit",
+    label: "area_unit",
+    name: "area_unit",
   }),
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.selectField({
     label: "status",
     name: "status",
@@ -1021,7 +1039,7 @@ const sold_lands_report = [
 ];
 
 const sold_villas_report = [
-  FIELDS_STRUCTURE.textField({
+  FIELDS_STRUCTURE.villa({
     label: "villa_no",
     name: "villa_no",
   }),
@@ -1049,7 +1067,9 @@ const sold_villas_report = [
       name: "area_to",
     },
   },
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.selectField({
     label: "status",
     name: "status",
@@ -1062,7 +1082,9 @@ const sold_villas_report = [
 ];
 
 const overdue_payments_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.uniqueField({
     label: "contract",
     name: "contract",
@@ -1092,7 +1114,9 @@ const manger_cheques_report = [];
 
 // services contracts report fields
 const services_contracts_report = [
-  FIELDS_STRUCTURE.client(),
+  FIELDS_STRUCTURE.client({
+    name:'client_id'
+  }),
   FIELDS_STRUCTURE.textField({
     label: "area_name",
     name: "area_name",
@@ -1222,9 +1246,15 @@ const contract_cycle_report = [
 ];
 
 const creditors_ages_report = [
-  FIELDS_STRUCTURE.account(),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   FIELDS_STRUCTURE.numberField({
     label: "period",
     name: "period",
@@ -1341,10 +1371,8 @@ const complaints_report = [
     name: "contract",
     ref_name: "contract",
   }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "building",
-    name: "building",
-    ref_name: "building",
+  FIELDS_STRUCTURE.building({
+    name:'building_id'
   }),
   FIELDS_STRUCTURE.uniqueField({
     label: "category",
@@ -1394,10 +1422,8 @@ const worker_report = [
     name: "contract",
     ref_name: "contract",
   }),
-  FIELDS_STRUCTURE.uniqueField({
-    label: "building",
-    name: "building",
-    ref_name: "building",
+  FIELDS_STRUCTURE.building({
+    name:'building_id'
   }),
   FIELDS_STRUCTURE.uniqueField({
     label: "category",
@@ -1449,8 +1475,12 @@ const item_activity_report = [
   FIELDS_STRUCTURE.client({
     label: "client",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   // FIELDS_STRUCTURE.number({
   //   name: "code",
   //   label: "code",
@@ -1481,8 +1511,12 @@ const inventory_report = [
   FIELDS_STRUCTURE.client({
     label: "client",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   FIELDS_STRUCTURE.uniqueField({
     table: "material",
     name: "code",
@@ -1509,8 +1543,12 @@ const ending_inventory_report = [
   FIELDS_STRUCTURE.client({
     label: "client",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   FIELDS_STRUCTURE.uniqueField({
     table: "material",
     name: "code",
@@ -1560,8 +1598,12 @@ const sales_report = [
   FIELDS_STRUCTURE.client({
     label: "client",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   FIELDS_STRUCTURE.uniqueField({
     table: "material",
     name: "code",
@@ -1587,21 +1629,34 @@ const sales_report = [
 ];
 
 const bill_details_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.client({
     label: "client",
+    name: "customer_id",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name: "cost_center_id",
+  }),
+  FIELDS_STRUCTURE.currency({
+    name: "currency_id",
+  }),
 ];
 
 const bill_profit_report = [
-  FIELDS_STRUCTURE.account(),
+  FIELDS_STRUCTURE.account({
+    name:'account_id'
+  }),
   FIELDS_STRUCTURE.client({
     label: "client",
   }),
-  FIELDS_STRUCTURE.cost_center(),
-  FIELDS_STRUCTURE.currency(),
+  FIELDS_STRUCTURE.cost_center({
+    name:'cost_center_id'
+  }),
+  FIELDS_STRUCTURE.currency({
+    name:'currency_id'
+  }),
   FIELDS_STRUCTURE.number({
     label: "bill no",
     name: "bill",
