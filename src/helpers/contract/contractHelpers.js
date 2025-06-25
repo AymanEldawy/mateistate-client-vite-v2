@@ -219,8 +219,8 @@ export function onWatchChangesInTab1(name, setValue, watch) {
       setValue(`contract.finalPrice`, finalPrice);
       setValue(`contract.priceBeforeVat`, finalPrice);
       setValue("installment.totalAmount", price);
-      if (discount)
-        setValue(`contract.discountValue`, discountValue?.toFixed(2));
+      // if (discount)
+      setValue(`contract.discountValue`, parseFloat(discountValue?.toFixed(2)));
 
       // if Contract has Real state management
       if (watch("contractCommission.commissionPercentage")) {
@@ -311,9 +311,7 @@ export async function mergePatternWithContractData(
   setValue,
 ) {
 
-console.log('called pattern merge', pattern);
-
-
+  console.log('called pattern merge', pattern)
 
   setValue('contract.contractType', pattern?.contractType);
   setValue('contract.contractPatternId', pattern?.id);
@@ -386,8 +384,8 @@ export const onWatchChangesTerminationTab = (name, value, watch, setValue) => {
             restPrice = restPrice?.toFixed(2);
             break;
         }
-        setValue("contractTermination.ownerTotalAmount", totalPrice);
-        setValue("contractTermination.ownerRestAmount", restPrice);
+        setValue("contractTermination.ownerTotalAmount", +totalPrice);
+        setValue("contractTermination.ownerRestAmount", +restPrice);
       }
       break;
     default:

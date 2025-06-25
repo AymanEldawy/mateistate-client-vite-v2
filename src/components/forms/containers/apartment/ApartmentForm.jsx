@@ -5,26 +5,18 @@ import { getSearchApartment, getSingleApartment } from "@/services/apartmentServ
 import { useTranslation } from "react-i18next";
 import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableInput, RHFTextarea } from "../../fields";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
+import BuildingField from "../../global/BuildingField";
 import TableForm from "../../wrapper/TableForm";
-import { getSearchBuilding, getSingleBuilding } from './../../../../services/buildingService';
 
 const ApartmentForm = ({ tab }) => {
   const { t } = useTranslation();
   const ApartmentGeneralFields = (
     <div className="grid grid-cols-2 gap-4">
-      <RHFAsyncSelectField
-        table="building"
+      <BuildingField
         name="apartment.buildingId"
         label="building_id"
         required
-        getSearch={getSearchBuilding}
-        getSingle={getSingleBuilding}
       />
-      {/* <BuildingField
-        name="apartment.buildingId"
-        label="building_id"
-        required
-      /> */}
       <RHFInput name="apartment.floorNo" label="floor_number" />
       <RHFSelectField
         label="apartment_kind"

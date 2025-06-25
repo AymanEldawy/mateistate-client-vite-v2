@@ -1,5 +1,3 @@
-
-
 import ConfirmModal from "@/components/shared/ConfirmModal";
 import Loading from "@/components/shared/Loading";
 import SEARCH_PARAMS from "@/data/searchParamsKeys";
@@ -37,50 +35,30 @@ const FormWrapper = ({
   onInsertDispatchedForm,
   ...props
 }) => {
-  console.log({ outerClose, onInsertDispatchedForm, refetch }, 'props in FormWrapper');
+  // console.log({ outerClose, onInsertDispatchedForm, refetch }, numberSearchParam, 'props in FormWrapper');
 
   const navigate = useNavigate();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [searchParams] = useSearchParams();
-  const searchParamsSelectedNumber = useCustomSearchParams(SEARCH_PARAMS.NUMBER);
+  const searchParamsSelectedNumber = useCustomSearchParams(
+    SEARCH_PARAMS.NUMBER
+  );
   const searchParamsSelectedCode = useCustomSearchParams(SEARCH_PARAMS.CODE);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const queryClient = useQueryClient();
   const { t: tToast } = useTranslation("toastMessages");
-  const paginationForm = useFormPagination({
-    name,
-    number: refetch ? searchParamsSelectedNumber : numberSearchParam,
-    code: refetch ? searchParamsSelectedCode : codeSearchParam,
-  })
   const [preventClose, setPreventClose] = useState(false);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
-
-  const { data: oldData } = useQuery({
-    queryKey: [queryKey, 'single', paginationForm?.currentId],
-
-    queryFn: async () => {
-      if (!paginationForm?.currentId) return;
-      const response = await formProps?.getSingleFunction(paginationForm?.currentId)
-      if (response?.success) {
-        reset(response, { keepDirty: false })
-        setPreventClose(false)
-        return response
-      } else {
-        reset(defaultValue, { keepDirty: false })
-        setPreventClose(false)
-      }
-    },
-    enabled: !!paginationForm?.currentId,
-  })
-
-  const id = paginationForm?.currentId || oldData?.id || formProps?.defaultValue?.id;
-
   const methods = useForm({
     defaultValues: defaultValue,
     // resolver: zodResolver(validationSchema),
     mode: "onBlur",
-    resolver: zodResolver(typeof formProps?.validationSchema === 'function' ? formProps?.validationSchema(tab, setTab) : formProps?.validationSchema),
+    resolver: zodResolver(
+      typeof formProps?.validationSchema === "function"
+        ? formProps?.validationSchema(tab, setTab)
+        : formProps?.validationSchema
+    ),
   });
 
   const {
@@ -90,31 +68,60 @@ const FormWrapper = ({
     formState: { isSubmitting, isLoading, isDirty, errors, dirtyFields },
   } = methods;
 
-  console.log(watch(), 'watch');
-  console.log(errors, 'errors');
+  const paginationForm = useFormPagination({
+    name,
+    number: refetch ? searchParamsSelectedNumber : numberSearchParam,
+    code: refetch ? searchParamsSelectedCode : codeSearchParam,
+    reset,
+    defaultValue,
+  });
 
+  const { data: oldData } = useQuery({
+    queryKey: [queryKey, "single", paginationForm?.currentId],
+
+    queryFn: async () => {
+      if (!paginationForm?.currentId) return;
+      const response = await formProps?.getSingleFunction(
+        paginationForm?.currentId
+      );
+      if (response?.success) {
+        reset(response, { keepDirty: false });
+        setPreventClose(false);
+        return response;
+      } else {
+        reset(defaultValue, { keepDirty: false });
+        setPreventClose(false);
+      }
+    },
+    enabled: !!paginationForm?.currentId,
+  });
+
+  const id =
+    paginationForm?.currentId || oldData?.id || formProps?.defaultValue?.id;
+
+  // console.log(watch(), 'watch');
+  // console.log(errors, 'errors');
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
       if (id) {
-        return formProps?.mutationUpdateFunction(id, data)
+        return formProps?.mutationUpdateFunction(id, data);
       } else {
-        return formProps?.mutationAddFunction(data)
+        return formProps?.mutationAddFunction(data);
       }
     },
     onSuccess: (response) => {
-      toast.success(id ? tToast('successUpdate') : tToast('successInsert'));
+      toast.success(id ? tToast("successUpdate") : tToast("successInsert"));
       queryClient.invalidateQueries();
       if (invalidateQueryKeyOnSuccess) {
         queryClient.invalidateQueries(invalidateQueryKeyOnSuccess);
       }
       onSuccessAction?.(response);
       if (onInsertDispatchedForm) {
-        onInsertDispatchedForm(response)
+        onInsertDispatchedForm(response);
       }
-      if (outerClose)
-        outerClose()
-      onClose()
+      if (outerClose) outerClose();
+      onClose();
     },
   });
 
@@ -123,10 +130,10 @@ const FormWrapper = ({
     const newSearchParams = new URLSearchParams(searchParams);
     if (numberSearchParam) newSearchParams.delete(SEARCH_PARAMS.NUMBER);
     if (codeSearchParam) newSearchParams.delete(SEARCH_PARAMS.CODE);
-    console.log({
-      numberSearchParam,
-      codeSearchParam
-    });
+    // console.log({
+    //   numberSearchParam,
+    //   codeSearchParam
+    // });
 
     navigate(
       {
@@ -139,13 +146,13 @@ const FormWrapper = ({
 
   useEffect(() => {
     if (oldValues) {
-      reset(oldValues)
+      reset(oldValues);
     }
-  }, [oldValues])
+  }, [oldValues]);
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      if (type === 'change') {
+      if (type === "change") {
         setPreventClose(true);
       }
     });
@@ -163,29 +170,28 @@ const FormWrapper = ({
     if (!preventClose) {
       if (onClose) onClose();
       if (outerClose) outerClose();
-      removeSearchParams()
+      removeSearchParams();
       return;
     }
     setOpen(true);
-  }
+  };
 
   const handleDelete = async () => {
     try {
-      const response = await formProps?.onHandleDelete(id)
+      const response = await formProps?.onHandleDelete(id);
       if (response?.success) {
-        toast.success(tToast('successDelete'))
-        if (refetch) refetch()
-        onClose()
+        toast.success(tToast("successDelete"));
+        if (refetch) refetch();
+        onClose();
       }
     } catch (error) {
-      toast.error(tToast('failedDelete'))
+      toast.error(tToast("failedDelete"));
       console.log(error);
     }
-  }
-
+  };
 
   const handleSubmitFunc = async (data) => {
-    if (!isDirty) return toast.warn(tToast('formDirty'))
+    if (!isDirty) return toast.warn(tToast("formDirty"));
     try {
       await mutateAsync(cleanObject(data));
       id ? reset(data) : reset();
@@ -204,11 +210,10 @@ const FormWrapper = ({
         open={open}
         onCancel={() => setOpen(false)}
         onConfirmClose={() => {
-          setOpen(false)
-          if (onClose)
-            onClose()
-          if (outerClose) outerClose()
-          removeSearchParams()
+          setOpen(false);
+          if (onClose) onClose();
+          if (outerClose) outerClose();
+          removeSearchParams();
         }}
       />
       <ConfirmModal
@@ -216,9 +221,7 @@ const FormWrapper = ({
         open={openConfirmation}
         setOpen={setOpenConfirmation}
       />
-      <FormProvider
-        {...methods}
-      >
+      <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(handleSubmitFunc)}
           noValidate
@@ -242,15 +245,14 @@ const FormWrapper = ({
               codeSearchParam={codeSearchParam}
               {...props}
               {...formProps}
-            />)
-          }
+            />
+          )}
           <FormFooter
             resetFormHandler={resetFormHandler}
             paginationForm={paginationForm}
             isLoading={isLoading}
             setOpenConfirmation={setOpenConfirmation}
             {...formFooterProps}
-
           />
         </form>
       </FormProvider>

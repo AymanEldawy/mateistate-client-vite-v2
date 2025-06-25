@@ -7,7 +7,7 @@ const SellerForm = () => {
         <RHFInput name="name" label="name" required />
         <RHFInput name="ltnname" label="ltnname" />
         <RHFInput name="id_card" label="id_card" />
-        <RHFInput name="passport" label="passport" />
+        <RHFInput name="passport" label="passport" type="number" />
         <RHFInput name="workCardNumber" label="work_card_number" />
         <RHFInput name="mobile" label="mobile" />
         <RHFInput name="cellPhone" label="cellPhone" />

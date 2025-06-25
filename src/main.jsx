@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import EntriesPopupView from './components/forms/containers/entries/EntriesPopupView';
 import Loading from './components/shared/Loading';
 import { GlobalOptionsProvider } from './hook/useGlobalOptions';
 import { PopupFormProvider } from './hook/usePopupForm';
@@ -38,7 +37,6 @@ createRoot(document.getElementById('root')).render(
                   theme={"light"}
                 />
                 <RouterProvider router={router} />
-                <EntriesPopupView />
               </VoucherEntriesViewProvider>
             </PopupFormProvider>
           </GlobalOptionsProvider>

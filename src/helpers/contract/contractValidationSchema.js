@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import VALIDATION from '../VALIDATIONS';
+import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 // Contract Schema
 const ContractSchema = z.object({
@@ -7,7 +7,7 @@ const ContractSchema = z.object({
   lawsuit: z.boolean(),
   govNumber: z.number().nullable(),
   contractsNumberPrev: z.number().int().nonnegative(),
-  issueDate: z.date().optional(),
+  issueDate: VALIDATION.OPTIONAL_DATE,
   contractValue: VALIDATION.NON_NEGATIVE_NUMBER,
   priceBeforeVat: z.number().nullable(),
   finalPrice: VALIDATION.POSITIVE_NUMBER,
@@ -16,12 +16,12 @@ const ContractSchema = z.object({
   vatRate: z.number().nullable(),
   currentSecuringValue: z.number().nullable(),
   contractDuration: VALIDATION.NON_NEGATIVE_NUMBER,
-  startDurationDate: z.date().optional(),
-  endDurationDate: z.date().optional(),
+  startDurationDate: VALIDATION.OPTIONAL_DATE,
+  endDurationDate: VALIDATION.OPTIONAL_DATE,
   discountValue: z.number().nullable(),
   vatValue: z.number().nullable(),
   previousSecuring: z.number().nullable(),
-  propertyDeliveryDate: z.date().nullable(),
+  propertyDeliveryDate: VALIDATION.OPTIONAL_DATE,
   clientId: VALIDATION.NON_EMPTY_STRING,
   lessorId: VALIDATION.OPTIONAL_UUID,
   revenueAccountId: VALIDATION.NON_EMPTY_STRING,
@@ -47,11 +47,11 @@ const ContractSchema = z.object({
 const ContractCommissionSchema = z.object({
   commissionPercentage: z.number().nullable(),
   commissionValue: z.number().nullable(),
-  commissionAccountId: z.number().nullable(),
+  commissionAccountId: VALIDATION.OPTIONAL_UUID,
   commissionNote: z.string().nullable(),
   commissionFromOwnerPercentage: z.number().nullable(),
   commissionFromOwnerValue: z.number().nullable(),
-  commissionFromOwnerAccountId: z.number().nullable(),
+  commissionFromOwnerAccountId: VALIDATION.OPTIONAL_UUID,
   commissionFromOwnerNote: z.string().nullable(),
 });
 
@@ -59,14 +59,14 @@ const ContractCommissionSchema = z.object({
 const ContractCycleSchema = z.object({
   contractCertifyingBody: z.string().nullable(),
   commissionFromOwnerValue: z.number().nullable(),
-  municipalLicenseFrom: z.date().nullable(),
-  municipalLicenseTo: z.date().nullable(),
+  municipalLicenseFrom: VALIDATION.OPTIONAL_DATE,
+  municipalLicenseTo: VALIDATION.OPTIONAL_DATE,
   licenseNum: z.string().nullable(),
-  licenseFrom: z.date().nullable(),
-  licenseTo: z.date().nullable(),
+  licenseFrom: VALIDATION.OPTIONAL_DATE,
+  licenseTo: VALIDATION.OPTIONAL_DATE,
   civilLicenseNum: z.string().nullable(),
-  civilLicenseFrom: z.date().nullable(),
-  civilLicenseTo: z.date().nullable(),
+  civilLicenseFrom: VALIDATION.OPTIONAL_DATE,
+  civilLicenseTo: VALIDATION.OPTIONAL_DATE,
   contractDocumented: z.boolean().nullable(),
   contractCertifying: z.boolean().nullable(),
   contractDelivered: z.boolean().nullable(),
@@ -75,52 +75,55 @@ const ContractCycleSchema = z.object({
 
 // Contract Linked Parking Schema
 const ContractLinkedParkingSchema = z.object({
-  buildingId: z.number().nullable(),
-  mainContractId: z.number().nullable(),
-  accountId: z.number().nullable(),
+  buildingId: VALIDATION.OPTIONAL_UUID,
+  mainContractId: VALIDATION.OPTIONAL_UUID,
+  accountId: VALIDATION.OPTIONAL_UUID,
 });
 
 // Contract Termination Schema
 const ContractTerminationSchema = z.object({
   terminated: z.boolean().nullable(),
   genEntries: z.boolean().nullable(),
-  terminationDate: z.date().nullable(),
+  terminationDate: VALIDATION.OPTIONAL_DATE,
   ownerTotalAmount: z.number().nullable(),
   ownerRestAmount: z.number().nullable(),
+  fines: z.string().optional().nullable(),
   roundTo: z.number().nullable(),
-  revenueNote: z.string().nullable(),
+  revenueNote: z.string().nullable().optional(),
   evacuationRequest: z.boolean().nullable(),
-  evacuationDate: z.date().nullable(),
-  clearancePrinted: z.boolean().nullable(),
-  clearancePrintedDate: z.date().nullable(),
+  evacuationDate: VALIDATION.OPTIONAL_DATE,
+  clearancePrinted: z.boolean().optional().nullable(),
+  clearancePrintedDate: VALIDATION.OPTIONAL_DATE.nullable(),
+  date: VALIDATION.OPTIONAL_DATE.nullable(),
 });
 
 // Contract Fines Grid Schema
 const ContractFinesGridSchema = z.object({
-  createdAt: z.date().nullable(),
+  createdAt: VALIDATION.OPTIONAL_DATE,
   fee_amount: z.number().nullable(),
-  account_id: z.number().nullable(),
+  account_id: VALIDATION.OPTIONAL_UUID,
   notes: z.string().nullable(),
 });
 
 // Contract Other Fees Schema
 const ContractOtherFeesSchema = z.object({
-  date: z.date().nullable(),
+  date: VALIDATION.OPTIONAL_DATE,
   feeAmount: z.number().nullable(),
-  accountId: z.number().nullable(),
+  accountId: VALIDATION.OPTIONAL_UUID,
   notes: z.string().nullable(),
 });
 
 // Combined Schema for the entire form
-export const contractValidationSchema = () => z.object({
-  contract: ContractSchema,
-  contractCommission: ContractCommissionSchema.optional().nullable(),
-  contractCycle: ContractCycleSchema.optional().nullable(),
-  contractLinkedParking: ContractLinkedParkingSchema.array().optional(),
-  contractTermination: ContractTerminationSchema.optional().nullable(),
-  contractFinesGrid: ContractFinesGridSchema.array().optional(),
-  contractOtherFees: ContractOtherFeesSchema.array().optional(),
-});
+export const contractValidationSchema = () =>
+  z.object({
+    contract: ContractSchema,
+    contractCommission: ContractCommissionSchema.optional().nullable(),
+    contractCycle: ContractCycleSchema.optional().nullable(),
+    contractLinkedParking: ContractLinkedParkingSchema.array().optional(),
+    contractTermination: ContractTerminationSchema.optional().nullable(),
+    contractFinesGrid: ContractFinesGridSchema.array().optional(),
+    contractOtherFees: ContractOtherFeesSchema.array().optional(),
+  });
 
 // Utility function to clean form data
 
@@ -138,7 +141,7 @@ export const contractDefaultValues = {
     contractValue: null,
     priceBeforeVat: null,
     finalPrice: null,
-    description: '',
+    description: "",
     discountRate: null,
     vatRate: null,
     contractPatternId: null,
@@ -146,7 +149,9 @@ export const contractDefaultValues = {
     currentSecuringValue: null,
     contractDuration: 3,
     startDurationDate: new Date().toISOString(),
-    endDurationDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString(),
+    endDurationDate: new Date(
+      new Date().setFullYear(new Date().getFullYear() + 1)
+    ).toISOString(),
     discountValue: null,
     vatValue: null,
     previousSecuring: null,
@@ -157,7 +162,7 @@ export const contractDefaultValues = {
     insuranceAccountId: null,
     vatAccountId: null,
     paidType: 1,
-    note: '',
+    note: "",
     isArchived: false,
     isDeleted: false,
     apartmentId: null,
@@ -191,11 +196,13 @@ export const contractDefaultValues = {
     contractDelivered: null,
     contractSigned: null,
   },
-  contractLinkedParking: [{
-    buildingId: null,
-    mainContractId: null,
-    accountId: null,
-  }],
+  contractLinkedParking: [
+    {
+      buildingId: null,
+      mainContractId: null,
+      accountId: null,
+    },
+  ],
   contractTermination: {
     terminated: null,
     genEntries: null,
@@ -209,16 +216,20 @@ export const contractDefaultValues = {
     clearancePrinted: null,
     clearancePrintedDate: null,
   },
-  contractFinesGrid: [{
-    createdAt: null,
-    fee_amount: null,
-    account_id: null,
-    notes: null,
-  }],
-  contractOtherFees: [{
-    date: null,
-    feeAmount: null,
-    accountId: null,
-    notes: null,
-  }],
+  contractFinesGrid: [
+    {
+      createdAt: null,
+      fee_amount: null,
+      account_id: null,
+      notes: null,
+    },
+  ],
+  contractOtherFees: [
+    {
+      date: null,
+      feeAmount: null,
+      accountId: null,
+      notes: null,
+    },
+  ],
 };

@@ -1,7 +1,4 @@
 import { MATERIAL_STEPS } from "@/helpers/materials/materialsSteps"
-import { getAllStores } from "@/services/storeService"
-import { useQuery } from "@tanstack/react-query"
-import QUERY_KEYS from "@/data/queryKeys"
 import { lazy } from "react"
 
 const MaterialsGeneral = lazy(() => import("./MaterialsGeneral"))
@@ -13,22 +10,12 @@ const MaterialFormPricesDetails = lazy(() => import("./MaterialFormPricesDetails
 
 const MaterialsForm = ({ tab }) => {
 
-  const { data: stores } = useQuery({
-    queryKey: [QUERY_KEYS.STORE],
-    queryFn: async () => {
-      const response = await getAllStores();
-      return response?.data || [];
-    },
-  });
-
-
-
   const displayForm = () => {
     switch (tab) {
       case MATERIAL_STEPS.material_balance:
-        return <MaterialFormBalance stores={stores} />
+        return <MaterialFormBalance />
       case MATERIAL_STEPS.material_minimum:
-        return <MaterialFormMinimum stores={stores} />
+        return <MaterialFormMinimum />
       case MATERIAL_STEPS.material_prices:
         return <MaterialFormPrices />
       case MATERIAL_STEPS.material_prices_details:

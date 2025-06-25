@@ -1,15 +1,14 @@
-import React from 'react'
+import { RHFInput, RHFInputAmount } from '../../fields'
+import StoreField from '../../global/StoreField'
 import TableForm from '../../wrapper/TableForm'
-import { RHFInput, RHFInputAmount, RHFSelectField, RHFTableAsyncSelect } from '../../fields'
 const MaterialFormMinimum = ({ stores }) => (
   <TableForm
     renderFields={(item, index) => (
       <>
         <td>
-          <RHFSelectField
+          <StoreField
             name={`materialMinimums.${index}.storeId`}
             hideErrors
-            options={stores}
           />
         </td>
         <td>

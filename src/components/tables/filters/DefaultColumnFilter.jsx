@@ -13,7 +13,7 @@ export function DefaultColumnFilter({
       className="p-1 text-xs border rounded-md"
       value={value || ''}
       onChange={value => {
-        setFilterValue(value|| undefined);
+        setFilterValue(value || '');
       }}
       debounce={400}
       placeholder={`Search ${header} records...`}

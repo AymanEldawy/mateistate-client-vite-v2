@@ -1,23 +1,29 @@
-import Btn from '@/components/shared/Btn'
-import { usePopupForm } from '@/hook/usePopupForm'
+import Btn from "@/components/shared/Btn";
+import { usePopupForm } from "@/hook/usePopupForm";
 
 const ContractFormFooter = ({ data, pattern }) => {
-  const { handleDispatchForm } = usePopupForm()
+  const { handleDispatchForm } = usePopupForm();
 
   const openInstallmentPanel = () => {
-
     handleDispatchForm({
       contract: data?.contract,
       table: "installment",
-      pattern
-    })
-  }
+      pattern,
+    });
+  };
 
   return (
     <div>
-      <Btn disabled={!data?.data?.id} onClick={openInstallmentPanel} kind="info" type="button">installment</Btn>
+      <Btn
+        disabled={!data?.contract?.id}
+        onClick={openInstallmentPanel}
+        kind="info"
+        type="button"
+      >
+        installment
+      </Btn>
     </div>
-  )
-}
+  );
+};
 
-export default ContractFormFooter
+export default ContractFormFooter;

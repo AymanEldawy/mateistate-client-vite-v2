@@ -1,4 +1,5 @@
-import { RHFInput, RHFSelectField, RHFTableAsyncSelect } from "../../fields"
+import { RHFInput } from "../../fields"
+import StoreField from "../../global/StoreField"
 import TableForm from "../../wrapper/TableForm"
 
 const MaterialFormBalance = ({ stores }) => (
@@ -6,10 +7,9 @@ const MaterialFormBalance = ({ stores }) => (
     renderFields={(item, index) => (
       <>
         <td>
-          <RHFSelectField
+          <StoreField
             name={`materialBalances.${index}.storeId`}
             hideErrors
-            options={stores}
           />
         </td>
         <td>

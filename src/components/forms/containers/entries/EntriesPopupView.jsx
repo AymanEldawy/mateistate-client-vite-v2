@@ -7,6 +7,8 @@ import { getSingleEntry } from '@/services/entriesService';
 import { useQuery } from '@tanstack/react-query';
 
 const EntriesPopupView = () => {
+  console.log('called here entry');
+  
   const { voucherInfo, setVoucherInfo } = useVoucherEntriesView();
   const { isLoading, data: entry } = useQuery({
     queryKey: [QUERY_KEYS.ENTRIES, voucherInfo?.id],
@@ -17,9 +19,9 @@ const EntriesPopupView = () => {
     enabled: !!voucherInfo?.id
   });
 
+  console.log(entry, voucherInfo, 'entry in EntriesPopupView');
   if (!voucherInfo?.id) return;
 
-  console.log(entry, 'entry in EntriesPopupView');
   
 
   return (
@@ -40,6 +42,7 @@ const EntriesPopupView = () => {
               popupFormConfig={{
                 oldValues: entry
               }}
+              defaultNumber={entry?.entry?.number}
             />
           ) : (
             <div className="flex flex-col text-xl text-red-500 h-full p-4">

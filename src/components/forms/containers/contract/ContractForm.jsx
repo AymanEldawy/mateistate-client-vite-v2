@@ -1,3 +1,4 @@
+
 import { fetchAndMergeAssetInfo, fetchAndMergeBuildingInfo, mergePatternWithContractData, onWatchChangesInTab1, onWatchChangesTerminationTab } from "@/helpers/contract/contractHelpers"
 import { GLOBAL_CONTRACT_STEPS } from "@/helpers/contract/contractSteps"
 import { getUnitInfo } from "@/utils/functions"
@@ -35,6 +36,7 @@ const ContractForm = ({ tab, code, pattern }) => {
 
       switch (name) {
         case 'contract.endDurationDate':
+          setValue('contract.status', 1)
           if (type === 'change' && watch('contract.startDurationDate') && watch('contract.endDurationDate') && Date.parse(watch('contract.endDurationDate')) < Date.parse(watch('contract.startDurationDate'))) {
             toast.error('End date should be grater than start date')
             // setValue('contract.endDurationDate', new Date(watch('contract.startDurationDate')))

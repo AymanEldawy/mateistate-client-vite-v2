@@ -1,13 +1,12 @@
 import Btn from "@/components/shared/Btn";
+import { ViewEntry } from "@/components/shared/ViewEntry";
+import { CREATED_FROM_CONTRACT_FINES } from "@/data/GENERATE_STARTING_DATA";
 import { CONTRACT_ROUND_TO, CONTRACT_STATUS } from "@/helpers/DEFAULT_OPTIONS";
-import { useVoucherEntriesView } from "@/hook/useVoucherEntriesView";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { RHFCheckbox, RHFDatePicker, RHFInput, RHFInputAmount, RHFSelectField, RHFTextarea } from "../../fields";
-import { ViewEntry } from "@/components/shared/ViewEntry";
-import TableForm from "../../wrapper/TableForm";
-import { CREATED_FROM_CONTRACT_FINES } from "@/data/GENERATE_STARTING_DATA";
 import { AccountField } from "../../global";
+import TableForm from "../../wrapper/TableForm";
 
 const ContractFormTermination = () => {
   const { watch, setValue } = useFormContext();
@@ -69,7 +68,7 @@ const ContractFormTermination = () => {
                   {watch(`contractTermination.id`) ? <ViewEntry id={watch(`contractTermination.id`)} /> : null}
                 </div>
               </div>
-              <RHFInput
+              <RHFDatePicker
                 name="contractTermination.terminationDate"
                 label="terminationDate"
               />
@@ -77,12 +76,14 @@ const ContractFormTermination = () => {
 
                 name="contractTermination.ownerTotalAmount"
                 label="ownerTotalAmount"
+                  type="number"
               />
               <div className="grid grid-cols-2 gap-2">
                 <RHFInput
                   name="contractTermination.ownerRestAmount"
                   label="ownerRestAmount"
                   containerClassName="flex-1"
+                  type="number"
                 />
                 <RHFSelectField
                   name="contractTermination.roundTo"
@@ -101,11 +102,19 @@ const ContractFormTermination = () => {
             </div>
             <div className="flex flex-col gap-4">
 
+              <RHFInput
+                name="contractTermination.fines"
+                label="fines"
+              />
+              <RHFDatePicker
+                name="contractTermination.date"
+                label="date"
+              />
               <RHFCheckbox
                 name="contractTermination.evacuationRequest"
                 label="evacuationRequest"
               />
-              <RHFInput
+              <RHFDatePicker
                 name="contractTermination.evacuationDate"
                 label="evacuationDate"
                 containerClassName="flex-1"
@@ -116,7 +125,7 @@ const ContractFormTermination = () => {
                 label="clearancePrinted"
               />
               {watch(`contractTermination.clearancePrinted`) ? (
-                <RHFInput
+                <RHFDatePicker
                   name="contractTermination.clearancePrintedDate"
                   label="clearancePrintedDate"
                 />

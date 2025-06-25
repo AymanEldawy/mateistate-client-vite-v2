@@ -51,7 +51,13 @@ export const getSearchParking = (value) => {
 };
 
 export const getParkingCode = (parentId) => {
-  return http.delete(
+  return http.get(
     `${API_URL_CONSTANTS.BASE_PARKING}/code=${parentId}`
+  );
+};
+
+export const getAvailableParkingsByBuildingId = (buildingId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_PARKING}/available?buildingId=${buildingId}`
   );
 };

@@ -1,13 +1,12 @@
-import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
-import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
 import { CONTACT_PATTERN_ASSETS_TYPE } from "@/helpers/DEFAULT_OPTIONS";
-import { useFormContext } from "react-hook-form";
-import { getSearchBuilding, getSingleBuilding } from "@/services/buildingService";
-import { useMemo } from "react";
 import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
 import { getSearchParking, getSingleParking } from "@/services/parkingService";
 import { getSearchShop, getSingleShop } from "@/services/shopService";
+import { useMemo } from "react";
+import { useFormContext } from "react-hook-form";
+import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
 import { AccountField } from "../../global";
+import BuildingField from "../../global/BuildingField";
 const ReservationPropertyForm = () => {
   const { watch } = useFormContext();
 
@@ -42,14 +41,11 @@ const ReservationPropertyForm = () => {
           label="Account"
           required
         />
-        <RHFAsyncSelectField
+        <BuildingField
           name="buildingId"
           label="Building"
-          Table="building"
           required
           containerClassName="col-span-2"
-          getSearch={getSearchBuilding}
-          getSingle={getSingleBuilding}
         />
         <RHFSelectField
           name="propertyType"
@@ -61,6 +57,7 @@ const ReservationPropertyForm = () => {
           name="bookDate"
           label="Book Date"
         />
+        
         <RHFDatePicker
           name="endBookDate"
           label="End Book Date"

@@ -155,6 +155,8 @@ export const getUnitInfo = (assetType) => {
 }
 
 export function cleanObject(obj) {
+  console.log(obj, 'obj')
+
   if (Array.isArray(obj)) {
     const cleanedArray = obj
       .map(item => cleanObject(item))
@@ -163,9 +165,16 @@ export function cleanObject(obj) {
   }
 
   if (typeof obj === 'object' && obj !== null) {
+    // Handle Date objects explicitly
+    if (obj instanceof Date) {
+      return obj;
+    }
+
     const cleaned = {};
     for (const [key, value] of Object.entries(obj)) {
+      // Skip null, undefined, or empty string
       if (value === null || value === undefined || value === '') continue;
+      // Skip empty arrays
       if (Array.isArray(value) && value.length === 0) continue;
 
       const cleanedValue = cleanObject(value);
@@ -174,6 +183,15 @@ export function cleanObject(obj) {
       }
     }
     return Object.keys(cleaned).length > 0 ? cleaned : null;
+  }
+
+  // Preserve string dates (ISO 8601 or other valid date strings)
+  if (typeof obj === 'string') {
+    // Check if the string can be parsed as a valid date
+    const date = new Date(obj);
+    if (!isNaN(date.getTime())) {
+      return obj; // Return original string if it's a valid date
+    }
   }
 
   return obj;

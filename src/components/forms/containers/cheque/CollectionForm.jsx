@@ -1,33 +1,38 @@
-import ConfirmModal from '@/components/shared/ConfirmModal';
-import Loading from '@/components/shared/Loading';
-import { CHQ_RECEIVED_CODE } from '@/data/GENERATE_STARTING_DATA';
-import QUERY_KEYS from '@/data/queryKeys';
-import { opCollectionDefaultValues, opCollectionValidationSchema } from '@/helpers/operations/opCollectionValidationSchema';
-import { createCollection, deleteCollection, getCollectionByChequeId, updateCollection } from '@/services/opCollectionService';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { RHFDatePicker, RHFInput, RHFInputAmount } from '../../fields';
-import { AccountField, CurrencyFieldGroup } from '../../global';
-import CostCenterField from '../../global/CostCenterField';
-import { FormFooter, FormHeader } from '../../wrapper';
+import ConfirmModal from "@/components/shared/ConfirmModal";
+import Loading from "@/components/shared/Loading";
+import { CHQ_RECEIVED_CODE } from "@/data/GENERATE_STARTING_DATA";
+import QUERY_KEYS from "@/data/queryKeys";
+import {
+  opCollectionDefaultValues,
+  opCollectionValidationSchema,
+} from "@/helpers/operations/opCollectionValidationSchema";
+import {
+  createCollection,
+  deleteCollection,
+  getCollectionByChequeId,
+  updateCollection,
+} from "@/services/opCollectionService";
+import { cleanObject } from "@/utils/functions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { RHFDatePicker, RHFInput, RHFInputAmount } from "../../fields";
+import { AccountField, CurrencyFieldGroup } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
+import { FormFooter, FormHeader } from "../../wrapper";
 
-const mergePattern = async (
-  pattern,
-  chqValues,
-  setValue,
-) => {
+const mergePattern = async (pattern, chqValues, setValue) => {
   setValue("amount", chqValues?.amount);
   setValue("chequeId", chqValues?.id);
   if (pattern?.commissionCreditAccountId) {
     setValue("commissionCostCenterId", chqValues?.costCenterId);
-    setValue('commissionCreditId', pattern?.commissionCreditAccountId)
+    setValue("commissionCreditId", pattern?.commissionCreditAccountId);
   }
 
   if (pattern?.commissionDebitAccountId) {
-    setValue('commissionDebitId', pattern?.commissionDebitAccountId)
+    setValue("commissionDebitId", pattern?.commissionDebitAccountId);
   }
   // if (
   //   pattern?.collectionMoveCostCenterCredit ||
@@ -73,67 +78,80 @@ const mergePattern = async (
   // setRefresh(p => !p);
 };
 
-const CollectionForm = ({
-  popupFormConfig,
-  outerClose
-}) => {
+const CollectionForm = ({ popupFormConfig, outerClose }) => {
   const methods = useForm({
     defaultValue: opCollectionDefaultValues,
     mode: "onBlur",
-    resolver: zodResolver(opCollectionValidationSchema)
+    resolver: zodResolver(opCollectionValidationSchema),
   });
-  const chequeId = popupFormConfig?.chequeValue?.id
-  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { errors, isLoading, isSubmitting } } = methods
+  const chequeId = popupFormConfig?.chequeValue?.id;
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    setError,
+    clearErrors,
+    reset,
+    formState: { errors, isLoading, isSubmitting },
+  } = methods;
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.COLLECTION, chequeId],
     queryFn: async () => {
       const response = await getCollectionByChequeId(chequeId);
       if (response?.success) {
-        reset(response)
+        reset(response);
         return response;
       }
     },
-    enabled: !!chequeId
+    enabled: !!chequeId,
   });
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
-  console.log(popupFormConfig, 'popupFormConfig', popupFormConfig?.chequeValue);
-  
-  useEffect(() => {
-    mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, setValue)
-  }, [popupFormConfig, setValue])
+  console.log(popupFormConfig, "popupFormConfig", popupFormConfig?.chequeValue);
 
+  useEffect(() => {
+    if (!popupFormConfig?.pattern) return;
+    mergePattern(
+      popupFormConfig?.pattern,
+      popupFormConfig?.chequeValue,
+      setValue
+    );
+  }, [popupFormConfig, setValue]);
 
   const onHandleDelete = async () => {
-    setIsDeleteLoading(true)
+    setIsDeleteLoading(true);
     const response = await deleteCollection(data?.id);
     if (response?.success) {
-      outerClose()
+      outerClose();
     }
-    setIsDeleteLoading(false)
-  }
+    setIsDeleteLoading(false);
+  };
 
   const onSubmit = async (values) => {
-    const isUpdate = data?.id
+    const isUpdate = data?.id;
     let response;
     if (isUpdate) {
-      response = await updateCollection(data?.id, values)
+      response = await updateCollection(data?.id, cleanObject(values));
     } else {
-      response = await createCollection(values)
+      response = await createCollection(cleanObject(values));
     }
 
     if (response?.success) {
-      toast.success(`Successfully ${isUpdate ? 'updated' : 'inserted'} cheque collection`)
+      toast.success(
+        `Successfully ${isUpdate ? "updated" : "inserted"} cheque collection`
+      );
     } else {
-      toast.success(`Failed to ${isUpdate ? 'updated' : 'inserted'} cheque collection`)
+      toast.success(
+        `Failed to ${isUpdate ? "updated" : "inserted"} cheque collection`
+      );
     }
-  }
+  };
 
-  console.log(watch(), 'wa');
-  console.log(errors, 'errors', outerClose);
+  console.log(watch(), "wa");
+  console.log(errors, "errors", outerClose);
 
   return (
     <>
@@ -145,9 +163,9 @@ const CollectionForm = ({
       />
       <div>
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate >
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormHeader header="collection" onClose={outerClose} />
-            <div className='grid grid-cols-2 gap-4 p-4'>
+            <div className="grid grid-cols-2 gap-4 p-4">
               <RHFDatePicker label="createdAt" name="createdAt" />
               <CurrencyFieldGroup />
               <RHFInputAmount label="amount" name="amount" />
@@ -155,11 +173,24 @@ const CollectionForm = ({
               <AccountField label="creditAccountId" name="creditAccountId" />
               <CostCenterField label="costCenterId" name="costCenterId" />
               <RHFInput label="note" name="note" />
-              <RHFInput label="commissionPercentage" name="commissionPercentage" type="number" />
+              <RHFInput
+                label="commissionPercentage"
+                name="commissionPercentage"
+                type="number"
+              />
               <RHFInputAmount label="commissionValue" name="commissionValue" />
-              <AccountField label="commissionDebitId" name="commissionDebitId" />
-              <AccountField label="commissionCreditId" name="commissionCreditId" />
-              <CostCenterField label="commissionCostCenterId" name="commissionCostCenterId" />
+              <AccountField
+                label="commissionDebitId"
+                name="commissionDebitId"
+              />
+              <AccountField
+                label="commissionCreditId"
+                name="commissionCreditId"
+              />
+              <CostCenterField
+                label="commissionCostCenterId"
+                name="commissionCostCenterId"
+              />
               <RHFInput label="commissionNote" name="commissionNote" />
             </div>
             <FormFooter
@@ -170,8 +201,7 @@ const CollectionForm = ({
         </FormProvider>
       </div>
     </>
+  );
+};
 
-  )
-}
-
-export default CollectionForm
+export default CollectionForm;
