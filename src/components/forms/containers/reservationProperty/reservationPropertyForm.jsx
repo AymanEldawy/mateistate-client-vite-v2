@@ -1,77 +1,108 @@
+import QUERY_KEYS from "@/data/queryKeys";
 import { CONTACT_PATTERN_ASSETS_TYPE } from "@/helpers/DEFAULT_OPTIONS";
-import { getSearchApartment, getSingleApartment } from "@/services/apartmentService";
-import { getSearchParking, getSingleParking } from "@/services/parkingService";
-import { getSearchShop, getSingleShop } from "@/services/shopService";
+import {
+  getAllApartments,
+  getSearchApartment,
+  getSingleApartment,
+} from "@/services/apartmentService";
+import {
+  getAvailableParkingsByBuildingId,
+  getSearchParking,
+  getSingleParking,
+} from "@/services/parkingService";
+import {
+  getAvailableShopsByBuildingId,
+  getSearchShop,
+  getSingleShop,
+} from "@/services/shopService";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
-import { RHFAsyncSelectField, RHFCheckbox, RHFDatePicker, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import {
+  RHFAsyncSelectField,
+  RHFCheckbox,
+  RHFDatePicker,
+  RHFInput,
+  RHFSelectField,
+  RHFTextarea,
+} from "../../fields";
 import { AccountField } from "../../global";
 import BuildingField from "../../global/BuildingField";
 const ReservationPropertyForm = () => {
   const { watch } = useFormContext();
 
+  const { data: units } = useQuery({
+    queryKey: [
+      QUERY_KEYS.BUILDING,
+      watch("buildingId"),
+      watch("property_type"),
+    ],
+
+    queryFn: async () => {
+      let fn = null;
+      switch (assetType) {
+        case 2: // Parking Unit
+          fn = getAvailableParkingsByBuildingId(watch("buildingId"));
+          break;
+        case 3: // shop
+          fn = getAvailableShopsByBuildingId(watch("buildingId"));
+          break;
+        default:
+          // fn = getAvailableApartmentsByBuildingId(watch('buildingId'));
+          fn = getAllApartments({
+            buildingId: watch("buildingId"),
+          });
+      }
+      const response = await fn;
+      return response?.data || [];
+    },
+  });
+
   const displayUnits = useMemo(() => {
-    let type = watch('property_type');
-    const search = type === 2 ? getSearchShop : type === 2 ? getSearchParking : getSearchApartment
-    const single = type === 2 ? getSingleShop : type === 2 ? getSingleParking : getSingleApartment
+    let type = watch("property_type");
+    const search =
+      type === 2
+        ? getSearchShop
+        : type === 2
+        ? getSearchParking
+        : getSearchApartment;
+    const single =
+      type === 2
+        ? getSingleShop
+        : type === 2
+        ? getSingleParking
+        : getSingleApartment;
     return (
-      <RHFAsyncSelectField
-        disabled={!watch('propertyType') || !watch('buildingId')}
+      <RHFSelectField
+        disabled={!watch("propertyType") || !watch("buildingId")}
         name="property_id"
         label="Property ID"
         type="text"
         required
-        getSearch={search}
-        getSingle={single}
+        options={units}
       />
-    )
-  }, [watch('propertyType')])
+    );
+  }, [watch("propertyType")]);
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[75vh] overflow-auto min-w-[700px]">
-      <div className="grid grid-cols-2 gap-4">
-
-
-        <RHFDatePicker
-          name="createdAt"
-          label="Date"
-        />
-        <AccountField
-          name="accountId"
-          label="Account"
-          required
-        />
-        <BuildingField
-          name="buildingId"
-          label="Building"
-          required
-          containerClassName="col-span-2"
-        />
+    <div className="p-4 flex flex-col min-h-[200px] max-h-[75vh] overflow-auto ">
+      <div className="grid grid-cols-3 gap-4">
+        <RHFDatePicker name="createdAt" label="Date" />
+        <AccountField name="accountId" label="Account" required />
+        <BuildingField name="buildingId" label="Building" required />
         <RHFSelectField
           name="propertyType"
           label="Property Type"
           options={CONTACT_PATTERN_ASSETS_TYPE}
         />
         {displayUnits}
-        <RHFDatePicker
-          name="bookDate"
-          label="Book Date"
-        />
-        
-        <RHFDatePicker
-          name="endBookDate"
-          label="End Book Date"
-        />
+        <RHFDatePicker name="bookDate" label="Book Date" />
 
-        <RHFCheckbox
-          name="reservationExpired"
-          label="Reservation Expired"
-        />
+        <RHFDatePicker name="endBookDate" label="End Book Date" />
 
-        <RHFCheckbox
-          name="hasPayment"
-          label="Has Payment"
-        />
+        <RHFCheckbox name="reservationExpired" label="Reservation Expired" />
+
+        <RHFCheckbox name="hasPayment" label="Has Payment" />
       </div>
       {watch("hasPayment") && (
         <div className="col-span-2 border dark:border-dark-border bg-gray-50 dark:bg-dark-bg p-4 rounded-xl mt-8 relative">
@@ -131,7 +162,7 @@ const ReservationPropertyForm = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ReservationPropertyForm
+export default ReservationPropertyForm;

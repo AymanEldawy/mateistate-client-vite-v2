@@ -6,15 +6,21 @@ export const getSingleInstallment = (id) => {
 };
 
 export const getInstallmentByContractId = (contractId) => {
-  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}?contractId=${contractId}`);
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${contractId}${API_URL_CONSTANTS.BASE_INSTALLMENTS}`);
 };
 
 export const createInstallment = (data) => {
+  console.log(data,'data installment');
+  
   return http.post(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}`, data);
 };
 
+export const installmentCanUpdateCheques = (installmentId) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}/${installmentId}/can-update`);
+};
+
 export const updateInstallment = (installmentId, data) => {
-  return http.patch(
+  return http.put(
     `${API_URL_CONSTANTS.BASE_CONTRACT}/${API_URL_CONSTANTS.BASE_INSTALLMENTS}/${installmentId}`,
     data,
     // {

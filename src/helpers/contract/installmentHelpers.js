@@ -68,6 +68,7 @@ export async function mergeInstallmentAndFirstTabData(
 
   if (total) {
     setValue("installment.totalAmount", total);
+    setValue("installment.restAmount", total);
   }
 
   if (date) {
@@ -78,7 +79,13 @@ export async function mergeInstallmentAndFirstTabData(
   }
 }
 
-export const generatePaymentBatches = async (watch, setValue, unitId, list) => {
+export const generatePaymentBatches = async (
+  watch,
+  setValue,
+  unitId,
+  list,
+  reset
+) => {
   const rest_amount = watch("installment.restAmount");
   const each_duration = watch("installment.eachDuration");
   const each_number = watch("installment.eachNumber");
@@ -88,7 +95,8 @@ export const generatePaymentBatches = async (watch, setValue, unitId, list) => {
   const beneficiaryName = watch("installment.beneficiaryName");
   const accountId = list?.contract?.clientId;
   // let observeAccountId = null;
-  let observeAccountId = await getAccountReceivable(list?.contract?.buildingId);
+  let cashAccount = await getAccountReceivable(list?.contract?.buildingId);
+  let observeAccountId = cashAccount?.accountId;
   const client = list?.client?.find((c) => c.id === accountId);
   const bankId = watch("installment.bankId");
   const bank = list?.bank?.find((c) => c.id === bankId);
@@ -129,7 +137,9 @@ export const generatePaymentBatches = async (watch, setValue, unitId, list) => {
       [unitId]: list?.contract?.[unitId],
     });
   }
-  setValue("installmentGrid", cheques);
+  console.log(cheques,'-cheques');
+  
+  reset({ ...watch(), installmentGrid: cheques});
 };
 
 export function onWatchChangesInstallmentTab(name, value, setValue, watch) {

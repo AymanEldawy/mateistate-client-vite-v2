@@ -1,6 +1,14 @@
-import { FLAT_PROPERTY_TABS, FLATS, refetchBuildingAssets } from "@/helpers/building/buildingHelpers";
+import {
+  FLAT_PROPERTY_TABS,
+  FLATS,
+  refetchBuildingAssets,
+} from "@/helpers/building/buildingHelpers";
 import useFlatColoring from "@/hook/useFlatColoring";
-import { generateBuildingDetailsAndUnits, getBuildingDetailsAndUnits, getSingleBuilding } from "@/services/buildingService";
+import {
+  generateBuildingDetailsAndUnits,
+  getBuildingDetailsAndUnits,
+  getSingleBuilding,
+} from "@/services/buildingService";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -12,7 +20,6 @@ import { ToolsColorsBar } from "./ToolsColorsBar";
 import { ToolsContentBar } from "./ToolsContentBar";
 import { ToolsTabsTable } from "./ToolsTabsTable";
 import { ToolsTabsTableForm } from "./ToolsTabsTableForm";
-
 
 const calculateFlats = (building) => {
   FLATS.apartmentCount = building?.apartmentCount * building?.apartmentFloor;
@@ -42,7 +49,7 @@ const ToolsWarper = () => {
     watch,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useFormContext();
   const [selectedTab, setSelectedTab] = useState(
     Object.values(FLAT_PROPERTY_TABS)?.[0]
@@ -52,11 +59,10 @@ const ToolsWarper = () => {
     queryKey: ["building", id],
     queryFn: async () => {
       const res = await getSingleBuilding(id);
-      return res
+      return res;
     },
-    enabled: !!id
+    enabled: !!id,
   });
-
 
   const { refetch } = useQuery({
     queryKey: ["property_values", building?.id],
@@ -80,7 +86,7 @@ const ToolsWarper = () => {
         );
       }
     },
-    enabled: !!building?.id
+    enabled: !!building?.id,
   });
 
   const onSubmit = async (value) => {
@@ -92,11 +98,19 @@ const ToolsWarper = () => {
     }
 
     const collectFlats = (keys) =>
-      keys.flatMap(key => flatsDetails?.[key] ? Object.values(flatsDetails[key]) : []);
+      keys.flatMap((key) =>
+        flatsDetails?.[key] ? Object.values(flatsDetails[key]) : []
+      );
 
-    const apartments = collectFlats(['apartment', 'mezzanine', 'office', 'penthouse', 'warehouse']);
-    const shops = collectFlats(['store', 'shop']);
-    const parkings = collectFlats(['parking', 'underground']);
+    const apartments = collectFlats([
+      "apartment",
+      "mezzanine",
+      "office",
+      "penthouse",
+      "warehouse",
+    ]);
+    const shops = collectFlats(["store", "shop"]);
+    const parkings = collectFlats(["parking", "underground"]);
 
     setIsLoading(true);
 
@@ -107,18 +121,21 @@ const ToolsWarper = () => {
         apartments,
         shops,
         parkings,
-      }
+      },
     });
 
-    if (response?.isCompleted) {
+    if (response?.success) {
       setUPDATES_ROWS({});
       refetch();
-      refetchBuildingAssets(
-        building?.id,
-        setFlatsDetails,
-        COLLECTION_COUNTS,
-        setUNITS_COLORED_COUNT
-      );
+      // refetchBuildingAssets(
+      //   building?.id,
+      //   setFlatsDetails,
+      //   COLLECTION_COUNTS,
+      //   setUNITS_COLORED_COUNT
+      // );
+      toast.success("Successfully generate units");
+    } else {
+      toast.error("Failed to generate units");
     }
     setIsLoading(false);
   };
@@ -158,10 +175,11 @@ const ToolsWarper = () => {
               return (
                 <span
                   key={key}
-                  className={`rounded-md py-1 px-2 ${val - assetsColoringCount
-                    ? "text-red-500 bg-red-50 font-normal border-red-500"
-                    : "text-gray-400"
-                    } border text-center capitalize`}
+                  className={`rounded-md py-1 px-2 ${
+                    val - assetsColoringCount
+                      ? "text-red-500 bg-red-50 font-normal border-red-500"
+                      : "text-gray-400"
+                  } border text-center capitalize`}
                 >
                   {key?.replace("_", " ")} : {val - assetsColoringCount}
                 </span>
@@ -181,10 +199,11 @@ const ToolsWarper = () => {
                       type="button"
                       onClick={() => setSelectedTab(tab)}
                       key={`${index}-${tab?.tabName}`}
-                      className={`${selectedTab?.tabName === tab?.tabName
-                        ? "!text-black !font-medium dark:bg-dark-border dark:!text-white bg-white"
-                        : ""
-                        } border dark:border-dark-border p-2 px-4 text-sm text-gray-500 font-normal min-w-[120px] w-fit capitalize whitespace-nowrap`}
+                      className={`${
+                        selectedTab?.tabName === tab?.tabName
+                          ? "!text-black !font-medium dark:bg-dark-border dark:!text-white bg-white"
+                          : ""
+                      } border dark:border-dark-border p-2 px-4 text-sm text-gray-500 font-normal min-w-[120px] w-fit capitalize whitespace-nowrap`}
                     >
                       {tab?.tabName}
                     </button>
@@ -202,12 +221,12 @@ const ToolsWarper = () => {
             </div>
           </div>
           <div className="mt-8 flex justify-end">
-            <Btn kind="primary" type="submit" >Submit</Btn>
+            <Btn kind="primary" type="submit">
+              Submit
+            </Btn>
           </div>
         </form>
       </div>
-
-
     </>
   );
 };

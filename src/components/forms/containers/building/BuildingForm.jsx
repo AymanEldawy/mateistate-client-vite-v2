@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
-import DynamicForm from "../../wrapper/DynamicForm";
 import { SubStepsList } from "@/components/shared/SubStepsList";
-import { BUILDING_STEPS } from "@/helpers/building/buildingSteps";
 import {
-  BUILDING_UNITS_FIELDS,
   BUILDING_BUYING_FIELDS,
   BUILDING_EDITORIAL_FIELDS,
+  BUILDING_FIELDS,
   BUILDING_INVESTMENT_FIELDS,
   BUILDING_REAL_ESTATE_DEVELOPMENT_FIELDS,
   BUILDING_REAL_ESTATE_MANAGEMENT_FIELDS,
-  BUILDING_DEFAULT_ACCOUNTS_FIELDS,
-  BUILDING_FIELDS
+  BUILDING_UNITS_FIELDS
 } from "@/helpers/building/buildingFields";
 import { FLATS } from "@/helpers/building/buildingHelpers";
+import { BUILDING_STEPS } from "@/helpers/building/buildingSteps";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import DynamicForm from "../../wrapper/DynamicForm";
+import BuildingFormAccounts from "./BuildingFormAccounts";
 
 const SUB_STEPS = [
   "real_estate_management",
@@ -120,9 +120,9 @@ const BuildingForm = ({ tab }) => {
         )
       }
       case BUILDING_STEPS.building_default_accounts:
-        return <DynamicForm fields={BUILDING_DEFAULT_ACCOUNTS_FIELDS} customGrid="grid-cols-2 gap-4" />
+        return <BuildingFormAccounts />
       default:
-        return <DynamicForm fields={BUILDING_FIELDS} />
+        return <DynamicForm customGrid="grid-cols-2 gap-4" fields={BUILDING_FIELDS} />
     }
   }
 

@@ -1,14 +1,9 @@
 import { RHFDatePicker, RHFSelectField } from "../../fields";
 import UserField from "../../global/UserField";
 const UserWorkTimeForm = () => {
-
   return (
     <div className="p-4 flex flex-col gap-2 min-w-[700px]">
-      <UserField
-        name="userId"
-        label="User"
-        required
-      />
+      <UserField name="userId" label="User" required />
       <RHFSelectField
         name="repeat_type"
         label="Repeat Type"
@@ -51,7 +46,7 @@ const UserWorkTimeForm = () => {
         showTimeCaption={false}
       />
     </div>
-  )
-}
+  );
+};
 
-export default UserWorkTimeForm
+export default UserWorkTimeForm;

@@ -13,11 +13,16 @@ import {
 } from "@/helpers/DEFAULT_OPTIONS";
 import { getLeavesAccounts } from "@/services/accountService";
 import { getAllBanks } from "@/services/bankService";
-import { getInstallmentByContractId } from "@/services/installmentService";
+import {
+  createInstallment,
+  getInstallmentByContractId,
+  installmentCanUpdateCheques,
+  updateInstallment,
+} from "@/services/installmentService";
 import { getNameFromList, getUnitInfo } from "@/utils/functions";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useEffect, useMemo, useState } from "react";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import {
   RHFCheckbox,
@@ -89,6 +94,8 @@ const InstallmentForm = ({
   pattern,
   contract,
 }) => {
+  const [refresh, setRefresh] = useState(false);
+  const [canUpdate, setCanUpdate] = useState(true);
   const methods = useForm();
   const {
     watch,
@@ -97,8 +104,13 @@ const InstallmentForm = ({
     clearErrors,
     handleSubmit,
     reset,
+    control,
     formState: { isSubmitting, errors },
   } = methods;
+  const { replace } = useFieldArray({
+    control,
+    name: "installmentGrid",
+  });
   const CACHE_LIST = {};
 
   const unit = useMemo(
@@ -106,22 +118,23 @@ const InstallmentForm = ({
     [contract?.flatType]
   );
 
-  console.log(
-    pattern,
-    contractId,
-    CACHE_LIST,
-    contract,
-    "-contract installment form-"
-  );
-
   const { isLoading } = useQuery({
-    queryKey: ["installment"],
+    queryKey: ["installment", contract?.id],
     queryFn: async () => {
-      const response = await getInstallmentByContractId(contractId);
+      const response = await getInstallmentByContractId(contract?.id);
+      console.log("called here");
+      if (response?.success) {
+        console.log("can t called here");
+
+        const res = await installmentCanUpdateCheques(
+          response?.installment?.id
+        );
+        if (res?.success) setCanUpdate(res?.canUpdate);
+      }
       reset(response);
       return response;
     },
-    enabled: !!contractId,
+    enabled: !!contract?.id,
   });
 
   const { data: banks } = useQuery({
@@ -139,9 +152,6 @@ const InstallmentForm = ({
       return response?.data || [];
     },
   });
-
-  console.log("installment watch", watch());
-  console.log("installment error", errors);
 
   useEffect(() => {
     if (!contract?.id) return;
@@ -194,45 +204,53 @@ const InstallmentForm = ({
     return () => subscription.unsubscribe();
   }, [watch("installment")]);
 
-  const handleSubmitInstallments = async () => {
+  const generateCheques = () => {
+    generatePaymentBatches(
+      watch,
+      setValue,
+      unit?.value,
+      {
+        banks,
+        clients,
+        contract,
+      },
+      reset
+    );
+    setRefresh((p) => !p);
+  };
+
+  const handleSubmitInstallments = async (values) => {
     if (!installmentValidation(watch, setError)) {
       return;
     }
 
-    const installmentData = watch("installment");
-    const installmentGridData = watch("installmentGrid");
-    const clientName = getNameFromList(clients, watch(`contract.clientId`));
-    const bankName = getNameFromList(banks, watch(`installment.bankId`));
+    const clientName = getNameFromList(clients, contract.clientId);
+    const bankName = getNameFromList(banks, values?.installment.bankId);
 
     const buildingNumber = CACHE_LIST?.building?.find(
-      (c) => c.id === watch(`contract.buildingId`)
+      (c) => c.id === contract.buildingId
     )?.number;
 
     const assetsNumber = CACHE_LIST?.[unit?.table]?.find(
-      (c) => c.id === watch(`contract.${unit?.value}`)
+      (c) => c.id === contract?.[unit?.value]
     )?.[`${unit?.label}`];
 
     let note = `received first payment from mr ${clientName} due date ${new Date(
-      watch("installment.paymentDate")
+      values?.installment.paymentDate
     )?.toLocaleDateString("en-UK")} bank ${bankName} ${
       buildingNumber ? `building number ${buildingNumber}` : ""
     }  ${assetsNumber ? `${unit?.table} number ${assetsNumber}` : ""} `;
 
     try {
-      // await insertIntoContractInstallment({
-      //   installment: installmentData,
-      //   installmentGrid: installmentGridData,
-      //   contractId,
-      //   firstTabData: watch("contract"),
-      //   note,
-      // });
-      // const { installment, installmentGrid, voucher_grid } =
-      //   await getInstallmentData(contractId);
+      console.log(values, "values", watch());
 
-      // if (installment?.success) {
-      //   setValue("voucher_grid", voucher_grid?.result);
-      //   setValue("installmentGrid", installmentGrid?.result);
-      // }
+      setValue("installment.contractId", contract?.id);
+      let response = null;
+      if (values?.installment.id) {
+        response = await updateInstallment(values?.installment.id, values);
+      } else {
+        response = await createInstallment(values);
+      }
       toast.success("Successfully saved Installment");
     } catch (error) {
       toast.error("Failed to save Installment");
@@ -265,7 +283,7 @@ const InstallmentForm = ({
                   name={`installment.restAmount`}
                   readOnly
                 />
-                <CurrencyFieldGroup tab="installment" />
+                <CurrencyFieldGroup name="installment.currencyId" />
                 <div
                   className={`${
                     watch("installment.hasFirstBatch") ? "col-span-2" : "ـــ"
@@ -337,20 +355,14 @@ const InstallmentForm = ({
                   disabled={
                     !watch("installment.eachNumber") ||
                     !watch("installment.installmentsNumbers") ||
-                    !watch("installment.eachDuration")
+                    !watch("installment.eachDuration") ||
+                    !canUpdate
                     // ||
                     // !watch("installment.rest_amount")
                   }
                   type="button"
                   kind="warn"
-                  onClick={() => {
-                    generatePaymentBatches(watch, setValue, unit?.value, {
-                      banks,
-                      clients,
-                      contract,
-                    });
-                    // setTotalChqAmount(watch("installment.rest_amount"));
-                  }}
+                  onClick={generateCheques}
                 >
                   {watch("installmentGrid")?.length
                     ? "ReGenerate cheques"

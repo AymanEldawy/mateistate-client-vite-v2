@@ -1,7 +1,7 @@
 import ReactSelectAsync from "@/components/shared/ReactSelectAsync";
 import { QueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 import { ErrorText } from "../../shared/ErrorText";
 import { Label } from "./Label";
 
@@ -27,10 +27,17 @@ const RHFSelectField = ({
   hideErrors,
   ...field
 }) => {
-  
   const { control, watch, setValue } = useFormContext();
-  const [defaultOption, setDefaultOption] = useState(null)
-  const { name, optionValue = 'id', optionLabel = 'name', table, required, allowAdd, options } = field || {}
+  const [defaultOption, setDefaultOption] = useState(null);
+  const {
+    name,
+    optionValue = "id",
+    optionLabel = "name",
+    table,
+    required,
+    allowAdd,
+    options,
+  } = field || {};
   const queryClient = new QueryClient();
 
   const getDefaultOption = async (value) => {
@@ -40,33 +47,34 @@ const RHFSelectField = ({
         queryFn: async () => {
           if (!value) return;
           const response = await getSingle(value);
-          setDefaultOption(response?.data)
+          setDefaultOption(response?.data);
         },
-        enable: value
+        enable: value,
       });
       return res;
     } catch (error) {
       throw Error(JSON.stringify(error));
     }
-  }
+  };
 
   useEffect(() => {
-    if ((defaultOption && defaultOption?.id === watch(name)) || !watch(name)) return;
-    getDefaultOption(watch(name))
-
-  }, [watch(name), defaultOption])
+    if ((defaultOption && defaultOption?.id === watch(name)) || !watch(name))
+      return;
+    getDefaultOption(watch(name));
+  }, [watch(name), defaultOption]);
 
   return (
     <Controller
       name={name}
       control={control}
       defaultValue={null}
-      render={({
-        field: { ref, onChange, value },
-        fieldState: { error },
-      }) => {
+      render={({ field: { ref, onChange, value }, fieldState: { error } }) => {
         return (
-          <div className={`w-full ${containerClassName} flex ${col ? 'flex-col' : 'flex-row items-center'} gap-1`}>
+          <div
+            className={`w-full ${containerClassName} flex ${
+              col ? "flex-col" : "flex-row items-center"
+            } gap-1`}
+          >
             {label && (
               <Label
                 name={name}
@@ -75,21 +83,23 @@ const RHFSelectField = ({
                 labelClassName={labelClassName}
               />
             )}
-            <div className='relative w-full'>
+            <div className="relative w-full">
               <ReactSelectAsync
                 getOptionLabel={(option) => option?.[optionLabel]}
                 getOptionValue={(option) => option?.[optionValue]}
                 styles={styles}
                 error={error}
-                defaultValue={options?.find(c => c?.[optionValue] === value)}
-                value={options?.find(c => c?.[optionValue] === value)}
+                defaultValue={(options || [])?.find(
+                  (c) => c?.[optionValue] === value
+                )}
+                value={(options || [])?.find((c) => c?.[optionValue] === value)}
                 options={options}
                 selectClassName={selectClassName}
                 isDarkMode={isDarkMode}
                 selectProps={selectProps}
                 small={small}
                 onChange={(option) => {
-                  onChange(option?.[optionValue])
+                  onChange(option?.[optionValue]);
                 }}
                 allowAdd={allowAdd}
                 table={table}
@@ -97,7 +107,9 @@ const RHFSelectField = ({
                 getSearch={getSearch}
               />
               {error && !hideErrors ? (
-                <ErrorText containerClassName="py-1">{error?.message}</ErrorText>
+                <ErrorText containerClassName="py-1">
+                  {error?.message}
+                </ErrorText>
               ) : null}
             </div>
           </div>

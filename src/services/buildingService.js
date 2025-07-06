@@ -67,6 +67,6 @@ export const getBuildingDetailsAndUnits = (buildingId) => {
 
 export const getAccountReceivable = (buildingId) => {
   return http.get(
-    `${API_URL_CONSTANTS.BASE_BUILDING}/receivable?buildingId=${buildingId}`
+    `${API_URL_CONSTANTS.BASE_BUILDING}/${buildingId}/receivable`
   );
 };

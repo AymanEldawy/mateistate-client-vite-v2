@@ -57,7 +57,7 @@ const userColumns = [
   },
   {
     header: "created_at",
-    accessorKey: "created_at",
+    accessorKey: "createdAt",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
@@ -66,7 +66,7 @@ const userColumns = [
   { header: "token", accessorKey: "token" },
   {
     header: "card_type",
-    accessorKey: "card_type",
+    accessorKey: "user.cardType",
 
     cell: ({ getValue }) => {
       let type = USER_TYPE.find((c) => c?.id === getValue());
@@ -75,51 +75,51 @@ const userColumns = [
   },
   {
     header: "date_of_birth",
-    accessorKey: "date_of_birth",
+    accessorKey: "user.dateOfBirth",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "passport_number", accessorKey: "passport_number" },
-  { header: "passport_expiry", accessorKey: "passport_expiry" },
+  { header: "passport_number", accessorKey: "user.passportNumber" },
+  { header: "passport_expiry", accessorKey: "user.passportExpiry" },
   {
     header: "national_id",
-    accessorKey: "national_id",
+    accessorKey: "user.nationalId",
   },
   {
     header: "national_id_expiry",
-    accessorKey: "national_id_expiry",
+    accessorKey: "user.nationalIdExpiry",
   },
-  { header: "address", accessorKey: "address" },
-  { header: "user_type", accessorKey: "user_type" },
-  { header: "commercial_register", accessorKey: "commercial_register" },
-  { header: "barcode", accessorKey: "barcode" },
-  { header: "profession", accessorKey: "profession" },
-  { header: "work_phone", accessorKey: "work_phone" },
-  { header: "personal_phone", accessorKey: "personal_phone" },
-  { header: "fax", accessorKey: "fax" },
-  { header: "mailbox", accessorKey: "mailbox" },
+  { header: "address", accessorKey: "user.address" },
+  { header: "user_type", accessorKey: "user.userType" },
+  { header: "commercial_register", accessorKey: "user.commercialRegister" },
+  { header: "barcode", accessorKey: "user.barcode" },
+  { header: "profession", accessorKey: "user.profession" },
+  { header: "work_phone", accessorKey: "user.workPhone" },
+  { header: "personal_phone", accessorKey: "user.personalPhone" },
+  { header: "fax", accessorKey: "user.fax" },
+  { header: "mailbox", accessorKey: "user.mailbox" },
   { header: "email", accessorKey: "email" },
-  { header: "sponsor", accessorKey: "sponsor" },
-  { header: "sponsor_data", accessorKey: "sponsor_data" },
-  { header: "statement", accessorKey: "statement" },
+  { header: "sponsor", accessorKey: "user.sponsor" },
+  { header: "sponsor_data", accessorKey: "user.sponsorData" },
+  { header: "statement", accessorKey: "user.statement" },
   {
     header: "account_id",
-    accessorKey: "account_id",
+    accessorKey: "user.accountId",
   },
   {
     header: "insurance_account_id",
-    accessorKey: "insurance_account_id",
+    accessorKey: "user.insuranceAccountId",
   },
   {
     header: "bank_id",
-    accessorKey: "bank_id",
+    accessorKey: "user.bankId",
   },
-  { header: "bank_account", accessorKey: "bank_account" },
+  { header: "bank_account", accessorKey: "user.bankAccount" },
   { header: "files", accessorKey: "files" },
   {
     header: "nationality",
-    accessorKey: "nationality",
+    accessorKey: "user.nationality",
   },
 ];
 

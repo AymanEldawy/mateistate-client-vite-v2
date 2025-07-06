@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CONTACT_PATTERN_CONTRACT_TYPE } from "../DEFAULT_OPTIONS";
 // import { getUnitType } from "@/utils/functions";
 import { BanknoteIcon, UserIcon } from "@/components/Icons";
-
+import { getUnitInfo, getUnitTypeColorOrClass } from "@/utils/functions";
 
 const contractColumns = [
   {
@@ -41,13 +41,10 @@ const contractColumns = [
       );
       // let unitType = getContractUnitType(row?.original);
       let unitType = null;
-      const link = `/contracts?code=${row?.original?.code}&number=${row?.original?.number}`
+      const link = `/contracts?code=${row?.original?.code}&number=${row?.original?.number}`;
 
       return (
-        <Link
-          to={link}
-          className="text-blue-500 font-medium hover:underline"
-        >
+        <Link to={link} className="text-blue-500 font-medium hover:underline">
           # {getValue()}
         </Link>
       );
@@ -68,27 +65,31 @@ const contractColumns = [
   {
     header: "unit",
     accessorKey: "unit.name",
-    cell: ({ row, getValue }) => (
-      // <Link
-      //   className={`font-medium hover:underline`}
-      //   style={{ color: row?.original?.hex }}
-      //   to={`/update/building/${row?.original?.building._id}`}
-      // >
-      //   {getValue()}
-      // </Link>
-      <span className={`font-medium`} style={{ color: row?.original?.hex }}>
-        {getValue()}
-      </span>
-    ),
-  },
+    cell: ({ row, getValue }) => {
+      const unit = getUnitInfo(row?.original?.flatType);
 
+      return (
+        <span className={`font-medium`} style={{ color: row?.original?.hex }}>
+          {row?.original?.[unit?.table]?.[unit?.label]}
+        </span>
+      );
+    },
+  },
   {
     header: "unit_type",
     accessorKey: "unit.type",
-    // cell: ({ row, getValue }) => {
-    //   let unitType = getUnitType(row?.original, getValue());
-    //   return <span className="capitalize">{unitType}</span>;
-    // },
+
+    cell: ({ row, getValue }) => {
+      const unit = getUnitInfo(row?.original?.flatType);
+      const color = getUnitTypeColorOrClass(unit?.unitType);
+      return (
+        <span
+          className={`capitalize px-2 py-1 rounded-md flex mx-auto w-fit ${color}`}
+        >
+          {unit?.unitType}
+        </span>
+      );
+    },
   },
   {
     header: "description",
@@ -126,9 +127,7 @@ const contractColumns = [
       <div className="flex gap-1 items-center">
         {new Date(getValue()).toLocaleDateString("en-UK")} -{" "}
         <span className="text-red-500">
-          {new Date(row?.original?.endDurationDate).toLocaleDateString(
-            "en-UK"
-          )}
+          {new Date(row?.original?.endDurationDate).toLocaleDateString("en-UK")}
         </span>
       </div>
     ),
@@ -189,4 +188,4 @@ const contractColumns = [
   // { header: "number", accessorKey: "number" },
 ];
 
-export default contractColumns
+export default contractColumns;

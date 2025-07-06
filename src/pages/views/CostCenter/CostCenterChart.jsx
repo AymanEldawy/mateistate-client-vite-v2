@@ -11,6 +11,8 @@ const CostCenterChart = () => {
 
   // onSelectAddHandler
   const onAddItemHandler = async (item) => {
+    console.log(item,'item');
+    
     const id = item?.parentId ? item?.parentId : item?.id
     const response = await getCostCenterCodeNumber(id);
     if (response?.success) {

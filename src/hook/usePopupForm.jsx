@@ -3,32 +3,34 @@ import { createContext, useContext, useState } from "react";
 export const PopupFormContext = createContext();
 
 export const PopupFormProvider = ({ children }) => {
-  const [stack, setStack] = useState({})
+  const [stack, setStack] = useState({});
   const [open, setOpen] = useState(false);
 
-  const handleDispatchForm = (form) => {    
+  const handleDispatchForm = (form) => {
     setStack({
-      [form.table]: form
-    })
+      [form.table]: form,
+    });
     setOpen(true);
   };
 
-  const onCloseDispatchedForm = (item) => {    
+  const onCloseDispatchedForm = (item) => {
     const newStack = stack;
     delete newStack[item];
-    setStack(newStack)
-    if(!Object.keys(newStack).length) {
+    setStack(newStack);
+    if (!Object.keys(newStack).length) {
       setOpen(false);
     }
-  }
-  
+  };
+
+  console.log(stack, "stack");
+
   return (
     <PopupFormContext.Provider
       value={{
         handleDispatchForm,
         onCloseDispatchedForm,
         stack,
-        open
+        open,
       }}
     >
       {children}

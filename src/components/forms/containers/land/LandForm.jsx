@@ -1,8 +1,13 @@
-import { RHFAsyncSelectField, RHFDatePicker, RHFInput, RHFTableInput, RHFTextarea } from "../../fields";
 import { LAND_STEPS } from "@/data/constants";
-import TableForm from "../../wrapper/TableForm";
-import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
 import { useTranslation } from "react-i18next";
+import {
+  RHFAsyncSelectField,
+  RHFDatePicker,
+  RHFInput,
+  RHFTableInput,
+  RHFTextarea,
+} from "../../fields";
+import TableForm from "../../wrapper/TableForm";
 const LandForm = ({ tab }) => {
   const { t } = useTranslation();
   // todo: rethink this after client feedback
@@ -29,8 +34,16 @@ const LandForm = ({ tab }) => {
 
       <RHFInput name="licenseNo" label="license_number" />
       <RHFInput name="license" label="license" />
-      <RHFDatePicker name="licenseDate" label="license_date" containerClassName="col-span-2" />
-      <RHFTextarea name="details" label="details" containerClassName="col-span-2" />
+      <RHFDatePicker
+        name="licenseDate"
+        label="license_date"
+        containerClassName="col-span-2"
+      />
+      <RHFTextarea
+        name="details"
+        label="details"
+        containerClassName="col-span-2"
+      />
 
       <RHFInput name="beginLandValue" label="begin_land_value" type="number" />
       <RHFAsyncSelectField
@@ -39,7 +52,11 @@ const LandForm = ({ tab }) => {
         label="begin_land_currency"
         allowAdd
       />
-      <RHFInput name="currencyValBeginLand" label="currency_value_begin_land" type="number" />
+      <RHFInput
+        name="currencyValBeginLand"
+        label="currency_value_begin_land"
+        type="number"
+      />
       <RHFAsyncSelectField
         table="cost_center"
         name="beginLandCostCenterId"
@@ -52,8 +69,16 @@ const LandForm = ({ tab }) => {
         label="purchase_currency"
         allowAdd
       />
-      <RHFInput name="currencyValPurchase" label="currency_value_purchase" type="number" />
-      <RHFInput name="purchaseNote" label="purchase_note" containerClassName="col-span-2" />
+      <RHFInput
+        name="currencyValPurchase"
+        label="currency_value_purchase"
+        type="number"
+      />
+      <RHFInput
+        name="purchaseNote"
+        label="purchase_note"
+        containerClassName="col-span-2"
+      />
       <RHFAsyncSelectField
         table="cost_center"
         name="costCenterId"
@@ -123,16 +148,32 @@ const LandForm = ({ tab }) => {
         label="currency_identity_id"
         allowAdd
       />
-      <RHFInput name="currencyValidEntity" label="currency_valid_entity" type="number" />
-      <RHFDatePicker name="identityBeginDate" label="identity_begin_date" type="date" />
-      <RHFDatePicker name="identityEndDate" label="identity_end_date" type="date" />
+      <RHFInput
+        name="currencyValidEntity"
+        label="currency_valid_entity"
+        type="number"
+      />
+      <RHFDatePicker
+        name="identityBeginDate"
+        label="identity_begin_date"
+        type="date"
+      />
+      <RHFDatePicker
+        name="identityEndDate"
+        label="identity_end_date"
+        type="date"
+      />
       <RHFAsyncSelectField
         table="identity_entry"
         name="identityEntryId"
         label="identity_entry_id"
         allowAdd
       />
-      <RHFTextarea name="identityNote" label="identity_note" containerClassName="col-span-2" />
+      <RHFTextarea
+        name="identityNote"
+        label="identity_note"
+        containerClassName="col-span-2"
+      />
 
       <RHFInput name="ltnname" label="LTN Name" />
       <RHFInput name="ltnLandType" label="LTN Land Type" type="text" />
@@ -143,14 +184,25 @@ const LandForm = ({ tab }) => {
       <RHFInput name="ltnSide" label="LTN Side" type="text" />
 
       <RHFInput name="ban" label="Ban" type="checkbox" />
-      <RHFInput name="commissionPercent" label="Commission Percent" type="number" />
+      <RHFInput
+        name="commissionPercent"
+        label="Commission Percent"
+        type="number"
+      />
       <RHFInput name="usedEndDate" label="Used End Date" type="checkbox" />
-      <RHFInput name="createEntryInvestment" label="Create Entry Investment" type="checkbox" />
+      <RHFInput
+        name="createEntryInvestment"
+        label="Create Entry Investment"
+        type="checkbox"
+      />
     </div>
-  )
+  );
 
   const LandAccumulateFields = (
-    <div key="landAccumulateFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
+    <div
+      key="landAccumulateFields"
+      className="grid grid-cols-1 gap-x-4 gap-y-4"
+    >
       <TableForm
         renderFields={(item, index) => (
           <td>
@@ -162,92 +214,113 @@ const LandForm = ({ tab }) => {
           </td>
         )}
         gridName={"landAccumulates"}
-        headers={[
-          "land_id",
-        ]}
+        headers={["land_id"]}
       />
     </div>
-  )
+  );
 
   const LandRentalPriceFields = (
-    <div key="landRentalPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
+    <div
+      key="landRentalPriceFields"
+      className="grid grid-cols-1 gap-x-4 gap-y-4"
+    >
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`landRentalPrices.${index}.date`} type="date" />
+              <RHFDatePicker
+                name={`landRentalPrices.${index}.date`}
+                type="date"
+              />
             </td>
             <td>
-              <RHFTableInput name={`landRentalPrices.${index}.price`} label="price" type="number" />
+              <RHFTableInput
+                name={`landRentalPrices.${index}.price`}
+                label="price"
+                type="number"
+              />
             </td>
             <td>
-              <RHFAsyncSelectField name={`landRentalPrices.${index}.currencyId`} table="currency" allowAdd />
+              <RHFAsyncSelectField
+                name={`landRentalPrices.${index}.currencyId`}
+                table="currency"
+                allowAdd
+              />
             </td>
             <td>
-              <RHFTableInput name={`landRentalPrices.${index}.note`} label="note" />
+              <RHFTableInput
+                name={`landRentalPrices.${index}.note`}
+                label="note"
+              />
             </td>
           </>
         )}
         gridName={"landRentalPrices"}
-        headers={[
-          "date",
-          "price",
-          "currency",
-          "note",
-        ]}
+        headers={["date", "price", "currency", "note"]}
       />
     </div>
-  )
+  );
 
   const LandSellingPriceFields = (
-    <div key="landSellingPriceFields" className="grid grid-cols-1 gap-x-4 gap-y-4">
+    <div
+      key="landSellingPriceFields"
+      className="grid grid-cols-1 gap-x-4 gap-y-4"
+    >
       <TableForm
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker name={`landSellingPrices.${index}.date`} type="date" />
+              <RHFDatePicker
+                name={`landSellingPrices.${index}.date`}
+                type="date"
+              />
             </td>
             <td>
-              <RHFTableInput name={`landSellingPrices.${index}.price`} label="price" type="number" />
+              <RHFTableInput
+                name={`landSellingPrices.${index}.price`}
+                label="price"
+                type="number"
+              />
             </td>
             <td>
-              <RHFAsyncSelectField name={`landSellingPrices.${index}.currencyId`} table="currency" allowAdd />
+              <RHFAsyncSelectField
+                name={`landSellingPrices.${index}.currencyId`}
+                table="currency"
+                allowAdd
+              />
             </td>
             <td>
-              <RHFTableInput name={`landSellingPrices.${index}.note`} label="note" />
+              <RHFTableInput
+                name={`landSellingPrices.${index}.note`}
+                label="note"
+              />
             </td>
           </>
         )}
         gridName={"landSellingPrices"}
-        headers={[
-          "date",
-          "price",
-          "currency",
-          "note",
-        ]}
+        headers={["date", "price", "currency", "note"]}
       />
     </div>
-  )
+  );
 
   const renderFields = () => {
     switch (tab) {
       case LAND_STEPS.land_general:
-        return LandGeneralFields
+        return LandGeneralFields;
       case LAND_STEPS.land_accumulate:
-        return LandAccumulateFields
+        return LandAccumulateFields;
       case LAND_STEPS.land_rental_price:
-        return LandRentalPriceFields
+        return LandRentalPriceFields;
       case LAND_STEPS.land_selling_price:
-        return LandSellingPriceFields
-
+        return LandSellingPriceFields;
     }
-  }
+  };
 
   return (
-    <div className="p-4 flex flex-col min-h-[400px] max-h-[70lvh] overflow-auto min-w-[700px]">
+    <div className="p-4 flex flex-col min-h-[400px] max-h-[70lvh] overflow-auto ">
       {renderFields()}
     </div>
-  )
-}
+  );
+};
 
-export default LandForm
+export default LandForm;

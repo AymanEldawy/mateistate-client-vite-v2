@@ -196,3 +196,22 @@ export function cleanObject(obj) {
 
   return obj;
 }
+
+
+// Returns a color or className string based on the unit type
+export function getUnitTypeColorOrClass(unitType) {
+  switch (unitType?.toLowerCase()) {
+    case "apartment":
+      return "bg-blue-100 text-blue-700"; // or "#3b82f6"
+    case "parking":
+      return "bg-gray-200 text-gray-700"; // or "#6b7280"
+    case "land":
+      return "bg-green-100 text-green-700"; // or "#22c55e"
+    case "villa":
+      return "bg-purple-100 text-purple-700"; // or "#a21caf"
+    case "shop":
+      return "bg-yellow-100 text-yellow-700"; // or "#eab308"
+    default:
+      return "bg-gray-100 text-gray-500"; // or "#9ca3af"
+  }
+}

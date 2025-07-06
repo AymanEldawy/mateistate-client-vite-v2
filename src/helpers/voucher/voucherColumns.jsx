@@ -1,56 +1,76 @@
-import { PrintIcon, SearchIcon } from "@/components/Icons"
-import Btn from "@/components/shared/Btn"
-import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox"
-import { VOUCHER_RECEIPTS_CODE, VOUCHER_RECEIPTS_NAME } from "@/data/GENERATE_STARTING_DATA"
-import { Link } from "react-router-dom"
+import { PrintIcon, SearchIcon } from "@/components/Icons";
+import Btn from "@/components/shared/Btn";
+import { ViewEntry } from "@/components/shared/ViewEntry";
+import IndeterminateCheckbox from "@/components/tables/containers/IndeterminateCheckbox";
+import {
+  VOUCHER_RECEIPTS_CODE,
+  VOUCHER_RECEIPTS_NAME,
+} from "@/data/GENERATE_STARTING_DATA";
+import { Link } from "react-router-dom";
 
-export const VOUCHER_GRID_COLUMNS = [
+export const CASHES_COLUMNS = [
   {
     header: "internal_number",
-    accessorKey: "internal_number",
-    enableColumnFilter: false, cell: ({ row, getValue, table }) => {
+    accessorKey: "number",
+    enableColumnFilter: false,
+    cell: ({ row, getValue, table }) => {
       return (
         <div className="flex gap-2 items-center">
-          <button type='button' className="border px-2 py-1 font-medium hover:bg-gray-200 bg-gray-100 rounded-md flex items-center gap-2 text-sm" onClick={() => {
-            table.options.meta.handleDispatchForm({
-              type: "VOUCHER",
-              table: 'voucher',
-              voucherName: VOUCHER_RECEIPTS_NAME,
-              voucherType: VOUCHER_RECEIPTS_CODE,
-              cheque_id: row?.original.id,
-              oldValues: {
-                ...row?.original,
-                credit_total: 0,
-                debit_total: 0,
-                debit_amount: 0,
-                credit_amount: 0,
-                voucherGridData: row?.original?.result,
-              },
-            })
-          }}>
+          <button
+            type="button"
+            className="border px-2 py-1 font-medium hover:bg-gray-200 bg-gray-100 rounded-md flex items-center gap-2 text-sm"
+            onClick={() => {
+              table.options.meta.handleDispatchForm({
+                type: "VOUCHER",
+                table: "voucher",
+                voucherName: VOUCHER_RECEIPTS_NAME,
+                voucherType: VOUCHER_RECEIPTS_CODE,
+                defaultCode: VOUCHER_RECEIPTS_CODE,
+                defaultNumber: row?.original.number,
+                cheque_id: row?.original.id,
+                oldValues: {
+                  ...row?.original,
+                  creditTotal: 0,
+                  debitTotal: 0,
+                  debitAmount: 0,
+                  creditAmount: 0,
+                  voucherGridData: row?.original?.result,
+                },
+                handleRefetchOnChangeData:
+                  table?.options?.meta?.handleRefetchOnChangeData,
+              });
+            }}
+          >
             {getValue()}
             <SearchIcon className="h-4 w-4" />
           </button>
-          {/* <ViewEntry id={row?.original?.id} hideText /> */}
+          <ViewEntry id={row?.original?.id} hideText />
           <Btn
             type="button"
-            onClick={() => { }}
+            onClick={() => {}}
             containerClassName="!w-fit !px-2"
           >
             <PrintIcon className="w-5 h-5 text-inherit" />
           </Btn>
         </div>
-      )
-    }
+      );
+    },
   },
-  { header: "credit", accessorKey: "credit", enableColumnFilter: false, },
   {
-    header: "created_at", accessorKey: "createdAt", enableColumnFilter: false, cell: ({ getValue }) => (
+    header: "credit",
+    accessorKey: "voucherGridData.0.credit",
+    enableColumnFilter: false,
+  },
+  {
+    header: "created_at",
+    accessorKey: "createdAt",
+    enableColumnFilter: false,
+    cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "note", accessorKey: "note", enableColumnFilter: false, },
-]
+  { header: "note", accessorKey: "note", enableColumnFilter: false },
+];
 
 const voucherColumns = [
   {
@@ -107,29 +127,27 @@ const voucherColumns = [
   {
     header: "feedback",
     accessorKey: "feedback",
-    cell: ({ getValue }) => (
-      <span>{getValue() ? "Yes" : "No"}</span>
-    ),
+    cell: ({ getValue }) => <span>{getValue() ? "Yes" : "No"}</span>,
   },
   {
     header: "gen_entries",
     accessorKey: "genEntries",
-    cell: ({ getValue }) => (
-      <span>{getValue() ? "Yes" : "No"}</span>
-    ),
+    cell: ({ getValue }) => <span>{getValue() ? "Yes" : "No"}</span>,
   },
   {
     header: "first_batch",
     accessorKey: "isFirstBatch",
-    cell: ({ getValue }) => (
-      <span>{getValue() ? "Yes" : "No"}</span>
-    ),
+    cell: ({ getValue }) => <span>{getValue() ? "Yes" : "No"}</span>,
   },
   {
     header: "status",
     accessorKey: "isDeleted",
     cell: ({ getValue }) => (
-      <span className={`px-2 py-1 rounded-full text-xs ${getValue() ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"}`}>
+      <span
+        className={`px-2 py-1 rounded-full text-xs ${
+          getValue() ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"
+        }`}
+      >
         {getValue() ? "Deleted" : "Active"}
       </span>
     ),

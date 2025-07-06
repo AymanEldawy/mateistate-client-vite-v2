@@ -16,7 +16,7 @@ const useFormPagination = ({
   defaultValue,
 }) => {
   const idKey = name === "user" ? "member_id" : "id";
-  // console.log("useFormPagination", name, number, code, chequeId);
+  // console.log("useFormPagination", name, number, code?.toString(), chequeId);
   const [currentNumber, setCurrentNumber] = useState();
   const [lastNumber, setLastNumber] = useState(number);
   const [currentId, setCurrentId] = useState(null);
@@ -37,7 +37,7 @@ const useFormPagination = ({
       name,
       number || defaultNumber,
       "number",
-      code,
+      code?.toString(),
       chequeId
     );
     if (current?.data) {
@@ -50,7 +50,7 @@ const useFormPagination = ({
   };
 
   const goLast = async (isNew, ignore) => {
-    const current = await getLastOne(name, code, chequeId);
+    const current = await getLastOne(name, code?.toString(), chequeId);
     if (current?.success) {
       let data = current?.data;
       let last = +data?.number || 0;
@@ -84,7 +84,12 @@ const useFormPagination = ({
   };
 
   const goNext = async () => {
-    const current = await getNextOne(name, currentNumber, code, chequeId);
+    const current = await getNextOne(
+      name,
+      currentNumber,
+      code?.toString(),
+      chequeId
+    );
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);
@@ -94,7 +99,12 @@ const useFormPagination = ({
 
   const goBack = async () => {
     if (currentNumber === 1) return;
-    const current = await getPreviousOne(name, currentNumber, code, chequeId);
+    const current = await getPreviousOne(
+      name,
+      currentNumber,
+      code?.toString(),
+      chequeId
+    );
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);
@@ -104,7 +114,7 @@ const useFormPagination = ({
 
   const goFirst = async () => {
     if (currentNumber === 1) return;
-    const current = await getFirstOne(name, code, chequeId);
+    const current = await getFirstOne(name, code?.toString(), chequeId);
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);

@@ -110,8 +110,6 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
-  console.log(popupFormConfig, "popupFormConfig", popupFormConfig?.chequeValue);
-
   useEffect(() => {
     if (!popupFormConfig?.pattern) return;
     mergePattern(
@@ -149,9 +147,6 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
       );
     }
   };
-
-  console.log(watch(), "wa");
-  console.log(errors, "errors", outerClose);
 
   return (
     <>

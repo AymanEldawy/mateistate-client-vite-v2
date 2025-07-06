@@ -33,9 +33,10 @@ const FormWrapper = ({
   oldValues,
   refetch,
   onInsertDispatchedForm,
+  handleRefetchOnChangeData,
   ...props
 }) => {
-  // console.log({ outerClose, onInsertDispatchedForm, refetch }, numberSearchParam, 'props in FormWrapper');
+  console.log(oldValues, "old values");
 
   const navigate = useNavigate();
   const pathname = usePathname();
@@ -68,6 +69,13 @@ const FormWrapper = ({
     formState: { isSubmitting, isLoading, isDirty, errors, dirtyFields },
   } = methods;
 
+  console.log(
+    refetch,
+    "-refetch",
+    searchParamsSelectedNumber,
+    numberSearchParam
+  );
+
   const paginationForm = useFormPagination({
     name,
     number: refetch ? searchParamsSelectedNumber : numberSearchParam,
@@ -99,8 +107,7 @@ const FormWrapper = ({
   const id =
     paginationForm?.currentId || oldData?.id || formProps?.defaultValue?.id;
 
-  // console.log(watch(), 'watch');
-  // console.log(errors, 'errors');
+  console.log(errors, "errors");
 
   const { mutateAsync } = useMutation({
     mutationFn: (data) => {
@@ -119,6 +126,12 @@ const FormWrapper = ({
       onSuccessAction?.(response);
       if (onInsertDispatchedForm) {
         onInsertDispatchedForm(response);
+      }
+
+      if (handleRefetchOnChangeData) {
+        console.log("called refetch data");
+
+        handleRefetchOnChangeData();
       }
       if (outerClose) outerClose();
       onClose();
@@ -201,6 +214,8 @@ const FormWrapper = ({
     }
   };
 
+  console.log(watch(), "watch");
+
   const resetFormHandler = () => reset(defaultValue);
 
   return (
@@ -235,6 +250,7 @@ const FormWrapper = ({
               formSidebarProps={formSidebarProps}
               paginationForm={paginationForm}
               code={codeSearchParam}
+              refetch={refetch}
               {...props}
               {...formProps}
             />
@@ -243,6 +259,7 @@ const FormWrapper = ({
               paginationForm={paginationForm}
               code={codeSearchParam}
               codeSearchParam={codeSearchParam}
+              refetch={refetch}
               {...props}
               {...formProps}
             />

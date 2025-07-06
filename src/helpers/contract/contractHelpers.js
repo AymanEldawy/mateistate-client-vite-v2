@@ -7,14 +7,14 @@ import { FLAT_PROPERTY_TYPES } from "../building/buildingHelpers";
 export function getNextYear() {
   let date = new Date();
   date.setDate(date.getDate() - 1);
-  return new Date(date.setFullYear(date.getFullYear() + 1))
+  return new Date(date.setFullYear(date.getFullYear() + 1));
 }
 export function getUnitType(contract, value) {
   let type = contract?.parkingId
     ? "parking"
     : contract?.shopId
-      ? "shop"
-      : "apartment";
+    ? "shop"
+    : "apartment";
 
   return FLAT_PROPERTY_TYPES[`${type}${value}`];
 }
@@ -64,8 +64,6 @@ export function dividePrice(
 
   return result;
 }
-
-
 
 export const COUNTER_CHQ_NUMBER = [
   "first",
@@ -134,43 +132,36 @@ export const CONTRACT_STATUS = {
 export async function fetchAndMergeBuildingInfo(buildingId, setValue) {
   const data = await getSingleBuilding(buildingId);
   if (data?.success) {
-    if (data?.lessorId)
-      setValue(`contract.lessorId`, data?.lessorId);
+    if (data?.lessorId) setValue(`contract.lessorId`, data?.lessorId);
     if (data?.commissionRate) {
-      setValue(
-        "contractCommission.commissionPercentage",
-        data?.commissionRate
-      );
+      setValue("contractCommission.commissionPercentage", data?.commissionRate);
       setValue(
         "contractCommission.commissionFromOwnerAccountId",
         data?.ownerAccountId
       );
-      setValue("contractCommission.commissionAccountId", data?.buildingRevenueAccountId);
+      setValue(
+        "contractCommission.commissionAccountId",
+        data?.buildingRevenueAccountId
+      );
     }
     if (data?.buildingRevenueAccountId)
       setValue(`contract.revenueAccountId`, data?.buildingRevenueAccountId);
     if (data?.buildingDiscountAccountId)
-      setValue(
-        `contract.discountAccountId`,
-        data?.buildingDiscountAccountId
-      );
+      setValue(`contract.discountAccountId`, data?.buildingDiscountAccountId);
     if (data?.buildingInsuranceAccountId)
-      setValue(
-        `contract.insuranceAccountId`,
-        data?.buildingInsuranceAccountId
-      );
+      setValue(`contract.insuranceAccountId`, data?.buildingInsuranceAccountId);
   }
 }
 
 export async function fetchAndMergeAssetInfo(asset, assetId, setValue) {
-  let response = null
+  let response = null;
   switch (asset) {
     case 2: // Parking Unit
       response = await getSingleParking(assetId);
-      break
+      break;
     case 3: // shop
       response = await getSingleShop(assetId);
-      break
+      break;
     default:
       response = await getSingleApartment(assetId);
   }
@@ -184,9 +175,9 @@ export async function fetchAndMergeAssetInfo(asset, assetId, setValue) {
 
 export function onWatchChangesInTab1(name, setValue, watch) {
   switch (name) {
-    case 'contractValue': {
-      setValue('contract.priceBeforeVat', watch('contract.contractValue'))
-      setValue('contract.finalPrice', watch('contract.contractValue'))
+    case "contractValue": {
+      setValue("contract.priceBeforeVat", watch("contract.contractValue"));
+      setValue("contract.finalPrice", watch("contract.contractValue"));
       return;
     }
 
@@ -208,7 +199,7 @@ export function onWatchChangesInTab1(name, setValue, watch) {
       setValue(`contract.finalPrice`, newFinalPrice);
       setValue("installment.totalAmount", newFinalPrice);
       setValue(`contract.vatValue`, vatValue);
-      return
+      return;
     }
     case "discountRate": {
       let discount = watch(`contract.discountRate`) || 0;
@@ -241,10 +232,7 @@ export function onWatchChangesInTab1(name, setValue, watch) {
   }
 }
 
-export const calculateContractDuration = (
-  watch,
-  setValue,
-) => {
+export const calculateContractDuration = (watch, setValue) => {
   let duration = watch(`contract.contractDuration`);
   let date = new Date(watch(`contract.startDurationDate`));
 
@@ -257,37 +245,42 @@ export const calculateContractDuration = (
   let end_duration_date = null;
   if (duration === 4) {
     setValue(`contract.endDurationDate`, new Date());
-    return
+    return;
   }
 
   switch (duration) {
     case 1:
-      date = new Date(date.setMonth(date.getMonth() + 3))
+      date = new Date(date.setMonth(date.getMonth() + 3));
       break;
     case 2:
-      date = new Date(date.setMonth(date.getMonth() + 6))
+      date = new Date(date.setMonth(date.getMonth() + 6));
       break;
     case 3:
-      date = new Date(date.setFullYear(date.getFullYear() + 1))
+      date = new Date(date.setFullYear(date.getFullYear() + 1));
       break;
     default:
       break;
   }
-  let subDate = new Date(date)
+  let subDate = new Date(date);
   // subDate.setDate(subDate.getDate() - 1);
   subDate.setDate(subDate.getDate() - 1);
   setValue(`contract.endDurationDate`, new Date(subDate));
 };
 
-export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, watch) {
+export async function mergeInstallmentAndFirstTabData(
+  firstTabData,
+  setValue,
+  watch
+) {
   let total = firstTabData?.finalPrice;
-  let date = firstTabData?.startDurationDate || firstTabData?.propertyDeliveryDate;
+  let date =
+    firstTabData?.startDurationDate || firstTabData?.propertyDeliveryDate;
 
-  if (!watch('installment.eachNumber')) {
+  if (!watch("installment.eachNumber")) {
     setValue("installment.eachNumber", 3);
   }
 
-  if (!watch('installment.installmentsNumbers')) {
+  if (!watch("installment.installmentsNumbers")) {
     setValue("installment.installmentsNumbers", 4);
   }
 
@@ -301,54 +294,29 @@ export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, wa
       new Date(date)?.toISOString()?.substring(0, 10)
     );
   }
-
-
 }
 
-export async function mergePatternWithContractData(
-  pattern,
-  watch,
-  setValue,
-) {
+export async function mergePatternWithContractData(pattern, watch, setValue) {
+  console.log("called pattern merge", pattern);
 
-  console.log('called pattern merge', pattern)
-
-  setValue('contract.contractType', pattern?.contractType);
-  setValue('contract.contractPatternId', pattern?.id);
-  setValue('contract.code', +pattern?.code);
-  setValue('contract.flatType', pattern?.assetsType);
+  setValue("contract.contractType", pattern?.contractType);
+  setValue("contract.contractPatternId", pattern?.id);
+  setValue("contract.code", +pattern?.code);
+  setValue("contract.flatType", pattern?.assetsType);
   if (pattern?.defaultRevenueAccountId)
-    setValue(
-      `contract.revenueAccountId`,
-      pattern?.defaultRevenueAccountId
-    );
+    setValue(`contract.revenueAccountId`, pattern?.defaultRevenueAccountId);
   if (pattern?.defaultInsuranceAccountId)
-    setValue(
-      `contract.insuranceAccountId`,
-      pattern?.defaultInsuranceAccountId
-    );
+    setValue(`contract.insuranceAccountId`, pattern?.defaultInsuranceAccountId);
   if (pattern?.defaultDiscountAccountId)
-    setValue(
-      `contract.discountAccountId`,
-      pattern?.defaultDiscountAccountId
-    );
+    setValue(`contract.discountAccountId`, pattern?.defaultDiscountAccountId);
   if (pattern?.defaultVatAccountId)
-    setValue(
-      `contract.vatAccountId`,
-      pattern?.defaultVatAccountId
-    );
-  if (pattern?.vatRate)
-    setValue(
-      `contract.vatRate`,
-      pattern?.vatRate
-    );
-  if (pattern?.genEntries)
-    setValue(`contract.genEntries`, pattern?.genEntries);
+    setValue(`contract.vatAccountId`, pattern?.defaultVatAccountId);
+  if (pattern?.vatRate) setValue(`contract.vatRate`, pattern?.vatRate);
+  if (pattern?.genEntries) setValue(`contract.genEntries`, pattern?.genEntries);
 
   for (let i = 1; i <= 10; i++) {
-    let account = pattern?.[`defaultFeesAccountId${i}`]
-    if (account)
-      setValue(`contractFinesGrid.${i - 1}.accountId`, account)
+    let account = pattern?.[`defaultFeesAccountId${i}`];
+    if (account) setValue(`contractFinesGrid.${i - 1}.accountId`, account);
   }
 }
 
@@ -366,12 +334,16 @@ export const onWatchChangesTerminationTab = (name, value, watch, setValue) => {
         let price = watch(`contract.contractValue`);
         let start = watch(`contract.startDurationDate`);
         let end = watch(`contract.endDurationDate`);
+
+        console.log(price,'---', start, end);
+        
         let { totalPrice, restPrice } = calculateModifiedPrice(
           price,
           start,
           end,
           terminationDate
         );
+        console.log('called here', restPrice, totalPrice);
 
         let roundTo = watch("contractTermination.roundTo");
         switch (roundTo) {
@@ -386,6 +358,8 @@ export const onWatchChangesTerminationTab = (name, value, watch, setValue) => {
         }
         setValue("contractTermination.ownerTotalAmount", +totalPrice);
         setValue("contractTermination.ownerRestAmount", +restPrice);
+        console.log('called here', restPrice, totalPrice);
+        
       }
       break;
     default:
@@ -403,7 +377,7 @@ function calculateModifiedPrice(price, startDate, endDate, terminationDate) {
   let priceInDay = price / totalDays;
   let totalPrice = 0;
   let restPrice = 0;
-
+  
   if (termination > end) {
     diffDays = Math.floor((termination - end) / (1000 * 60 * 60 * 24));
     modifiedPrice = totalDays + diffDays;
@@ -411,7 +385,8 @@ function calculateModifiedPrice(price, startDate, endDate, terminationDate) {
     diffDays = Math.floor((end - termination) / (1000 * 60 * 60 * 24));
     modifiedPrice = totalDays - diffDays;
   }
-
+  
+  console.log('modify',modifiedPrice , priceInDay )
   totalPrice = modifiedPrice * priceInDay;
   restPrice = price - totalPrice;
 
@@ -435,7 +410,7 @@ export function getAssetType(name) {
 //       { type: "and", conditions: [["connect_with_id", "=", contract_id]] },
 //     ],
 //   });
-//   setValue("installment_grid", chqResponse?.result);
+//   setValue("installmentGrid", chqResponse?.result);
 //   const vouchersResponse = await ApiActions.read("voucher_main_data", {
 //     conditions: [
 //       { type: "and", conditions: [["connect_with_id", "=", contract_id]] },
