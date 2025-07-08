@@ -50,7 +50,7 @@ const UserForm = () => {
         <RHFInput label="trnNumber" name="user.trnNumber" type="number" />
         <AccountField label="accountId" name="user.accountId" />
 
-        <RHFInput label="dateOfBirth" name="user.dateOfBirth" />
+        <RHFDatePicker label="dateOfBirth" name="user.dateOfBirth" />
         <RHFInput label="passportNumber" name="user.passportNumber" />
         <RHFDatePicker label="passportExpiry" name="user.passportExpiry" />
         <RHFInput label="nationalId" name="user.nationalId" />
@@ -59,7 +59,7 @@ const UserForm = () => {
         <RHFSelectField label="userType" name="user.userType" options={[]} />
         <RHFInput label="commercialRegister" name="user.commercialRegister" />
         <RHFInput label="barcode" name="user.barcode" type="number" />
-        <RHFInput label="profession" name="user.profession" />
+        <RHFInput label="profession" name="user.profession"  type="number" />
         <RHFInput label="workPhone" name="user.workPhone" />
         <RHFInput label="token" name="user.token" />
         <RHFInput label="fax" name="user.fax" />

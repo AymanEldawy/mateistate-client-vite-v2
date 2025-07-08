@@ -7,7 +7,7 @@ export const billDefaultValue = {
     billKind: 1,
     clientAccountId: "",
     currencyId: "",
-    currencyVal: 1.0,
+    // currencyVal: 1.0,
     paymentMethod: 1,
     note: "",
     receiptNumber: "",
@@ -46,8 +46,8 @@ export const billDefaultValue = {
       accountId: "",
       discount: 0,
       extra: 0,
-      currencyId: "",
-      currencyVal: 1,
+      // currencyId: "",
+      // currencyVal: 1,
       costCenterId: "",
       obverseAccountId: "",
       note: ""
@@ -68,15 +68,15 @@ const billDiscountDetailSchema = z.object({
   accountId: z.string().optional(),
   discount: z.number().min(0),
   extra: z.number().min(0),
-  currencyId: z.string().optional(),
-  currencyVal: z.number().min(0),
+  // currencyId: z.string().optional(),
+  // currencyVal: z.number().min(0),
   costCenterId: z.string().optional(),
   obverseAccountId: z.string().optional(),
   note: z.string().optional()
 });
 
 const billMaterialDetailSchema = z.object({
-  materialId: z.string().optional(),
+  materialId: z.string(),
   quantity: z.number().min(0),
   unitPrice: z.number().min(0),
   totalPrice: z.number().min(0),
@@ -89,7 +89,7 @@ const billSchema = z.object({
   billKind: z.number().min(1),
   clientAccountId: z.string().optional(),
   currencyId: z.string().optional(),
-  currencyVal: z.number().min(0),
+  // currencyVal: z.number().min(0),
   paymentMethod: z.number().min(1),
   note: z.string().optional(),
   receiptNumber: z.string().or(z.number()).optional(),

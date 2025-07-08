@@ -1,8 +1,22 @@
-import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from "@/services/paginationService";
+import {
+  getFirstOne,
+  getLastOne,
+  getNextOne,
+  getOneBy,
+  getPreviousOne,
+} from "@/services/paginationService";
 import { useEffect, useMemo, useState } from "react";
 
-const useFormPagination = ({ name, number, code, chequeId }) => {
-  console.log("useFormPagination", name, number, code, chequeId);
+const useFormPagination = ({
+  name,
+  number,
+  code,
+  chequeId,
+  reset,
+  defaultValue,
+}) => {
+  const idKey = name === "user" ? "member_id" : "id";
+  // console.log("useFormPagination", name, number, code?.toString(), chequeId);
   const [currentNumber, setCurrentNumber] = useState();
   const [lastNumber, setLastNumber] = useState(number);
   const [currentId, setCurrentId] = useState(null);
@@ -11,7 +25,7 @@ const useFormPagination = ({ name, number, code, chequeId }) => {
     if (number) {
       getPaginationTable();
       setCurrentNumber(number);
-      goLast();
+      // goLast(false, true);
     } else if (!currentNumber) {
       goLast(true);
       // goFirst();
@@ -23,33 +37,33 @@ const useFormPagination = ({ name, number, code, chequeId }) => {
       name,
       number || defaultNumber,
       "number",
-      code,
+      code?.toString(),
       chequeId
     );
     if (current?.data) {
       let data = current?.data;
       setCurrentNumber(data?.number);
-      if (data?.id) {
-        setCurrentId(data?.id);
+      if (data?.[idKey]) {
+        setCurrentId(data?.[idKey]);
       }
-    } else goLast(true)
+    } else goLast(true);
   };
 
-  const goLast = async (isNew) => {
-    const current = await getLastOne(name, code, chequeId);
+  const goLast = async (isNew, ignore) => {
+    const current = await getLastOne(name, code?.toString(), chequeId);
     if (current?.success) {
       let data = current?.data;
       let last = +data?.number || 0;
       setLastNumber(last);
       if (isNew) {
         setCurrentNumber(last + 1);
-      } else {
-        setCurrentNumber(last);
-        setCurrentId(data?.id);
       }
+      // if (!ignore) {
+      //   setCurrentNumber(last);
+      //   setCurrentId(data?.[idKey]);
+      // }
     }
   };
-
 
   const isFirst = useMemo(() => {
     return +currentNumber === 1;
@@ -65,34 +79,46 @@ const useFormPagination = ({ name, number, code, chequeId }) => {
     } else {
       goLast(true);
     }
+    reset(defaultValue);
+    console.log("called reset");
   };
 
   const goNext = async () => {
-    const current = await getNextOne(name, currentNumber, code, chequeId);
+    const current = await getNextOne(
+      name,
+      currentNumber,
+      code?.toString(),
+      chequeId
+    );
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);
-      setCurrentId(data?.id);
+      setCurrentId(data?.[idKey]);
     }
   };
 
   const goBack = async () => {
     if (currentNumber === 1) return;
-    const current = await getPreviousOne(name, currentNumber, code, chequeId);
+    const current = await getPreviousOne(
+      name,
+      currentNumber,
+      code?.toString(),
+      chequeId
+    );
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);
-      setCurrentId(data?.id);
+      setCurrentId(data?.[idKey]);
     }
   };
 
   const goFirst = async () => {
     if (currentNumber === 1) return;
-    const current = await getFirstOne(name, code, chequeId);
+    const current = await getFirstOne(name, code?.toString(), chequeId);
     if (current?.success) {
       let data = current?.data;
       setCurrentNumber(data?.number);
-      setCurrentId(data?.id);
+      setCurrentId(data?.[idKey]);
     }
   };
 
@@ -117,7 +143,7 @@ const useFormPagination = ({ name, number, code, chequeId }) => {
     lastNumber,
     goNew,
     currentId,
-    getPaginationTable
+    getPaginationTable,
   };
 };
 

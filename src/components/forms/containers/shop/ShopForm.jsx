@@ -1,23 +1,19 @@
-import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableAsyncSelect, RHFTableInput, RHFTextarea } from "../../fields";
-import { FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { SHOP_STEPS } from "@/data/constants";
-import RHFUploadFilesController from "../../fields/RHFUploadFiles";
-import TableForm from "../../wrapper/TableForm";
-import FormFieldsGridContainer from "@/components/shared/FormFieldsGridContainer";
-import { getSearchBuilding, getSingleBuilding } from "@/services/buildingService";
+import { FLAT_PROPERTY_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { useTranslation } from "react-i18next";
+import { RHFAsyncSelectField, RHFColorPicker, RHFDatePicker, RHFInput, RHFSelectField, RHFTableAsyncSelect, RHFTableInput, RHFTextarea } from "../../fields";
+import RHFUploadFilesController from "../../fields/RHFUploadFiles";
+import BuildingField from "../../global/BuildingField";
+import TableForm from "../../wrapper/TableForm";
 const ShopForm = ({ tab }) => {
   const { t } = useTranslation();
 
   const ShopGeneralFields = (
     <div className="grid grid-cols-2 gap-2">
-      <RHFAsyncSelectField
-        table="building"
+      <BuildingField
         name="shop.buildingId"
         label="building"
         required
-        getSearch={getSearchBuilding}
-        getSingle={getSingleBuilding}
       />
       <RHFInput name="shop.floorNo" label="floor_number" />
       <RHFInput name="shop.kind" label="kind" />

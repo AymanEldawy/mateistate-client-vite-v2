@@ -1,11 +1,11 @@
-import "react-datepicker/dist/react-datepicker.css";
 import "@/styles/date-picker.css";
+import "react-datepicker/dist/react-datepicker.css";
 
+import { CalenderIcon } from "@/components/Icons";
+import { ErrorText } from "@/components/shared/ErrorText";
 import ReactDatePicker from "react-datepicker";
 import { Controller, useFormContext } from "react-hook-form";
-import { ErrorText } from "@/components/shared/ErrorText";
 import { Label } from "./Label";
-import { CalenderIcon } from "@/components/Icons";
 
 const RHFDatePicker = ({
   containerClassName,

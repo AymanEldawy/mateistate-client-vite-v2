@@ -76,7 +76,7 @@ const accountColumns = [
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "currency", accessorKey: "currencyVal" },
+  // { header: "currency", accessorKey: "currencyVal" },
   { header: "note", accessorKey: "note" },
 ];
 

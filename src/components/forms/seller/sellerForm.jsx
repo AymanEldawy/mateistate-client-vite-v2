@@ -6,9 +6,9 @@ const SellerForm = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
         <RHFInput name="name" label="name" required />
         <RHFInput name="ltnname" label="ltnname" />
-        <RHFInput name="id_card" label="id_card" />
-        <RHFInput name="passport" label="passport" />
-        <RHFInput name="workCardNumber" label="work_card_number" />
+        <RHFInput name="idCard" label="id_card" type="number" />
+        <RHFInput name="passport" label="passport" type="number" />
+        <RHFInput name="workCardNumber" label="work_card_number" type="number" />
         <RHFInput name="mobile" label="mobile" />
         <RHFInput name="cellPhone" label="cellPhone" />
         <RHFInput name="mailbox" label="mailbox" />

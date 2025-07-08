@@ -1,6 +1,6 @@
 import http from "./http";
 
-export const getOneBy = async (entity, value, column = "number", code, chequeId) => {
+export const getOneBy = async (entity, value, column = "number", code = null, chequeId) => {
   return http.post(`/pagination/one-by`, { entity, value, column, code, chequeId });
 };
 

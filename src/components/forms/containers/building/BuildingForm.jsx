@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
-import DynamicForm from "../../wrapper/DynamicForm";
 import { SubStepsList } from "@/components/shared/SubStepsList";
-import { BUILDING_STEPS } from "@/helpers/building/buildingSteps";
 import {
-  BUILDING_UNITS_FIELDS,
   BUILDING_BUYING_FIELDS,
   BUILDING_EDITORIAL_FIELDS,
+  BUILDING_FIELDS,
   BUILDING_INVESTMENT_FIELDS,
   BUILDING_REAL_ESTATE_DEVELOPMENT_FIELDS,
   BUILDING_REAL_ESTATE_MANAGEMENT_FIELDS,
-  BUILDING_DEFAULT_ACCOUNTS_FIELDS,
-  BUILDING_FIELDS
+  BUILDING_UNITS_FIELDS
 } from "@/helpers/building/buildingFields";
 import { FLATS } from "@/helpers/building/buildingHelpers";
 import { RHFAsyncSelectField, RHFCheckbox, RHFInput } from "../../fields";

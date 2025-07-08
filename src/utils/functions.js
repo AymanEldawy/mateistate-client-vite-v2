@@ -155,6 +155,8 @@ export const getUnitInfo = (assetType) => {
 }
 
 export function cleanObject(obj) {
+  console.log(obj, 'obj')
+
   if (Array.isArray(obj)) {
     const cleanedArray = obj
       .map(item => cleanObject(item))
@@ -163,9 +165,16 @@ export function cleanObject(obj) {
   }
 
   if (typeof obj === 'object' && obj !== null) {
+    // Handle Date objects explicitly
+    if (obj instanceof Date) {
+      return obj;
+    }
+
     const cleaned = {};
     for (const [key, value] of Object.entries(obj)) {
+      // Skip null, undefined, or empty string
       if (value === null || value === undefined || value === '') continue;
+      // Skip empty arrays
       if (Array.isArray(value) && value.length === 0) continue;
 
       const cleanedValue = cleanObject(value);
@@ -176,5 +185,33 @@ export function cleanObject(obj) {
     return Object.keys(cleaned).length > 0 ? cleaned : null;
   }
 
+  // Preserve string dates (ISO 8601 or other valid date strings)
+  if (typeof obj === 'string') {
+    // Check if the string can be parsed as a valid date
+    const date = new Date(obj);
+    if (!isNaN(date.getTime())) {
+      return obj; // Return original string if it's a valid date
+    }
+  }
+
   return obj;
+}
+
+
+// Returns a color or className string based on the unit type
+export function getUnitTypeColorOrClass(unitType) {
+  switch (unitType?.toLowerCase()) {
+    case "apartment":
+      return "bg-blue-100 text-blue-700"; // or "#3b82f6"
+    case "parking":
+      return "bg-gray-200 text-gray-700"; // or "#6b7280"
+    case "land":
+      return "bg-green-100 text-green-700"; // or "#22c55e"
+    case "villa":
+      return "bg-purple-100 text-purple-700"; // or "#a21caf"
+    case "shop":
+      return "bg-yellow-100 text-yellow-700"; // or "#eab308"
+    default:
+      return "bg-gray-100 text-gray-500"; // or "#9ca3af"
+  }
 }

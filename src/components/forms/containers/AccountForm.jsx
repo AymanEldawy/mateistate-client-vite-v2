@@ -77,7 +77,7 @@ const AccountForm = () => {
           options={ACCOUNT_TYPE}
         />
       </div>
-      {watch("type") === 1 ? (
+      {watch("type") === 1 || watch("account.type") === 1 ? (
         <div className="flex-1 grid grid-cols-1 my-4 sm:grid-cols-2 md:grid-cols-3 items-center gap-4">
           <RHFSelectField
             name="account.parentId"
@@ -92,7 +92,7 @@ const AccountForm = () => {
         </div>
       ) : null}
       <RHFTextarea name="account.note" label="note" />
-      {watch("type") === 3 ? (
+      {watch("type") === 3 || watch("account.type") === 3  ? (
         <div
           className={
             errors?.[ACCOUNT_ASSEMBLY_TYPE_NAME]
@@ -120,7 +120,7 @@ const AccountForm = () => {
           />
         </div>
       ) : null}
-      {watch("type") === 4 ? (
+      {watch("type") === 4|| watch("account.type") === 4 ? (
         <div
           className={
             errors?.[ACCOUNT_DISTRIBUTIVE_TYPE_NAME]

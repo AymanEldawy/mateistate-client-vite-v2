@@ -40,9 +40,9 @@ const ownerColumns = [
       );
     },
   },
-  { header: "id_card", accessorKey: "id_card" },
+  { header: "idCard", accessorKey: "idCard" },
   { header: "phone", accessorKey: "phone" },
-  { header: "cell_phone", accessorKey: "cell_phone" },
+  { header: "cellPhone", accessorKey: "cellPhone" },
   { header: "fax", accessorKey: "fax" },
   { header: "mailbox", accessorKey: "mailbox" },
   { header: "email", accessorKey: "email" },

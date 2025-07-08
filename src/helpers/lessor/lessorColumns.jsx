@@ -43,14 +43,14 @@ const lessorColumns = [
   { header: "passport", accessorKey: "passport" },
   {
     header: "passport_expiry_date",
-    accessorKey: "passport_expiry_date",
+    accessorKey: "passportExpiryDate",
     cell: ({ getValue }) => (
       <span>{new Date(getValue())?.toLocaleDateString("en-UK")}</span>
     ),
   },
-  { header: "id_card", accessorKey: "id_card" },
-  { header: "lessor_card", accessorKey: "lessor_card" },
-  { header: "cell_phone", accessorKey: "cell_phone" },
+  { header: "id_card", accessorKey: "idCard" },
+  { header: "lessor_card", accessorKey: "lessorCard" },
+  { header: "cell_phone", accessorKey: "cellPhone" },
   { header: "number", accessorKey: "number" },
   { header: "address", accessorKey: "address" },
   { header: "nationality", accessorKey: "nationality" },

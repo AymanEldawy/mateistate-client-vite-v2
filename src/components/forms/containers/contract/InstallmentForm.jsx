@@ -1,30 +1,55 @@
 import Btn from "@/components/shared/Btn";
 import Loading from "@/components/shared/Loading";
 import Modal from "@/components/shared/Modal";
-import { generatePaymentBatches, mergeInstallmentAndFirstTabData, onWatchChangesInstallmentTab } from "@/helpers/contract/installmentHelpers";
-import { INSTALLMENT_EACH_DURATION, INSTALLMENT_EACH_NUMBER } from "@/helpers/DEFAULT_OPTIONS";
-import { getInstallmentByContractId } from "@/services/installmentService";
+import QUERY_KEYS from "@/data/queryKeys";
+import {
+  generatePaymentBatches,
+  mergeInstallmentAndFirstTabData,
+  onWatchChangesInstallmentTab,
+} from "@/helpers/contract/installmentHelpers";
+import {
+  INSTALLMENT_EACH_DURATION,
+  INSTALLMENT_EACH_NUMBER,
+} from "@/helpers/DEFAULT_OPTIONS";
+import { getLeavesAccounts } from "@/services/accountService";
+import { getAllBanks } from "@/services/bankService";
+import {
+  createInstallment,
+  getInstallmentByContractId,
+  installmentCanUpdateCheques,
+  updateInstallment,
+} from "@/services/installmentService";
 import { getNameFromList, getUnitInfo } from "@/utils/functions";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useEffect, useMemo, useState } from "react";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { RHFAsyncSelectField, RHFCheckbox, RHFInput, RHFInputAmount, RHFSelectField } from "../../fields";
+import {
+  RHFCheckbox,
+  RHFDatePicker,
+  RHFInput,
+  RHFInputAmount,
+  RHFSelectField,
+} from "../../fields";
+import { CurrencyFieldGroup } from "../../global";
 import { FormHeader } from "../../wrapper";
-import { onWatchChangesInstallmentGridTab } from './../../../../helpers/contract/installmentHelpers';
+import { onWatchChangesInstallmentGridTab } from "./../../../../helpers/contract/installmentHelpers";
 import InstallmentGrid from "./InstallmentGrid";
 
-
 const updateNote = (watch, setValue, CACHE_LIST, index) => {
-  let item = watch(`installmentGrid.${index}`)
+  let item = watch(`installmentGrid.${index}`);
   const client = CACHE_LIST?.client?.find(
     (c) => c.id === watch(`contract.clientId`)
   );
   const bankId = item?.bankId || watch("installment.bankId");
   const bank = CACHE_LIST?.bank?.find((c) => c.id === bankId);
-  const note1 = `received chq number ${item?.internalNumber || 'ـــ'} from mr ${client?.name || 'ـــ'} ${item?.amount || 'ـــ'} due date ${item?.dueDate || 'ـــ'} end date ${item?.endDueDate || 'ـــ'} bank name ${bank?.name || 'ـــ'}`;
-  setValue(`installmentGrid.${index}.note1`, note1)
-}
+  const note1 = `received chq number ${item?.internalNumber || "ـــ"} from mr ${
+    client?.name || "ـــ"
+  } ${item?.amount || "ـــ"} due date ${item?.dueDate || "ـــ"} end date ${
+    item?.endDueDate || "ـــ"
+  } bank name ${bank?.name || "ـــ"}`;
+  setValue(`installmentGrid.${index}.note1`, note1);
+};
 
 const installmentValidation = (watch, setError) => {
   if (+watch("installment.firstBatch") > +watch("installment.totalAmount")) {
@@ -62,36 +87,75 @@ const installmentValidation = (watch, setError) => {
   return true;
 };
 
-
 const InstallmentForm = ({
   onClose,
   contractId,
   outerClose,
   pattern,
-  contract
+  contract,
 }) => {
-  const methods = useForm()
-  const { watch, setValue, setError, clearErrors, handleSubmit, reset, formState: { isSubmitting } } = methods;
-  const CACHE_LIST = {}
+  const [refresh, setRefresh] = useState(false);
+  const [canUpdate, setCanUpdate] = useState(true);
+  const methods = useForm();
+  const {
+    watch,
+    setValue,
+    setError,
+    clearErrors,
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting, errors },
+  } = methods;
+  const { replace } = useFieldArray({
+    control,
+    name: "installmentGrid",
+  });
+  const CACHE_LIST = {};
 
-  const unit = useMemo(() => getUnitInfo(contract?.flatType), [contract?.flatType]);
-
-  console.log(pattern, contractId, CACHE_LIST, contract, '-contract installment form-');
+  const unit = useMemo(
+    () => getUnitInfo(contract?.flatType),
+    [contract?.flatType]
+  );
 
   const { isLoading } = useQuery({
-    queryKey: ['installment'],
+    queryKey: ["installment", contract?.id],
     queryFn: async () => {
-      const response = await getInstallmentByContractId(contractId);
-      reset(response)
-      return response
+      const response = await getInstallmentByContractId(contract?.id);
+      console.log("called here");
+      if (response?.success) {
+        console.log("can t called here");
+
+        const res = await installmentCanUpdateCheques(
+          response?.installment?.id
+        );
+        if (res?.success) setCanUpdate(res?.canUpdate);
+      }
+      reset(response);
+      return response;
     },
-    enabled: !!contractId
+    enabled: !!contract?.id,
   });
 
+  const { data: banks } = useQuery({
+    queryKey: [QUERY_KEYS.Bank],
+    queryFn: async () => {
+      const response = await getAllBanks();
+      return response?.data || [];
+    },
+  });
+
+  const { data: clients } = useQuery({
+    queryKey: [QUERY_KEYS.ACCOUNT, "leave"],
+    queryFn: async () => {
+      const response = await getLeavesAccounts();
+      return response?.data || [];
+    },
+  });
 
   useEffect(() => {
-    if (!contractId) return;
-    mergeInstallmentAndFirstTabData(watch("contract"), setValue, watch);
+    if (!contract?.id) return;
+    mergeInstallmentAndFirstTabData(contract, setValue, watch);
   }, [contractId]);
 
   useEffect(() => {
@@ -99,12 +163,15 @@ const InstallmentForm = ({
       if (name?.indexOf("installment.") !== -1) {
         clearErrors(name);
       }
-      if (name?.indexOf('installmentGrid') !== -1 && type) {
-        updateNote(watch, setValue, CACHE_LIST, name?.split('.')[1])
+      if (name?.indexOf("installmentGrid") !== -1 && type) {
+        updateNote(watch, setValue, name?.split(".")[1]);
       }
-      if (name === "installment.hasFirstBatch" && !watch("installment.hasFirstBatch")) {
-        setValue('installment.firstBatch', 0)
-        setValue('installment.paymentDate', null)
+      if (
+        name === "installment.hasFirstBatch" &&
+        !watch("installment.hasFirstBatch")
+      ) {
+        setValue("installment.firstBatch", 0);
+        setValue("installment.paymentDate", null);
       }
 
       if (name?.indexOf(`installment.`) !== -1) {
@@ -116,8 +183,7 @@ const InstallmentForm = ({
         );
       }
 
-
-      if (name?.indexOf(`installment_grid`) !== -1) {
+      if (name?.indexOf(`installmentGrid`) !== -1) {
         let subName = name?.split(".")?.at(-1);
         switch (subName) {
           case "dueDate":
@@ -125,7 +191,9 @@ const InstallmentForm = ({
           case "amount":
           case "bankId":
           case "endDueDate": {
-            onWatchChangesInstallmentGridTab(name, setValue, watch, CACHE_LIST);
+            onWatchChangesInstallmentGridTab(name, setValue, watch, {
+              contract,
+            });
             break;
           }
           default:
@@ -136,44 +204,53 @@ const InstallmentForm = ({
     return () => subscription.unsubscribe();
   }, [watch("installment")]);
 
-  const handleSubmitInstallments = async () => {
+  const generateCheques = () => {
+    generatePaymentBatches(
+      watch,
+      setValue,
+      unit?.value,
+      {
+        banks,
+        clients,
+        contract,
+      },
+      reset
+    );
+    setRefresh((p) => !p);
+  };
+
+  const handleSubmitInstallments = async (values) => {
     if (!installmentValidation(watch, setError)) {
       return;
     }
 
-    const installmentData = watch("installment");
-    const installmentGridData = watch("installmentGrid");
-    const clientName = getNameFromList(CACHE_LIST?.client, watch(`contract.clientId`))
-    const bankName = getNameFromList(CACHE_LIST?.bank, watch(`installment.bankId`))
+    const clientName = getNameFromList(clients, contract.clientId);
+    const bankName = getNameFromList(banks, values?.installment.bankId);
 
     const buildingNumber = CACHE_LIST?.building?.find(
-      (c) => c.id === watch(`contract.buildingId`)
+      (c) => c.id === contract.buildingId
     )?.number;
 
     const assetsNumber = CACHE_LIST?.[unit?.table]?.find(
-      (c) => c.id === watch(`contract.${unit?.value}`)
+      (c) => c.id === contract?.[unit?.value]
     )?.[`${unit?.label}`];
 
     let note = `received first payment from mr ${clientName} due date ${new Date(
-      watch("installment.paymentDate")
-    )?.toLocaleDateString("en-UK")} bank ${bankName} ${buildingNumber ? `building number ${buildingNumber}` : ""
-      }  ${assetsNumber ? `${unit?.table} number ${assetsNumber}` : ""} `;
+      values?.installment.paymentDate
+    )?.toLocaleDateString("en-UK")} bank ${bankName} ${
+      buildingNumber ? `building number ${buildingNumber}` : ""
+    }  ${assetsNumber ? `${unit?.table} number ${assetsNumber}` : ""} `;
 
     try {
-      // await insertIntoContractInstallment({
-      //   installment: installmentData,
-      //   installmentGrid: installmentGridData,
-      //   contractId,
-      //   firstTabData: watch("contract"),
-      //   note,
-      // });
-      // const { installment, installmentGrid, voucher_grid } =
-      //   await getInstallmentData(contractId);
+      console.log(values, "values", watch());
 
-      // if (installment?.success) {
-      //   setValue("voucher_grid", voucher_grid?.result);
-      //   setValue("installmentGrid", installmentGrid?.result);
-      // }
+      setValue("installment.contractId", contract?.id);
+      let response = null;
+      if (values?.installment.id) {
+        response = await updateInstallment(values?.installment.id, values);
+      } else {
+        response = await createInstallment(values);
+      }
       toast.success("Successfully saved Installment");
     } catch (error) {
       toast.error("Failed to save Installment");
@@ -189,18 +266,12 @@ const InstallmentForm = ({
         open={true}
         containerClassName="z-[101]"
         bodyClassName="!p-0"
-
       >
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(handleSubmitInstallments)} noValidate>
-
-            <FormHeader
-              header="installment"
-              onClose={outerClose}
-            />
+            <FormHeader header="installment" onClose={outerClose} />
             <div className="p-4">
               <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-
                 <RHFInputAmount
                   label="totalAmount"
                   name={`installment.totalAmount`}
@@ -212,33 +283,42 @@ const InstallmentForm = ({
                   name={`installment.restAmount`}
                   readOnly
                 />
-                <div className={`${watch('installment.hasFirstBatch') ? 'col-span-2' : 'ـــ'} contents gap-2 items-center justify-between`}>
+                <CurrencyFieldGroup name="installment.currencyId" />
+                <div
+                  className={`${
+                    watch("installment.hasFirstBatch") ? "col-span-2" : "ـــ"
+                  } contents gap-2 items-center justify-between`}
+                >
+                  <RHFCheckbox
+                    label="hasFirstBatch"
+                    name={`installment.hasFirstBatch`}
+                    containerClassName="shrink-0"
+                  />
 
-                  <div className="flex gap-x-6 items-center w-full">
-                    <RHFCheckbox
-                      label="hasFirstBatch"
-                      name={`installment.hasFirstBatch`}
-                      containerClassName="shrink-0"
-                    />
-
-                    {!watch("installment.hasFirstBatch") ? null : (
-                      <RHFInput
-                        label="firstBatch"
-                        name={`installment.firstBatch`}
-                        containerClassName="!flex-1"
-                      />
+                  <RHFInputAmount
+                    label="firstBatch"
+                    name={`installment.firstBatch`}
+                    containerClassName="!flex-1"
+                    readOnly={!watch("installment.hasFirstBatch")}
+                  />
+                  <RHFDatePicker
+                    label="paymentDate"
+                    name={`installment.paymentDate`}
+                    readOnly={!watch("installment.hasFirstBatch")}
+                  />
+                  {/* <div className="flex gap-x-6 items-center w-full">
+                  </div> */}
+                  {/* {!watch("installment.hasFirstBatch") ? null : (
                     )}
-                  </div>
                   {!watch("installment.hasFirstBatch") ? null : (
-                    <RHFInput
-                      label="paymentDate"
-                      name={`installment.paymentDate`}
-                    />
-                  )}
+                  
+                  )} */}
                 </div>
+
                 <RHFInput
                   label="installmentsNumbers"
                   name={`installment.installmentsNumbers`}
+                  type="number"
                 />
 
                 <RHFSelectField
@@ -253,20 +333,20 @@ const InstallmentForm = ({
                   name={`installment.eachDuration`}
                   options={INSTALLMENT_EACH_DURATION}
                 />
-                <RHFInput
+                <RHFDatePicker
                   label="firstInstallmentDate"
                   name={`installment.firstInstallmentDate`}
                 />
                 <RHFInput
                   label="beginNumber"
                   name={`installment.beginNumber`}
+                  type="number"
                 />
 
-                <RHFAsyncSelectField
+                <RHFSelectField
                   label="bankId"
                   name={`installment.bankId`}
-                  table={"bank"}
-                  CACHE_LIST={CACHE_LIST}
+                  options={banks}
                 />
               </div>
               <InstallmentGrid />
@@ -275,18 +355,18 @@ const InstallmentForm = ({
                   disabled={
                     !watch("installment.eachNumber") ||
                     !watch("installment.installmentsNumbers") ||
-                    !watch("installment.eachDuration")
+                    !watch("installment.eachDuration") ||
+                    !canUpdate
                     // ||
                     // !watch("installment.rest_amount")
                   }
                   type="button"
                   kind="warn"
-                  onClick={() => {
-                    generatePaymentBatches(watch, setValue, CACHE_LIST, unit?.value);
-                    // setTotalChqAmount(watch("installment.rest_amount"));
-                  }}
+                  onClick={generateCheques}
                 >
-                  {watch("installmentGrid")?.length ? "ReGenerate cheques" : "Generate"}
+                  {watch("installmentGrid")?.length
+                    ? "ReGenerate cheques"
+                    : "Generate"}
                 </Btn>
                 <Btn
                   kind="primary"

@@ -1,23 +1,43 @@
-import { calculateMaterialsTotal, calculateTotal, calculateVatAndDiscounts } from "@/helpers/bill/billHelpers";
+import QUERY_KEYS from "@/data/queryKeys";
+import {
+  calculateMaterialsTotal,
+  calculateTotal,
+  calculateVatAndDiscounts,
+  mergePatternWithBillData,
+} from "@/helpers/bill/billHelpers";
 import { BILL_PATTERN_PAYMENT_METHODS } from "@/helpers/DEFAULT_OPTIONS";
+import { getAllMaterials } from "@/services/materialsService";
+import { useQuery } from "@tanstack/react-query";
 import numberToText from "number-to-text";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { RHFAsyncSelectField, RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
-import { CurrencyFieldGroup } from "../../global";
+import { RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
+import { AccountField, CurrencyFieldGroup } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
+import StoreField from "../../global/StoreField";
+import UserField from "../../global/UserField";
 import BillConnectWithField from "./BillConnectWithField";
 import BillFormTables from "./BillFormTables";
 
-const BillForm = ({ code, pattern }) => {
+const BillForm = ({ pattern }) => {
   const { t } = useTranslation();
   const [refresh, setRefresh] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
-  const {
-    watch,
-    setValue,
-    clearErrors,
-  } = useFormContext();
+  const { watch, setValue, clearErrors } = useFormContext();
+
+  const { data: materials } = useQuery({
+    queryKey: [QUERY_KEYS.MATERIAL],
+    queryFn: async () => {
+      const response = await getAllMaterials();
+      return response?.data || [];
+    },
+  });
+
+  useEffect(() => {
+    if (!pattern) return;
+    mergePatternWithBillData(pattern, setValue, setRefresh);
+  }, [pattern]);
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
@@ -25,38 +45,29 @@ const BillForm = ({ code, pattern }) => {
       let tab = name.split(".");
       if (name === "bill.total") {
         setValue(
-          "bill.bill_total_text",
+          "bill.billTotalText",
           numberToText.convertToText(+watch(name))
         );
       }
-      if (name === "bill.payment_method") {
+      if (name === "bill.paymentMethod") {
         if (watch(name) === 2) {
-          setValue(
-            "bill.customer_account_id",
-            pattern.cash_account_id
-          );
-
+          setValue("bill.customerAccountId", pattern.cashAccountId);
         } else {
-          setValue(
-            "bill.customer_account_id",
-            null
-          );
-
+          setValue("bill.customerAccountId", null);
         }
-
       }
       if (name === "bill.connect_with_id") {
         getMaterials(watch(name));
       }
 
-      if (name === "bill.customer_id") {
+      if (name === "bill.customerId") {
         // should update get account id when select customer
-        // setValue("bill.customer_account_id", customer_account_id);
-        clearErrors("bill.customer_account_id");
+        // setValue("bill.customerAccountId", customer_account_id);
+        clearErrors("bill.customerAccountId");
         setRefresh((p) => !p);
       }
 
-      if (tab?.includes("bill_material_details")) {
+      if (tab?.includes("billMaterialDetails")) {
         calculateMaterialsTotal(watch, setValue);
         if (name?.indexOf("material_id") !== -1) {
           // set unit
@@ -65,7 +76,7 @@ const BillForm = ({ code, pattern }) => {
         // if()
       }
 
-      if (tab?.includes("bill_discounts_details")) {
+      if (tab?.includes("billDiscountsDetails")) {
         calculateVatAndDiscounts(watch, setValue);
       }
       if (name === "bill.taxable") {
@@ -82,41 +93,16 @@ const BillForm = ({ code, pattern }) => {
     for (let index = 1; index < 4; index++) {
       if (material?.[`defaults${index}`])
         setValue(
-          name?.replace(/material_id/i, "unit"),
+          name?.replace(/materialId/i, "unit"),
           material?.[`unit${index}`]
         );
     }
   };
 
-
   const getMaterials = async (service_id) => {
     // const materials = await getRequestedMaterialsByServiceId(service_id);
     const materials = null;
-    setValue("bill_material_details", materials?.result);
-    setRefresh((p) => !p);
-  };
-
-  const mergePatternWithBillData = async (pattern, watch, setValue) => {
-    if (pattern?.payment_method) {
-      setValue("bill.payment_method", pattern?.payment_method);
-    }
-    if (pattern?.payment_method) {
-      setValue("bill.taxable", pattern?.vat_percentage);
-    }
-    if (pattern?.cost_center_id) {
-      setValue("bill.cost_center_id", pattern?.cost_center_id);
-    }
-    if (pattern?.default_store_id) {
-      setValue("bill.store_id", pattern?.default_store_id);
-    }
-
-    if (pattern?.material_account_id) {
-      setValue("bill.material_account_id", pattern?.material_account_id);
-    }
-
-    // if (pattern?.vat_account_id) {
-    //   setValue("bill.vat_account_id", pattern?.vat_account_id);
-    // }
+    setValue("billMaterialDetails", materials?.result);
     setRefresh((p) => !p);
   };
 
@@ -133,114 +119,60 @@ const BillForm = ({ code, pattern }) => {
         </MenuItem>
       </ContextMenu> */}
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 items-start justify-between gap-y-1 overflow-auto">
-        <RHFInput
-          label="number"
-          name="bill.number"
-          readOnly
-        />
-        <RHFInput
-          label="issueDate"
-          name="bill.issueDate"
-        />
-        <RHFInput
-          label="billDate"
-          name="bill.billDate"
-        />
+        <RHFInput label="number" name="bill.number" readOnly />
+        <RHFInput label="issueDate" name="bill.issueDate" />
+        <RHFInput label="billDate" name="bill.billDate" />
 
-        <RHFInput
-          label="receiptNumber"
-          name="bill.receiptNumber"
-        />
-        <CurrencyFieldGroup />
+        <RHFInput label="receiptNumber" name="bill.receiptNumber" />
+        <CurrencyFieldGroup tab="bill" />
         <RHFSelectField
           label="paymentMethod"
           name="bill.paymentMethod"
           options={BILL_PATTERN_PAYMENT_METHODS}
         />
 
-        <RHFAsyncSelectField
-          label="costCenterId"
-          name="bill.costCenterId"
-        />
+        <CostCenterField label="costCenterId" name="bill.costCenterId" />
 
-        <RHFAsyncSelectField
-          label="storeId"
-          name="bill.storeId"
-        />
-        <RHFAsyncSelectField
+        <StoreField label="storeId" name="bill.storeId" />
+        <UserField
           name="bill.customerId"
-          label={
-            +pattern?.bill_type === 2
-              ? "Customer Name"
-              : "Supplier name"
-          }
-          required={
-            +watch('bill.paymentMethod') === 1
-          }
+          label={+pattern?.billType === 2 ? "customerId" : "supplierId"}
+          required={+watch("bill.paymentMethod") === 1}
         />
-        <RHFAsyncSelectField
-          label="customerAccountId"
-          name="bill.customerAccountId"
 
-        />
-        <RHFAsyncSelectField
-          label="materialAccountId"
-          name="bill.materialAccountId"
-
-        />
-        <RHFAsyncSelectField
+        <AccountField label="customerAccountId" name="bill.customerAccountId" />
+        <AccountField label="materialAccountId" name="bill.materialAccountId" />
+        <AccountField
           required={false}
           label="vatAccountId"
           name="bill.vatAccountId"
         />
       </div>
       <div className="grid grid-cols-3 gap-4 mt-2">
-        {+pattern?.bill_type === 2 ? (
-          <BillConnectWithField />
-        ) : null}
+        {+pattern?.billType === 2 ? <BillConnectWithField /> : null}
       </div>
-      <RHFTextarea
-        label="note"
-        name="bill.note"
-        textareaClassName="h-[60px]"
-      />
+      <RHFTextarea label="note" name="bill.note" textareaClassName="h-[60px]" />
 
-      <BillFormTables setActiveTab={setActiveTab} activeTab={activeTab} pattern={pattern} />
+      <BillFormTables
+        setActiveTab={setActiveTab}
+        activeTab={activeTab}
+        pattern={pattern}
+        materials={materials}
+      />
 
       <div className="my-4 bg-gray-200 dark:bg-[#303030] p-2">
         <div className=" flex gap-12 items-center justify-between px-8">
           <div className="flex flex-col gap-2 max-w-sm">
-            <RHFInput
-              label="totalQuantities"
-              name="bill.totalQuantities"
-            />
-            <RHFInput
-              label="discounts"
-              name="bill.discounts"
-            />
-            <RHFInput
-              label="extras"
-              name="bill.extras"
-            />
-            <RHFInput
-              label="taxable"
-              name="bill.taxable"
-            />
-            <RHFInput
-              label="vatAmount"
-              name="bill.vatAmount"
-            />
+            <RHFInput label="totalQuantities" name="bill.totalQuantities" />
+            <RHFInput label="discounts" name="bill.discounts" />
+            <RHFInput label="extras" name="bill.extras" />
+            <RHFInput label="taxable" name="bill.taxable" />
+            <RHFInput label="vatAmount" name="bill.vatAmount" />
           </div>
           <div className="flex flex-col gap-2 max-w-sm md:min-w-[400px]">
-            <RHFInput
-              label="subtotal"
-              name="bill.subtotal"
-            />
+            <RHFInput label="subtotal" name="bill.subtotal" />
 
-            <RHFInput
-              label="total"
-              name="bill.total"
-            />
+            <RHFInput label="total" name="bill.total" />
             <RHFTextarea
               label="billTotalText"
               name="bill.billTotalText"

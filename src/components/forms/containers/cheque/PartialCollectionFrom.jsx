@@ -1,21 +1,41 @@
-import ConfirmModal from '@/components/shared/ConfirmModal';
-import Loading from '@/components/shared/Loading';
-import QUERY_KEYS from '@/data/queryKeys';
-import { opPartialDefaultValues, opPartialValidationSchema } from '@/helpers/operations/opPartialValidationSchema';
-import { createPartial, deletePartial, getSinglePartial, updatePartial } from '@/services/opPartialCollectionService';
-import { getFirstOne, getLastOne, getNextOne, getOneBy, getPreviousOne } from '@/services/paginationService';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { RHFInput, RHFInputAmount, RHFTextarea } from '../../fields';
-import { AccountField, CurrencyFieldGroup } from '../../global';
-import CostCenterField from '../../global/CostCenterField';
-import { FormFooter, FormHeader } from '../../wrapper';
+import ConfirmModal from "@/components/shared/ConfirmModal";
+import Loading from "@/components/shared/Loading";
+import QUERY_KEYS from "@/data/queryKeys";
+import {
+  opPartialDefaultValues,
+  opPartialValidationSchema,
+} from "@/helpers/operations/opPartialValidationSchema";
+import {
+  createPartial,
+  deletePartial,
+  getPartialByChequeId,
+  getSinglePartial,
+  updatePartial,
+} from "@/services/opPartialCollectionService";
+import {
+  getFirstOne,
+  getLastOne,
+  getNextOne,
+  getOneBy,
+  getPreviousOne,
+} from "@/services/paginationService";
+import { cleanObject } from "@/utils/functions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import {
+  RHFDatePicker,
+  RHFInput,
+  RHFInputAmount,
+  RHFTextarea,
+} from "../../fields";
+import { AccountField, CurrencyFieldGroup } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
+import { FormFooter, FormHeader } from "../../wrapper";
 
 const mergePattern = (pattern, chqValues, setValue) => {
-
   if (chqValues?.id) {
     setValue("chequeId", chqValues?.id);
   }
@@ -44,46 +64,54 @@ const mergePattern = (pattern, chqValues, setValue) => {
   ) {
     setValue("costCenterId", chqValues?.costCenterId);
   }
-}
+};
 
-
-const PartialCollectionFrom = ({
-  popupFormConfig,
-  outerClose
-}) => {
-  const name = 'op_partial_collection'
+const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
+  const name = "op_partial_collection";
   const methods = useForm({
     defaultValue: opPartialDefaultValues,
     mode: "onBlur",
-    resolver: zodResolver(opPartialValidationSchema)
+    resolver: zodResolver(opPartialValidationSchema),
   });
-  const chequeId = popupFormConfig?.chequeValue?.id
-  const chequeValue = popupFormConfig?.chequeValue
-  const { handleSubmit, watch, setValue, setError, clearErrors, reset, formState: { isLoading, isSubmitting } } = methods
+  const chequeId = popupFormConfig?.chequeValue?.id;
+  const chequeValue = popupFormConfig?.chequeValue;
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    setError,
+    clearErrors,
+    reset,
+    formState: { isLoading, isSubmitting },
+  } = methods;
   const [currentNumber, setCurrentNumber] = useState(1);
   const [lastNumber, setLastNumber] = useState(0);
-  const [openConfirmation, setOpenConfirmation] = useState(false)
+  const [openConfirmation, setOpenConfirmation] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
     queryFn: async () => {
-      const response = await getLastOne(name, null, chequeId);
+      const response = await getPartialByChequeId(chequeId);
       if (response?.success && response?.data) {
         const current = await getSinglePartial(response?.id);
         goNew(current);
         setLastNumber(response?.number);
-        return current
+        return current;
       } else {
         setValue("number", 1);
       }
     },
-    enabled: !!chequeId
+    enabled: !!chequeId,
   });
 
   useEffect(() => {
-    mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, setValue)
-  }, [popupFormConfig, setValue])
+    mergePattern(
+      popupFormConfig?.pattern,
+      popupFormConfig?.chequeValue,
+      setValue
+    );
+  }, [popupFormConfig, setValue]);
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
@@ -96,12 +124,9 @@ const PartialCollectionFrom = ({
         let theTotalSum = prev + amount;
 
         if (theTotalRest <= -1) {
-          toast.error(
-            "Failed to enter value the rest can't be less than 0",
-            {
-              autoClose: true,
-            }
-          );
+          toast.error("Failed to enter value the rest can't be less than 0", {
+            autoClose: true,
+          });
           setError("rest", {
             type: "manual",
             message: "Failed to enter value the rest can't be less than 0",
@@ -118,19 +143,17 @@ const PartialCollectionFrom = ({
 
   const goTo = async (value) => {
     let response = null;
-    if (value === 'FIRST')
-      response = await getFirstOne(name, null, chequeId)
-    else if (value === 'LAST')
-      response = await getLastOne(name, null, chequeId)
-    else await getOneBy(name, value, 'number', null, chequeId)
-
-  }
+    if (value === "FIRST") response = await getFirstOne(name, null, chequeId);
+    else if (value === "LAST")
+      response = await getLastOne(name, null, chequeId);
+    else await getOneBy(name, value, "number", null, chequeId);
+  };
 
   const goNew = () => {
     if (!data) return;
     if (data?.rest === 0) {
       reset(data);
-      return
+      return;
     }
     let totalSumPrev = (data?.totalSumPrev || 0) + data?.amount;
 
@@ -144,35 +167,43 @@ const PartialCollectionFrom = ({
     setValue("creditAccountId", data?.creditAccountId);
     setValue("debitAccountId", data?.debitAccountId);
     setValue("totalValue", chequeValue?.amount);
-    let num = +data?.number + 1 || 1
+    let num = +data?.number + 1 || 1;
     setValue("number", num);
     setCurrentNumber(num);
-  }
+  };
 
   const onHandleDelete = async () => {
-    setIsDeleteLoading(true)
+    setIsDeleteLoading(true);
     const response = await deletePartial(data?.id);
     if (response?.success) {
-      outerClose()
+      outerClose();
     }
-    setIsDeleteLoading(false)
-  }
+    setIsDeleteLoading(false);
+  };
 
   const onSubmit = async (values) => {
-    const isUpdate = data?.id
+    const isUpdate = data?.id;
     let response;
     if (isUpdate) {
-      response = await updatePartial(data?.id, values)
+      response = await updatePartial(data?.id, cleanObject(values));
     } else {
-      response = await createPartial(values)
+      response = await createPartial(cleanObject(values));
     }
 
     if (response?.success) {
-      toast.success(`Successfully ${isUpdate ? 'updated' : 'inserted'} cheque partial collection`)
+      toast.success(
+        `Successfully ${
+          isUpdate ? "updated" : "inserted"
+        } cheque partial collection`
+      );
     } else {
-      toast.success(`Failed to ${isUpdate ? 'updated' : 'inserted'} cheque partial collection`)
+      toast.success(
+        `Failed to ${
+          isUpdate ? "updated" : "inserted"
+        } cheque partial collection`
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -189,28 +220,23 @@ const PartialCollectionFrom = ({
           <div className="max-w-3xl w-full p-4">
             <div className="grid grid-cols-3 gap-8 xl:gap-14">
               <div className="flex flex-col gap-2 col-span-2">
-                <RHFInput name="createdAt" label="createdAt" />
+                <RHFDatePicker name="createdAt" label="createdAt" />
                 <CurrencyFieldGroup />
                 <RHFInputAmount name="amount" label="amount" />
-                <AccountField
-                  name="debitAccountId"
-                  label="debitAccountId"
-                />
-                <AccountField
-                  name="creditAccountId"
-                  label="creditAccountId"
-
-                />
-                <CostCenterField
-                  name="costCenterId"
-                  label="costCenterId"
-
-                />
+                <AccountField name="debitAccountId" label="debitAccountId" />
+                <AccountField name="creditAccountId" label="creditAccountId" />
+                <CostCenterField name="costCenterId" label="costCenterId" />
               </div>
               <div className="flex flex-col gap-2 ">
                 {["totalValue", "totalSumPrev", "totalSum", "rest"]?.map(
                   (field) => (
-                    <RHFInput name={field} label={field} key={field} readOnly={true} type="number" />
+                    <RHFInput
+                      name={field}
+                      label={field}
+                      key={field}
+                      readOnly={true}
+                      type="number"
+                    />
                   )
                 )}
                 {/* {watch('rest') < 0 ? <ErrorText>Failed to enter value the rest can't be less than 0</ErrorText> : null} */}
@@ -220,26 +246,31 @@ const PartialCollectionFrom = ({
             <div className="grid grid-cols-2 gap-8 xl:gap-14 my-4">
               <div className="flex flex-col gap-2 ">
                 <AccountField
-                  name='commissionDebitId'
-                  label='commissionDebitId'
+                  name="commissionDebitId"
+                  label="commissionDebitId"
                 />
                 <AccountField
-                  name='commissionCreditId'
-                  label='commissionCreditId'
+                  name="commissionCreditId"
+                  label="commissionCreditId"
                 />
                 <CostCenterField
-                  name='commissionCostCenterId'
-                  label='commissionCostCenterId'
-
+                  name="commissionCostCenterId"
+                  label="commissionCostCenterId"
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <RHFInput name="commissionPercentage" label="commissionPercentage" type="number" />
-                <RHFInputAmount name="commissionValue" label="commissionValue" />
+                <RHFInput
+                  name="commissionPercentage"
+                  label="commissionPercentage"
+                  type="number"
+                />
+                <RHFInputAmount
+                  name="commissionValue"
+                  label="commissionValue"
+                />
                 <RHFInput name="commissionNote" label="commissionNote" />
               </div>
             </div>
-
           </div>
           <FormFooter
             isLoading={isLoading || isSubmitting}
@@ -258,7 +289,7 @@ const PartialCollectionFrom = ({
         </form>
       </FormProvider>
     </>
-  )
-}
+  );
+};
 
-export default PartialCollectionFrom
+export default PartialCollectionFrom;

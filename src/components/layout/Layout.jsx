@@ -3,6 +3,7 @@ import withLoggedOut from '@/HOC/withLoggedOut'
 import { useMenuData } from '@/hook/useMenuData'
 import { useMemo } from 'react'
 import { Outlet } from 'react-router-dom'
+import EntriesPopupView from '../forms/containers/entries/EntriesPopupView'
 import { DynamicPopupForm } from '../forms/wrapper'
 import Footer from './Footer'
 import Header from './header/Header'
@@ -28,6 +29,7 @@ const Layout = () => {
       <Menu menu={isLoading ? [] : menu} />
       <Sidebar menu={isLoading ? [] : menu} />
       <Outlet />
+      <EntriesPopupView />
       <DynamicPopupForm />
       <Footer />
     </div>

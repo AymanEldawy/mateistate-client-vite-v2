@@ -44,10 +44,14 @@ export const deleteManyApartments = (ids) => {
   );
 };
 
-
-
 export const getSearchApartment = (value) => {
   return http.get(
     `${API_URL_CONSTANTS.BASE_APARTMENT}?search=${value}`
+  );
+};
+
+export const getAvailableApartmentsByBuildingId = (buildingId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_APARTMENT}/available?buildingId=${buildingId}`
   );
 };

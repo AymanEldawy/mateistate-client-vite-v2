@@ -1,13 +1,8 @@
-import Modal from '@/components/shared/Modal'
-import React from 'react'
-import { useFormContext } from 'react-hook-form';
+import Modal from "@/components/shared/Modal";
+import { useFormContext } from "react-hook-form";
 
-const ContractModal = ({
-  openForm,
-  setOpenForm,
-}) => {
-
-  const {watch, setValue} = useFormContext()
+const ContractModal = ({ openForm, setOpenForm }) => {
+  const { watch, setValue } = useFormContext();
 
   const updateGrid = (gridName, data) => {
     const list = watch(gridName) || [];
@@ -15,7 +10,7 @@ const ContractModal = ({
     if (isNew) {
       setValue(`${gridName}.${list.length}`, data);
     } else {
-      const index = list.findIndex(item => item?.id === data?.id);
+      const index = list.findIndex((item) => item?.id === data?.id);
       if (index !== -1) {
         setValue(`${gridName}.${index}`, data);
       } else {
@@ -25,13 +20,12 @@ const ContractModal = ({
   };
 
   const updateChequeGrid = (data) => {
-    updateGrid("installment_grid", data);
+    updateGrid("installmentGrid", data);
   };
 
   const updateVoucherGrid = (data, grid) => {
     updateGrid("voucher_grid", data, grid);
   };
-
 
   return (
     <Modal open={openForm} bodyClassName="!p-0" key={openForm?.type}>
@@ -68,8 +62,7 @@ const ContractModal = ({
         />
       )} */}
     </Modal>
+  );
+};
 
-  )
-}
-
-export default ContractModal
+export default ContractModal;

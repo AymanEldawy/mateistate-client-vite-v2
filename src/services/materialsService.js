@@ -46,4 +46,12 @@ export const getSearchMaterials = (value) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}?search=${value}`);
 };
 
+export const getUnRegisterMaterials = () => {
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/unregister-materials`);
+};
+
+export const getRequestedMaterials = () => {
+  return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/requested-materials`);
+};
+
 

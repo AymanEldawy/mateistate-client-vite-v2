@@ -25,7 +25,7 @@ export const lessorValidationSchema = () =>
     name: z.string().nonempty({ message: "Name is Required" }),
     ltnname: VALIDATION.OPTIONAL_STRING,
     passport: VALIDATION.NON_EMPTY_STRING,
-    passport_expiry_date: VALIDATION.OPTIONAL_STRING,
+    passport_expiry_date: VALIDATION.OPTIONAL_DATE,
     id_card: VALIDATION.OPTIONAL_STRING,
     lessor_card: VALIDATION.OPTIONAL_STRING,
     cell_phone: VALIDATION.OPTIONAL_STRING,

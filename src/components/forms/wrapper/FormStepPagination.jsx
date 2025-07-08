@@ -25,6 +25,7 @@ const FormStepPagination = (props) => {
     isLast,
     goNew,
   } = props || {};
+  
   const handleChange = (e) => {
     // Allow only numeric input
     setCurrentNumber(e.target.value.replace(/[^0-9]/g, ""));
@@ -80,7 +81,7 @@ const FormStepPagination = (props) => {
           New
         </span>
       ) : (
-        <Btn type="button" onClick={goNew} containerClassName="mx-4" >
+        <Btn type="button" kind="warn" onClick={goNew}>
           <PlusIcon className="w-5 h-5" />
           Add new
         </Btn>

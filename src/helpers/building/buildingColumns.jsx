@@ -53,7 +53,7 @@ const buildingColumns = [
   { header: "suburb", accessorKey: "suburb" },
   { header: "area", accessorKey: "area" },
   { header: "street", accessorKey: "street" },
-  { header: "building_number", accessorKey: "building_number" },
+  { header: "building_number", accessorKey: "buildingNumber" },
   { header: "part_number", accessorKey: "partNumber" },
   { header: "basin_number", accessorKey: "basinNumber" },
   { header: "bond_number", accessorKey: "bondNumber" },

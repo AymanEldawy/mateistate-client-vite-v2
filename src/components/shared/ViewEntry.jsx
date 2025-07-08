@@ -15,15 +15,11 @@ export const ViewEntry = ({ id, created_from, hideText }) => {
     queryKey: [QUERY_KEYS.ENTRIES, 'CREATED_FROM', id],
     queryFn: async () => {
       const response = await getEntriesByCreatedFrom(id);
-      console.log(response, '-res');
 
       return response || {};
     },
     enabled: !!id
   });
-
-
-  console.log(data, 'entry', id);
 
   return (
     <Btn
@@ -37,7 +33,7 @@ export const ViewEntry = ({ id, created_from, hideText }) => {
           table: "entry_main_data",
           grid: "entry_grid_data",
           ref_name: "created_from_id",
-          id: data?.entry?.id,
+          id: data?.entryMainData?.id,
         })
       }
     >

@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleAccount = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}/${id}`);
@@ -24,7 +24,7 @@ export const createAccount = (data) => {
 export const updateAccount = (country_id, data) => {
   return http.patch(
     `${API_URL_CONSTANTS.BASE_ACCOUNT}/${country_id}`,
-    data,
+    data
     // {
     //   headers: {
     //     "Content-Type": "multipart/form-data",
@@ -34,17 +34,12 @@ export const updateAccount = (country_id, data) => {
 };
 
 export const deleteAccount = (id) => {
-  return http.delete(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/${id}`
-  );
+  return http.delete(`${API_URL_CONSTANTS.BASE_ACCOUNT}/${id}`);
 };
 
 export const deleteManyAccounts = (ids) => {
-  return http.post(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/bulk-delete`, ids
-  );
+  return http.post(`${API_URL_CONSTANTS.BASE_ACCOUNT}/bulk-delete`, ids);
 };
-
 
 export const getAccountSearch = (value) => {
   return http.get(
@@ -53,16 +48,7 @@ export const getAccountSearch = (value) => {
 };
 
 export const getAccountCode = (parentId) => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/code=${parentId}`
-  );
-};
-
-
-export const getAccountReceivable = (buildingId) => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/receivable?buildingId=${buildingId}`
-  );
+  return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}/code=${parentId}`);
 };
 
 export const getAccountCash = (buildingId) => {
@@ -71,13 +57,9 @@ export const getAccountCash = (buildingId) => {
   );
 };
 
-
 export const getAccountChildrenByParentId = (parentId) => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/${parentId}/children`
-  );
+  return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}/${parentId}/children`);
 };
-
 
 export const getAccountCodeNumber = (parentId) => {
   return http.get(
@@ -86,18 +68,14 @@ export const getAccountCodeNumber = (parentId) => {
 };
 
 export const getLeavesAccounts = () => {
-  return http.get(
-    `${API_URL_CONSTANTS.BASE_ACCOUNT}/leaves`
-  );
+  return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}/leaves`);
 };
-
 
 export const getAccountSuppliersOnly = () => {
   return http.get(
     `${API_URL_CONSTANTS.BASE_ACCOUNT}/suppliers-customers?=supplier`
   );
 };
-
 
 export const getAccountCustomersOnly = () => {
   return http.get(
@@ -108,5 +86,3 @@ export const getAccountCustomersOnly = () => {
 export const getAllChartAccounts = () => {
   return http.get(`${API_URL_CONSTANTS.BASE_ACCOUNT}?is_root=true`);
 };
-
-

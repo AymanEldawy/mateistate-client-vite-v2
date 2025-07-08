@@ -17,11 +17,13 @@ const AccountChart = () => {
         type: 1,
         account: {
           type: 1,
-          code: response?.nextChildCode,
-          parentId: response?.parentId,
-          finalId: response?.finalId ||  response?.parentId,
+          code: response?.data?.nextChildCode,
+          parentId: response?.data?.parentId,
+          finalId: response?.data?.finalId ||  response?.data?.parentId,
         }
       };
+      console.log('chart', defaultValues);
+      
       handleDispatchForm({
         table: 'account',
         oldValues: defaultValues

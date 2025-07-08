@@ -1,14 +1,16 @@
 import Btn from '@/components/shared/Btn'
-import { RHFAsyncSelectField, RHFInput, RHFInputAmount, RHFTableSelect } from '../../fields'
+import { RHFInput, RHFInputAmount, RHFSelectField } from '../../fields'
 import { AccountField } from '../../global'
+import CostCenterField from '../../global/CostCenterField'
 import TableForm from '../../wrapper/TableForm'
 
 const BillFormTables = ({
   setActiveTab,
   activeTab,
-  PATTERN_SETTINGS
+  materials
 }) => {
   return (
+
     <div className="mt-4">
       <div className="flex items-center bg-gray-100 border">
         <Btn type="button" onClick={() => setActiveTab(1)} containerClassName="!rounded-none" kind={activeTab === 1 ? 'info' : "default"} isActive={activeTab === 1}>Materials </Btn>
@@ -33,30 +35,35 @@ const BillFormTables = ({
             renderFields={(item, index) => (
               <>
                 <td>
-                  <RHFTableSelect
+                  <RHFSelectField
                     name={`billMaterialDetails.${index}.materialId`}
-                    options={[]}
+                    options={materials}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInput
                     name={`billMaterialDetails.${index}.unit`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInput
                     name={`billMaterialDetails.${index}.quantity`}
+                    hideErrors
                     type="number"
                   />
                 </td>
                 <td>
                   <RHFInputAmount
                     name={`billMaterialDetails.${index}.unitPrice`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInput
                     name={`billMaterialDetails.${index}.vatPercentage`}
+                    hideErrors
                     type="number"
 
                   />
@@ -64,21 +71,25 @@ const BillFormTables = ({
                 <td>
                   <RHFInputAmount
                     name={`billMaterialDetails.${index}.vatAmount`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInputAmount
                     name={`billMaterialDetails.${index}.totalPrice`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInputAmount
                     name={`billMaterialDetails.${index}.net`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInput
                     name={`billMaterialDetails.${index}.note`}
+                    hideErrors
                   />
                 </td>
               </>
@@ -115,32 +126,37 @@ const BillFormTables = ({
                 <td>
                   <AccountField
                     name={`billDiscountDetails.${index}.accountId`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInputAmount
                     name={`billDiscountDetails.${index}.discount`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInputAmount
                     name={`billDiscountDetails.${index}.extra`}
+                    hideErrors
                   />
                 </td>
                 <td>
-                  <RHFAsyncSelectField
+                  <CostCenterField
                     name={`billDiscountDetails.${index}.costCenterId`}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <AccountField
                     name={`billDiscountDetails.${index}.obverseAccountId`}
-                    options={[]}
+                    hideErrors
                   />
                 </td>
                 <td>
                   <RHFInput
                     name={`billDiscountDetails.${index}.note`}
+                    hideErrors
                   />
                 </td>
               </>

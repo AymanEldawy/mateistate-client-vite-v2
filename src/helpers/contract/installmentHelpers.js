@@ -1,4 +1,4 @@
-import { getAccountReceivable } from "@/services/accountService";
+import { getAccountReceivable } from "@/services/buildingService";
 import { dividePrice } from "./contractHelpers";
 
 export const COUNTER_CHQ_NUMBER = [
@@ -44,22 +44,31 @@ export const COUNTER_CHQ_NUMBER = [
   "fortieth",
 ];
 
-export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, watch) {
-  console.log('called mergeInstallmentAndFirstTabData with firstTabData:', firstTabData);
-  
-  let total = firstTabData?.final_price;
-  let date = firstTabData?.start_duration_date || firstTabData?.property_delivery_date;
+export async function mergeInstallmentAndFirstTabData(
+  firstTabData,
+  setValue,
+  watch
+) {
+  console.log(
+    "called mergeInstallmentAndFirstTabData with firstTabData:",
+    firstTabData
+  );
 
-  if (!watch('installment.eachNumber')) {
+  let total = firstTabData?.finalPrice;
+  let date =
+    firstTabData?.startDurationDate || firstTabData?.propertyDeliveryDate;
+
+  if (!watch("installment.eachNumber")) {
     setValue("installment.eachNumber", 3);
   }
 
-  if (!watch('installment.installmentsNumbers')) {
+  if (!watch("installment.installmentsNumbers")) {
     setValue("installment.installmentsNumbers", 4);
   }
 
   if (total) {
     setValue("installment.totalAmount", total);
+    setValue("installment.restAmount", total);
   }
 
   if (date) {
@@ -68,16 +77,14 @@ export async function mergeInstallmentAndFirstTabData(firstTabData, setValue, wa
       new Date(date)?.toISOString()?.substring(0, 10)
     );
   }
-
-
 }
-
 
 export const generatePaymentBatches = async (
   watch,
   setValue,
-  CACHE_LIST,
-  unitId
+  unitId,
+  list,
+  reset
 ) => {
   const rest_amount = watch("installment.restAmount");
   const each_duration = watch("installment.eachDuration");
@@ -86,13 +93,13 @@ export const generatePaymentBatches = async (
   const installments_numbers = watch("installment.installmentsNumbers");
   const begin_number = watch("installment.beginNumber");
   const beneficiaryName = watch("installment.beneficiaryName");
-  const accountId = watch(`contract.clientId`);
-  let observeAccountId = await getAccountReceivable(watch(`contract.buildingId`))
-  const client = CACHE_LIST?.client?.find(
-    (c) => c.id === accountId
-  );
+  const accountId = list?.contract?.clientId;
+  // let observeAccountId = null;
+  let cashAccount = await getAccountReceivable(list?.contract?.buildingId);
+  let observeAccountId = cashAccount?.accountId;
+  const client = list?.client?.find((c) => c.id === accountId);
   const bankId = watch("installment.bankId");
-  const bank = CACHE_LIST?.bank?.find((c) => c.id === bankId);
+  const bank = list?.bank?.find((c) => c.id === bankId);
 
   const result = dividePrice(
     new Date(first_installment_date),
@@ -101,6 +108,8 @@ export const generatePaymentBatches = async (
     each_duration,
     each_number
   );
+
+  console.log(result, "result");
 
   let cheques = [];
 
@@ -125,24 +134,22 @@ export const generatePaymentBatches = async (
       observeCostCenterId: watch("costCenterId"),
       note1,
       note2,
-      [unitId]: watch(`contract.${unitId}`),
+      [unitId]: list?.contract?.[unitId],
     });
   }
-  setValue("installment_grid", cheques);
+  console.log(cheques,'-cheques');
+  
+  reset({ ...watch(), installmentGrid: cheques});
 };
-
-
 
 export function onWatchChangesInstallmentTab(name, value, setValue, watch) {
   switch (name) {
     case "totalAmount": {
-
       let first_batch = watch(`installment.firstBatch`) || 0;
       setValue(`installment.restAmount`, value - +first_batch);
       break;
     }
     case "firstBatch": {
-
       let totalAmount = watch(`installment.totalAmount`);
       setValue(`installment.restAmount`, totalAmount - (value || 0));
 
@@ -161,7 +168,7 @@ export function onWatchChangesInstallmentTab(name, value, setValue, watch) {
   }
 }
 
-export function onWatchChangesInstallmentGridTab(name, setValue, watch, cache) {
+export function onWatchChangesInstallmentGridTab(name, setValue, watch, list) {
   let row = name?.split(".").slice(0, 2).join(".");
   let note1 = ``;
 
@@ -170,31 +177,31 @@ export function onWatchChangesInstallmentGridTab(name, setValue, watch, cache) {
     case "number":
     case "amount":
     case "bankId":
-    case "endDueDate": {
+    case "endDueDate":
+      {
+        const number = watch(`${row}.number`);
+        const clientId = list?.contract?.clientId;
+        const amount = watch(`${row}.amount`);
 
-      const number = watch(`${row}.number`);
-      const clientId = watch(`contract.clientId`);
-      const amount = watch(`${row}.amount`);
+        const dueDate = new Date(watch(`${row}.dueDate`)).toLocaleDateString(
+          "en-UK"
+        );
 
-      const dueDate = new Date(watch(`${row}.dueDate`)).toLocaleDateString(
-        "en-UK"
-      );
+        const endDueDate = new Date(
+          watch(`${row}.endDueDate`)
+        ).toLocaleDateString("en-UK");
 
-      const endDueDate = new Date(
-        watch(`${row}.endDueDate`)
-      ).toLocaleDateString("en-UK");
+        // const bank = getCacheRowData(cache, "bank", watch(`${row}.bank_id`));
+        const bank = {};
+        const client = {};
+        // const client = getCacheRowData(
+        //   cache,
+        //   UNIQUE_REF_TABLES.clients,
+        //   clientId
+        // );
 
-      // const bank = getCacheRowData(cache, "bank", watch(`${row}.bank_id`));
-      const bank = {};
-      const client = {};
-      // const client = getCacheRowData(
-      //   cache,
-      //   UNIQUE_REF_TABLES.clients,
-      //   clientId
-      // );
-
-      note1 = `received chq number ${number} from mr ${client?.name} ${amount} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
-    }
+        note1 = `received chq number ${number} from mr ${client?.name} ${amount} due date ${dueDate} end date ${endDueDate} bank name ${bank?.name}`;
+      }
       break;
     default:
       break;

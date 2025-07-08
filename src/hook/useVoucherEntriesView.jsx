@@ -6,6 +6,7 @@ export const VoucherEntriesViewProvider = ({ children }) => {
   const [voucherInfo, setVoucherInfo] = useState({});
 
   const dispatchVoucherEntries = ({ table, grid, ref_name, id, created_from }) => {
+    
     if (id) {
       setVoucherInfo({
         table,
@@ -18,7 +19,7 @@ export const VoucherEntriesViewProvider = ({ children }) => {
       setVoucherInfo({});
     }
   };  
-
+  
   return (
     <VoucherEntriesViewContext.Provider
       value={{ dispatchVoucherEntries, voucherInfo, setVoucherInfo }}

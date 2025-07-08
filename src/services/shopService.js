@@ -50,3 +50,9 @@ export const getSearchShop = (value) => {
     `${API_URL_CONSTANTS.BASE_SHOP}?search=${value}`
   );
 };
+
+export const getAvailableShopsByBuildingId = (buildingId) => {
+  return http.get(
+    `${API_URL_CONSTANTS.BASE_SHOP}/available?buildingId=${buildingId}`
+  );
+};

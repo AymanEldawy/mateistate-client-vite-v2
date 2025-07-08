@@ -3,13 +3,19 @@ import { getAllOwners } from "@/services/ownerService";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { RHFDatePicker, RHFInput, RHFInputAmount, RHFSelectField, RHFTableInput } from "../../fields";
+import {
+  RHFDatePicker,
+  RHFInput,
+  RHFInputAmount,
+  RHFSelectField,
+  RHFTableInput,
+} from "../../fields";
 import BuildingField from "../../global/BuildingField";
 import TableForm from "../../wrapper/TableForm";
-import { getAllOwnerExpensesTypes } from './../../../../services/ownerExpensesTypesService';
+import { getAllOwnerExpensesTypes } from "./../../../../services/ownerExpensesTypesService";
 
 const OwnerExpensesForm = () => {
-  const { watch, setValue } = useFormContext();
+  const { watch, reset, setValue, control } = useFormContext();
 
   const { data: expensesTypes } = useQuery({
     queryKey: [QUERY_KEYS.OWNER_EXPENSES_TYPES],
@@ -19,7 +25,6 @@ const OwnerExpensesForm = () => {
     },
   });
 
-
   const { data: owners } = useQuery({
     queryKey: [QUERY_KEYS.Owner],
     queryFn: async () => {
@@ -28,10 +33,9 @@ const OwnerExpensesForm = () => {
     },
   });
 
-
   useEffect(() => {
     if (expensesTypes?.length > 0) {
-      let grid = []
+      let grid = [];
       for (let i = 0; i < expensesTypes.length; i++) {
         const expenseType = expensesTypes[i];
         if (expenseType?.isActive) {
@@ -45,24 +49,19 @@ const OwnerExpensesForm = () => {
           });
         }
       }
-      if (grid.length === 0)
-        setValue(`expenseDetails`, grid);
+      if (grid.length > 0) {
+        reset({
+          expenseDetails: grid,
+        });
+      }
     }
-
   }, [expensesTypes]);
-
 
   return (
     <div className="flex flex-col gap-2 p-2">
       <div className="grid grid-cols-3 gap-4">
-        <RHFDatePicker
-          label="date"
-          name={`ownerExpense.date`}
-        />
-        <RHFInput
-          label="receiptNumber"
-          name={`ownerExpense.receiptNumber`}
-        />
+        <RHFDatePicker label="date" name={`ownerExpense.date`} />
+        <RHFInput label="receiptNumber" name={`ownerExpense.receiptNumber`} />
         <BuildingField
           label="buildingId"
           name={`ownerExpense.buildingId`}
@@ -75,11 +74,7 @@ const OwnerExpensesForm = () => {
           options={owners}
           required
         />
-        <RHFInput
-          label="note"
-          name={`ownerExpense.note`}
-          hideErrors
-        />
+        <RHFInput label="note" name={`ownerExpense.note`} hideErrors />
       </div>
 
       <TableForm
@@ -87,9 +82,7 @@ const OwnerExpensesForm = () => {
         renderFields={(item, index) => (
           <>
             <td>
-              <RHFDatePicker
-                name={`expenseDetails.${index}.date`}
-              />
+              <RHFDatePicker name={`expenseDetails.${index}.date`} />
             </td>
             <td>
               <RHFSelectField
@@ -105,25 +98,14 @@ const OwnerExpensesForm = () => {
               />
             </td>
             <td>
-              <RHFTableInput
-                name={`expenseDetails.${index}.note`}
-              />
+              <RHFTableInput name={`expenseDetails.${index}.note`} />
             </td>
             <td>
-              <RHFTableInput
-                name={`expenseDetails.${index}.receiptNumber`}
-              />
+              <RHFTableInput name={`expenseDetails.${index}.receiptNumber`} />
             </td>
           </>
         )}
-        headers={[
-          'date',
-          'owner_types',
-          'amount',
-          'note',
-          'receipt_number',
-        ]}
-
+        headers={["date", "owner_types", "amount", "note", "receipt_number"]}
       />
     </div>
   );
