@@ -5,8 +5,8 @@ const BuildingFormAccounts = () => {
   return (
     <div className='grid grid-cols-2 gap-2'>
     {
-      BUILDING_DEFAULT_ACCOUNTS_FIELDS?.map(field => (
-        <AccountField {...field} />
+      BUILDING_DEFAULT_ACCOUNTS_FIELDS?.map((field,index) => (
+        <AccountField key={index} {...field} />
       ))
     }
     </div>
