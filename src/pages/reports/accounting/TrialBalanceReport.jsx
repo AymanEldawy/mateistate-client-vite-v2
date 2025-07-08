@@ -8,7 +8,7 @@ import { ReportPostedField } from "@/components/reports/shared/ReportPostedField
 import ReportWrapper from "@/components/reports/wrapper/ReportWrapper";
 import { LEVELS_TYPE } from "@/helpers/DEFAULT_OPTIONS";
 import { getReportColumns } from "@/helpers/reports";
-import { getTrialBalanceReportData } from "@/services/reportsServices";
+import { getCostCenterTrialBalanceReportData } from "@/services/reportsServices";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 
@@ -23,7 +23,7 @@ const TrialBalanceReport = () => {
   return (
     <ReportWrapper
       columns={columns}
-      getReportData={getTrialBalanceReportData}
+      getReportData={getCostCenterTrialBalanceReportData}
       reportHeadProps={{
         header: name
       }}
