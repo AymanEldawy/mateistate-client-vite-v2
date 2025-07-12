@@ -5,22 +5,17 @@ import { VoucherFooter } from "./VoucherFooter";
 import VoucherFormGrid from "./VoucherFormGrid";
 import { VoucherHead } from "./VoucherHead";
 
-const VoucherForm = ({
-  oldValues = null,
-  code,
-  pattern,
-  ...props
-}) => {
-  const {
-    watch,
-    reset,
-    setValue,
-  } = useFormContext();
+const VoucherForm = ({ oldValues = null, code, pattern, ...props }) => {
+  const { watch, reset, setValue } = useFormContext();
 
   useEffect(() => {
-    if(!pattern) return;
+    if (!pattern) return;
+
+    setValue("voucher.code", +code);
     setValue("voucher.voucherType", +code);
     setValue("voucher.voucherPatternId", pattern?.id);
+
+    console.log("VoucherForm pattern", code);
   }, [code]);
 
   useEffect(() => {
@@ -36,7 +31,7 @@ const VoucherForm = ({
       let subName = name?.split(".")?.at(-1);
       if (subName === "credit" || subName === "debit") {
         // calculateVoucherAmount(row, value, column)
-        reCalculateVouchersResult(watch, setValue)
+        reCalculateVouchersResult(watch, setValue);
       }
     });
 
@@ -49,7 +44,6 @@ const VoucherForm = ({
       <VoucherFormGrid PATTERN_SETTINGS={pattern} />
       <VoucherFooter PATTERN_SETTINGS={pattern} />
     </div>
-
   );
 };
 

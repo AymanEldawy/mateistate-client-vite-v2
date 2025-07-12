@@ -50,6 +50,7 @@ const DynamicPopupForm = () => {
       case "op_partial_collection":
         return (
           <PartialCollectionFrom
+            {...props}
             popupFormConfig={props}
             outerClose={() => onCloseDispatchedForm(props.table)}
           />
@@ -57,6 +58,7 @@ const DynamicPopupForm = () => {
       case "op_collection":
         return (
           <CollectionForm
+            {...props}
             popupFormConfig={props}
             outerClose={() => onCloseDispatchedForm(props.table)}
           />
@@ -64,6 +66,7 @@ const DynamicPopupForm = () => {
       case "op_return":
         return (
           <ReturnForm
+            {...props}
             popupFormConfig={props}
             outerClose={() => onCloseDispatchedForm(props.table)}
           />

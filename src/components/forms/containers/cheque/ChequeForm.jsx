@@ -19,7 +19,7 @@ import {
   RHFSelectField,
   RHFTextarea,
 } from "../../fields";
-import { AccountField, CurrencyFieldGroup } from "../../global";
+import { AccountLeaveField, CurrencyFieldGroup } from "../../global";
 import CostCenterField from "../../global/CostCenterField";
 import ChequeFormBar from "./ChequeFormBar";
 // import { getSearchParking, getSingleParking } from "@/services/parkingService";
@@ -47,7 +47,9 @@ const mergePatternWithChequeData = (pattern, watch, setValue, reset) => {
   // })
 };
 
-const ChequeForm = ({ code, pattern, ...props }) => {
+const ChequeForm = ({ code, pattern, refetchCurrent, ...props }) => {
+  console.log("ChequeForm props:", props);
+
   const { watch, setValue, reset } = useFormContext();
 
   const { data: users } = useQuery({
@@ -115,7 +117,7 @@ const ChequeForm = ({ code, pattern, ...props }) => {
             ) : null}
           </div>
           <div className="flex flex-col gap-2">
-            <AccountField
+            <AccountLeaveField
               label="account_id"
               name="accountId"
               required
@@ -126,7 +128,7 @@ const ChequeForm = ({ code, pattern, ...props }) => {
               name="costCenterId"
               required
             />
-            <AccountField
+            <AccountLeaveField
               label="observe_account_id"
               name="observeAccountId"
               required
@@ -167,7 +169,7 @@ const ChequeForm = ({ code, pattern, ...props }) => {
           <RHFTextarea name="note" label="note" />
           <RHFTextarea name="note2" label="note2" />
         </div>
-        <ChequeFormBar pattern={pattern} />
+        <ChequeFormBar pattern={pattern} refetchCheque={refetchCurrent} />
       </div>
     </>
   );

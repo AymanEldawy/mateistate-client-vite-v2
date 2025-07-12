@@ -1,4 +1,5 @@
 import ConfirmModal from "@/components/shared/ConfirmModal";
+import EntryBar from "@/components/shared/EntryBar";
 import Loading from "@/components/shared/Loading";
 import QUERY_KEYS from "@/data/queryKeys";
 import {
@@ -31,42 +32,49 @@ import {
   RHFInputAmount,
   RHFTextarea,
 } from "../../fields";
-import { AccountField, CurrencyFieldGroup } from "../../global";
+import { AccountLeaveField, CurrencyFieldGroup } from "../../global";
 import CostCenterField from "../../global/CostCenterField";
 import { FormFooter, FormHeader } from "../../wrapper";
 
-const mergePattern = (pattern, chqValues, setValue) => {
-  if (chqValues?.id) {
-    setValue("chequeId", chqValues?.id);
-  }
-  if (chqValues?.amount) {
-    setValue("totalValue", chqValues?.amount);
-    setValue("totalSum", chqValues?.amount);
-    setValue("rest", chqValues?.amount);
-  }
+const mergePattern = (pattern, chqValues, reset) => {
+  let data = {
+    chequeId: chqValues?.id,
+    totalValue: chqValues?.amount,
+    totalSum: chqValues?.amount,
+    rest: chqValues?.amount,
+    genEntries: true,
+    number: 1,
+  };
+
   if (pattern?.partialCreditAccountId) {
-    setValue("creditAccountId", pattern?.partialCreditAccountId);
+    data.creditAccountId = pattern?.partialCreditAccountId;
   }
 
   if (pattern?.partialDefaultObserveAccountIsClient) {
-    setValue("creditAccountId", chqValues?.accountId);
+    data.creditAccountId = chqValues?.accountId;
   }
 
   if (pattern?.partialDebitAccountId) {
-    setValue("debitAccountId", pattern?.partialDebitAccountId);
+    data.debitAccountId = pattern?.partialDebitAccountId;
   }
 
-  if (pattern?.partialGenEntries) setValue("genEntries", true);
+  if (pattern?.partialGenEntries) data.genEntries = true;
 
   if (
     pattern?.partialMoveCostCenterDebit ||
     pattern?.partialMoveCostCenterCredit
   ) {
-    setValue("costCenterId", chqValues?.costCenterId);
+    data.costCenterId = chqValues?.costCenterId;
   }
+
+  reset(data);
 };
 
-const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
+const PartialCollectionFrom = ({
+  popupFormConfig,
+  outerClose,
+  refetchCheque,
+}) => {
   const name = "op_partial_collection";
   const methods = useForm({
     defaultValue: opPartialDefaultValues,
@@ -93,10 +101,12 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
     queryKey: [QUERY_KEYS.PARTIAL_COLLECTION, chequeId],
     queryFn: async () => {
       const response = await getPartialByChequeId(chequeId);
+
       if (response?.success && response?.data) {
-        const current = await getSinglePartial(response?.id);
+        const current = await getSinglePartial(response?.data?.id);
+
         goNew(current);
-        setLastNumber(response?.number);
+        setLastNumber(response?.data?.number);
         return current;
       } else {
         setValue("number", 1);
@@ -106,12 +116,9 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
   });
 
   useEffect(() => {
-    mergePattern(
-      popupFormConfig?.pattern,
-      popupFormConfig?.chequeValue,
-      setValue
-    );
-  }, [popupFormConfig, setValue]);
+    if (!popupFormConfig?.pattern || data) return;
+    mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, reset);
+  }, [popupFormConfig, data]);
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
@@ -142,11 +149,15 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
   }, [watch]);
 
   const goTo = async (value) => {
-    let response = null;
-    if (value === "FIRST") response = await getFirstOne(name, null, chequeId);
-    else if (value === "LAST")
-      response = await getLastOne(name, null, chequeId);
-    else await getOneBy(name, value, "number", null, chequeId);
+    let current = null;
+    if (value === "FIRST") current = await getFirstOne(name, null, chequeId);
+    else if (value === "LAST") current = await getLastOne(name, null, chequeId);
+    else current = await getOneBy(name, value, "number", null, chequeId);
+
+    if (current?.data) {
+      reset(current?.data);
+      setCurrentNumber(current?.data?.number);
+    }
   };
 
   const goNew = () => {
@@ -163,13 +174,32 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
     setValue("totalSumPrev", totalSumPrev || 0);
     setValue("rest", +watch("totalValue") - totalSumPrev);
     setValue("costCenterId", data?.costCenterId);
+    setValue("currencyId", data?.currencyId);
+    setValue("currencyVal", data?.currencyVal);
+    setValue("genEntries", data?.genEntries);
     setValue("chequeId", data?.chequeId || chequeId);
     setValue("creditAccountId", data?.creditAccountId);
     setValue("debitAccountId", data?.debitAccountId);
     setValue("totalValue", chequeValue?.amount);
-    let num = +data?.number + 1 || 1;
+    let num = +data?.number + 1;
     setValue("number", num);
     setCurrentNumber(num);
+  };
+
+  const goBack = async () => {
+    const current = await getPreviousOne(name, currentNumber, null, chequeId);
+    if (current?.data) {
+      reset(current?.data);
+      setCurrentNumber(current?.data?.number);
+    }
+  };
+
+  const goNext = async () => {
+    const current = await getNextOne(name, currentNumber, null, chequeId);
+    if (current?.data) {
+      reset(current?.data);
+      setCurrentNumber(current?.data?.number);
+    }
   };
 
   const onHandleDelete = async () => {
@@ -177,6 +207,7 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
     const response = await deletePartial(data?.id);
     if (response?.success) {
       outerClose();
+      refetchCheque();
     }
     setIsDeleteLoading(false);
   };
@@ -191,6 +222,8 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
     }
 
     if (response?.success) {
+      reset(response?.data);
+      refetchCheque();
       toast.success(
         `Successfully ${
           isUpdate ? "updated" : "inserted"
@@ -216,15 +249,25 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
       />
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <FormHeader onClose={outerClose} header="partial_collection" />
+          <FormHeader
+            onClose={outerClose}
+            header="partial_collection"
+            ExtraContentBar={() => <EntryBar entryId={watch("id")} />}
+          />
           <div className="max-w-3xl w-full p-4">
             <div className="grid grid-cols-3 gap-8 xl:gap-14">
               <div className="flex flex-col gap-2 col-span-2">
                 <RHFDatePicker name="createdAt" label="createdAt" />
                 <CurrencyFieldGroup />
                 <RHFInputAmount name="amount" label="amount" />
-                <AccountField name="debitAccountId" label="debitAccountId" />
-                <AccountField name="creditAccountId" label="creditAccountId" />
+                <AccountLeaveField
+                  name="debitAccountId"
+                  label="debitAccountId"
+                />
+                <AccountLeaveField
+                  name="creditAccountId"
+                  label="creditAccountId"
+                />
                 <CostCenterField name="costCenterId" label="costCenterId" />
               </div>
               <div className="flex flex-col gap-2 ">
@@ -245,11 +288,11 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
             <RHFTextarea name="note" label="note" />
             <div className="grid grid-cols-2 gap-8 xl:gap-14 my-4">
               <div className="flex flex-col gap-2 ">
-                <AccountField
+                <AccountLeaveField
                   name="commissionDebitId"
                   label="commissionDebitId"
                 />
-                <AccountField
+                <AccountLeaveField
                   name="commissionCreditId"
                   label="commissionCreditId"
                 />
@@ -277,8 +320,8 @@ const PartialCollectionFrom = ({ popupFormConfig, outerClose }) => {
             setOpenConfirmation={setOpenConfirmation}
             paginationForm={{
               goTo,
-              goBack: () => getPreviousOne(name, currentNumber, null, chequeId),
-              goNext: () => getNextOne(name, currentNumber, null, chequeId),
+              goBack,
+              goNext,
               lastNumber,
               setCurrentNumber,
               currentNumber,

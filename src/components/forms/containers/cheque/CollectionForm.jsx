@@ -1,5 +1,6 @@
 import ConfirmModal from "@/components/shared/ConfirmModal";
 import Loading from "@/components/shared/Loading";
+import { ViewEntry } from "@/components/shared/ViewEntry";
 import { CHQ_RECEIVED_CODE } from "@/data/GENERATE_STARTING_DATA";
 import QUERY_KEYS from "@/data/queryKeys";
 import {
@@ -19,7 +20,7 @@ import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { RHFDatePicker, RHFInput, RHFInputAmount } from "../../fields";
-import { AccountField, CurrencyFieldGroup } from "../../global";
+import { AccountLeaveField, CurrencyFieldGroup } from "../../global";
 import CostCenterField from "../../global/CostCenterField";
 import { FormFooter, FormHeader } from "../../wrapper";
 
@@ -78,7 +79,7 @@ const mergePattern = async (pattern, chqValues, setValue) => {
   // setRefresh(p => !p);
 };
 
-const CollectionForm = ({ popupFormConfig, outerClose }) => {
+const CollectionForm = ({ popupFormConfig, outerClose, refetchCheque }) => {
   const methods = useForm({
     defaultValue: opCollectionDefaultValues,
     mode: "onBlur",
@@ -100,12 +101,14 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
     queryFn: async () => {
       const response = await getCollectionByChequeId(chequeId);
       if (response?.success) {
-        reset(response);
-        return response;
+        reset(response?.data);
+        return response?.data;
       }
     },
     enabled: !!chequeId,
   });
+
+  console.log(data, "data in collection form");
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
@@ -124,6 +127,7 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
     const response = await deleteCollection(data?.id);
     if (response?.success) {
       outerClose();
+      refetchCheque();
     }
     setIsDeleteLoading(false);
   };
@@ -138,6 +142,8 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
     }
 
     if (response?.success) {
+      refetchCheque();
+      reset(response);
       toast.success(
         `Successfully ${isUpdate ? "updated" : "inserted"} cheque collection`
       );
@@ -159,13 +165,20 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
       <div>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <FormHeader header="collection" onClose={outerClose} />
+            <FormHeader
+              header="collection"
+              onClose={outerClose}
+              ExtraContentBar={() => <ViewEntry id={watch("id")} />}
+            />
             <div className="grid grid-cols-2 gap-4 p-4">
               <RHFDatePicker label="createdAt" name="createdAt" />
               <CurrencyFieldGroup />
               <RHFInputAmount label="amount" name="amount" />
-              <AccountField label="debitAccountId" name="debitAccountId" />
-              <AccountField label="creditAccountId" name="creditAccountId" />
+              <AccountLeaveField label="debitAccountId" name="debitAccountId" />
+              <AccountLeaveField
+                label="creditAccountId"
+                name="creditAccountId"
+              />
               <CostCenterField label="costCenterId" name="costCenterId" />
               <RHFInput label="note" name="note" />
               <RHFInput
@@ -174,11 +187,11 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
                 type="number"
               />
               <RHFInputAmount label="commissionValue" name="commissionValue" />
-              <AccountField
+              <AccountLeaveField
                 label="commissionDebitId"
                 name="commissionDebitId"
               />
-              <AccountField
+              <AccountLeaveField
                 label="commissionCreditId"
                 name="commissionCreditId"
               />

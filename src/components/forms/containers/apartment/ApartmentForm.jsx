@@ -23,6 +23,7 @@ import {
 } from "../../fields";
 import RHFUploadFilesController from "../../fields/RHFUploadFiles";
 import BuildingField from "../../global/BuildingField";
+import CostCenterField from "../../global/CostCenterField";
 import TableForm from "../../wrapper/TableForm";
 
 const ApartmentForm = ({ tab }) => {
@@ -83,16 +84,14 @@ const ApartmentForm = ({ tab }) => {
         type="text"
       />
       <RHFInput name="apartment.statement" label="statement" type="text" />
-      <RHFAsyncSelectField
-        table="cost_center"
+      <CostCenterField
         name="apartment.mainCostCenterId"
         label="main_cost_center"
         allowAdd
         getSearch={getSearchCostCenter}
         getSingle={getSingleCostCenter}
       />
-      <RHFAsyncSelectField
-        table="cost_center"
+      <CostCenterField
         name="apartment.costCenterId"
         label="cost_center"
         allowAdd

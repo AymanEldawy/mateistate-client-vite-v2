@@ -1,4 +1,5 @@
 import ConfirmModal from "@/components/shared/ConfirmModal";
+import EntryBar from "@/components/shared/EntryBar";
 import Loading from "@/components/shared/Loading";
 import QUERY_KEYS from "@/data/queryKeys";
 import { CHQ_RETURN_REASONS } from "@/helpers/DEFAULT_OPTIONS";
@@ -22,39 +23,42 @@ import {
   RHFAsyncSelectField,
   RHFDatePicker,
   RHFInput,
-  RHFInputAmount,
   RHFSelectField,
 } from "../../fields";
-import { AccountField } from "../../global";
+import { AccountLeaveField } from "../../global";
 import CostCenterField from "../../global/CostCenterField";
 import { FormFooter, FormHeader } from "../../wrapper";
 
-const mergePattern = async (pattern, chqValues, setValue) => {
-  setValue("amount", chqValues?.amount);
-  setValue("cheque_id", chqValues?.id);
+const mergePattern = (pattern, chqValues, reset) => {
+  const data = {
+    amount: chqValues?.amount,
+    chequeId: chqValues?.id,
+    createdAt: new Date(),
+  };
+  console.log("pattern in return form", pattern);
 
-  if (pattern?.returnableGenEntries) setValue("genEntries", true);
+  if (pattern?.returnableGenEntries) data.genEntries = true;
   if (pattern?.returnableCreditAccountId) {
-    setValue("creditAccountId", pattern?.returnableCreditAccountId);
+    data.creditAccountId = pattern?.returnableCreditAccountId;
   }
   if (pattern?.returnDefaultObserveAccountIsClient) {
-    setValue("creditAccountId", chqValues?.accountId);
+    data.creditAccountId = chqValues?.accountId;
   }
-  setValue("debitAccountId", chqValues?.accountId);
+  data.debitAccountId = chqValues?.accountId;
   // if (pattern?.returnableDefaultAccountIsClient) {
-  //   setValue("debitAccountId", chqValues?.accountId);
+  //   data.debitAccountId = chqValues?.accountId
   // }
 
   if (pattern?.returnableDebitAccountId) {
-    setValue("debitAccountId", pattern?.returnableDebitAccountId);
+    data.debitAccountId = pattern?.returnableDebitAccountId;
   }
 
   // if(pattern?.returnableActiveOperations)
 
   if (pattern?.returnableDefaultDate === 2) {
-    setValue("createdAt", chqValues?.dueDate);
+    data.createdAt = chqValues?.dueDate;
   } else {
-    setValue("createdAt", new Date());
+    data.createdAt = new Date();
   }
 
   if (pattern?.returnableDefaultObserveAccountIsBuildingBank) {
@@ -65,15 +69,18 @@ const mergePattern = async (pattern, chqValues, setValue) => {
     pattern?.returnableMoveCostCenterCredit ||
     pattern?.returnableMoveCostCenterDebit
   )
-    setValue("costCenterId", chqValues?.costCenterId);
+    data.costCenterId = chqValues?.costCenterId;
 
   // const buildingAccounts = await getBuildingBank(chqValues);
-  // setValue("debitAccountId", buildingAccounts?.bankId);
+  // setValue("debitAccountId =  buildingAccounts?.bankId);
   // setValue("creditAccountId", buildingAccounts?.chequeId);
   // setRefresh(p => !p);
+  reset(data);
 };
 
-const CollectionForm = ({ popupFormConfig, outerClose }) => {
+const ReturnForm = ({ popupFormConfig, outerClose, refetchCheque }) => {
+  console.log(refetchCheque, "refetchCheque,");
+
   const methods = useForm({
     defaultValue: opReturnDefaultValues,
     mode: "onBlur",
@@ -95,8 +102,8 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
     queryFn: async () => {
       const response = await getReturnByChequeId(chequeId);
       if (response?.success) {
-        reset(response);
-        return response;
+        reset(response?.data);
+        return response?.data;
       }
     },
     enabled: !!chequeId,
@@ -105,27 +112,28 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   useEffect(() => {
-    mergePattern(
-      popupFormConfig?.pattern,
-      popupFormConfig?.chequeValue,
-      setValue
-    );
-    setValue("chequeId", chequeId);
-  }, [popupFormConfig, setValue]);
+    if (!popupFormConfig?.pattern && !data?.id) return;
+    console.log(popupFormConfig, "popupFormConfig in return form");
+    mergePattern(popupFormConfig?.pattern, popupFormConfig?.chequeValue, reset);
+  }, [popupFormConfig]);
 
   const onHandleDelete = async () => {
     setIsDeleteLoading(true);
     const response = await deleteReturn(data?.id);
     if (response?.success) {
       outerClose();
+      refetchCheque();
     }
     setIsDeleteLoading(false);
   };
+
+  console.log(watch(), "watch in return form");
 
   const onSubmit = async (values) => {
     const isUpdate = data?.id;
     let response;
 
+    setValue("chequeId", chequeId);
     if (isUpdate) {
       response = await updateReturn(data?.id, values);
     } else {
@@ -133,6 +141,8 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
     }
 
     if (response?.success) {
+      refetchCheque();
+      reset(response);
       toast.success(
         `Successfully ${isUpdate ? "updated" : "inserted"} cheque return`
       );
@@ -154,12 +164,16 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
       />
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <FormHeader header="return" onClose={outerClose} />
+          <FormHeader
+            header="return"
+            onClose={outerClose}
+            ExtraContentBar={() => <EntryBar entryId={data?.id} />}
+          />
           <div className="grid grid-cols-2 gap-4 p-4">
             <RHFDatePicker label="createdAt" name="createdAt" />
-            <RHFInputAmount label="amount" name="amount" />
-            <AccountField label="creditAccountId" name="creditAccountId" />
-            <AccountField
+            <RHFInput label="amount" name="amount" type="amount" readOnly />
+            <AccountLeaveField label="creditAccountId" name="creditAccountId" />
+            <AccountLeaveField
               label="debitAccountId"
               name="debitAccountId"
               required
@@ -194,4 +208,4 @@ const CollectionForm = ({ popupFormConfig, outerClose }) => {
   );
 };
 
-export default CollectionForm;
+export default ReturnForm;

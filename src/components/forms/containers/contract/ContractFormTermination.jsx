@@ -13,7 +13,7 @@ import {
   RHFSelectField,
   RHFTextarea,
 } from "../../fields";
-import { AccountField } from "../../global";
+import { AccountLeaveField } from "../../global";
 import TableForm from "../../wrapper/TableForm";
 
 const ContractFormTermination = () => {
@@ -24,8 +24,8 @@ const ContractFormTermination = () => {
     const subscription = watch((value, { name, type }) => {
       let key = name?.split(".")?.at(-1);
       if (name?.indexOf(`contractTermination`) !== -1) {
-        console.log('called termination');
-        
+        console.log("called termination");
+
         onWatchChangesTerminationTab(
           name?.split(".")?.at(-1),
           watch(name),
@@ -173,12 +173,12 @@ const ContractFormTermination = () => {
                   </td>
                   <td>
                     <RHFInputAmount
-                      name={`contractFinesGrid.${index}.fee_amount`}
+                      name={`contractFinesGrid.${index}.feeAmount`}
                     />
                   </td>
                   <td>
-                    <AccountField
-                      name={`contractFinesGrid.${index}.account_id`}
+                    <AccountLeaveField
+                      name={`contractFinesGrid.${index}.accountId`}
                     />
                   </td>
                   <td>

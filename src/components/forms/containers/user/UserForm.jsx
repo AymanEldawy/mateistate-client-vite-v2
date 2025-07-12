@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 import { ReportFilterBuildings } from "../../../filters/ReportFilterBuildings";
 import { ReportFilterCategories } from "../../../filters/ReportFilterCategories";
 import { RHFDatePicker, RHFInput, RHFSelectField } from "../../fields";
-import { AccountField } from "../../global";
+import { AccountLeaveField } from "../../global";
 
 const UserForm = () => {
   const { watch, setValue } = useFormContext();
@@ -20,35 +20,38 @@ const UserForm = () => {
       const response = await getAllBanks();
       return response?.data || [];
     },
-  })
-
+  });
 
   const update = useCallback((itemKey, list, formKey) => {
-    let data = []
+    let data = [];
     for (const key in list) {
-      data.push({ [itemKey]: key })
+      data.push({ [itemKey]: key });
     }
-    setValue(formKey, data)
-  }, [])
+    setValue(formKey, data);
+  }, []);
 
   useMemo(() => {
-    update('buildingId', buildingsIds, 'workerBuildings')
-  }, [Object.keys(buildingsIds).length])
+    update("buildingId", buildingsIds, "workerBuildings");
+  }, [Object.keys(buildingsIds).length]);
 
   useMemo(() => {
-    update('categoryId', categoriesIds, 'workerCategories')
-  }, [Object.keys(categoriesIds).length])
-
+    update("categoryId", categoriesIds, "workerCategories");
+  }, [Object.keys(categoriesIds).length]);
 
   return (
     <div className="overflow-auto max-h-[500px]">
       <div className="grid grid-cols-2 gap-2">
         <RHFInput label="name" name="user.name" required />
-        <RHFSelectField label="cardType" name="user.cardType" options={USER_TYPE} required />
+        <RHFSelectField
+          label="cardType"
+          name="user.cardType"
+          options={USER_TYPE}
+          required
+        />
         <RHFInput label="phone" name="user.phone" required />
         <RHFInput label="email" name="user.email" required />
         <RHFInput label="trnNumber" name="user.trnNumber" type="number" />
-        <AccountField label="accountId" name="user.accountId" />
+        <AccountLeaveField label="accountId" name="user.accountId" />
 
         <RHFDatePicker label="dateOfBirth" name="user.dateOfBirth" />
         <RHFInput label="passportNumber" name="user.passportNumber" />
@@ -59,20 +62,23 @@ const UserForm = () => {
         <RHFSelectField label="userType" name="user.userType" options={[]} />
         <RHFInput label="commercialRegister" name="user.commercialRegister" />
         <RHFInput label="barcode" name="user.barcode" type="number" />
-        <RHFInput label="profession" name="user.profession"  type="number" />
+        <RHFInput label="profession" name="user.profession" type="number" />
         <RHFInput label="workPhone" name="user.workPhone" />
         <RHFInput label="token" name="user.token" />
         <RHFInput label="fax" name="user.fax" />
         <RHFInput label="mailbox" name="user.mailbox" />
         <RHFInput label="sponsor" name="user.sponsor" type="number" />
         <RHFInput label="statement" name="user.statement" />
-        <AccountField label="insuranceAccountId" name="user.insuranceAccountId" />
+        <AccountLeaveField
+          label="insuranceAccountId"
+          name="user.insuranceAccountId"
+        />
         <RHFSelectField label="bankId" name="user.bankId" options={banks} />
-        <RHFSelectField label="nationality" name="user.nationality" options={NATIONALITY_LISTS} />
-
-
-
-
+        <RHFSelectField
+          label="nationality"
+          name="user.nationality"
+          options={NATIONALITY_LISTS}
+        />
       </div>
       {/* <DynamicForm
         containerClassName="mb-4 border-b pb-4"
@@ -80,14 +86,14 @@ const UserForm = () => {
         key={'user'}
         tab="user"
       /> */}
-      {watch("user.card_type") > 2 ? (
+      {watch("user.cardType") > 3 ? (
         <ReportFilterBuildings
           bodyClassName={"grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6"}
           buildingsIds={buildingsIds}
           setBuildingsIds={setBuildingsIds}
         />
       ) : null}
-      {watch("user.card_type") > 3 ? (
+      {watch("user.cardType") > 2 ? (
         <ReportFilterCategories
           containerClassName="mt-4"
           bodyClassName={"grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6"}

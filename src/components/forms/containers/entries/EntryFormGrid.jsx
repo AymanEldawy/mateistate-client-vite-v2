@@ -1,24 +1,15 @@
-import TableForm from '../../wrapper/TableForm'
-import { RHFInputAmount, RHFSelectField, RHFTableAsyncSelect, RHFTableInput, RHFTableSelect } from '../../fields'
-import { AccountField } from '../../global'
-import { useQuery } from '@tanstack/react-query';
-import { getLeavesAccounts } from '@/services/accountService';
-import useFetchData from '@/hook/useFetchQuery';
-import QUERY_KEYS from '@/data/queryKeys';
+import { RHFInputAmount, RHFTableInput, RHFTableSelect } from "../../fields";
+import { AccountLeaveField } from "../../global";
+import TableForm from "../../wrapper/TableForm";
 
-const EntryFormGrid = ({
-  accounts,
-  costCenters,
-}) => {
-
+const EntryFormGrid = ({ accounts, costCenters }) => {
   return (
     <TableForm
       renderFields={(item, index) => {
         return (
           <>
-
             <td>
-              <RHFTableSelect
+              <AccountLeaveField
                 label=""
                 name={`entryGridData.${index}.accountId`}
                 hideErrors
@@ -48,33 +39,29 @@ const EntryFormGrid = ({
               />
             </td>
             <td>
-              <RHFTableInput
-                name={`entryGridData.${index}.note`}
-                hideErrors
-              />
+              <RHFTableInput name={`entryGridData.${index}.note`} hideErrors />
             </td>
             <td>
-              <AccountField
+              <AccountLeaveField
                 name={`entryGridData.${index}.observeAccountId`}
                 hideErrors
               />
             </td>
           </>
-        )
+        );
       }}
       gridName="entryGridData"
       headers={[
-        'account',
-        'debit',
-        'credit',
-        'cost_center',
-        'note',
-        'observe_account_id',
+        "account",
+        "debit",
+        "credit",
+        "cost_center",
+        "note",
+        "observe_account_id",
         // 'currency',
       ]}
-
     />
-  )
-}
+  );
+};
 
-export default EntryFormGrid
+export default EntryFormGrid;

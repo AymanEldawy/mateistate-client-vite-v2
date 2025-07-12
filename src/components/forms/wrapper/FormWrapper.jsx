@@ -36,8 +36,6 @@ const FormWrapper = ({
   handleRefetchOnChangeData,
   ...props
 }) => {
-  console.log(oldValues, "old values");
-
   const navigate = useNavigate();
   const pathname = usePathname();
   const [searchParams] = useSearchParams();
@@ -52,7 +50,7 @@ const FormWrapper = ({
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState(formSidebarProps?.list?.[0]);
   const methods = useForm({
-    defaultValues: defaultValue,
+    defaultValues: formProps?.defaultValue,
     // resolver: zodResolver(validationSchema),
     mode: "onBlur",
     resolver: zodResolver(
@@ -69,22 +67,15 @@ const FormWrapper = ({
     formState: { isSubmitting, isLoading, isDirty, errors, dirtyFields },
   } = methods;
 
-  console.log(
-    refetch,
-    "-refetch",
-    searchParamsSelectedNumber,
-    numberSearchParam
-  );
-
   const paginationForm = useFormPagination({
     name,
     number: refetch ? searchParamsSelectedNumber : numberSearchParam,
     code: refetch ? searchParamsSelectedCode : codeSearchParam,
     reset,
-    defaultValue,
+    defaultValue: formProps?.defaultValue,
   });
 
-  const { data: oldData } = useQuery({
+  const { data: oldData, refetch: refetchCurrent } = useQuery({
     queryKey: [queryKey, "single", paginationForm?.currentId],
 
     queryFn: async () => {
@@ -129,8 +120,6 @@ const FormWrapper = ({
       }
 
       if (handleRefetchOnChangeData) {
-        console.log("called refetch data");
-
         handleRefetchOnChangeData();
       }
       if (outerClose) outerClose();
@@ -143,10 +132,6 @@ const FormWrapper = ({
     const newSearchParams = new URLSearchParams(searchParams);
     if (numberSearchParam) newSearchParams.delete(SEARCH_PARAMS.NUMBER);
     if (codeSearchParam) newSearchParams.delete(SEARCH_PARAMS.CODE);
-    // console.log({
-    //   numberSearchParam,
-    //   codeSearchParam
-    // });
 
     navigate(
       {
@@ -214,6 +199,7 @@ const FormWrapper = ({
     }
   };
 
+  console.log(errors, "errors in form wrapper");
   console.log(watch(), "watch");
 
   const resetFormHandler = () => reset(defaultValue);
@@ -251,6 +237,7 @@ const FormWrapper = ({
               paginationForm={paginationForm}
               code={codeSearchParam}
               refetch={refetch}
+              refetchCurrent={refetchCurrent}
               {...props}
               {...formProps}
             />
@@ -260,6 +247,7 @@ const FormWrapper = ({
               code={codeSearchParam}
               codeSearchParam={codeSearchParam}
               refetch={refetch}
+              refetchCurrent={refetchCurrent}
               {...props}
               {...formProps}
             />

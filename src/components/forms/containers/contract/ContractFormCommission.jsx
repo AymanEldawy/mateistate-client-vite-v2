@@ -1,5 +1,5 @@
-import { RHFInput, RHFInputAmount, RHFTextarea } from "../../fields"
-import { AccountField } from "../../global"
+import { RHFInput, RHFInputAmount, RHFTextarea } from "../../fields";
+import { AccountLeaveField } from "../../global";
 
 const ContractFormCommission = () => {
   return (
@@ -13,7 +13,7 @@ const ContractFormCommission = () => {
           label="commissionValue"
           name={`contractCommission.commissionValue`}
         />
-        <AccountField
+        <AccountLeaveField
           name={`contractCommission.commissionAccountId`}
           label="commissionAccountId"
         />
@@ -31,7 +31,7 @@ const ContractFormCommission = () => {
           label="commissionFromOwnerValue"
           name={`contractCommission.commissionFromOwnerValue`}
         />
-        <AccountField
+        <AccountLeaveField
           name={`contractCommission.commissionFromOwnerAccountId`}
           label="commissionFromOwnerAccountId"
         />
@@ -41,7 +41,7 @@ const ContractFormCommission = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContractFormCommission
+export default ContractFormCommission;

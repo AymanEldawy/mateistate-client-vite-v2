@@ -18,7 +18,7 @@ import {
   RHFSelectField,
   RHFTextarea,
 } from "../../fields";
-import { AccountField } from "../../global";
+import { AccountLeaveField } from "../../global";
 import BuildingField from "../../global/BuildingField";
 
 const ContractFormGeneral = ({ pattern, unit }) => {
@@ -81,7 +81,7 @@ const ContractFormGeneral = ({ pattern, unit }) => {
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-2 gap-x-6 mt-4 w-full  items-start">
         <div className="grid grid-cols-1 gap-y-2 gap-x-6 ">
-          <AccountField
+          <AccountLeaveField
             // options={customers}
             label="clientId"
             name="contract.clientId"
@@ -145,7 +145,7 @@ const ContractFormGeneral = ({ pattern, unit }) => {
         </div>
 
         <div className="flex flex-col gap-y-2 gap-x-6">
-          <RHFSelectField
+          <AccountLeaveField
             inputClassName={
               watch(`contract.revenueAccountId`) ? "bg-blue-100" : ""
             }
@@ -154,7 +154,7 @@ const ContractFormGeneral = ({ pattern, unit }) => {
             options={accountsLeaves}
             required
           />
-          <RHFSelectField
+          <AccountLeaveField
             inputClassName={
               watch(`contract.discountAccountId`) ? "bg-blue-100" : ""
             }
@@ -162,7 +162,7 @@ const ContractFormGeneral = ({ pattern, unit }) => {
             name={`contract.discountAccountId`}
             options={accountsLeaves}
           />
-          <RHFSelectField
+          <AccountLeaveField
             inputClassName={
               watch(`contract.insuranceAccountId`) ? "bg-blue-100" : ""
             }
@@ -171,7 +171,7 @@ const ContractFormGeneral = ({ pattern, unit }) => {
             options={accountsLeaves}
             required={pattern?.insuranceRequired}
           />
-          <RHFSelectField
+          <AccountLeaveField
             inputClassName={watch(`contract.vatAccountId`) ? "bg-blue-100" : ""}
             label={`vatAccountId`}
             name={`contract.vatAccountId`}

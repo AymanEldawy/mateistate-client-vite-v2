@@ -26,8 +26,9 @@ import {
   RHFSelectField,
   RHFTextarea,
 } from "../../fields";
-import { AccountField } from "../../global";
+import { AccountLeaveField } from "../../global";
 import BuildingField from "../../global/BuildingField";
+import CostCenterField from "../../global/CostCenterField";
 const ReservationPropertyForm = () => {
   const { watch } = useFormContext();
 
@@ -88,7 +89,7 @@ const ReservationPropertyForm = () => {
     <div className="p-4 flex flex-col min-h-[200px] max-h-[75vh] overflow-auto ">
       <div className="grid grid-cols-3 gap-4">
         <RHFDatePicker name="createdAt" label="Date" />
-        <AccountField name="accountId" label="Account" required />
+        <AccountLeaveField name="accountId" label="Account" required />
         <BuildingField name="buildingId" label="Building" required />
         <RHFSelectField
           name="propertyType"
@@ -121,35 +122,31 @@ const ReservationPropertyForm = () => {
             <RHFAsyncSelectField
               name="currencyId"
               label="Currency"
-              Table="currency"
+              table="currency"
               allowAdd
             />
 
-            <RHFAsyncSelectField
+            <AccountLeaveField
               name="debitAccountId"
               label="Debit Account"
-              Table="account"
               allowAdd
             />
 
-            <RHFAsyncSelectField
+            <AccountLeaveField
               name="creditAccountId"
               label="Credit Account"
-              Table="account"
               allowAdd
             />
 
-            <RHFAsyncSelectField
+            <CostCenterField
               name="debitCostCenterId"
               label="Debit Cost Center"
-              Table="cost_center"
               allowAdd
             />
 
-            <RHFAsyncSelectField
+            <CostCenterField
               name="creditCostCenterId"
               label="Credit Cost Center"
-              Table="cost_center"
               allowAdd
             />
 

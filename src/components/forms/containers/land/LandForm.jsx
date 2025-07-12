@@ -7,6 +7,9 @@ import {
   RHFTableInput,
   RHFTextarea,
 } from "../../fields";
+import { AccountLeaveField } from "../../global";
+import CostCenterField from "../../global/CostCenterField";
+import UserField from "../../global/UserField";
 import TableForm from "../../wrapper/TableForm";
 const LandForm = ({ tab }) => {
   const { t } = useTranslation();
@@ -57,8 +60,7 @@ const LandForm = ({ tab }) => {
         label="currency_value_begin_land"
         type="number"
       />
-      <RHFAsyncSelectField
-        table="cost_center"
+      <CostCenterField
         name="beginLandCostCenterId"
         label="begin_land_cost_center"
         allowAdd
@@ -79,41 +81,25 @@ const LandForm = ({ tab }) => {
         label="purchase_note"
         containerClassName="col-span-2"
       />
-      <RHFAsyncSelectField
-        table="cost_center"
-        name="costCenterId"
-        label="cost_center"
-        allowAdd
-      />
-      <RHFAsyncSelectField
-        table="account"
-        name="bankAccountId"
-        label="bank_account"
-        allowAdd
-      />
-      <RHFAsyncSelectField
-        table="account"
+      <CostCenterField name="costCenterId" label="cost_center" allowAdd />
+      <AccountLeaveField name="bankAccountId" label="bank_account" allowAdd />
+      <AccountLeaveField
         name="accountCommIncomeId"
         label="account_comm_income"
         allowAdd
       />
 
       <RHFInput name="rent" label="Rent" type="number" />
-      <RHFAsyncSelectField
+      <AccountLeaveField
         table="currency"
         name="rentCurrencyId"
         label="rent_currency"
         allowAdd
       />
 
-      <RHFAsyncSelectField
-        table="account"
-        name="accountId"
-        label="account_id"
-        allowAdd
-      />
-      <RHFAsyncSelectField
-        table="account"
+      <AccountLeaveField name="accountId" label="account_id" allowAdd />
+      <UserField
+        table="user"
         name="customerId"
         label="customer_id"
         required
@@ -124,8 +110,7 @@ const LandForm = ({ tab }) => {
         name="currentOwnerId"
         label="current_owner_id"
       />
-      <RHFAsyncSelectField
-        table="account"
+      <AccountLeaveField
         name="bankAccountId"
         label="bank_account_id"
         allowAdd

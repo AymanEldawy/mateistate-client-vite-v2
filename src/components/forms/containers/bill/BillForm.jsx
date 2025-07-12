@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { RHFInput, RHFSelectField, RHFTextarea } from "../../fields";
-import { AccountField, CurrencyFieldGroup } from "../../global";
+import { AccountLeaveField, CurrencyFieldGroup } from "../../global";
 import CostCenterField from "../../global/CostCenterField";
 import StoreField from "../../global/StoreField";
 import UserField from "../../global/UserField";
@@ -140,9 +140,15 @@ const BillForm = ({ pattern }) => {
           required={+watch("bill.paymentMethod") === 1}
         />
 
-        <AccountField label="customerAccountId" name="bill.customerAccountId" />
-        <AccountField label="materialAccountId" name="bill.materialAccountId" />
-        <AccountField
+        <AccountLeaveField
+          label="customerAccountId"
+          name="bill.customerAccountId"
+        />
+        <AccountLeaveField
+          label="materialAccountId"
+          name="bill.materialAccountId"
+        />
+        <AccountLeaveField
           required={false}
           label="vatAccountId"
           name="bill.vatAccountId"
