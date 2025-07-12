@@ -5,6 +5,10 @@ export const getSingleLessor = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_Lessor}/${id}`);
 };
 
+export const getSearchLessor = (search) => {
+  return http.get(`${API_URL_CONSTANTS.BASE_Lessor}?search=${search}`);
+};
+
 export const getAllLessors = (signal) => {
   return http.get(API_URL_CONSTANTS.BASE_Lessor);
 };
