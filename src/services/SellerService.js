@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleSeller = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_SELLER}/${id}`);
@@ -40,7 +40,7 @@ export const deleteSeller = (id) => {
 };
 
 export const deleteManySellers = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_SELLER}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_SELLER}/bulk-delete`, {ids});
 };
 
 export const getSellerCode = (parentId) => {

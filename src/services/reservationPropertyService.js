@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleReservationProperty = (id, signal) => {
     return http.get(`${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}/${id}`);
@@ -37,7 +37,7 @@ export const deleteReservationProperty = (id) => {
 
 export const deleteManyReservationProperties = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}/bulk-delete`, ids
+        `${API_URL_CONSTANTS.BASE_RESERVATION_PROPERTY}/bulk-delete`, {ids}
     );
 };
 

@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleStore = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_STORE}/${id}`);
@@ -38,7 +38,7 @@ export const deleteStore = (id) => {
 };
 
 export const deleteManyStores = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_STORE}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_STORE}/bulk-delete`, {ids});
 };
 
 export const getStoreCode = (parentId) => {

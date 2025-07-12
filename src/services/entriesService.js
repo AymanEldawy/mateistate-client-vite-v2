@@ -17,9 +17,9 @@ export const createEntry = (data) => {
   });
 };
 
-export const updateEntry = (country_id, data) => {
-  return http.patch(
-    `${API_URL_CONSTANTS.BASE_ENTRIES}/${country_id}`,
+export const updateEntry = (entryId, data) => {
+  return http.put(
+    `${API_URL_CONSTANTS.BASE_ENTRIES}/${entryId}`,
     data,
     // {
     //   headers: {
@@ -37,7 +37,7 @@ export const deleteEntry = (id) => {
 
 export const deleteManyEntries = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_ENTRIES}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_ENTRIES}/bulk-delete`, {ids}
   );
 };
 

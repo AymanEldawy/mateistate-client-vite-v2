@@ -40,7 +40,7 @@ export const deleteShop = (id) => {
 
 export const deleteManyShops = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_SHOP}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_SHOP}/bulk-delete`, {ids}
   );
 };
 

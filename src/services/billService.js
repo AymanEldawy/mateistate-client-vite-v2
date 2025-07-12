@@ -22,7 +22,7 @@ export const deleteBill = (id) => {
 };
 
 export const deleteManyBills = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_BILLS}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_BILLS}/bulk-delete`, {ids});
 };
 
 export const getSearchBill = (value) => {

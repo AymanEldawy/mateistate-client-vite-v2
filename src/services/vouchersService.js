@@ -22,7 +22,7 @@ export const deleteVoucher = (id) => {
 };
 
 export const deleteManyVouchers = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_VOUCHER}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_VOUCHER}/bulk-delete`, {ids});
 };
 
 export const getSearchVoucher = (value) => {

@@ -42,7 +42,7 @@ export const deleteVoucherPattern = (id) => {
 
 export const deleteManyVoucherPatterns = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_VOUCHER_PATTERN}/bulk-delete`, {ids}
   );
 };
 

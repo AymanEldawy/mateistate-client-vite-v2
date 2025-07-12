@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleVilla = (id, signal) => {
     return http.get(`${API_URL_CONSTANTS.BASE_VILLA}/${id}`);
@@ -41,7 +41,7 @@ export const deleteVilla = (id) => {
 
 export const deleteManyVillas = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_VILLA}/bulk-delete`, ids
+        `${API_URL_CONSTANTS.BASE_VILLA}/bulk-delete`, {ids}
     );
 };
 

@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleMaterialGroup = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/${id}`);
@@ -34,7 +34,7 @@ export const deleteMaterialGroup = (id) => {
 };
 
 export const deleteManyMaterialGroup = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_MATERIAL_GROUPS}/bulk-delete`, {ids});
 };
 
 export const getMaterialGroupCode = (parentId) => {

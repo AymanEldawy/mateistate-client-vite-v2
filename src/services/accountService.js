@@ -38,7 +38,7 @@ export const deleteAccount = (id) => {
 };
 
 export const deleteManyAccounts = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_ACCOUNT}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_ACCOUNT}/bulk-delete`, {ids});
 };
 
 export const getAccountSearch = (value) => {

@@ -18,7 +18,7 @@ export const createReturn = (data) => {
 };
 
 export const updateReturn = (id, data) => {
-  return http.patch(
+  return http.put(
     `${API_URL_CONSTANTS.BASE_RETURN}/${id}`,
     data,
     // {

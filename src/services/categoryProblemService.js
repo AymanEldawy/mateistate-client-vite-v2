@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleCategoryProblem = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM}/${id}`);
@@ -34,5 +34,5 @@ export const deleteCategoryProblem = (id) => {
 };
 
 export const deleteManyCategoryProblems = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_CATEGORY_PROBLEM}/bulk-delete`, {ids});
 };

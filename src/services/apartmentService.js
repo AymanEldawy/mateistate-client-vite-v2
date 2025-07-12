@@ -40,7 +40,7 @@ export const deleteApartment = (id) => {
 
 export const deleteManyApartments = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_APARTMENT}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_APARTMENT}/bulk-delete`, {ids}
   );
 };
 

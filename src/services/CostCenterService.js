@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleCostCenter = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_COST_CENTER}/${id}`);
@@ -34,7 +34,7 @@ export const deleteCostCenter = (id) => {
 };
 
 export const deleteManyCostCenters = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_COST_CENTER}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_COST_CENTER}/bulk-delete`, {ids});
 };
 
 export const getCostCenterCode = (parentId) => {

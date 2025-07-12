@@ -18,7 +18,7 @@ export const createPartial = (data) => {
 };
 
 export const updatePartial = (country_id, data) => {
-  return http.patch(
+  return http.put(
     `${API_URL_CONSTANTS.BASE_PARTIAL_COLLECTION}/${country_id}`,
     data,
     // {

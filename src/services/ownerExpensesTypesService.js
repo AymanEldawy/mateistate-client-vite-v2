@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleOwnerExpensesTypes = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.OWNER_EXPENSES_TYPES}/${id}`);
@@ -37,5 +37,5 @@ export const getSearchOwnerExpensesTypes = (value) => {
 };
 
 export const deleteManyOwnerExpensesTypes = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.OWNER_EXPENSES_TYPES}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.OWNER_EXPENSES_TYPES}/bulk-delete`, {ids});
 };

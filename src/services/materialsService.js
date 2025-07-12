@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleMaterial = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_MATERIALS}/${id}`);
@@ -34,7 +34,7 @@ export const deleteMaterial = (id) => {
 };
 
 export const deleteManyMaterial = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_MATERIALS}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_MATERIALS}/bulk-delete`, {ids});
 };
 
 export const getMaterialCode = (parentId) => {

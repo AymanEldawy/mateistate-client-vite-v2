@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleUser = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_USER}/${id}`);
@@ -37,7 +37,7 @@ export const deleteUser = (id) => {
 
 export const deleteManyUsers = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_USER}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_USER}/bulk-delete`, {ids}
   );
 };
 

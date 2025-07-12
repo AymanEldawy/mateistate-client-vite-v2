@@ -17,9 +17,17 @@ export const createContract = (data) => {
   });
 };
 
-export const updateContract = (country_id, data) => {
+export const renewContract = (contractId, data) => {
+  return http.post(`${API_URL_CONSTANTS.BASE_CONTRACT}/${contractId}`, data, {
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    // },
+  });
+};
+
+export const updateContract = (contractId, data) => {
   return http.put(
-    `${API_URL_CONSTANTS.BASE_CONTRACT}/${country_id}`,
+    `${API_URL_CONSTANTS.BASE_CONTRACT}/${contractId}`,
     data,
     // {
     //   headers: {
@@ -37,7 +45,7 @@ export const deleteContract = (id) => {
 
 export const deleteManyContracts = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_CONTRACT}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_CONTRACT}/bulk-delete`, {ids}
   );
 };
 

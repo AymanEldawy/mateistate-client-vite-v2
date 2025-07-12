@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleLand = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_LAND}/${id}`);
@@ -41,6 +41,6 @@ export const deleteLand = (id) => {
 
 export const deleteManyLands = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_LAND}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_LAND}/bulk-delete`, {ids}
   );
 };

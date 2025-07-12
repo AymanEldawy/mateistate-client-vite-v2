@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleUserWorkTime = (id, signal) => {
     return http.get(`${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/${id}`);
@@ -37,7 +37,7 @@ export const deleteUserWorkTime = (id) => {
 
 export const deleteManyUserWorkTimes = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/bulk-delete`, ids
+        `${API_URL_CONSTANTS.BASE_USER_WORK_TIME}/bulk-delete`, {ids}
     );
 };
 

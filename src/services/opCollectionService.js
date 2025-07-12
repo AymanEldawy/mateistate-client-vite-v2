@@ -18,7 +18,7 @@ export const createCollection = (data) => {
 };
 
 export const updateCollection = (country_id, data) => {
-  return http.patch(
+  return http.put(
     `${API_URL_CONSTANTS.BASE_COLLECTION}/${country_id}`,
     data,
     // {

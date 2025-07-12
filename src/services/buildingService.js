@@ -34,7 +34,7 @@ export const deleteBuilding = (id) => {
 };
 
 export const deleteManyBuildings = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_BUILDING}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_BUILDING}/bulk-delete`, {ids});
 };
 
 export const getBuildingDetails = () => {

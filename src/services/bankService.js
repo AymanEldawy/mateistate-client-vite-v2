@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleBank = (id) => {
   return http.get(`${API_URL_CONSTANTS.BASE_BANK}/${id}`);
@@ -41,7 +41,7 @@ export const deleteBank = (id) => {
 
 export const deleteManyBanks = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_BANK}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_BANK}/bulk-delete`, {ids}
   );
 };
 

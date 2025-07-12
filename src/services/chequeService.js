@@ -31,7 +31,7 @@ export const deleteCheque = (id) => {
 
 // export const deleteManyCheques = (ids) => {
 //   return http.post(
-//     `${API_URL_CONSTANTS.BASE_CHEQUE}/bulk-delete`, ids
+//     `${API_URL_CONSTANTS.BASE_CHEQUE}/bulk-delete`, {ids}
 //   );
 // };
 

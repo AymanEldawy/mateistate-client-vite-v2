@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleOwner = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_owner}/${id}`);
@@ -34,7 +34,7 @@ export const deleteOwner = (id) => {
 };
 
 export const deleteManyOwners = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_owner}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_owner}/bulk-delete`, {ids});
 };
 
 export const getOwnerCode = (parentId) => {

@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleService = (id, signal) => {
     return http.get(`${API_URL_CONSTANTS.BASE_SERVICE}/${id}`);
@@ -37,7 +37,7 @@ export const deleteService = (id) => {
 
 export const deleteManyServices = (ids) => {
     return http.delete(
-        `${API_URL_CONSTANTS.BASE_SERVICE}/bulk-delete`, ids
+        `${API_URL_CONSTANTS.BASE_SERVICE}/bulk-delete`, {ids}
     );
 };
 

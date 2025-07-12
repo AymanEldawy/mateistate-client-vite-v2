@@ -36,7 +36,7 @@ export const deleteBillPattern = (id) => {
 
 export const deleteManyBillPatterns = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_BILL_PATTERN}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_BILL_PATTERN}/bulk-delete`, {ids}
   );
 };
 

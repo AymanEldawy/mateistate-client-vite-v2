@@ -41,7 +41,7 @@ export const deleteParking = (id) => {
 
 export const deleteManyParkings = (ids) => {
   return http.post(
-    `${API_URL_CONSTANTS.BASE_PARKING}/bulk-delete`, ids
+    `${API_URL_CONSTANTS.BASE_PARKING}/bulk-delete`, {ids}
   );
 };
 

@@ -1,5 +1,5 @@
-import http from "./http";
 import API_URL_CONSTANTS from "./APIUrlConstants";
+import http from "./http";
 
 export const getSingleCategory = (id, signal) => {
   return http.get(`${API_URL_CONSTANTS.BASE_CATEGORY}/${id}`);
@@ -34,7 +34,7 @@ export const deleteCategory = (id) => {
 };
 
 export const deleteManyCategories = (ids) => {
-  return http.post(`${API_URL_CONSTANTS.BASE_CATEGORY}/bulk-delete`, ids);
+  return http.post(`${API_URL_CONSTANTS.BASE_CATEGORY}/bulk-delete`, {ids});
 };
 
 export const getSearchCategory = (value) => {
