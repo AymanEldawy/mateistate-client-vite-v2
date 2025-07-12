@@ -19,6 +19,8 @@ export const opPartialDefaultValues = {
   commissionPercentage: 0,
   commissionValue: 0,
   commissionNote: '',
+  genEntries: true,
+  number: 1,
 }
 
 export const opPartialValidationSchema = z.object({
@@ -41,4 +43,6 @@ export const opPartialValidationSchema = z.object({
   commissionPercentage: VALIDATION.OPTIONAL_NUMBER,
   commissionValue: VALIDATION.OPTIONAL_NUMBER,
   commissionNote: VALIDATION.OPTIONAL_STRING,
+  genEntries: VALIDATION.OPTIONAL_BOOLEAN,
+  number: z.number()
 });

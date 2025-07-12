@@ -2,7 +2,7 @@ import { z } from "zod"
 import VALIDATION from "../VALIDATIONS"
 
 export const opReturnDefaultValues = {
-  amount: null,
+  amount: 0,
   chequeId: null,
   connectWithChqId: null,
   costCenterId: null,
@@ -11,6 +11,7 @@ export const opReturnDefaultValues = {
   debitAccountId: null,
   note: "",
   reason: 0,
+  genEntries: true,
 }
 
 export const opReturnValidationSchema = z.object({
@@ -23,4 +24,5 @@ export const opReturnValidationSchema = z.object({
   debitAccountId: VALIDATION.NON_EMPTY_STRING,
   note: VALIDATION.OPTIONAL_STRING,
   reason: VALIDATION.NON_NEGATIVE_NUMBER,
+  genEntries: VALIDATION.OPTIONAL_BOOLEAN
 })

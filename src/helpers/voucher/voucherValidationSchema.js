@@ -1,4 +1,5 @@
 import { z } from "zod";
+import VALIDATION from "../VALIDATIONS";
 
 export const voucherDefaultValues = {
   voucher: {
@@ -16,7 +17,8 @@ export const voucherDefaultValues = {
     accountId: null,
     currencyId: null,
     voucherPatternId: null,
-    contractId: null
+    contractId: null,
+    code: null
   },
   voucherGridData: [
     {
@@ -67,7 +69,8 @@ const voucherSchema = z.object({
   accountId: z.string().optional(),
   currencyId: z.string().optional().nullable(),
   voucherPatternId: z.string(),
-  contractId: z.string().optional().nullable()
+  contractId: z.string().optional().nullable(),
+  code:VALIDATION.OPTIONAL_NUMBER
 });
 
 export const voucherValidationSchema = () => z.object({

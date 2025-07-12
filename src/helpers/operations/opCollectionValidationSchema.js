@@ -15,6 +15,7 @@ export const opCollectionDefaultValues = {
   creditAccountId: null,
   debitAccountId: null,
   note: '',
+  genEntries: true,
 }
 
 export const opCollectionValidationSchema = z.object({
@@ -32,5 +33,5 @@ export const opCollectionValidationSchema = z.object({
   creditAccountId: VALIDATION.NON_EMPTY_STRING,
   debitAccountId: VALIDATION.NON_EMPTY_STRING,
   note: VALIDATION.OPTIONAL_STRING,
-
+  genEntries: VALIDATION.OPTIONAL_BOOLEAN,
 })
