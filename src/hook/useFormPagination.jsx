@@ -25,7 +25,7 @@ const useFormPagination = ({
     if (number) {
       getPaginationTable();
       setCurrentNumber(number);
-      // goLast(false, true);
+      goLast(false);
     } else if (!currentNumber) {
       goLast(true);
       // goFirst();
@@ -49,7 +49,7 @@ const useFormPagination = ({
     } else goLast(true);
   };
 
-  const goLast = async (isNew, ignore) => {
+  const goLast = async (isNew) => {
     const current = await getLastOne(name, code?.toString(), chequeId);
     if (current?.success) {
       let data = current?.data;
@@ -80,7 +80,6 @@ const useFormPagination = ({
       goLast(true);
     }
     reset(defaultValue);
-    console.log("called reset");
   };
 
   const goNext = async () => {

@@ -1,4 +1,9 @@
-import { FLAT_PROPERTY_TABS, generateFlatHashName, getAlphabetSortingView, getPrefix } from "@/helpers/building/buildingHelpers";
+import {
+  FLAT_PROPERTY_TABS,
+  generateFlatHashName,
+  getAlphabetSortingView,
+  getPrefix,
+} from "@/helpers/building/buildingHelpers";
 import useFlatColoring from "@/hook/useFlatColoring";
 import { useMemo, useState } from "react";
 import Checkbox from "../shared/Checkbox";
@@ -14,7 +19,7 @@ export const ToolsTabsTable = ({
     useFlatColoring();
   const { tabName } = selectedTab;
   const [isUpdatable, setIsUpdatable] = useState("");
-  const [selectedRows, setSelectedRows] = useState({})
+  const [selectedRows, setSelectedRows] = useState({});
 
   let prefix = useMemo(() => getPrefix(selectedTab.tabName), [selectedTab]);
 
@@ -65,7 +70,7 @@ export const ToolsTabsTable = ({
           xIndex: y,
           yIndex: i + 1,
           floorNo: (i + 1).toString(),
-        };        
+        };
         onInsertColor(tabName, itemHash, additional);
       } else {
         onRemoveFromColor(tabName, itemHash);
@@ -85,18 +90,23 @@ export const ToolsTabsTable = ({
           >
             <tr>
               {canInsertColor ? (
-                <th className="px-4 py-2 border border-gray-400 min-w-[20px]">#</th>
+                <th className="px-4 py-2 border border-gray-400 min-w-[20px]">
+                  #
+                </th>
               ) : null}
               {Array(selectedTab?.y ? yCount : xCount)
                 .fill(0)
                 .map((row, indexY) => {
-                  const inputHash = `${tabName}${indexY}${xCount}`
+                  const inputHash = `${tabName}${indexY}${xCount}`;
                   return (
                     <th
                       key={`${row}-${indexY}`}
                       className="border border-gray-400 min-w-[90px] !py-2 text-sm !px-2 "
                     >
-                      <div className="flex gap-1 items-center" onClick={onInsertColor}>
+                      <div
+                        className="flex gap-1 items-center"
+                        onClick={onInsertColor}
+                      >
                         <label className="flex items-center gap-4 justify-between">
                           {canInsertColor && selectedTab?.y !== "" ? (
                             <input
@@ -108,7 +118,7 @@ export const ToolsTabsTable = ({
                               }
                               onChange={(e) => {
                                 onSelectAllVertical(e, indexY, xCount);
-                                toggleRowSelection(inputHash)
+                                toggleRowSelection(inputHash);
                               }}
                             />
                           ) : null}
@@ -116,7 +126,7 @@ export const ToolsTabsTable = ({
                         </label>
                       </div>
                     </th>
-                  )
+                  );
                 })}
             </tr>
           </thead>
@@ -125,7 +135,7 @@ export const ToolsTabsTable = ({
               Array(xCount)
                 .fill(0)
                 .map((r, indexX) => {
-                  const inputHash = `${tabName}${indexX}${yCount}`
+                  const inputHash = `${tabName}${indexX}${yCount}`;
                   return (
                     <tr key={`${r}-${indexX}`}>
                       {canInsertColor ? (
@@ -135,9 +145,9 @@ export const ToolsTabsTable = ({
                           <Checkbox
                             name={tabName}
                             checked={selectedRows?.[inputHash]}
-                            onChange={e => {
-                              onSelectAllHorizontal(e, indexX, yCount, true)
-                              toggleRowSelection(inputHash)
+                            onChange={(e) => {
+                              onSelectAllHorizontal(e, indexX, yCount, true);
+                              toggleRowSelection(inputHash);
                             }}
                           />
                         </td>
@@ -160,7 +170,7 @@ export const ToolsTabsTable = ({
                           />
                         ))}
                     </tr>
-                  )
+                  );
                 })
             ) : (
               <tr>
@@ -171,8 +181,8 @@ export const ToolsTabsTable = ({
                     <Checkbox
                       name={tabName}
                       onChange={(e) => {
-                        onSelectAllHorizontal(e, 0, xCount)
-                        toggleRowSelection(`${tabName}0${xCount}`)
+                        onSelectAllHorizontal(e, 0, xCount);
+                        toggleRowSelection(`${tabName}0${xCount}`);
                       }}
                       checked={selectedRows?.[`${tabName}0${xCount}`]}
                     />

@@ -1,4 +1,7 @@
-import { DEFAULT_COLORS, FLAT_PROPERTY_TABS } from "@/helpers/building/buildingHelpers";
+import {
+  DEFAULT_COLORS,
+  FLAT_PROPERTY_TABS,
+} from "@/helpers/building/buildingHelpers";
 import {
   createContext,
   useCallback,
@@ -31,7 +34,7 @@ const calculateRoomCount = (collections, setRoomCounts) => {
       ? counts[collections[hex]] + 1
       : 1;
   }
-  setRoomCounts(counts);  
+  setRoomCounts(counts);
 };
 
 export const FlatColoringProvider = ({ children }) => {
@@ -94,6 +97,8 @@ export const FlatColoringProvider = ({ children }) => {
   };
 
   const onInsertColor = (tab, indexHash, additional) => {
+    if (typeof tab !== "string") return;
+
     let tabSettings = FLAT_PROPERTY_TABS[tab];
     let flatType = tabSettings?.type
       ? { [tabSettings?.type_col_name]: tabSettings?.type }
@@ -102,19 +107,21 @@ export const FlatColoringProvider = ({ children }) => {
       ? { ...additional, [tabSettings?.no]: additional?.name, ...flatType }
       : {};
     let prevData = flatsDetails?.[tab]?.[indexHash];
-    
-    if(additional.name)
-      COLLECTION_COUNTS[additional?.name] = hex;
+
+    console.log(prevData, "prevData");
+
+    if (additional.name) COLLECTION_COUNTS[additional?.name] = hex;
 
     calculateUnitsColoringOnAdd(tab, indexHash);
     let prevItem = flatsDetails?.[tab]?.[indexHash];
 
-    if (prevItem?.id && prevItem?.hex !== hex) {
-      // Handle delete prev asset
-      let asset = FLAT_PROPERTY_TABS?.[tab];
-      deleteAssetsById(asset?.table, prevItem);
-      prevData = {};
-    }
+    console.log("onInsertColor", tab, indexHash, rest, prevItem);
+    // if (prevItem?.id && prevItem?.hex !== hex) {
+    //   // Handle delete prev asset
+    //   // let asset = FLAT_PROPERTY_TABS?.[tab];
+    //   // deleteAssetsById(asset?.table, prevItem);
+    //   // prevData = {};
+    // }
 
     if (!UPDATES_ROWS?.[indexHash]) {
       setUPDATES_ROWS((prev) => ({

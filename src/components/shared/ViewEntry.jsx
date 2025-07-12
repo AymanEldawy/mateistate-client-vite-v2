@@ -6,19 +6,17 @@ import { useTranslation } from "react-i18next";
 import { EyeIcon } from "../Icons";
 import Btn from "./Btn";
 
-
 export const ViewEntry = ({ id, created_from, hideText }) => {
   const { t } = useTranslation();
   const { dispatchVoucherEntries } = useVoucherEntriesView();
 
   const { data } = useQuery({
-    queryKey: [QUERY_KEYS.ENTRIES, 'CREATED_FROM', id],
+    queryKey: [QUERY_KEYS.ENTRIES, "CREATED_FROM", id],
     queryFn: async () => {
       const response = await getEntriesByCreatedFrom(id);
-
       return response || {};
     },
-    enabled: !!id
+    enabled: !!id,
   });
 
   return (
@@ -37,9 +35,7 @@ export const ViewEntry = ({ id, created_from, hideText }) => {
         })
       }
     >
-      {hideText ? null :
-        t('view_entry')
-      }
+      {hideText ? null : t("view_entry")}
       <EyeIcon className="h-5 w-5" />
     </Btn>
   );

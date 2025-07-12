@@ -1,4 +1,8 @@
-import { FLAT_PROPERTY_TABS, generateFlatHashName, getValueOfInputColor } from "@/helpers/building/buildingHelpers";
+import {
+  FLAT_PROPERTY_TABS,
+  generateFlatHashName,
+  getValueOfInputColor,
+} from "@/helpers/building/buildingHelpers";
 import useFlatColoring from "@/hook/useFlatColoring";
 import { useEffect, useMemo, useRef } from "react";
 import { useFormContext } from "react-hook-form";
